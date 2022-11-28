@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Branch\BranchController;
+use App\Http\Controllers\Serials\SerialController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ use App\Http\Controllers\Company\CompanyController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+
     Route::group(['prefix'=>'companies'],function(){
         Route::get('',[CompanyController::class,"index"]);
         Route::get('/{id}',[CompanyController::class,"show"]);
@@ -33,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}',[CompanyController::class,"update"]);
         Route::delete('/{id}',[CompanyController::class,"destroy"]);
     });
-    
+
 });
 
 
@@ -61,9 +62,14 @@ Route::group(['prefix' => 'modules'], function () {
     });
 });
 
+
+
+//---------------------milad routes---------------------
+
 Route::resource ('branches',BranchController::class)->except ('create','edit');
+Route::resource ('serials',SerialController::class)->except ('create','edit');
 
-
+//------------------------------------------------------
 
 
 
