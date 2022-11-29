@@ -26,7 +26,7 @@ class StoreModuleRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|unique:modules,name',
             'name_e' => 'required|string|max:255|unique:modules,name_e',
-            'parent_id' => "nullable|exists:modules,id" ,
+            'parent_id' => "nullable|exists:modules,id",
             "is_active" => "nullable|in:active,inactive",
         ];
     }
@@ -34,12 +34,16 @@ class StoreModuleRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => __('message.name is required'),
-            'name_e.required' => __('message.name is required'),
-            'name.unique' => __('message.name already exists'),
-            'name_e.unique' => __('message.name already exists'),
-            'parent_id.exists' => __('message.parent not found'),
-            'is_active.in' => __('message.status must be active or inactive'),
+            'name.required' => __('message.field is required'),
+            'name.string' => __('message.field must be string'),
+            'name.max' => __('message.field must be less than 255 character'),
+            'name.unique' => __('message.field must be unique'),
+            'name_e.required' => __('message.field is required'),
+            'name_e.string' => __('message.field must be string'),
+            'name_e.max' => __('message.field must be less than 255 character'),
+            'name_e.unique' => __('message.field must be unique'),
+            'parent_id.exists' => __('message.field must be exists'),
+
         ];
     }
 
