@@ -2,17 +2,19 @@
 
 namespace App\Providers;
 
-use App\Repositories\Branch\BranchRepository;
-use App\Repositories\Branch\BranchRepositoryInterface;
-use App\Repositories\Company\CompanyRepository;
-use App\Repositories\Company\CompanyRepositoryInterface;
+use Illuminate\Support\ServiceProvider;
+use App\Repositories\User\UserRepository;
+use App\Repositories\Store\StoreInterface;
+use App\Repositories\Store\StoreRepository;
 use App\Repositories\Module\ModuleInterface;
+use App\Repositories\Branch\BranchRepository;
 use App\Repositories\Module\ModuleRepository;
 use App\Repositories\Serial\SerialRepository;
-use App\Repositories\Serial\SerialRepositoryInterface;
-use App\Repositories\User\UserRepository;
+use App\Repositories\Company\CompanyRepository;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Support\ServiceProvider;
+use App\Repositories\Branch\BranchRepositoryInterface;
+use App\Repositories\Serial\SerialRepositoryInterface;
+use App\Repositories\Company\CompanyRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
 
         $this->app->bind(ModuleInterface::class, ModuleRepository::class);
+        $this->app->bind(StoreInterface::class, StoreRepository::class);
 
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);

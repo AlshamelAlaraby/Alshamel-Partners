@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
@@ -16,6 +15,9 @@ class Branch extends Model
         'is_active' => 'App\Enums\IsActive',
     ];
 
-
+    public function stores()
+    {
+        return $this->hasMany(Store::class);
+    }
 
 }
