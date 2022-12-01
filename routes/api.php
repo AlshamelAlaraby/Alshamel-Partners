@@ -7,8 +7,6 @@ use App\Http\Controllers\Serials\SerialController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-//use App\Http\Controllers\Store\StoreController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
+
+Route::controller(\App\Http\Controllers\MainController::class)->group(function () {
+    Route::post("/media", "media");
+});
 
 Route::middleware('auth:sanctum')->group(function () {
 
