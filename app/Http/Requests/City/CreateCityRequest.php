@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Request\City;
+namespace App\Http\Requests\City;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class EditCityRequest extends FormRequest
+class CreateCityRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,9 +17,11 @@ class EditCityRequest extends FormRequest
     public function rules()
     {
         return [
-//            'company_id'=>['required'],
-//            'name'=>['required'],
-//            'name_e'=>['required']
+            'country_id'=>['required'],
+            'governorate_id'=>['required'],
+            'name'=>[],
+            'name_e'=>[],
+            'is_active'=>[],
         ];
     }
 
@@ -33,8 +36,8 @@ class EditCityRequest extends FormRequest
     }
 
     /*
-     * custom failedValidation response
-     */
+    * custom failedValidation response
+    */
     public function failedValidation ( Validator $validator )
     {
         throw new HttpResponseException(response()->json(

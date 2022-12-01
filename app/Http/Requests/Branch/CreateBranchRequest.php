@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Request\Branch;
+namespace App\Http\Requests\Branch;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class EditBranchRequest extends FormRequest
+class CreateBranchRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,9 +17,9 @@ class EditBranchRequest extends FormRequest
     public function rules()
     {
         return [
-//            'company_id'=>['required'],
-//            'name'=>['required'],
-//            'name_e'=>['required']
+            'company_id'=>['required'],
+            'name'=>['required'],
+            'name_e'=>['required'],
         ];
     }
 
@@ -33,8 +34,8 @@ class EditBranchRequest extends FormRequest
     }
 
     /*
-     * custom failedValidation response
-     */
+    * custom failedValidation response
+    */
     public function failedValidation ( Validator $validator )
     {
         throw new HttpResponseException(response()->json(

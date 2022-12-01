@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Request\Currency;
+namespace App\Http\Requests\Serial;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class CreateCurrencyRequest extends FormRequest
+class EditSerialRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,16 +16,9 @@ class CreateCurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>[],
-            'name_e'=>[],
-            'code'=>[],
-            'code_e'=>[],
-            'fraction'=>[],
-            'Fraction_e'=>[],
-            'Fraction_no'=>[],
-            'is_default'=>[],
-            'is_active'=>[],
-
+//            'company_id'=>['required'],
+//            'name'=>['required'],
+//            'name_e'=>['required']
         ];
     }
 
@@ -41,8 +33,8 @@ class CreateCurrencyRequest extends FormRequest
     }
 
     /*
-    * custom failedValidation response
-    */
+     * custom failedValidation response
+     */
     public function failedValidation ( Validator $validator )
     {
         throw new HttpResponseException(response()->json(

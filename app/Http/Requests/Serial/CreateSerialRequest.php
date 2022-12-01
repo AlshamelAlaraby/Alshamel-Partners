@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Request\Serial;
+namespace App\Http\Requests\Serial;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class EditSerialRequest extends FormRequest
+class CreateSerialRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,9 +17,14 @@ class EditSerialRequest extends FormRequest
     public function rules()
     {
         return [
-//            'company_id'=>['required'],
-//            'name'=>['required'],
-//            'name_e'=>['required']
+            'company_id'=>['required'],
+            'branch_id'=>['required'],
+            'store_id'=>['required'],
+            'restart_period'=>['required'],
+            'is_default'=>['required'],
+            'start_no'=>['nullable'],
+            'perfix'=>['nullable'],
+            'suffix'=>['nullable'],
         ];
     }
 
@@ -33,8 +39,8 @@ class EditSerialRequest extends FormRequest
     }
 
     /*
-     * custom failedValidation response
-     */
+    * custom failedValidation response
+    */
     public function failedValidation ( Validator $validator )
     {
         throw new HttpResponseException(response()->json(

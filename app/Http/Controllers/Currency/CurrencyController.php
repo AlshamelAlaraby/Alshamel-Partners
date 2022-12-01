@@ -14,7 +14,8 @@ use App\Http\Controllers\ResponseController;
 
 
 
-use App\Http\Request\Currency\CreateCurrencyRequest;
+
+use App\Http\Requests\Currency\CreateCurrencyRequest;
 use App\Http\Resources\Currency\CurrencyResource;
 use App\Repositories\Currency\CurrencyRepositoryInterface;
 use Illuminate\Http\Request;

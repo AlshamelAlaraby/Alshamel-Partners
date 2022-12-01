@@ -10,10 +10,8 @@ namespace App\Http\Controllers\City;
 
 use App\Http\Controllers\ResponseController;
 
-use App\Http\Request\Branch\CreateBranchRequest;
-use App\Http\Request\Branch\EditBranchRequest;
-use App\Http\Request\City\CreateCityRequest;
-use App\Http\Request\City\EditCityRequest;
+
+use App\Http\Requests\City\CreateCityRequest;
 use App\Http\Resources\Branch\BranchResource;
 use App\Http\Resources\City\CityResource;
 use App\Http\Resources\Module\ModuleResource;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Request\Branch;
+namespace App\Http\Requests\Currency;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class CreateBranchRequest extends FormRequest
+class CreateCurrencyRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,9 +17,16 @@ class CreateBranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_id'=>['required'],
-            'name'=>['required'],
-            'name_e'=>['required'],
+            'name'=>[],
+            'name_e'=>[],
+            'code'=>[],
+            'code_e'=>[],
+            'fraction'=>[],
+            'Fraction_e'=>[],
+            'Fraction_no'=>[],
+            'is_default'=>[],
+            'is_active'=>[],
+
         ];
     }
 
