@@ -21,7 +21,7 @@ class Country extends Model implements \Spatie\MediaLibrary\HasMedia
 
     protected $casts = [
         'is_active' => 'App\Enums\IsActive',
-        "is_default" => '\App\Enums\isDefault',
+        "is_default" => '\App\Enums\IsDefault',
     ];
 
 }

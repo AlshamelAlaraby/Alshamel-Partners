@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Request\Serial;
+namespace App\Http\Requests\City;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class EditSerialRequest extends FormRequest
+class EditCityRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

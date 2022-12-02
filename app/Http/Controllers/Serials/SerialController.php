@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Serials;
 
 use App\Http\Controllers\ResponseController;
-use App\Http\Request\Serial\CreateSerialRequest;
-use App\Http\Request\Serial\EditSerialRequest;
+use App\Http\Requests\Serial\CreateSerialRequest;
+use App\Http\Requests\Serial\EditSerialRequest;
 use App\Http\Resources\Serials\SerialResource;
 use App\Repositories\Serial\SerialRepositoryInterface;
 use Illuminate\Http\Request;

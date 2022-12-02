@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Branch;
+namespace App\Http\Controllers\City;
 
 
 
@@ -11,20 +11,21 @@ namespace App\Http\Controllers\Branch;
 use App\Http\Controllers\ResponseController;
 
 
-use App\Http\Requests\Branch\CreateBranchRequest;
-use App\Http\Requests\Branch\EditBranchRequest;
+use App\Http\Requests\City\CreateCityRequest;
 use App\Http\Resources\Branch\BranchResource;
+use App\Http\Resources\City\CityResource;
 use App\Http\Resources\Module\ModuleResource;
 use App\Repositories\Branch\BranchRepositoryInterface;
+use App\Repositories\City\CityRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class BranchController extends ResponseController
+class CityController extends ResponseController
 {
     public $repository;
-    public $resource = BranchResource::class;
-    public function __construct (BranchRepositoryInterface $repository)
+    public $resource = CityResource::class;
+    public function __construct (CityRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -36,18 +37,18 @@ class BranchController extends ResponseController
     public function index(Request $request)
     {
 
-        $branches = cacheGet ('branches');
+        $data = cacheGet ('cities');
         if ($request->search || $request->is_active){
-            cacheForget ('branches');
-            $branches = $this->repository->getAllBranches($request);
+            cacheForget ('cities');
+            $data = $this->repository->getAll($request);
         }
-        if (!$branches){
-            $branches = $this->repository->getAllBranches($request);
-            cachePut('branches', $branches);
+        if (!$data){
+            $data = $this->repository->getAll($request);
+            cachePut('cities', $data);
         }
 
 
-        return responseJson(200, 'success', ($this->resource)::collection ($branches['data']), $branches['paginate'] ? getPaginates($branches['data']) : null);
+        return responseJson(200, 'success', ($this->resource)::collection ($data['data']), $data['paginate'] ? getPaginates($data['data']) : null);
     }
 
 
@@ -55,13 +56,16 @@ class BranchController extends ResponseController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \response
      */
-    public function store(CreateBranchRequest $request)
+    public function store(CreateCityRequest $request)
     {
         try {
-            if (!DB::table('companies')->find($request->company_id)){
-                return $this->errorResponse (__ ('company does\'t exist'),422);
+            if (!DB::table('countries')->find($request->country_id)){
+                return $this->errorResponse (__ ('country does\'t exist'),422);
+            }
+            if (!DB::table('governorates')->find($request->governorate_id)){
+                return $this->errorResponse (__ ('governorates does\'t exist'),422);
             }
             $this->repository->create($request->validated ());
             return responseJson (200,__ ('done'));
@@ -99,24 +103,37 @@ class BranchController extends ResponseController
      * @param int $id
      * @return \response
      */
-    public function update(EditBranchRequest $request, $id)
+    public function update(Request $request, $id)
     {
+
         $data = [];
-        if ($request->company_id){
-            if (!DB::table('companies')->find($request->company_id)){
-                return responseJson(422,__ ('company does\'t exist'));
+        if ($request->country_id){
+            if (!DB::table('countries')->find($request->country_id)){
+                return responseJson(422,__ ('countries does\'t exist'));
             }
-            $data['company_id']=$request->company_id;
+            $data['country_id']=$request->country_id;
         }
+
+        if ($request->governorate_id){
+            if (!DB::table('governorates')->find($request->governorate_id)){
+                return responseJson(422,__ ('governorates does\'t exist'));
+            }
+            $data['governorate_id']=$request->governorate_id;
+        }
+
+
         if ($request->name){
             $data['name']=$request->name;
         }
+
         if ($request->name_e){
             $data['name_e']=$request->name_e;
         }
+
         if ($request->is_active){
             $data['is_active']=$request->is_active;
         }
+
         try {
             $this->repository->update($data,$id);
             return responseJson(200,__('updated'));
