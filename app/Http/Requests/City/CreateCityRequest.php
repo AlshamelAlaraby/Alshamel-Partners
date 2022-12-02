@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Request\Serial;
+namespace App\Http\Requests\City;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class CreateSerialRequest extends FormRequest
+class CreateCityRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,14 +17,11 @@ class CreateSerialRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_id'=>['required'],
-            'branch_id'=>['required'],
-            'store_id'=>['required'],
-            'restart_period'=>['required'],
-            'is_default'=>['required'],
-            'start_no'=>['nullable'],
-            'perfix'=>['nullable'],
-            'suffix'=>['nullable'],
+            'country_id'=>['required'],
+            'governorate_id'=>['required'],
+            'name'=>[],
+            'name_e'=>[],
+            'is_active'=>[],
         ];
     }
 

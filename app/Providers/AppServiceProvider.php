@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\City\CityRepository;
+use App\Repositories\City\CityRepositoryInterface;
+use App\Repositories\Currency\CurrencyRepository;
+use App\Repositories\Currency\CurrencyRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\User\UserRepository;
 use App\Repositories\Store\StoreInterface;
@@ -36,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
+        $this->app->bind(CurrencyRepositoryInterface::class, CurrencyRepository::class);
     }
 
     /**

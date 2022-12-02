@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Request\Branch;
+namespace App\Http\Requests\Currency;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class EditBranchRequest extends FormRequest
+class EditCurrencyRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
