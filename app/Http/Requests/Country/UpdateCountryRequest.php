@@ -20,16 +20,19 @@ class UpdateCountryRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
-     */
-    public function rules()
+     */public function rules()
     {
         return [
             'name' => 'string|max:255',
             'name_e' => 'string|max:255',
-            'company_id' => 'integer|exists:companies,id',
-            'branch_id' => 'integer|exists:branches,id',
+            "is_default" => "in:0,1",
+            "phone_key" => "unique:countries,phone_key," . $this->id,
+            'national_id_length' => "integer",
+            'long_name' => "max:100",
+            'long_name_e' => "max:100",
+            'short_code' => "max:10",
             'is_active' => 'nullable|in:active,inactive',
-
+            "media" => ["exists:media,id", new \App\Rules\MediaRule()],
         ];
     }
 
@@ -44,14 +47,19 @@ class UpdateCountryRequest extends FormRequest
         return [
             'name.string' => __('message.field must be string'),
             'name.max' => __('message.field must be less than 255 character'),
-
             'name_e.string' => __('message.field must be string'),
             'name_e.max' => __('message.field must be less than 255 character'),
-            'company_id.integer' => __('message.field must be integer'),
-            'company_id.exists' => __('message.field must be exists'),
+            'is_default.in' => __('message.field must be in 0,1'),
+            'phone_key.unique' => __('message.field must be unique'),
+            'national_id_length.integer' => __('message.field must be integer'),
+            'long_name.max' => __('message.field must be less than 100 character'),
+            'long_name_e.max' => __('message.field must be less than 100 character'),
+            'short_code.max' => __('message.field must be less than 10 character'),
+            'is_active.in' => __('message.field must be in active,inactive'),
+            'media.exists' => __('message.field must be exists'),
+            'media.media' => __('message.field must be media'),
 
-            'branch_id.integer' => __('message.field must be integer'),
-            'branch_id.exists' => __('message.field must be exists'),
         ];
     }
+
 }

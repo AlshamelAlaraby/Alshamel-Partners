@@ -26,8 +26,12 @@ class StoreCountryRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'name_e' => 'required|string|max:255',
-            'is_default' => 'required|integer|exists:companies,id',
-            'branch_id' => 'required|integer|exists:branches,id',
+            "is_default" => "required|in:0,1",
+            "phone_key" => "required|unique:countries,phone_key",
+            'national_id_length' => "required|integer",
+            'long_name' => "required|max:100",
+            'long_name_e' => "required|max:100",
+            'short_code' => "required|max:10",
             'is_active' => 'nullable|in:active,inactive',
             "media" => ["required", "exists:media,id", new \App\Rules\MediaRule()],
         ];
@@ -45,17 +49,27 @@ class StoreCountryRequest extends FormRequest
             'name.required' => __('message.field is required'),
             'name.string' => __('message.field must be string'),
             'name.max' => __('message.field must be less than 255 character'),
-
             'name_e.required' => __('message.field is required'),
             'name_e.string' => __('message.field must be string'),
             'name_e.max' => __('message.field must be less than 255 character'),
-            'company_id.required' => __('message.field is required'),
-            'company_id.integer' => __('message.field must be integer'),
-            'company_id.exists' => __('message.field must be exists'),
+            'is_default.required' => __('message.field is required'),
+            'is_default.in' => __('message.field must be in 0,1'),
+            'phone_key.required' => __('message.field is required'),
+            'phone_key.unique' => __('message.field must be unique'),
+            'national_id_length.required' => __('message.field is required'),
+            'national_id_length.integer' => __('message.field must be integer'),
+            'long_name.required' => __('message.field is required'),
+            'long_name.max' => __('message.field must be less than 100 character'),
+            'long_name_e.required' => __('message.field is required'),
+            'long_name_e.max' => __('message.field must be less than 100 character'),
+            'short_code.required' => __('message.field is required'),
+            'short_code.max' => __('message.field must be less than 10 character'),
+            'is_active.in' => __('message.field must be in active,inactive'),
+            'media.required' => __('message.field is required'),
+            'media.exists' => __('message.field must be exists'),
+            'media.media' => __('message.field must be media'),
 
-            'branch_id.required' => __('message.field is required'),
-            'branch_id.integer' => __('message.field must be integer'),
-            'branch_id.exists' => __('message.field must be exists'),
+
         ];
     }
 }
