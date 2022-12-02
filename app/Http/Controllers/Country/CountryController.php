@@ -75,27 +75,5 @@ class CountryController extends Controller
         return responseJson(200, 'success');
     }
 
-    // public function addCountryToCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
-
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->addCountryToCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
-
-    // public function removeCountryFromCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->removeCountryFromCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
 
 }

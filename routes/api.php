@@ -65,8 +65,18 @@ Route::group(['prefix' => 'stores'], function () {
         Route::post('/', 'create')->name('stores.create');
         Route::put('/{id}', 'update')->name('stores.update');
         Route::delete('/{id}', 'delete')->name('stores.destroy');
-        // Route::post('/{module_id}/company/{company_id}', 'addModuleToCompany')->name('modules.company.add');
-        // Route::delete('/{module_id}/company/{company_id}', 'removeModuleFromCompany')->name('modules.company.remove');
+
+    });
+});
+
+
+Route::group(['prefix' => 'countries'], function () {
+    Route::controller(\App\Http\Controllers\Country\CountryController::class)->group(function () {
+        Route::get('/', 'all')->name('countries.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('countries.create');
+        Route::put('/{id}', 'update')->name('countries.update');
+        Route::delete('/{id}', 'delete')->name('countries.destroy');
 
     });
 });

@@ -16,7 +16,11 @@ class Country extends Model implements \Spatie\MediaLibrary\HasMedia
         'name_e',
         'is_active',
         'is_default',
-        "phone_ke"
+        "phone_key",
+        'national_id_length',
+        "long_name",
+        "long_name_e",
+        "short_code"
     ];
 
     protected $casts = [

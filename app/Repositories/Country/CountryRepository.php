@@ -60,7 +60,17 @@ class CountryRepository implements CountryInterface
     public function update($request, $id)
     {
         DB::transaction(function () use ($id, $request) {
-            $this->model->where("id", $id)->update($request->all());
+            $model = $this->model->find($id);
+            $model->update($request->except(["media"]));
+            if ($request->media) {
+                $model->clearMediaCollection('media');
+
+                $this->media::where('id', $request->media)->update([
+                    'model_id' => $model->id,
+                    'model_type' => get_class($this->model),
+                ]);
+
+            }
             $this->forget($id);
 
         });
