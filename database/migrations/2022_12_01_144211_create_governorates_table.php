@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('is_default')->default(0);
             $table->string("is_active")->default('active');
             $table->string("phone_key", 10)->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

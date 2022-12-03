@@ -24,6 +24,7 @@ class CreateCountriesTable extends Migration
             $table->string("short_code", 10);
             $table->tinyInteger('is_default')->default(0);
             $table->string("is_active")->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class CreateBranchesTable extends Migration
             $table->string('name');
             $table->string('name_e');
             $table->string('is_active')->default('inactive');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
