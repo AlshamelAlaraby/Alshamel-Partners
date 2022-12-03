@@ -81,6 +81,19 @@ Route::group(['prefix' => 'countries'], function () {
     });
 });
 
+
+
+Route::group(['prefix' => 'governorates'], function () {
+    Route::controller(\App\Http\Controllers\Governorate\GovernorateController::class)->group(function () {
+        Route::get('/', 'all')->name('governorates.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('governorates.create');
+        Route::put('/{id}', 'update')->name('governorates.update');
+        Route::delete('/{id}', 'delete')->name('governorates.destroy');
+
+    });
+});
+
 //---------------------milad routes---------------------
 
 Route::resource('branches', BranchController::class)->except('create', 'edit');

@@ -19,6 +19,7 @@ class CreateModulesTable extends Migration
             $table->string('name_e')->unique();
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->string('is_active')->default('inactive');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

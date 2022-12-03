@@ -1,56 +1,56 @@
 <?php
 
-namespace App\Http\Controllers\Module;
+namespace App\Http\Controllers\Governorate;
 
 use App\Http\Requests\AllRequest;
-use App\Http\Requests\Module\StoreModuleRequest;
-use App\Http\Requests\Module\UpdateModuleRequest;
-use App\Http\Resources\Module\ModuleResource;
+use App\Http\Requests\Governorate\StoreGovernorateRequest;
+use App\Http\Requests\Governorate\UpdateGovernorateRequest;
+use App\Http\Resources\Governorate\GovernorateResource;
 use Illuminate\Routing\Controller;
 
-class ModuleController extends Controller
+class GovernorateController extends Controller
 {
-    public function __construct(private \App\Repositories\Module\ModuleInterface$modelInterface)
+    public function __construct(private \App\Repositories\Governorate\GovernorateInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function find($id)
     {
-        $model = cacheGet('modules_' . $id);
+        $model = cacheGet('governorates_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('modules_' . $id, $model);
+                cachePut('governorates_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new ModuleResource($model));
+        return responseJson(200, 'success', new GovernorateResource($model));
     }
 
     public function all(AllRequest $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('modules');
+            $models = cacheGet('governorates');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('modules', $models);
+                cachePut('governorates', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', ModuleResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', GovernorateResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(StoreModuleRequest $request)
+    public function create(StoreGovernorateRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
     }
 
-    public function update(UpdateModuleRequest $request, $id)
+    public function update(UpdateGovernorateRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
@@ -75,7 +75,7 @@ class ModuleController extends Controller
         return responseJson(200, 'success');
     }
 
-    // public function addModuleToCompany($module_id, $company_id)
+    // public function addGovernorateToCompany($module_id, $company_id)
     // {
     //     $model = $this->modelInterface->find($module_id);
 
@@ -83,18 +83,18 @@ class ModuleController extends Controller
     //         return responseJson(404, __('message.data not found'));
     //     }
 
-    //     $this->modelInterface->addModuleToCompany($module_id, $company_id);
+    //     $this->modelInterface->addGovernorateToCompany($module_id, $company_id);
     //     return responseJson(200, 'success');
     // }
 
-    // public function removeModuleFromCompany($module_id, $company_id)
+    // public function removeGovernorateFromCompany($module_id, $company_id)
     // {
     //     $model = $this->modelInterface->find($module_id);
     //     if (!$model) {
     //         return responseJson(404, __('message.data not found'));
     //     }
 
-    //     $this->modelInterface->removeModuleFromCompany($module_id, $company_id);
+    //     $this->modelInterface->removeGovernorateFromCompany($module_id, $company_id);
     //     return responseJson(200, 'success');
     // }
 

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Repositories\City;
+namespace App\Repositories\Governorate;
 
-use App\Models\City;
 use Illuminate\Support\Facades\DB;
 
-class CityRepository implements CityRepositoryInterface
+class GovernorateRepository implements GovernorateInterface
 {
-    public $model;
-    public function __construct(City $model)
+
+    public function __construct(private \App\Models\Governorate$model)
     {
         $this->model = $model;
+
     }
-    public function getAll($request)
+
+    public function all($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
 
@@ -24,6 +25,13 @@ class CityRepository implements CityRepositoryInterface
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
+            if ($request->is_default) {
+                $q->where('is_default', $request->is_default);
+            }
+
+            if ($request->country_id) {
+                $q->where('country_id', $request->country_id);
+            }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
@@ -34,45 +42,46 @@ class CityRepository implements CityRepositoryInterface
         }
     }
 
-    public function create(array $data)
-    {
-        DB::transaction(function () use ($data) {
-            $this->model->create($data);
-            cacheForget("cites");
-        });
-    }
-
     public function find($id)
     {
         return $this->model->find($id);
     }
 
-    public function update($data, $id)
+    public function create($request)
     {
-        DB::transaction(function () use ($id, $data) {
-            $this->model->where("id", $id)->update($data);
-            $this->forget($id);
+        DB::transaction(function () use ($request) {
+            $this->model->create($request->all());
+            cacheForget("governorates");
         });
+    }
+
+    public function update($request, $id)
+    {
+        DB::transaction(function () use ($id, $request) {
+            $this->model->where("id", $id)->update($request->all());
+            $this->forget($id);
+
+        });
+
     }
 
     public function delete($id)
     {
         $model = $this->find($id);
-        if ($model) {
-            $this->forget($id);
-            $model->delete();
-        }
+        $this->forget($id);
+        $model->delete();
     }
 
     private function forget($id)
     {
         $keys = [
-            "cities",
-            "cities_" . $id,
+            "governorates",
+            "governorates_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);
         }
 
     }
+
 }

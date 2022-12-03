@@ -20,6 +20,7 @@ class CompanyModule extends Migration
             $table->bigInteger('allowed_users_no');
             $table->date("start_date");
             $table->date("end_date");
+            $table->softDeletes();
             $table->timestamps();
         });
     }
