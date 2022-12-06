@@ -3,13 +3,6 @@
 
 namespace App\Repositories\Serial;
 
-
-
-
-
-
-
-use App\Models\Branch;
 use App\Models\Serial;
 use Illuminate\Support\Facades\DB;
 

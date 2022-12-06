@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Serials;
+namespace App\Http\Controllers\Roles;
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Role\CreateRoleRequest;
+use App\Http\Requests\Role\EditRoleRequest;
 use App\Http\Requests\Serial\CreateSerialRequest;
 use App\Http\Requests\Serial\EditSerialRequest;
 use App\Http\Resources\Roles\RoleResource;
@@ -10,7 +12,7 @@ use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class RoleController extends ResponseController
+class RoleController extends Controller
 {
     public $repository;
     public $resource = RoleResource::class;
@@ -42,13 +44,13 @@ class RoleController extends ResponseController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \response
      */
-    public function store(CreateSerialRequest $request)
+    public function store(CreateRoleRequest $request)
     {
         try {
             if (!DB::table('role_types')->find($request->roletype_id)) {
-                return $this->errorResponse(__('role_type does\'t exist'), 422);
+                return responseJson(404,__('role_type does\'t exist'));
             }
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
@@ -86,14 +88,21 @@ class RoleController extends ResponseController
      * @param int $id
      * @return \response
      */
-    public function update(EditSerialRequest $request, $id)
+    public function update(EditRoleRequest $request, $id)
     {
         $data = [];
         if ($request->roletype_id) {
             if (!DB::table('role_types')->find($request->roletype_id)) {
-                return responseJson(422, __('role_type does\'t exist'));
+                return responseJson(404, __('role_type does\'t exist'));
             }
             $data['roletype_id'] = $request->roletype_id;
+        }
+        if ($request->name){
+            $data['name'] = $request->name;
+        }
+
+        if ($request->name_e){
+            $data['name_e'] = $request->name_e;
         }
 
         try {

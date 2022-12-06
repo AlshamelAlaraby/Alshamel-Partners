@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repositories\Serial;
+namespace App\Repositories\RoleWorkflow;
 
 
 
@@ -9,14 +9,15 @@ namespace App\Repositories\Serial;
 
 
 
-use App\Models\Branch;
-use App\Models\Serial;
+
+
+use App\Models\RoleWorkflow;
 use Illuminate\Support\Facades\DB;
 
-class SerialRepository implements SerialRepositoryInterface
+class RoleWorkflowRepository implements RoleWorkflowRepositoryInterface
 {
     public $model;
-    public function __construct(Serial $model){
+    public function __construct(RoleWorkflow $model){
         $this->model = $model;
     }
     public function getAll ($request)

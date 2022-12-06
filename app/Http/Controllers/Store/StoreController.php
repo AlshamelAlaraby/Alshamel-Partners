@@ -41,7 +41,6 @@ class StoreController extends Controller
             $models = $this->modelInterface->all($request);
         }
 
-
         return responseJson(200, 'success', StoreResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
@@ -68,9 +67,7 @@ class StoreController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->have_children) {
-            return responseJson(400, __('message.parent have children'));
-        }
+
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');

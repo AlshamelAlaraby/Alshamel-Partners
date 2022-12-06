@@ -8,7 +8,8 @@ namespace App\Http\Controllers\Branch;
 
 
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\Controller;
+
 
 
 use App\Http\Requests\Branch\CreateBranchRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class BranchController extends ResponseController
+class BranchController extends Controller
 {
     public $repository;
     public $resource = BranchResource::class;
@@ -55,13 +56,13 @@ class BranchController extends ResponseController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \response
      */
     public function store(CreateBranchRequest $request)
     {
         try {
             if (!DB::table('companies')->find($request->company_id)){
-                return $this->errorResponse (__ ('company does\'t exist'),422);
+                return responseJson (404,__ ('company does\'t exist'));
             }
             $this->repository->create($request->validated ());
             return responseJson (200,__ ('done'));

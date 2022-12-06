@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Module;
 
-use App\Http\Requests\Module\AllModuleRequest;
+use App\Http\Requests\AllRequest;
 use App\Http\Requests\Module\StoreModuleRequest;
 use App\Http\Requests\Module\UpdateModuleRequest;
 use App\Http\Resources\Module\ModuleResource;
@@ -29,7 +29,7 @@ class ModuleController extends Controller
         return responseJson(200, 'success', new ModuleResource($model));
     }
 
-    public function all(AllModuleRequest $request)
+    public function all(AllRequest $request)
     {
         if (count($_GET) == 0) {
             $models = cacheGet('modules');

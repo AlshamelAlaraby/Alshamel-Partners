@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repositories\City;
 
 use App\Models\City;
@@ -9,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 class CityRepository implements CityRepositoryInterface
 {
     public $model;
-    public function __construct(City $model){
+    public function __construct(City $model)
+    {
         $this->model = $model;
     }
-    public function getAll ($request)
+    public function getAll($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
 
@@ -25,7 +25,6 @@ class CityRepository implements CityRepositoryInterface
                 $q->where('is_active', $request->is_active);
             }
 
-
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -35,27 +34,31 @@ class CityRepository implements CityRepositoryInterface
         }
     }
 
-    public function create(array $data){
+    public function create(array $data)
+    {
         DB::transaction(function () use ($data) {
             $this->model->create($data);
             cacheForget("cites");
         });
     }
 
-    public function find($id){
+    public function find($id)
+    {
         return $this->model->find($id);
     }
 
-    public function update($data,$id){
+    public function update($data, $id)
+    {
         DB::transaction(function () use ($id, $data) {
             $this->model->where("id", $id)->update($data);
             $this->forget($id);
         });
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $model = $this->find($id);
-        if ($model){
+        if ($model) {
             $this->forget($id);
             $model->delete();
         }

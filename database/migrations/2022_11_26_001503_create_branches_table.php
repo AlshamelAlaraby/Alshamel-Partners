@@ -16,10 +16,11 @@ class CreateBranchesTable extends Migration
 
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->unsignedInteger('company_id')->nullable();
             $table->string('name');
             $table->string('name_e');
             $table->string('is_active')->default('inactive');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

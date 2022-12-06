@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Cache;
 
+function uploadImage($id, array $value)
+{
+    \Spatie\MediaLibrary\MediaCollections\Models\Media::where('id', $id)->update($value);
+}
+
 /**
  * @param message which return with of response json
  * @param  data  $object

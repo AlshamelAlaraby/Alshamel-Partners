@@ -5,12 +5,11 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\City\CityController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Currency\CurrencyController;
-use App\Http\Controllers\Serials\RoleController;
+use App\Http\Controllers\Roles\RoleController;
+use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\Serials\SerialController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
-
-//use App\Http\Controllers\Store\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
+
+Route::controller(\App\Http\Controllers\MainController::class)->group(function () {
+    Route::post("/media", "media");
+});
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -64,8 +67,31 @@ Route::group(['prefix' => 'stores'], function () {
         Route::post('/', 'create')->name('stores.create');
         Route::put('/{id}', 'update')->name('stores.update');
         Route::delete('/{id}', 'delete')->name('stores.destroy');
-        // Route::post('/{module_id}/company/{company_id}', 'addModuleToCompany')->name('modules.company.add');
-        // Route::delete('/{module_id}/company/{company_id}', 'removeModuleFromCompany')->name('modules.company.remove');
+
+    });
+});
+
+
+Route::group(['prefix' => 'countries'], function () {
+    Route::controller(\App\Http\Controllers\Country\CountryController::class)->group(function () {
+        Route::get('/', 'all')->name('countries.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('countries.create');
+        Route::put('/{id}', 'update')->name('countries.update');
+        Route::delete('/{id}', 'delete')->name('countries.destroy');
+
+    });
+});
+
+
+
+Route::group(['prefix' => 'governorates'], function () {
+    Route::controller(\App\Http\Controllers\Governorate\GovernorateController::class)->group(function () {
+        Route::get('/', 'all')->name('governorates.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('governorates.create');
+        Route::put('/{id}', 'update')->name('governorates.update');
+        Route::delete('/{id}', 'delete')->name('governorates.destroy');
 
     });
 });
@@ -77,5 +103,6 @@ Route::resource('serials', SerialController::class)->except('create', 'edit');
 Route::resource('cities', CityController::class)->except('create', 'edit');
 Route::resource('currencies', CurrencyController::class)->except('create', 'edit');
 Route::resource('roles', RoleController::class)->except('create', 'edit');
+Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
 
 //------------------------------------------------------

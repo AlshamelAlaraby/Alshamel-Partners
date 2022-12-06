@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Company;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ResponseController;
 use Mockery\Exception;
 use Illuminate\Contracts\Support\Renderable;
 use App\Repositories\Company\CompanyRepositoryInterface;
@@ -11,7 +11,7 @@ use App\Http\Resources\Company\CompanyResource;
 use App\Http\Request\Company\StoreCompanyRequest;
 use App\Http\Request\Company\UpdateCompanyRequest;
 
-class CompanyController extends ResponseController
+class CompanyController extends Controller
 {
     public $repository;
     public $resource = CompanyResource::class;

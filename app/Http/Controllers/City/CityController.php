@@ -6,9 +6,8 @@ namespace App\Http\Controllers\City;
 
 
 
+use App\Http\Controllers\Controller;
 
-
-use App\Http\Controllers\ResponseController;
 
 
 use App\Http\Requests\City\CreateCityRequest;
@@ -21,7 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class CityController extends ResponseController
+class CityController extends Controller
 {
     public $repository;
     public $resource = CityResource::class;
@@ -62,10 +61,10 @@ class CityController extends ResponseController
     {
         try {
             if (!DB::table('countries')->find($request->country_id)){
-                return $this->errorResponse (__ ('country does\'t exist'),422);
+                return responseJson (404,__ ('country does\'t exist'));
             }
             if (!DB::table('governorates')->find($request->governorate_id)){
-                return $this->errorResponse (__ ('governorates does\'t exist'),422);
+                return responseJson (404,__ ('governorates does\'t exist'));
             }
             $this->repository->create($request->validated ());
             return responseJson (200,__ ('done'));

@@ -8,7 +8,8 @@ namespace App\Http\Controllers\Currency;
 
 
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\Controller;
+
 
 
 
@@ -22,7 +23,7 @@ use Illuminate\Http\Request;
 
 
 
-class CurrencyController extends ResponseController
+class CurrencyController extends Controller
 {
     public $repository;
     public $resource = CurrencyResource::class;
