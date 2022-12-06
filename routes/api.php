@@ -5,6 +5,8 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\City\CityController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Currency\CurrencyController;
+use App\Http\Controllers\Roles\RoleController;
+use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\Serials\SerialController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -100,5 +102,7 @@ Route::resource('branches', BranchController::class)->except('create', 'edit');
 Route::resource('serials', SerialController::class)->except('create', 'edit');
 Route::resource('cities', CityController::class)->except('create', 'edit');
 Route::resource('currencies', CurrencyController::class)->except('create', 'edit');
+Route::resource('roles', RoleController::class)->except('create', 'edit');
+Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
 
 //------------------------------------------------------

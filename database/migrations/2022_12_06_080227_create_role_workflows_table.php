@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('role_workflows', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('company_id')->nullable();
-            $table->string('name');
-            $table->string('name_e');
-            $table->string('is_active')->default('inactive');
-            $table->softDeletes();
+            $table->unsignedInteger ('role_id')->nullable ()->default (0)->comment ('PK from GEN_Roles');
+            $table->unsignedInteger ('workflow_id')->nullable ()->default (0)->comment ('PK from SYS_workflow');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('role_workflows');
     }
-}
+};

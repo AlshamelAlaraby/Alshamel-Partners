@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Serials;
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Serial\CreateSerialRequest;
 use App\Http\Requests\Serial\EditSerialRequest;
 use App\Http\Resources\Serials\SerialResource;
@@ -10,7 +10,7 @@ use App\Repositories\Serial\SerialRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SerialController extends ResponseController
+class SerialController extends Controller
 {
     public $repository;
     public $resource = SerialResource::class;
@@ -42,19 +42,19 @@ class SerialController extends ResponseController
     /**
      * Store a newly created resource in storage.
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \response
      */
     public function store(CreateSerialRequest $request)
     {
         try {
             if (!DB::table('companies')->find($request->company_id)) {
-                return $this->errorResponse(__('company does\'t exist'), 422);
+                return responseJson(404,__('company does\'t exist'));
             }
             if (!DB::table('branches')->find($request->branch_id)) {
-                return $this->errorResponse(__('branch does\'t exist'), 422);
+                return responseJson(404,__('branch does\'t exist'));
             }
             if (!DB::table('stores')->find($request->store_id)) {
-                return $this->errorResponse(__('store does\'t exist'), 422);
+                return responseJson(404,__('store does\'t exist'));
             }
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
