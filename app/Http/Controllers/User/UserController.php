@@ -2,36 +2,74 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\ResponseController;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Requests;
+use App\Http\Requests\AllRequest;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
-use App\Http\Request\StoreUserRequest;
-use App\Http\Request\UpdateUserRequest;
+use Illuminate\Routing\Controller;
 
-class UserController extends ResponseController
+class UserController extends Controller
 {
-    public function __construct(UserRepositoryInterface $userRepository){}
-
-    public function index(Request $request)
+    public function __construct(private \App\Repositories\User\UserInterface$modelInterface)
     {
-        //// Example Success
-        return $this->successResponse(UserResource::collection($this->userRepository->getAllUsers()), 'Done', 200);
-
-        ///Example Error 
-        //return $this->errorResponse('', 422);
+        $this->modelInterface = $modelInterface;
     }
 
-    public function store(StoreUserRequest  $request)
+    public function find($id)
     {
-
+        $model = cacheGet('users_' . $id);
+        if (!$model) {
+            $model = $this->modelInterface->find($id);
+            if (!$model) {
+                return responseJson(404, __('message.data not found'));
+            } else {
+                cachePut('users_' . $id, $model);
+            }
+        }
+        return responseJson(200, 'success', new UserResource($model));
     }
 
-    public function update(UpdateUserRequest  $request)
+    public function all(AllRequest $request)
     {
+        if (count($_GET) == 0) {
+            $models = cacheGet('users');
+            if (!$models) {
+                $models = $this->modelInterface->all($request);
+                cachePut('users', $models);
+            }
+        } else {
+            $models = $this->modelInterface->all($request);
+        }
 
+        return responseJson(200, 'success', UserResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
-   
+
+    public function create(StoreUserRequest $request)
+    {
+        $model = $this->modelInterface->create($request);
+        return responseJson(200, 'success');
+    }
+
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+        $model = $this->modelInterface->update($request, $id);
+
+        return responseJson(200, 'success');
+    }
+
+    public function delete($id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+        $this->modelInterface->delete($id);
+
+        return responseJson(200, 'success');
+    }
+
 }

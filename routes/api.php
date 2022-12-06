@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\City\CityController;
 use App\Http\Controllers\Company\CompanyController;
@@ -8,7 +7,6 @@ use App\Http\Controllers\Currency\CurrencyController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\Serials\SerialController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +25,6 @@ Route::controller(\App\Http\Controllers\MainController::class)->group(function (
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::group(['prefix' => 'companies'], function () {
         Route::get('', [CompanyController::class, "index"]);
         Route::get('/{id}', [CompanyController::class, "show"]);
@@ -36,15 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [CompanyController::class, "destroy"]);
     });
 
-});
-
-Route::get('/users', [UserController::class, "index"]);
-
-/*
- * Auth
- */
-Route::group(['prefix' => 'auth'], function () {
-    Route::post('/login', [LoginController::class, "login"]);
 });
 
 Route::group(['prefix' => 'modules'], function () {
@@ -100,6 +88,17 @@ Route::group(['prefix' => 'employees'], function () {
         Route::post('/', 'create')->name('employees.create');
         Route::put('/{id}', 'update')->name('employees.update');
         Route::delete('/{id}', 'delete')->name('employees.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'users'], function () {
+    Route::controller(\App\Http\Controllers\User\UserController::class)->group(function () {
+        Route::get('/', 'all')->name('users.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('users.create');
+        Route::put('/{id}', 'update')->name('users.update');
+        Route::delete('/{id}', 'delete')->name('users.destroy');
 
     });
 });

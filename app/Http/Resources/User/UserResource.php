@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\Employee\EmployeeResource;
+use App\Http\Resources\FileResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -10,13 +12,14 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image,
             'name' => $this->name,
-            'email' => $this->email,
-            'mobile' => $this->mobile,
-            'active' => $this->active ? false : true,
-            'token' => $this->token,
+            'name_e' => $this->name_e,
+            'is_active' => $this->is_active,
+            "email" => $this->email,
+            "media" => new FileResource($this->files[0]),
+            "employee" => new EmployeeResource($this->employee),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
-        

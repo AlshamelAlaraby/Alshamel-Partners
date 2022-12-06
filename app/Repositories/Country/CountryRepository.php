@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\User;
 
 use Illuminate\Support\Facades\DB;
 
-class CountryRepository implements CountryInterface
+class UserRepository implements UserInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\User$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
     {
         $this->model = $model;
         $this->media = $media;
