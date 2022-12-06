@@ -2,30 +2,19 @@
 
 namespace App\Http\Controllers\Branch;
 
-
-
-
-
-
-
 use App\Http\Controllers\Controller;
-
-
-
 use App\Http\Requests\Branch\CreateBranchRequest;
 use App\Http\Requests\Branch\EditBranchRequest;
 use App\Http\Resources\Branch\BranchResource;
-use App\Http\Resources\Module\ModuleResource;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 
 class BranchController extends Controller
 {
     public $repository;
     public $resource = BranchResource::class;
-    public function __construct (BranchRepositoryInterface $repository)
+    public function __construct(BranchRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -37,21 +26,18 @@ class BranchController extends Controller
     public function index(Request $request)
     {
 
-        $branches = cacheGet ('branches');
-        if ($request->search || $request->is_active){
-            cacheForget ('branches');
+        $branches = cacheGet('branches');
+        if ($request->search || $request->is_active) {
+            cacheForget('branches');
             $branches = $this->repository->getAllBranches($request);
         }
-        if (!$branches){
+        if (!$branches) {
             $branches = $this->repository->getAllBranches($request);
             cachePut('branches', $branches);
         }
 
-
-        return responseJson(200, 'success', ($this->resource)::collection ($branches['data']), $branches['paginate'] ? getPaginates($branches['data']) : null);
+        return responseJson(200, 'success', ($this->resource)::collection($branches['data']), $branches['paginate'] ? getPaginates($branches['data']) : null);
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -61,13 +47,13 @@ class BranchController extends Controller
     public function store(CreateBranchRequest $request)
     {
         try {
-            if (!DB::table('companies')->find($request->company_id)){
-                return responseJson (404,__ ('company does\'t exist'));
+            if (!DB::table('companies')->find($request->company_id)) {
+                return responseJson(404, __('company does\'t exist'));
             }
-            $this->repository->create($request->validated ());
-            return responseJson (200,__ ('done'));
-        }catch (Exception $exception){
-            return responseJson ($exception->getCode (),$exception->getMessage ());
+            $this->repository->create($request->validated());
+            return responseJson(200, __('done'));
+        } catch (Exception $exception) {
+            return responseJson($exception->getCode(), $exception->getMessage());
         }
     }
 
@@ -78,10 +64,10 @@ class BranchController extends Controller
      */
     public function show($id)
     {
-        if ($branch = $this->repository->find($id)){
-            return responseJson(200,__ ('Done'),new $this->resource($branch),200);
+        if ($branch = $this->repository->find($id)) {
+            return responseJson(200, __('Done'), new $this->resource($branch), 200);
         }
-        return responseJson (404,__ ('not found'));
+        return responseJson(404, __('not found'));
     }
 
     /**
@@ -103,26 +89,26 @@ class BranchController extends Controller
     public function update(EditBranchRequest $request, $id)
     {
         $data = [];
-        if ($request->company_id){
-            if (!DB::table('companies')->find($request->company_id)){
-                return responseJson(422,__ ('company does\'t exist'));
+        if ($request->company_id) {
+            if (!DB::table('companies')->find($request->company_id)) {
+                return responseJson(422, __('company does\'t exist'));
             }
-            $data['company_id']=$request->company_id;
+            $data['company_id'] = $request->company_id;
         }
-        if ($request->name){
-            $data['name']=$request->name;
+        if ($request->name) {
+            $data['name'] = $request->name;
         }
-        if ($request->name_e){
-            $data['name_e']=$request->name_e;
+        if ($request->name_e) {
+            $data['name_e'] = $request->name_e;
         }
-        if ($request->is_active){
-            $data['is_active']=$request->is_active;
+        if ($request->is_active) {
+            $data['is_active'] = $request->is_active;
         }
         try {
-            $this->repository->update($data,$id);
-            return responseJson(200,__('updated'));
-        }catch (\Exception $exception){
-            return responseJson($exception->getCode (),$exception->getMessage ());
+            $this->repository->update($data, $id);
+            return responseJson(200, __('updated'));
+        } catch (\Exception$exception) {
+            return responseJson($exception->getCode(), $exception->getMessage());
         }
     }
 
@@ -134,6 +120,6 @@ class BranchController extends Controller
     public function destroy($id)
     {
         $this->repository->delete($id);
-        return responseJson(200,__('deleted'));
+        return responseJson(200, __('deleted'));
     }
 }
