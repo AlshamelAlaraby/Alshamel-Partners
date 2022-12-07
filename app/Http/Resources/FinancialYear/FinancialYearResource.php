@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Governorate;
+namespace App\Http\Resources\FinancialYear;
 
-use App\Http\Resources\Country\CountryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GovernorateResource extends JsonResource
+class FinancialYearResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,10 +19,8 @@ class GovernorateResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'name_e' => $this->name_e,
-            'is_default' => $this->is_default ? true : false,
-            'is_active' => $this->is_active,
-            "phone_key" => $this->phone_key,
-            // "country" => new CountryResource($this->country),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\Unit;
 
 use Illuminate\Support\Facades\DB;
 
-class CountryRepository implements CountryInterface
+class UnitRepository implements UnitInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\Unit$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
     {
         $this->model = $model;
         $this->media = $media;
@@ -45,11 +45,7 @@ class CountryRepository implements CountryInterface
     {
         DB::transaction(function () use ($request) {
             $model = $this->model->create($request->all());
-            $this->media::where('id', $request->media)->update([
-                'model_id' => $model->id,
-                'model_type' => get_class($this->model),
-            ]);
-            cacheForget("countries");
+            cacheForget("units");
         });
     }
 
@@ -58,15 +54,7 @@ class CountryRepository implements CountryInterface
         DB::transaction(function () use ($id, $request) {
             $model = $this->model->find($id);
             $model->update($request->except(["media"]));
-            if ($request->media) {
-                $model->clearMediaCollection('media');
 
-                $this->media::where('id', $request->media)->update([
-                    'model_id' => $model->id,
-                    'model_type' => get_class($this->model),
-                ]);
-
-            }
             $this->forget($id);
 
         });
@@ -83,8 +71,8 @@ class CountryRepository implements CountryInterface
     private function forget($id)
     {
         $keys = [
-            "countries",
-            "countries_" . $id,
+            "units",
+            "units_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

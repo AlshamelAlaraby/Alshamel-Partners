@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\FinancialYear;
 
 use Illuminate\Support\Facades\DB;
 
-class CountryRepository implements CountryInterface
+class FinancialYearRepository implements FinancialYearInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\FinancialYear$model)
     {
         $this->model = $model;
-        $this->media = $media;
 
     }
 
@@ -23,8 +22,16 @@ class CountryRepository implements CountryInterface
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
             }
 
-            if ($request->is_active) {
-                $q->where('is_active', $request->is_active);
+            if ($request->start_date && $request->end_date) {
+                $q->whereBetween('start_date', [$request->start_date, $request->end_date]);
+            }
+
+            if ($request->start_date && !$request->end_date) {
+                $q->where('start_date', '>=', $request->start_date);
+            }
+
+            if (!$request->start_date && $request->end_date) {
+                $q->where('start_date', '<=', $request->end_date);
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -44,29 +51,15 @@ class CountryRepository implements CountryInterface
     public function create($request)
     {
         DB::transaction(function () use ($request) {
-            $model = $this->model->create($request->all());
-            $this->media::where('id', $request->media)->update([
-                'model_id' => $model->id,
-                'model_type' => get_class($this->model),
-            ]);
-            cacheForget("countries");
+            $this->model->create($request->all());
+            cacheForget("financial-years");
         });
     }
 
     public function update($request, $id)
     {
         DB::transaction(function () use ($id, $request) {
-            $model = $this->model->find($id);
-            $model->update($request->except(["media"]));
-            if ($request->media) {
-                $model->clearMediaCollection('media');
-
-                $this->media::where('id', $request->media)->update([
-                    'model_id' => $model->id,
-                    'model_type' => get_class($this->model),
-                ]);
-
-            }
+            $this->model->where("id", $id)->update($request->all());
             $this->forget($id);
 
         });
@@ -83,8 +76,8 @@ class CountryRepository implements CountryInterface
     private function forget($id)
     {
         $keys = [
-            "countries",
-            "countries_" . $id,
+            "financial-years",
+            "financial-years_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);
