@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\Avenue;
 
 use Illuminate\Support\Facades\DB;
 
-class CountryRepository implements CountryInterface
+class AvenueRepository implements AvenueInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\Avenue$model)
     {
         $this->model = $model;
-        $this->media = $media;
 
     }
 
     public function all($request)
     {
-        $models = $this->model->where(function ($q) use ($request) {
+        $models = $this->model->with(["governorate", 'city', 'country'])->where(function ($q) use ($request) {
 
             if ($request->search) {
                 $q->where('name', 'like', '%' . $request->search . '%');
@@ -25,6 +24,18 @@ class CountryRepository implements CountryInterface
 
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
+            }
+
+            if ($request->country_id) {
+                $q->where('country_id', $request->country_id);
+            }
+
+            if ($request->city_id) {
+                $q->where('city_id', $request->city_id);
+            }
+
+            if ($request->governorate_id) {
+                $q->where('governorate_id', $request->governorate_id);
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -38,35 +49,22 @@ class CountryRepository implements CountryInterface
 
     public function find($id)
     {
-        return $this->model->find($id);
+        return $this->model->with(["governorate", 'city', 'country'])->find($id);
     }
 
     public function create($request)
     {
         DB::transaction(function () use ($request) {
-            $model = $this->model->create($request->all());
-            $this->media::where('id', $request->media)->update([
-                'model_id' => $model->id,
-                'model_type' => get_class($this->model),
-            ]);
-            cacheForget("countries");
+            $this->model->create($request->all());
+
+            cacheForget("avenues");
         });
     }
 
     public function update($request, $id)
     {
         DB::transaction(function () use ($id, $request) {
-            $model = $this->model->find($id);
-            $model->update($request->except(["media"]));
-            if ($request->media) {
-                $model->clearMediaCollection('media');
-
-                $this->media::where('id', $request->media)->update([
-                    'model_id' => $model->id,
-                    'model_type' => get_class($this->model),
-                ]);
-
-            }
+            $this->model->where("id", $id)->update($request->all());
             $this->forget($id);
 
         });
@@ -83,8 +81,8 @@ class CountryRepository implements CountryInterface
     private function forget($id)
     {
         $keys = [
-            "countries",
-            "countries_" . $id,
+            "avenues",
+            "avenues_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

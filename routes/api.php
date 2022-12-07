@@ -92,6 +92,39 @@ Route::group(['prefix' => 'employees'], function () {
     });
 });
 
+Route::group(['prefix' => 'financial-years'], function () {
+    Route::controller(\App\Http\Controllers\FinancialYear\FinancialYearController::class)->group(function () {
+        Route::get('/', 'all')->name('financial-years.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('financial-years.create');
+        Route::put('/{id}', 'update')->name('financial-years.update');
+        Route::delete('/{id}', 'delete')->name('financial-years.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'units'], function () {
+    Route::controller(\App\Http\Controllers\Unit\UnitController::class)->group(function () {
+        Route::get('/', 'all')->name('units.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('units.create');
+        Route::put('/{id}', 'update')->name('units.update');
+        Route::delete('/{id}', 'delete')->name('units.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'avenues'], function () {
+    Route::controller(\App\Http\Controllers\Avenue\AvenueController::class)->group(function () {
+        Route::get('/', 'all')->name('avenues.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('avenues.create');
+        Route::put('/{id}', 'update')->name('avenues.update');
+        Route::delete('/{id}', 'delete')->name('avenues.destroy');
+
+    });
+});
+
 Route::group(['prefix' => 'users'], function () {
     Route::controller(\App\Http\Controllers\User\UserController::class)->group(function () {
         Route::get('/', 'all')->name('users.index');

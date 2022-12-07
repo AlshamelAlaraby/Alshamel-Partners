@@ -16,6 +16,9 @@ return [
     "field must be less than 10 character" => "field must be less than 10 character",
     "country has governorates" => "country has governorates",
     "field must be confirmed" => "field must be confirmed",
+    "field must be date" => "field must be date",
+    "field must be after or equal today" => "field must be after or equal today",
+    "field must be after or equal start date" => "field must be after or equal start date",
 
 ];
 //
