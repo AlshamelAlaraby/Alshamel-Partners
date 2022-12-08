@@ -38,6 +38,8 @@ function getPaginates($collection)
         'previous_page_url' => $collection->previousPageUrl(),
         'last_page' => $collection->lastPage(),
         'has_more_pages' => $collection->hasMorePages(),
+        'from' => $collection->firstItem(),
+        'to' => $collection->lastItem(),
     ];
 }
 
