@@ -26,8 +26,14 @@ class AllRequest extends FormRequest
         return [
             "parent_id" => "nullable|exists:modules,id",
             "is_active" => "nullable|in:active,inactive",
+            "sort" => "nullable|integer",
             "page" => "nullable|integer",
             "per_page" => "nullable|integer",
+            'country_id' =>  "nullable|exists:countries,id",
+            'city_id' =>  "nullable|exists:cities,id",
+            "is_default" => "nullable|in:0,1",
+            "is_employee" => "nullable|in:0,1",
+
         ];
     }
 }

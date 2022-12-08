@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('salesmen_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_e');
-            $table->string('is_active')->default('active');
+            $table->string("name", 100);
+            $table->string("name_e", 100);
+            $table->string("is_employee")->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('salesman_types');
     }
 };

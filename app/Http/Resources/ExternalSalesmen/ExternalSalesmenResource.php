@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Country;
+namespace App\Http\Resources\ExternalSalesmen;
 
-use App\Http\Resources\FileResource;
+use App\Http\Resources\Country\CountryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CountryResource extends JsonResource
+class ExternalSalesmenResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,15 +17,13 @@ class CountryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'name_e' => $this->name_e,
-            'long_name' => $this->long_name,
-            'long_name_e' => $this->long_name_e,
-            'is_default' => $this->is_default == 1 ? true : false,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'rp_code' => $this->rp_code,
+            'email' => $this->email,
             'is_active' => $this->is_active,
-            "short_code" => $this->short_code,
-            "phone_key" => $this->phone_key,
-            "media" => new FileResource($this->files[0]),
+            'national_id' => $this->national_id,
+            'country_id' => new CountryResource($this->country),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
