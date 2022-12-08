@@ -34,4 +34,9 @@ class Country extends Model implements \Spatie\MediaLibrary\HasMedia
         return $this->hasMany(\App\Models\Governorate::class);
     }
 
+    public function externalSalesmen()
+    {
+        return $this->hasMany(\App\Models\ExternalSalesmen::class);
+    }
+
 }
