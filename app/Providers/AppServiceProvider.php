@@ -9,7 +9,9 @@ use App\Repositories\City\CityRepository;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Color\ColorInterface;
 use App\Repositories\Store\StoreInterface;
+use App\Repositories\Color\ColorRepository;
 use App\Repositories\Store\StoreRepository;
 use App\Repositories\Avenue\AvenueInterface;
 use App\Repositories\Module\ModuleInterface;
@@ -65,6 +67,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(CountryInterface::class, CountryRepository::class);
 
+        $this->app->bind(ColorInterface::class, ColorRepository::class);
+
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
@@ -72,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(RoleTypeRepositoryInterface::class, RoleTypeRepository::class);
         $this->app->bind(RoleWorkflowRepositoryInterface::class, RoleWorkflowRepository::class);
+
     }
 
     /**

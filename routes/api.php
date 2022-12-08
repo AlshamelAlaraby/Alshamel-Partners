@@ -125,6 +125,17 @@ Route::group(['prefix' => 'avenues'], function () {
     });
 });
 
+Route::group(['prefix' => 'colors'], function () {
+    Route::controller(\App\Http\Controllers\Color\ColorController::class)->group(function () {
+        Route::get('/', 'all')->name('colors.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('colors.create');
+        Route::put('/{id}', 'update')->name('colors.update');
+        Route::delete('/{id}', 'delete')->name('colors.destroy');
+
+    });
+});
+
 Route::group(['prefix' => 'users'], function () {
     Route::controller(\App\Http\Controllers\User\UserController::class)->group(function () {
         Route::get('/', 'all')->name('users.index');
