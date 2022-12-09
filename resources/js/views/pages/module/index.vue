@@ -9,7 +9,9 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import alphaArabic  from "../../../helper/alphaArabic";
 import alphaEnglish  from "../../../helper/alphaEnglish";
-import {dynamicSortString}  from "../../../helper/tableSort";
+import { dynamicSortString }   from "../../../helper/tableSort";
+import senderHoverHelper   from "../../../helper/senderHoverHelper";
+import ModuleCreate   from "../../../components/create/module";
 
 /**
  * Advanced Table component
@@ -24,7 +26,8 @@ export default {
         PageHeader,
         Switches,
         ErrorMessage,
-        loader
+        loader,
+        ModuleCreate
     },
     data() {
         return {
@@ -55,7 +58,8 @@ export default {
             isButton: true,
             isCheckAll: false,
             checkAll: [],
-            current_page: 1
+            current_page: 1,
+            setting: ['name','name_e','is_active']
         }
     },
     validations: {
@@ -107,7 +111,7 @@ export default {
     },
     methods: {
         /**
-         *  get Data module
+         *  start get Data module && pagination
          */
         getData(page = 1){
             this.isLoader = true;
@@ -154,7 +158,10 @@ export default {
             }
         },
         /**
-         *  delete module
+         *  end get Data module && pagination
+         */
+        /**
+         *  start delete module
          */
         deleteModule(id) {
             Swal.fire({
@@ -198,6 +205,9 @@ export default {
             });
         },
         /**
+         *  end delete module
+         */
+        /**
          *  reset Modal (create)
          */
         resetModalHidden(){
@@ -218,6 +228,7 @@ export default {
          *  create module
          */
         AddSubmit(){
+
             this.$v.create.$touch();
 
             if (this.$v.create.$invalid) {
@@ -308,7 +319,7 @@ export default {
                         title: `${this.$t('general.Error')}`,
                         text: `${this.$t('general.Thereisanerrorinthesystem')}`,
                     });
-                })
+                });
         },
         /**
          *   show Modal (edit)
@@ -336,7 +347,7 @@ export default {
         /**
          *  start  dropdown Google
          */
-        searchSender(){
+        searchSender(e){
             this.dropDownSenders = [];
             this.create.parent_id = 0;
             this.edit.parent_id = 0;
@@ -347,8 +358,8 @@ export default {
                 }, 400);
             }else{
                 this.dropDownSenders = [];
+                console.log(e);
             }
-            this.isButton = false;
         },
 
         showSenderName(index){
@@ -361,11 +372,7 @@ export default {
             this.dropDownSenders = [];
         },
 
-        senderHover(e){
-            let items = document.querySelectorAll('.sender-search .Sender');
-            items.forEach(e => e.classList.remove('active'));
-            e.target.classList.add('active');
-        },
+        senderHover(e){ senderHoverHelper(e);},
 
         keyDropdown(){
             document.addEventListener('keyup',(e) => {
@@ -426,20 +433,19 @@ export default {
                     }else {
                         this.dropDownSenders = [];
                     }
-                    e.target.blur();
                 };
             });
 
             document.addEventListener('click',(e) => {
+                if(e.target.tagName !== 'BUTTON'){
+                    e.preventDefault();
+                }
                 if(this.dropDownSenders.length > 0){
                     if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                        this.isButton = false;
+                        return  false;
                     }else {
-                        this.isButton = true;
                         this.dropDownSenders = [];
                     }
-                }else {
-                    this.isButton = true;
                 }
             });
         },
@@ -447,13 +453,10 @@ export default {
         ClickDropdown(e){
             if(this.dropDownSenders.length > 0){
                 if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                    this.isButton = false;
+                    return  false;
                 }else {
-                    this.isButton = true;
                     this.dropDownSenders = [];
                 }
-            }else {
-                this.isButton = true;
             }
         },
         /**
@@ -462,9 +465,10 @@ export default {
         /**
          *  start  dynamicSortString
          */
-        sortString(value){
-            return dynamicSortString(value);
-        },
+        sortString(value){ return dynamicSortString(value);},
+        /**
+         *  start  ckeckRow
+         */
         checkRow(id){
             if(!this.checkAll.includes(id)) {
                 this.checkAll.push(id);
@@ -472,6 +476,12 @@ export default {
                 let index = this.checkAll.indexOf(id);
                 this.checkAll.splice(index,1);
             }
+        },
+        /**
+         *  end  ckeckRow
+         */
+        moveInput(tag,c,index){
+            document.querySelector(`${tag}[data-${c}='${index}']`).focus()
         }
     },
 };
@@ -484,6 +494,8 @@ export default {
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+
+                        <!-- start search -->
                         <div class="row justify-content-between align-items-center mb-2">
                             <h4 class="header-title"> {{ $t('module.ModulesTable') }}</h4>
                             <div class="col-xs-10 col-md-9 col-lg-7" style="font-weight: 500">
@@ -491,9 +503,9 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="setting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="setting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="setting" value="is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -514,9 +526,11 @@ export default {
                                 </div>
                             </div>
                         </div>
+                        <!-- end search -->
 
                         <div class="row justify-content-between align-items-center mb-2 px-1">
                             <div class="col-md-3 d-flex align-items-center mb-1 mb-xl-0">
+                                <!-- start create and printer -->
                                 <b-button
                                     v-b-modal.create
                                     variant="primary"
@@ -558,32 +572,38 @@ export default {
                                     </button>
                                     <!--  end one delete  -->
                                 </div>
+                                <!-- end create and printer -->
                             </div>
                             <div
                                 class="col-xs-10 col-md-9 col-lg-7 d-flex align-items-center  justify-content-end"
                             >
-                                <div>
-                                    <b-button
-                                        class="mx-1 custom-btn-background"
-                                    >
-                                        {{ $t('general.filter') }}
-                                        <i class="fas fa-filter"></i>
-                                    </b-button>
-                                    <b-button
-                                        class="mx-1 custom-btn-background"
-                                    >
-                                        {{ $t('general.group') }}
-                                        <i class="fe-menu"></i>
-                                    </b-button>
-                                    <b-button
-                                        class="mx-1 custom-btn-background"
-                                    >
-                                        {{ $t('general.setting') }}
-                                        <i class="fe-settings"></i>
-                                    </b-button>
+                                <div class="d-fex">
+                                    <!-- start filter and setting -->
+                                    <div class="d-inline-block">
+                                        <b-button
+                                            class="mx-1 custom-btn-background"
+                                        >
+                                            {{ $t('general.filter') }}
+                                            <i class="fas fa-filter"></i>
+                                        </b-button>
+                                        <b-button
+                                            class="mx-1 custom-btn-background"
+                                        >
+                                            {{ $t('general.group') }}
+                                            <i class="fe-menu"></i>
+                                        </b-button>
+                                        <b-button
+                                            class="mx-1 custom-btn-background"
+                                        >
+                                            {{ $t('general.setting') }}
+                                            <i class="fe-settings"></i>
+                                        </b-button>
+                                    </div>
+                                    <!-- end filter and setting -->
+
                                     <!-- start Pagination -->
                                     <div class="d-inline-flex align-items-center pagination-custom">
-                                        <div class="d-inline-block" style="font-size:15px;">
+                                        <div class="d-inline-block" style="font-size:13px;">
                                             {{ modulesPagination.from }}-{{ modulesPagination.to }} / {{ modulesPagination.total }}
                                         </div>
                                         <div class="d-inline-block">
@@ -614,7 +634,6 @@ export default {
                             </div>
                         </div>
 
-
                         <!--  create   -->
                         <b-modal
                             id="create"
@@ -625,7 +644,7 @@ export default {
                             @show="resetModal"
                             @hidden="resetModalHidden"
                         >
-                            <form  @submit.stop.prevent="AddSubmit">
+                            <form>
                                 <div class="row">
                                     <div class="col-md-6 direction" dir="rtl">
                                         <div class="form-group">
@@ -636,6 +655,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                data-create="1"
+                                                @keypress.enter="moveInput('input','create',2)"
                                                 v-model="$v.create.name.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.name.$error || errors.name,
@@ -660,6 +681,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
+                                                data-create="2"
+                                                @keypress.enter="moveInput('select','create',3)"
                                                 v-model="$v.create.name_e.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.name_e.$error || errors.name_e,
@@ -684,6 +707,8 @@ export default {
                                             <select
                                                 class="custom-select my-1 mr-sm-2"
                                                 id="inlineFormCustomSelectPref"
+                                                data-create="3"
+                                                @keypress.enter.prevent="moveInput('input','create',4)"
                                                 v-model="$v.create.is_active.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.is_active.$error || errors.is_active,
@@ -705,9 +730,10 @@ export default {
                                             <input
                                                 class="form-control input-Sender"
                                                 v-model.trim="create.search"
+                                                data-create="4"
+                                                @keypress.enter="moveInput('input','create',1)"
                                                 @input="searchSender"
                                                 @blur.prevent="ClickDropdown"
-                                                @focus="isButton = false"
                                                 :placeholder="$t('general.IdParent')" id="field-9"
                                             />
 
@@ -730,7 +756,12 @@ export default {
                                 </div>
                                 <div class="mt-1 d-flex justify-content-end">
                                     <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button  variant="success" type="submit" class="mx-1" v-if="!isLoader && isButton">
+                                    <b-button
+                                        variant="success"
+                                        type="button" class="mx-1"
+                                        v-if="!isLoader && isButton"
+                                        @click.prevent="AddSubmit"
+                                    >
                                         {{ $t('general.Add') }}
                                     </b-button>
 
@@ -1019,6 +1050,7 @@ export default {
                                 </tr>
                                 </tbody>
                             </table>
+
                         </div>
                         <!-- end .table-responsive-->
 
