@@ -227,6 +227,7 @@ export default {
         /**
          *  create module
          */
+
         AddSubmit(){
 
             this.$v.create.$touch();
@@ -371,9 +372,7 @@ export default {
             this.isButton = true;
             this.dropDownSenders = [];
         },
-
         senderHover(e){ senderHoverHelper(e);},
-
         keyDropdown(){
             document.addEventListener('keyup',(e) => {
                 if(e.keyCode == 38){ //top arrow
@@ -449,7 +448,6 @@ export default {
                 }
             });
         },
-
         ClickDropdown(e){
             if(this.dropDownSenders.length > 0){
                 if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){

@@ -125,6 +125,39 @@ Route::group(['prefix' => 'avenues'], function () {
     });
 });
 
+Route::group(['prefix' => 'colors'], function () {
+    Route::controller(\App\Http\Controllers\Color\ColorController::class)->group(function () {
+        Route::get('/', 'all')->name('colors.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('colors.create');
+        Route::put('/{id}', 'update')->name('colors.update');
+        Route::delete('/{id}', 'delete')->name('colors.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'salesmen-types'], function () {
+    Route::controller(\App\Http\Controllers\SalesmenType\SalesmenTypeController::class)->group(function () {
+        Route::get('/', 'all')->name('salesmen-types.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('salesmen-types.create');
+        Route::put('/{id}', 'update')->name('salesmen-types.update');
+        Route::delete('/{id}', 'delete')->name('salesmen-types.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'external-salesmen'], function () {
+    Route::controller(\App\Http\Controllers\ExternalSalesmen\ExternalSalesmenController::class)->group(function () {
+        Route::get('/', 'all')->name('external-salesmen.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('external-salesmen.create');
+        Route::put('/{id}', 'update')->name('external-salesmen.update');
+        Route::delete('/{id}', 'delete')->name('external-salesmen.destroy');
+
+    });
+});
+
 Route::group(['prefix' => 'users'], function () {
     Route::controller(\App\Http\Controllers\User\UserController::class)->group(function () {
         Route::get('/', 'all')->name('users.index');
