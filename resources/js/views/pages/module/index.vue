@@ -217,6 +217,7 @@ export default {
         /**
          *  create module
          */
+
         AddSubmit(){
             this.$v.create.$touch();
 
@@ -366,7 +367,6 @@ export default {
             items.forEach(e => e.classList.remove('active'));
             e.target.classList.add('active');
         },
-
         keyDropdown(){
             document.addEventListener('keyup',(e) => {
                 if(e.keyCode == 38){ //top arrow
