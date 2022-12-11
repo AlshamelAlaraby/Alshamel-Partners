@@ -3,11 +3,11 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/module',
-        name: 'module',
+        path: '/externalSalesmen',
+        name: 'externalSalesmen',
         meta: {
             middleware: [auth,checkAuth]
         },
-        component: () => import('../../views/pages/module/index'),
+        component: () => import('../../views/pages/externalSalesmen/index'),
     },
 ];

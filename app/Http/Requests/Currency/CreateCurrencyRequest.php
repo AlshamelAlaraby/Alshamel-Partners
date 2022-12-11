@@ -22,11 +22,10 @@ class CreateCurrencyRequest extends FormRequest
             'code'=>[],
             'code_e'=>[],
             'fraction'=>[],
-            'Fraction_e'=>[],
-            'Fraction_no'=>[],
+            'fraction_e'=>[],
+            'fraction_no'=>[],
             'is_default'=>[],
             'is_active'=>[],
-
         ];
     }
 

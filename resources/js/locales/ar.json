@@ -12,17 +12,35 @@
         "danger": "يوجد خطا في الاميل او الباسورد",
         "Loading": "تحميل"
     },
-    "module": {
-        "addmodule": "اضافه موديل جديد",
-        "editmodule": "تعديل موديل ",
-        "ModulesTable": "جدول الموديول",
-        "module": "موديول"
+    "country": {
+        "addcountry": "اضافه دوله جديد",
+        "editcountry": "تعديل دوله ",
+        "countriesTable": "جدول الدول",
+        "country": "دولة"
     },
-    "partner": {
-        "addpartner": "اضافه شريك جديد",
-        "editpartner": "تعديل الشريك ",
-        "partnersTable": "جدول الشركاء",
-        "partner": "الشركاء"
+    "city": {
+        "addcity": "اضافه مدينه جديد",
+        "editcity": "تعديل المدينه ",
+        "city": "المدن",
+        "citiesTable": "جدول المدن"
+    },
+    "employee": {
+        "addemployee": "اضافه مدينه جديد",
+        "editemployee": "تعديل المدينه ",
+        "employee": "المدن",
+        "employeesTable": "جدول المدن"
+    },
+    "governorate": {
+        "addgovernorate": "اضافه محافظه جديد",
+        "editgovernorate": "تعديل المحافظه",
+        "governorate": "المحافظات",
+        "governoratesTable": "جدول المحافظات"
+    },
+    "currency": {
+        "addcurrency": "اضافه عمله جديد",
+        "editcurrency": "تعديل عمله",
+        "currency": "العملات",
+        "currenciesTable": "جدول العملات"
     },
     "company": {
         "addcompany": "اضافه الشركه جديد",
@@ -30,6 +48,24 @@
         "companysTable": "جدول الشركات",
         "company": "الشركات",
         "LogoFileUpload": "تحميل ملف الشعار"
+    },
+    "financialYear": {
+        "addfinancialYear": "اضافه سنه الماليه جديد",
+        "editfinancialYear": "تعديل سنه الماليه ",
+        "financialYearsTable": "جدول السنه الماليه",
+        "financialYear": "السنه الماليه"
+    },
+    "avenue": {
+        "addavenue": "اضافه منطقه جديد",
+        "editavenue": "تعديل منطقه",
+        "avenuesTable": "جدول المناطق",
+        "avenue": "المناطق"
+    },
+    "externalSalesmen": {
+        "addexternalSalesmen": "اضافه بائع خارجي جديد",
+        "editexternalSalesmen": "تعديل بائع خارجي ",
+        "externalSalesmensTable": "جدول الباعه الخارجيين",
+        "externalSalesmen": "الباعه الخارجيين"
     },
     "navbar": {
     "search": {
@@ -145,14 +181,29 @@
     "navigation": {
     "text": "التنقل"
     },
-    "module": {
-    "text": "موديول"
+    "country": {
+    "text": "الدول"
     },
-    "company": {
-    "text": "الشركات"
+    "city": {
+    "text": "المدن"
     },
-    "partner": {
-    "text": "الشركاء"
+    "financialYear":{
+        "text": "السنه الماليه"
+    },
+    "currency":{
+    "text": "العملات"
+    },
+    "employee": {
+        "text": "الموظفين"
+    },
+    "governorate": {
+        "text": "المحافظات"
+    },
+    "avenue": {
+        "text": "المناطق"
+    },
+    "externalSalesmen": {
+        "text": "الباعه الخارجين"
     },
     "dashboard": {
     "text": "لوحة القيادة",
@@ -434,6 +485,25 @@
         "commands": "الاوامر",
         "delete": "حذف",
         "edit": "تعديل",
-        "searchSetting": "Search Setting"
+        "searchSetting": "إعداد البحث",
+        "long_name": "الاسم كبير(عربي)",
+        "long_name_e": "الاسم كبير(انجليزي)",
+        "codeAr": "الكود(عربي)",
+        "code_e": "الكود(انجليزي) ",
+        "fraction": "كسر(عربي)",
+        "fraction_e": "كسر(انجليزي)",
+        "fraction_no": "رقم الكسر",
+        "short_code": "كود قصير",
+        "phone_key": "مفتاح الدوله",
+        "is_default": "إفتراضي",
+        "national": "جنسيه",
+        "country": "الدوله",
+        "phone": "رقم التليفون",
+        "email": "الاميل",
+        "code": "كود",
+        "governorate": "المحافظه",
+        "city": "المدينه",
+        "startDate": "تاريخ البدايه",
+        "endDate": "تاريخ النهايه"
     }
 }

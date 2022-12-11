@@ -21,8 +21,8 @@ class CurrencyResource extends JsonResource
             'code'=>$this->code,
             'code_e'=>$this->code_e,
             'fraction'=>$this->fraction,
-            'Fraction_e'=>$this->Fraction_e,
-            'Fraction_no'=>$this->Fraction_no,
+            'fraction_e'=>$this->fraction_e,
+            'fraction_no'=>$this->fraction_no,
             'is_default'=>$this->is_default ? 'yes' : 'no',
             'is_active'=>$this->is_active ? 'yes' : 'no',
         ];
