@@ -176,19 +176,19 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 Route::group(['prefix' => 'branches'], function () {
-    Route::controller(\App\Http\Controllers\Branch\BranchController::class)->group(function () {
+    Route::controller(BranchController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('branches.logs');
     });
 });
 
 Route::group(['prefix' => 'roles'], function () {
-    Route::controller(\App\Http\Controllers\Role\RoleController::class)->group(function () {
+    Route::controller(RoleController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('roles.logs');
     });
 });
 
 Route::group(['prefix' => 'role_types'], function () {
-    Route::controller(\App\Http\Controllers\RoleType\RoleTypeController::class)->group(function () {
+    Route::controller(RoleTypeController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('role_types.logs');
     });
 });

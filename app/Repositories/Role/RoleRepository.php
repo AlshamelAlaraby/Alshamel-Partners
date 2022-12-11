@@ -1,14 +1,6 @@
 <?php
 
-
 namespace App\Repositories\Role;
-
-
-
-
-
-
-
 
 use App\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -16,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 class RoleRepository implements RoleRepositoryInterface
 {
     public $model;
-    public function __construct(Role $model){
+    public function __construct(Role $model)
+    {
         $this->model = $model;
     }
-    public function getAll ($request)
+    public function getAll($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
 
@@ -32,7 +25,12 @@ class RoleRepository implements RoleRepositoryInterface
                 $q->where('roletype_id', $request->roletype_id);
             }
 
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
 
+            }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
@@ -43,30 +41,38 @@ class RoleRepository implements RoleRepositoryInterface
         }
     }
 
-    public function create(array $data){
+    public function create(array $data)
+    {
         DB::transaction(function () use ($data) {
             $this->model->create($data);
             cacheForget("roles");
         });
     }
 
-    public function find($id){
+    public function find($id)
+    {
         return $this->model->find($id);
     }
 
-    public function update($data,$id){
+    public function update($data, $id)
+    {
         DB::transaction(function () use ($id, $data) {
             $this->model->where("id", $id)->update($data);
             $this->forget($id);
         });
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $model = $this->find($id);
-        if ($model){
+        if ($model) {
             $this->forget($id);
             $model->delete();
         }
+    }
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     private function forget($id)

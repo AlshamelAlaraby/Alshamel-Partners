@@ -27,13 +27,18 @@ class CountryRepository implements CountryInterface
                 $q->where('is_active', $request->is_active);
             }
 
-            if($request->governorate_id)
-            {
+            if ($request->governorate_id) {
                 $q->whereHas('governorates', function ($q) use ($request) {
                     $q->where('id', $request->governorate_id);
                 });
             }
-            
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+
+            }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
@@ -81,6 +86,10 @@ class CountryRepository implements CountryInterface
 
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
     public function delete($id)
     {
         $model = $this->find($id);
