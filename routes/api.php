@@ -176,13 +176,13 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 
-Route::group(['prefix' => 'role-screen-field'], function () {
+Route::group(['prefix' => 'role-screen-hotfield'], function () {
     Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
-        Route::get('/', 'all')->name('role-screen-field.index');
-        Route::get('/{id}', 'find');
-        Route::post('/', 'create')->name('role-screen-field.create');
-        Route::put('/{id}', 'update')->name('role-screen-field.update');
-        Route::delete('/{id}', 'delete')->name('role-screen-field.destroy');
+        Route::get('/', 'all' )->name('role-screen-hotfield.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('role-screen-hotfield.create');
+        Route::post('/{id}', 'update' )->name('role-screen-hotfield.update');
+        Route::delete('/{id}', 'delete' )->name('role-screen-hotfield.destroy');
 
     });
 });
@@ -194,7 +194,7 @@ Route::group(['prefix' => 'branches'], function () {
 });
 
 Route::group(['prefix' => 'roles'], function () {
-    Route::controller(\App\Http\Controllers\Role\RoleController::class)->group(function () {
+    Route::controller(\App\Http\Controllers\Roles\RoleController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('roles.logs');
     });
 });

@@ -38,7 +38,7 @@ use App\Repositories\Serial\SerialRepository;
 use App\Repositories\Serial\SerialRepositoryInterface;
 use App\Repositories\Store\StoreInterface;
 use App\Repositories\Store\StoreRepository;
-use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldInterface;
+use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
 use App\Repositories\Unit\UnitInterface;
 use App\Repositories\Unit\UnitRepository;

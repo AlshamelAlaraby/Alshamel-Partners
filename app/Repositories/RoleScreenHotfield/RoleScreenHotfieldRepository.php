@@ -17,7 +17,11 @@ class RoleScreenHotfieldRepository implements RoleScreenHotfieldRepositoryInterf
 
     public function getAllRoleScreenHotfields($request)
     {
-        $models = $this->model;
+        $models = RoleScreenHotfield::all();
+        dd($models);
+        $models = $this->model->where(function ($q) use ($request) {
+            $this->model->scopeFilter($q , $request);
+        })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
