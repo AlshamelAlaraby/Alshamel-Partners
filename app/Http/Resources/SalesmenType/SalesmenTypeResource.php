@@ -18,7 +18,7 @@ class SalesmenTypeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'name_e' => $this->name_e,
-            'is_employee' => $this->is_employee == 1 ? true : false,
+            'is_employee' => $this->is_employee,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
