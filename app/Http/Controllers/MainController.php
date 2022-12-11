@@ -51,7 +51,7 @@ class MainController extends \Illuminate\Routing\Controller
 
         \Illuminate\Support\Facades\DB::transaction(function () use ($request) {
 
-            $model = $this->setting->where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+           where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
 
             $request['data_json'] = json_encode($request['data_json']);
 
