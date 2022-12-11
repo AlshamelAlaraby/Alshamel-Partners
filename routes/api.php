@@ -6,6 +6,7 @@ use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Currency\CurrencyController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
+use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
 use App\Http\Controllers\Serials\SerialController;
 use Illuminate\Support\Facades\Route;
 
@@ -104,6 +105,7 @@ Route::group(['prefix' => 'financial-years'], function () {
         Route::post('/', 'create')->name('financial-years.create');
         Route::put('/{id}', 'update')->name('financial-years.update');
         Route::delete('/{id}', 'delete')->name('financial-years.destroy');
+        Route::get('logs/{id}', 'logs')->name('financial-years.logs');
 
     });
 });
@@ -115,6 +117,19 @@ Route::group(['prefix' => 'units'], function () {
         Route::post('/', 'create')->name('units.create');
         Route::put('/{id}', 'update')->name('units.update');
         Route::delete('/{id}', 'delete')->name('units.destroy');
+        Route::get('logs/{id}', 'logs')->name('units.logs');
+
+    });
+});
+
+Route::group(['prefix' => 'role-workflows'], function () {
+    Route::controller(RoleWorkflowController::class)->group(function () {
+        Route::get('/', 'index')->name('role-workflows.index');
+        Route::get('/{id}', 'show');
+        Route::post('/', 'store')->name('role-workflows.store');
+        Route::put('/{id}', 'update')->name('role-workflows.update');
+        Route::delete('/{id}', 'destroy')->name('role-workflows.destroy');
+        Route::get('logs/{id}', 'logs')->name('role-workflows.logs');
 
     });
 });
