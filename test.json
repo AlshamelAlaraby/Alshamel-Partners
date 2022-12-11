@@ -1,0 +1,9 @@
+{
+    "user_id": 1,
+    "screen_id": 1,
+    "data_json": {
+        "name": true,
+        "name_e": false,
+        "created_at": true
+    }
+}
