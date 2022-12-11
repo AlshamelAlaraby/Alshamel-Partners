@@ -17,16 +17,18 @@ class CreateCurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>[],
-            'name_e'=>[],
-            'code'=>[],
-            'code_e'=>[],
-            'fraction'=>[],
-            'Fraction_e'=>[],
-            'Fraction_no'=>[],
-            'is_default'=>[],
-            'is_active'=>[],
-
+            'name' => 'required|unique:currencies,name',
+            'name_e' => 'required|unique:currencies,name_e',
+            'symbol' => 'required|unique:currencies,symbol',
+            'symbol_e' => 'required|unique:currencies,symbol_e',
+            'code' => 'required|unique:currencies,code',
+            'code_e' => 'required|unique:currencies,code_e',
+            'is_active' => 'required|boolean',
+            'is_active' => 'nullable|in:active,inactive',
+            "is_default" => "required|in:0,1",
+            'fraction' => [],
+            'Fraction_e' => [],
+            'Fraction_no' => [],
         ];
     }
 
@@ -41,19 +43,19 @@ class CreateCurrencyRequest extends FormRequest
     }
 
     /*
-    * custom failedValidation response
-    */
-    public function failedValidation ( Validator $validator )
+     * custom failedValidation response
+     */
+    public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(
             [
-                'status'    => 422,
+                'status' => 422,
 
-                'success'   => false,
+                'success' => false,
 
-                'message'   => __ ('validation errors'),
+                'message' => __('validation errors'),
 
-                'data'      => $validator->errors()
+                'data' => $validator->errors(),
             ]
         ));
     }
@@ -61,11 +63,11 @@ class CreateCurrencyRequest extends FormRequest
     /*
      * translate failedValidation messages
      */
-    public function messages ()
+    public function messages()
     {
         return [
-            'required'=>__ ('required'),
-            'unique'=>__ ('exists')
+            'required' => __('required'),
+            'unique' => __('exists'),
         ];
     }
 }
