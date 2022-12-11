@@ -19,6 +19,7 @@ return [
     "field must be date" => "field must be date",
     "field must be after or equal today" => "field must be after or equal today",
     "field must be after or equal start date" => "field must be after or equal start date",
+    "country has sub data" => "country has sub data",
 
 ];
 //

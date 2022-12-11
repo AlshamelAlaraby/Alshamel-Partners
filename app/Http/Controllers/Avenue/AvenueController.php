@@ -67,35 +67,11 @@ class AvenueController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->have_children) {
-            return responseJson(400, __('message.parent have children'));
-        }
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
     }
 
-    // public function addAvenueToCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
 
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->addAvenueToCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
-
-    // public function removeAvenueFromCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->removeAvenueFromCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
 
 }
