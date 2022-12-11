@@ -2,15 +2,19 @@
 
 namespace App\Repositories\User;
 
+use App\Models\User;
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserRepository implements UserInterface
 {
 
-    public function __construct(private \App\Models\User$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private User $model, private Media $media, private UserSettingScreen $setting)
     {
         $this->model = $model;
         $this->media = $media;
+        $this->setting = $setting;
 
     }
 
@@ -79,6 +83,36 @@ class UserRepository implements UserInterface
 
         });
 
+    }
+
+    public function setting($request)
+    {
+
+        DB::transaction(function () use ($request) {
+
+            $model = $this->setting->where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+
+            $request['data_json'] = json_encode($request['data_json']);
+
+            if (!$model) {
+                $this->setting->create($request->all());
+            } else {
+
+                $model->update($request->all());
+            }
+
+        });
+    }
+
+    public function getSetting($user_id, $screen_id)
+    {
+
+        return $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     public function delete($id)
