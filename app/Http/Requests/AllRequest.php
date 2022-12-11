@@ -33,6 +33,7 @@ class AllRequest extends FormRequest
             'city_id' =>  "nullable|exists:cities,id",
             "is_default" => "nullable|in:0,1",
             "is_employee" => "nullable|in:0,1",
+            "columns" => "array"
 
         ];
     }

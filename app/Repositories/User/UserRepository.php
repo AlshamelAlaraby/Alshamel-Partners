@@ -24,6 +24,13 @@ class UserRepository implements UserInterface
                 $q->orWhere('email', 'like', '%' . $request->search . '%');
             }
 
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+
+            }
+
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }

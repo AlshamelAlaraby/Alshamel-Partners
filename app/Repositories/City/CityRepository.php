@@ -25,6 +25,14 @@ class CityRepository implements CityRepositoryInterface
                 $q->where('is_active', $request->is_active);
             }
 
+            if ($request->country_id) {
+                $q->where('country_id', $request->country_id);
+            }
+
+            if ($request->governorate_id) {
+                $q->where('governorate_id', $request->governorate_id);
+            }
+
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {

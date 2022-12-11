@@ -15,16 +15,16 @@ class CurrencyResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'name_e'=>$this->name_e,
-            'code'=>$this->code,
-            'code_e'=>$this->code_e,
-            'fraction'=>$this->fraction,
-            'Fraction_e'=>$this->Fraction_e,
-            'Fraction_no'=>$this->Fraction_no,
-            'is_default'=>$this->is_default ? 'yes' : 'no',
-            'is_active'=>$this->is_active ? 'yes' : 'no',
+            'id' => $this->id,
+            'name' => $this->name,
+            'name_e' => $this->name_e,
+            'code' => $this->code,
+            'code_e' => $this->code_e,
+            'fraction' => $this->fraction,
+            'Fraction_e' => $this->Fraction_e,
+            'Fraction_no' => $this->Fraction_no,
+            'is_default' => $this->is_default ? true : false,
+            'is_active' => $this->is_active ? true : false,
         ];
     }
 }

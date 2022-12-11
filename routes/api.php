@@ -83,10 +83,17 @@ Route::group(['prefix' => 'governorates'], function () {
 
 Route::group(['prefix' => 'employees'], function () {
     Route::controller(\App\Http\Controllers\Employee\EmployeeController::class)->group(function () {
+        Route::put('setting', 'setting')->name('employees.setting.update');
+
+        Route::get('setting/{user_id}/{screen_d}', 'getSetting')->name('employees.setting.update');
+
+        Route::get('logs/{id}', 'logs')->name('employees.logs');
+
         Route::get('/', 'all')->name('employees.index');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('employees.create');
         Route::put('/{id}', 'update')->name('employees.update');
+
         Route::delete('/{id}', 'delete')->name('employees.destroy');
 
     });

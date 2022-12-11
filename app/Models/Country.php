@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Country extends Model implements \Spatie\MediaLibrary\HasMedia
-
 {
 
     use HasFactory, \App\Traits\MediaTrait, SoftDeletes;
@@ -37,6 +36,11 @@ class Country extends Model implements \Spatie\MediaLibrary\HasMedia
     public function externalSalesmen()
     {
         return $this->hasMany(\App\Models\ExternalSalesmen::class);
+    }
+
+    public function avenues()
+    {
+        return $this->hasMany(\App\Models\Avenue::class);
     }
 
 }
