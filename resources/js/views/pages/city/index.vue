@@ -1006,6 +1006,7 @@ export default {
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
+
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
