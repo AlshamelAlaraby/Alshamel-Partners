@@ -61,7 +61,7 @@ class RoleScreenHotfieldController extends Controller
     }
 
 
-    public function store(StoreRoleScreenHotfieldRequest $request)
+    public function create(StoreRoleScreenHotfieldRequest $request)
     {
         try {
             return responseJson(200 , __('Done') , $this->repository->create($request->validated()));

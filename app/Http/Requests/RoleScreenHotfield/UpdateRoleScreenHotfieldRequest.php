@@ -25,8 +25,8 @@ class UpdateRoleScreenHotfieldRequest extends FormRequest
     {
         return [
             "role_id"       => "exists:roles,id" ,
-            "screen_id"     => "exists:screens,id" ,
-            "hotfield_id"   => "exists:hotfields,id" ,
+            "screen_id"     => "numeric" ,
+            "hotfield_id"   => "numeric"
         ];
     }
 }

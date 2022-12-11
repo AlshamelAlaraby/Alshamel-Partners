@@ -25,8 +25,8 @@ class StoreRoleScreenHotfieldRequest extends FormRequest
     {
         return [
             "role_id"       => "required|exists:roles,id" ,
-            "screen_id"     => "required|exists:screens,id" ,
-            "hotfield_id"   => "required|exists:hotfields,id" ,
+            "screen_id"     => "required|numeric" ,
+            "hotfield_id"   => "required|numeric" ,
         ];
     }
 }

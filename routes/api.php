@@ -177,6 +177,18 @@ Route::group(['prefix' => 'users'], function () {
 });
 
 
+Route::group(['prefix' => 'role-screen-field'], function () {
+    Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
+        Route::get('/', 'all')->name('role-screen-field.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('role-screen-field.create');
+        Route::put('/{id}', 'update')->name('role-screen-field.update');
+        Route::delete('/{id}', 'delete')->name('role-screen-field.destroy');
+
+    });
+});
+
+
 //---------------------milad routes---------------------
 
 Route::resource('branches', BranchController::class)->except('create', 'edit');
