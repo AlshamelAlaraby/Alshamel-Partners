@@ -2,16 +2,13 @@
 
 namespace App\Repositories\Governorate;
 
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
 
 class GovernorateRepository implements GovernorateInterface
 {
 
-    public function __construct(private \App\Models\Governorate$model)
-    {
-        $this->model = $model;
-
-    }
+    public function __construct(private \App\Models\Governorate$model){}
 
     public function all($request)
     {
@@ -31,6 +28,13 @@ class GovernorateRepository implements GovernorateInterface
 
             if ($request->country_id) {
                 $q->where('country_id', $request->country_id);
+            }
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -70,6 +74,11 @@ class GovernorateRepository implements GovernorateInterface
         $model = $this->find($id);
         $this->forget($id);
         $model->delete();
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     private function forget($id)

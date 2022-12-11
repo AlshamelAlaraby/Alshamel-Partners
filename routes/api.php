@@ -81,7 +81,7 @@ Route::group(['prefix' => 'governorates'], function () {
         Route::post('/', 'create')->name('governorates.create');
         Route::put('/{id}', 'update')->name('governorates.update');
         Route::delete('/{id}', 'delete')->name('governorates.destroy');
-
+        Route::get('logs/{id}', 'logs');
     });
 });
 
@@ -126,7 +126,7 @@ Route::group(['prefix' => 'avenues'], function () {
         Route::post('/', 'create')->name('avenues.create');
         Route::put('/{id}', 'update')->name('avenues.update');
         Route::delete('/{id}', 'delete')->name('avenues.destroy');
-
+        Route::get('logs/{id}', 'logs');
     });
 });
 
@@ -216,7 +216,9 @@ Route::group(['prefix' => 'serials'], function () {
 Route::resource('branches', BranchController::class)->except('create', 'edit');
 Route::resource('serials', SerialController::class)->except('create', 'edit');
 Route::resource('cities', CityController::class)->except('create', 'edit');
+Route::get('cities/logs/{id}', [CityController::class,'logs']);
 Route::resource('currencies', CurrencyController::class)->except('create', 'edit');
+Route::get('currencies/logs/{id}', [CurrencyController::class,'logs']);
 Route::resource('roles', RoleController::class)->except('create', 'edit');
 Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
 

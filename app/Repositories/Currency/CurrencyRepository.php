@@ -26,7 +26,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
-
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+            }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
@@ -61,6 +65,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
             $this->forget($id);
             $model->delete();
         }
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     private function forget($id)
