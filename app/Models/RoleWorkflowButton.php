@@ -10,14 +10,15 @@ use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
 
-class RoleScreenHotfield extends Model
+class RoleWorkflowButton extends Model
 {
+    use HasFactory;
     use HasFactory;
     use SoftDeletes;
     use LogsActivity;
     use CausesActivity;
 
-    protected $table = 'roles_screens_hotfields';
+    protected $table = 'roles_workflows_buttons';
 
     protected $guarded = ["id"];
 
@@ -27,14 +28,14 @@ class RoleScreenHotfield extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function screen()
+    public function workflow()
     {
-        return $this->belongsTo(Screen::class);
+        return $this->belongsTo(Workflow::class);
     }
 
-    public function hotfield()
+    public function button()
     {
-        return $this->belongsTo(Hotfield::class);
+        return $this->belongsTo(Button::class);
     }
 
 
@@ -50,7 +51,7 @@ class RoleScreenHotfield extends Model
 
         return LogOptions::defaults()
             ->logAll()
-            ->useLogName('RoleScreensHotfield')
+            ->useLogName('RoleWorkflowButton')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 

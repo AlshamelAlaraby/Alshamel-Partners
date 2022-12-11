@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Repositories\RoleScreenHotfield;
+namespace App\Repositories\RoleWorkflowButton;
 
 use App\Models\UserSettingScreen;
-use App\Models\RoleScreenHotfield;
+use App\Models\RoleWorkflowButton;
 use Illuminate\Support\Facades\DB;
 
-class RoleScreenHotfieldRepository implements RoleScreenHotfieldRepositoryInterface
+class RoleWorkflowButtonRepository implements RoleWorkflowButtonRepositoryInterface
 {
 
     private $model;
-    public function __construct(RoleScreenHotfield $model)
+    public function __construct(RoleWorkflowButton $model)
     {
         $this->model = $model;
     }
 
-    public function getAllRoleScreenHotfields($request)
+    public function getAllRoleWorkflowButtons($request)
     {
+
         $models = $this->model->where(function ($q) use ($request) {
             $this->model->scopeFilter($q , $request);
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -38,7 +39,7 @@ class RoleScreenHotfieldRepository implements RoleScreenHotfieldRepositoryInterf
         DB::transaction(function () use ($request) {
 
             $this->model->create($request);
-            cacheForget("RoleScreenHotfields");
+            cacheForget("RoleWorkflowButtons");
         });
     }
 
@@ -81,8 +82,8 @@ class RoleScreenHotfieldRepository implements RoleScreenHotfieldRepositoryInterf
     private function forget($id)
     {
         $keys = [
-            "RoleScreenHotfields",
-            "RoleScreenHotfields_" . $id,
+            "RoleWorkflowButtons",
+            "RoleWorkflowButtons_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

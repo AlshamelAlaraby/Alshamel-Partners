@@ -187,6 +187,17 @@ Route::group(['prefix' => 'role-screen-hotfield'], function () {
     });
 });
 
+Route::group(['prefix' => 'role-workflow-button'], function () {
+    Route::controller(\App\Http\Controllers\RoleWorkflowButton\RoleWorkflowButtonController::class)->group(function () {
+        Route::get('/', 'all' )->name('role-workflow-button.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('role-workflow-button.create');
+        Route::post('/{id}', 'update' )->name('role-workflow-button.update');
+        Route::delete('/{id}', 'delete' )->name('role-workflow-button.destroy');
+
+    });
+});
+
 Route::group(['prefix' => 'branches'], function () {
     Route::controller(\App\Http\Controllers\Branch\BranchController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('branches.logs');
