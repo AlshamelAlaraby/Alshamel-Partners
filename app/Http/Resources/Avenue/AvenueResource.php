@@ -23,6 +23,7 @@ class AvenueResource extends JsonResource
             'name_e' => $this->name_e,
             'is_active' => $this->is_active,
             "city" => new CityResource($this->city),
+
             "governorate" => new GovernorateResource($this->governorate),
             'country' => new CountryResource($this->country),
             'created_at' => $this->created_at,
