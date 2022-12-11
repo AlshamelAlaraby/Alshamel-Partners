@@ -5142,6 +5142,40 @@ var menuItems = [{
   icon: 'fab fa-medium-m',
   link: '/module'
 }, {
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
+}, {
+  id: 10004,
+  label: 'menuitems.units.text',
+  icon: 'far fa-list-alt',
+  link: '/units'
+}, {
+  id: 10005,
+  label: 'menuitems.colors.text',
+  icon: 'fas fa-palette',
+  link: '/colors'
+}, {
+  id: 10006,
+  label: "menuitems.salesMen.text",
+  icon: "fas fa-user-tag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10007,
+    label: 'menuitems.dashboard.list.salesMenType',
+    link: '/salesmenTypes'
+  }]
+}, {
   id: 1115,
   label: "menuitems.dashboard.text",
   icon: "ri-dashboard-line",

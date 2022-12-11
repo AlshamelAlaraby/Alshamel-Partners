@@ -4,12 +4,22 @@ import login from "./routeChild/login";
 import company from "./routeChild/company";
 import module from "./routeChild/module";
 import partner from "./routeChild/partner";
+import rolesType from "./routeChild/rolesType";
+import roles from "./routeChild/roles";
+import units from "./routeChild/units";
+import colors from "./routeChild/colors";
+import salesmenTypes from "./routeChild/salesmenTypes";
 
 export default [
     ...login,
     ...company,
     ...module,
     ...partner,
+    ...rolesType,
+    ...roles,
+    ...units,
+    ...colors,
+    ...salesmenTypes,
 
     //**********************************************
     {
