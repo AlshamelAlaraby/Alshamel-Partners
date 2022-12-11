@@ -169,6 +169,7 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 
+
 //---------------------milad routes---------------------
 
 Route::resource('branches', BranchController::class)->except('create', 'edit');
