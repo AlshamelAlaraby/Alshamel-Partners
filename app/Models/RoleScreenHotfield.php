@@ -83,6 +83,11 @@ class RoleScreenHotfield extends Model
                 }
             }
 
+            if (count($_GET) == 0) {
+                return self::all() ;
+            }
+
+
         });
 
     }
