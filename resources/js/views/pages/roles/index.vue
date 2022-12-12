@@ -828,7 +828,7 @@ export default {
                                 </thead>
                                 <tbody v-if="roles.length > 0">
                                 <tr
-                                    @click.prevent="checkRow(data.id)"
+                                    @click.capture="checkRow(data.id)"
                                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                     v-for="(data,index) in roles"
                                     :key="data.id"
