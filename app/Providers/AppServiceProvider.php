@@ -42,6 +42,8 @@ use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
+use App\Repositories\TreeProperty\TreePropertyRepository;
+use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
 use App\Repositories\Unit\UnitInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\User\UserInterface;
@@ -90,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleWorkflowRepositoryInterface::class, RoleWorkflowRepository::class);
         $this->app->bind(RoleScreenHotfieldRepositoryInterface::class, RoleScreenHotfieldRepository::class);
         $this->app->bind(RoleWorkflowButtonRepositoryInterface::class, RoleWorkflowButtonRepository::class);
+        $this->app->bind (TreePropertyRepositoryInterface::class,TreePropertyRepository::class);
 
     }
 
