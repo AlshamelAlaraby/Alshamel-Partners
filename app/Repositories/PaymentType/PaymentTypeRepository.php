@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Repositories\SalesmenType;
+namespace App\Repositories\PaymentType;
 
 use Illuminate\Support\Facades\DB;
 
-class SalesmenTypeRepository implements SalesmenTypeInterface
+class PaymentTypeRepository implements PaymentTypeInterface
 {
 
-    public function __construct(private \App\Models\SalesmenType$model)
+    public function __construct(private \App\Models\PaymentType$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
     {
         $this->model = $model;
+        $this->media = $media;
 
     }
 
@@ -22,8 +23,15 @@ class SalesmenTypeRepository implements SalesmenTypeInterface
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
             }
 
-            if ($request->is_employee) {
-                $q->where('is_employee', $request->is_employee);
+            if ($request->is_active) {
+                $q->where('is_active', $request->is_active);
+            }
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -44,7 +52,8 @@ class SalesmenTypeRepository implements SalesmenTypeInterface
     {
         DB::transaction(function () use ($request) {
             $model = $this->model->create($request->all());
-            cacheForget("salesmen_types");
+
+            cacheForget("payment_types");
         });
     }
 
@@ -52,8 +61,7 @@ class SalesmenTypeRepository implements SalesmenTypeInterface
     {
         DB::transaction(function () use ($id, $request) {
             $model = $this->model->find($id);
-            $model->update($request->except(["media"]));
-
+            $model->update($request->all());
             $this->forget($id);
 
         });
@@ -73,8 +81,8 @@ class SalesmenTypeRepository implements SalesmenTypeInterface
     private function forget($id)
     {
         $keys = [
-            "salesmen_types",
-            "salesmen_types_" . $id,
+            "payment_types",
+            "payment_types_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

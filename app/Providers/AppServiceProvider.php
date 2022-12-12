@@ -26,8 +26,14 @@ use App\Repositories\Governorate\GovernorateInterface;
 use App\Repositories\Governorate\GovernorateRepository;
 use App\Repositories\Module\ModuleInterface;
 use App\Repositories\Module\ModuleRepository;
+use App\Repositories\PaymentType\PaymentTypeInterface;
+use App\Repositories\PaymentType\PaymentTypeRepository;
+use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
+use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\RoleType\RoleTypeRepository;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
+use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
+use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepository;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
@@ -38,12 +44,6 @@ use App\Repositories\Serial\SerialRepository;
 use App\Repositories\Serial\SerialRepositoryInterface;
 use App\Repositories\Store\StoreInterface;
 use App\Repositories\Store\StoreRepository;
-use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
-use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
-use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
-use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
-use App\Repositories\TreeProperty\TreePropertyRepository;
-use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
 use App\Repositories\Unit\UnitInterface;
 use App\Repositories\Unit\UnitRepository;
 use App\Repositories\User\UserInterface;
@@ -68,6 +68,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CountryInterface::class, CountryRepository::class);
 
         $this->app->bind(UserInterface::class, UserRepository::class);
+        $this->app->bind(PaymentTypeInterface::class, PaymentTypeRepository::class);
 
         $this->app->bind(GovernorateInterface::class, GovernorateRepository::class);
 
@@ -92,7 +93,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleWorkflowRepositoryInterface::class, RoleWorkflowRepository::class);
         $this->app->bind(RoleScreenHotfieldRepositoryInterface::class, RoleScreenHotfieldRepository::class);
         $this->app->bind(RoleWorkflowButtonRepositoryInterface::class, RoleWorkflowButtonRepository::class);
-        $this->app->bind (TreePropertyRepositoryInterface::class,TreePropertyRepository::class);
 
     }
 
