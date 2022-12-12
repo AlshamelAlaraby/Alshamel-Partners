@@ -3,18 +3,22 @@
 namespace App\Models;
 
 use App\Models\Employee;
+use App\Traits\MediaTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Activitylog\LogOptions;
 
 
-class User extends Authenticatable implements \Spatie\MediaLibrary\HasMedia
-
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, \App\Traits\MediaTrait, \Spatie\Activitylog\Traits\LogsActivity, \Spatie\Activitylog\Traits\CausesActivity;
+    use HasApiTokens, HasFactory, Notifiable, MediaTrait, LogsActivity, CausesActivity;
 
     protected $fillable = [
         'name',
@@ -48,13 +52,14 @@ class User extends Authenticatable implements \Spatie\MediaLibrary\HasMedia
         return $this->belongsTo(Employee::class);
     }
 
+
     public function getActivitylogOptions() : LogOptions
     {
         $user = auth()->user()->id ?? "system";
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Partner')
+            ->useLogName('User')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
