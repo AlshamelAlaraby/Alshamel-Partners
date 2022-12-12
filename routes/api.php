@@ -216,6 +216,8 @@ Route::group(['prefix' => 'role-screen-hotfield'], function () {
         Route::post('/', 'create' )->name('role-screen-hotfield.create');
         Route::post('/{id}', 'update' )->name('role-screen-hotfield.update');
         Route::delete('/{id}', 'delete' )->name('role-screen-hotfield.destroy');
+        Route::post('/screen-setting', 'screenSetting')->name('role-screen-hotfield.screenSetting');
+        Route::get('/get-screen-setting/{user_id}/{screen_id}', 'getScreenSetting')->name('role-screen-hotfield.getScreenSetting');
 
     });
 });
@@ -227,6 +229,8 @@ Route::group(['prefix' => 'role-workflow-button'], function () {
         Route::post('/', 'create' )->name('role-workflow-button.create');
         Route::post('/{id}', 'update' )->name('role-workflow-button.update');
         Route::delete('/{id}', 'delete' )->name('role-workflow-button.destroy');
+        Route::post('/screen-setting', 'screenSetting')->name('role-workflow-button.screenSetting');
+        Route::get('/get-screen-setting/{user_id}/{screen_id}', 'getScreenSetting')->name('role-workflow-button.getScreenSetting');
 
     });
 });
