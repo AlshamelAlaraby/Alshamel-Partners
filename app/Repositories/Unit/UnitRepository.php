@@ -2,12 +2,13 @@
 
 namespace App\Repositories\Unit;
 
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
 
 class UnitRepository implements UnitInterface
 {
 
-    public function __construct(private \App\Models\Unit$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\Unit$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media,private UserSettingScreen $setting)
     {
         $this->model = $model;
         $this->media = $media;
@@ -17,16 +18,7 @@ class UnitRepository implements UnitInterface
     public function all($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
-
-            if ($request->search) {
-                $q->where('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-            }
-
-            if ($request->is_active) {
-                $q->where('is_active', $request->is_active);
-            }
-
+            $this->model->scopeFilter($q , $request);
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -68,6 +60,36 @@ class UnitRepository implements UnitInterface
         $model->delete();
     }
 
+
+    public function setting($request)
+    {
+
+        DB::transaction(function () use ($request) {
+
+            $model = $this->setting->where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+
+            $request['data_json'] = json_encode($request['data_json']);
+
+            if (!$model) {
+                $this->setting->create($request->all());
+            } else {
+
+                $model->update($request->all());
+            }
+
+        });
+    }
+
+    public function getSetting($user_id, $screen_id)
+    {
+
+        return $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
     private function forget($id)
     {
         $keys = [

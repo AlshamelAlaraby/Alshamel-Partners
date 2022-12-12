@@ -2,12 +2,13 @@
 
 namespace App\Repositories\FinancialYear;
 
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
 
 class FinancialYearRepository implements FinancialYearInterface
 {
 
-    public function __construct(private \App\Models\FinancialYear$model)
+    public function __construct(private \App\Models\FinancialYear$model,private UserSettingScreen $setting)
     {
         $this->model = $model;
 
@@ -16,24 +17,7 @@ class FinancialYearRepository implements FinancialYearInterface
     public function all($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
-
-            if ($request->search) {
-                $q->where('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-            }
-
-            if ($request->start_date && $request->end_date) {
-                $q->whereBetween('start_date', [$request->start_date, $request->end_date]);
-            }
-
-            if ($request->start_date && !$request->end_date) {
-                $q->where('start_date', '>=', $request->start_date);
-            }
-
-            if (!$request->start_date && $request->end_date) {
-                $q->where('start_date', '<=', $request->end_date);
-            }
-
+            $this->model->scopeFilter($q , $request);
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -71,6 +55,37 @@ class FinancialYearRepository implements FinancialYearInterface
         $model = $this->find($id);
         $this->forget($id);
         $model->delete();
+    }
+
+
+    public function setting($request)
+    {
+
+        DB::transaction(function () use ($request) {
+
+            $model = $this->setting->where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+
+            $request['data_json'] = json_encode($request['data_json']);
+
+            if (!$model) {
+                $this->setting->create($request->all());
+            } else {
+
+                $model->update($request->all());
+            }
+
+        });
+    }
+
+    public function getSetting($user_id, $screen_id)
+    {
+
+        return $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     private function forget($id)

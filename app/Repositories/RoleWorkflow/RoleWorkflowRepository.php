@@ -23,34 +23,7 @@ class RoleWorkflowRepository implements RoleWorkflowRepositoryInterface
     public function getAll ($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
-
-            if ($request->search) {
-                $q->where('perfix', 'like', '%' . $request->search . '%');
-                $q->orWhere('suffix', 'like', '%' . $request->search . '%');
-            }
-
-            if ($request->is_active) {
-                $q->where('is_default', $request->is_default);
-            }
-            if ($request->start_no) {
-                $q->where('start_no', $request->start_no);
-            }
-
-            if ($request->restart_period) {
-                $q->where('restart_period', $request->restart_period);
-            }
-
-            if ($request->company_id) {
-                $q->where('company_id', $request->company_id);
-            }
-            if ($request->branch_id) {
-                $q->where('branch_id', $request->branch_id);
-            }
-            if ($request->store_id) {
-                $q->where('store_id', $request->store_id);
-            }
-
-
+            $this->model->scopeFilter($q , $request);
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -63,7 +36,7 @@ class RoleWorkflowRepository implements RoleWorkflowRepositoryInterface
     public function create(array $data){
         DB::transaction(function () use ($data) {
             $this->model->create($data);
-            cacheForget("serials");
+            cacheForget("RoleWorkflow");
         });
     }
 
@@ -86,11 +59,16 @@ class RoleWorkflowRepository implements RoleWorkflowRepositoryInterface
         }
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
+
     private function forget($id)
     {
         $keys = [
-            "serials",
-            "serials_" . $id,
+            "RoleWorkflow",
+            "RoleWorkflow_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

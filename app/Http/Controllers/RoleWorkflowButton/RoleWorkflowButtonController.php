@@ -1,0 +1,105 @@
+<?php
+
+namespace App\Http\Controllers\RoleWorkflowButton;
+
+use App\Http\Controllers\Controller;
+use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
+use App\Http\Resources\RoleWorkflowButton\RoleWorkflowButtonResource;
+use App\Http\Requests\RoleWorkflowButton\StoreRoleWorkflowButtonRequest;
+use App\Http\Requests\RoleWorkflowButton\UpdateRoleWorkflowButtonRequest;
+use Mockery\Exception;
+use Illuminate\Http\Request;
+
+class RoleWorkflowButtonController extends Controller
+{
+
+    protected $repository;
+    protected $resource = RoleWorkflowButtonResource::class;
+
+
+    public function __construct(RoleWorkflowButtonRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function all(Request $request)
+    {
+        if (count($_GET) == 0) {
+            $models = cacheGet('RoleWorkflowButtons');
+
+            if (!$models) {
+                $models = $this->repository->getAllRoleWorkflowButtons($request);
+                cachePut('RoleWorkflowButtons', $models);
+            }
+        } else {
+
+            $models = $this->repository->getAllRoleWorkflowButtons($request);
+        }
+
+        // return responseJson(200, 'success', RoleWorkflowButtonResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success',$models["data"]);
+
+    }
+
+
+    public function find($id)
+    {
+        try{
+            $model = cacheGet('RoleWorkflowButtons_' . $id);
+
+            if (!$model) {
+                $model = $this->repository->find($id);
+                if (!$model) {
+                    return responseJson( 404 , __('message.data not found'));
+                } else {
+                    cachePut('RoleWorkflowButtons_' . $id, $model);
+                }
+            }
+            return responseJson(200 , __('Done'), new RoleWorkflowButtonResource($model));
+        } catch (Exception $exception) {
+            return responseJson( $exception->getCode() , $exception->getMessage());
+        }
+    }
+
+
+    public function create(StoreRoleWorkflowButtonRequest $request)
+    {
+        try {
+            return responseJson(200 , __('Done') , $this->repository->create($request->validated()));
+        } catch (Exception $exception) {
+            return responseJson( $exception->getCode() , $exception->getMessage());
+        }
+    }
+
+
+    public function update(UpdateRoleWorkflowButtonRequest $request , $id)
+    {
+        try {
+            $model = $this->repository->find($id);
+            if (!$model) {
+                return responseJson( 404 , __('message.data not found'));
+            }
+            $model = $this->repository->update($request->validated(), $id);
+
+            return  responseJson(200 , __('Done'));
+        } catch (Exception $exception) {
+            return responseJson( $exception->getCode() , $exception->getMessage());
+        }
+
+    }
+
+    public function delete($id)
+    {
+        try{
+            $model = $this->repository->find($id);
+            if (!$model) {
+                return responseJson( 404 , __('message.data not found'));
+            }
+            $this->repository->delete($id);
+            return  responseJson(200 , __('Done'));
+
+        } catch (Exception $exception) {
+            return responseJson( $exception->getCode() , $exception->getMessage());
+        }
+    }
+}

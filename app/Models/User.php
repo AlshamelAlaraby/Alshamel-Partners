@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Activitylog\LogOptions;
+
 
 class User extends Authenticatable implements HasMedia
 {
@@ -49,7 +52,8 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(Employee::class);
     }
 
-    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+
+    public function getActivitylogOptions() : LogOptions
     {
         $user = auth()->user()->id ?? "system";
 

@@ -2,16 +2,13 @@
 
 namespace App\Repositories\Avenue;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\UserSettingScreen;
+use DB;
 
 class AvenueRepository implements AvenueInterface
 {
 
-    public function __construct(private \App\Models\Avenue$model)
-    {
-        $this->model = $model;
-
-    }
+    public function __construct(private \App\Models\Avenue$model, private UserSettingScreen $setting){}
 
     public function all($request)
     {
@@ -36,6 +33,12 @@ class AvenueRepository implements AvenueInterface
 
             if ($request->governorate_id) {
                 $q->where('governorate_id', $request->governorate_id);
+            }
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -76,6 +79,17 @@ class AvenueRepository implements AvenueInterface
         $model = $this->find($id);
         $this->forget($id);
         $model->delete();
+    }
+
+
+    public function getSetting($user_id, $screen_id)
+    {
+        return $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     private function forget($id)
