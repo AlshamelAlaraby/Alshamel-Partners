@@ -4,6 +4,8 @@ namespace Modules\RealEstate\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\RealEstate\Repositories\PropertyTypeRepository;
+use Modules\RealEstate\Repositories\PropertyTypeRepositoryInterface;
 
 class RealEstateServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class RealEstateServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        $this->app->bind (PropertyTypeRepositoryInterface::class,PropertyTypeRepository::class);
     }
 
     /**

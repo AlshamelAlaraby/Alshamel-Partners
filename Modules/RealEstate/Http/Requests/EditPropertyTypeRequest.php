@@ -14,7 +14,8 @@ class EditPropertyTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'string|max:255',
+            'name_e' => 'string|max:255',
         ];
     }
 
@@ -26,5 +27,15 @@ class EditPropertyTypeRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    public function messages()
+    {
+        return [
+            'name.string' => __('message.field must be string'),
+            'name.max' => __('message.field must be less than 255 character'),
+            'name_e.string' => __('message.field must be string'),
+            'name_e.max' => __('message.field must be less than 255 character'),
+        ];
     }
 }
