@@ -231,6 +231,17 @@ Route::group(['prefix' => 'role-workflow-button'], function () {
     });
 });
 
+Route::group(['prefix' => 'workflow-hotfield'], function () {
+    Route::controller(\App\Http\Controllers\WorkflowHotfield\WorkflowHotfieldController::class)->group(function () {
+        Route::get('/', 'all' )->name('workflow-hotfield.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('workflow-hotfield.create');
+        Route::post('/{id}', 'update' )->name('workflow-hotfield.update');
+        Route::delete('/{id}', 'delete' )->name('workflow-hotfield.destroy');
+        Route::get('logs/{id}', 'logs')->name('workflow-hotfield.logs');
+    });
+});
+
 Route::group(['prefix' => 'branches'], function () {
     Route::controller(BranchController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('branches.logs');

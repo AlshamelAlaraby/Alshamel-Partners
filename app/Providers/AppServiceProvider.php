@@ -34,6 +34,8 @@ use App\Repositories\RoleType\RoleTypeRepository;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
+use App\Repositories\WorkflowHotfield\WorkflowHotfieldRepository;
+use App\Repositories\WorkflowHotfield\WorkflowHotfieldRepositoryInterface;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepository;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
@@ -93,6 +95,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleWorkflowRepositoryInterface::class, RoleWorkflowRepository::class);
         $this->app->bind(RoleScreenHotfieldRepositoryInterface::class, RoleScreenHotfieldRepository::class);
         $this->app->bind(RoleWorkflowButtonRepositoryInterface::class, RoleWorkflowButtonRepository::class);
+        $this->app->bind(WorkflowHotfieldRepositoryInterface::class, WorkflowHotfieldRepository::class);
 
     }
 

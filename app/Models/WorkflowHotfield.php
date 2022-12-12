@@ -10,32 +10,16 @@ use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
 
-class RoleScreenHotfield extends Model
+class WorkflowHotfield extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use LogsActivity;
     use CausesActivity;
 
-    protected $table = 'roles_screens_hotfields';
+    protected $table = 'workflows_hotfields';
 
     protected $guarded = ["id"];
-
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function screen()
-    {
-        return $this->belongsTo(Screen::class);
-    }
-
-    public function hotfield()
-    {
-        return $this->belongsTo(Hotfield::class);
-    }
 
 
     public function tapActivity(Activity $activity, string $eventName)
@@ -50,7 +34,7 @@ class RoleScreenHotfield extends Model
 
         return LogOptions::defaults()
             ->logAll()
-            ->useLogName('RoleScreensHotfield')
+            ->useLogName('WorkflowHotfield')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
@@ -61,16 +45,9 @@ class RoleScreenHotfield extends Model
 
             if ($request->search) {
 
-                $q->whereHas('role', function ($q) use ($request) {
+                $q->whereHas('workflow', function ($q) use ($request) {
                     $q->where('name', 'like', '%' . $request->search . '%');
                     $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-                });
-
-                $q->orWhereHas('screen', function ($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%');
-                    $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-                    $q->orWhere('title', 'like', '%' . $request->search . '%');
-                    $q->orWhere('title_e', 'like', '%' . $request->search . '%');
                 });
 
                 $q->orWhereHas('hotfield', function ($q) use ($request) {
