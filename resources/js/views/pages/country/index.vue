@@ -78,7 +78,7 @@ export default {
                     "My-Awesome-Header": "header value",
                 },
             },
-            setting: ['name','name_e','long_name','long_name_e','short_code','phone_key','national_id_length']
+            filterSetting: ['name','name_e','long_name','long_name_e','short_code','phone_key','national_id_length']
         }
     },
     validations: {
@@ -147,7 +147,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/countries?page=${page}&per_page=${this.per_page}&search=${this.search}`)
+            adminApi.get(`/countries?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
                     this.countries = l.data;
@@ -165,11 +165,11 @@ export default {
                     this.isLoader = false;
                 });
         },
-        getDataCurrentPage(){
+        getDataCurrentPage(page = 1){
             if(this.current_page <= this.countriesPagination.last_page && this.current_page != this.countriesPagination.current_page && this.current_page){
                 this.isLoader = true;
 
-                adminApi.get(`/countries?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`)
+                adminApi.get(`/countries?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
                     .then((res) => {
                         let l = res.data;
                         this.countries = l.data;
@@ -458,13 +458,13 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown  ,'long_name','long_name_e','short_code','phone_key','national_id' -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="setting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="long_name" class="mb-1">{{ $t('general.long_name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="long_name_e" class="mb-1">{{ $t('general.long_name_e') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="short_code" class="mb-1">{{ $t('general.short_code') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="phone_key" class="mb-1">{{ $t('general.phone_key') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="national_id_length" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="long_name" class="mb-1">{{ $t('general.long_name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="long_name_e" class="mb-1">{{ $t('general.long_name_e') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="short_code" class="mb-1">{{ $t('general.short_code') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="phone_key" class="mb-1">{{ $t('general.phone_key') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="national_id_length" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>

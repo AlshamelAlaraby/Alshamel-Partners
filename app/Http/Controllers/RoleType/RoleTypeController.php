@@ -3,16 +3,11 @@
 namespace App\Http\Controllers\RoleType;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Role\CreateRoleRequest;
-use App\Http\Requests\Role\EditRoleRequest;
-
-
 use App\Http\Requests\RoleType\CreateRoleTypeRequest;
 use App\Http\Requests\RoleType\EditRoleTypeRequest;
 use App\Http\Resources\RoleTypes\RoleTypeResource;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RoleTypeController extends Controller
 {
@@ -91,11 +86,11 @@ class RoleTypeController extends Controller
     {
         $data = [];
 
-        if ($request->name){
+        if ($request->name) {
             $data['name'] = $request->name;
         }
 
-        if ($request->name_e){
+        if ($request->name_e) {
             $data['name_e'] = $request->name_e;
         }
 
@@ -106,7 +101,17 @@ class RoleTypeController extends Controller
             return responseJson($exception->getCode(), $exception->getMessage());
         }
     }
+    public function logs($id)
+    {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
 
+        $logs = $this->repository->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

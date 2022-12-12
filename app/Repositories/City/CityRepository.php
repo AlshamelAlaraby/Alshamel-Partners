@@ -25,6 +25,20 @@ class CityRepository implements CityRepositoryInterface
                 $q->where('is_active', $request->is_active);
             }
 
+            if ($request->country_id) {
+                $q->where('country_id', $request->country_id);
+            }
+
+            if ($request->governorate_id) {
+                $q->where('governorate_id', $request->governorate_id);
+            }
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+            }
+
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -53,6 +67,11 @@ class CityRepository implements CityRepositoryInterface
             $this->model->where("id", $id)->update($data);
             $this->forget($id);
         });
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     public function delete($id)

@@ -2,15 +2,19 @@
 
 namespace App\Repositories\Employee;
 
+use App\Models\Employee;
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class EmployeeRepository implements EmployeeInterface
 {
 
-    public function __construct(private \App\Models\Employee$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private Employee $model, private Media $media, private UserSettingScreen $setting)
     {
         $this->model = $model;
         $this->media = $media;
+        $this->setting = $setting;
 
     }
 
@@ -21,6 +25,13 @@ class EmployeeRepository implements EmployeeInterface
             if ($request->search) {
                 $q->where('name', 'like', '%' . $request->search . '%');
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
+            }
+
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
+
             }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -65,6 +76,10 @@ class EmployeeRepository implements EmployeeInterface
         $model->delete();
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
     private function forget($id)
     {
         $keys = [

@@ -27,6 +27,14 @@ class CountryRepository implements CountryInterface
                 $q->where('is_active', $request->is_active);
             }
 
+            if($request->governorate_id)
+            {
+                $q->whereHas('governorates', function ($q) use ($request) {
+                    $q->where('id', $request->governorate_id);
+                });
+            }
+            
+
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {

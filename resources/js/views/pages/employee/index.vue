@@ -47,7 +47,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['name','name_e']
+            filterSetting: ['name','name_e']
         }
     },
     validations: {
@@ -101,7 +101,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/employees?page=${page}&per_page=${this.per_page}&search=${this.search}`)
+            adminApi.get(`/employees?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
                     this.employees = l.data;
@@ -119,11 +119,11 @@ export default {
                     this.isLoader = false;
                 });
         },
-        getDataCurrentPage(){
+        getDataCurrentPage(page = 1){
             if(this.current_page <= this.employeesPagination.last_page && this.current_page != this.employeesPagination.current_page && this.current_page){
                 this.isLoader = true;
 
-                adminApi.get(`/employees?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`)
+                adminApi.get(`/employees?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
                     .then((res) => {
                         let l = res.data;
                         this.employees = l.data;
@@ -358,8 +358,8 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="setting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -685,7 +685,7 @@ export default {
                                           <!--  edit   -->
                                           <b-modal
                                               :id="`modal-edit-${data.id}`"
-                                              :title="$t('country.editcountry')"
+                                              :title="$t('employee.editemployee')"
                                               title-class="font-18"
                                               body-class="p-4"
                                               :ref="`edit-${data.id}`"

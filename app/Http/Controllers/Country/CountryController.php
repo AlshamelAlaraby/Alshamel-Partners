@@ -70,7 +70,10 @@ class CountryController extends Controller
         if ($model->governorates()->count() > 0) {
             return responseJson(400, __('message.country has governorates'));
         }
-        $this->modelInterface->delete($id);
+
+        if ($model->avenues()->count) {
+            $this->modelInterface->delete($id);
+        }
 
         return responseJson(200, 'success');
     }

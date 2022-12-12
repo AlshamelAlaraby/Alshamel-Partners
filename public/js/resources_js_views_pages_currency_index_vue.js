@@ -1413,7 +1413,7 @@ var imgValid = function imgValid(value) {
       checkAll: [],
       current_page: 1,
       image: '',
-      setting: ['name', 'name_e', 'code', 'code_e', 'fraction', 'fraction_e']
+      filterSetting: ['name', 'name_e', 'code', 'code_e', 'fraction', 'fraction_e']
     };
   },
   validations: {
@@ -1562,7 +1562,7 @@ var imgValid = function imgValid(value) {
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
         var l = res.data;
         _this3.currencies = l.data;
         _this3.currenciesPagination = l.pagination;
@@ -1579,9 +1579,10 @@ var imgValid = function imgValid(value) {
     },
     getDataCurrentPage: function getDataCurrentPage() {
       var _this4 = this;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.currenciesPagination.last_page && this.current_page != this.currenciesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting)).then(function (res) {
           var l = res.data;
           _this4.currencies = l.data;
           _this4.currenciesPagination = l.pagination;
@@ -4957,11 +4958,11 @@ var render = function render() {
       value: "name"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -4969,11 +4970,11 @@ var render = function render() {
       value: "name_e"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -4981,11 +4982,11 @@ var render = function render() {
       value: "code"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -4993,11 +4994,11 @@ var render = function render() {
       value: "code_e"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -5005,11 +5006,11 @@ var render = function render() {
       value: "fraction"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -5017,11 +5018,11 @@ var render = function render() {
       value: "fraction_e"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v(_vm._s(_vm.$t("general.fraction_e")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
@@ -7167,6 +7168,55 @@ var menuItems = [{
   label: 'menuitems.externalSalesmen.text',
   icon: 'fas fa-users',
   link: '/externalSalesmen'
+}, {
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
+}, {
+  id: 10004,
+  label: 'menuitems.units.text',
+  icon: 'far fa-list-alt',
+  link: '/units'
+}, {
+  id: 10005,
+  label: 'menuitems.colors.text',
+  icon: 'fas fa-palette',
+  link: '/colors'
+}, {
+  id: 10006,
+  label: "menuitems.salesMen.text",
+  icon: "fas fa-user-tag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10007,
+    label: 'menuitems.dashboard.list.salesMenType',
+    link: '/salesmenTypes'
+  }]
+}, {
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
+}, {
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
+}, {
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

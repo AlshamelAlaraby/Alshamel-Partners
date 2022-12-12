@@ -10,6 +10,14 @@ import employee from "./routeChild/employee";
 import financialYear from  "./routeChild/financialYear";
 import avenue from  "./routeChild/avenue";
 import externalSalesmen from  "./routeChild/externalSalesmen";
+import rolesType from "./routeChild/rolesType";
+import roles from "./routeChild/roles";
+import units from "./routeChild/units";
+import colors from "./routeChild/colors";
+import salesmenTypes from "./routeChild/salesmenTypes";
+import branches from "./routeChild/branch";
+import serial from "./routeChild/serial";
+import store from "./routeChild/store";
 
 
 export default [
@@ -23,7 +31,14 @@ export default [
     ...financialYear,
     ...externalSalesmen,
     ...avenue,
-
+    ...rolesType,
+    ...roles,
+    ...units,
+    ...colors,
+    ...salesmenTypes,
+    ...branches,
+    ...store,
+    ...serial,
     //**********************************************
     {
         path: '/',

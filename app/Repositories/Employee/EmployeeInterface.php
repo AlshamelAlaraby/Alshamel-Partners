@@ -7,6 +7,8 @@ interface EmployeeInterface
 
     public function all($request);
 
+    public function logs($id);
+
     public function find($id);
 
     public function create($request);

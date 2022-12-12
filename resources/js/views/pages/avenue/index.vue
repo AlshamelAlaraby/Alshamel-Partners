@@ -57,7 +57,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['name','name_e','country_id','governorate_id','city_id'],
+            filterSetting: ['name','name_e','country_id','governorate_id','city_id'],
             countries: [],
             governorates: [],
             cities: []
@@ -122,7 +122,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/avenues?page=${page}&per_page=${this.per_page}&search=${this.search}`)
+            adminApi.get(`/avenues?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
                     this.avenues = l.data;
@@ -140,11 +140,11 @@ export default {
                     this.isLoader = false;
                 });
         },
-        getDataCurrentPage(){
+        getDataCurrentPage(page = 1){
             if(this.current_page <= this.avenuesPagination.last_page && this.current_page != this.avenuesPagination.current_page && this.current_page){
                 this.isLoader = true;
 
-                adminApi.get(`/avenues?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`)
+                adminApi.get(`/avenues?page=${page}&per_page=${this.per_page}&search=${this.columns}&columns=${this.filterSetting}`)
                     .then((res) => {
                         let l = res.data;
                         this.avenues = l.data;
@@ -460,11 +460,11 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="setting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="governorate_id" class="mb-1">{{ $t('general.governorate') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="governorate_id" class="mb-1">{{ $t('general.governorate') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>

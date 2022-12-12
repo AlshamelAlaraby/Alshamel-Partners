@@ -56,7 +56,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['phone','address','email','rp_code','country_id','national_id','is_active'],
+            filterSetting: ['phone','address','email','rp_code','country_id','national_id','is_active'],
             countries: []
         }
     },
@@ -121,7 +121,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}`)
+            adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
                     this.externalSalesmens = l.data;
@@ -139,11 +139,11 @@ export default {
                     this.isLoader = false;
                 });
         },
-        getDataCurrentPage(){
+        getDataCurrentPage(page = 1){
             if(this.current_page <= this.externalSalesmensPagination.last_page && this.current_page != this.externalSalesmensPagination.current_page && this.current_page){
                 this.isLoader = true;
 
-                adminApi.get(`/external-salesmen?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`)
+                adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
                     .then((res) => {
                         let l = res.data;
                         this.externalSalesmens = l.data;
@@ -418,13 +418,13 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="setting" value="phone" class="mb-1">{{ $t('general.phone') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="email" class="mb-1">{{ $t('general.email') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="national_id" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="address" class="mb-1">{{ $t('general.address') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="rp_code" class="mb-1">{{ $t('general.code') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="phone" class="mb-1">{{ $t('general.phone') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="email" class="mb-1">{{ $t('general.email') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="national_id" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="address" class="mb-1">{{ $t('general.address') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="rp_code" class="mb-1">{{ $t('general.code') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
