@@ -242,6 +242,17 @@ Route::group(['prefix' => 'workflow-hotfield'], function () {
     });
 });
 
+Route::group(['prefix' => 'salesmen'], function () {
+    Route::controller(\App\Http\Controllers\Salesman\SalesmanController::class)->group(function () {
+        Route::get('/', 'all' )->name('salesmen.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('salesmen.create');
+        Route::post('/{id}', 'update' )->name('salesmen.update');
+        Route::delete('/{id}', 'delete' )->name('salesmen.destroy');
+        Route::get('logs/{id}', 'logs')->name('salesmen.logs');
+    });
+});
+
 Route::group(['prefix' => 'branches'], function () {
     Route::controller(BranchController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('branches.logs');

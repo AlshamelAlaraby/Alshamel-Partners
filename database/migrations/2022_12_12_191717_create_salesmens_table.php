@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('workflows_hotfields', function (Blueprint $table) {
+        Schema::create('salesmen', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('workflow_id');
-            $table->unsignedInteger('hotfield_id');
+            $table->foreignId('salesman_type_id')->constrained('salesmen_types')->references("id");
+            $table->string('name' , 100 );
+            $table->string('name_e' , 100 );
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workflow_hotfields');
+        Schema::dropIfExists('salesmens');
     }
 };
