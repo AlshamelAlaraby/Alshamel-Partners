@@ -66,6 +66,20 @@ class RoleScreenHotfield extends Model
                     $q->orWhere('name_e', 'like', '%' . $request->search . '%');
                 });
 
+                $q->orWhereHas('screen', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%');
+                    $q->orWhere('name_e', 'like', '%' . $request->search . '%');
+                    $q->orWhere('title', 'like', '%' . $request->search . '%');
+                    $q->orWhere('title_e', 'like', '%' . $request->search . '%');
+                });
+
+                $q->orWhereHas('hotfield', function ($q) use ($request) {
+                    $q->where('field_name', 'like', '%' . $request->search . '%');
+                    $q->orWhere('field_name_e', 'like', '%' . $request->search . '%');
+                    $q->orWhere('field_title', 'like', '%' . $request->search . '%');
+                    $q->orWhere('field_title_e', 'like', '%' . $request->search . '%');
+                });
+
             }
 
 

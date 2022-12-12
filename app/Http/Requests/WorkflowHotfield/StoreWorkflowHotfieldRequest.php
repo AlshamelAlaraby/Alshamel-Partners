@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\WorkflowHotfield;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreuserSettingScreenRequest extends FormRequest
+class StoreWorkflowHotfieldRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreuserSettingScreenRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreuserSettingScreenRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "workflow_id"     => "required|numeric" ,
+            "hotfield_id"   => "required|numeric" ,
         ];
     }
 }

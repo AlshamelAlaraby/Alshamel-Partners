@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Salesman;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateExternalSalesmenRequest extends FormRequest
+class UpdateSalesmanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateExternalSalesmenRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateExternalSalesmenRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "salesman_type_id"       => "exists:salesmen_types,id" ,
+            "name"                  => "string|max:100" ,
+            "name_e"                => "string|max:100" ,
         ];
     }
 }

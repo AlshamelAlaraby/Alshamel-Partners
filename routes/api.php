@@ -8,6 +8,7 @@ use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
 use App\Http\Controllers\Serials\SerialController;
+use App\Http\Controllers\TreeProperty\TreePropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -148,6 +149,7 @@ Route::group(['prefix' => 'avenues'], function () {
 Route::group(['prefix' => 'colors'], function () {
     Route::controller(\App\Http\Controllers\Color\ColorController::class)->group(function () {
         Route::get('/', 'all')->name('colors.index');
+        Route::get('logs/{id}', 'logs')->name('colors.logs');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('colors.create');
         Route::put('/{id}', 'update')->name('colors.update');
@@ -159,6 +161,9 @@ Route::group(['prefix' => 'colors'], function () {
 Route::group(['prefix' => 'salesmen-types'], function () {
     Route::controller(\App\Http\Controllers\SalesmenType\SalesmenTypeController::class)->group(function () {
         Route::get('/', 'all')->name('salesmen-types.index');
+
+        Route::get('logs/{id}', 'logs')->name('salesmen-types.logs');
+
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('salesmen-types.create');
         Route::put('/{id}', 'update')->name('salesmen-types.update');
@@ -170,10 +175,23 @@ Route::group(['prefix' => 'salesmen-types'], function () {
 Route::group(['prefix' => 'external-salesmen'], function () {
     Route::controller(\App\Http\Controllers\ExternalSalesmen\ExternalSalesmenController::class)->group(function () {
         Route::get('/', 'all')->name('external-salesmen.index');
+        Route::get('logs/{id}', 'logs')->name('external-salesmen.logs');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('external-salesmen.create');
         Route::put('/{id}', 'update')->name('external-salesmen.update');
         Route::delete('/{id}', 'delete')->name('external-salesmen.destroy');
+
+    });
+});
+
+Route::group(['prefix' => 'payment-types'], function () {
+    Route::controller(\App\Http\Controllers\PaymentType\PaymentTypeController::class)->group(function () {
+        Route::get('/', 'all')->name('payment-types.index');
+        Route::get('logs/{id}', 'logs')->name('payment-types.logs');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('payment-types.create');
+        Route::put('/{id}', 'update')->name('payment-types.update');
+        Route::delete('/{id}', 'delete')->name('payment-types.destroy');
 
     });
 });
@@ -198,7 +216,7 @@ Route::group(['prefix' => 'role-screen-hotfield'], function () {
         Route::post('/', 'create' )->name('role-screen-hotfield.create');
         Route::post('/{id}', 'update' )->name('role-screen-hotfield.update');
         Route::delete('/{id}', 'delete' )->name('role-screen-hotfield.destroy');
-
+        Route::get('logs/{id}', 'logs')->name('role-screen-hotfield.logs');
     });
 });
 
@@ -209,24 +227,46 @@ Route::group(['prefix' => 'role-workflow-button'], function () {
         Route::post('/', 'create' )->name('role-workflow-button.create');
         Route::post('/{id}', 'update' )->name('role-workflow-button.update');
         Route::delete('/{id}', 'delete' )->name('role-workflow-button.destroy');
+        Route::get('logs/{id}', 'logs')->name('role-workflow-button.logs');
+    });
+});
 
+Route::group(['prefix' => 'workflow-hotfield'], function () {
+    Route::controller(\App\Http\Controllers\WorkflowHotfield\WorkflowHotfieldController::class)->group(function () {
+        Route::get('/', 'all' )->name('workflow-hotfield.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('workflow-hotfield.create');
+        Route::post('/{id}', 'update' )->name('workflow-hotfield.update');
+        Route::delete('/{id}', 'delete' )->name('workflow-hotfield.destroy');
+        Route::get('logs/{id}', 'logs')->name('workflow-hotfield.logs');
+    });
+});
+
+Route::group(['prefix' => 'salesmen'], function () {
+    Route::controller(\App\Http\Controllers\Salesman\SalesmanController::class)->group(function () {
+        Route::get('/', 'all' )->name('salesmen.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('salesmen.create');
+        Route::post('/{id}', 'update' )->name('salesmen.update');
+        Route::delete('/{id}', 'delete' )->name('salesmen.destroy');
+        Route::get('logs/{id}', 'logs')->name('salesmen.logs');
     });
 });
 
 Route::group(['prefix' => 'branches'], function () {
-    Route::controller(\App\Http\Controllers\Branch\BranchController::class)->group(function () {
+    Route::controller(BranchController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('branches.logs');
     });
 });
 
 Route::group(['prefix' => 'roles'], function () {
-    Route::controller(\App\Http\Controllers\Roles\RoleController::class)->group(function () {
+    Route::controller(RoleController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('roles.logs');
     });
 });
 
 Route::group(['prefix' => 'role_types'], function () {
-    Route::controller(\App\Http\Controllers\RoleType\RoleTypeController::class)->group(function () {
+    Route::controller(RoleTypeController::class)->group(function () {
         Route::get('logs/{id}', 'logs')->name('role_types.logs');
     });
 });
@@ -247,5 +287,7 @@ Route::resource('currencies', CurrencyController::class)->except('create', 'edit
 Route::get('currencies/logs/{id}', [CurrencyController::class,'logs']);
 Route::resource('roles', RoleController::class)->except('create', 'edit');
 Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
+Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
+Route::get('tree-properties/logs/{id}', [TreePropertyController::class,'logs']);
 
 //------------------------------------------------------

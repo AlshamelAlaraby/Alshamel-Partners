@@ -2,12 +2,13 @@
 
 namespace App\Repositories\Store;
 
+use App\Models\Store;
 use Illuminate\Support\Facades\DB;
 
 class StoreRepository implements StoreInterface
 {
 
-    public function __construct(private \App\Models\Store$model)
+    public function __construct(private Store $model)
     {
         $this->model = $model;
 

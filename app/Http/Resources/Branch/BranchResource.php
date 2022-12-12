@@ -15,11 +15,13 @@ class BranchResource extends JsonResource
     public function toArray($request)
     {
         return [
+
             'id'=>$this->id,
             'company'=>$this->company_id,
             'name'=>$this->name,
             'name_e'=>$this->name_e,
-            'isActive'=>$this->is_active
+            'is_active'=>$this->is_active
+
         ];
     }
 }
