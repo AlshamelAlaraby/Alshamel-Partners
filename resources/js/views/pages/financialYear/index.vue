@@ -64,14 +64,14 @@ export default {
         create: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            start_date: {required,},
-            end_date: {required,},
+            start_date: {required},
+            end_date: {required},
         },
         edit: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            start_date: {required,},
-            end_date: {required,},
+            start_date: {required},
+            end_date: {required},
         },
     },
     watch: {
@@ -229,7 +229,7 @@ export default {
             this.create ={
                 name: '',
                 name_e: '',
-                start_date: null,
+                start_date: formatDateTime(this.create.custom_date_start),
                 end_date: null,
                 custom_date_start: new Date(),
                 custom_date_end: null

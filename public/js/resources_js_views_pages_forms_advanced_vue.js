@@ -4535,7 +4535,7 @@ var render = function render() {
     staticClass: "mb-3 header-title"
   }, [_vm._v("Switchery")]), _vm._v(" "), _c("h6", [_vm._v("Basic")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted mb-3 font-13"
-  }, [_vm._v("\r\n                        Add an attribute\r\n                        "), _c("code", [_vm._v('data-plugin="switchery" data-color="@colors"')]), _vm._v("\r\n                        to your input element and it will be converted into switch.\r\n                    ")]), _vm._v(" "), _c("switches", {
+  }, [_vm._v("\n                        Add an attribute\n                        "), _c("code", [_vm._v('data-plugin="switchery" data-color="@colors"')]), _vm._v("\n                        to your input element and it will be converted into switch.\n                    ")]), _vm._v(" "), _c("switches", {
     staticClass: "mb-0",
     attrs: {
       "type-bold": "true"
@@ -4614,7 +4614,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("h6", [_vm._v("Sizes")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted mb-3 font-13"
-  }, [_vm._v("\r\n                        Add an attribute\r\n                        "), _c("code", [_vm._v('data-size="small"')]), _vm._v("\r\n                        to your input element and it will be converted into switch.\r\n                    ")]), _vm._v(" "), _c("div", [_c("switches", {
+  }, [_vm._v("\n                        Add an attribute\n                        "), _c("code", [_vm._v('data-size="small"')]), _vm._v("\n                        to your input element and it will be converted into switch.\n                    ")]), _vm._v(" "), _c("div", [_c("switches", {
     model: {
       value: _vm.small,
       callback: function callback($$v) {
@@ -4817,7 +4817,7 @@ var render = function render() {
     staticClass: "mb-1 mt-3 font-weight-medium text-muted"
   }, [_vm._v("Threshold value")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted font-13"
-  }, [_vm._v("\r\n                            Do you want the badge to show up when there are 20 chars or less? Use the\r\n                            "), _c("code", [_vm._v("threshold")]), _vm._v("\r\n                            option:\r\n                        ")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("\n                            Do you want the badge to show up when there are 20 chars or less? Use the\n                            "), _c("code", [_vm._v("threshold")]), _vm._v("\n                            option:\n                        ")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4850,7 +4850,7 @@ var render = function render() {
     staticClass: "mb-1 mt-3 font-weight-medium text-muted"
   }, [_vm._v("All the options")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted font-13"
-  }, [_vm._v("\r\n                            Please note: if the\r\n                            "), _c("code", [_vm._v("alwaysShow")]), _vm._v(" option is enabled, the\r\n                            "), _c("code", [_vm._v("threshold")]), _vm._v(" option\r\n                            is\r\n                            ignored.\r\n                        ")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("\n                            Please note: if the\n                            "), _c("code", [_vm._v("alwaysShow")]), _vm._v(" option is enabled, the\n                            "), _c("code", [_vm._v("threshold")]), _vm._v(" option\n                            is\n                            ignored.\n                        ")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4879,7 +4879,7 @@ var render = function render() {
       "badge-success": _vm.option.length !== 25,
       "badge-danger": _vm.option.length === 25
     }
-  }, [_vm._v("\r\n                                You typed\r\n                                " + _vm._s(_vm.option.length) + " out of 25 chars available.\r\n                            ")]) : _vm._e()])]), _vm._v(" "), _c("div", [_c("label", {
+  }, [_vm._v("\n                                You typed\n                                " + _vm._s(_vm.option.length) + " out of 25 chars available.\n                            ")]) : _vm._e()])]), _vm._v(" "), _c("div", [_c("label", {
     staticClass: "mb-1 mt-3 font-weight-medium text-muted"
   }, [_vm._v("Textareas")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted font-13"
@@ -4913,7 +4913,7 @@ var render = function render() {
       "badge-success": _vm.textarea.length !== 225,
       "badge-danger": _vm.textarea.length === 225
     }
-  }, [_vm._v("\r\n                                " + _vm._s(_vm.textarea.length) + " /\r\n                                225\r\n                            ")]) : _vm._e()])])])])])])], 1);
+  }, [_vm._v("\n                                " + _vm._s(_vm.textarea.length) + " /\n                                225\n                            ")]) : _vm._e()])])])])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

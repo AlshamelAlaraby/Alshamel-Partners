@@ -496,7 +496,7 @@
         "short_code": "كود قصير",
         "phone_key": "مفتاح الدوله",
         "is_default": "إفتراضي",
-        "national": "جنسيه",
+        "national": "رقم الهويه الوطنيه",
         "country": "الدوله",
         "phone": "رقم التليفون",
         "email": "الاميل",
@@ -504,6 +504,7 @@
         "governorate": "المحافظه",
         "city": "المدينه",
         "startDate": "تاريخ البدايه",
+        "imagEUpload": "تحميل صوره",
         "endDate": "تاريخ النهايه"
     }
 }

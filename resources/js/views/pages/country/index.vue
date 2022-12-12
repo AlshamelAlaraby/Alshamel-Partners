@@ -10,12 +10,11 @@ import loader from "../../../components/loader";
 import alphaArabic  from "../../../helper/alphaArabic";
 import alphaEnglish  from "../../../helper/alphaEnglish";
 import { dynamicSortString }   from "../../../helper/tableSort";
-import senderHoverHelper   from "../../../helper/senderHoverHelper";
+import vue2Dropzone from "vue2-dropzone";
 
 /**
  * Advanced Table component
  */
-const imgValid = (value) => ['image/png','image/jpg','image/jpeg','image/gif'].includes(value);
 
 export default {
     page: {
@@ -27,7 +26,8 @@ export default {
         PageHeader,
         Switches,
         ErrorMessage,
-        loader
+        loader,
+        vueDropzone: vue2Dropzone
     },
     data() {
         return {
@@ -44,13 +44,10 @@ export default {
                 long_name_e: '',
                 short_code: '',
                 phone_key: '',
-                national_id: null,
+                national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: {},
-                type: '',
-                search: "",
-                isImage: true
+                media: null
             },
             edit: {
                 name: '',
@@ -59,20 +56,29 @@ export default {
                 long_name_e: '',
                 short_code: '',
                 phone_key: '',
-                national_id: null,
+                national_id_length: null,
                 is_default: 0,
-                search: '',
                 is_active: 'active',
-                media: {}
+                media: null,
             },
             errors: {},
             dropDownSenders: [],
-            isDrop: false,
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
             image: '',
-            setting: ['name','name_e','long_name','long_name_e','short_code','phone_key','national_id']
+            dropzoneOptions: {
+                url: `${process.env.MIX_APP_URL}api/media`,
+                maxFilesize: 5,
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                parallelUploads: 1,
+                maxFiles: 1,
+                autoProcessQueue: false,
+                headers: {
+                    "My-Awesome-Header": "header value",
+                },
+            },
+            setting: ['name','name_e','long_name','long_name_e','short_code','phone_key','national_id_length']
         }
     },
     validations: {
@@ -84,10 +90,8 @@ export default {
             short_code: {required,minLength: minLength(1),maxLength: maxLength(10)},
             phone_key: {required,minLength: minLength(1),maxLength: maxLength(10)},
             is_default: {required,integer},
-            national_id: {required},
+            national_id_length: {required,minLength: minLength(1),maxLength: maxLength(20)},
             is_active: {required},
-            media: {required},
-            type: {imgValid}
         },
         edit: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
@@ -97,9 +101,9 @@ export default {
             short_code: {required,minLength: minLength(1),maxLength: maxLength(10)},
             phone_key: {required,minLength: minLength(1),maxLength: maxLength(10)},
             is_default: {required,integer},
-            national_id: {required},
+            national_id_length: {required,minLength: minLength(1),maxLength: maxLength(20)},
             is_active: {required},
-            media: {}
+            media:{required}
         },
     },
     watch: {
@@ -135,7 +139,6 @@ export default {
     },
     mounted() {
         this.getData();
-        this.keyDropdown();
     },
     methods: {
         /**
@@ -239,7 +242,7 @@ export default {
          *  reset Modal (create)
          */
         resetModalHidden(){
-            this.create =  {
+            this.create = {
                 name: '',
                 name_e: '',
                 long_name:'',
@@ -249,10 +252,7 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: {},
-                type: '',
-                search: "",
-                isImage: true
+                media: null
             };
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
@@ -272,10 +272,7 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: {},
-                type: '',
-                search: "",
-                isImage: true
+                media: null
             };
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
@@ -293,19 +290,8 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let formDate = new FormData();
-                formDate.append('name',this.create.name);
-                formDate.append('name_e',this.create.name_e);
-                formDate.append('long_name',this.create.long_name);
-                formDate.append('long_name_e',this.create.long_name_e);
-                formDate.append('phone_key',this.create.phone_key);
-                formDate.append('national_id_length',this.create.national_id_length);
-                formDate.append('short_code',this.create.short_code);
-                formDate.append('media',this.create.media);
-                formDate.append('is_active',this.create.is_active);
-                formDate.append('is_default',this.create.is_default);
 
-                adminApi.post(`/countries`,formDate)
+                adminApi.post(`/countries`,this.create)
                     .then((res) => {
                         this.$bvModal.hide(`create`);
                         this.getData();
@@ -345,8 +331,7 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let {name,name_e,parent_id,is_active} = this.edit;
-                adminApi.put(`/countries/${id}`,{name,name_e,parent_id,is_active})
+                adminApi.put(`/countries/${id}`,this.edit)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
@@ -381,8 +366,14 @@ export default {
             let country = this.countries.find(e => id == e.id );
             this.edit.name = country.name;
             this.edit.name_e = country.name_e;
+            this.edit.long_name_e = country.long_name_e;
+            this.edit.long_name = country.long_name;
+            this.edit.national_id_length = country.national_id_length;
+            this.edit.phone_key = country.phone_key;
+            this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
-            this.edit.parent_id = country.parent_id;
+            this.edit.is_default = country.is_default;
+            this.edit.media = country.media.id;
             this.errors = {};
         },
         /**
@@ -399,120 +390,10 @@ export default {
                 phone_key: '',
                 national_id_length: null,
                 is_default: 0,
-                search: '',
                 is_active: 'active',
-                media: {}
+                media: null
             };
         },
-        /**
-         *  start  dropdown Google
-         */
-        searchSenderNational(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderNational(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        senderHover(e){ senderHoverHelper(e);},
-        keyDropdown(){
-            document.addEventListener('keyup',(e) => {
-                if(e.keyCode == 38){ //top arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != 0){
-                            items[index].classList.remove('active');
-                            items[index - 1].classList.add('active');
-                        }else if(isTrue && index == 0){
-                            items[index].classList.remove('active');
-                            items[items.length - 1].classList.add('active');
-                        }
-                        if(!isTrue) items[0].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 40){ //down arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[index + 1].classList.add('active');
-                        }else if(isTrue && index == (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[0].classList.add('active');
-                        }
-                        if(!isTrue) items[items.length - 1].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 13){ //enter
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) this.showSenderName(i);
-                        });
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-            });
-
-            document.addEventListener('click',(e) => {
-                if(this.dropDownSenders.length > 0){
-                    if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                        return  false;
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                }
-            });
-        },
-        ClickDropdown(e){
-            if(this.dropDownSenders.length > 0){
-                if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                    return  false;
-                }else {
-                    this.dropDownSenders = [];
-                }
-            }
-        },
-        /**
-         *  end  dropdown Google
-         */
         /**
          *  start  dynamicSortString
          */
@@ -532,102 +413,31 @@ export default {
          *  end  ckeckRow
          */
         moveInput(tag,c,index){document.querySelector(`${tag}[data-${c}='${index}']`).focus()},
-        /**
-         *  start Image ceate
-         */
-        onDragEnter(){
-            this.isDrop = true;
-            this.counter++;
+        sendingEvent (file, xhr, formData) {
+            formData.append('media[0]', file);
         },
-        onDragLeave(){
-            this.counter--;
-            this.isDrop = false;
+        afterUpload(response){
+           if(response.status == 'success'){
+               this.create.media = JSON.parse(response.xhr.response).data[0].id;
+               this.AddSubmit();
+           }else{
+               Swal.fire({
+                   icon: 'error',
+                   title: `${this.$t('general.Error')}`,
+                   text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+               });
+           }
         },
-        onDrop(e){
-            this.create.media = {};
-            this.image = '';
-            this.isDrop = false;
-            const file = e.dataTransfer.files;
-            this.addImage(file[0]);
-        },
-        onImageChanged(e){
-            this.create.media = {};
-            this.edit.isImage = false;
-            this.image = '';
-            const file = e.target.files[0];
-            this.addImage(file);
-        },
-        addImage(file){
-            this.isDrop = true;
-            this.create.type = file.type;
-            this.create.media = file; //upload
-            //preview of image
-            const reader = new FileReader();
-            reader.onload = (e)=> this.image = e.target.result;
-            reader.readAsDataURL(this.create.media);
-        },
-        deleteImageCreate(){
-            this.isDrop = false;
-            this.create.type = '';
-            this.image = '';
-            this.create.media = {};
-            let imageInput = document.getElementById('uploadImageCreate');
-            if(imageInput.value) {imageInput.value = ''}
-        },
-        /**
-         *  end Image ceate
-         */
-        /**
-         *  start Image ceate
-         */
-        onDragEnterEdit(){
-            this.isDrop = true;
-            this.counter++;
-        },
-        onDragLeaveEdit(){
-            this.counter--;
-            this.isDrop = false;
-        },
-        onDropEdit(e){
-            this.edit.media = {};
-            this.image = '';
-            this.edit.isImage = false;
-            this.isDrop = false;
-            const file = e.dataTransfer.files;
-            this.addImageEdit(file[0]);
-        },
-        onImageChangedEdit(e){
-            this.edit.media = {};
-            this.edit.isImage = false;
-            this.image = '';
-            const file = e.target.files[0];
-            this.addImageEdit(file);
-        },
-        addImageEdit(file){
-            if(file){
-                this.isDrop = true;
-                this.edit.type = file.type;
-                this.edit.media = file; //upload
-                //preview of image
-                const reader = new FileReader();
-                reader.onload = (e)=> this.image = e.target.result;
-                reader.readAsDataURL(this.edit.media);
-            }else{
-                this.edit.isImage = true;
+        shootCountry(){
+            this.$v.create.$touch();
+
+            if (this.$v.create.$invalid) {
+                return;
+            } else {
+                this.isLoader = true;
+                this.$refs.myCreateDropzone.processQueue();
             }
-        },
-        deleteImageEdit(){
-            this.isDrop = false;
-            this.edit.isImage = true;
-            this.edit.type = '';
-            this.image = '';
-            this.edit.media = {};
-            let imageInput = document.getElementById('uploadImageEdit');
-            if(imageInput.value) {imageInput.value = ''}
-        },
-        /**
-         *  end Image ceate
-         */
+        }
     },
 };
 </script>
@@ -654,7 +464,7 @@ export default {
                                         <b-form-checkbox v-model="setting" value="long_name_e" class="mb-1">{{ $t('general.long_name_e') }}</b-form-checkbox>
                                         <b-form-checkbox v-model="setting" value="short_code" class="mb-1">{{ $t('general.short_code') }}</b-form-checkbox>
                                         <b-form-checkbox v-model="setting" value="phone_key" class="mb-1">{{ $t('general.phone_key') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="national_id" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="setting" value="national_id_length" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -706,7 +516,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length > 1"
-                                        @click.prevent="deletecountry(checkAll)"
+                                        @click.prevent="deleteCountry(checkAll)"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -899,42 +709,28 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="edit-20" class="control-label">
+                                            <label for="create-20" class="control-label">
                                                 {{ $t('general.national') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 class="form-control input-Sender"
-                                                v-model.trim="edit.search"
-                                                data-edit="5"
-                                                @keypress.enter="moveInput('input','edit',6)"
-                                                @input="searchSenderNational"
-                                                @blur.prevent="ClickDropdown"
+                                                v-model.trim="create.national_id_length"
+                                                data-create="5"
+                                                @keypress.enter="moveInput('input','create',6)"
                                                 :class="{
-                                                'is-invalid':$v.edit.national_id.$error || errors.national_id,
-                                                'is-valid':!$v.edit.national_id.$invalid && !errors.national_id
+                                                'is-invalid':$v.create.national_id_length.$error || errors.national_id_length,
+                                                'is-valid':!$v.create.national_id_length.$invalid && !errors.national_id_length
                                                 }"
-                                                id="edit-20"
+                                                id="create-20"
                                             />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
-                                            >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderNational(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-                                            <template v-if="errors.national_id">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.national_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            <div v-if="!$v.create.national_id_length.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.national_id_length.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.national_id_length.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.national_id_length.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.national_id_length">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.national_id_length" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
@@ -1043,77 +839,26 @@ export default {
                                     </div>
                                     <div class="col-md-12 my-2">
                                         <label class="mb-1">
-                                            {{ $t('company.LogoFileUpload') }}
+                                            {{ $t('general.imagEUpload') }}
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <div
-                                            class="dropzone-custom position-relative"
-                                            :style="{minHeight: !isDrop? '160px':'160px'}"
-                                            @dragenter.prevent="onDragEnter"
-                                            @dragleave.prevent="onDragLeave"
-                                            @dragover.prevent
-                                            @drop.prevent.stop="onDrop"
+                                        <!-- file upload -->
+                                        <vue-dropzone
+                                            id="dropzone"
+                                            ref="myCreateDropzone"
+                                            :use-custom-slot="true"
+                                            :options="dropzoneOptions"
+                                            @vdropzone-complete="afterUpload"
+                                            @vdropzone-sending="sendingEvent"
                                         >
-                                            <div
-                                                class="dropzone-content text-center"
-                                                v-if="!isDrop"
-                                            >
-                                                <div class="dropzone-icon">
-                                                    <i class="fas fa-cloud-download-alt"></i>
-                                                </div>
+                                            <div class="dz-message needsclick">
+                                                <i class="h1 text-muted ri-upload-cloud-2-line"></i>
                                                 <h3>{{ $t('general.Dropfileshereorclicktoupload') }}</h3>
-                                                <p>{{ $t('general.Dropfileshereorclicktoupload') }}</p>
-                                            </div
-                                            >
-
-                                            <input
-                                                accept="image/png, image/gif, image/jpeg, image/jpg"
-                                                type="file"
-                                                id="uploadImageCreate"
-                                                @change="onImageChanged"
-                                                class="input-file-upload position-absolute"
-                                                :class="{
-                                                    'is-invalid':$v.create.media.$error || errors.media,
-                                                    'is-valid':!$v.create.media.$invalid && !errors.media
-                                                }"
-                                            >
-
-                                            <template  v-if="isDrop && image">
-                                                <div class="dropzone-previews mt-3 position-relative">
-                                                    <div class="card mt-1 mb-0 shadow-none border" style="border: 1px solid #ccc">
-                                                        <div class="p-2" >
-                                                            <div class="row align-items-center">
-                                                                <div class="col-auto">
-                                                                    <img data-dz-thumbnail :src="image" class="avatar-sm rounded bg-light">
-                                                                </div>
-                                                                <div class="col pl-0">
-                                                                    <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
-                                                                        {{ create.media.name }}
-                                                                    </a>
-                                                                    <p class="mb-0" data-dz-size>{{ create.media.size }}</p>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <!-- Button -->
-                                                                    <a
-                                                                        href="javascript:void(0);"
-                                                                        class="btn btn-link btn-lg text-muted"
-                                                                        data-dz-remove
-                                                                        @click.prevent="deleteImageCreate"
-                                                                    >
-                                                                        <i class="fe-x"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-
-                                        </div>
-                                        <div v-if="!$v.create.type.imgValid && $v.create.type.$error" class="text-danger">{{ $t('general.ItmustbeyourImage') }}</div>
-                                        <template v-if="errors.logo">
-                                            <ErrorMessage v-for="(errorMessage,index) in errors.logo" :key="index">{{ errorMessage }}</ErrorMessage>
-                                        </template>
+                                                <span class="text-muted font-13">
+                                                    {{ $t('general.Dropfileshereorclicktoupload') }}
+                                                </span>
+                                            </div>
+                                        </vue-dropzone>
                                     </div>
                                 </div>
                                 <div class="mt-1 d-flex justify-content-end">
@@ -1121,8 +866,8 @@ export default {
                                     <b-button
                                         variant="success"
                                         type="button" class="mx-1"
-                                        v-if="!isLoader && isButton"
-                                        @click.prevent="AddSubmit"
+                                        v-if="!isLoader"
+                                        @click.prevent="shootCountry"
                                     >
                                         {{ $t('general.Add') }}
                                     </b-button>
@@ -1323,6 +1068,7 @@ export default {
                                             :title="$t('country.editcountry')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
@@ -1367,10 +1113,10 @@ export default {
                                                                 class="form-control"
                                                                 data-edit="2"
                                                                 @keypress.enter="moveInput('input','edit',3)"
-                                                                v-model="$v.create.name_e.$model"
+                                                                v-model="$v.edit.name_e.$model"
                                                                 :class="{
-                                                                    'is-invalid':$v.create.name_e.$error || errors.name_e,
-                                                                    'is-valid':!$v.create.name_e.$invalid && !errors.name_e
+                                                                    'is-invalid':$v.edit.name_e.$error || errors.name_e,
+                                                                    'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
                                                                 id="edit-2"
                                                             />
@@ -1393,7 +1139,7 @@ export default {
                                                                 class="form-control"
                                                                 data-edit="3"
                                                                 @keypress.enter="moveInput('input','edit',4)"
-                                                                v-model="$v.create.long_name.$model"
+                                                                v-model="$v.edit.long_name.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.long_name.$error || errors.long_name,
                                                                     'is-valid':!$v.edit.long_name.$invalid && !errors.long_name
@@ -1433,30 +1179,32 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <label for="edit-9" class="control-label">
+                                                            <label for="edit-21" class="control-label">
                                                                 {{ $t('general.national') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
-                                                                type="text"
-                                                                class="form-control"
+                                                                type="number"
+                                                                class="form-control input-Sender"
+                                                                v-model.trim="$v.edit.national_id_length.$model"
                                                                 data-edit="5"
                                                                 @keypress.enter="moveInput('input','edit',6)"
-                                                                v-model="$v.create.national_id_length.$model"
                                                                 :class="{
                                                                 'is-invalid':$v.edit.national_id_length.$error || errors.national_id_length,
                                                                 'is-valid':!$v.edit.national_id_length.$invalid && !errors.national_id_length
                                                                 }"
-                                                                id="edit-9"
+                                                                id="edit-21"
                                                             />
+                                                            <div v-if="!$v.edit.national_id_length.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.national_id_length.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.national_id_length.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.national_id_length.$params.maxLength.max }} {{ $t('general.letters') }}</div>
                                                             <template v-if="errors.national_id_length">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.national_id_length" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="edit-4" class="control-label">
                                                                 {{ $t('general.phone_key') }}
@@ -1482,7 +1230,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="edit-4" class="control-label">
                                                                 {{ $t('general.short_code') }}
@@ -1508,7 +1256,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class=" mr-2" for="edit-11">
                                                                 {{ $t('general.is_default') }}
@@ -1518,7 +1266,7 @@ export default {
                                                                 id="edit-11"
                                                                 data-edit="8"
                                                                 @keypress.enter.prevent="moveInput('select','edit',9)"
-                                                                v-model="$v.create.is_default.$model"
+                                                                v-model="$v.edit.is_default.$model"
                                                                 :class="{
                                                                 'is-invalid':$v.edit.is_default.$error || errors.is_default,
                                                                 'is-valid':!$v.edit.is_default.$invalid && !errors.is_default
@@ -1533,7 +1281,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class=" mr-2">
                                                                 {{ $t('general.Status') }}
@@ -1561,7 +1309,7 @@ export default {
                                                 </div>
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button  variant="success" type="submit" class="mx-1" v-if="!isLoader && isButton">
+                                                    <b-button  variant="success" type="submit" class="mx-1" v-if="!isLoader">
                                                         {{ $t('general.Edit') }}
                                                     </b-button>
 

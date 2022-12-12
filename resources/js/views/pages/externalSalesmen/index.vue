@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString, dynamicSortNumber }   from "../../../helper/tableSort";
-import senderHoverHelper   from "../../../helper/senderHoverHelper";
+import Multiselect from "vue-multiselect";
 
 /**
  * Advanced Table component
@@ -22,6 +22,7 @@ export default {
         Layout,
         PageHeader,
         Switches,
+        Multiselect,
         ErrorMessage,
         loader
     },
@@ -41,7 +42,6 @@ export default {
                 country_id: null,
                 national_id: null,
                 is_active: 'active',
-                search: ""
             },
             edit: {
                 phone: '',
@@ -51,14 +51,13 @@ export default {
                 country_id: null,
                 national_id: null,
                 is_active: 'active',
-                search: ""
             },
             errors: {},
-            dropDownSenders: [],
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['phone','address','email','rp_code','country_id','national_id','is_active']
+            setting: ['phone','address','email','rp_code','country_id','national_id','is_active'],
+            countries: []
         }
     },
     validations: {
@@ -114,7 +113,6 @@ export default {
     },
     mounted() {
         this.getData();
-        this.keyDropdown();
     },
     methods: {
         /**
@@ -226,8 +224,8 @@ export default {
                 country_id: null,
                 national_id: null,
                 is_active: 'active',
-                search: ""
             };
+            this.countries = [];
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
             this.$bvModal.hide(`create`);
@@ -244,9 +242,9 @@ export default {
                 country_id: null,
                 national_id: null,
                 is_active: 'active',
-                search: ""
             };
             this.$nextTick(() => { this.$v.$reset() });
+            this.getCategory();
             this.errors = {};
         },
         /**
@@ -302,8 +300,7 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let {name,name_e,parent_id,is_active} = this.edit;
-                adminApi.put(`/external-salesmen/${id}`,{name,name_e,parent_id,is_active})
+                adminApi.put(`/external-salesmen/${id}`,this.edit)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
@@ -334,12 +331,16 @@ export default {
         /**
          *   show Modal (edit)
          */
-        resetModalEdit(id){
+        async resetModalEdit(id){
             let externalSalesmen = this.externalSalesmens.find(e => id == e.id );
-            this.edit.name = externalSalesmen.name;
-            this.edit.name_e = externalSalesmen.name_e;
             this.edit.is_active = externalSalesmen.is_active;
-            this.edit.parent_id = externalSalesmen.parent_id;
+            await this.getCategory();
+            this.edit.country_id = externalSalesmen.country.id;
+            this.edit.national_id = externalSalesmen.national_id;
+            this.edit.phone = externalSalesmen.phone;
+            this.edit.email = externalSalesmen.email;
+            this.edit.rp_code = externalSalesmen.rp_code;
+            this.edit.address = externalSalesmen.address;
             this.errors = {};
         },
         /**
@@ -355,142 +356,9 @@ export default {
                 country_id: null,
                 national_id: null,
                 is_active: 'active',
-                search: ""
             };
+            this.countries = [];
         },
-        /**
-         *  start  dropdown Google
-         */
-        searchSenderCountry(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderCountry(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        searchSenderNational(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderNational(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        senderHover(e){ senderHoverHelper(e);},
-        keyDropdown(){
-            document.addEventListener('keyup',(e) => {
-                if(e.keyCode == 38){ //top arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != 0){
-                            items[index].classList.remove('active');
-                            items[index - 1].classList.add('active');
-                        }else if(isTrue && index == 0){
-                            items[index].classList.remove('active');
-                            items[items.length - 1].classList.add('active');
-                        }
-                        if(!isTrue) items[0].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 40){ //down arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[index + 1].classList.add('active');
-                        }else if(isTrue && index == (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[0].classList.add('active');
-                        }
-                        if(!isTrue) items[items.length - 1].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 13){ //enter
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) this.showSenderName(i);
-                        });
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-            });
-
-            document.addEventListener('click',(e) => {
-                if(e.target.tagName !== 'BUTTON'){
-                    e.preventDefault();
-                }
-                if(this.dropDownSenders.length > 0){
-                    if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                        return  false;
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                }
-            });
-        },
-        ClickDropdown(e){
-            if(this.dropDownSenders.length > 0){
-                if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                    return  false;
-                }else {
-                    this.dropDownSenders = [];
-                }
-            }
-        },
-        /**
-         *  end  dropdown Google
-         */
         /**
          *  start  dynamicSortString
          */
@@ -510,7 +378,26 @@ export default {
         /**
          *  end  ckeckRow
          */
-        moveInput(tag,c,index){document.querySelector(`${tag}[data-${c}='${index}']`).focus()}
+        moveInput(tag,c,index){document.querySelector(`${tag}[data-${c}='${index}']`).focus()},
+        async getCategory(){
+            this.isLoader = true;
+            this.countries = [];
+            await adminApi.get(`/countries`)
+                .then((res) => {
+                    let l = res.data;
+                    this.countries = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                })
+                .finally(() => {
+                    this.isLoader = false;
+                });
+        }
     },
 };
 </script>
@@ -682,11 +569,11 @@ export default {
                                     <div class="col-md-6" >
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ $t('general.phone') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 class="form-control"
                                                 data-create="1"
                                                 @keypress.enter="moveInput('input','create',2)"
@@ -714,7 +601,7 @@ export default {
                                                 type="email"
                                                 class="form-control"
                                                 data-create="2"
-                                                @keypress.enter="moveInput('input','create',3)"
+                                                @keypress.enter="moveInput('input','create',4)"
                                                 v-model="$v.create.email.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.email.$error || errors.email,
@@ -728,41 +615,23 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" >
                                         <div class="form-group position-relative">
-                                            <label for="field-12" class="control-label">
+                                            <label  class="control-label">
                                                 {{ $t('general.country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="3"
-                                                @keypress.enter="moveInput('input','create',4)"
-                                                @input="searchSenderCountry"
-                                                @blur.prevent="ClickDropdown"
-                                                :class="{
-                                                'is-invalid':$v.create.country_id.$error || errors.country_id,
-                                                'is-valid':!$v.create.country_id.$invalid && !errors.country_id
-                                                }"
-                                                :placeholder="$t('partner.partner')" id="field-12"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
+                                            <multiselect
+                                                v-model="create.country_id"
+                                                :options="countries.map(type => type.id)"
+                                                :custom-label="opt => countries.find(x => x.id == opt).name"
                                             >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderCountry(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
+                                            </multiselect>
+                                            <div v-if="$v.create.country_id.$error || errors.country_id"
+                                                 class="text-danger"
+                                            >
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>
                                             <template v-if="errors.country_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
@@ -776,32 +645,16 @@ export default {
                                             </label>
                                             <input
                                                 type="text"
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
+                                                class="form-control"
+                                                v-model.trim="$v.create.national_id.$model"
                                                 data-create="4"
                                                 @keypress.enter="moveInput('select','create',5)"
-                                                @input="searchSenderNational"
-                                                @blur.prevent="ClickDropdown"
                                                 :class="{
                                                 'is-invalid':$v.create.national_id.$error || errors.national_id,
                                                 'is-valid':!$v.create.national_id.$invalid && !errors.national_id
                                                 }"
                                                 :placeholder="$t('partner.partner')" id="field-4"
                                             />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
-                                            >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderNational(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
                                             <template v-if="errors.national_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.national_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
@@ -1003,7 +856,7 @@ export default {
                                     <td>
                                         <h5 class="m-0 font-weight-normal">{{ data.email }}</h5>
                                     </td>
-                                      <td>{{ data.country_id }}</td>
+                                      <td>{{ data.country.name }}</td>
                                       <td>{{ data.national_id }}</td>
                                       <td>{{ data.rp_code }}</td>
                                       <td>
@@ -1060,6 +913,7 @@ export default {
                                             :title="$t('externalSalesmen.editexternalSalesmen')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
@@ -1102,7 +956,7 @@ export default {
                                                                 type="email"
                                                                 class="form-control"
                                                                 data-edit="2"
-                                                                @keypress.enter="moveInput('input','edit',3)"
+                                                                @keypress.enter="moveInput('input','edit',4)"
                                                                 v-model="$v.edit.email.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.email.$error || errors.email,
@@ -1116,41 +970,22 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" >
                                                         <div class="form-group position-relative">
-                                                            <label for="edit-12" class="control-label">
+                                                            <label  class="control-label">
                                                                 {{ $t('general.country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
-                                                                data-edit="3"
-                                                                @keypress.enter="moveInput('input','edit',4)"
-                                                                @input="searchSenderCountry"
-                                                                @blur.prevent="ClickDropdown"
-                                                                :class="{
-                                                                'is-invalid':$v.edit.country_id.$error || errors.country_id,
-                                                                'is-valid':!$v.edit.country_id.$invalid && !errors.country_id
-                                                                }"
-                                                                :placeholder="$t('partner.partner')" id="edit-12"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
+                                                            <multiselect
+                                                                v-model="edit.country_id"
+                                                                :options="countries.map(type => type.id)"
+                                                                :custom-label="opt => countries.find(x => x.id == opt)['name']"
                                                             >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderCountry(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
-
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
+                                                                 class="text-danger">
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>
                                                             <template v-if="errors.country_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
@@ -1158,38 +993,21 @@ export default {
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="edit-4" class="control-label">
+                                                            <label class="control-label">
                                                                 {{ $t('general.national') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
                                                                 type="text"
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
+                                                                class="form-control"
+                                                                v-model.trim="$v.edit.national_id.$model"
                                                                 data-edit="4"
                                                                 @keypress.enter="moveInput('select','edit',5)"
-                                                                @input="searchSenderNational"
-                                                                @blur.prevent="ClickDropdown"
                                                                 :class="{
                                                                 'is-invalid':$v.edit.national_id.$error || errors.national_id,
                                                                 'is-valid':!$v.edit.national_id.$invalid && !errors.national_id
                                                                 }"
-                                                                :placeholder="$t('partner.partner')" id="edit-4"
                                                             />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
-                                                            >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderNational(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
                                                             <template v-if="errors.national_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.national_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>

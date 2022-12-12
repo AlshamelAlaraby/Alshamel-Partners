@@ -11,6 +11,7 @@ import alphaArabic  from "../../../helper/alphaArabic";
 import alphaEnglish  from "../../../helper/alphaEnglish";
 import { dynamicSortString, dynamicSortNumber }   from "../../../helper/tableSort";
 import senderHoverHelper   from "../../../helper/senderHoverHelper";
+import Multiselect from "vue-multiselect";
 
 /**
  * Advanced Table component
@@ -24,6 +25,7 @@ export default {
         Layout,
         PageHeader,
         Switches,
+        Multiselect,
         ErrorMessage,
         loader
     },
@@ -42,7 +44,6 @@ export default {
                 governorate_id: null,
                 city_id: null,
                 is_active: 'active',
-                search:''
             },
             edit: {
                 name: '',
@@ -51,14 +52,15 @@ export default {
                 governorate_id: null,
                 city_id: null,
                 is_active: 'active',
-                search:''
             },
             errors: {},
-            dropDownSenders: [],
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['name','name_e','country_id','governorate_id','city_id']
+            setting: ['name','name_e','country_id','governorate_id','city_id'],
+            countries: [],
+            governorates: [],
+            cities: []
         }
     },
     validations: {
@@ -112,7 +114,6 @@ export default {
     },
     mounted() {
         this.getData();
-        this.keyDropdown();
     },
     methods: {
         /**
@@ -223,7 +224,6 @@ export default {
                 governorate_id: null,
                 city_id: null,
                 is_active: 'active',
-                search:''
             };
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
@@ -240,9 +240,9 @@ export default {
                 governorate_id: null,
                 city_id: null,
                 is_active: 'active',
-                search:''
             };
             this.$nextTick(() => { this.$v.$reset() });
+            this.getCategory();
             this.errors = {};
         },
         /**
@@ -329,12 +329,15 @@ export default {
         /**
          *   show Modal (edit)
          */
-        resetModalEdit(id){
-            let city = this.avenues.find(e => id == e.id );
-            this.edit.name = city.name;
-            this.edit.name_e = city.name_e;
-            this.edit.is_active = city.is_active;
-            this.edit.parent_id = city.parent_id;
+        async resetModalEdit(id){
+            let avenue = this.avenues.find(e => id == e.id );
+            this.edit.name = avenue.name;
+            this.edit.name_e = avenue.name_e;
+            this.edit.is_active = avenue.is_active;
+            this.edit.country_id = avenue.country.id;
+            this.edit.city_id = avenue.city.id;
+            await this.getCategory();
+            this.edit.governorate_id = avenue.governorate.id;
             this.errors = {};
         },
         /**
@@ -349,163 +352,11 @@ export default {
                 governorate_id: null,
                 city_id: null,
                 is_active: 'active',
-                search:''
             };
+            this.countries = [];
+            this.governorates = [];
+            this.cities = [];
         },
-        /**
-         *  start  dropdown Google
-         */
-        searchSenderCountry(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderCountry(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        searchSenderGovernorate(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderGovernorate(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        searchSenderCity(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-            }
-        },
-        showSenderCity(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.dropDownSenders = [];
-        },
-        senderHover(e){ senderHoverHelper(e);},
-        keyDropdown(){
-            document.addEventListener('keyup',(e) => {
-                if(e.keyCode == 38){ //top arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != 0){
-                            items[index].classList.remove('active');
-                            items[index - 1].classList.add('active');
-                        }else if(isTrue && index == 0){
-                            items[index].classList.remove('active');
-                            items[items.length - 1].classList.add('active');
-                        }
-                        if(!isTrue) items[0].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 40){ //down arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[index + 1].classList.add('active');
-                        }else if(isTrue && index == (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[0].classList.add('active');
-                        }
-                        if(!isTrue) items[items.length - 1].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 13){ //enter
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) this.showSenderName(i);
-                        });
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-            });
-
-            document.addEventListener('click',(e) => {
-                if(e.target.tagName !== 'BUTTON'){
-                    e.preventDefault();
-                }
-                if(this.dropDownSenders.length > 0){
-                    if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                        return  false;
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                }
-            });
-        },
-        ClickDropdown(e){
-            if(this.dropDownSenders.length > 0){
-                if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                    return  false;
-                }else {
-                    this.dropDownSenders = [];
-                }
-            }
-        },
-        /**
-         *  end  dropdown Google
-         */
         /**
          *  start  dynamicSortString
          */
@@ -527,6 +378,67 @@ export default {
          */
         moveInput(tag,c,index){
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
+        },
+        async getCategory(){
+
+            this.countries = [];
+            this.cities = [];
+            this.governorates = [];
+            this.create.governorate_id = null;
+            this.edit.governorate_id = null;
+            this.create.city_id = null;
+            this.edit.city_id = null;
+
+            await adminApi.get(`/countries`)
+                .then((res) => {
+                    let l = res.data;
+                    this.countries = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
+
+        },
+        getGovernorate(){
+
+            this.cities = [];
+            this.governorates = [];
+            this.create.city_id = null;
+            this.edit.city_id = null;
+
+            adminApi.get(`/governorates`)
+                .then((res) => {
+                    let l = res.data;
+                    this.governorates = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
+
+        },
+        getCity(){
+            this.cities = [];
+
+            adminApi.get(`/cities`)
+                .then((res) => {
+                    let l = res.data;
+                    this.cities = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
         }
     },
 };
@@ -746,121 +658,63 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" >
                                         <div class="form-group position-relative">
-                                            <label for="field-12" class="control-label">
+                                            <label  class="control-label">
                                                 {{ $t('general.country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="3"
-                                                @keypress.enter="moveInput('input','create',4)"
-                                                @input="searchSenderCountry"
-                                                @blur.prevent="ClickDropdown"
-                                                :class="{
-                                                'is-invalid':$v.create.country_id.$error || errors.country_id,
-                                                'is-valid':!$v.create.country_id.$invalid && !errors.country_id
-                                                }"
-                                                id="field-12"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
+                                            <multiselect
+                                                @select="getGovernorate"
+                                                v-model="$v.create.country_id.$model"
+                                                :options="countries.map(type => type.id)"
+                                                :custom-label="opt => countries.find(x => x.id == opt).name"
                                             >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderCountry(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
+                                            </multiselect>
+                                            <div v-if="$v.create.country_id.$error || errors.country_id"
+                                                 class="text-danger">
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>
                                             <template v-if="errors.country_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" v-if="create.country_id">
                                         <div class="form-group position-relative">
-                                            <label for="field-11" class="control-label">
+                                            <label  class="control-label">
                                                 {{ $t('general.governorate') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="4"
-                                                @keypress.enter="moveInput('input','create',5)"
-                                                @input="searchSenderGovernorate"
-                                                @blur.prevent="ClickDropdown"
-                                                :class="{
-                                                'is-invalid':$v.create.governorate_id.$error || errors.governorate_id,
-                                                'is-valid':!$v.create.governorate_id.$invalid && !errors.governorate_id
-                                                }"
-                                                 id="field-11"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
-                                            >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderGovernorate(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
-                                            <template v-if="errors.governorate_id">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            <multiselect
+                                                @select="getCity"
+                                                v-model="$v.create.governorate_id.$model"
+                                                :options="governorates.map(type => type.id)"
+                                                :custom-label="opt => governorates.find(x => x.id == opt).name">
+                                            </multiselect>
+                                            <div v-if="$v.create.governorate_id.$error || errors.governorate_id"
+                                                 class="text-danger">
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>                                           <template v-if="errors.governorate_id">
+                                            <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" v-if="create.governorate_id">
                                         <div class="form-group position-relative">
-                                            <label for="field-13" class="control-label">
+                                            <label  class="control-label">
                                                 {{ $t('general.city') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="5"
-                                                @keypress.enter="moveInput('select','create',6)"
-                                                @input="searchSenderCity"
-                                                @blur.prevent="ClickDropdown"
-                                                :class="{
-                                                'is-invalid':$v.create.city_id.$error || errors.city_id,
-                                                'is-valid':!$v.create.city_id.$invalid && !errors.city_id
-                                                }"
-                                                 id="field-13"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
-                                            >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderCountry(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
+                                            <multiselect
+                                                v-model="$v.create.city_id.$model"
+                                                :options="cities.map(type => type.id)"
+                                                :custom-label="opt => cities.find(x => x.id == opt).name">
+                                            </multiselect>
+                                            <div v-if="$v.create.city_id.$error || errors.city_id"
+                                                 class="text-danger">
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>
                                             <template v-if="errors.city_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.city_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
@@ -1019,9 +873,9 @@ export default {
                                     <td>
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                      <td>{{ data.country_id }}</td>
-                                      <td>{{ data.governorate_id }}</td>
-                                      <td>{{ data.city_id }}</td>
+                                      <td>{{ $i18n.locale == 'ar' ? data.country.name : data.country.name_e }}</td>
+                                      <td>{{ $i18n.locale == 'ar' ? data.governorate.name : data.governorate.name_e }}</td>
+                                      <td>{{ $i18n.locale == 'ar' ? data.city.name : data.city.name_e }}</td>
                                       <td>
                                         <span :class="[
                                             data.is_active == 'active' ?
@@ -1135,123 +989,64 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" >
                                                         <div class="form-group position-relative">
-                                                            <label for="edit-12" class="control-label">
+                                                            <label  class="control-label">
                                                                 {{ $t('general.country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
-                                                                data-edit="3"
-                                                                @keypress.enter="moveInput('input','edit',4)"
-                                                                @input="searchSenderCountry"
-                                                                @blur.prevent="ClickDropdown"
-                                                                :class="{
-                                                                'is-invalid':$v.edit.country_id.$error || errors.country_id,
-                                                                'is-valid':!$v.edit.country_id.$invalid && !errors.country_id
-                                                                }"
-                                                                id="edit-12"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
+                                                            <multiselect
+                                                                @select="getGovernorate"
+                                                                v-model="$v.edit.country_id.$model"
+                                                                :options="countries.map(type => type.id)"
+                                                                :custom-label="opt => countries.find(x => x.id == opt).name"
                                                             >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderCountry(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
-
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
+                                                                 class="text-danger">
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>
                                                             <template v-if="errors.country_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" v-if="edit.country_id">
                                                         <div class="form-group position-relative">
-                                                            <label for="edit-11" class="control-label">
+                                                            <label  class="control-label">
                                                                 {{ $t('general.governorate') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
-                                                                data-edit="4"
-                                                                @keypress.enter="moveInput('input','edit',5)"
-                                                                @input="searchSenderGovernorate"
-                                                                @blur.prevent="ClickDropdown"
-                                                                :class="{
-                                                                'is-invalid':$v.edit.governorate_id.$error || errors.governorate_id,
-                                                                'is-valid':!$v.edit.governorate_id.$invalid && !errors.governorate_id
-                                                                }"
-                                                                id="edit-11"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
-                                                            >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderGovernorate(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
-
-                                                            <template v-if="errors.governorate_id">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            <multiselect
+                                                                @select="getCity"
+                                                                v-model="$v.edit.governorate_id.$model"
+                                                                :options="governorates.map(type => type.id)"
+                                                                :custom-label="opt => governorates.find(x => x.id == opt).name">
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.governorate_id.$error || errors.governorate_id"
+                                                                 class="text-danger">
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>                                                             <template v-if="errors.governorate_id">
+                                                            <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" v-if="edit.governorate_id">
                                                         <div class="form-group position-relative">
-                                                            <label for="edit-13" class="control-label">
+                                                            <label  class="control-label">
                                                                 {{ $t('general.city') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="create.search"
-                                                                data-create="5"
-                                                                @keypress.enter="moveInput('select','edit',6)"
-                                                                @input="searchSenderCity"
-                                                                @blur.prevent="ClickDropdown"
-                                                                :class="{
-                                                                'is-invalid':$v.edit.city_id.$error || errors.city_id,
-                                                                'is-valid':!$v.edit.city_id.$invalid && !errors.city_id
-                                                                }"
-                                                                id="edit-13"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
-                                                            >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderCountry(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
-
-                                                            <template v-if="errors.city_id">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.city_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            <multiselect
+                                                                v-model="$v.edit.city_id.$model"
+                                                                :options="cities.map(type => type.id)"
+                                                                :custom-label="opt => cities.find(x => x.id == opt).name">
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.city_id.$error || errors.city_id"
+                                                                 class="text-danger">
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>                                                                <template v-if="errors.city_id">
+                                                            <ErrorMessage v-for="(errorMessage,index) in errors.city_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>

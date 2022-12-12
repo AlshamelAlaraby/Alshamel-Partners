@@ -488,7 +488,7 @@
           "fraction_e": "Fraction((English))",
           "fraction_no": "Fraction Number",
           "phone_key": "Phone key",
-          "national": "National",
+          "national": "National Id",
           "is_default": "Default",
           "phone": "Phone",
           "email": "Email",
@@ -497,6 +497,7 @@
           "governorate": "Governorate",
           "city": "City",
           "startDate": "Start Date",
+          "imagEUpload": "Image Upload",
           "endDate": "End Date"
     }
 }

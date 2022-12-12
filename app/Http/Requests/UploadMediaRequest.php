@@ -24,7 +24,6 @@ class UploadMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'media' => 'media',
             'media' => 'array',
             'media.*' => 'file',
             "link" => "url",

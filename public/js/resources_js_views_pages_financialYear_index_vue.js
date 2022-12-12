@@ -1605,7 +1605,7 @@ __webpack_require__.r(__webpack_exports__);
       this.create = {
         name: '',
         name_e: '',
-        start_date: null,
+        start_date: (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_9__.formatDateTime)(this.create.custom_date_start),
         end_date: null,
         custom_date_start: new Date(),
         custom_date_end: null

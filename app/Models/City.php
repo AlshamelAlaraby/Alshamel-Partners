@@ -11,4 +11,15 @@ class City extends Model
 
     protected $guarded = ['id'];
 
+
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 }
