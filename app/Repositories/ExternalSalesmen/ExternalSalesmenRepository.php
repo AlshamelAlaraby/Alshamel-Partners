@@ -60,6 +60,11 @@ class ExternalSalesmenRepository implements ExternalSalesmenInterface
 
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
+
     public function delete($id)
     {
         $model = $this->find($id);

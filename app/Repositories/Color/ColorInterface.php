@@ -13,6 +13,9 @@ interface ColorInterface
 
     public function update($request, $id);
 
+    public function logs($id);
+
+
     public function delete($id);
 
 }

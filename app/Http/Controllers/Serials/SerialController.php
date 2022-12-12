@@ -83,7 +83,7 @@ class SerialController extends Controller
      */
     public function edit($id)
     {
-
+            
     }
 
     /**

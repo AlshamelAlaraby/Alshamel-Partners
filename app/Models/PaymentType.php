@@ -10,25 +10,19 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class ExternalSalesmen extends Model
+class PaymentType extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
-    protected $table = 'external_salesmen';
 
     protected $fillable = [
-        'phone',
-        'address',
-        'rp_code',
-        'email',
-        'is_active',
-        'national_id',
-        'country_id',
+        'name',
+        'name_e',
+        'is_default',
     ];
 
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+    protected $casts = [
+        'is_default' => '\App\Enums\IsDefault',
+    ];
 
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -42,8 +36,7 @@ class ExternalSalesmen extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('External Salesmen')
+            ->useLogName('Payment Type')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
-
 }
