@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\CreateRoleRequest;
 use App\Http\Requests\Role\EditRoleRequest;
-use App\Http\Requests\Serial\CreateSerialRequest;
-use App\Http\Requests\Serial\EditSerialRequest;
 use App\Http\Resources\Roles\RoleResource;
 use App\Repositories\Role\RoleRepositoryInterface;
 use Illuminate\Http\Request;
@@ -50,7 +48,7 @@ class RoleController extends Controller
     {
         try {
             if (!DB::table('role_types')->find($request->roletype_id)) {
-                return responseJson(404,__('role_type does\'t exist'));
+                return responseJson(404, __('role_type does\'t exist'));
             }
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
@@ -97,11 +95,11 @@ class RoleController extends Controller
             }
             $data['roletype_id'] = $request->roletype_id;
         }
-        if ($request->name){
+        if ($request->name) {
             $data['name'] = $request->name;
         }
 
-        if ($request->name_e){
+        if ($request->name_e) {
             $data['name_e'] = $request->name_e;
         }
 
@@ -113,6 +111,18 @@ class RoleController extends Controller
         }
     }
 
+    public function logs($id)
+    {
+
+        $model = $this->repository->find($id);
+
+        if (!$model) {
+            return responseJson(404, __('not found'));
+        }
+        $logs = $this->repository->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

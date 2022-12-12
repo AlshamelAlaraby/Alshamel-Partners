@@ -2,12 +2,13 @@
 
 namespace App\Repositories\Store;
 
+use App\Models\Store;
 use Illuminate\Support\Facades\DB;
 
 class StoreRepository implements StoreInterface
 {
 
-    public function __construct(private \App\Models\Store$model)
+    public function __construct(private Store $model)
     {
         $this->model = $model;
 
@@ -21,7 +22,12 @@ class StoreRepository implements StoreInterface
                 $q->where('name', 'like', '%' . $request->search . '%');
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
             }
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
+                }
 
+            }
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
@@ -67,6 +73,10 @@ class StoreRepository implements StoreInterface
 
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
     public function delete($id)
     {
         $model = $this->find($id);

@@ -61,17 +61,31 @@ class CountryController extends Controller
         return responseJson(200, 'success');
     }
 
+    public function logs($id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+
+        $logs = $this->modelInterface->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
+
     public function delete($id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->governorates()->count() > 0 || $model->avenues()->count() > 0) {
-            return responseJson(400, __('message.country has sub data'));
+        if ($model->governorates()->count() > 0) {
+            return responseJson(400, __('message.country has governorates'));
         }
 
-        $this->modelInterface->delete($id);
+        if ($model->avenues()->count) {
+            $this->modelInterface->delete($id);
+        }
 
         return responseJson(200, 'success');
     }

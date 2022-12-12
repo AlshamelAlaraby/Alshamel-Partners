@@ -28,6 +28,7 @@ class CountryResource extends JsonResource
             "media" => new FileResource($this->files[0]),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'national_id_length' => $this->national_id_length
         ];
     }
 }

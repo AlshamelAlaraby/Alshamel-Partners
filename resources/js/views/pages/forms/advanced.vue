@@ -184,7 +184,11 @@ export default {
                     <h4 class="mb-4 header-title">Select2</h4>
                     <label>Single Select</label>
 
-                    <multiselect v-model="value" :options="options"></multiselect>
+                    <multiselect
+                        v-model="value"
+                        :options="options"
+                    >
+                    </multiselect>
                     <label class="mt-3">Multiple Select</label>
 
                     <multiselect v-model="value1" :options="options" :multiple="true"></multiselect>

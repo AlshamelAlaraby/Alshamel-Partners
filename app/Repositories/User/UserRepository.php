@@ -2,12 +2,14 @@
 
 namespace App\Repositories\User;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserRepository implements UserInterface
 {
 
-    public function __construct(private \App\Models\User$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private User $model, private Media $media)
     {
         $this->model = $model;
         $this->media = $media;
@@ -79,6 +81,11 @@ class UserRepository implements UserInterface
 
         });
 
+    }
+
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
     public function delete($id)

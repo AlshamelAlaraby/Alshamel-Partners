@@ -1405,7 +1405,7 @@ __webpack_require__.r(__webpack_exports__);
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      setting: ['name', 'name_e', 'is_active']
+      filterSetting: ['name', 'name_e']
     };
   },
   validations: {
@@ -1488,7 +1488,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/colors?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/colors?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
         var l = res.data;
         _this3.colors = l.data;
         _this3.colorsPagination = l.pagination;
@@ -1505,9 +1505,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getDataCurrentPage: function getDataCurrentPage() {
       var _this4 = this;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.colorsPagination.last_page && this.current_page != this.colorsPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/colors?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/colors?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting)).then(function (res) {
           var l = res.data;
           _this4.colors = l.data;
           _this4.colorsPagination = l.pagination;
@@ -4864,11 +4865,11 @@ var render = function render() {
       value: "name"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
   }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
@@ -4876,25 +4877,13 @@ var render = function render() {
       value: "name_e"
     },
     model: {
-      value: _vm.setting,
+      value: _vm.filterSetting,
       callback: function callback($$v) {
-        _vm.setting = $$v;
+        _vm.filterSetting = $$v;
       },
-      expression: "setting"
+      expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    attrs: {
-      value: "is_active"
-    },
-    model: {
-      value: _vm.setting,
-      callback: function callback($$v) {
-        _vm.setting = $$v;
-      },
-      expression: "setting"
-    }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Status")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -6255,19 +6244,44 @@ var menuItems = [{
   isTitle: true
 }, {
   id: 2,
-  label: 'menuitems.partner.text',
-  icon: 'far fa-user-circle',
-  link: '/partner'
+  label: 'menuitems.country.text',
+  icon: 'fas fa-flag',
+  link: '/country'
 }, {
   id: 3,
-  label: 'menuitems.company.text',
-  icon: 'ri-building-4-line',
-  link: '/company'
+  label: 'menuitems.governorate.text',
+  icon: 'fas fa-city',
+  link: '/governorate'
 }, {
   id: 4,
-  label: 'menuitems.module.text',
-  icon: 'fab fa-medium-m',
-  link: '/module'
+  label: 'menuitems.city.text',
+  icon: 'fas fa-city',
+  link: '/city'
+}, {
+  id: 5,
+  label: 'menuitems.currency.text',
+  icon: ' fas fa-dollar-sign',
+  link: '/currency'
+}, {
+  id: 6,
+  label: 'menuitems.employee.text',
+  icon: 'fas fa-user-friends',
+  link: '/employee'
+}, {
+  id: 7,
+  label: 'menuitems.financialYear.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/financialYear'
+}, {
+  id: 8,
+  label: 'menuitems.avenue.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/avenue'
+}, {
+  id: 9,
+  label: 'menuitems.externalSalesmen.text',
+  icon: 'fas fa-users',
+  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6302,6 +6316,21 @@ var menuItems = [{
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
   }]
+}, {
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
+}, {
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
+}, {
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

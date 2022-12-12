@@ -48,13 +48,13 @@ class SerialController extends Controller
     {
         try {
             if (!DB::table('companies')->find($request->company_id)) {
-                return responseJson(404,__('company does\'t exist'));
+                return responseJson(404, __('company does\'t exist'));
             }
             if (!DB::table('branches')->find($request->branch_id)) {
-                return responseJson(404,__('branch does\'t exist'));
+                return responseJson(404, __('branch does\'t exist'));
             }
             if (!DB::table('stores')->find($request->store_id)) {
-                return responseJson(404,__('store does\'t exist'));
+                return responseJson(404, __('store does\'t exist'));
             }
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
@@ -83,7 +83,7 @@ class SerialController extends Controller
      */
     public function edit($id)
     {
-
+            
     }
 
     /**
@@ -135,7 +135,17 @@ class SerialController extends Controller
             return responseJson($exception->getCode(), $exception->getMessage());
         }
     }
+    public function logs($id)
+    {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
 
+        $logs = $this->repository->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

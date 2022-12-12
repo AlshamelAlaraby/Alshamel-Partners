@@ -12,11 +12,47 @@
         "danger": "Email Or Password is wrong!",
         "Loading": "Loading"
     },
-    "module": {
-        "addmodule": "New Add Module",
-        "editmodule": "Edit Module",
-        "module": "Module",
-        "ModulesTable": "Modules Table"
+    "country": {
+        "addcountry": "New Add Country",
+        "editcountry": "Edit Country",
+        "country": "Country",
+        "countriesTable": "Countries Table"
+    },
+    "city": {
+        "addcity": "New Add City",
+        "editcity": "Edit City",
+        "city": "City",
+        "citiesTable": "Cities Table"
+    },
+    "governorate": {
+        "addgovernorate": "New Add Governorate",
+        "editgovernorate": "Edit Governorate",
+        "governorate": "Governorate",
+        "governoratesTable": "Governorates Table"
+    },
+    "currency": {
+        "addcurrency": "New Add Currency",
+        "editcurrency": "Edit Currency",
+        "currency": "Currency",
+        "currenciesTable": "Currencies Table"
+    },
+    "employee": {
+        "addemployee": "New Add Employees",
+        "editemployee": "Edit Employee",
+        "employee": "Employees",
+        "employeesTable": "Employees Table"
+    },
+    "financialYear": {
+        "addfinancialYear": "New Add Financial Year",
+        "editfinancialYear": "Edit Financial Year",
+        "financialYearsTable": "Financial Year Table",
+        "financialYear": "Financial Year"
+    },
+    "avenue": {
+        "addavenue": "New Add Avenue",
+        "editavenue": "Edit Avenue",
+        "avenuesTable": "Avenues Table",
+        "avenue": "Avenues"
     },
     "rolesType": {
         "add": "Add New Type",
@@ -48,18 +84,29 @@
         "Table": "Sales Men Types Table",
         "colors": "Sales Men Types"
     },
-    "partner": {
-        "addpartner": "New Add Partner",
-        "editpartner": "Edit Partner",
-        "partner": "Partner",
-        "partnersTable": "Partners Table"
+    "externalSalesmen": {
+        "addexternalSalesmen": "New Add External Salesman",
+        "editexternalSalesmen": "Edit External Salesman",
+        "externalSalesmensTable": "External Salesmen Table",
+        "externalSalesmen": "External Salesmen"
     },
-    "company": {
-        "addcompany": "New Add Company",
-        "editcompany": "Edit Company",
-        "company": "Company",
-        "companysTable": "Companies Table",
-        "LogoFileUpload": "Logo File Upload"
+    "branch": {
+        "addbranch": "New Add Branch",
+        "editbranch": "Edit Branch",
+        "branchesTable": "Branches Table",
+        "branch": "Branches"
+    },
+    "store": {
+        "addstore": "New Add Store",
+        "editstore": "Edit Store",
+        "storesTable": "Stores Table",
+        "store": "Stores"
+    },
+    "serial": {
+        "addserial": "New Add Serial",
+        "editserial": "Edit Serial",
+        "serialsTable": "Serials Table",
+        "serial": "Serials"
     },
     "navbar": {
         "search": {
@@ -175,11 +222,29 @@
         "navigation": {
             "text": "Navigation"
         },
-        "module": {
-            "text": "Module"
+        "country": {
+            "text": "Country"
         },
-        "company": {
-            "text": "Company"
+        "city": {
+            "text": "Cities"
+        },
+        "employee": {
+            "text": "Employee"
+        },
+        "governorate": {
+            "text": "Governorate"
+        },
+        "currency": {
+            "text": "Currencies"
+        },
+        "financialYear": {
+            "text": "Financial Year"
+        },
+        "avenue": {
+            "text": "Avenue"
+        },
+        "externalSalesmen": {
+            "text": "External Salesmen"
         },
         "role": {
             "text": "Roles"
@@ -193,9 +258,16 @@
         "salesMen": {
             "text": "Sales Men"
         },
-        "partner": {
-            "text": "Partner"
+        "branch": {
+            "text": "Branches"
         },
+        "store": {
+            "text": "Store"
+        },
+        "serial": {
+            "text": "Serial"
+        },
+
         "dashboard": {
             "text": "Dashboards",
             "badge": "3",
@@ -417,8 +489,8 @@
                         "2": "Level 2.2"
                     }
                 }
-            }
         }
+    }
     },
     "general": {
         "fieldIsRequired": "This field is required",
@@ -480,8 +552,29 @@
         "delete": "Delete",
         "edit": "Edit",
         "searchSetting": "Search Setting",
+        "long_name": "Long Name(arabic)",
+        "long_name_e": "Long Name(English)",
+        "short_code": "Short Code",
+        "codeAr": "Code(arabic)",
+        "code_e": "Code((English))",
+        "fraction": "Fraction(arabic)",
+        "fraction_e": "Fraction((English))",
+        "fraction_no": "Fraction Number",
+        "phone_key": "Phone key",
+        "national": "National Id",
+        "is_default": "Default",
+        "phone": "Phone",
+        "email": "Email",
+        "code": "Code",
+        "country": "Country",
+        "governorate": "Governorate",
+        "city": "City",
+        "startDate": "Start Date",
+        "imagEUpload": "Image Upload",
+        "endDate": "End Date",
         "isEmployee": "Is Employee ?",
         "Yes": "Yes",
-        "No": "No"
+        "No": "No",
+        "branch": "Branch"
     }
 }

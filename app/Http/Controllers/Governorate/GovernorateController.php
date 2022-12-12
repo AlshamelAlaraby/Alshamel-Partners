@@ -75,6 +75,16 @@ class GovernorateController extends Controller
         return responseJson(200, 'success');
     }
 
+    public function logs($id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+        $logs = $this->modelInterface->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+    }
+
     // public function addGovernorateToCompany($module_id, $company_id)
     // {
     //     $model = $this->modelInterface->find($module_id);

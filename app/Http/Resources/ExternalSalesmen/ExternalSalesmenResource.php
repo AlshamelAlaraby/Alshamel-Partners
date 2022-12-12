@@ -23,7 +23,7 @@ class ExternalSalesmenResource extends JsonResource
             'email' => $this->email,
             'is_active' => $this->is_active,
             'national_id' => $this->national_id,
-            'country_id' => new CountryResource($this->country),
+            'country' => new CountryResource($this->country),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

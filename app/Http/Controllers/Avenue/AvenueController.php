@@ -7,13 +7,11 @@ use App\Http\Requests\Avenue\StoreAvenueRequest;
 use App\Http\Requests\Avenue\UpdateAvenueRequest;
 use App\Http\Resources\Avenue\AvenueResource;
 use Illuminate\Routing\Controller;
+use DB;
 
 class AvenueController extends Controller
 {
-    public function __construct(private \App\Repositories\Avenue\AvenueInterface$modelInterface)
-    {
-        $this->modelInterface = $modelInterface;
-    }
+    public function __construct(private \App\Repositories\Avenue\AvenueInterface$modelInterface){}
 
     public function find($id)
     {
@@ -72,6 +70,13 @@ class AvenueController extends Controller
         return responseJson(200, 'success');
     }
 
-
-
+    public function logs($id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+        $logs = $this->modelInterface->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+    }
 }
