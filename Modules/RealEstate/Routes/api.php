@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('realestate')->group (function (){
-    Route::middleware('auth:sanctum')->group (function (){
-        Route::resource('property_types', 'PropertyTypeController')->except('create', 'edit');
-    });
+Route::middleware('auth:api')->get('/realestate', function (Request $request) {
+    return $request->user();
 });
-Route::resource('property_types', 'PropertyTypeController')->except('create', 'edit');

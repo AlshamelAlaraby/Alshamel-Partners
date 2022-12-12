@@ -1,11 +1,11 @@
 {
-    "name": "Realestate",
+    "name": "RealEstate",
     "alias": "realestate",
     "description": "",
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\Realestate\\Providers\\RealestateServiceProvider"
+        "Modules\\RealEstate\\Providers\\RealEstateServiceProvider"
     ],
     "files": []
 }

@@ -12,17 +12,19 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class TreeProperty extends Model
 {
-    use HasFactory,SoftDeletes ,LogsActivity, CausesActivity;
+    use HasFactory,LogsActivity, CausesActivity;
+
+    protected $guarded = ['id'];
 
     public function tapActivity(Activity $activity, string $eventName)
     {
-        $activity->causer_id = auth()->user()->id ?: 0;
-        $activity->causer_type = auth()->user()->role ?: "admin";
+        $activity->causer_id = @auth()->user()->id ?: 0;
+        $activity->causer_type = @auth()->user()->role ?: "admin";
     }
 
     public function getActivitylogOptions(): LogOptions
     {
-        $user = auth()->user()->id ?: "system";
+        $user = @auth()->user()->id ?: "system";
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()

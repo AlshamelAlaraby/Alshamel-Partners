@@ -1,16 +1,16 @@
 <?php
 
-namespace Modules\Realestate\Providers;
+namespace Modules\RealEstate\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class RealestateServiceProvider extends ServiceProvider
+class RealEstateServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Realestate';
+    protected $moduleName = 'RealEstate';
 
     /**
      * @var string $moduleNameLower

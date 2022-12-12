@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Realestate\Http\Requests;
+namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditPropertyTypeRequest extends FormRequest
+class CreatePropertyTypeRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

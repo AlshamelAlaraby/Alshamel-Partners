@@ -20,7 +20,7 @@ class TreePropertyController extends Controller
         $this->modelInterface = $modelInterface;
     }
 
-    public function find($id)
+    public function show($id)
     {
         $model = cacheGet('tree_properties_' . $id);
         if (!$model) {
@@ -34,7 +34,7 @@ class TreePropertyController extends Controller
         return responseJson(200, 'success', new UnitResource($model));
     }
 
-    public function all(Request $request)
+    public function index(Request $request)
     {
         if (count($_GET) == 0) {
             $models = cacheGet('tree_properties');
@@ -49,7 +49,7 @@ class TreePropertyController extends Controller
         return responseJson(200, 'success', TreePropertyResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateTreePropertyRequest $request)
+    public function store(CreateTreePropertyRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
@@ -92,14 +92,11 @@ class TreePropertyController extends Controller
 
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
             return responseJson(404, __('message.data not found'));
-        }
-        if ($model->governorates()->count() > 0) {
-            return responseJson(400, __('message.country has governorates'));
         }
         $this->modelInterface->delete($id);
 
