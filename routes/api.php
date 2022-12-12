@@ -8,6 +8,7 @@ use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
 use App\Http\Controllers\Serials\SerialController;
+use App\Http\Controllers\TreeProperty\TreePropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -264,5 +265,6 @@ Route::resource('currencies', CurrencyController::class)->except('create', 'edit
 Route::get('currencies/logs/{id}', [CurrencyController::class,'logs']);
 Route::resource('roles', RoleController::class)->except('create', 'edit');
 Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
+Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
 
 //------------------------------------------------------

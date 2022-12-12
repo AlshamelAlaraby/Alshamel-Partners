@@ -52,7 +52,7 @@ class CityRepository implements CityRepositoryInterface
     {
         DB::transaction(function () use ($data) {
             $this->model->create($data);
-            cacheForget("cites");
+            cacheForget("cities");
         });
     }
 
