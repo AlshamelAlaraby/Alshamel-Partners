@@ -43,21 +43,21 @@ class WorkflowHotfield extends Model
     {
         return $query->where(function ($q) use ($request) {
 
-            if ($request->search) {
+            // if ($request->search) {
 
-                $q->whereHas('workflow', function ($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%');
-                    $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-                });
+            //     $q->whereHas('workflow', function ($q) use ($request) {
+            //         $q->where('name', 'like', '%' . $request->search . '%');
+            //         $q->orWhere('name_e', 'like', '%' . $request->search . '%');
+            //     });
 
-                $q->orWhereHas('hotfield', function ($q) use ($request) {
-                    $q->where('field_name', 'like', '%' . $request->search . '%');
-                    $q->orWhere('field_name_e', 'like', '%' . $request->search . '%');
-                    $q->orWhere('field_title', 'like', '%' . $request->search . '%');
-                    $q->orWhere('field_title_e', 'like', '%' . $request->search . '%');
-                });
+            //     $q->orWhereHas('hotfield', function ($q) use ($request) {
+            //         $q->where('field_name', 'like', '%' . $request->search . '%');
+            //         $q->orWhere('field_name_e', 'like', '%' . $request->search . '%');
+            //         $q->orWhere('field_title', 'like', '%' . $request->search . '%');
+            //         $q->orWhere('field_title_e', 'like', '%' . $request->search . '%');
+            //     });
 
-            }
+            // }
 
 
             if ($request->column_name && $request->column_value) {

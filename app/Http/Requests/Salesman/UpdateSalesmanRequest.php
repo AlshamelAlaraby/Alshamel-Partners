@@ -24,7 +24,7 @@ class UpdateSalesmanRequest extends FormRequest
     public function rules()
     {
         return [
-            "salesmanType_id"       => "exists:salesmen_types,id" ,
+            "salesman_type_id"       => "exists:salesmen_types,id" ,
             "name"                  => "string|max:100" ,
             "name_e"                => "string|max:100" ,
         ];
