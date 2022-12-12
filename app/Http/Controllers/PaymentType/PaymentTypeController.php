@@ -1,56 +1,56 @@
 <?php
 
-namespace App\Http\Controllers\SalesmenType;
+namespace App\Http\Controllers\PaymentType;
 
-use App\Http\Requests\SalesmenType\StoreSalesmenTypeRequest;
-use App\Http\Requests\SalesmenType\UpdateSalesmenTypeRequest;
-use App\Http\Resources\SalesmenType\SalesmenTypeResource;
+use App\Http\Requests\PaymentType\StorePaymentTypeRequest;
+use App\Http\Requests\PaymentType\UpdatePaymentTypeRequest;
+use App\Http\Resources\PaymentType\PaymentTypeResource;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class SalesmenTypeController extends Controller
+class PaymentTypeController extends Controller
 {
-    public function __construct(private \App\Repositories\SalesmenType\SalesmenTypeInterface$modelInterface)
+    public function __construct(private \App\Repositories\PaymentType\PaymentTypeInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function find($id)
     {
-        $model = cacheGet('salesmen_types_' . $id);
+        $model = cacheGet('payment_types_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('salesmen_types_' . $id, $model);
+                cachePut('payment_types_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new SalesmenTypeResource($model));
+        return responseJson(200, 'success', new PaymentTypeResource($model));
     }
 
     public function all(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('salesmen_types');
+            $models = cacheGet('payment_types');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('salesmen_types', $models);
+                cachePut('payment_types', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', SalesmenTypeResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', PaymentTypeResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(StoreSalesmenTypeRequest $request)
+    public function create(StorePaymentTypeRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
     }
 
-    public function update(UpdateSalesmenTypeRequest $request, $id)
+    public function update(UpdatePaymentTypeRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
@@ -79,7 +79,6 @@ class SalesmenTypeController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');

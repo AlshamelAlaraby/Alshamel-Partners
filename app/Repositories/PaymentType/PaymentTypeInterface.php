@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\SalesmenType;
+namespace App\Repositories\PaymentType;
 
-interface SalesmenTypeInterface
+interface PaymentTypeInterface
 {
 
     public function all($request);

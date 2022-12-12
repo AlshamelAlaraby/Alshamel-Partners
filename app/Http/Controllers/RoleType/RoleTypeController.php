@@ -108,6 +108,7 @@ class RoleTypeController extends Controller
             return responseJson(404, __('message.data not found'));
         }
 
+
         $logs = $this->repository->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
 
