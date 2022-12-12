@@ -6079,19 +6079,44 @@ var menuItems = [{
   isTitle: true
 }, {
   id: 2,
-  label: 'menuitems.partner.text',
-  icon: 'far fa-user-circle',
-  link: '/partner'
+  label: 'menuitems.country.text',
+  icon: 'fas fa-flag',
+  link: '/country'
 }, {
   id: 3,
-  label: 'menuitems.company.text',
-  icon: 'ri-building-4-line',
-  link: '/company'
+  label: 'menuitems.governorate.text',
+  icon: 'fas fa-city',
+  link: '/governorate'
 }, {
   id: 4,
-  label: 'menuitems.module.text',
-  icon: 'fab fa-medium-m',
-  link: '/module'
+  label: 'menuitems.city.text',
+  icon: 'fas fa-city',
+  link: '/city'
+}, {
+  id: 5,
+  label: 'menuitems.currency.text',
+  icon: ' fas fa-dollar-sign',
+  link: '/currency'
+}, {
+  id: 6,
+  label: 'menuitems.employee.text',
+  icon: 'fas fa-user-friends',
+  link: '/employee'
+}, {
+  id: 7,
+  label: 'menuitems.financialYear.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/financialYear'
+}, {
+  id: 8,
+  label: 'menuitems.avenue.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/avenue'
+}, {
+  id: 9,
+  label: 'menuitems.externalSalesmen.text',
+  icon: 'fas fa-users',
+  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6126,6 +6151,21 @@ var menuItems = [{
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
   }]
+}, {
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
+}, {
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
+}, {
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

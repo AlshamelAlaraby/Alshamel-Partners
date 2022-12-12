@@ -23,7 +23,7 @@ class GovernorateResource extends JsonResource
             'is_default' => $this->is_default ? true : false,
             'is_active' => $this->is_active,
             "phone_key" => $this->phone_key,
-            // "country" => new CountryResource($this->country),
+            "country" => new CountryResource($this->country),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

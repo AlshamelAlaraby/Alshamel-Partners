@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string ('code',15)->nullable ();
             $table->string ('code_e',15)->nullable ();
             $table->string ('fraction',15)->nullable ();
-            $table->string ('Fraction_e',15)->nullable ();
-            $table->integer ('Fraction_no')->nullable ();
+            $table->string ('fraction_e',15)->nullable ();
+            $table->integer ('fraction_no')->nullable ();
             $table->tinyInteger ('is_default')->nullable ()->default (0);
             $table->tinyInteger ('is_active')->nullable ()->default (0);
             $table->timestamps();

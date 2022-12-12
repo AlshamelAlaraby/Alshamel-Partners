@@ -2,25 +2,43 @@ import auth from "../middleware/auth";
 import checkAuth from "../middleware/auth-check";
 import login from "./routeChild/login";
 import company from "./routeChild/company";
-import module from "./routeChild/module";
-import partner from "./routeChild/partner";
+import country from "./routeChild/country";
+import governorate from "./routeChild/governorate";
+import city from "./routeChild/city";
+import currency from "./routeChild/currency";
+import employee from "./routeChild/employee";
+import financialYear from  "./routeChild/financialYear";
+import avenue from  "./routeChild/avenue";
+import externalSalesmen from  "./routeChild/externalSalesmen";
 import rolesType from "./routeChild/rolesType";
 import roles from "./routeChild/roles";
 import units from "./routeChild/units";
 import colors from "./routeChild/colors";
 import salesmenTypes from "./routeChild/salesmenTypes";
+import branches from "./routeChild/branch";
+import serial from "./routeChild/serial";
+import store from "./routeChild/store";
+
 
 export default [
     ...login,
     ...company,
-    ...module,
-    ...partner,
+    ...country,
+    ...governorate,
+    ...city,
+    ...currency,
+    ...employee,
+    ...financialYear,
+    ...externalSalesmen,
+    ...avenue,
     ...rolesType,
     ...roles,
     ...units,
     ...colors,
     ...salesmenTypes,
-
+    ...branches,
+    ...store,
+    ...serial,
     //**********************************************
     {
         path: '/',
