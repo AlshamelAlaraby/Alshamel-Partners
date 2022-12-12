@@ -79,6 +79,11 @@ class RoleWorkflowButtonRepository implements RoleWorkflowButtonRepositoryInterf
         return  UserSettingScreen::where('user_id',$user_id)->where('screen_id',$screen_id)->first();
     }
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
+
     private function forget($id)
     {
         $keys = [

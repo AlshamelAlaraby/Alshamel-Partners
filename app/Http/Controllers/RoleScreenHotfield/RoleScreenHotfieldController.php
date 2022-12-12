@@ -7,6 +7,7 @@ use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Http\Resources\RoleScreenHotfield\RoleScreenHotfieldResource;
 use App\Http\Requests\RoleScreenHotfield\StoreRoleScreenHotfieldRequest;
 use App\Http\Requests\RoleScreenHotfield\UpdateRoleScreenHotfieldRequest;
+use App\Http\Resources\ScreenSetting\ScreenSettingResource;
 use Mockery\Exception;
 use Illuminate\Http\Request;
 
@@ -103,6 +104,18 @@ class RoleScreenHotfieldController extends Controller
         }
     }
 
+        public function logs($id)
+    {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+
+        $logs = $this->repository->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
+
 
     public function screenSetting(Request $request)
     {
@@ -120,7 +133,7 @@ class RoleScreenHotfieldController extends Controller
             if (!$screenSetting) {
                 return responseJson( 404 , __('message.data not found'));
             }
-            return responseJson( 200 , __('Done'), $screenSetting);
+            return responseJson( 200 , __('Done'), new ScreenSettingResource( $screenSetting ));
         } catch (Exception $exception) {
             return  responseJson( $exception->getCode() , $exception->getMessage());
         }

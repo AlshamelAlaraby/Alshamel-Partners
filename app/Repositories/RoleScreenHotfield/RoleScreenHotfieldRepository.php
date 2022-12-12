@@ -58,6 +58,12 @@ class RoleScreenHotfieldRepository implements RoleScreenHotfieldRepositoryInterf
     }
 
 
+    public function logs($id)
+    {
+        return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
+    }
+
+
     public function setting($request)
     {
         DB::transaction(function () use ($request) {
