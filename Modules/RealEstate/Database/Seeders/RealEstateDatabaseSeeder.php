@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Realestate\Database\Seeders;
+namespace Modules\RealEstate\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class RealestateDatabaseSeeder extends Seeder
+class RealEstateDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -12,5 +12,5 @@
 */
 
 Route::prefix('realestate')->group(function() {
-    Route::get('/', 'RealestateController@index');
+    Route::get('/', 'RealEstateController@index');
 });
