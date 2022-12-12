@@ -266,5 +266,6 @@ Route::get('currencies/logs/{id}', [CurrencyController::class,'logs']);
 Route::resource('roles', RoleController::class)->except('create', 'edit');
 Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
 Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
+Route::get('tree-properties/logs/{id}', [TreePropertyController::class,'logs']);
 
 //------------------------------------------------------

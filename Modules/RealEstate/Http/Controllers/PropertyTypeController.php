@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Realestate\Http\Controllers;
+namespace Modules\RealEstate\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class RealestateController extends Controller
+class PropertyTypeController extends Controller
 {
     /**
      * Display a listing of the resource.

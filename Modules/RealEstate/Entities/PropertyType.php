@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Realestate\Entities;
+namespace Modules\RealEstate\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +13,6 @@ class PropertyType extends Model
     
     protected static function newFactory()
     {
-        return \Modules\Realestate\Database\factories\PropertyTypeFactory::new();
+        return \Modules\RealEstate\Database\factories\PropertyTypeFactory::new();
     }
 }
