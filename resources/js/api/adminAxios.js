@@ -17,6 +17,7 @@ adminApi.interceptors.request.use(
     }
 );
 
+
 adminApi.defaults.headers.common['secretApi'] = 'Snr92EUKCmrE06PiJ';
 adminApi.defaults.headers.common['Accept'] = 'application/json';
 // end axios

@@ -18,6 +18,7 @@ import salesmenTypes from "./routeChild/salesmenTypes";
 import branches from "./routeChild/branch";
 import serial from "./routeChild/serial";
 import store from "./routeChild/store";
+import salesmen from  "./routeChild/salesMen";
 
 
 export default [
@@ -39,6 +40,7 @@ export default [
     ...branches,
     ...store,
     ...serial,
+    ...salesmen,
     //**********************************************
     {
         path: '/',

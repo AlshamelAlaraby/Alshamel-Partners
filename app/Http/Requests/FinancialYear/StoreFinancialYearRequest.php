@@ -24,8 +24,8 @@ class StoreFinancialYearRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:modules,name',
-            'name_e' => 'required|string|max:255|unique:modules,name_e',
+            'name' => 'required|string|max:255|unique:financial_years,name',
+            'name_e' => 'required|string|max:255|unique:financial_years,name_e',
             "start_date" => 'required|date_format:Y-m-d H:i:s|after_or_equal:today',
             "end_date" => 'required|date_format:Y-m-d H:i:s|after_or_equal:start_date',
 
