@@ -37,8 +37,7 @@ class SalesmanController extends Controller
             $models = $this->repository->getAllSalesmans($request);
         }
 
-        // return responseJson(200, 'success', SalesmanResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
-        return responseJson(200, 'success',$models);
+        return responseJson(200, 'success', SalesmanResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
 
     }
 

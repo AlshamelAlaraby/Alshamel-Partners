@@ -26,6 +26,8 @@ class UpdateGovernorateRequest extends FormRequest
         return [
             'name' => 'string|max:255|unique:governorates,name',
             'name_e' => 'string|max:255|unique:governorates,name_e',
+            'name' => 'string|max:255|unique:governorates,name,'.$this->id,
+            'name_e' => 'string|max:255|unique:governorates,name_e,'.$this->id,
             "is_active" => "nullable|in:active,inactive",
             "is_default" => "nullable|in:0,1",
             "country_id" => "exists:countries,id",

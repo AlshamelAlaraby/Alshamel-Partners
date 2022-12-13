@@ -24,8 +24,8 @@ class StoreAvenueRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:modules,name',
-            'name_e' => 'required|string|max:255|unique:modules,name_e',
+            'name' => 'required|string|max:255|unique:avenues,name',
+            'name_e' => 'required|string|max:255|unique:avenues,name_e',
             "is_active" => "nullable|in:active,inactive",
             "country_id" => "required|exists:countries,id",
             "city_id" => "required|exists:cities,id",
