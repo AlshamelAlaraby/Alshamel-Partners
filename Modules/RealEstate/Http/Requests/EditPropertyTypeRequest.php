@@ -2,10 +2,12 @@
 
 namespace Modules\RealEstate\Http\Requests;
 
+use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditPropertyTypeRequest extends FormRequest
 {
+    use ValidationTrait;
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,13 +31,4 @@ class EditPropertyTypeRequest extends FormRequest
         return true;
     }
 
-    public function messages()
-    {
-        return [
-            'name.string' => __('message.field must be string'),
-            'name.max' => __('message.field must be less than 255 character'),
-            'name_e.string' => __('message.field must be string'),
-            'name_e.max' => __('message.field must be less than 255 character'),
-        ];
-    }
 }

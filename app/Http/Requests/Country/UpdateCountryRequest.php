@@ -32,7 +32,7 @@ class UpdateCountryRequest extends FormRequest
             'long_name_e' => "max:100",
             'short_code' => "max:10",
             'is_active' => 'nullable|in:active,inactive',
-            "media" => ["exists:media,id", new \App\Rules\MediaRule()],
+            "media" => ["nullable","exists:media,id", new \App\Rules\MediaRule()],
         ];
     }
 

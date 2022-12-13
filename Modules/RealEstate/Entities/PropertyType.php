@@ -47,6 +47,12 @@ class PropertyType extends Model
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
             }
 
+            if ($request->search && $request->columns){
+                foreach ($request->columns as $column){
+                    $q->orWhere($column,'like','%' . $request->search . '%');
+                }
+            }
+
             if ($request->name) {
                 $q->orWhere('name', 'like', '%' . $request->name . '%');
             }

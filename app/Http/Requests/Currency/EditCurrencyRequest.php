@@ -46,7 +46,8 @@ class EditCurrencyRequest extends FormRequest
                 'message'   => __ ('validation errors'),
 
                 'data'      => $validator->errors()
-            ]
+            ],
+            422
         ));
     }
 
