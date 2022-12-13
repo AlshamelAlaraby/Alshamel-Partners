@@ -20,7 +20,8 @@ class UpdateRlstReservationRequest extends FormRequest
             "vdate"            => "required|date" ,
             "salesman_id"      => "required|exists:salesmen,id" ,
             "customer_id"      => "required|exists:rlst_buildings,id" ,
-            "payment_plan_id"  => "required|exists:rlst_Payment_plans,id" ,
+            "payment_plan_id"  => "required|numeric" ,
+            // "payment_plan_id"  => "required|exists:rlst_Payment_plans,id" ,
         ];
     }
 

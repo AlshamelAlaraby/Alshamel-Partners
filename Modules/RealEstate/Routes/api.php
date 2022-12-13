@@ -57,7 +57,7 @@ Route::prefix ('real-estate')->group (function (){
             Route::get('/logs', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
             Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
             Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
-            Route::put('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
+            Route::post('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
             Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
         });
     });

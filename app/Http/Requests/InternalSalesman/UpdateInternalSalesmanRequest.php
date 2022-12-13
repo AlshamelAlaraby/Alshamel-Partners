@@ -25,7 +25,7 @@ class UpdateInternalSalesmanRequest extends FormRequest
     {
         return [
             "employee_id"     => "required|numeric" ,
-            "is_active"       => "numeric" ,
+            "is_active"       => "in:active,inactive" ,
         ];
     }
 }

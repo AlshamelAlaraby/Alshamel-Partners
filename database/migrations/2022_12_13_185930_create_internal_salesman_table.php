@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('internal_salesman', function (Blueprint $table) {
             $table->id();
             $table->integer("employee_id");
-            $table->integer("is_active")->default('0');
+            $table->string("is_active")->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
