@@ -42,6 +42,8 @@ use App\Repositories\RoleWorkflow\RoleWorkflowRepository;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepositoryInterface;
 use App\Repositories\TreeProperty\TreePropertyRepository;
 use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
+use App\Repositories\InternalSalesman\InternalSalesmanRepository;
+use App\Repositories\InternalSalesman\InternalSalesmanRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\SalesmenType\SalesmenTypeInterface;
@@ -102,6 +104,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WorkflowHotfieldRepositoryInterface::class, WorkflowHotfieldRepository::class);
         $this->app->bind(SalesmanRepositoryInterface::class, SalesmanRepository::class);
         $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
+        $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
 
     }
 

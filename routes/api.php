@@ -252,6 +252,16 @@ Route::group(['prefix' => 'salesmen'], function () {
         Route::get('logs/{id}', 'logs')->name('salesmen.logs');
     });
 });
+Route::group(['prefix' => 'internal-salesman'], function () {
+    Route::controller(\App\Http\Controllers\InternalSalesman\InternalSalesmanController::class)->group(function () {
+        Route::get('/', 'all' )->name('internal-salesman.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('internal-salesman.create');
+        Route::post('/{id}', 'update' )->name('internal-salesman.update');
+        Route::delete('/{id}', 'delete' )->name('internal-salesman.destroy');
+        Route::get('logs/{id}', 'logs')->name('internal-salesman.logs');
+    });
+});
 
 Route::group(['prefix' => 'branches'], function () {
     Route::controller(BranchController::class)->group(function () {
