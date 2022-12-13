@@ -3,18 +3,18 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Models\Country;
-use Spatie\Activitylog\LogOptions;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Contracts\Activity;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Contracts\Activity;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class RlstOwner extends Model
+class RlstCustomer extends Model
 {
-    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory,SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
         'name',
@@ -29,6 +29,11 @@ class RlstOwner extends Model
         'contact_person',
         'contact_phones',
         'national_id',
+        'passport_no',
+        'note1',
+        'note2',
+        'note3',
+        'note4',
         'whatsapp',
         'categories',
 
@@ -100,7 +105,7 @@ class RlstOwner extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Real Estate Owners')
+            ->useLogName('Real Estate Customers')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

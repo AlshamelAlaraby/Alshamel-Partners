@@ -21,6 +21,10 @@ return [
     "field must be after or equal start date" => "field must be after or equal start date",
     "country has sub data" => "country has sub data",
     "field must be exists" => "field must be exists",
+    "field must be array" => "field must be array",
+    "field must be less than 20 character" => "field must be less than 20 character",
+    "field must be less than 100 character" => "field must be less than 100 character",
+    "field must be exists" => "field must be exists",
 
 ];
 //

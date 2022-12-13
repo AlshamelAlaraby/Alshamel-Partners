@@ -24,8 +24,8 @@ class UpdateGovernorateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:255|unique:modules,name',
-            'name_e' => 'string|max:255|unique:modules,name_e',
+            'name' => 'string|max:255|unique:governorates,name',
+            'name_e' => 'string|max:255|unique:governorates,name_e',
             "is_active" => "nullable|in:active,inactive",
             "is_default" => "nullable|in:0,1",
             "country_id" => "exists:countries,id",

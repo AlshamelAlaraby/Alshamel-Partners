@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstOwnerRequest extends FormRequest
+class CreateRlstCustomerRequest extends FormRequest
 {
     public function authorize()
     {
@@ -26,6 +26,13 @@ class CreateRlstOwnerRequest extends FormRequest
             "contact_person" => "required|string|max:100",
             "contact_phones" => "required|string|max:100",
             "national_id" => "required|string|max:20",
+            "passport_no" => "required|string|max:20",
+            "contact_person" => "required|string|max:100",
+            "contact_phones" => "required|string|max:100",
+            "note1" => 'required|max:100',
+            "note2" => 'required|max:100',
+            "note3" => 'required|max:100',
+            "note4" => 'required|max:100',
             "whatsapp" => "required|string|max:20",
             "categories" => "required",
         ];
@@ -71,7 +78,17 @@ class CreateRlstOwnerRequest extends FormRequest
             'whatsapp.string' => __("message.field must be string"),
             'whatsapp.max' => __("message.field must be less than 20 characters"),
             "categories.required" => __("message.field is required"),
-
+            "note1.required" => __("message.field is required"),
+            'note1.max' => __("message.field must be less than 100 characters"),
+            "note2.required" => __("message.field is required"),
+            'note2.max' => __("message.field must be less than 100 characters"),
+            "note3.required" => __("message.field is required"),
+            'note3.max' => __("message.field must be less than 100 characters"),
+            "note4.required" => __("message.field is required"),
+            'note4.max' => __("message.field must be less than 100 characters"),
+            "passport_no.required" => __("message.field is required"),
+            'passport_no.string' => __("message.field must be string"),
+            'passport_no.max' => __("message.field must be less than 20 characters"),
 
 
 
