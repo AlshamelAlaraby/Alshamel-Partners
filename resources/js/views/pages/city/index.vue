@@ -382,7 +382,7 @@ export default {
             this.create.city_id = null;
             this.edit.city_id = null;
 
-            await adminApi.get(`/countries`)
+            await adminApi.get(`/countries?is_active=active`)
                 .then((res) => {
                     let l = res.data;
                     this.countries = l.data;

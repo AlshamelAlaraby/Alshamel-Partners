@@ -1791,7 +1791,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this11.create.city_id = null;
                 _this11.edit.city_id = null;
                 _context2.next = 9;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries").then(function (res) {
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?is_active=active").then(function (res) {
                   var l = res.data;
                   _this11.countries = l.data;
                 })["catch"](function (err) {
