@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string("contact_phones", 100);
             $table->string("national_id", 20);
             $table->string("whatsapp", 20);
-            $table->json('categories');
+            $table->text('categories');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

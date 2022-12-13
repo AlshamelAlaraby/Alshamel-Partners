@@ -4,15 +4,15 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstOwner;
-use Modules\RealEstate\Transformers\RlstOwnerResource;
-use Modules\RealEstate\Http\Requests\CreateRlstOwnerRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstOwnerRequest;
+use Modules\RealEstate\Entities\RlstCustomer;
+use Modules\RealEstate\Transformers\RlstCustomerResource;
+use Modules\RealEstate\Http\Requests\CreateRlstCustomerRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstCustomerRequest;
 
-class RlstOwnerController extends Controller
+class RlstCustomerController extends Controller
 {
 
-    public function __construct(private RlstOwner $model)
+    public function __construct(private RlstCustomer $model)
     {
         $this->model = $model;
     }
@@ -25,7 +25,7 @@ class RlstOwnerController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstOwnerResource($model));
+        return responseJson(200, 'success', new RlstCustomerResource($model));
     }
 
 
@@ -40,11 +40,11 @@ class RlstOwnerController extends Controller
         }
 
 
-        return responseJson(200, 'success', RlstOwnerResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstCustomerResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
 
-    public function create(CreateRlstOwnerRequest $request)
+    public function create(CreateRlstCustomerRequest $request)
     {
         $this->model->create($request->validated());
 
@@ -52,7 +52,7 @@ class RlstOwnerController extends Controller
     }
 
 
-    public function update($id, UpdateRlstOwnerRequest $request)
+    public function update($id, UpdateRlstCustomerRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
