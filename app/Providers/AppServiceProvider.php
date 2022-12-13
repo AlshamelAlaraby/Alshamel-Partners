@@ -34,8 +34,14 @@ use App\Repositories\RoleType\RoleTypeRepository;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
+use App\Repositories\WorkflowHotfield\WorkflowHotfieldRepository;
+use App\Repositories\WorkflowHotfield\WorkflowHotfieldRepositoryInterface;
+use App\Repositories\Salesman\SalesmanRepository;
+use App\Repositories\Salesman\SalesmanRepositoryInterface;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepository;
 use App\Repositories\RoleWorkflow\RoleWorkflowRepositoryInterface;
+use App\Repositories\TreeProperty\TreePropertyRepository;
+use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\SalesmenType\SalesmenTypeInterface;
@@ -93,6 +99,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleWorkflowRepositoryInterface::class, RoleWorkflowRepository::class);
         $this->app->bind(RoleScreenHotfieldRepositoryInterface::class, RoleScreenHotfieldRepository::class);
         $this->app->bind(RoleWorkflowButtonRepositoryInterface::class, RoleWorkflowButtonRepository::class);
+        $this->app->bind(WorkflowHotfieldRepositoryInterface::class, WorkflowHotfieldRepository::class);
+        $this->app->bind(SalesmanRepositoryInterface::class, SalesmanRepository::class);
+        $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
 
     }
 

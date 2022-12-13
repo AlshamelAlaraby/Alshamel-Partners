@@ -20,4 +20,9 @@ class City extends Model
         return $this->hasMany(\Modules\RealEstate\Entities\RlstOwner::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 }
