@@ -40,7 +40,7 @@ Route::prefix ('real-estate')->group (function (){
 
 
 
-    Route::group(['prefix' => 'rlst', 'namespace' => 'Modules\RealEstate\Http\Controllers'], function () {
+    Route::group(['prefix' => 'rlst'], function () {
         Route::group(['prefix' => 'owners'], function () {
             Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
             Route::get('/logs', 'RlstOwnerController@logs')->name('rlst-owners.logs');
@@ -48,6 +48,17 @@ Route::prefix ('real-estate')->group (function (){
             Route::post('/', 'RlstOwnerController@create')->name('rlst-owners.create');
             Route::put('/{id}', 'RlstOwnerController@update')->name('rlst-owners.update');
             Route::delete('/{id}', 'RlstOwnerController@delete')->name('rlst-owners.delete');
+        });
+    });
+
+    Route::group(['prefix' => 'rlst'], function () {
+        Route::group(['prefix' => 'reservations'], function () {
+            Route::get('/', 'RlstReservationController@all')->name('rlst-Reservations.all');
+            Route::get('/logs', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
+            Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
+            Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
+            Route::put('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
+            Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
         });
     });
 

@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\InternalSalesman;
+namespace Modules\RealEstate\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Repositories\InternalSalesman\InternalSalesmanRepositoryInterface;
-use App\Http\Resources\InternalSalesman\InternalSalesmanResource;
-use App\Http\Requests\InternalSalesman\StoreInternalSalesmanRequest;
-use App\Http\Requests\InternalSalesman\UpdateInternalSalesmanRequest;
 use App\Http\Resources\ScreenSetting\ScreenSettingResource;
-use Mockery\Exception;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Modules\RealEstate\Http\Requests\RlstReservation\StoreRlstReservationRequest;
+use Modules\RealEstate\Http\Requests\RlstReservation\UpdateRlstReservationRequest;
+use Modules\RealEstate\Repositories\RlstReservation\RlstReservationRepositoryInterface;
+use Modules\RealEstate\Transformers\RlstReservationResource;
 
-class InternalSalesmanController extends Controller
+class RlstReservationController extends Controller
 {
+
     protected $repository;
-    protected $resource = InternalSalesmanResource::class;
+    protected $resource = RlstReservationResource::class;
 
 
-    public function __construct(InternalSalesmanRepositoryInterface $repository)
+    public function __construct(RlstReservationRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -25,18 +26,18 @@ class InternalSalesmanController extends Controller
     public function all(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('InternalSalesmen');
+            $models = cacheGet('RlstReservations');
 
             if (!$models) {
-                $models = $this->repository->getAllInternalSalesmen($request);
-                cachePut('InternalSalesmen', $models);
+                $models = $this->repository->getAllRlstReservations($request);
+                cachePut('RlstReservations', $models);
             }
         } else {
 
-            $models = $this->repository->getAllInternalSalesmen($request);
+            $models = $this->repository->getAllRlstReservations($request);
         }
 
-        return responseJson(200, 'success', InternalSalesmanResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstReservationResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
 
     }
 
@@ -44,24 +45,24 @@ class InternalSalesmanController extends Controller
     public function find($id)
     {
         try{
-            $model = cacheGet('InternalSalesman_' . $id);
+            $model = cacheGet('RlstReservations_' . $id);
 
             if (!$model) {
                 $model = $this->repository->find($id);
                 if (!$model) {
                     return responseJson( 404 , __('message.data not found'));
                 } else {
-                    cachePut('InternalSalesman_' . $id, $model);
+                    cachePut('RlstReservations_' . $id, $model);
                 }
             }
-            return responseJson(200 , __('Done'), new InternalSalesmanResource($model));
+            return responseJson(200 , __('Done'), new RlstReservationResource($model));
         } catch (Exception $exception) {
             return responseJson( $exception->getCode() , $exception->getMessage());
         }
     }
 
 
-    public function create(StoreInternalSalesmanRequest $request)
+    public function create(StoreRlstReservationRequest $request)
     {
         try {
             return responseJson(200 , __('Done') , $this->repository->create($request->validated()));
@@ -71,7 +72,7 @@ class InternalSalesmanController extends Controller
     }
 
 
-    public function update(UpdateInternalSalesmanRequest $request , $id)
+    public function update(UpdateRlstReservationRequest $request , $id)
     {
         try {
             $model = $this->repository->find($id);
@@ -136,6 +137,4 @@ class InternalSalesmanController extends Controller
             return  responseJson( $exception->getCode() , $exception->getMessage());
         }
     }
-
-
 }
