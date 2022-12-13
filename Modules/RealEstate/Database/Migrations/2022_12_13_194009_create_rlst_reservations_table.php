@@ -18,7 +18,8 @@ return new class extends Migration
             $table->date("vdate");
             $table->foreignId('salesman_id')->constrained('salesmen')->references("id");
             $table->foreignId('customer_id')->constrained('rlst_buildings')->references("id");
-            $table->foreignId('Payment_paln_id')->constrained('rlst_Payment_plans')->references("id");
+            $table->integer('Payment_paln_id');
+            // $table->foreignId('Payment_paln_id')->constrained('rlst_Payment_plans')->references("id");
             $table->softDeletes();
             $table->timestamps();
         });
