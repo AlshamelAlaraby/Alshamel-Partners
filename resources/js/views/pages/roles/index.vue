@@ -10,7 +10,7 @@ import loader from "../../../components/loader";
 import alphaArabic from "../../../helper/alphaArabic";
 import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
-import senderHoverHelper from "../../../helper/senderHoverHelper";
+import Multiselect from "vue-multiselect";
 
 /**
  * Advanced Table component
@@ -26,6 +26,7 @@ export default {
         Switches,
         ErrorMessage,
         loader,
+        Multiselect
     },
     data() {
         return {
@@ -62,10 +63,12 @@ export default {
         create: {
             name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
             name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            roletype_id:{required}
         },
         edit: {
             name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
             name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            roletype_id:{required}
         },
     },
     watch: {
@@ -101,7 +104,6 @@ export default {
     },
     mounted() {
         this.getData();
-        this.keyDropdown();
     },
     methods: {
         /**
@@ -215,8 +217,9 @@ export default {
         /**
          *  hidden Modal (create)
          */
-        resetModal() {
+         resetModal() {
             this.create = {name: '', name_e: '', roletype_id: 0};
+            this.getParent();
             this.$nextTick(() => {
                 this.$v.$reset()
             });
@@ -307,8 +310,8 @@ export default {
         /**
          *  get parent
          */
-        getParent() {
-            adminApi.get(`/roles?roletype_id=${0}`)
+       async getParent() {
+           await adminApi.get(`/role_types`)
                 .then((res) => {
                     this.dropDownSenders = res.data.data;
                 })
@@ -323,7 +326,8 @@ export default {
         /**
          *   show Modal (edit)
          */
-        resetModalEdit(id) {
+        async resetModalEdit(id) {
+           await this.getParent();
             let module = this.roles.find(e => id == e.id);
             this.edit.name = module.name;
             this.edit.name_e = module.name_e;
@@ -341,126 +345,6 @@ export default {
                 roletype_id: 0
             };
         },
-        /**
-         *  start  dropdown Google
-         */
-        searchSender(e) {
-            this.dropDownSenders = [];
-            this.create.roletype_id = 0;
-            this.edit.roletype_id = 0;
-            if (this.create.search || this.edit.search) {
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-                    this.getParent();
-                }, 400);
-            } else {
-                this.dropDownSenders = [];
-                console.log(e);
-            }
-        },
-
-        showSenderName(index) {
-            let item = this.dropDownSenders[index];
-            this.create.roletype_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.roletype_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.isButton = true;
-            this.dropDownSenders = [];
-        },
-        senderHover(e) {
-            senderHoverHelper(e);
-        },
-        keyDropdown() {
-            document.addEventListener('keyup', (e) => {
-                if (e.keyCode == 38) { //top arrow
-                    if (this.dropDownSenders.length > 0) {
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e, i) => {
-                            if (e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if (isTrue && index != 0) {
-                            items[index].classList.remove('active');
-                            items[index - 1].classList.add('active');
-                        } else if (isTrue && index == 0) {
-                            items[index].classList.remove('active');
-                            items[items.length - 1].classList.add('active');
-                        }
-                        if (!isTrue) items[0].classList.add('active');
-                    } else {
-                        this.dropDownSenders = [];
-                    }
-                }
-                ;
-
-                if (e.keyCode == 40) { //down arrow
-                    if (this.dropDownSenders.length > 0) {
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e, i) => {
-                            if (e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if (isTrue && index != (items.length - 1)) {
-                            items[index].classList.remove('active');
-                            items[index + 1].classList.add('active');
-                        } else if (isTrue && index == (items.length - 1)) {
-                            items[index].classList.remove('active');
-                            items[0].classList.add('active');
-                        }
-                        if (!isTrue) items[items.length - 1].classList.add('active');
-                    } else {
-                        this.dropDownSenders = [];
-                    }
-                }
-                ;
-
-                if (e.keyCode == 13) { //enter
-                    if (this.dropDownSenders.length > 0) {
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        items.forEach((e, i) => {
-                            if (e.classList.contains('active')) this.showSenderName(i);
-                        });
-                    } else {
-                        this.dropDownSenders = [];
-                    }
-                }
-                ;
-            });
-
-            document.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'BUTTON') {
-                    e.preventDefault();
-                }
-                if (this.dropDownSenders.length > 0) {
-                    if (e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')) {
-                        return false;
-                    } else {
-                        this.dropDownSenders = [];
-                    }
-                }
-            });
-        },
-        ClickDropdown(e) {
-            if (this.dropDownSenders.length > 0) {
-                if (e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')) {
-                    return false;
-                } else {
-                    this.dropDownSenders = [];
-                }
-            }
-        },
-        /**
-         *  end  dropdown Google
-         */
         /**
          *  start  dynamicSortString
          */
@@ -725,33 +609,25 @@ export default {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mt-1 position-relative">
-                                        <div class="form-group">
-                                            <label class="my-1 mr-2">{{ $t('general.IdParent') }}</label>
-                                            <input
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="4"
-                                                @keypress.enter="moveInput('input','create',1)"
-                                                @input="searchSender"
-                                                @blur.prevent="ClickDropdown"
-                                                :placeholder="$t('general.IdParent')" id="field-9"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
+                                    <div class="col-md-6">
+                                        <div class="form-group position-relative">
+                                            <label  class="control-label">
+                                                {{ $t('general.country') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <multiselect
+                                                v-model="create.roletype_id"
+                                                :options="dropDownSenders.map(type => type.id)"
+                                                :custom-label="opt => dropDownSenders.find(x => x.id == opt).name">
+                                            </multiselect>
+                                            <div v-if="$v.create.roletype_id.$error || errors.roletype_id"
+                                                 class="text-danger"
                                             >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderName(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>
+                                            <template v-if="errors.roletype_id">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.roletype_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>
@@ -986,33 +862,25 @@ export default {
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6 mt-1">
-                                                        <div class="form-group">
-                                                            <label class="my-1 mr-2">{{
-                                                                    $t('general.IdParent')
-                                                                }}</label>
-                                                            <input
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
-                                                                @input="searchSender"
-                                                                @blur.prevent="ClickDropdown"
-                                                                @focus="isButton = false"
-                                                                :placeholder="$t('general.IdParent')"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
+                                                    <div class="col-md-6">
+                                                        <div class="form-group position-relative">
+                                                            <label  class="control-label">
+                                                                {{ $t('general.country') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <multiselect
+                                                                v-model="edit.roletype_id"
+                                                                :options="dropDownSenders.map(type => type.id)"
+                                                                :custom-label="opt => dropDownSenders.find(x => x.id == opt).name">
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.roletype_id.$error || errors.roletype_id"
+                                                                 class="text-danger"
                                                             >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderName(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>
+                                                            <template v-if="errors.roletype_id">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.roletype_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
                                                         </div>
                                                     </div>
                                                 </div>
