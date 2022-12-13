@@ -1,27 +1,21 @@
 <?php
 
-namespace Modules\RealEstate\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+namespace App\Traits;
+
+
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class PropertyType extends Model
+trait LogTrait
 {
-    use HasFactory,LogsActivity, CausesActivity;
-
-    protected $fillable = [];
-
-    protected $guarded = ['id'];
-
+    use LogsActivity, CausesActivity;
     protected static function newFactory()
     {
-        return \Modules\RealEstate\Database\factories\PropertyTypeFactory::new();
+        return \Modules\RealEstate\Database\factories\RlstBuildingFactory::new();
     }
-
 
     public function tapActivity(Activity $activity, string $eventName)
     {

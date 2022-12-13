@@ -6,54 +6,58 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Http\Requests\CreateRlstBuildingRequest;
+use Modules\RealEstate\Http\Requests\CreateRlstUnitRequest;
 use Modules\RealEstate\Http\Requests\EditRlstBuildingRequest;
+use Modules\RealEstate\Http\Requests\EditRlstUnitRequest;
 use Modules\RealEstate\Repositories\RlstBuildingRepositoryInterface;
+use Modules\RealEstate\Repositories\RlstUnitRepositoryInterface;
 use Modules\RealEstate\Transformers\RlstBuildingResource;
+use Modules\RealEstate\Transformers\RlstUnitResource;
 
-class RlstBuildingController extends Controller
+class RlstUnitController extends Controller
 {
     private $modelInterface;
-    public function __construct(RlstBuildingRepositoryInterface $modelInterface)
+    public function __construct(RlstUnitRepositoryInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function show($id)
     {
-        $model = cacheGet('rlst_buildings_' . $id);
+        $model = cacheGet('rlst_units_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('rlst_buildings_' . $id, $model);
+                cachePut('rlst_units_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new RlstBuildingResource($model));
+        return responseJson(200, 'success', new RlstUnitResource($model));
     }
 
     public function index(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('rlst_buildings');
+            $models = cacheGet('rlst_units');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('rlst_buildings', $models);
+                cachePut('rlst_units', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', RlstBuildingResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function store(CreateRlstBuildingRequest $request)
+    public function store(CreateRlstUnitRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
     }
 
-    public function update(EditRlstBuildingRequest $request, $id)
+    public function update(EditRlstUnitRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {

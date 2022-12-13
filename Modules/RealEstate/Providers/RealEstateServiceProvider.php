@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\RealEstate\Repositories\PropertyTypeRepository;
 use Modules\RealEstate\Repositories\PropertyTypeRepositoryInterface;
+use Modules\RealEstate\Repositories\RlstBuildingRepository;
+use Modules\RealEstate\Repositories\RlstBuildingRepositoryInterface;
+use Modules\RealEstate\Repositories\RlstUnitRepository;
+use Modules\RealEstate\Repositories\RlstUnitRepositoryInterface;
 
 class RealEstateServiceProvider extends ServiceProvider
 {
@@ -32,6 +36,8 @@ class RealEstateServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         $this->app->bind (PropertyTypeRepositoryInterface::class,PropertyTypeRepository::class);
+        $this->app->bind (RlstBuildingRepositoryInterface::class,RlstBuildingRepository::class);
+        $this->app->bind (RlstUnitRepositoryInterface::class,RlstUnitRepository::class);
     }
 
     /**

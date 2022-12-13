@@ -25,4 +25,10 @@ Route::prefix ('real-estate')->group (function (){
 
     Route::resource ('property-types','PropertyTypeController')->except ('edit','create');
     Route::get ('property-types/logs/{id}','PropertyTypeController@logs');
+
+    Route::resource ('rlst-buildings','RlstBuildingController')->except ('edit','create');
+    Route::get ('rlst-buildings/logs/{id}','RlstBuildingController@logs');
+
+    Route::resource ('rlst-units','RlstUnitController')->except ('edit','create');
+    Route::get ('rlst-units/logs/{id}','RlstUnitController@logs');
 });
