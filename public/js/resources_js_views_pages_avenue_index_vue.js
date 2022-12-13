@@ -1725,17 +1725,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 avenue = _this10.avenues.find(function (e) {
                   return id == e.id;
                 });
+                _context.next = 3;
+                return _this10.getCategory();
+              case 3:
+                _context.next = 5;
+                return _this10.getGovernorate(avenue.country.id);
+              case 5:
+                _context.next = 7;
+                return _this10.getCity(avenue.city.id);
+              case 7:
                 _this10.edit.name = avenue.name;
                 _this10.edit.name_e = avenue.name_e;
                 _this10.edit.is_active = avenue.is_active;
                 _this10.edit.country_id = avenue.country.id;
                 _this10.edit.city_id = avenue.city.id;
-                _context.next = 8;
-                return _this10.getCategory();
-              case 8:
                 _this10.edit.governorate_id = avenue.governorate.id;
                 _this10.errors = {};
-              case 10:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -1819,36 +1825,62 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getGovernorate: function getGovernorate() {
+    getGovernorate: function getGovernorate(id) {
       var _this12 = this;
-      this.cities = [];
-      this.governorates = [];
-      this.create.city_id = null;
-      this.edit.city_id = null;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates").then(function (res) {
-        var l = res.data;
-        _this12.governorates = l.data;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this12.$t('general.Error')),
-          text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
-        });
-      });
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this12.cities = [];
+                _this12.governorates = [];
+                _this12.create.city_id = null;
+                _this12.edit.city_id = null;
+                _context3.next = 6;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates?country_id=".concat(id)).then(function (res) {
+                  var l = res.data;
+                  _this12.governorates = l.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this12.$t('general.Error')),
+                    text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
+                  });
+                });
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
-    getCity: function getCity() {
+    getCity: function getCity(id, id2) {
       var _this13 = this;
-      this.cities = [];
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities").then(function (res) {
-        var l = res.data;
-        _this13.cities = l.data;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this13.$t('general.Error')),
-          text: "".concat(_this13.$t('general.Thereisanerrorinthesystem'))
-        });
-      });
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this13.cities = [];
+                _context4.next = 3;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?country_id=".concat(id, "&governorate_id=").concat(id2)).then(function (res) {
+                  var l = res.data;
+                  _this13.cities = l.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this13.$t('general.Error')),
+                    text: "".concat(_this13.$t('general.Thereisanerrorinthesystem'))
+                  });
+                });
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   }
 });
@@ -5358,7 +5390,9 @@ var render = function render() {
       }
     },
     on: {
-      select: _vm.getGovernorate
+      input: function input($event) {
+        return _vm.getGovernorate(_vm.create.country_id);
+      }
     },
     model: {
       value: _vm.$v.create.country_id.$model,
@@ -5393,7 +5427,9 @@ var render = function render() {
       }
     },
     on: {
-      select: _vm.getCity
+      input: function input($event) {
+        return _vm.getCity(_vm.create.country_id, _vm.create.governorate_id);
+      }
     },
     model: {
       value: _vm.$v.create.governorate_id.$model,
@@ -5811,6 +5847,7 @@ var render = function render() {
         title: _vm.$t("avenue.editavenue"),
         "title-class": "font-18",
         "body-class": "p-4",
+        size: "lg",
         "hide-footer": true
       },
       on: {
@@ -6095,7 +6132,7 @@ var render = function render() {
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
-    }, [!_vm.isLoader && _vm.isButton ? _c("b-button", {
+    }, [!_vm.isLoader ? _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6669,21 +6706,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6698,16 +6720,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6738,9 +6750,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,

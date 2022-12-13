@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Salesman;
 
+use App\Http\Resources\Salesman\SalesmanResource;
 use App\Models\UserSettingScreen;
 use App\Models\Salesman;
 use Illuminate\Support\Facades\DB;
@@ -24,9 +25,9 @@ class SalesmanRepository implements SalesmanRepositoryInterface
 
 
         if ($request->per_page) {
-            return ['data' => $models->paginate($request->per_page), 'paginate' => true];
+            return ['data' => SalesmanResource::collection($models->paginate($request->per_page)), 'paginate' => true];
         } else {
-            return ['data' => $models->get(), 'paginate' => false];
+            return ['data' => SalesmanResource::collection($models->get()), 'paginate' => false];
         }
     }
 
