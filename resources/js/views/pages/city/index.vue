@@ -9,70 +9,72 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import alphaArabic  from "../../../helper/alphaArabic";
 import alphaEnglish  from "../../../helper/alphaEnglish";
-import { dynamicSortString }   from "../../../helper/tableSort";
-import senderHoverHelper   from "../../../helper/senderHoverHelper";
-import ModuleCreate   from "../../../components/create/module";
+import { dynamicSortString, dynamicSortNumber }   from "../../../helper/tableSort";
+import Multiselect from "vue-multiselect";
 
 /**
  * Advanced Table component
  */
 export default {
     page: {
-        title: "Module",
-        meta: [{ name: "description", content: 'Module' }],
+        title: "City",
+        meta: [{ name: "description", content: 'City' }],
     },
     components: {
         Layout,
         PageHeader,
         Switches,
+        Multiselect,
         ErrorMessage,
-        loader,
-        ModuleCreate
+        loader
     },
     data() {
         return {
             per_page: 50,
             search: '',
             debounce: {},
-            modulesPagination: {},
-            modules: [],
-            parents: [],
-            enabled3: false,
+            citiesPagination: {},
+            cities: [],
             isLoader: false,
             create: {
                 name: '',
                 name_e: '',
-                parent_id: 0,
-                is_active: 'active',
-                search: ''
+                country_id: null,
+                governorate_id: null,
+                is_active: 1,
             },
             edit: {
                 name: '',
                 name_e: '',
-                parent_id: 0,
-                is_active: 'active',
-                search: ''
+                country_id: null,
+                governorate_id: null,
+                is_active: 1,
             },
             errors: {},
             dropDownSenders: [],
-            isButton: true,
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            setting: ['name','name_e','is_active']
+            filterSetting: ['name','name_e','country_id','governorate_id'],
+            countries: [],
+            governorates: []
         }
     },
     validations: {
         create: {
-            name: {required,minLength: minLength(3),maxLength: maxLength(100),alphaArabic},
-            name_e: {required,minLength: minLength(3),maxLength: maxLength(100),alphaEnglish},
-            is_active: {required}
+            name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
+            country_id: {required},
+            governorate_id: {required},
+            is_active: {required,integer}
         },
         edit: {
-            name: {required,minLength: minLength(3),maxLength: maxLength(100),alphaArabic},
-            name_e: {required,minLength: minLength(3),maxLength: maxLength(100),alphaEnglish},
-            is_active: {required}
-        },
+            name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
+            country_id: {required},
+            governorate_id: {required},
+            is_active: {required,integer}
+        }
     },
     watch: {
         /**
@@ -95,7 +97,7 @@ export default {
          */
         isCheckAll(after,befour){
             if(after){
-                this.modules.forEach(el => {
+                this.cities.forEach(el => {
                     if(!this.checkAll.includes(el.id)){
                         this.checkAll.push(el.id);
                     }
@@ -107,20 +109,20 @@ export default {
     },
     mounted() {
         this.getData();
-        this.keyDropdown();
     },
     methods: {
         /**
-         *  start get Data module && pagination
+         *  start get Data countrie && pagination
          */
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/modules?page=${page}&per_page=${this.per_page}&search=${this.search}`)
+            adminApi.get(`/cities?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
-                    this.modules = l.data;
-                    this.modulesPagination = l.pagination;
+                    this.cities = l.data;
+                    console.log(l);
+                    this.citiesPagination = l.pagination;
                     this.current_page = l.pagination.current_page;
                 })
                 .catch((err) => {
@@ -134,15 +136,15 @@ export default {
                     this.isLoader = false;
                 });
         },
-        getDataCurrentPage(){
-            if(this.current_page <= this.modulesPagination.last_page && this.current_page != this.modulesPagination.current_page && this.current_page){
+        getDataCurrentPage(page = 1){
+            if(this.current_page <= this.citiesPagination.last_page && this.current_page != this.citiesPagination.current_page && this.current_page){
                 this.isLoader = true;
 
-                adminApi.get(`/modules?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`)
+                adminApi.get(`/cities?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
                     .then((res) => {
                         let l = res.data;
-                        this.modules = l.data;
-                        this.modulesPagination = l.pagination;
+                        this.cities = l.data;
+                        this.citiesPagination = l.pagination;
                         this.current_page = l.pagination.current_page;
                     })
                     .catch((err) => {
@@ -158,12 +160,12 @@ export default {
             }
         },
         /**
-         *  end get Data module && pagination
+         *  end get Data countrie && pagination
          */
         /**
-         *  start delete module
+         *  start delete countrie
          */
-        deleteModule(id) {
+        deleteCity(id) {
             Swal.fire({
                 title: `${this.$t('general.Areyousure')}`,
                 text: `${this.$t('general.Youwontbeabletoreverthis')}`,
@@ -179,7 +181,7 @@ export default {
 
                     this.isLoader = true;
 
-                    adminApi.delete(`/modules/${id}`)
+                    adminApi.delete(`/cities/${id}`)
                         .then((res) => {
                             this.getData();
                             this.checkAll = [];
@@ -205,13 +207,21 @@ export default {
             });
         },
         /**
-         *  end delete module
+         *  end delete countrie
          */
         /**
          *  reset Modal (create)
          */
         resetModalHidden(){
-            this.create =  {name: '', name_e: '', parent_id: 0, is_active: 'active'};
+            this.create =  {
+                name: '',
+                name_e: '',
+                country_id: null,
+                governorate_id: null,
+                is_active: 1,
+            };
+            this.governorates = [];
+            this.countries = [];
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
             this.$bvModal.hide(`create`);
@@ -220,12 +230,19 @@ export default {
          *  hidden Modal (create)
          */
         resetModal(){
-            this.create =  {name: '', name_e: '', parent_id: 0, is_active: 'active'};
+            this.create =  {
+                name: '',
+                name_e: '',
+                country_id: null,
+                governorate_id: null,
+                is_active: 1,
+            };
+            this.getCategory();
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
         },
         /**
-         *  create module
+         *  create countrie
          */
 
         AddSubmit(){
@@ -237,7 +254,7 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                adminApi.post(`/modules`,this.create)
+                adminApi.post(`/cities`,this.create)
                     .then((res) => {
                         this.$bvModal.hide(`create`);
                         this.getData();
@@ -267,7 +284,7 @@ export default {
 
         },
         /**
-         *  edit module
+         *  edit countrie
          */
         editSubmit(id){
             this.$v.edit.$touch();
@@ -277,8 +294,7 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let {name,name_e,parent_id,is_active} = this.edit;
-                adminApi.put(`/modules/${id}`,{name,name_e,parent_id,is_active})
+                adminApi.put(`/cities/${id}`,this.edit)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
@@ -307,30 +323,16 @@ export default {
             }
         },
         /**
-         *  get parent
-         */
-        getParent(){
-            adminApi.get(`/modules?parent_id=${0}&is_active=active`)
-                .then((res) => {
-                    this.dropDownSenders = res.data.data;
-                })
-                .catch((err) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${this.$t('general.Error')}`,
-                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                    });
-                });
-        },
-        /**
          *   show Modal (edit)
          */
-        resetModalEdit(id){
-            let module = this.modules.find(e => id == e.id );
-            this.edit.name = module.name;
-            this.edit.name_e = module.name_e;
-            this.edit.is_active = module.is_active;
-            this.edit.parent_id = module.parent_id;
+        async resetModalEdit(id){
+            let city = this.cities.find(e => id == e.id );
+            await this.getCategory();
+            this.edit.name = city.name;
+            this.edit.name_e = city.name_e;
+            this.edit.is_active = city.is_active ? 1: 0;
+            this.edit.country_id = city.country.id;
+            this.edit.governorate_id = city.governorate.id;
             this.errors = {};
         },
         /**
@@ -341,129 +343,18 @@ export default {
             this.edit = {
                 name: '',
                 name_e: '',
-                parent_id: 0,
-                is_active: 'active'
+                country_id: null,
+                governorate_id: null,
+                is_active: 1,
             };
+            this.governorates = [];
+            this.countries = [];
         },
-        /**
-         *  start  dropdown Google
-         */
-        searchSender(e){
-            this.dropDownSenders = [];
-            this.create.parent_id = 0;
-            this.edit.parent_id = 0;
-            if(this.create.search || this.edit.search){
-                clearTimeout(this.debounce);
-                this.debounce = setTimeout(() => {
-                    this.getParent();
-                }, 400);
-            }else{
-                this.dropDownSenders = [];
-                console.log(e);
-            }
-        },
-
-        showSenderName(index){
-            let item = this.dropDownSenders[index];
-            this.create.parent_id = item.id;
-            this.create.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.edit.parent_id = item.id;
-            this.edit.search = (this.$i18n.locale == 'ar' ? item.name : item.name_e);
-            this.isButton = true;
-            this.dropDownSenders = [];
-        },
-        senderHover(e){ senderHoverHelper(e);},
-        keyDropdown(){
-            document.addEventListener('keyup',(e) => {
-                if(e.keyCode == 38){ //top arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != 0){
-                            items[index].classList.remove('active');
-                            items[index - 1].classList.add('active');
-                        }else if(isTrue && index == 0){
-                            items[index].classList.remove('active');
-                            items[items.length - 1].classList.add('active');
-                        }
-                        if(!isTrue) items[0].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 40){ //down arrow
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        let isTrue = false;
-                        let index = null;
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) {
-                                isTrue = true;
-                                index = i;
-                            }
-                        });
-                        if(isTrue && index != (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[index + 1].classList.add('active');
-                        }else if(isTrue && index == (items.length - 1)){
-                            items[index].classList.remove('active');
-                            items[0].classList.add('active');
-                        }
-                        if(!isTrue) items[items.length - 1].classList.add('active');
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-
-                if(e.keyCode == 13){ //enter
-                    if(this.dropDownSenders.length > 0){
-                        let items = document.querySelectorAll('.sender-search .Sender');
-                        items.forEach((e,i) => {
-                            if(e.classList.contains('active')) this.showSenderName(i);
-                        });
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                };
-            });
-
-            document.addEventListener('click',(e) => {
-                if(e.target.tagName !== 'BUTTON'){
-                    e.preventDefault();
-                }
-                if(this.dropDownSenders.length > 0){
-                    if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                        return  false;
-                    }else {
-                        this.dropDownSenders = [];
-                    }
-                }
-            });
-        },
-        ClickDropdown(e){
-            if(this.dropDownSenders.length > 0){
-                if(e.target.classList.contains('Sender') || e.target.classList.contains('input-Sender')){
-                    return  false;
-                }else {
-                    this.dropDownSenders = [];
-                }
-            }
-        },
-        /**
-         *  end  dropdown Google
-         */
         /**
          *  start  dynamicSortString
          */
         sortString(value){ return dynamicSortString(value);},
+        SortNumber(value){return dynamicSortNumber(value);},
         /**
          *  start  ckeckRow
          */
@@ -480,7 +371,52 @@ export default {
          */
         moveInput(tag,c,index){
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
-        }
+        },
+        async getCategory(){
+
+            this.countries = [];
+            this.cities = [];
+            this.governorates = [];
+            this.create.governorate_id = null;
+            this.edit.governorate_id = null;
+            this.create.city_id = null;
+            this.edit.city_id = null;
+
+            await adminApi.get(`/countries`)
+                .then((res) => {
+                    let l = res.data;
+                    this.countries = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
+
+        },
+        getGovernorate(){
+
+            this.cities = [];
+            this.governorates = [];
+            this.create.city_id = null;
+            this.edit.city_id = null;
+
+            adminApi.get(`/governorates`)
+                .then((res) => {
+                    let l = res.data;
+                    this.governorates = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
+
+        },
     },
 };
 </script>
@@ -495,15 +431,16 @@ export default {
 
                         <!-- start search -->
                         <div class="row justify-content-between align-items-center mb-2">
-                            <h4 class="header-title"> {{ $t('module.ModulesTable') }}</h4>
+                            <h4 class="header-title"> {{ $t('city.citiesTable') }}</h4>
                             <div class="col-xs-10 col-md-9 col-lg-7" style="font-weight: 500">
 
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="setting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="setting" value="is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="governorate_id" class="mb-1">{{ $t('general.governorate') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -555,7 +492,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length > 1"
-                                        @click.prevent="deleteModule(checkAll)"
+                                        @click.prevent="deleteCity(checkAll)"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -564,7 +501,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length == 1"
-                                        @click.prevent="deleteModule(checkAll)"
+                                        @click.prevent="deleteCity(checkAll)"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -602,13 +539,13 @@ export default {
                                     <!-- start Pagination -->
                                     <div class="d-inline-flex align-items-center pagination-custom">
                                         <div class="d-inline-block" style="font-size:13px;">
-                                            {{ modulesPagination.from }}-{{ modulesPagination.to }} / {{ modulesPagination.total }}
+                                            {{ citiesPagination.from }}-{{ citiesPagination.to }} / {{ citiesPagination.total }}
                                         </div>
                                         <div class="d-inline-block">
                                             <a
                                                 href="javascript:void(0)"
-                                                :style="{'pointer-events':modulesPagination.current_page == 1 ? 'none': ''}"
-                                                @click.prevent="getData(modulesPagination.current_page - 1)"
+                                                :style="{'pointer-events':citiesPagination.current_page == 1 ? 'none': ''}"
+                                                @click.prevent="getData(citiesPagination.current_page - 1)"
                                             >
                                                 <span>&lt;</span>
                                             </a>
@@ -620,8 +557,8 @@ export default {
                                             />
                                             <a
                                                 href="javascript:void(0)"
-                                                :style="{'pointer-events':modulesPagination.last_page == modulesPagination.current_page ? 'none': ''}"
-                                                @click.prevent="getData(modulesPagination.current_page + 1)"
+                                                :style="{'pointer-events':citiesPagination.last_page == citiesPagination.current_page ? 'none': ''}"
+                                                @click.prevent="getData(citiesPagination.current_page + 1)"
                                             >
                                                 <span>&gt;</span>
                                             </a>
@@ -635,8 +572,9 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('module.addmodule')"
+                            :title="$t('city.addcity')"
                             title-class="font-18"
+                            size="lg"
                             body-class="p-4 "
                             :hide-footer="true"
                             @show="resetModal"
@@ -660,7 +598,7 @@ export default {
                                                 'is-invalid':$v.create.name.$error || errors.name,
                                                 'is-valid':!$v.create.name.$invalid && !errors.name
                                             }"
-                                                :placeholder="$t('general.Name')" id="field-1"
+                                                id="field-1"
                                             />
                                             <div v-if="!$v.create.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
@@ -680,13 +618,13 @@ export default {
                                                 type="text"
                                                 class="form-control"
                                                 data-create="2"
-                                                @keypress.enter="moveInput('select','create',3)"
+                                                @keypress.enter="moveInput('select','create',5)"
                                                 v-model="$v.create.name_e.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.name_e.$error || errors.name_e,
                                                 'is-valid':!$v.create.name_e.$invalid && !errors.name_e
                                             }"
-                                                :placeholder="$t('general.Name_en')" id="field-2"
+                                                id="field-2"
                                             />
                                             <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
@@ -696,17 +634,59 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-1">
+                                    <div class="col-md-6" >
+                                        <div class="form-group position-relative">
+                                            <label  class="control-label">
+                                                {{ $t('general.country') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <multiselect
+                                                @select="getGovernorate"
+                                                v-model="create.country_id"
+                                                :options="countries.map(type => type.id)"
+                                                :custom-label="opt => countries.find(x => x.id == opt).name"
+                                                >
+                                            </multiselect>
+                                            <div v-if="$v.create.country_id.$error || errors.country_id"
+                                                 class="text-danger"
+                                            >
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>                                             <template v-if="errors.country_id">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" v-if="create.country_id">
+                                        <div class="form-group position-relative">
+                                            <label  class="control-label">
+                                                {{ $t('general.governorate') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <multiselect
+                                                v-model="create.governorate_id"
+                                                :options="governorates.map(type => type.id)"
+                                                :custom-label="opt => governorates.find(x => x.id == opt).name">
+                                            </multiselect>
+                                            <div v-if="$v.create.governorate_id.$error || errors.country_id"
+                                                 class="text-danger"
+                                            >
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>                                             <template v-if="errors.governorate_id">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
+                                            <label class=" mr-2" for="inlineFormCustomSelectPref">
                                                 {{ $t('general.Status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <select
-                                                class="custom-select my-1 mr-sm-2"
+                                                class="custom-select mr-sm-2"
                                                 id="inlineFormCustomSelectPref"
-                                                data-create="3"
-                                                @keypress.enter.prevent="moveInput('input','create',4)"
+                                                data-create="5"
+                                                @keypress.enter.prevent="moveInput('input','create',1)"
                                                 v-model="$v.create.is_active.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.is_active.$error || errors.is_active,
@@ -714,41 +694,12 @@ export default {
                                             }"
                                             >
                                                 <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
+                                                <option value="1">{{ $t('general.Active') }}</option>
+                                                <option value="0">{{ $t('general.Inactive') }}</option>
                                             </select>
                                             <template v-if="errors.is_active">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-1 position-relative">
-                                        <div class="form-group">
-                                            <label class="my-1 mr-2" >{{ $t('general.IdParent') }}</label>
-                                            <input
-                                                class="form-control input-Sender"
-                                                v-model.trim="create.search"
-                                                data-create="4"
-                                                @keypress.enter="moveInput('input','create',1)"
-                                                @input="searchSender"
-                                                @blur.prevent="ClickDropdown"
-                                                :placeholder="$t('general.IdParent')" id="field-9"
-                                            />
-
-                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                v-if="dropDownSenders.length > 0"
-                                            >
-                                                <li
-                                                    class="Sender"
-                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                    :key="index"
-                                                    @click="showSenderName(index)"
-                                                    @mouseenter="senderHover"
-                                                >
-                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                </li>
-                                            </ul>
-
                                         </div>
                                     </div>
                                 </div>
@@ -757,7 +708,7 @@ export default {
                                     <b-button
                                         variant="success"
                                         type="button" class="mx-1"
-                                        v-if="!isLoader && isButton"
+                                        v-if="!isLoader"
                                         @click.prevent="AddSubmit"
                                     >
                                         {{ $t('general.Add') }}
@@ -785,7 +736,7 @@ export default {
 
                             <table class="table table-borderless table-hover table-centered m-0">
                                 <thead>
-                                <tr>
+                                    <tr>
                                     <th scope="col" style="width: 0;">
                                         <div class="form-check custom-control">
                                             <input
@@ -799,8 +750,8 @@ export default {
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name') }}</span>
                                             <div class="arrow-sort">
-                                                <i class="fas fa-arrow-up" @click="modules.sort(sortString('name'))"></i>
-                                                <i class="fas fa-arrow-down" @click="modules.sort(sortString('-name'))"></i>
+                                                <i class="fas fa-arrow-up" @click="cities.sort(sortString('name'))"></i>
+                                                <i class="fas fa-arrow-down" @click="cities.sort(sortString('-name'))"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -808,8 +759,26 @@ export default {
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name_en') }}</span>
                                             <div class="arrow-sort">
-                                                <i class="fas fa-arrow-up" @click="modules.sort(sortString('name_e'))"></i>
-                                                <i class="fas fa-arrow-down" @click="modules.sort(sortString('-name_e'))"></i>
+                                                <i class="fas fa-arrow-up" @click="cities.sort(sortString('name_e'))"></i>
+                                                <i class="fas fa-arrow-down" @click="cities.sort(sortString('-name_e'))"></i>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-center">
+                                            <span>{{ $t('general.country') }}</span>
+                                            <div class="arrow-sort">
+                                                <i class="fas fa-arrow-up" @click="cities.sort(SortNumber('country_id'))"></i>
+                                                <i class="fas fa-arrow-down" @click="cities.sort(SortNumber('-country_id'))"></i>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="d-flex justify-content-center">
+                                            <span>{{ $t('general.governorate') }}</span>
+                                            <div class="arrow-sort">
+                                                <i class="fas fa-arrow-up" @click="cities.sort(SortNumber('governorate_id'))"></i>
+                                                <i class="fas fa-arrow-down" @click="cities.sort(SortNumber('-governorate_id'))"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -817,8 +786,8 @@ export default {
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                             <div class="arrow-sort">
-                                                <i class="fas fa-arrow-up" @click="modules.sort(sortString('name_e'))"></i>
-                                                <i class="fas fa-arrow-down" @click="modules.sort(sortString('-name_e'))"></i>
+                                                <i class="fas fa-arrow-up" @click="cities.sort(sortString('name_e'))"></i>
+                                                <i class="fas fa-arrow-down" @click="cities.sort(sortString('-name_e'))"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -828,11 +797,11 @@ export default {
                                     <th><i class="fas fa-ellipsis-v"></i></th>
                                 </tr>
                                 </thead>
-                                <tbody v-if="modules.length > 0">
+                                <tbody v-if="cities.length > 0">
                                   <tr
-                                      @click.prevent="checkRow(data.id)"
+                                      @click.capture="checkRow(data.id)"
                                       @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
-                                      v-for="(data,index) in modules"
+                                      v-for="(data,index) in cities"
                                       :key="data.id"
                                       class="body-tr-custom"
                                   >
@@ -853,7 +822,9 @@ export default {
                                     <td>
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                    <td>
+                                      <td>{{ $i18n.locale == 'ar' ? data.country.name : data.country.name_e }}</td>
+                                      <td>{{ $i18n.locale == 'ar' ? data.governorate.name : data.governorate.name_e }}</td>
+                                      <td>
                                         <span :class="[
                                             data.is_active == 'active' ?
                                             'text-success':
@@ -864,7 +835,7 @@ export default {
                                             {{ data.is_active == 'active'? `${$t('general.Active')}`:`${$t('general.Inactive')}`}}
                                         </span>
                                     </td>
-                                    <td>
+                                      <td>
                                         <div class="btn-group">
                                             <button
                                                 type="button"
@@ -891,7 +862,7 @@ export default {
                                                 <a
                                                    class="dropdown-item text-black"
                                                    href="#"
-                                                   @click.prevent="deleteModule(data.id)"
+                                                   @click.prevent="deleteCity(data.id)"
                                                 >
                                                     <div class="d-flex justify-content-between align-items-center text-black">
                                                         <span>{{ $t('general.delete') }}</span>
@@ -904,35 +875,38 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('module.editmodule')"
+                                            :title="$t('city.editcity')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
+
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
-                                            <form  @submit.stop.prevent="editSubmit(data.id)">
+                                            <form>
                                                 <div class="row">
                                                     <div class="col-md-6 direction" dir="rtl">
                                                         <div class="form-group">
-                                                            <label for="field-u-1" class="control-label">
+                                                            <label for="edit-1" class="control-label">
                                                                 {{ $t('general.Name') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
+                                                                data-edit="1"
+                                                                @keypress.enter="moveInput('input','edit',2)"
                                                                 v-model="$v.edit.name.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                :placeholder="$t('general.Name')" id="field-u-1"
+                                                                id="edit-1"
                                                             />
-                                                            <div v-if="!$v.edit.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <div v-if="!$v.edit.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <template v-if="errors.name">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
@@ -940,19 +914,21 @@ export default {
                                                     </div>
                                                     <div class="col-md-6 direction-ltr" dir="ltr">
                                                         <div class="form-group">
-                                                            <label for="field-u-2" class="control-label">
+                                                            <label for="edit-2" class="control-label">
                                                                 {{ $t('general.Name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
+                                                                data-edit="2"
+                                                                @keypress.enter="moveInput('input','edit',5)"
                                                                 v-model="$v.edit.name_e.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.name_e.$error || errors.name_e,
                                                                     'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
-                                                                :placeholder="$t('general.Name_en')" id="field-u-2"
+                                                                id="edit-2"
                                                             />
                                                             <div v-if="!$v.edit.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
@@ -962,61 +938,84 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-1">
+                                                    <div class="col-md-6" >
+                                                        <div class="form-group position-relative">
+                                                            <label  class="control-label">
+                                                                {{ $t('general.country') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <multiselect
+                                                                @select="getGovernorate"
+                                                                v-model="edit.country_id"
+                                                                :options="countries.map(type => type.id)"
+                                                                :custom-label="opt => countries.find(x => x.id == opt).name"
+                                                            >
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
+                                                                 class="text-danger"
+                                                            >
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>                                                             <template v-if="errors.country_id">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group position-relative">
+                                                            <label  class="control-label">
+                                                                {{ $t('general.governorate') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <multiselect
+                                                                v-model="edit.governorate_id"
+                                                                :options="governorates.map(type => type.id)"
+                                                                :custom-label="opt => governorates.find(x => x.id == opt).name">
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
+                                                                 class="text-danger"
+                                                            >
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>                                                             <template v-if="errors.governorate_id">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.governorate_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="my-1 mr-2" for="inlineFormCustomSelectPrefs">
+                                                            <label class=" mr-2" for="edit-5">
                                                                 {{ $t('general.Status') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <select
-                                                                class="custom-select my-1 mr-sm-2"
-                                                                id="inlineFormCustomSelectPrefs"
+                                                                class="custom-select mr-sm-2"
+                                                                id="edit-5"
+                                                                data-edit="9"
+                                                                @keypress.enter.prevent="moveInput('input','edit',1)"
                                                                 v-model="$v.edit.is_active.$model"
                                                                 :class="{
-                                                                    'is-invalid':$v.edit.is_active.$error || errors.is_active,
-                                                                    'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
-                                                                }"
+                                                                        'is-invalid':$v.edit.is_active.$error || errors.is_active,
+                                                                        'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
+                                                                    }"
                                                                 >
-                                                                <option value="0" selected>{{ $t('general.Choose') }}...</option>
-                                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
+                                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
+                                                                <option value="1">{{ $t('general.Active') }}</option>
+                                                                <option value="0">{{ $t('general.Inactive') }}</option>
                                                             </select>
                                                             <template v-if="errors.is_active">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-1">
-                                                        <div class="form-group">
-                                                            <label class="my-1 mr-2">{{ $t('general.IdParent') }}</label>
-                                                            <input
-                                                                class="form-control input-Sender"
-                                                                v-model.trim="edit.search"
-                                                                @input="searchSender"
-                                                                @blur.prevent="ClickDropdown"
-                                                                @focus="isButton = false"
-                                                                :placeholder="$t('general.IdParent')"
-                                                            />
-
-                                                            <ul class="dropdown-search list-unstyled sender-search"
-                                                                v-if="dropDownSenders.length > 0"
-                                                            >
-                                                                <li
-                                                                    class="Sender"
-                                                                    v-for="(dropDownSender,index) in dropDownSenders"
-                                                                    :key="index"
-                                                                    @click="showSenderName(index)"
-                                                                    @mouseenter="senderHover"
-                                                                >
-                                                                    {{ `${dropDownSender.id}- ${dropDownSender.name}` }}
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button  variant="success" type="submit" class="mx-1" v-if="!isLoader && isButton">
+                                                    <b-button
+                                                        variant="success"
+                                                        type="submit"
+                                                        class="mx-1"
+                                                        @click.prevent="editSubmit(data.id)"
+                                                        v-if="!isLoader"
+                                                    >
                                                         {{ $t('general.Edit') }}
                                                     </b-button>
 
@@ -1037,14 +1036,14 @@ export default {
                                         </b-modal>
                                         <!--  /edit   -->
                                     </td>
-                                    <td>
+                                      <td>
                                         <i class="fe-info" style="font-size: 22px;"></i>
                                     </td>
                                 </tr>
                                 </tbody>
                                 <tbody v-else>
                                 <tr>
-                                    <th class="text-center" colspan="6">{{ $t('general.notDataFound') }}</th>
+                                    <th class="text-center" colspan="11">{{ $t('general.notDataFound') }}</th>
                                 </tr>
                                 </tbody>
                             </table>

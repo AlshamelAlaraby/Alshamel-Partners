@@ -12,6 +12,36 @@
         "danger": "يوجد خطا في الاميل او الباسورد",
         "Loading": "تحميل"
     },
+    "country": {
+        "addcountry": "اضافه دوله جديد",
+        "editcountry": "تعديل دوله ",
+        "countriesTable": "جدول الدول",
+        "country": "دولة"
+    },
+    "city": {
+        "addcity": "اضافه مدينه جديد",
+        "editcity": "تعديل المدينه ",
+        "city": "المدن",
+        "citiesTable": "جدول المدن"
+    },
+    "employee": {
+        "addemployee": "اضافه مدينه جديد",
+        "editemployee": "تعديل المدينه ",
+        "employee": "المدن",
+        "employeesTable": "جدول المدن"
+    },
+    "governorate": {
+        "addgovernorate": "اضافه محافظه جديد",
+        "editgovernorate": "تعديل المحافظه",
+        "governorate": "المحافظات",
+        "governoratesTable": "جدول المحافظات"
+    },
+    "currency": {
+        "addcurrency": "اضافه عمله جديد",
+        "editcurrency": "تعديل عمله",
+        "currency": "العملات",
+        "currenciesTable": "جدول العملات"
+    },
     "module": {
         "addmodule": "اضافه موديل جديد",
         "editmodule": "تعديل موديل ",
@@ -48,18 +78,41 @@
         "Table": "جدول أنواع رجال المبيعات",
         "salesmen-types": "أنواع رجال المبيعات"
     },
-    "partner": {
-        "addpartner": "اضافه شريك جديد",
-        "editpartner": "تعديل الشريك ",
-        "partnersTable": "جدول الشركاء",
-        "partner": "الشركاء"
+    "financialYear": {
+        "addfinancialYear": "اضافه سنه الماليه جديد",
+        "editfinancialYear": "تعديل سنه الماليه ",
+        "financialYearsTable": "جدول السنه الماليه",
+        "financialYear": "السنه الماليه"
     },
-    "company": {
-        "addcompany": "اضافه الشركه جديد",
-        "editcompany": "تعديل الشركه ",
-        "companysTable": "جدول الشركات",
-        "company": "الشركات",
-        "LogoFileUpload": "تحميل ملف الشعار"
+    "avenue": {
+        "addavenue": "اضافه منطقه جديد",
+        "editavenue": "تعديل منطقه",
+        "avenuesTable": "جدول المناطق",
+        "avenue": "المناطق"
+    },
+    "externalSalesmen": {
+        "addexternalSalesmen": "اضافه بائع خارجي جديد",
+        "editexternalSalesmen": "تعديل بائع خارجي ",
+        "externalSalesmensTable": "جدول الباعه الخارجيين",
+        "externalSalesmen": "الباعه الخارجيين"
+    },
+    "branch": {
+        "addbranch": "اضافه فرع جديد",
+        "editbranch": "تعديل فرع ",
+        "branchesTable": "جدول الفروع",
+        "branch": "الفروع"
+    },
+    "store": {
+        "addstore": "اضافه مخزن جديد",
+        "editstore": "تعديل مخزن ",
+        "storesTable": "جدول المخازن",
+        "store": "المخازن"
+    },
+    "serial": {
+        "addserial": "اضافه سريل جديد",
+        "editserial": "تعديل سريل ",
+        "serialsTable": "جدول سريل",
+        "serial": "سريل"
     },
     "navbar": {
         "search": {
@@ -175,11 +228,29 @@
         "navigation": {
             "text": "التنقل"
         },
-        "module": {
-            "text": "موديول"
+        "country": {
+            "text": "الدول"
         },
-        "company": {
-            "text": "الشركات"
+        "city": {
+            "text": "المدن"
+        },
+        "financialYear": {
+            "text": "السنه الماليه"
+        },
+        "currency": {
+            "text": "العملات"
+        },
+        "employee": {
+            "text": "الموظفين"
+        },
+        "governorate": {
+            "text": "المحافظات"
+        },
+        "avenue": {
+            "text": "المناطق"
+        },
+        "externalSalesmen": {
+            "text": "الباعه الخارجين"
         },
         "role": {
             "text": "الأدوار"
@@ -193,9 +264,16 @@
         "salesMen": {
             "text": "رجال المبيعات"
         },
-        "partner": {
-            "text": "الشركاء"
+        "branch": {
+            "text": "فروع"
         },
+        "store": {
+            "text": "المخازن"
+        },
+        "serial": {
+            "text": "Serial"
+        },
+
         "dashboard": {
             "text": "لوحة القيادة",
             "badge": "3",
@@ -386,7 +464,6 @@
                 "knob": "مقبض الباب"
             }
         },
-
         "maps": {
             "text": "خرائط",
             "list": {
@@ -481,8 +558,31 @@
         "delete": "حذف",
         "edit": "تعديل",
         "searchSetting": "إعداد البحث",
+        "long_name": "الاسم كبير(عربي)",
+        "long_name_e": "الاسم كبير(انجليزي)",
+        "codeAr": "الكود(عربي)",
+        "code_e": "الكود(انجليزي) ",
+        "fraction": "كسر(عربي)",
+        "fraction_e": "كسر(انجليزي)",
+        "fraction_no": "رقم الكسر",
+        "short_code": "كود قصير",
+        "phone_key": "مفتاح الدوله",
+        "is_default": "إفتراضي",
+        "national": "رقم الهويه الوطنيه",
+        "country": "الدوله",
+        "phone": "رقم التليفون",
+        "email": "الاميل",
+        "code": "كود",
+        "governorate": "المحافظه",
+        "city": "المدينه",
+        "startDate": "تاريخ البدايه",
+        "imagEUpload": "تحميل صوره",
+        "endDate": "تاريخ النهايه",
         "isEmployee": "هل هو موظف ؟",
         "Yes": "نعم",
-        "No": "لا"
+        "No": "لا",
+        "branch": "فروع",
+
     }
+
 }

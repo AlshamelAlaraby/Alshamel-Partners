@@ -7,6 +7,7 @@ use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepositoryInterface;
 use App\Http\Resources\RoleWorkflowButton\RoleWorkflowButtonResource;
 use App\Http\Requests\RoleWorkflowButton\StoreRoleWorkflowButtonRequest;
 use App\Http\Requests\RoleWorkflowButton\UpdateRoleWorkflowButtonRequest;
+use App\Http\Resources\ScreenSetting\ScreenSettingResource;
 use Mockery\Exception;
 use Illuminate\Http\Request;
 
@@ -102,4 +103,43 @@ class RoleWorkflowButtonController extends Controller
             return responseJson( $exception->getCode() , $exception->getMessage());
         }
     }
+
+
+
+    public function logs($id)
+    {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+
+        $logs = $this->repository->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+
+    }
+
+
+    public function screenSetting(Request $request)
+    {
+        try {
+            return responseJson(200 , __('Done') , $this->repository->setting($request->all()));
+        } catch (Exception $exception) {
+            return  responseJson( $exception->getCode() , $exception->getMessage());
+        }
+    }
+
+    public function getScreenSetting($user_id , $screen_id)
+    {
+        try{
+            $screenSetting = $this->repository->getSetting($user_id , $screen_id);
+            if (!$screenSetting) {
+                return responseJson( 404 , __('message.data not found'));
+            }
+            return responseJson( 200 , __('Done'), new ScreenSettingResource( $screenSetting ));
+        } catch (Exception $exception) {
+            return  responseJson( $exception->getCode() , $exception->getMessage());
+        }
+    }
+
+
 }

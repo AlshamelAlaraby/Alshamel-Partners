@@ -6990,11 +6990,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.partner.text',
-  icon: 'far fa-user-circle',
-  link: '/partner'
-}, {
   id: 3,
   label: 'menuitems.company.text',
   icon: 'ri-building-4-line',
@@ -7002,8 +6997,8 @@ var menuItems = [{
 }, {
   id: 4,
   label: 'menuitems.module.text',
-  icon: 'fab fa-medium-m',
-  link: '/module'
+  icon: 'fas fa-flag',
+  link: '/country'
 }, {
   id: 10001,
   label: "menuitems.role.text",

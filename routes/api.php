@@ -216,7 +216,7 @@ Route::group(['prefix' => 'role-screen-hotfield'], function () {
         Route::post('/', 'create' )->name('role-screen-hotfield.create');
         Route::post('/{id}', 'update' )->name('role-screen-hotfield.update');
         Route::delete('/{id}', 'delete' )->name('role-screen-hotfield.destroy');
-
+        Route::get('logs/{id}', 'logs')->name('role-screen-hotfield.logs');
     });
 });
 
@@ -227,7 +227,29 @@ Route::group(['prefix' => 'role-workflow-button'], function () {
         Route::post('/', 'create' )->name('role-workflow-button.create');
         Route::post('/{id}', 'update' )->name('role-workflow-button.update');
         Route::delete('/{id}', 'delete' )->name('role-workflow-button.destroy');
+        Route::get('logs/{id}', 'logs')->name('role-workflow-button.logs');
+    });
+});
 
+Route::group(['prefix' => 'workflow-hotfield'], function () {
+    Route::controller(\App\Http\Controllers\WorkflowHotfield\WorkflowHotfieldController::class)->group(function () {
+        Route::get('/', 'all' )->name('workflow-hotfield.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('workflow-hotfield.create');
+        Route::post('/{id}', 'update' )->name('workflow-hotfield.update');
+        Route::delete('/{id}', 'delete' )->name('workflow-hotfield.destroy');
+        Route::get('logs/{id}', 'logs')->name('workflow-hotfield.logs');
+    });
+});
+
+Route::group(['prefix' => 'salesmen'], function () {
+    Route::controller(\App\Http\Controllers\Salesman\SalesmanController::class)->group(function () {
+        Route::get('/', 'all' )->name('salesmen.index');
+        Route::get('/{id}', 'find' );
+        Route::post('/', 'create' )->name('salesmen.create');
+        Route::post('/{id}', 'update' )->name('salesmen.update');
+        Route::delete('/{id}', 'delete' )->name('salesmen.destroy');
+        Route::get('logs/{id}', 'logs')->name('salesmen.logs');
     });
 });
 

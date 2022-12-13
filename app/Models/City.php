@@ -17,4 +17,9 @@ class City extends Model
         return $this->belongsTo(Governorate::class);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 }

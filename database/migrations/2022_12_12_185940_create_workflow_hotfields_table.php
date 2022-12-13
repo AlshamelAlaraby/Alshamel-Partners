@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartnersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePartnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('partners', function (Blueprint $table) {
+        Schema::create('workflows_hotfields', function (Blueprint $table) {
             $table->id();
-            $table->string("name" , 100)->comment("Name Arabic");
-            $table->string("name_e" , 100)->comment("Name English");
-            $table->string('is_active')->default('inactive');
+            $table->unsignedInteger('workflow_id');
+            $table->unsignedInteger('hotfield_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreatePartnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('partners');
+        Schema::dropIfExists('workflow_hotfields');
     }
-}
+};
