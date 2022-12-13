@@ -31,4 +31,10 @@ Route::prefix ('real-estate')->group (function (){
 
     Route::resource ('rlst-units','RlstUnitController')->except ('edit','create');
     Route::get ('rlst-units/logs/{id}','RlstUnitController@logs');
+
+    Route::resource ('rlst-unit-status','RlstUnitStatusController')->except ('edit','create');
+    Route::get ('rlst-unit-status/logs/{id}','RlstUnitStatusController@logs');
+
+    Route::resource ('rlst-wallet-building','RlstWalletBuildingController')->except ('edit','create');
+    Route::get ('rlst-wallet-building/logs/{id}','RlstWalletBuildingController@logs');
 });

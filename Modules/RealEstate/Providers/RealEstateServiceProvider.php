@@ -10,6 +10,10 @@ use Modules\RealEstate\Repositories\RlstBuildingRepository;
 use Modules\RealEstate\Repositories\RlstBuildingRepositoryInterface;
 use Modules\RealEstate\Repositories\RlstUnitRepository;
 use Modules\RealEstate\Repositories\RlstUnitRepositoryInterface;
+use Modules\RealEstate\Repositories\RlstUnitStatusRepositoryInterface;
+use Modules\RealEstate\Repositories\RlstUnitStausRepository;
+use Modules\RealEstate\Repositories\RlstWalletBuildingRepository;
+use Modules\RealEstate\Repositories\RlstWalletBuildingRepositoryInterface;
 
 class RealEstateServiceProvider extends ServiceProvider
 {
@@ -38,6 +42,8 @@ class RealEstateServiceProvider extends ServiceProvider
         $this->app->bind (PropertyTypeRepositoryInterface::class,PropertyTypeRepository::class);
         $this->app->bind (RlstBuildingRepositoryInterface::class,RlstBuildingRepository::class);
         $this->app->bind (RlstUnitRepositoryInterface::class,RlstUnitRepository::class);
+        $this->app->bind (RlstUnitStatusRepositoryInterface::class,RlstUnitStausRepository::class);
+        $this->app->bind (RlstWalletBuildingRepositoryInterface::class,RlstWalletBuildingRepository::class);
     }
 
     /**
