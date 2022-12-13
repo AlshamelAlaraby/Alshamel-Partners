@@ -1,58 +1,59 @@
 <?php
 
-namespace App\Http\Controllers\TreeProperty;
+namespace Modules\RealEstate\Http\Controllers;
 
-use App\Http\Requests\TreeProperty\CreateTreePropertyRequest;
-use App\Http\Requests\TreeProperty\EditTreePropertyRequest;
-use App\Http\Resources\TreeProperty\TreePropertyResource;
-use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\RealEstate\Http\Requests\CreateRlstBuildingRequest;
+use Modules\RealEstate\Http\Requests\EditRlstBuildingRequest;
+use Modules\RealEstate\Repositories\RlstBuildingRepositoryInterface;
+use Modules\RealEstate\Transformers\RlstBuildingResource;
 
-class TreePropertyController extends Controller
+class RlstBuildingController extends Controller
 {
     private $modelInterface;
-    public function __construct(TreePropertyRepositoryInterface $modelInterface)
+    public function __construct(RlstBuildingRepositoryInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function show($id)
     {
-        $model = cacheGet('tree_properties_' . $id);
+        $model = cacheGet('rlst_buildings_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('tree_properties_' . $id, $model);
+                cachePut('rlst_buildings_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new TreePropertyResource($model));
+        return responseJson(200, 'success', new RlstBuildingResource($model));
     }
 
     public function index(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('tree_properties');
+            $models = cacheGet('rlst_buildings');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('tree_properties', $models);
+                cachePut('rlst_buildings', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', TreePropertyResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstBuildingResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function store(CreateTreePropertyRequest $request)
+    public function store(CreateRlstBuildingRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
     }
 
-    public function update(EditTreePropertyRequest $request, $id)
+    public function update(EditRlstBuildingRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
@@ -99,5 +100,4 @@ class TreePropertyController extends Controller
 
         return responseJson(200, 'success');
     }
-
 }

@@ -1,40 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Currency;
+
+namespace App\Traits;
+
 
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class EditCurrencyRequest extends FormRequest
+trait ValidationTrait
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-//            'company_id'=>['required'],
-//            'name'=>['required'],
-//            'name_e'=>['required']
-        ];
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /*
-     * custom failedValidation response
-     */
+    * custom failedValidation response
+    */
     public function failedValidation ( Validator $validator )
     {
         throw new HttpResponseException(response()->json(
@@ -61,4 +39,5 @@ class EditCurrencyRequest extends FormRequest
             'unique'=>__ ('exists')
         ];
     }
+
 }

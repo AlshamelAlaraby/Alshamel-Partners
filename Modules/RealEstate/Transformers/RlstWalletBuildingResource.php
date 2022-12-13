@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PropertyTypeResource extends JsonResource
+class RlstWalletBuildingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,10 @@ class PropertyTypeResource extends JsonResource
     {
         return [
             "id"=>$this->id,
-            "name"=>$this->name,
-            "name_e"=>$this->name_e,
+            "wallet_Id"=>$this->wallet_Id,
+            "building_id"=>$this->building_id,
+            "item_id"=>$this->item_id,
+            "Bu_ty"=>$this->Bu_ty,
         ];
     }
 }

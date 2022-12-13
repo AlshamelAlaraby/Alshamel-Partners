@@ -5,7 +5,7 @@ namespace Modules\RealEstate\Http\Requests;
 use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditPropertyTypeRequest extends FormRequest
+class EditRlstWalletBuildingRequest extends FormRequest
 {
     use ValidationTrait;
     /**
@@ -16,8 +16,10 @@ class EditPropertyTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:255',
-            'name_e' => 'string|max:255',
+            'wallet_Id' =>[],
+            'building_id' =>[],
+            'item_id'=>[],
+            'Bu_ty'=>[],
         ];
     }
 
