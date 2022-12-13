@@ -789,6 +789,3 @@ export const menuItems = [
         ]
     }
 ];
-
-
-
