@@ -34,6 +34,7 @@ class Country extends Model implements HasMedia
         "is_default" => '\App\Enums\IsDefault',
     ];
 
+    // relations
     public function governorates()
     {
         return $this->hasMany(\App\Models\Governorate::class);
@@ -49,6 +50,21 @@ class Country extends Model implements HasMedia
         return $this->hasMany(\App\Models\Avenue::class);
     }
 
+    public function cities()
+    {
+        return $this->hasMany(\App\Models\City::class);
+    }
+
+    public function rlstOwners()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstOwner::class);
+    }
+
+
+
+
+
+    // logs activities
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;

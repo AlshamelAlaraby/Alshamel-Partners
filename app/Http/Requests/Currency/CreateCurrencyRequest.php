@@ -23,7 +23,7 @@ class CreateCurrencyRequest extends FormRequest
             'symbol_e' => 'required|unique:currencies,symbol_e',
             'code' => 'required|unique:currencies,code',
             'code_e' => 'required|unique:currencies,code_e',
-            'is_active' => 'nullable|in:active,inactive',
+            'is_active' => 'nullable|in:0,1',
             "is_default" => "required|in:0,1",
             'fraction' => [],
             'Fraction_e' => [],
@@ -55,7 +55,8 @@ class CreateCurrencyRequest extends FormRequest
                 'message' => __('validation errors'),
 
                 'data' => $validator->errors(),
-            ]
+            ],
+            422
         ));
     }
 

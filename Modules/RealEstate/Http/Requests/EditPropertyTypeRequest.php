@@ -2,10 +2,12 @@
 
 namespace Modules\RealEstate\Http\Requests;
 
+use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditPropertyTypeRequest extends FormRequest
 {
+    use ValidationTrait;
     /**
      * Get the validation rules that apply to the request.
      *
@@ -14,7 +16,8 @@ class EditPropertyTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'string|max:255',
+            'name_e' => 'string|max:255',
         ];
     }
 
@@ -27,4 +30,5 @@ class EditPropertyTypeRequest extends FormRequest
     {
         return true;
     }
+
 }
