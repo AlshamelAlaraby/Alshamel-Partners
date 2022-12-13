@@ -331,12 +331,14 @@ export default {
          */
         async resetModalEdit(id){
             let avenue = this.avenues.find(e => id == e.id );
+            await this.getCategory();
+            await this.getGovernorate(avenue.country.id);
+            await this.getCity(avenue.city.id);
             this.edit.name = avenue.name;
             this.edit.name_e = avenue.name_e;
             this.edit.is_active = avenue.is_active;
             this.edit.country_id = avenue.country.id;
             this.edit.city_id = avenue.city.id;
-            await this.getCategory();
             this.edit.governorate_id = avenue.governorate.id;
             this.errors = {};
         },
@@ -403,14 +405,14 @@ export default {
                 });
 
         },
-        getGovernorate(){
+        async getGovernorate(id){
 
             this.cities = [];
             this.governorates = [];
             this.create.city_id = null;
             this.edit.city_id = null;
 
-            adminApi.get(`/governorates`)
+            await adminApi.get(`/governorates?country_id=${id}`)
                 .then((res) => {
                     let l = res.data;
                     this.governorates = l.data;
@@ -424,10 +426,10 @@ export default {
                 });
 
         },
-        getCity(){
+        async getCity(id,id2){
             this.cities = [];
 
-            adminApi.get(`/cities`)
+            await adminApi.get(`/cities?country_id=${id}&governorate_id=${id2}`)
                 .then((res) => {
                     let l = res.data;
                     this.cities = l.data;
@@ -665,7 +667,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
-                                                @select="getGovernorate"
+                                                @input="getGovernorate(create.country_id)"
                                                 v-model="$v.create.country_id.$model"
                                                 :options="countries.map(type => type.id)"
                                                 :custom-label="opt => countries.find(x => x.id == opt).name"
@@ -687,7 +689,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
-                                                @select="getCity"
+                                                @input="getCity(create.country_id,create.governorate_id)"
                                                 v-model="$v.create.governorate_id.$model"
                                                 :options="governorates.map(type => type.id)"
                                                 :custom-label="opt => governorates.find(x => x.id == opt).name">
@@ -930,6 +932,7 @@ export default {
                                             :title="$t('avenue.editavenue')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
@@ -1084,7 +1087,7 @@ export default {
                                                         type="submit"
                                                         class="mx-1"
                                                         @click.prevent="editSubmit(data.id)"
-                                                        v-if="!isLoader && isButton"
+                                                        v-if="!isLoader"
                                                     >
                                                         {{ $t('general.Edit') }}
                                                     </b-button>

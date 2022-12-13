@@ -1413,11 +1413,10 @@ __webpack_require__.r(__webpack_exports__);
         media: null
       },
       errors: {},
-      dropDownSenders: [],
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      image: '',
+      changeImage: false,
       dropzoneOptions: {
         url: "".concat("http://127.0.0.1:8000/", "api/media"),
         maxFilesize: 5,
@@ -1526,9 +1525,6 @@ __webpack_require__.r(__webpack_exports__);
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(20)
       },
       is_active: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
-      },
-      media: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
       }
     }
@@ -1794,7 +1790,7 @@ __webpack_require__.r(__webpack_exports__);
       this.edit.short_code = country.short_code;
       this.edit.is_active = country.is_active;
       this.edit.is_default = country.is_default;
-      this.edit.media = country.media.id;
+      // this.edit.media = country.media.id;
       this.errors = {};
     },
     /**
@@ -6593,7 +6589,27 @@ var render = function render() {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-12"
+    }, [!_vm.changeImage ? _c("tamplate", [_c("vue-dropzone", {
+      ref: "myCreateDropzone_edit",
+      refInFor: true,
+      attrs: {
+        id: "dropzone_edit",
+        "use-custom-slot": true,
+        options: _vm.dropzoneOptions
+      },
+      on: {
+        "vdropzone-complete": _vm.afterUpload,
+        "vdropzone-sending": _vm.sendingEvent
+      }
+    }, [_c("div", {
+      staticClass: "dz-message needsclick"
+    }, [_c("i", {
+      staticClass: "h1 text-muted ri-upload-cloud-2-line"
+    }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(_vm.$t("general.Dropfileshereorclicktoupload")))]), _vm._v(" "), _c("span", {
+      staticClass: "text-muted font-13"
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                                            ")])])])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
     }, [!_vm.isLoader ? _c("b-button", {
       staticClass: "mx-1",
@@ -7163,21 +7179,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -7192,16 +7193,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -7232,9 +7223,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,
