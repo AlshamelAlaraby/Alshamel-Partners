@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('salesmen', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->string('name_e', 100);
             $table->foreignId('salesman_type_id')->constrained('salesmen_types')->references("id");
-            $table->string('name' , 100 );
-            $table->string('name_e' , 100 );
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salesmens');
+        Schema::dropIfExists('salesmen');
     }
 };

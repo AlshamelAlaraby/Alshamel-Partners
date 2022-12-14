@@ -73,16 +73,6 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstWalletController@delete')->name('rlst-wallets.delete');
     });
 
-    Route::group(['prefix' => 'rlst'], function () {
-        Route::group(['prefix' => 'owners'], function () {
-            Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
-            Route::get('/logs', 'RlstOwnerController@logs')->name('rlst-owners.logs');
-            Route::get('/{id}', 'RlstOwnerController@find')->name('rlst-owners.find');
-            Route::post('/', 'RlstOwnerController@create')->name('rlst-owners.create');
-            Route::put('/{id}', 'RlstOwnerController@update')->name('rlst-owners.update');
-            Route::delete('/{id}', 'RlstOwnerController@delete')->name('rlst-owners.delete');
-        });
-    });
 
     Route::group(['prefix' => 'rlst'], function () {
         Route::group(['prefix' => 'reservations'], function () {
@@ -94,5 +84,4 @@ Route::prefix('real-estate')->group(function () {
             Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
         });
     });
-
 });
