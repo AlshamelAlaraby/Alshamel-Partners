@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\InternalSalesman;
 
+use App\Http\Resources\Employee\EmployeeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class InternalSalesmanResource extends JsonResource
@@ -14,6 +15,13 @@ class InternalSalesmanResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "employee" => new EmployeeResource($this->employee),
+            "is_active" => $this->is_active,
+            "created_at" => $this->created_at,
+            "update_at" => $this->update_at,
+
+        ];
     }
 }
