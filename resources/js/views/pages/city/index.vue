@@ -876,6 +876,7 @@ export default {
                                             :title="$t('city.editcity')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
