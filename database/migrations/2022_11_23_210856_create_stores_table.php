@@ -16,7 +16,7 @@ class CreateStoresTable extends Migration
 
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->references("id")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedInteger('company_id');
             $table->foreignId('branch_id')->constrained('branches')->references("id")->cascadeOnDelete()->cascadeOnUpdate();
             $table->string("name" , 100)->comment("Name Arabic");
             $table->string("name_e" , 100)->comment("Name English");

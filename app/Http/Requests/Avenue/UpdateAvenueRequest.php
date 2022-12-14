@@ -24,8 +24,8 @@ class UpdateAvenueRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:255|unique:modules,name',
-            'name_e' => 'string|max:255|unique:modules,name_e',
+            'name' => 'string|max:255|unique:avenues,name,'. $this->id,
+            'name_e' => 'string|max:255|unique:avenues,name_e,'. $this->id,
             "is_active" => "nullable|in:active,inactive",
             "country_id" => "exists:countries,id",
             "city_id" => "exists:cities,id",

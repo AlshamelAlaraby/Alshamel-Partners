@@ -39,6 +39,8 @@ export default {
             create: {
                 name: '',
                 name_e: '',
+                symbol: '',
+                symbol_e: '',
                 code:'',
                 code_e: '',
                 fraction:'',
@@ -50,6 +52,8 @@ export default {
             edit: {
                 name: '',
                 name_e: '',
+                symbol: '',
+                symbol_e: '',
                 code:'',
                 code_e: '',
                 fraction:'',
@@ -70,6 +74,8 @@ export default {
         create: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
+            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
             code: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
             code_e: {required,minLength: minLength(3),maxLength: maxLength(15),alphaEnglish},
             fraction: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
@@ -81,6 +87,8 @@ export default {
         edit: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
+            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
             code: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
             code_e: {required,minLength: minLength(3),maxLength: maxLength(15),alphaEnglish},
             fraction: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
@@ -229,12 +237,14 @@ export default {
             this.create =  {
                 name: '',
                 name_e: '',
+                symbol: '',
+                symbol_e: '',
                 code:'',
                 code_e: '',
                 fraction:'',
                 fraction_e: '',
                 fraction_no: 0,
-                is_default: 0 ,
+                is_default: 0,
                 is_active: 1
             };
             this.$nextTick(() => { this.$v.$reset() });
@@ -248,12 +258,14 @@ export default {
             this.create = {
                 name: '',
                 name_e: '',
+                symbol: '',
+                symbol_e: '',
                 code:'',
                 code_e: '',
                 fraction:'',
                 fraction_e: '',
                 fraction_no: 0,
-                is_default: 0 ,
+                is_default: 0,
                 is_active: 1
             };
             this.$nextTick(() => { this.$v.$reset() });
@@ -349,6 +361,8 @@ export default {
             let currency = this.currencies.find(e => id == e.id );
             this.edit.name = currency.name;
             this.edit.name_e = currency.name_e;
+            this.edit.symbol = currency.symbol;
+            this.edit.symbol_e = currency.symbol_e;
             this.edit.code = currency.code;
             this.edit.code_e = currency.code_e;
             this.edit.fraction = currency.fraction;
@@ -366,12 +380,14 @@ export default {
             this.edit = {
                 name: '',
                 name_e: '',
+                symbol: '',
+                symbol_e: '',
                 code:'',
                 code_e: '',
                 fraction:'',
                 fraction_e: '',
                 fraction_no: 0,
-                is_default: 0 ,
+                is_default: 0,
                 is_active: 1
             };
         },
@@ -618,8 +634,8 @@ export default {
                                     </div>
                                     <div class="col-md-6 direction" dir="rtl">
                                         <div class="form-group">
-                                            <label for="field-3" class="control-label">
-                                                {{ $t('general.code') }}
+                                            <label for="field-45" class="control-label">
+                                                {{ $t('general.symbol') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -627,6 +643,58 @@ export default {
                                                 class="form-control"
                                                 data-create="3"
                                                 @keypress.enter="moveInput('input','create',4)"
+                                                v-model="$v.create.symbol.$model"
+                                                :class="{
+                                                'is-invalid':$v.create.symbol.$error || errors.symbol,
+                                                'is-valid':!$v.create.symbol.$invalid && !errors.symbol
+                                            }"
+                                                id="field-45"
+                                            />
+                                            <div v-if="!$v.create.symbol.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.symbol.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.symbol.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.symbol.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.symbol.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
+                                            <template v-if="errors.symbol">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                        <div class="form-group">
+                                            <label for="field-33" class="control-label">
+                                                {{ $t('general.symbol_e') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                data-create="4"
+                                                @keypress.enter="moveInput('input','create',5)"
+                                                v-model="$v.create.symbol_e.$model"
+                                                :class="{
+                                                'is-invalid':$v.create.symbol_e.$error || errors.symbol_e,
+                                                'is-valid':!$v.create.symbol_e.$invalid && !errors.symbol_e
+                                            }"
+                                                id="field-33"
+                                            />
+                                            <div v-if="!$v.create.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.symbol_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
+                                            <template v-if="errors.symbol_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 direction" dir="rtl">
+                                        <div class="form-group">
+                                            <label for="field-3" class="control-label">
+                                                {{ $t('general.code') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                data-create="5"
+                                                @keypress.enter="moveInput('input','create',6)"
                                                 v-model="$v.create.code.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.code.$error || errors.code,
@@ -651,8 +719,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                data-create="4"
-                                                @keypress.enter="moveInput('input','create',5)"
+                                                data-create="6"
+                                                @keypress.enter="moveInput('input','create',7)"
                                                 v-model="$v.create.code_e.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.code_e.$error || errors.code_e,
@@ -676,8 +744,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                data-create="5"
-                                                @keypress.enter="moveInput('input','create',6)"
+                                                data-create="7"
+                                                @keypress.enter="moveInput('input','create',8)"
                                                 v-model="$v.create.fraction.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.fraction.$error || errors.fraction,
@@ -702,8 +770,8 @@ export default {
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                data-create="6"
-                                                @keypress.enter="moveInput('input','create',7)"
+                                                data-create="8"
+                                                @keypress.enter="moveInput('input','create',9)"
                                                 v-model="$v.create.fraction_e.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.fraction_e.$error || errors.fraction_e,
@@ -727,9 +795,9 @@ export default {
                                             <input
                                                 type="number"
                                                 class="form-control"
-                                                data-create="7"
-                                                step="0.01"
-                                                @keypress.enter="moveInput('select','create',8)"
+                                                data-create="9"
+                                                step="0.1"
+                                                @keypress.enter="moveInput('select','create',10)"
                                                 v-model="$v.create.fraction_no.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.fraction_no.$error || errors.fraction_no,
@@ -749,8 +817,8 @@ export default {
                                             <select
                                                 class="custom-select  mr-sm-2"
                                                 id="field-11"
-                                                data-create="8"
-                                                @keypress.enter.prevent="moveInput('select','create',9)"
+                                                data-create="10"
+                                                @keypress.enter.prevent="moveInput('select','create',11)"
                                                 v-model="$v.create.is_default.$model"
                                                 :class="{
                                                 'is-invalid':$v.create.is_default.$error || errors.is_default,
@@ -775,7 +843,7 @@ export default {
                                             <select
                                                 class="custom-select mr-sm-2"
                                                 id="inlineFormCustomSelectPref"
-                                                data-create="9"
+                                                data-create="11"
                                                 @keypress.enter.prevent="moveInput('input','create',1)"
                                                 v-model="$v.create.is_active.$model"
                                                 :class="{
@@ -1011,9 +1079,10 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('country.editcountry')"
+                                            :title="$t('currency.editcurrency')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
@@ -1075,8 +1144,8 @@ export default {
                                                     </div>
                                                     <div class="col-md-6 direction" dir="rtl">
                                                         <div class="form-group">
-                                                            <label for="edit-3" class="control-label">
-                                                                {{ $t('general.code') }}
+                                                            <label for="edit-45" class="control-label">
+                                                                {{ $t('general.symbol') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1084,6 +1153,58 @@ export default {
                                                                 class="form-control"
                                                                 data-edit="3"
                                                                 @keypress.enter="moveInput('input','edit',4)"
+                                                                v-model="$v.edit.symbol.$model"
+                                                                :class="{
+                                                                    'is-invalid':$v.edit.symbol.$error || errors.symbol,
+                                                                    'is-valid':!$v.edit.symbol.$invalid && !errors.symbol
+                                                                }"
+                                                                id="edit-45"
+                                                            />
+                                                            <div v-if="!$v.edit.symbol.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.symbol.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.symbol.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.symbol.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.symbol.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
+                                                            <template v-if="errors.symbol">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                                        <div class="form-group">
+                                                            <label for="edit-33" class="control-label">
+                                                                {{ $t('general.symbol_e') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                data-edit="4"
+                                                                @keypress.enter="moveInput('input','edit',5)"
+                                                                v-model="$v.edit.symbol_e.$model"
+                                                                :class="{
+                                                                    'is-invalid':$v.edit.symbol_e.$error || errors.symbol_e,
+                                                                    'is-valid':!$v.edit.symbol_e.$invalid && !errors.symbol_e
+                                                                }"
+                                                                id="edit-33"
+                                                            />
+                                                            <div v-if="!$v.edit.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.symbol_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
+                                                            <template v-if="errors.symbol_e">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 direction" dir="rtl">
+                                                        <div class="form-group">
+                                                            <label for="edit-3" class="control-label">
+                                                                {{ $t('general.code') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                data-edit="5"
+                                                                @keypress.enter="moveInput('input','edit',6)"
                                                                 v-model="$v.edit.code.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.code.$error || errors.code,
@@ -1108,8 +1229,8 @@ export default {
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                data-edit="4"
-                                                                @keypress.enter="moveInput('input','edit',5)"
+                                                                data-edit="6"
+                                                                @keypress.enter="moveInput('input','edit',7)"
                                                                 v-model="$v.edit.code_e.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.code_e.$error || errors.code_e,
@@ -1133,8 +1254,8 @@ export default {
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                data-edit="5"
-                                                                @keypress.enter="moveInput('input','edit',6)"
+                                                                data-edit="7"
+                                                                @keypress.enter="moveInput('input','edit',8)"
                                                                 v-model="$v.edit.fraction.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.fraction.$error || errors.fraction,
@@ -1159,8 +1280,8 @@ export default {
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                data-edit="6"
-                                                                @keypress.enter="moveInput('input','edit',7)"
+                                                                data-edit="8"
+                                                                @keypress.enter="moveInput('input','edit',9)"
                                                                 v-model="$v.edit.fraction_e.$model"
                                                                 :class="{
                                                                 'is-invalid':$v.edit.fraction_e.$error || errors.fraction_e,
@@ -1184,9 +1305,9 @@ export default {
                                                             <input
                                                                 type="number"
                                                                 class="form-control"
-                                                                step="0.01"
-                                                                data-edit="7"
-                                                                @keypress.enter="moveInput('select','edit',8)"
+                                                                step="0.1"
+                                                                data-edit="9"
+                                                                @keypress.enter="moveInput('select','edit',10)"
                                                                 v-model="$v.edit.fraction_no.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.fraction_no.$error || errors.fraction_no,
@@ -1206,8 +1327,8 @@ export default {
                                                             <select
                                                                 class="custom-select  mr-sm-2"
                                                                 id="edit-11"
-                                                                data-edit="8"
-                                                                @keypress.enter.prevent="moveInput('select','edit',9)"
+                                                                data-edit="10"
+                                                                @keypress.enter.prevent="moveInput('select','edit',11)"
                                                                 v-model="$v.edit.is_default.$model"
                                                                 :class="{
                                                                     'is-invalid':$v.edit.is_default.$error || errors.is_default,
@@ -1232,7 +1353,7 @@ export default {
                                                             <select
                                                                 class="custom-select mr-sm-2"
                                                                 id="edit-9"
-                                                                data-edit="9"
+                                                                data-edit="11"
                                                                 @keypress.enter.prevent="moveInput('input','edit',1)"
                                                                 v-model="$v.edit.is_active.$model"
                                                                 :class="{
