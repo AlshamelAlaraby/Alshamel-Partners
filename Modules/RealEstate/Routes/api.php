@@ -73,6 +73,30 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstWalletController@delete')->name('rlst-wallets.delete');
     });
 
+    // wallet-owner
+
+    Route::group(['prefix' => 'wallet-owner'], function () {
+        Route::get('/', 'RlstWalletOwnerController@all')->name('rlst-wallet-owner.all');
+        Route::get('/logs/{id}', 'RlstWalletOwnerController@logs')->name('rlst-wallet-owner.logs');
+        Route::get('/{id}', 'RlstWalletOwnerController@find')->name('rlst-wallet-owner.find');
+        Route::post('/', 'RlstWalletOwnerController@create')->name('rlst-wallet-owner.create');
+        Route::put('/{id}', 'RlstWalletOwnerController@update')->name('rlst-wallet-owner.update');
+        Route::delete('/{id}', 'RlstWalletOwnerController@delete')->name('rlst-wallet-owner.delete');
+    });
+
+    //installments
+
+    Route::group(['prefix' => 'installments'], function () {
+        Route::get('/', 'RlstInstallmentController@all')->name('rlst-installments.all');
+        Route::get('/logs/{id}', 'RlstInstallmentController@logs')->name('rlst-installments.logs');
+        Route::get('/{id}', 'RlstInstallmentController@find')->name('rlst-installments.find');
+        Route::post('/', 'RlstInstallmentController@create')->name('rlst-installments.create');
+        Route::put('/{id}', 'RlstInstallmentController@update')->name('rlst-installments.update');
+        Route::delete('/{id}', 'RlstInstallmentController@delete')->name('rlst-installments.delete');
+    });
+
+
+
 
     Route::group(['prefix' => 'rlst'], function () {
         Route::group(['prefix' => 'reservations'], function () {
