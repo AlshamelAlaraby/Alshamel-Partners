@@ -22,7 +22,7 @@ class CityResource extends JsonResource
             'name_e' => $this->name_e,
             "country" => new CountryResource($this->country),
             "governorate" => new GovernorateResource($this->governorate),
-            'isActive' => $this->is_active ? true : false,
+            'isActive' => $this->is_active,
         ];
     }
 }
