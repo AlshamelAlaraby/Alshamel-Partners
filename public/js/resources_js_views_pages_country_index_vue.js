@@ -1418,7 +1418,7 @@ __webpack_require__.r(__webpack_exports__);
       current_page: 1,
       changeImage: false,
       dropzoneOptions: {
-        url: "".concat("http://127.0.0.1:8000/", "api/media"),
+        url: "".concat("http://partners.alshamelalaraby.com/", "api/media"),
         maxFilesize: 5,
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
         parallelUploads: 1,
