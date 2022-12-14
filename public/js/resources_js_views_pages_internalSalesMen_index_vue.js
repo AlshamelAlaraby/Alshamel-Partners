@@ -5271,7 +5271,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.employee")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5289,41 +5289,7 @@ var render = function render() {
     }
   })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
-    staticClass: "arrow-sort"
-  }, [_c("i", {
-    staticClass: "fas fa-arrow-up",
-    on: {
-      click: function click($event) {
-        _vm.inernalSales.sort(_vm.sortString("name_e"));
-      }
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "fas fa-arrow-down",
-    on: {
-      click: function click($event) {
-        _vm.inernalSales.sort(_vm.sortString("-name_e"));
-      }
-    }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
-    staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.isEmployee")))]), _vm._v(" "), _c("div", {
-    staticClass: "arrow-sort"
-  }, [_c("i", {
-    staticClass: "fas fa-arrow-up",
-    on: {
-      click: function click($event) {
-        _vm.inernalSales.sort(_vm.sortString("name_e"));
-      }
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "fas fa-arrow-down",
-    on: {
-      click: function click($event) {
-        _vm.inernalSales.sort(_vm.sortString("-name_e"));
-      }
-    }
-  })])])]), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))])])]), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.inernalSales.length > 0 ? _c("tbody", _vm._l(_vm.inernalSales, function (data, index) {
     return _c("tr", {
@@ -5383,11 +5349,9 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name))])]), _vm._v(" "), _c("td", [_c("h5", {
-      staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_c("span", {
-      "class": [parseInt(data.is_employee) == true ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(parseInt(data.is_employee) == true ? "".concat(_vm.$t("general.Yes")) : "".concat(_vm.$t("general.No"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.employee.name : data.employee.name_e))])]), _vm._v(" "), _c("td", [_c("span", {
+      "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
+    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",

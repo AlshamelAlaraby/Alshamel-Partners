@@ -631,7 +631,7 @@ export default {
                                     </th>
                                     <th>
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ $t('general.employee') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="inernalSales.sort(sortString('name'))"></i>
@@ -642,24 +642,7 @@ export default {
                                     </th>
                                     <th>
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
-                                            <div class="arrow-sort">
-                                                <i class="fas fa-arrow-up"
-                                                   @click="inernalSales.sort(sortString('name_e'))"></i>
-                                                <i class="fas fa-arrow-down"
-                                                   @click="inernalSales.sort(sortString('-name_e'))"></i>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.isEmployee') }}</span>
-                                            <div class="arrow-sort">
-                                                <i class="fas fa-arrow-up"
-                                                   @click="inernalSales.sort(sortString('name_e'))"></i>
-                                                <i class="fas fa-arrow-down"
-                                                   @click="inernalSales.sort(sortString('-name_e'))"></i>
-                                            </div>
+                                            <span>{{ $t('general.Status') }}</span>
                                         </div>
                                     </th>
                                     <th>
@@ -688,20 +671,17 @@ export default {
                                         </div>
                                     </td>
                                     <td>
-                                        <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
-                                    </td>
-                                    <td>
-                                        <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.employee.name : data.employee.name_e}}</h5>
                                     </td>
                                     <td>
                                         <span :class="[
-                                           parseInt(data.is_employee)  == true ?
+                                           data.is_active  == 'active' ?
                                             'text-success':
                                             'text-danger',
                                             'badge'
                                             ]"
                                         >
-                                            {{ parseInt(data.is_employee) == true ? `${$t('general.Yes')}` : `${$t('general.No')}` }}
+                                            {{ data.is_active  == 'active' ? `${$t('general.Active')}` : `${$t('general.Inactive')}` }}
                                         </span>
                                     </td>
                                     <td>
