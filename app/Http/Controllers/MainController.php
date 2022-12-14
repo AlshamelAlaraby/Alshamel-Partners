@@ -14,10 +14,9 @@ class MainController extends \Illuminate\Routing\Controller
     public function __construct(UserSettingScreen $setting)
     {
         $this->setting = $setting;
-
     }
 
-    public function media(\App\Http\Requests\UploadMediaRequest$request)
+    public function media(\App\Http\Requests\UploadMediaRequest $request)
     {
 
         if (is_array($request->media)) {
@@ -51,7 +50,7 @@ class MainController extends \Illuminate\Routing\Controller
 
         \Illuminate\Support\Facades\DB::transaction(function () use ($request) {
 
-           where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+            $model = $this->setting->where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
 
             $request['data_json'] = json_encode($request['data_json']);
 
@@ -70,6 +69,5 @@ class MainController extends \Illuminate\Routing\Controller
     {
         $model = $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
         return responseJson(200, 'success', new \App\Http\Resources\ScreenSetting\ScreenSettingResource($model));
-
     }
 }

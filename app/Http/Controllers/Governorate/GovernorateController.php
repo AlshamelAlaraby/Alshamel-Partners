@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 
 class GovernorateController extends Controller
 {
-    public function __construct(private \App\Repositories\Governorate\GovernorateInterface$modelInterface)
+    public function __construct(private \App\Repositories\Governorate\GovernorateInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
@@ -61,6 +61,17 @@ class GovernorateController extends Controller
         return responseJson(200, 'success');
     }
 
+
+    public function logs($id)
+    {
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
+        }
+        $logs = $this->modelInterface->logs($id);
+        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
+    }
+
     public function delete($id)
     {
         $model = $this->modelInterface->find($id);
@@ -74,38 +85,4 @@ class GovernorateController extends Controller
 
         return responseJson(200, 'success');
     }
-
-    public function logs($id)
-    {
-        $model = $this->modelInterface->find($id);
-        if (!$model) {
-            return responseJson(404, __('message.data not found'));
-        }
-        $logs = $this->modelInterface->logs($id);
-        return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
-    }
-
-    // public function addGovernorateToCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
-
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->addGovernorateToCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
-
-    // public function removeGovernorateFromCompany($module_id, $company_id)
-    // {
-    //     $model = $this->modelInterface->find($module_id);
-    //     if (!$model) {
-    //         return responseJson(404, __('message.data not found'));
-    //     }
-
-    //     $this->modelInterface->removeGovernorateFromCompany($module_id, $company_id);
-    //     return responseJson(200, 'success');
-    // }
-
 }

@@ -1512,7 +1512,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
         var l = res.data;
         _this3.cities = l.data;
-        console.log(l);
         _this3.citiesPagination = l.pagination;
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
@@ -1679,7 +1678,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.isLoader = true;
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/cities/".concat(id), this.edit).then(function (res) {
-          _this9.$bvModal.hide("modal-edit-".concat(id));
+          _this9.$bvModal.hide("edit-".concat(id));
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1721,13 +1720,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 3;
                 return _this10.getCategory();
               case 3:
+                _context.next = 5;
+                return _this10.getGovernorate(city.country.id);
+              case 5:
                 _this10.edit.name = city.name;
                 _this10.edit.name_e = city.name_e;
                 _this10.edit.is_active = city.is_active ? 1 : 0;
                 _this10.edit.country_id = city.country.id;
                 _this10.edit.governorate_id = city.governorate.id;
                 _this10.errors = {};
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -1784,14 +1786,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this11.countries = [];
-                _this11.cities = [];
                 _this11.governorates = [];
                 _this11.create.governorate_id = null;
                 _this11.edit.governorate_id = null;
                 _this11.create.city_id = null;
                 _this11.edit.city_id = null;
-                _context2.next = 9;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries").then(function (res) {
+                _context2.next = 8;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?is_active=active").then(function (res) {
                   var l = res.data;
                   _this11.countries = l.data;
                 })["catch"](function (err) {
@@ -1801,7 +1802,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     text: "".concat(_this11.$t('general.Thereisanerrorinthesystem'))
                   });
                 });
-              case 9:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -1809,22 +1810,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getGovernorate: function getGovernorate() {
+    getGovernorate: function getGovernorate(id) {
       var _this12 = this;
-      this.cities = [];
-      this.governorates = [];
-      this.create.city_id = null;
-      this.edit.city_id = null;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates").then(function (res) {
-        var l = res.data;
-        _this12.governorates = l.data;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this12.$t('general.Error')),
-          text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
-        });
-      });
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this12.governorates = [];
+                _this12.create.city_id = null;
+                _this12.edit.city_id = null;
+                _context3.next = 5;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates?country_id=".concat(id)).then(function (res) {
+                  var l = res.data;
+                  _this12.governorates = l.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this12.$t('general.Error')),
+                    text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
+                  });
+                });
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });
@@ -5077,7 +5090,7 @@ var render = function render() {
     staticClass: "custom-btn-dowonload",
     on: {
       click: function click($event) {
-        return _vm.$bvModal.show("modal-edit-".concat(_vm.checkAll[0]));
+        return _vm.$bvModal.show("edit-".concat(_vm.checkAll[0]));
       }
     }
   }, [_c("i", {
@@ -5322,7 +5335,9 @@ var render = function render() {
       }
     },
     on: {
-      select: _vm.getGovernorate
+      input: function input($event) {
+        return _vm.getGovernorate(_vm.create.country_id);
+      }
     },
     model: {
       value: _vm.create.country_id,
@@ -5614,14 +5629,14 @@ var render = function render() {
   })])])]), _vm._v(" "), _vm.cities.length > 0 ? _c("tbody", _vm._l(_vm.cities, function (data, index) {
     return _c("tr", {
       key: data.id,
-      staticClass: "body-tr-custom",
+      "class": ["body-tr-custom ", data.id],
       on: {
         "!click": function click($event) {
           return _vm.checkRow(data.id);
         },
         dblclick: function dblclick($event) {
           $event.preventDefault();
-          return _vm.$bvModal.show("modal-edit-".concat(data.id));
+          return _vm.$bvModal.show("edit-".concat(data.id));
         }
       }
     }, [_c("td", [_c("div", {
@@ -5692,6 +5707,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
+          $event.preventDefault();
           return _vm.$bvModal.show("modal-edit-".concat(data.id));
         }
       }
@@ -5715,10 +5731,8 @@ var render = function render() {
     }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.delete")))]), _vm._v(" "), _c("i", {
       staticClass: "fas fa-times text-danger"
     })])])])]), _vm._v(" "), _c("b-modal", {
-      ref: "edit-".concat(data.id),
-      refInFor: true,
       attrs: {
-        id: "modal-edit-".concat(data.id),
+        id: "edit-".concat(data.id),
         title: _vm.$t("city.editcity"),
         "title-class": "font-18",
         "body-class": "p-4",
@@ -5862,7 +5876,9 @@ var render = function render() {
         }
       },
       on: {
-        select: _vm.getGovernorate
+        select: function select($event) {
+          return _vm.getGovernorate(_vm.edit.country_id);
+        }
       },
       model: {
         value: _vm.edit.country_id,
@@ -6003,7 +6019,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.$bvModal.hide("modal-edit-".concat(data.id));
+          return _vm.$bvModal.hide("edit-".concat(data.id));
         }
       }
     }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
@@ -6545,21 +6561,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6574,16 +6575,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6614,9 +6605,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,

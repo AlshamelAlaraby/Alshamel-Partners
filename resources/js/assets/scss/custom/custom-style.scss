@@ -245,6 +245,10 @@ table tbody tr:nth-child(even) {
     background-color: #2494be;
 }
 
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
-    font-weight: bold;
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle,
+.btn.btn-primary{
+    font-weight: bold !important;
+    color: snow
 }

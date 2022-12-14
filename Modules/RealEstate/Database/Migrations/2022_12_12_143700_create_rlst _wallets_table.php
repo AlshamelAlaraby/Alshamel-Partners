@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rlst_owners', function (Blueprint $table) {
+        Schema::create('rlst_wallets', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
             $table->string('name_e', 100);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_types');
+        Schema::dropIfExists('rlst_wallets');
     }
 };

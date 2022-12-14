@@ -82,7 +82,7 @@
         "add": "Add New Sales Men Type",
         "edit": "Edit Sales Men Type",
         "Table": "Sales Men Types Table",
-        "colors": "Sales Men Types"
+        "salesmen-types": "Sales Men Types"
     },
     "externalSalesmen": {
         "addexternalSalesmen": "New Add External Salesman",
@@ -107,6 +107,12 @@
         "editserial": "Edit Serial",
         "serialsTable": "Serials Table",
         "serial": "Serials"
+    },
+    "salesmen": {
+        "add": "Add New Sales Men",
+        "edit": "Edit Sales Men",
+        "Table": "Sales Men Table",
+        "salesmen": "Sales Men"
     },
     "navbar": {
         "search": {
@@ -222,29 +228,14 @@
         "navigation": {
             "text": "Navigation"
         },
-        "country": {
-            "text": "Country"
-        },
-        "city": {
-            "text": "Cities"
-        },
         "employee": {
             "text": "Employee"
-        },
-        "governorate": {
-            "text": "Governorate"
         },
         "currency": {
             "text": "Currencies"
         },
         "financialYear": {
             "text": "Financial Year"
-        },
-        "avenue": {
-            "text": "Avenue"
-        },
-        "externalSalesmen": {
-            "text": "External Salesmen"
         },
         "role": {
             "text": "Roles"
@@ -267,7 +258,9 @@
         "serial": {
             "text": "Serial"
         },
-
+        "area": {
+            "text": "Area"
+        },
         "dashboard": {
             "text": "Dashboards",
             "badge": "3",
@@ -275,7 +268,13 @@
                 "sales": "Sales",
                 "rolesType": "Roles Type",
                 "roles": "Roles",
-                "salesMenType": "sales Men Type",
+                "salesMenType": "Sales Men Type",
+                "externalSalesmen": "External Sales Men",
+                "country": "Country",
+                "city": "Cities",
+                "governorate": "Governorate",
+                "avenue": "Avenue",
+                "salesMen": "Sales Men",
                 "crm": "CRM",
                 "analytics": "Analytics"
             }
@@ -575,6 +574,9 @@
         "isEmployee": "Is Employee ?",
         "Yes": "Yes",
         "No": "No",
-        "branch": "Branch"
+        "branch": "Branch",
+        "store": "Store",
+        "symbol_e": "Symbol (English)",
+        "symbol": "Symbol (Arabic)"
     }
 }
