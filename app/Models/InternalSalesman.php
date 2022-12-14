@@ -27,10 +27,15 @@ class InternalSalesman extends Model
 
     public function tapActivity(Activity $activity, string $eventName)
     {
-        $activity->causer_id = auth()->user()->id ?? 0 ;
+        $activity->causer_id = auth()->user()->id ?? 0;
         $activity->causer_type = auth()->user()->role ?? "admin";
     }
 
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
     public function getActivitylogOptions(): LogOptions
     {
         $user =  auth()->user()->id ?? "system";
@@ -50,7 +55,6 @@ class InternalSalesman extends Model
 
                 $q->where('name', 'like', '%' . $request->search . '%');
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-
             }
 
 
@@ -69,11 +73,8 @@ class InternalSalesman extends Model
             }
 
             if (count($_GET) == 0) {
-                return self::all() ;
+                return self::all();
             }
-
-
         });
-
     }
 }
