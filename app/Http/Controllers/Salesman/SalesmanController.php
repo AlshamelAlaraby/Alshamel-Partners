@@ -2,141 +2,84 @@
 
 namespace App\Http\Controllers\Salesman;
 
-use App\Http\Controllers\Controller;
-use App\Repositories\Salesman\SalesmanRepositoryInterface;
-use App\Http\Resources\Salesman\SalesmanResource;
 use App\Http\Requests\Salesman\StoreSalesmanRequest;
 use App\Http\Requests\Salesman\UpdateSalesmanRequest;
-use App\Http\Resources\ScreenSetting\ScreenSettingResource;
-use Mockery\Exception;
+use App\Http\Resources\Salesman\SalesmanResource;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class SalesmanController extends Controller
 {
-
-    protected $repository;
-    protected $resource = SalesmanResource::class;
-
-
-    public function __construct(SalesmanRepositoryInterface $repository)
+    public function __construct(private \App\Repositories\Salesman\SalesmanInterface $modelInterface)
     {
-        $this->repository = $repository;
+        $this->modelInterface = $modelInterface;
+    }
+
+    public function find($id)
+    {
+        $model = cacheGet('salesmen_' . $id);
+        if (!$model) {
+            $model = $this->modelInterface->find($id);
+            if (!$model) {
+                return responseJson(404, __('message.data not found'));
+            } else {
+                cachePut('salesmen_' . $id, $model);
+            }
+        }
+        return responseJson(200, 'success', new SalesmanResource($model));
     }
 
     public function all(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('Salesmans');
-
+            $models = cacheGet('salesmen');
             if (!$models) {
-                $models = $this->repository->getAllSalesmans($request);
-                cachePut('Salesmans', $models);
+                $models = $this->modelInterface->all($request);
+                cachePut('salesmen', $models);
             }
         } else {
-
-            $models = $this->repository->getAllSalesmans($request);
+            $models = $this->modelInterface->all($request);
         }
 
         return responseJson(200, 'success', SalesmanResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
-
     }
-
-
-    public function find($id)
-    {
-        try{
-            $model = cacheGet('Salesmans_' . $id);
-
-            if (!$model) {
-                $model = $this->repository->find($id);
-                if (!$model) {
-                    return responseJson( 404 , __('message.data not found'));
-                } else {
-                    cachePut('Salesmans_' . $id, $model);
-                }
-            }
-            return responseJson(200 , __('Done'), new SalesmanResource($model));
-        } catch (Exception $exception) {
-            return responseJson( $exception->getCode() , $exception->getMessage());
-        }
-    }
-
 
     public function create(StoreSalesmanRequest $request)
     {
-        try {
-            return responseJson(200 , __('Done') , $this->repository->create($request->validated()));
-        } catch (Exception $exception) {
-            return responseJson( $exception->getCode() , $exception->getMessage());
-        }
+        $model = $this->modelInterface->create($request);
+        return responseJson(200, 'success');
     }
 
-
-    public function update(UpdateSalesmanRequest $request , $id)
+    public function update(UpdateSalesmanRequest $request, $id)
     {
-        try {
-            $model = $this->repository->find($id);
-            if (!$model) {
-                return responseJson( 404 , __('message.data not found'));
-            }
-            $model = $this->repository->update($request->validated(), $id);
-
-            return  responseJson(200 , __('Done'));
-        } catch (Exception $exception) {
-            return responseJson( $exception->getCode() , $exception->getMessage());
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
         }
+        $model = $this->modelInterface->update($request, $id);
 
+        return responseJson(200, 'success');
     }
 
-    public function delete($id)
+    public function logs($id)
     {
-        try{
-            $model = $this->repository->find($id);
-            if (!$model) {
-                return responseJson( 404 , __('message.data not found'));
-            }
-            $this->repository->delete($id);
-            return  responseJson(200 , __('Done'));
-
-        } catch (Exception $exception) {
-            return responseJson( $exception->getCode() , $exception->getMessage());
-        }
-    }
-
-        public function logs($id)
-    {
-        $model = $this->repository->find($id);
+        $model = $this->modelInterface->find($id);
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
 
-        $logs = $this->repository->logs($id);
+        $logs = $this->modelInterface->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
-
     }
 
-
-    public function screenSetting(Request $request)
+    public function delete($id)
     {
-        try {
-            return responseJson(200 , __('Done') , $this->repository->setting($request->all()));
-        } catch (Exception $exception) {
-            return  responseJson( $exception->getCode() , $exception->getMessage());
+        $model = $this->modelInterface->find($id);
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
         }
+        $this->modelInterface->delete($id);
+
+        return responseJson(200, 'success');
     }
-
-    public function getScreenSetting($user_id , $screen_id)
-    {
-        try{
-            $screenSetting = $this->repository->getSetting($user_id , $screen_id);
-            if (!$screenSetting) {
-                return responseJson( 404 , __('message.data not found'));
-            }
-            return responseJson( 200 , __('Done'), new ScreenSettingResource( $screenSetting ));
-        } catch (Exception $exception) {
-            return  responseJson( $exception->getCode() , $exception->getMessage());
-        }
-    }
-
-
 }
