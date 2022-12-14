@@ -4,6 +4,12 @@ namespace Modules\RecievablePayable\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanDetailRepository;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanDetailRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentTypeRepository;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentTypeRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpInstallmentStatusRepository;
+use Modules\RecievablePayable\Repositories\RpInstallmentStatusRepositoryInterface;
 
 class RecievablePayableServiceProvider extends ServiceProvider
 {
@@ -28,6 +34,10 @@ class RecievablePayableServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        $this->app->bind (RpInstallmentPaymentPlanDetailRepositoryInterface::class,RpInstallmentPaymentPlanDetailRepository::class);
+        $this->app->bind (RpInstallmentPaymentTypeRepositoryInterface::class,RpInstallmentPaymentTypeRepository::class);
+        $this->app->bind (RpInstallmentStatusRepositoryInterface::class,RpInstallmentStatusRepository::class);
     }
 
     /**

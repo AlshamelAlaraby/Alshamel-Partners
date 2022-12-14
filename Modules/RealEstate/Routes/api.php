@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/realestate', function (Request $request) {
 
 Route::prefix ('real-estate')->group (function () {
 //    Route::middleware ('auth:sanctum')->group (function (){
-//        Route::resource ('property-types','PropertyTypeController')->except ('edit','create');
+
 //    });
 
     Route ::resource ( 'property-types' , 'PropertyTypeController' ) -> except ( 'edit' , 'create' );
@@ -39,6 +39,7 @@ Route::prefix ('real-estate')->group (function () {
     Route ::get ( 'rlst-wallet-building/logs/{id}' , 'RlstWalletBuildingController@logs' );
 
 });
+
 
 Route::group(['prefix' => 'rlst', 'namespace' => 'Modules\RealEstate\Http\Controllers'], function () {
     Route::group(['prefix' => 'owners'], function () {
