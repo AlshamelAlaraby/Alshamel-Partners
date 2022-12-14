@@ -114,6 +114,12 @@
         "Table": "Sales Men Table",
         "salesmen": "Sales Men"
     },
+    "internalSalesmen": {
+        "add": "Add New Internal Sales Men",
+        "edit": "Edit Internal Sales Men",
+        "Table": "Internal Sales Men Table",
+        "salesmen": "Internal Sales Men"
+    },
     "navbar": {
         "search": {
             "text": "Search..."
@@ -270,6 +276,7 @@
                 "roles": "Roles",
                 "salesMenType": "Sales Men Type",
                 "externalSalesmen": "External Sales Men",
+                "internalSalesmen": "Internal Sales Men",
                 "country": "Country",
                 "city": "Cities",
                 "governorate": "Governorate",
@@ -577,6 +584,12 @@
         "branch": "Branch",
         "store": "Store",
         "symbol_e": "Symbol (English)",
-        "symbol": "Symbol (Arabic)"
+        "symbol": "Symbol (Arabic)",
+        "salesManType" : "Sale Man Type",
+        "employee": "Employee"
     }
 }
+
+
+
+

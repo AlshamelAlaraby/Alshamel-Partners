@@ -1494,11 +1494,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
-        var l = res.data.data;
-        console.log(l);
-        // this.salesmens = l.data;
-        // this.salesmensPagination = l.data;
-        // this.current_page =  this.salesmensPagination.current_page;
+        var l = res.data;
+        _this3.salesmens = l.data;
+        _this3.salesmensPagination = l.pagination;
+        _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: 'error',
@@ -5146,7 +5145,6 @@ var render = function render() {
     attrs: {
       type: "text",
       "data-create": "1",
-      placeholder: _vm.$t("general.Name"),
       id: "field-1"
     },
     domProps: {
@@ -5201,7 +5199,6 @@ var render = function render() {
     attrs: {
       type: "text",
       "data-create": "2",
-      placeholder: _vm.$t("general.Name_en"),
       id: "field-2"
     },
     domProps: {
@@ -5233,7 +5230,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "my-1 mr-2"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.salesManType")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -5565,7 +5562,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name"),
         id: "field-u-1"
       },
       domProps: {
@@ -5615,7 +5611,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name_en"),
         id: "field-u-2"
       },
       domProps: {
@@ -5643,7 +5638,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.salesManType")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -6294,6 +6289,10 @@ var menuItems = [{
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
     link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
   }]
 }, {
   id: 1000544,

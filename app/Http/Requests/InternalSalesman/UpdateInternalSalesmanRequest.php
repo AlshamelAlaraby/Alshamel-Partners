@@ -24,7 +24,7 @@ class UpdateInternalSalesmanRequest extends FormRequest
     public function rules()
     {
         return [
-            "employee_id"     => "required|numeric" ,
+            "employee_id"     => "required|exists:employees,id" ,
             "is_active"       => "in:active,inactive" ,
         ];
     }
