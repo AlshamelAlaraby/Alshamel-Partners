@@ -781,6 +781,3 @@ export const menuItems = [
         ]
     }
 ];
-
-
-
