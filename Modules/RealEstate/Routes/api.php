@@ -72,7 +72,7 @@ Route::prefix('real-estate')->group(function () {
         Route::put('/{id}', 'RlstWalletController@update')->name('rlst-wallets.update');
         Route::delete('/{id}', 'RlstWalletController@delete')->name('rlst-wallets.delete');
     });
-=======
+
     Route::group(['prefix' => 'rlst'], function () {
         Route::group(['prefix' => 'owners'], function () {
             Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
