@@ -5,91 +5,61 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Salesman extends Model
 {
-    use HasFactory;
-    use HasFactory;
-    use SoftDeletes;
-    use LogsActivity;
-    use CausesActivity;
+    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+
+    protected $fillable = [
+        'name',
+        'name_e',
+        'salesman_type_id',
+    ];
+
+    protected $table = "salesmen";
 
 
-    protected $table = 'salesmen';
-
-    protected $guarded = ["id"];
-
+    // relations
     public function salesmanType()
     {
-        return $this->belongsTo(SalesmenType::class , "salesman_type_id" );
+        return $this->belongsTo(SalesmenType::class, 'salesman_type_id');
     }
-
 
     public function tapActivity(Activity $activity, string $eventName)
     {
-        $activity->causer_id = auth()->user()->id ?? 0 ;
+        $activity->causer_id = auth()->user()->id ?? 0;
         $activity->causer_type = auth()->user()->role ?? "admin";
     }
 
     public function getActivitylogOptions(): LogOptions
     {
-        $user =  auth()->user()->id ?? "system";
+        $user = auth()->user()->id ?? "system";
 
-        return LogOptions::defaults()
+        return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Salesman')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
+    // scopes
 
-    public function scopeFilter($query, $request)
+    public function scopeSearch($query, $request)
     {
         return $query->where(function ($q) use ($request) {
 
-            if ($request->search) {
-
-                $q->whereHas('salesmanType', function ($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%');
-                    $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-                });
-
-                $q->orWhere('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-
-            }
-
-            if ($request->name) {
-                $q->orWhere('name', 'like', '%' . $request->search . '%');
-            }
-            if ($request->name_e) {
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-            }
-
-
-            if ($request->column_name && $request->column_value) {
-
-                $dataSearch = explode(".", $request->column_name);
-                if (count($dataSearch) == 1) {
-                    $q->where($request->column_name, "like",  '%' . $request->column_value . '%');
-                }
-
-                if (count($dataSearch) == 2) {
-                    $q->whereHas($dataSearch[0], function ($q) use ($request, $dataSearch) {
-                        $q->where($dataSearch[1], 'like', '%' . $request->column_value . '%');;
-                    });
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
             }
 
-            if (count($_GET) == 0 ) {
-                return self::all() ;
+            if ($request->salesman_type_id) {
+                $q->where('salesmen_type_id', $request->salesman_type_id);
             }
-
         });
-
-
     }
 }

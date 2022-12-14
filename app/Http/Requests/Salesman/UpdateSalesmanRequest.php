@@ -15,7 +15,6 @@ class UpdateSalesmanRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,9 +23,27 @@ class UpdateSalesmanRequest extends FormRequest
     public function rules()
     {
         return [
-            "salesman_type_id"       => "exists:salesmen_types,id" ,
-            "name"                  => "string|max:100" ,
-            "name_e"                => "string|max:100" ,
+            "name" => "nullable|string|max:100",
+            "name_e" => "nullable|string|max:100",
+            "salesman_type_id" => "nullable|exists:salesmen_types,id",
+
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, mixed>
+     */
+
+    public function messages()
+    {
+        return [
+            "name.string" => __("message.field must be string"),
+            "name.max" => __("message.field must be less than 100 characters"),
+            "name_e.string" => __("message.field must be string"),
+            "name_e.max" => __("message.field must be less than 100 characters"),
+            "salesman_type_id.exists" => __("message.field must be exists"),
         ];
     }
 }
