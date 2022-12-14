@@ -37,4 +37,16 @@ Route::prefix ('real-estate')->group (function (){
 
     Route::resource ('rlst-wallet-building','RlstWalletBuildingController')->except ('edit','create');
     Route::get ('rlst-wallet-building/logs/{id}','RlstWalletBuildingController@logs');
+
+
+
+Route::group(['prefix' => 'rlst', 'namespace' => 'Modules\RealEstate\Http\Controllers'], function () {
+    Route::group(['prefix' => 'owners'], function () {
+        Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
+        Route::get('/logs', 'RlstOwnerController@logs')->name('rlst-owners.logs');
+        Route::get('/{id}', 'RlstOwnerController@find')->name('rlst-owners.find');
+        Route::post('/', 'RlstOwnerController@create')->name('rlst-owners.create');
+        Route::put('/{id}', 'RlstOwnerController@update')->name('rlst-owners.update');
+        Route::delete('/{id}', 'RlstOwnerController@delete')->name('rlst-owners.delete');
+    });
 });
