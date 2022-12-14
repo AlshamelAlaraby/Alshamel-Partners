@@ -3,13 +3,18 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Models\Country;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Contracts\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RlstOwner extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
         'name',
@@ -29,9 +34,6 @@ class RlstOwner extends Model
 
     ];
 
-    protected $casts = [
-        'categories' => 'json',
-    ];
 
     // relations
     public function country()
@@ -54,8 +56,8 @@ class RlstOwner extends Model
     protected function categories(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => json_encode($value),
-            set: fn ($value) => json_decode($value),
+            get: fn ($value) => json_decode($value),
+            set: fn ($value) => json_encode($value),
         );
     }
 
@@ -82,5 +84,23 @@ class RlstOwner extends Model
                 $q->where('city_id', $request->city_id);
             }
         });
+    }
+
+    // activities
+
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        $activity->causer_id = auth()->user()->id ?? 0;
+        $activity->causer_type = auth()->user()->role ?? "admin";
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        $user = auth()->user()->id ?? "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Real Estate Owners')
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

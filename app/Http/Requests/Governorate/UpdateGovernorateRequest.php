@@ -24,6 +24,8 @@ class UpdateGovernorateRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'string|max:255|unique:governorates,name',
+            'name_e' => 'string|max:255|unique:governorates,name_e',
             'name' => 'string|max:255|unique:governorates,name,'.$this->id,
             'name_e' => 'string|max:255|unique:governorates,name_e,'.$this->id,
             "is_active" => "nullable|in:active,inactive",

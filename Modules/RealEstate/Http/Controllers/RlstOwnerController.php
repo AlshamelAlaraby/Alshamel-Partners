@@ -5,8 +5,9 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstOwner;
-use Modules\RealEstate\Http\Requests\CreateRlstOwnerRequest;
 use Modules\RealEstate\Transformers\RlstOwnerResource;
+use Modules\RealEstate\Http\Requests\CreateRlstOwnerRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstOwnerRequest;
 
 class RlstOwnerController extends Controller
 {
@@ -45,13 +46,13 @@ class RlstOwnerController extends Controller
 
     public function create(CreateRlstOwnerRequest $request)
     {
-        $model = $this->model->create($request->validated());
+        $this->model->create($request->validated());
 
-        return responseJson(200, 'created', new RlstOwnerResource($model));
+        return responseJson(200, 'created');
     }
 
 
-    public function update($id, CreateRlstOwnerRequest $request)
+    public function update($id, UpdateRlstOwnerRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -60,7 +61,7 @@ class RlstOwnerController extends Controller
 
         $model->update($request->validated());
 
-        return responseJson(200, 'updated', new RlstOwnerResource($model));
+        return responseJson(200, 'updated');
     }
 
     public function logs($id)
@@ -78,13 +79,10 @@ class RlstOwnerController extends Controller
     public function delete($id)
     {
         $model = $this->model->find($id);
-
         if (!$model) {
             return responseJson(404, 'not found');
         }
-
         $model->delete();
-
         return responseJson(200, 'deleted');
     }
 }
