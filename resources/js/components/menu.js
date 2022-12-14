@@ -72,6 +72,11 @@ export const menuItems = [
                 id: 9,
                 label: 'menuitems.dashboard.list.externalSalesmen',
                 link: '/externalSalesmen'
+            },
+            {
+                id: 7636473,
+                label: 'menuitems.dashboard.list.internalSalesmen',
+                link: '/internalSalesman'
             }
         ]
     },
@@ -789,3 +794,4 @@ export const menuItems = [
         ]
     }
 ];
+

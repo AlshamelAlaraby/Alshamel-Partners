@@ -112,11 +112,10 @@ export default {
 
             adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
-                    let l = res.data.data;
-                    console.log(l);
-                    // this.salesmens = l.data;
-                    // this.salesmensPagination = l.data;
-                    // this.current_page =  this.salesmensPagination.current_page;
+                    let l = res.data;
+                    this.salesmens = l.data;
+                    this.salesmensPagination = l.pagination;
+                    this.current_page = l.pagination.current_page;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -563,7 +562,7 @@ export default {
                                                 'is-invalid':$v.create.name.$error || errors.name,
                                                 'is-valid':!$v.create.name.$invalid && !errors.name
                                             }"
-                                                :placeholder="$t('general.Name')" id="field-1"
+                                              id="field-1"
                                             />
                                             <div v-if="!$v.create.name.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -596,10 +595,10 @@ export default {
                                                 @keypress.enter="moveInput('select','create',3)"
                                                 v-model="$v.create.name_e.$model"
                                                 :class="{
-                                                'is-invalid':$v.create.name_e.$error || errors.name_e,
-                                                'is-valid':!$v.create.name_e.$invalid && !errors.name_e
-                                            }"
-                                                :placeholder="$t('general.Name_en')" id="field-2"
+                                                    'is-invalid':$v.create.name_e.$error || errors.name_e,
+                                                    'is-valid':!$v.create.name_e.$invalid && !errors.name_e
+                                                }"
+                                            id="field-2"
                                             />
                                             <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -622,7 +621,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">
-                                                {{ $t('general.isEmployee') }}
+                                                {{ $t('general.salesManType') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -826,7 +825,7 @@ export default {
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                :placeholder="$t('general.Name')" id="field-u-1"
+                                                                 id="field-u-1"
                                                             />
                                                             <div v-if="!$v.edit.name.alphaArabic"
                                                                  class="invalid-feedback">{{
@@ -867,7 +866,7 @@ export default {
                                                                     'is-invalid':$v.edit.name_e.$error || errors.name_e,
                                                                     'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
-                                                                :placeholder="$t('general.Name_en')" id="field-u-2"
+                                                                id="field-u-2"
                                                             />
                                                             <div v-if="!$v.edit.name_e.minLength"
                                                                  class="invalid-feedback">
@@ -897,7 +896,7 @@ export default {
                                                     <div class="col-md-12 ">
                                                         <div class="form-group">
                                                             <label class="my-1 mr-2">
-                                                                {{ $t('general.isEmployee') }}
+                                                                {{ $t('general.salesManType') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
