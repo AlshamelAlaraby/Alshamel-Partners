@@ -2,6 +2,7 @@
 
 namespace Modules\RealEstate\Entities;
 
+use App\Models\Currency;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
@@ -10,24 +11,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstWallet extends Model
+class RlstInstallment extends Model
 {
-    use HasFactory, LogsActivity, CausesActivity, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        'name',
-        'name_e',
+        'date',
+        'pay_type',
+        'amount',
+        "currency_id",
+        "rest_amount"
+    ];
 
-
+    protected $casts = [
+        'date' => 'date',
+        'pay_type' => '\App\Enums\PayType',
+        'amount' => 'float',
+        "currency_id" => 'integer',
+        "rest_amount" => 'float',
     ];
 
     // relations
 
-
-    public function walletOwner()
+    public function currency()
     {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
+
 
     // scopes
 
@@ -39,6 +49,10 @@ class RlstWallet extends Model
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
+            }
+
+            if ($request->currency_id) {
+                $q->where('currency_id', $request->currency_id);
             }
         });
     }
@@ -57,7 +71,7 @@ class RlstWallet extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Real Estate Wallets')
+            ->useLogName('Real Estate Installmentss')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }
