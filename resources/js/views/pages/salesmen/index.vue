@@ -50,7 +50,6 @@ export default {
             },
             errors: {},
             salesmenTypes: [],
-            isButton: true,
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
@@ -321,7 +320,7 @@ export default {
             await this.getSaleMenType();
             this.edit.name = module.name;
             this.edit.name_e = module.name_e;
-            this.edit.salesman_type_id = module.salesman_type.id ;
+            this.edit.salesman_type_id = module.salesmanType.id ;
             this.errors = {};
         },
         /**
@@ -647,7 +646,7 @@ export default {
                                     <b-button
                                         variant="success"
                                         type="button" class="mx-1"
-                                        v-if="!isLoader && isButton"
+                                        v-if="!isLoader"
                                         @click.prevent="AddSubmit"
                                     >
                                         {{ $t('general.Add') }}
@@ -709,7 +708,7 @@ export default {
                                     </th>
                                     <th>
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.isEmployee') }}</span>
+                                            <span>{{ $t('general.salesManType') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="salesmens.sort(sortString('name_e'))"></i>
@@ -749,17 +748,7 @@ export default {
                                     <td>
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                    <td>
-                                        <span :class="[
-                                           parseInt(data.is_employee)  == true ?
-                                            'text-success':
-                                            'text-danger',
-                                            'badge'
-                                            ]"
-                                        >
-                                            {{ parseInt(data.is_employee) == true ? `${$t('general.Yes')}` : `${$t('general.No')}` }}
-                                        </span>
-                                    </td>
+                                    <td>{{ $i18n.locale == 'ar' ? data.salesmanType.name :  data.salesmanType.name_e }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button
@@ -809,7 +798,7 @@ export default {
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
-                                            <form @submit.stop.prevent="editSubmit(data.id)">
+                                            <form>
                                                 <div class="row">
                                                     <div class="col-md-12 direction" dir="rtl">
                                                         <div class="form-group">
@@ -920,8 +909,8 @@ export default {
                                                 </div>
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button variant="success" type="submit" class="mx-1"
-                                                              v-if="!isLoader && isButton">
+                                                    <b-button variant="success" type="button" class="mx-1"  @click.prevent="editSubmit(data.id)"
+                                                              v-if="!isLoader">
                                                         {{ $t('general.Edit') }}
                                                     </b-button>
 

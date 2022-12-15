@@ -276,7 +276,7 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                adminApi.put(`/internal-salesmen/${id}`, this.edit)
+                adminApi.post(`/internal-salesmen/${id}`, this.edit)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();

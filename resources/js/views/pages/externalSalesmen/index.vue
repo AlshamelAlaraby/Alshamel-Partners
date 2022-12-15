@@ -225,7 +225,6 @@ export default {
                 national_id: null,
                 is_active: 'active',
             };
-            this.countries = [];
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
             this.$bvModal.hide(`create`);
@@ -653,7 +652,7 @@ export default {
                                                 'is-invalid':$v.create.national_id.$error || errors.national_id,
                                                 'is-valid':!$v.create.national_id.$invalid && !errors.national_id
                                                 }"
-                                                :placeholder="$t('partner.partner')" id="field-4"
+                                                 id="field-4"
                                             />
                                             <template v-if="errors.national_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.national_id" :key="index">{{ errorMessage }}</ErrorMessage>
