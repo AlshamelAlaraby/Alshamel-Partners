@@ -4,15 +4,15 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstReservation;
-use Modules\RealEstate\Transformers\RlstReservationResource;
-use Modules\RealEstate\Http\Requests\CreateRlstReservationRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstReservationRequest;
+use Modules\RealEstate\Entities\RlstInstallment;
+use Modules\RealEstate\Transformers\RlstInstallmentResource;
+use Modules\RealEstate\Http\Requests\CreateRlstInstallmentRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstInstallmentRequest;
 
-class RlstReservationController extends Controller
+class RlstInstallmentController extends Controller
 {
 
-    public function __construct(private RlstReservation $model)
+    public function __construct(private RlstInstallment $model)
     {
         $this->model = $model;
     }
@@ -25,7 +25,7 @@ class RlstReservationController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstReservationResource($model));
+        return responseJson(200, 'success', new RlstInstallmentResource($model));
     }
 
 
@@ -40,11 +40,11 @@ class RlstReservationController extends Controller
         }
 
 
-        return responseJson(200, 'success', RlstReservationResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstInstallmentResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
 
-    public function create(CreateRlstReservationRequest $request)
+    public function create(CreateRlstInstallmentRequest $request)
     {
         $this->model->create($request->validated());
 
@@ -52,7 +52,7 @@ class RlstReservationController extends Controller
     }
 
 
-    public function update($id, UpdateRlstReservationRequest $request)
+    public function update($id, UpdateRlstInstallmentRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

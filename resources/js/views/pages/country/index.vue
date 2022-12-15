@@ -1429,6 +1429,3 @@ export default {
     </Layout>
 
 </template>
-
-
-

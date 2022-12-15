@@ -4,15 +4,15 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstReservation;
-use Modules\RealEstate\Transformers\RlstReservationResource;
-use Modules\RealEstate\Http\Requests\CreateRlstReservationRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstReservationRequest;
+use Modules\RealEstate\Entities\RlstReservationUnit;
+use Modules\RealEstate\Transformers\RlstReservationUnitResource;
+use Modules\RealEstate\Http\Requests\CreateRlstReservationUnitRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstReservationUnitRequest;
 
-class RlstReservationController extends Controller
+class RlstReservationUnitController extends Controller
 {
 
-    public function __construct(private RlstReservation $model)
+    public function __construct(private RlstReservationUnit $model)
     {
         $this->model = $model;
     }
@@ -25,7 +25,7 @@ class RlstReservationController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstReservationResource($model));
+        return responseJson(200, 'success', new RlstReservationUnitResource($model));
     }
 
 
@@ -40,11 +40,11 @@ class RlstReservationController extends Controller
         }
 
 
-        return responseJson(200, 'success', RlstReservationResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstReservationUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
 
-    public function create(CreateRlstReservationRequest $request)
+    public function create(CreateRlstReservationUnitRequest $request)
     {
         $this->model->create($request->validated());
 
@@ -52,7 +52,7 @@ class RlstReservationController extends Controller
     }
 
 
-    public function update($id, UpdateRlstReservationRequest $request)
+    public function update($id, UpdateRlstReservationUnitRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

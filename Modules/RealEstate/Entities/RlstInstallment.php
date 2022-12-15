@@ -2,7 +2,7 @@
 
 namespace Modules\RealEstate\Entities;
 
-use App\Models\Salesman;
+use App\Models\Currency;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
@@ -11,44 +11,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstReservation extends Model
+class RlstInstallment extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        "salesman_id",
-        "customer_id",
-        "payment_plan_id",
-        "date"
+        'date',
+        'pay_type',
+        'amount',
+        "currency_id",
+        "rest_amount"
     ];
 
+    protected $casts = [
+        'date' => 'date',
+        'pay_type' => '\App\Enums\PayType',
+        'amount' => 'float',
+        "currency_id" => 'integer',
+        "rest_amount" => 'float',
+    ];
 
     // relations
 
-    public function salesman()
+    public function currency()
     {
-        return $this->belongsTo(Salesman::class);
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
-    public function customer()
-    {
-        return $this->belongsTo(\Modules\RealEstate\Entities\RlstCustomer::class);
-    }
 
-    // public function paymentPlan()
-    // {
-    //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
-    // }
-
-    public function contracts()
-    {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstContracts::class);
-    }
-
-    public function units()
-    {
-        return $this->belongsToMany(RlstReservationUnit::class, "unit_code");
-    }
     // scopes
 
     public function scopeSearch($query, $request)
@@ -61,12 +51,8 @@ class RlstReservation extends Model
                 }
             }
 
-            if ($request->salesman_id) {
-                $q->where('salesman_id', $request->salesman_id);
-            }
-
-            if ($request->customer_id) {
-                $q->where('customer_id', $request->customer_id);
+            if ($request->currency_id) {
+                $q->where('currency_id', $request->currency_id);
             }
         });
     }
@@ -85,7 +71,7 @@ class RlstReservation extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Rlst Reservation')
+            ->useLogName('Real Estate Installmentss')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

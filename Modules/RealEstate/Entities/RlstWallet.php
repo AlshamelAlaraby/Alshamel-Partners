@@ -21,6 +21,14 @@ class RlstWallet extends Model
 
     ];
 
+    // relations
+
+
+    public function walletOwner()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
+    }
+
     // scopes
 
     public function scopeSearch($query, $request)

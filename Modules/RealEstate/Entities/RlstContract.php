@@ -2,70 +2,51 @@
 
 namespace Modules\RealEstate\Entities;
 
-use App\Models\Country;
+use App\Models\Salesman;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstOwner extends Model
+class RlstContract extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        'name',
-        'name_e',
-        'phone',
-        'email',
-        'country_id',
-        'city_id',
-        'rb_code',
-        'nationality_id',
-        'bank_account_id',
-        'contact_person',
-        'contact_phones',
-        'national_id',
-        'whatsapp',
-        'categories',
-
+        "salesman_id",
+        "customer_id",
+        "payment_plan_id",
+        "reservation_id",
+        "date"
     ];
 
 
     // relations
-    public function country()
+
+    public function salesman()
     {
-        return $this->belongsTo(\App\Models\Country::class);
+        return $this->belongsTo(Salesman::class);
     }
 
-    public function city()
+    public function customer()
     {
-        return $this->belongsTo(\App\Models\City::class);
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstCustomer::class);
     }
 
-    public function nationality()
+    public function reservation()
     {
-        return $this->belongsTo(\App\Models\Country::class, 'nationality_id');
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstReservation::class);
     }
 
+    // public function paymentPlan()
+    // {
+    //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
+    // }
 
-    public function walletOwner()
-    {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
-    }
 
-    // attributes
-
-    protected function categories(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value),
-            set: fn ($value) => json_encode($value),
-        );
-    }
 
     // scopes
 
@@ -79,15 +60,16 @@ class RlstOwner extends Model
                 }
             }
 
-            if ($request->country_id) {
-                $q->where('country_id', $request->country_id);
+            if ($request->salesman_id) {
+                $q->where('salesman_id', $request->salesman_id);
             }
 
-            if ($request->nationality_id) {
-                $q->where('nationality_id', $request->nationality_id);
+            if ($request->customer_id) {
+                $q->where('customer_id', $request->customer_id);
             }
-            if ($request->city_id) {
-                $q->where('city_id', $request->city_id);
+
+            if ($request->reservation_id) {
+                $q->where('reservation_id', $request->reservation_id);
             }
         });
     }
@@ -106,7 +88,7 @@ class RlstOwner extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Real Estate Owners')
+            ->useLogName('Rlst Contracts')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }
