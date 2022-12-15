@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\RealEstate\Entities;
 
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
@@ -8,48 +8,24 @@ use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
-use Modules\RealEstate\Entities\RlstReservation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Salesman extends Model
+class RlstReservationUnit extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        'name',
-        'name_e',
-        'salesman_type_id',
-    ];
+        'unit_code',
 
-    protected $table = "salesmen";
+    ];
 
 
     // relations
-    public function salesmanType()
-    {
-        return $this->belongsTo(SalesmenType::class, 'salesman_type_id');
-    }
 
-    public function reservations()
+    public function reservation()
     {
-        return $this->hasMany(RlstReservation::class);
+        return $this->belongsTo(RlstReservation::class, "unit_code");
     }
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        $user = auth()->user()->id ?? "system";
-
-        return \Spatie\Activitylog\LogOptions::defaults()
-            ->logAll()
-            ->useLogName('Salesman')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
-    }
-
     // scopes
 
     public function scopeSearch($query, $request)
@@ -62,9 +38,31 @@ class Salesman extends Model
                 }
             }
 
-            if ($request->salesman_type_id) {
-                $q->where('salesmen_type_id', $request->salesman_type_id);
+            if ($request->salesman_id) {
+                $q->where('salesman_id', $request->salesman_id);
+            }
+
+            if ($request->customer_id) {
+                $q->where('customer_id', $request->customer_id);
             }
         });
+    }
+
+    // activities
+
+    public function tapActivity(Activity $activity, string $eventName)
+    {
+        $activity->causer_id = auth()->user()->id ?? 0;
+        $activity->causer_type = auth()->user()->role ?? "admin";
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        $user = auth()->user()->id ?? "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Rlst Reservation Unit')
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

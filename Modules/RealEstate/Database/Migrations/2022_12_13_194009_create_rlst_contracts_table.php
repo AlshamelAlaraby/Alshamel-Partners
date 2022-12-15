@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rlst_reservations', function (Blueprint $table) {
+        Schema::create('rlst_contracts', function (Blueprint $table) {
             $table->id();
             $table->date("date");
+            $table->foreignId("reservation_id");
             $table->foreignId('salesman_id');
             $table->foreignId('customer_id');
             $table->integer('payment_plan_id');
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rlst_reservations');
+        Schema::dropIfExists('rlst_contracts');
     }
 };

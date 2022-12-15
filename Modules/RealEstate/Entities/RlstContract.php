@@ -2,37 +2,50 @@
 
 namespace Modules\RealEstate\Entities;
 
+use App\Models\Salesman;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstWalletOwner extends Model
+class RlstContract extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        'wallet_id',
-        "owner_id",
-        "percentage"
+        "salesman_id",
+        "customer_id",
+        "payment_plan_id",
+        "reservation_id",
+        "date"
     ];
 
 
     // relations
 
-    public function wallet()
+    public function salesman()
     {
-        return $this->belongsTo(\Modules\RealEstate\Entities\RlstWallet::class);
+        return $this->belongsTo(Salesman::class);
     }
 
-    public function owner()
+    public function customer()
     {
-        return $this->belongsTo(\Modules\RealEstate\Entities\RlstOwner::class);
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstCustomer::class);
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstReservation::class);
+    }
+
+    // public function paymentPlan()
+    // {
+    //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
+    // }
+
 
 
     // scopes
@@ -47,12 +60,16 @@ class RlstWalletOwner extends Model
                 }
             }
 
-            if ($request->wallet_id) {
-                $q->where('wallet_id', $request->wallet_id);
+            if ($request->salesman_id) {
+                $q->where('salesman_id', $request->salesman_id);
             }
 
-            if ($request->owner_id) {
-                $q->where('owner_id', $request->owner_id);
+            if ($request->customer_id) {
+                $q->where('customer_id', $request->customer_id);
+            }
+
+            if ($request->reservation_id) {
+                $q->where('reservation_id', $request->reservation_id);
             }
         });
     }
@@ -71,7 +88,7 @@ class RlstWalletOwner extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Wallet Owner')
+            ->useLogName('Rlst Contracts')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

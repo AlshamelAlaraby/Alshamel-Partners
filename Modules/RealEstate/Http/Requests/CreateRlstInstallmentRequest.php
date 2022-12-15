@@ -30,7 +30,6 @@ class CreateRlstInstallmentRequest extends FormRequest
             "date.required" => __("message.field is required"),
             "date.date" => __("message.field must be date"),
             "pay_type.required" => __("message.field is required"),
-            "pay_type.in" => __("message.field must be in"),
             "amount.required" => __("message.field is required"),
             "amount.numeric" => __("message.field must be numeric"),
             "currency_id.required" => __("message.field is required"),
