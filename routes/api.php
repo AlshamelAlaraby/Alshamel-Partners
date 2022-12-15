@@ -240,6 +240,7 @@ Route::group(['prefix' => 'salesmen'], function () {
         Route::get('logs/{id}', 'logs')->name('salesmen.logs');
     });
 });
+
 Route::group(['prefix' => 'internal-salesmen'], function () {
     Route::controller(\App\Http\Controllers\InternalSalesman\InternalSalesmanController::class)->group(function () {
         Route::get('/', 'all')->name('internal-salesmen.index');
