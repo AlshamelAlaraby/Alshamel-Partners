@@ -4655,7 +4655,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "mdi mdi-help-circle mr-1 text-primary"
-  }), _vm._v("What is\n                Vakal text here?\n              ")])])]), _vm._v(" "), _c("b-collapse", {
+  }), _vm._v("What is\n                                Vakal text here?\n                            ")])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
       id: "customaccordion-1",
       visible: "",
@@ -4688,7 +4688,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "mdi mdi-help-circle mr-1 text-primary"
-  }), _vm._v("Why use\n                Vakal text here?\n              ")])])]), _vm._v(" "), _c("b-collapse", {
+  }), _vm._v("Why use\n                                Vakal text here?\n                            ")])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
       id: "customaccordion-2",
       accordion: "accordion",
@@ -4720,7 +4720,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "mdi mdi-help-circle mr-1 text-primary"
-  }), _vm._v("How many\n                variations exist?\n              ")])])]), _vm._v(" "), _c("b-collapse", {
+  }), _vm._v("How many\n                                variations exist?\n                            ")])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
       id: "customaccordion-3",
       accordion: "accordion",
@@ -4752,7 +4752,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "mdi mdi-help-circle mr-1 text-primary"
-  }), _vm._v("What is\n                Vakal text here?\n              ")])])]), _vm._v(" "), _c("b-collapse", {
+  }), _vm._v("What is\n                                Vakal text here?\n                            ")])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
       id: "customaccordion-4",
       accordion: "accordion",
@@ -4770,7 +4770,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("Link with href")]), _vm._v(" "), _c("b-button", {
+  }, [_vm._v("Link with href\n            ")]), _vm._v(" "), _c("b-button", {
     directives: [{
       name: "b-toggle",
       rawName: "v-b-toggle",
@@ -4781,13 +4781,13 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("Button with data-target")]), _vm._v(" "), _c("b-collapse", {
+  }, [_vm._v("Button with data-target\n            ")]), _vm._v(" "), _c("b-collapse", {
     staticClass: "mt-1",
     attrs: {
       id: "collapse-2",
       visible: ""
     }
-  }, [_c("b-card", [_vm._v("Anim pariatur cliche reprehenderit, enim eiusmod high life\n          accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica,\n          craft beer labore wes anderson cred nesciunt sapiente ea\n          proident.")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_c("b-card", [_vm._v("Anim pariatur cliche reprehenderit, enim eiusmod high life\n                    accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica,\n                    craft beer labore wes anderson cred nesciunt sapiente ea\n                    proident.\n                ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "col-xl-6"
   }, [_c("div", {
     attrs: {
@@ -4817,7 +4817,7 @@ var render = function render() {
     attrs: {
       href: "javascript: void(0);"
     }
-  }, [_vm._v("\n                Q. Can I use this template for my client?\n                "), _c("i", {
+  }, [_vm._v("\n                                Q. Can I use this template for my client?\n                                "), _c("i", {
     staticClass: "mdi mdi-chevron-down accordion-arrow"
   })])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
@@ -4826,7 +4826,7 @@ var render = function render() {
       accordion: "my-accordion",
       role: "tabpanel"
     }
-  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("\n                Yup, the marketplace license allows you to use this theme in\n                any end products. For more information on licenses, please\n                refere\n              ")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
+  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("\n                                Yup, the marketplace license allows you to use this theme in\n                                any end products. For more information on licenses, please\n                                refere\n                            ")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
     staticClass: "mb-0 custom-accordion",
     attrs: {
       "no-body": ""
@@ -4850,7 +4850,7 @@ var render = function render() {
     attrs: {
       href: "javascript: void(0);"
     }
-  }, [_vm._v("\n                Q. Can this theme work with WordPress?\n                "), _c("i", {
+  }, [_vm._v("\n                                Q. Can this theme work with WordPress?\n                                "), _c("i", {
     staticClass: "mdi mdi-chevron-down accordion-arrow"
   })])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
@@ -4858,7 +4858,7 @@ var render = function render() {
       accordion: "my-accordion",
       role: "tabpanel"
     }
-  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("\n                No. This is a HTML template. It won't directly with WordPress,\n                though you can convert this into WordPress compatible theme\n              ")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
+  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("\n                                No. This is a HTML template. It won't directly with WordPress,\n                                though you can convert this into WordPress compatible theme\n                            ")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
     staticClass: "mb-0 custom-accordion",
     attrs: {
       "no-body": ""
@@ -4882,7 +4882,7 @@ var render = function render() {
     attrs: {
       href: "javascript: void(0);"
     }
-  }, [_vm._v("\n                Q. How do I get help with the theme?\n                "), _c("i", {
+  }, [_vm._v("\n                                Q. How do I get help with the theme?\n                                "), _c("i", {
     staticClass: "mdi mdi-chevron-down accordion-arrow"
   })])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
@@ -4890,7 +4890,7 @@ var render = function render() {
       accordion: "my-accordion",
       role: "tabpanel"
     }
-  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("Use our dedicated support email (support@themesbrand.com) to\n                send your issues or feedback. We are here to help\n                anytime")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
+  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("Use our dedicated support email (support@themesbrand.com) to\n                                send your issues or feedback. We are here to help\n                                anytime\n                            ")])], 1)], 1)], 1), _vm._v(" "), _c("b-card", {
     staticClass: "mb-0 custom-accordion",
     attrs: {
       "no-body": ""
@@ -4914,7 +4914,7 @@ var render = function render() {
     attrs: {
       href: "javascript: void(0);"
     }
-  }, [_vm._v("\n                Q. Will you regularly give updates of Minton ?\n                "), _c("i", {
+  }, [_vm._v("\n                                Q. Will you regularly give updates of Minton ?\n                                "), _c("i", {
     staticClass: "mdi mdi-chevron-down accordion-arrow"
   })])])]), _vm._v(" "), _c("b-collapse", {
     attrs: {
@@ -4922,7 +4922,7 @@ var render = function render() {
       accordion: "my-accordion",
       role: "tabpanel"
     }
-  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("Yes, We will update the Minton regularly. All the future\n                updates would be available without any cost")])], 1)], 1)], 1)], 1)])])], 1);
+  }, [_c("b-card-body", [_c("b-card-text", [_vm._v("Yes, We will update the Minton regularly. All the future\n                                updates would be available without any cost\n                            ")])], 1)], 1)], 1)], 1)])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

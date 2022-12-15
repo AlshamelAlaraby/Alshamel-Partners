@@ -5039,7 +5039,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -5051,7 +5051,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "long_name"
@@ -5063,7 +5063,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.long_name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.long_name")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "long_name_e"
@@ -5075,7 +5075,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.long_name_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "short_code"
@@ -5087,7 +5087,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.short_code")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.short_code")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "phone_key"
@@ -5099,7 +5099,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.phone_key")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.phone_key")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "national_id_length"
@@ -5111,7 +5111,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.national")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.national")) + "\n                                        ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5168,7 +5168,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Create")) + "\n                                    "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -5217,11 +5217,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.filter")) + "\n                                            "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.group")) + "\n                                            "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -5239,7 +5239,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5248,7 +5248,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.long_name,
@@ -5257,7 +5257,7 @@ var render = function render() {
       },
       expression: "setting.long_name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.long_name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.long_name")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.long_name_e,
@@ -5266,7 +5266,7 @@ var render = function render() {
       },
       expression: "setting.long_name_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.long_name_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.short_code,
@@ -5275,7 +5275,7 @@ var render = function render() {
       },
       expression: "setting.short_code"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.short_code")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.short_code")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.phone_key,
@@ -5284,7 +5284,7 @@ var render = function render() {
       },
       expression: "setting.phone_key"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.phone_key")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.phone_key")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.national_id_length,
@@ -5293,7 +5293,7 @@ var render = function render() {
       },
       expression: "setting.national_id_length"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.national")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.national")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_default,
@@ -5302,7 +5302,7 @@ var render = function render() {
       },
       expression: "setting.is_default"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.is_default")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.is_default")) + "\n                                            ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_active,
@@ -5311,7 +5311,7 @@ var render = function render() {
       },
       expression: "setting.is_active"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.Status")) + "\n                                            ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5325,7 +5325,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.countriesPagination.from) + "-" + _vm._s(_vm.countriesPagination.to) + " / " + _vm._s(_vm.countriesPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.countriesPagination.from) + "-" + _vm._s(_vm.countriesPagination.to) + " /\n                                            " + _vm._s(_vm.countriesPagination.total) + "\n                                        ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -5391,6 +5391,23 @@ var render = function render() {
       hidden: _vm.resetModalHidden
     }
   }, [_c("form", [_c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("b-tabs", {
+    attrs: {
+      "nav-class": "nav-tabs nav-bordered"
+    }
+  }, [_c("b-tab", {
+    attrs: {
+      title: _vm.$t("general.DataEntry"),
+      active: ""
+    }
+  }, [_c("div", {
+    staticClass: "row justify-content-between"
+  }, [_c("div", {
+    staticClass: "col-md-7"
+  }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6 direction",
@@ -5404,7 +5421,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Name")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5438,68 +5455,14 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.name.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.alphaArabic ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.alphaArabic ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6 direction-ltr",
-    attrs: {
-      dir: "ltr"
-    }
-  }, [_c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    staticClass: "control-label",
-    attrs: {
-      "for": "field-2"
-    }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.name_e.$model,
-      expression: "$v.create.name_e.$model"
-    }],
-    staticClass: "form-control",
-    "class": {
-      "is-invalid": _vm.$v.create.name_e.$error || _vm.errors.name_e,
-      "is-valid": !_vm.$v.create.name_e.$invalid && !_vm.errors.name_e
-    },
-    attrs: {
-      type: "text",
-      "data-create": "2",
-      id: "field-2"
-    },
-    domProps: {
-      value: _vm.$v.create.name_e.$model
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 3);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.$v.create.name_e, "$model", $event.target.value);
-      }
-    }
-  }), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.alphaEnglish ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
-    return _c("ErrorMessage", {
-      key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 direction",
     attrs: {
@@ -5512,7 +5475,7 @@ var render = function render() {
     attrs: {
       "for": "field-3"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.long_name")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.long_name")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5546,14 +5509,68 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.long_name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.long_name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name.maxLength ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.long_name.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.long_name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name.alphaArabic ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.long_name.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name.alphaArabic ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.long_name ? _vm._l(_vm.errors.long_name, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.long_name ? _vm._l(_vm.errors.long_name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-2"
+    }
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                                        "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.name_e.$model,
+      expression: "$v.create.name_e.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.name_e.$error || _vm.errors.name_e,
+      "is-valid": !_vm.$v.create.name_e.$invalid && !_vm.errors.name_e
+    },
+    attrs: {
+      type: "text",
+      "data-create": "2",
+      id: "field-2"
+    },
+    domProps: {
+      value: _vm.$v.create.name_e.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 3);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.name_e, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 direction-ltr",
     attrs: {
@@ -5566,7 +5583,7 @@ var render = function render() {
     attrs: {
       "for": "field-4"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5600,16 +5617,20 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.long_name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.long_name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.long_name_e.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.long_name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name_e.alphaEnglish ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.long_name_e.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.long_name_e.alphaEnglish ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.long_name_e ? _vm._l(_vm.errors.long_name_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.long_name_e ? _vm._l(_vm.errors.long_name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
+  }) : _vm._e()], 2)])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-4"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5617,7 +5638,7 @@ var render = function render() {
     attrs: {
       "for": "create-20"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.national")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.national")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5657,14 +5678,14 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.national_id_length.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.national_id_length.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.national_id_length.maxLength ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.national_id_length.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.national_id_length.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.national_id_length.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.national_id_length ? _vm._l(_vm.errors.national_id_length, function (errorMessage, index) {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.national_id_length.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.national_id_length ? _vm._l(_vm.errors.national_id_length, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4"
+    staticClass: "col-md-6"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5672,58 +5693,7 @@ var render = function render() {
     attrs: {
       "for": "field-4"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.phone_key")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.phone_key.$model,
-      expression: "$v.create.phone_key.$model"
-    }],
-    staticClass: "form-control",
-    "class": {
-      "is-invalid": _vm.$v.create.phone_key.$error || _vm.errors.phone_key,
-      "is-valid": !_vm.$v.create.phone_key.$invalid && !_vm.errors.phone_key
-    },
-    attrs: {
-      type: "text",
-      "data-create": "6",
-      id: "field-5"
-    },
-    domProps: {
-      value: _vm.$v.create.phone_key.$model
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 7);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.$v.create.phone_key, "$model", $event.target.value);
-      }
-    }
-  }), _vm._v(" "), !_vm.$v.create.phone_key.minLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.phone_key.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone_key.maxLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.phone_key.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone_key.alphaEnglish ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.phone_key ? _vm._l(_vm.errors.phone_key, function (errorMessage, index) {
-    return _c("ErrorMessage", {
-      key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4"
-  }, [_c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    staticClass: "control-label",
-    attrs: {
-      "for": "field-4"
-    }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.short_code")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.short_code")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5757,16 +5727,67 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.short_code.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.short_code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.short_code.maxLength ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.short_code.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.short_code.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.short_code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.short_code.alphaEnglish ? _c("div", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.short_code.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.short_code.alphaEnglish ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.short_code ? _vm._l(_vm.errors.short_code, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.short_code ? _vm._l(_vm.errors.short_code, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4"
+    staticClass: "col-md-6"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-4"
+    }
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.phone_key")) + "\n                                                                        "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.phone_key.$model,
+      expression: "$v.create.phone_key.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.phone_key.$error || _vm.errors.phone_key,
+      "is-valid": !_vm.$v.create.phone_key.$invalid && !_vm.errors.phone_key
+    },
+    attrs: {
+      type: "text",
+      "data-create": "6",
+      id: "field-5"
+    },
+    domProps: {
+      value: _vm.$v.create.phone_key.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 7);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.phone_key, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.phone_key.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                        " + _vm._s(_vm.$v.create.phone_key.$params.minLength.min) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone_key.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                        " + _vm._s(_vm.$v.create.phone_key.$params.maxLength.max) + "\n                                                                        " + _vm._s(_vm.$t("general.letters")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone_key.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.phone_key ? _vm._l(_vm.errors.phone_key, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5774,7 +5795,7 @@ var render = function render() {
     attrs: {
       "for": "field-11"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.is_default")) + "\n                                        ")]), _vm._v(" "), _c("select", {
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                                                    ")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5811,7 +5832,7 @@ var render = function render() {
       value: "",
       selected: ""
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...\n                                                                        ")]), _vm._v(" "), _c("option", {
     attrs: {
       value: "1"
     }
@@ -5822,72 +5843,61 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4"
+    staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
-    staticClass: "mr-2",
-    attrs: {
-      "for": "inlineFormCustomSelectPref"
-    }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                            "), _c("span", {
+    staticClass: "mr-2"
+  }, [_vm._v("\n                                                                        " + _vm._s(_vm.$t("general.Status")) + "\n                                                                        "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.is_active.$model,
-      expression: "$v.create.is_active.$model"
-    }],
-    staticClass: "custom-select mr-sm-2",
+  }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
     "class": {
       "is-invalid": _vm.$v.create.is_active.$error || _vm.errors.is_active,
       "is-valid": !_vm.$v.create.is_active.$invalid && !_vm.errors.is_active
-    },
-    attrs: {
-      id: "inlineFormCustomSelectPref",
-      "data-create": "9"
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        $event.preventDefault();
-        return _vm.moveInput("input", "create", 1);
-      },
-      change: function change($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
-          return o.selected;
-        }).map(function (o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val;
-        });
-        _vm.$set(_vm.$v.create.is_active, "$model", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
-      }
     }
-  }, [_c("option", {
+  }, [_c("b-form-radio", {
+    staticClass: "d-inline-block",
     attrs: {
-      value: "",
-      selected: ""
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
-    attrs: {
+      name: "some-radios",
       value: "active"
+    },
+    model: {
+      value: _vm.$v.create.is_active.$model,
+      callback: function callback($$v) {
+        _vm.$set(_vm.$v.create.is_active, "$model", $$v);
+      },
+      expression: "$v.create.is_active.$model"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("b-form-radio", {
+    staticClass: "d-inline-block m-1",
     attrs: {
+      name: "some-radios",
       value: "inactive"
+    },
+    model: {
+      value: _vm.$v.create.is_active.$model,
+      callback: function callback($$v) {
+        _vm.$set(_vm.$v.create.is_active, "$model", $$v);
+      },
+      expression: "$v.create.is_active.$model"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])], 1), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(errorMessage) + "\n                                                                        ")]);
+  }) : _vm._e()], 2)])])])])]), _vm._v(" "), _c("b-tab", {
+    attrs: {
+      title: _vm.$t("general.ImageUploads")
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
     staticClass: "col-md-12 my-1"
   }, [_c("label", {
     staticClass: "mb-1"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.imagEUpload")) + "\n                                        "), _c("span", {
+  }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.imagEUpload")) + "\n                                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("vue-dropzone", {
     ref: "myCreateDropzone",
@@ -5907,7 +5917,7 @@ var render = function render() {
     staticClass: "h1 text-muted ri-upload-cloud-2-line"
   }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(_vm.$t("general.Dropfileshereorclicktoupload")))]), _vm._v(" "), _c("span", {
     staticClass: "text-muted font-13"
-  }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                            ")])])])], 1)]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                                ")])])])], 1)])])], 1)], 1)]), _vm._v(" "), _c("div", {
     staticClass: "mt-1 d-flex justify-content-end"
   }, [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1 custom-btn-background",
@@ -5921,7 +5931,7 @@ var render = function render() {
         return _vm.shootCountry.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Add")) + "\n                                ")]) : _c("b-button", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5944,7 +5954,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 1)])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Cancel")) + "\n                                    ")])], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "table-responsive mb-3 custom-table-theme position-relative"
   }, [_vm.isLoader ? _c("loader", {
     attrs: {
@@ -6071,11 +6081,11 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.phone_key ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.phone_key")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.short_code ? _c("th", [_c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.phone_key")) + "\n                                        ")])]) : _vm._e(), _vm._v(" "), _vm.setting.short_code ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.short_code")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.short_code")) + "\n                                        ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.is_default")) + "\n                                        ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6093,7 +6103,7 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Action")) + "\n                                    ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.countries.length > 0 ? _c("tbody", _vm._l(_vm.countries, function (data, index) {
     return _c("tr", {
@@ -6160,9 +6170,9 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.long_name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.phone_key ? _c("td", [_vm._v(_vm._s(data.phone_key))]) : _vm._e(), _vm._v(" "), _vm.setting.short_code ? _c("td", [_vm._v(_vm._s(data.short_code))]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("td", [_c("span", {
       "class": [data.is_default == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
+    }, [_vm._v("\n                                            " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                        ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
       "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                            " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                        ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6171,7 +6181,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.commands")) + "\n                                                "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -6237,7 +6247,7 @@ var render = function render() {
       attrs: {
         "for": "edit-1"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Name")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6271,14 +6281,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.alphaArabic ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.alphaArabic ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-6 direction-ltr",
       attrs: {
@@ -6291,7 +6301,7 @@ var render = function render() {
       attrs: {
         "for": "edit-2"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6325,14 +6335,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.alphaEnglish ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.alphaEnglish ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-6 direction",
       attrs: {
@@ -6345,7 +6355,7 @@ var render = function render() {
       attrs: {
         "for": "edit-3"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.long_name")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.long_name")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6379,14 +6389,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.long_name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.long_name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.long_name.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.long_name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name.alphaArabic ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.long_name.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name.alphaArabic ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.long_name ? _vm._l(_vm.errors.long_name, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.long_name ? _vm._l(_vm.errors.long_name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-6 direction-ltr",
       attrs: {
@@ -6399,7 +6409,7 @@ var render = function render() {
       attrs: {
         "for": "edit-4"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.long_name_e")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6433,14 +6443,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.long_name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.long_name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.long_name_e.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.long_name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name_e.alphaEnglish ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.long_name_e.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.long_name_e.alphaEnglish ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.long_name_e ? _vm._l(_vm.errors.long_name_e, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.long_name_e ? _vm._l(_vm.errors.long_name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-4"
     }, [_c("div", {
@@ -6450,7 +6460,7 @@ var render = function render() {
       attrs: {
         "for": "edit-21"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.national")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.national")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6490,12 +6500,12 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.national_id_length.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.national_id_length.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.national_id_length.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.national_id_length.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.national_id_length.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.national_id_length.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.national_id_length ? _vm._l(_vm.errors.national_id_length, function (errorMessage, index) {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.national_id_length.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.national_id_length ? _vm._l(_vm.errors.national_id_length, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-4"
     }, [_c("div", {
@@ -6505,7 +6515,7 @@ var render = function render() {
       attrs: {
         "for": "edit-4"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.phone_key")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.phone_key")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6539,14 +6549,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.phone_key.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.phone_key.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone_key.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.phone_key.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone_key.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.phone_key.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone_key.alphaEnglish ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.phone_key.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone_key.alphaEnglish ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.phone_key ? _vm._l(_vm.errors.phone_key, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.phone_key ? _vm._l(_vm.errors.phone_key, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-4"
     }, [_c("div", {
@@ -6556,7 +6566,7 @@ var render = function render() {
       attrs: {
         "for": "edit-4"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.short_code")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.short_code")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6590,14 +6600,14 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.short_code.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.short_code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.short_code.maxLength ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                                " + _vm._s(_vm.$v.edit.short_code.$params.minLength.min) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.short_code.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.short_code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.short_code.alphaEnglish ? _c("div", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                                " + _vm._s(_vm.$v.edit.short_code.$params.maxLength.max) + "\n                                                                " + _vm._s(_vm.$t("general.letters")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.short_code.alphaEnglish ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.short_code ? _vm._l(_vm.errors.short_code, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                            ")]) : _vm._e(), _vm._v(" "), _vm.errors.short_code ? _vm._l(_vm.errors.short_code, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-4"
     }, [_c("div", {
@@ -6607,7 +6617,7 @@ var render = function render() {
       attrs: {
         "for": "edit-11"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.is_default")) + "\n                                                        ")]), _vm._v(" "), _c("select", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.is_default")) + "\n                                                            ")]), _vm._v(" "), _c("select", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -6644,7 +6654,7 @@ var render = function render() {
         value: "",
         selected: ""
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...\n                                                                ")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "1"
       }
@@ -6655,14 +6665,14 @@ var render = function render() {
     }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-4"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "mr-2"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Status")) + "\n                                                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
       directives: [{
@@ -6700,18 +6710,18 @@ var render = function render() {
         value: "",
         selected: ""
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...\n                                                                ")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "active"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Active")) + "\n                                                                ")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "inactive"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")) + "\n                                                                ")])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-12"
     }, [!_vm.changeImage ? _c("tamplate", [_c("vue-dropzone", {
@@ -6732,7 +6742,7 @@ var render = function render() {
       staticClass: "h1 text-muted ri-upload-cloud-2-line"
     }), _vm._v(" "), _c("h3", [_vm._v(_vm._s(_vm.$t("general.Dropfileshereorclicktoupload")))]), _vm._v(" "), _c("span", {
       staticClass: "text-muted font-13"
-    }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                                            ")])])])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                                                                    " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                                                ")])])])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
     }, [!_vm.isLoader ? _c("b-button", {
       staticClass: "mx-1 custom-btn-background",
@@ -6745,7 +6755,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                                                        " + _vm._s(_vm.$t("general.Edit")) + "\n                                                    ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6768,7 +6778,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
+    }, [_vm._v("\n                                                        " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                    ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
       staticClass: "fe-info",
       on: {
         mouseenter: function mouseenter($event) {

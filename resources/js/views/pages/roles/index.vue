@@ -62,10 +62,12 @@ export default {
         create: {
             name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
             name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            roletype_id:{required}
         },
         edit: {
             name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
             name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            roletype_id:{required}
         },
     },
     watch: {
@@ -214,6 +216,7 @@ export default {
         /**
          *  hidden Modal (create)
          */
+
         async resetModal() {
             await this.getRoleType();
             this.create = {name: '', name_e: '', roletype_id: null};
@@ -608,6 +611,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">{{ $t('general.IdParent') }}</label>
@@ -695,7 +699,7 @@ export default {
                                 </thead>
                                 <tbody v-if="roles.length > 0">
                                 <tr
-                                    @click.prevent="checkRow(data.id)"
+                                    @click.capture="checkRow(data.id)"
                                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                     v-for="(data,index) in roles"
                                     :key="data.id"

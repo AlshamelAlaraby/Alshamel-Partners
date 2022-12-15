@@ -586,7 +586,9 @@
         "symbol_e": "Symbol (English)",
         "symbol": "Symbol (Arabic)",
         "salesManType" : "Sale Man Type",
-        "employee": "Employee"
+        "employee": "Employee",
+        "DataEntry": "Data Entry",
+        "ImageUploads": "Image Uploads"
     }
 }
 

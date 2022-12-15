@@ -592,7 +592,9 @@
         "symbol": "رمز (العربي)",
         "symbol_e": "رمز (انجليزي)",
         "salesManType" : "نوع رجل المبيعات",
-        "employee": "الموظف"
+        "employee": "الموظف",
+        "DataEntry": "ادخال البيانات",
+        "ImageUploads": "تحميل الصور"
     }
 
 }

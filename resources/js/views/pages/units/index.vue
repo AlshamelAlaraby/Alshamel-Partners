@@ -702,7 +702,7 @@ export default {
                                 </thead>
                                 <tbody v-if="units.length > 0">
                                 <tr
-                                    @click.prevent="checkRow(data.id)"
+                                    @click.capture="checkRow(data.id)"
                                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                     v-for="(data,index) in units"
                                     :key="data.id"

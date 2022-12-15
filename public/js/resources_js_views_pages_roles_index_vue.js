@@ -1426,6 +1426,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      roletype_id: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
       }
     },
     edit: {
@@ -1440,6 +1443,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      roletype_id: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
       }
     }
   },
@@ -5401,8 +5407,7 @@ var render = function render() {
       key: data.id,
       staticClass: "body-tr-custom",
       on: {
-        click: function click($event) {
-          $event.preventDefault();
+        "!click": function click($event) {
           return _vm.checkRow(data.id);
         },
         dblclick: function dblclick($event) {

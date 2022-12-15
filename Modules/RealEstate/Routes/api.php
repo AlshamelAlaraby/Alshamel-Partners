@@ -39,6 +39,7 @@ Route::prefix('real-estate')->group(function () {
 
 
 
+});
 
     // owners routes
     Route::group(['prefix' => 'owners'], function () {
@@ -125,4 +126,4 @@ Route::prefix('real-estate')->group(function () {
         Route::put('/{id}', 'RlstContractController@update')->name('rlst-contracts.update');
         Route::delete('/{id}', 'RlstContractController@delete')->name('rlst-contracts.delete');
     });
-});
+

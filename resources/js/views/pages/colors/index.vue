@@ -704,7 +704,7 @@ export default {
                                 </thead>
                                 <tbody v-if="colors.length > 0">
                                 <tr
-                                    @click.prevent="checkRow(data.id)"
+                                    @click.capture="checkRow(data.id)"
                                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                     v-for="(data,index) in colors"
                                     :key="data.id"
