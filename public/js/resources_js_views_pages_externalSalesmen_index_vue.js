@@ -1617,7 +1617,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         national_id: null,
         is_active: 'active'
       };
-      this.countries = [];
       this.$nextTick(function () {
         _this6.$v.$reset();
       });
@@ -5384,7 +5383,6 @@ var render = function render() {
     attrs: {
       type: "text",
       "data-create": "4",
-      placeholder: _vm.$t("partner.partner"),
       id: "field-4"
     },
     domProps: {
@@ -6776,44 +6774,20 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 5,
-  label: 'menuitems.currency.text',
-  icon: ' fas fa-dollar-sign',
-  link: '/currency'
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
 }, {
-  id: 6,
-  label: 'menuitems.employee.text',
-  icon: 'fas fa-user-friends',
-  link: '/employee'
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
 }, {
-  id: 7,
-  label: 'menuitems.financialYear.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/financialYear'
-}, {
-  id: 10001,
-  label: "menuitems.role.text",
-  icon: "ri-shield-user-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10002,
-    label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
-  }, {
-    id: 10003,
-    label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
-  }]
-}, {
-  id: 10004,
-  label: 'menuitems.units.text',
-  icon: 'far fa-list-alt',
-  link: '/units'
-}, {
-  id: 10005,
-  label: 'menuitems.colors.text',
-  icon: 'fas fa-palette',
-  link: '/colors'
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6831,6 +6805,10 @@ var menuItems = [{
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
     link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
   }]
 }, {
   id: 1000544,
@@ -6855,20 +6833,44 @@ var menuItems = [{
     link: '/avenue'
   }]
 }, {
-  id: 10007,
-  label: 'menuitems.branch.text',
-  icon: 'fas fa-code-branch',
-  link: '/branch'
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
 }, {
-  id: 10008,
-  label: 'menuitems.store.text',
-  icon: 'fas fa-store',
-  link: '/store'
+  id: 5,
+  label: 'menuitems.currency.text',
+  icon: ' fas fa-dollar-sign',
+  link: '/currency'
 }, {
-  id: 10009,
-  label: 'menuitems.serial.text',
-  icon: 'fas fa-eraser',
-  link: '/serial'
+  id: 6,
+  label: 'menuitems.employee.text',
+  icon: 'fas fa-user-friends',
+  link: '/employee'
+}, {
+  id: 7,
+  label: 'menuitems.financialYear.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/financialYear'
+}, {
+  id: 10004,
+  label: 'menuitems.units.text',
+  icon: 'far fa-list-alt',
+  link: '/units'
+}, {
+  id: 10005,
+  label: 'menuitems.colors.text',
+  icon: 'fas fa-palette',
+  link: '/colors'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

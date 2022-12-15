@@ -25,6 +25,12 @@ class SalesmenType extends Model
         'is_employee' => '\App\Enums\IsDefault',
     ];
 
+
+    public function salesmen()
+    {
+        return $this->hasMany(Salesman::class, 'salesman_type_id');
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;
@@ -38,6 +44,6 @@ class SalesmenType extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Salesmen Type')
-            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

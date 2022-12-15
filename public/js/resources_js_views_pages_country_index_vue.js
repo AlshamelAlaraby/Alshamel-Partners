@@ -1422,11 +1422,22 @@ __webpack_require__.r(__webpack_exports__);
         maxFilesize: 5,
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
         parallelUploads: 1,
-        maxFiles: 1,
+        maxFiles: 10,
         autoProcessQueue: false,
         headers: {
           "My-Awesome-Header": "header value"
         }
+      },
+      setting: {
+        name: true,
+        name_e: true,
+        long_name: true,
+        long_name_e: true,
+        short_code: true,
+        phone_key: true,
+        national_id_length: true,
+        is_default: true,
+        is_active: true
       },
       filterSetting: ['name', 'name_e', 'long_name', 'long_name_e', 'short_code', 'phone_key', 'national_id_length']
     };
@@ -1447,13 +1458,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       long_name: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       long_name_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
@@ -1495,13 +1506,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       long_name: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       long_name_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
@@ -1573,12 +1584,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
+      var filter = '';
+      for (var i = 0; i > this.filterSetting.length; ++i) {
+        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+      }
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
         _this3.countries = l.data;
         _this3.countriesPagination = l.pagination;
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
+        console.log(err.response);
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: 'error',
           title: "".concat(_this3.$t('general.Error')),
@@ -1593,7 +1609,11 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.countriesPagination.last_page && this.current_page != this.countriesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting)).then(function (res) {
+        var filter = '';
+        for (var i = 0; i > this.filterSetting.length; ++i) {
+          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+        }
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
           _this4.countries = l.data;
           _this4.countriesPagination = l.pagination;
@@ -1668,7 +1688,7 @@ __webpack_require__.r(__webpack_exports__);
         short_code: '',
         phone_key: '',
         national_id_length: null,
-        is_default: 0,
+        is_default: 1,
         is_active: 'active',
         media: null
       };
@@ -1691,7 +1711,7 @@ __webpack_require__.r(__webpack_exports__);
         short_code: '',
         phone_key: '',
         national_id_length: null,
-        is_default: 0,
+        is_default: 1,
         is_active: 'active',
         media: null
       };
@@ -1738,7 +1758,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     /**
-     *  edit countrie
+     *  edit country
      */
     editSubmit: function editSubmit(id) {
       var _this9 = this;
@@ -1774,6 +1794,25 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    /*
+    *  log country
+    * */
+    log: function log(id) {
+      var _this10 = this;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries/logs/".concat(id)).then(function (res) {
+        console.log(res.data.data);
+      })["catch"](function (err) {
+        if (err.response.data) {
+          _this10.errors = err.response.data.errors;
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: 'error',
+            title: "".concat(_this10.$t('general.Error')),
+            text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+          });
+        }
+      });
+    },
     /**
      *   show Modal (edit)
      */
@@ -1789,7 +1828,7 @@ __webpack_require__.r(__webpack_exports__);
       this.edit.phone_key = country.phone_key;
       this.edit.short_code = country.short_code;
       this.edit.is_active = country.is_active;
-      this.edit.is_default = country.is_default;
+      this.edit.is_default = country.is_default ? 1 : 0;
       // this.edit.media = country.media.id;
       this.errors = {};
     },
@@ -5184,11 +5223,102 @@ var render = function render() {
     staticClass: "mx-1 custom-btn-background"
   }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
     staticClass: "fe-menu"
-  })]), _vm._v(" "), _c("b-button", {
-    staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.setting")) + "\n                                        "), _c("i", {
-    staticClass: "fe-settings"
-  })])], 1), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("b-dropdown", {
+    ref: "dropdown",
+    staticClass: "dropdown-custom-ali",
+    attrs: {
+      variant: "primary",
+      html: "".concat(_vm.$t("general.setting"), " <i class='fe-settings'></i>")
+    }
+  }, [_c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.name,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "name", $$v);
+      },
+      expression: "setting.name"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.name_e,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "name_e", $$v);
+      },
+      expression: "setting.name_e"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.long_name,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "long_name", $$v);
+      },
+      expression: "setting.long_name"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.long_name")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.long_name_e,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "long_name_e", $$v);
+      },
+      expression: "setting.long_name_e"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.long_name_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.short_code,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "short_code", $$v);
+      },
+      expression: "setting.short_code"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.short_code")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.phone_key,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "phone_key", $$v);
+      },
+      expression: "setting.phone_key"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.phone_key")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.national_id_length,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "national_id_length", $$v);
+      },
+      expression: "setting.national_id_length"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.national")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.is_default,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "is_default", $$v);
+      },
+      expression: "setting.is_default"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.is_default")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.is_active,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "is_active", $$v);
+      },
+      expression: "setting.is_active"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
+    staticClass: "d-flex justify-content-end"
+  }, [_c("a", {
+    staticClass: "btn btn-primary btn-sm",
+    attrs: {
+      href: "javascript:void(0)"
+    }
+  }, [_vm._v("Apply")])])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex align-items-center pagination-custom"
   }, [_c("div", {
     staticClass: "d-inline-block",
@@ -5252,8 +5382,8 @@ var render = function render() {
       id: "create",
       title: _vm.$t("country.addcountry"),
       "title-class": "font-18",
-      size: "lg",
-      "body-class": "p-4 ",
+      "dialog-class": "modal-full-width",
+      "body-class": "p-4",
       "hide-footer": true
     },
     on: {
@@ -5754,7 +5884,7 @@ var render = function render() {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-12 my-2"
+    staticClass: "col-md-12 my-1"
   }, [_c("label", {
     staticClass: "mb-1"
   }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.imagEUpload")) + "\n                                        "), _c("span", {
@@ -5763,6 +5893,7 @@ var render = function render() {
     ref: "myCreateDropzone",
     attrs: {
       id: "dropzone",
+      multiple: "",
       "use-custom-slot": true,
       options: _vm.dropzoneOptions
     },
@@ -5779,7 +5910,7 @@ var render = function render() {
   }, [_vm._v("\n                                                " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                            ")])])])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "mt-1 d-flex justify-content-end"
   }, [!_vm.isLoader ? _c("b-button", {
-    staticClass: "mx-1",
+    staticClass: "mx-1 custom-btn-background",
     attrs: {
       variant: "success",
       type: "button"
@@ -5866,7 +5997,7 @@ var render = function render() {
         }
       }
     }
-  })])]), _vm._v(" "), _c("th", [_c("div", {
+  })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -5884,7 +6015,7 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-name"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -5902,7 +6033,7 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.long_name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.long_name")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -5920,7 +6051,7 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-long_name"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.long_name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.long_name_e")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -5938,13 +6069,13 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-long_name_e"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.phone_key ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.phone_key")) + "\n                                    ")])]), _vm._v(" "), _c("th", [_c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.phone_key")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.short_code ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.short_code")) + "\n                                    ")])]), _vm._v(" "), _c("th", [_c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.short_code")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]), _vm._v(" "), _c("th", [_c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -5962,7 +6093,7 @@ var render = function render() {
         _vm.countries.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.countries.length > 0 ? _c("tbody", _vm._l(_vm.countries, function (data, index) {
     return _c("tr", {
@@ -6019,19 +6150,19 @@ var render = function render() {
           }
         }
       }
-    })])]), _vm._v(" "), _c("td", [_c("h5", {
+    })])]), _vm._v(" "), _vm.setting.name ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name))])]), _vm._v(" "), _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.long_name ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.long_name))])]), _vm._v(" "), _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(data.long_name))])]) : _vm._e(), _vm._v(" "), _vm.setting.long_name_e ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.long_name_e))])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.phone_key))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.short_code))]), _vm._v(" "), _c("td", [_c("span", {
+    }, [_vm._v(_vm._s(data.long_name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.phone_key ? _c("td", [_vm._v(_vm._s(data.phone_key))]) : _vm._e(), _vm._v(" "), _vm.setting.short_code ? _c("td", [_vm._v(_vm._s(data.short_code))]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("td", [_c("span", {
       "class": [data.is_default == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("span", {
+    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
       "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6092,15 +6223,7 @@ var render = function render() {
           return _vm.resetModalHiddenEdit(data.id);
         }
       }
-    }, [_c("form", {
-      on: {
-        submit: function submit($event) {
-          $event.stopPropagation();
-          $event.preventDefault();
-          return _vm.editSubmit(data.id);
-        }
-      }
-    }, [_c("div", {
+    }, [_c("form", [_c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-6 direction",
@@ -6612,10 +6735,15 @@ var render = function render() {
     }, [_vm._v("\n                                                                " + _vm._s(_vm.$t("general.Dropfileshereorclicktoupload")) + "\n                                                            ")])])])], 1) : _vm._e()], 1)]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
     }, [!_vm.isLoader ? _c("b-button", {
-      staticClass: "mx-1",
+      staticClass: "mx-1 custom-btn-background",
       attrs: {
-        variant: "success",
-        type: "submit"
+        variant: "success"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.editSubmit(data.id);
+        }
       }
     }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
       staticClass: "mx-1",
@@ -6642,8 +6770,10 @@ var render = function render() {
       }
     }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
       staticClass: "fe-info",
-      staticStyle: {
-        "font-size": "22px"
+      on: {
+        mouseenter: function mouseenter($event) {
+          return _vm.log(data.id);
+        }
       }
     })])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
@@ -7179,44 +7309,20 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 5,
-  label: 'menuitems.currency.text',
-  icon: ' fas fa-dollar-sign',
-  link: '/currency'
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
 }, {
-  id: 6,
-  label: 'menuitems.employee.text',
-  icon: 'fas fa-user-friends',
-  link: '/employee'
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
 }, {
-  id: 7,
-  label: 'menuitems.financialYear.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/financialYear'
-}, {
-  id: 10001,
-  label: "menuitems.role.text",
-  icon: "ri-shield-user-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10002,
-    label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
-  }, {
-    id: 10003,
-    label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
-  }]
-}, {
-  id: 10004,
-  label: 'menuitems.units.text',
-  icon: 'far fa-list-alt',
-  link: '/units'
-}, {
-  id: 10005,
-  label: 'menuitems.colors.text',
-  icon: 'fas fa-palette',
-  link: '/colors'
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -7234,6 +7340,10 @@ var menuItems = [{
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
     link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
   }]
 }, {
   id: 1000544,
@@ -7258,20 +7368,44 @@ var menuItems = [{
     link: '/avenue'
   }]
 }, {
-  id: 10007,
-  label: 'menuitems.branch.text',
-  icon: 'fas fa-code-branch',
-  link: '/branch'
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
 }, {
-  id: 10008,
-  label: 'menuitems.store.text',
-  icon: 'fas fa-store',
-  link: '/store'
+  id: 5,
+  label: 'menuitems.currency.text',
+  icon: ' fas fa-dollar-sign',
+  link: '/currency'
 }, {
-  id: 10009,
-  label: 'menuitems.serial.text',
-  icon: 'fas fa-eraser',
-  link: '/serial'
+  id: 6,
+  label: 'menuitems.employee.text',
+  icon: 'fas fa-user-friends',
+  link: '/employee'
+}, {
+  id: 7,
+  label: 'menuitems.financialYear.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/financialYear'
+}, {
+  id: 10004,
+  label: 'menuitems.units.text',
+  icon: 'far fa-list-alt',
+  link: '/units'
+}, {
+  id: 10005,
+  label: 'menuitems.colors.text',
+  icon: 'fas fa-palette',
+  link: '/colors'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

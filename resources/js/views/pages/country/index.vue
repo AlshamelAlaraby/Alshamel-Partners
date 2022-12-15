@@ -71,11 +71,22 @@ export default {
                 maxFilesize: 5,
                 acceptedFiles: ".jpeg,.jpg,.png,.gif",
                 parallelUploads: 1,
-                maxFiles: 1,
+                maxFiles: 10,
                 autoProcessQueue: false,
                 headers: {
                     "My-Awesome-Header": "header value",
                 },
+            },
+            setting: {
+                name: true,
+                name_e: true,
+                long_name: true,
+                long_name_e: true,
+                short_code: true,
+                phone_key: true,
+                national_id_length: true,
+                is_default: true,
+                is_active: true
             },
             filterSetting: ['name','name_e','long_name','long_name_e','short_code','phone_key','national_id_length']
         }
@@ -84,8 +95,8 @@ export default {
         create: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            long_name: {required,minLength: minLength(3),maxLength: maxLength(100),alphaArabic},
-            long_name_e: {required,minLength: minLength(3),maxLength: maxLength(100),alphaEnglish},
+            long_name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            long_name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
             short_code: {required,minLength: minLength(1),maxLength: maxLength(10)},
             phone_key: {required,minLength: minLength(1),maxLength: maxLength(10)},
             is_default: {required,integer},
@@ -95,8 +106,8 @@ export default {
         edit: {
             name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
             name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            long_name: {required,minLength: minLength(3),maxLength: maxLength(100),alphaArabic},
-            long_name_e: {required,minLength: minLength(3),maxLength: maxLength(100),alphaEnglish},
+            long_name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
+            long_name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
             short_code: {required,minLength: minLength(1),maxLength: maxLength(10)},
             phone_key: {required,minLength: minLength(1),maxLength: maxLength(10)},
             is_default: {required,integer},
@@ -145,7 +156,10 @@ export default {
         getData(page = 1){
             this.isLoader = true;
 
-            adminApi.get(`/countries?page=${page}&per_page=${this.per_page}`)
+            let filter = '';
+            for(let i =0; i > this.filterSetting.length;++i){filter += `columns[${i}]=${this.filterSetting[i]}&`;}
+
+            adminApi.get(`/countries?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.countries = l.data;
@@ -153,6 +167,7 @@ export default {
                     this.current_page = l.pagination.current_page;
                 })
                 .catch((err) => {
+                    console.log(err.response)
                     Swal.fire({
                         icon: 'error',
                         title: `${this.$t('general.Error')}`,
@@ -166,8 +181,10 @@ export default {
         getDataCurrentPage(page = 1){
             if(this.current_page <= this.countriesPagination.last_page && this.current_page != this.countriesPagination.current_page && this.current_page){
                 this.isLoader = true;
+                let filter = '';
+                for(let i =0; i > this.filterSetting.length;++i){filter += `columns[${i}]=${this.filterSetting[i]}&`;}
 
-                adminApi.get(`/countries?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
+                adminApi.get(`/countries?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.countries = l.data;
@@ -248,7 +265,7 @@ export default {
                 short_code: '',
                 phone_key: '',
                 national_id_length: null,
-                is_default: 0,
+                is_default: 1,
                 is_active: 'active',
                 media: null
             };
@@ -268,7 +285,7 @@ export default {
                 short_code: '',
                 phone_key: '',
                 national_id_length: null,
-                is_default: 0,
+                is_default: 1,
                 is_active: 'active',
                 media: null
             };
@@ -319,7 +336,7 @@ export default {
 
         },
         /**
-         *  edit countrie
+         *  edit country
          */
         editSubmit(id){
             this.$v.edit.$touch();
@@ -357,6 +374,30 @@ export default {
                     });
             }
         },
+        /*
+        *  log country
+        * */
+        log(id){
+
+            adminApi.get(`/countries/logs/${id}`)
+                .then((res) => {
+
+                    console.log(res.data.data);
+
+                })
+                .catch((err) => {
+                    if(err.response.data){
+                        this.errors = err.response.data.errors;
+                    }else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: `${this.$t('general.Error')}`,
+                            text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                        });
+                    }
+                })
+
+        },
         /**
          *   show Modal (edit)
          */
@@ -370,7 +411,7 @@ export default {
             this.edit.phone_key = country.phone_key;
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
-            this.edit.is_default = country.is_default;
+            this.edit.is_default = country.is_default  ? 1: 0;
             // this.edit.media = country.media.id;
             this.errors = {};
         },
@@ -454,7 +495,7 @@ export default {
                             <div class="col-xs-10 col-md-9 col-lg-7" style="font-weight: 500">
 
                                 <div class="d-inline-block" style="width: 22.2%;">
-                                    <!-- Basic dropdown  ,'long_name','long_name_e','short_code','phone_key','national_id' -->
+                                    <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
                                         <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
@@ -549,12 +590,22 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary" :html="`${$t('general.setting')} <i class='fe-settings'></i>`" ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.long_name" class="mb-1">{{ $t('general.long_name') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.long_name_e"  class="mb-1">{{ $t('general.long_name_e') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.short_code" class="mb-1">{{ $t('general.short_code') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.phone_key" class="mb-1">{{ $t('general.phone_key') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.national_id_length" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_default" class="mb-1">{{ $t('general.is_default') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -596,8 +647,8 @@ export default {
                             id="create"
                             :title="$t('country.addcountry')"
                             title-class="font-18"
-                            size="lg"
-                            body-class="p-4 "
+                            dialog-class="modal-full-width"
+                            body-class="p-4"
                             :hide-footer="true"
                             @show="resetModal"
                             @hidden="resetModalHidden"
@@ -835,7 +886,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 my-2">
+                                    <div class="col-md-12 my-1">
                                         <label class="mb-1">
                                             {{ $t('general.imagEUpload') }}
                                             <span class="text-danger">*</span>
@@ -844,6 +895,7 @@ export default {
                                         <vue-dropzone
                                             id="dropzone"
                                             ref="myCreateDropzone"
+                                            multiple
                                             :use-custom-slot="true"
                                             :options="dropzoneOptions"
                                             @vdropzone-complete="afterUpload"
@@ -863,7 +915,7 @@ export default {
                                     <!-- Emulate built in modal footer ok and cancel button actions -->
                                     <b-button
                                         variant="success"
-                                        type="button" class="mx-1"
+                                        type="button" class="mx-1 custom-btn-background"
                                         v-if="!isLoader"
                                         @click.prevent="shootCountry"
                                     >
@@ -902,7 +954,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name') }}</span>
                                             <div class="arrow-sort">
@@ -911,7 +963,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name_en') }}</span>
                                             <div class="arrow-sort">
@@ -920,7 +972,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.long_name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.long_name') }}</span>
                                             <div class="arrow-sort">
@@ -929,7 +981,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.long_name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.long_name_e') }}</span>
                                             <div class="arrow-sort">
@@ -938,22 +990,22 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.phone_key">
                                         <div class="d-flex justify-content-center">
                                             {{ $t('general.phone_key') }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.short_code">
                                         <div class="d-flex justify-content-center">
                                             {{ $t('general.short_code') }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_default">
                                         <div class="d-flex justify-content-center">
                                             {{ $t('general.is_default') }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                             <div class="arrow-sort">
@@ -987,21 +1039,21 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name">
                                         <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                      <td>
+                                      <td v-if="setting.long_name">
                                           <h5 class="m-0 font-weight-normal">{{ data.long_name }}</h5>
                                       </td>
-                                      <td>
+                                      <td v-if="setting.long_name_e">
                                           <h5 class="m-0 font-weight-normal">{{ data.long_name_e }}</h5>
                                       </td>
-                                      <td>{{ data.phone_key }}</td>
-                                      <td>{{ data.short_code }}</td>
-                                      <td>
+                                      <td v-if="setting.phone_key">{{ data.phone_key }}</td>
+                                      <td v-if="setting.short_code">{{ data.short_code }}</td>
+                                      <td v-if="setting.is_default">
                                         <span :class="[
                                             data.is_default == 'active' ?
                                             'text-success':
@@ -1012,7 +1064,7 @@ export default {
                                             {{ data.is_default ? `${$t('general.Active')}`:`${$t('general.Inactive')}`}}
                                         </span>
                                       </td>
-                                      <td>
+                                      <td v-if="setting.is_active">
                                         <span :class="[
                                             data.is_active == 'active' ?
                                             'text-success':
@@ -1072,7 +1124,7 @@ export default {
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
-                                            <form  @submit.stop.prevent="editSubmit(data.id)">
+                                            <form>
                                                 <div class="row">
                                                     <div class="col-md-6 direction" dir="rtl">
                                                         <div class="form-group">
@@ -1328,7 +1380,10 @@ export default {
                                                 </div>
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button  variant="success" type="submit" class="mx-1" v-if="!isLoader">
+                                                    <b-button  variant="success"
+                                                               @click.prevent="editSubmit(data.id)"
+                                                               class="mx-1 custom-btn-background"
+                                                               v-if="!isLoader">
                                                         {{ $t('general.Edit') }}
                                                     </b-button>
 
@@ -1349,8 +1404,11 @@ export default {
                                         </b-modal>
                                         <!--  /edit   -->
                                     </td>
-                                      <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                    <td>
+                                        <i
+                                            @mouseenter="log(data.id)"
+                                            class="fe-info"
+                                        ></i>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -1369,4 +1427,5 @@ export default {
             </div>
         </div>
     </Layout>
+
 </template>

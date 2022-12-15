@@ -1406,7 +1406,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       errors: {},
       salesmenTypes: [],
-      isButton: true,
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
@@ -1494,11 +1493,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
-        var l = res.data.data;
-        console.log(l);
-        // this.salesmens = l.data;
-        // this.salesmensPagination = l.data;
-        // this.current_page =  this.salesmensPagination.current_page;
+        var l = res.data;
+        _this3.salesmens = l.data;
+        _this3.salesmensPagination = l.pagination;
+        _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: 'error',
@@ -1701,7 +1699,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 _this10.edit.name = module.name;
                 _this10.edit.name_e = module.name_e;
-                _this10.edit.salesman_type_id = module.salesman_type.id;
+                _this10.edit.salesman_type_id = module.salesmanType.id;
                 _this10.errors = {};
               case 7:
               case "end":
@@ -5146,7 +5144,6 @@ var render = function render() {
     attrs: {
       type: "text",
       "data-create": "1",
-      placeholder: _vm.$t("general.Name"),
       id: "field-1"
     },
     domProps: {
@@ -5201,7 +5198,6 @@ var render = function render() {
     attrs: {
       type: "text",
       "data-create": "2",
-      placeholder: _vm.$t("general.Name_en"),
       id: "field-2"
     },
     domProps: {
@@ -5233,7 +5229,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "my-1 mr-2"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.salesManType")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -5261,7 +5257,7 @@ var render = function render() {
     }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
   }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
     staticClass: "mt-1 d-flex justify-content-end"
-  }, [!_vm.isLoader && _vm.isButton ? _c("b-button", {
+  }, [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5387,7 +5383,7 @@ var render = function render() {
     }
   })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.isEmployee")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.salesManType")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5465,9 +5461,7 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name))])]), _vm._v(" "), _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_c("span", {
-      "class": [parseInt(data.is_employee) == true ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(parseInt(data.is_employee) == true ? "".concat(_vm.$t("general.Yes")) : "".concat(_vm.$t("general.No"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.salesmanType.name : data.salesmanType.name_e))]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -5527,15 +5521,7 @@ var render = function render() {
           return _vm.resetModalHiddenEdit(data.id);
         }
       }
-    }, [_c("form", {
-      on: {
-        submit: function submit($event) {
-          $event.stopPropagation();
-          $event.preventDefault();
-          return _vm.editSubmit(data.id);
-        }
-      }
-    }, [_c("div", {
+    }, [_c("form", [_c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12 direction",
@@ -5565,7 +5551,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name"),
         id: "field-u-1"
       },
       domProps: {
@@ -5615,7 +5600,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name_en"),
         id: "field-u-2"
       },
       domProps: {
@@ -5643,7 +5627,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.salesManType")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -5671,11 +5655,17 @@ var render = function render() {
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
     }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
-    }, [!_vm.isLoader && _vm.isButton ? _c("b-button", {
+    }, [!_vm.isLoader ? _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
-        type: "submit"
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.editSubmit(data.id);
+        }
       }
     }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
       staticClass: "mx-1",
@@ -6239,44 +6229,20 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 5,
-  label: 'menuitems.currency.text',
-  icon: ' fas fa-dollar-sign',
-  link: '/currency'
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
 }, {
-  id: 6,
-  label: 'menuitems.employee.text',
-  icon: 'fas fa-user-friends',
-  link: '/employee'
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
 }, {
-  id: 7,
-  label: 'menuitems.financialYear.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/financialYear'
-}, {
-  id: 10001,
-  label: "menuitems.role.text",
-  icon: "ri-shield-user-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10002,
-    label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
-  }, {
-    id: 10003,
-    label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
-  }]
-}, {
-  id: 10004,
-  label: 'menuitems.units.text',
-  icon: 'far fa-list-alt',
-  link: '/units'
-}, {
-  id: 10005,
-  label: 'menuitems.colors.text',
-  icon: 'fas fa-palette',
-  link: '/colors'
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6294,6 +6260,10 @@ var menuItems = [{
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
     link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
   }]
 }, {
   id: 1000544,
@@ -6318,20 +6288,44 @@ var menuItems = [{
     link: '/avenue'
   }]
 }, {
-  id: 10007,
-  label: 'menuitems.branch.text',
-  icon: 'fas fa-code-branch',
-  link: '/branch'
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
 }, {
-  id: 10008,
-  label: 'menuitems.store.text',
-  icon: 'fas fa-store',
-  link: '/store'
+  id: 5,
+  label: 'menuitems.currency.text',
+  icon: ' fas fa-dollar-sign',
+  link: '/currency'
 }, {
-  id: 10009,
-  label: 'menuitems.serial.text',
-  icon: 'fas fa-eraser',
-  link: '/serial'
+  id: 6,
+  label: 'menuitems.employee.text',
+  icon: 'fas fa-user-friends',
+  link: '/employee'
+}, {
+  id: 7,
+  label: 'menuitems.financialYear.text',
+  icon: 'fas fa-file-invoice-dollar',
+  link: '/financialYear'
+}, {
+  id: 10004,
+  label: 'menuitems.units.text',
+  icon: 'far fa-list-alt',
+  link: '/units'
+}, {
+  id: 10005,
+  label: 'menuitems.colors.text',
+  icon: 'fas fa-palette',
+  link: '/colors'
 }, {
   id: 1115,
   label: "menuitems.dashboard.text",

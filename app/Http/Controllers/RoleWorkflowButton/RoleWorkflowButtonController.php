@@ -37,8 +37,7 @@ class RoleWorkflowButtonController extends Controller
             $models = $this->repository->getAllRoleWorkflowButtons($request);
         }
 
-        // return responseJson(200, 'success', RoleWorkflowButtonResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
-        return responseJson(200, 'success',$models["data"]);
+        return responseJson(200, 'success', RoleWorkflowButtonResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
 
     }
 

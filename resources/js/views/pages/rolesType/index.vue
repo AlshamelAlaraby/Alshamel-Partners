@@ -505,6 +505,7 @@ export default {
                             :title="$t('rolesType.add')"
                             title-class="font-18"
                             body-class="p-4 "
+                            size="lg"
                             :hide-footer="true"
                             @show="resetModal"
                             @hidden="resetModalHidden"
@@ -527,7 +528,7 @@ export default {
                                                 'is-invalid':$v.create.name.$error || errors.name,
                                                 'is-valid':!$v.create.name.$invalid && !errors.name
                                             }"
-                                                :placeholder="$t('general.Name')" id="field-1"
+                                                 id="field-1"
                                             />
                                             <div v-if="!$v.create.name.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -563,7 +564,7 @@ export default {
                                                 'is-invalid':$v.create.name_e.$error || errors.name_e,
                                                 'is-valid':!$v.create.name_e.$invalid && !errors.name_e
                                             }"
-                                                :placeholder="$t('general.Name_en')" id="field-2"
+                                                 id="field-2"
                                             />
                                             <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -726,6 +727,7 @@ export default {
                                             :title="$t('rolesType.edit')"
                                             title-class="font-18"
                                             body-class="p-4"
+                                            size="lg"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
@@ -747,7 +749,7 @@ export default {
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                :placeholder="$t('general.Name')" id="field-u-1"
+                                                                 id="field-u-1"
                                                             />
                                                             <div v-if="!$v.edit.name.alphaArabic"
                                                                  class="invalid-feedback">{{
@@ -788,7 +790,7 @@ export default {
                                                                     'is-invalid':$v.edit.name_e.$error || errors.name_e,
                                                                     'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
-                                                                :placeholder="$t('general.Name_en')" id="field-u-2"
+                                                                 id="field-u-2"
                                                             />
                                                             <div v-if="!$v.edit.name_e.minLength"
                                                                  class="invalid-feedback">

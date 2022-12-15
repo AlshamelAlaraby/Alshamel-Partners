@@ -2,8 +2,29 @@ body {
     background-color: #dff0fe;
 }
 
+.modal-content {
+    background-color: #dff0fe !important;
+}
+
+.modal-header{
+    padding: .5rem 1rem !important;
+}
+
 .navbar-custom .topnav-menu .nav-link {
     color: #000 !important;
+}
+
+.dropdown-custom-ali .dropdown-toggle{
+    padding: 0.35rem 0.6rem !important;
+}
+
+.form-group {
+    margin-bottom: 0.3rem !important;
+}
+
+label {
+    margin-bottom: 0.2rem !important;
+    color: #343a40 !important;
 }
 
 .nav-user , .nav-route-related{
@@ -251,4 +272,9 @@ table tbody tr:nth-child(even) {
 .btn.btn-primary{
     font-weight: bold !important;
     color: snow
+}
+
+td i.fe-info {
+    font-size: 22px;
+    cursor: pointer;
 }
