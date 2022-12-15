@@ -21,7 +21,7 @@ class CountryResource extends JsonResource
             'name_e' => $this->name_e,
             'long_name' => $this->long_name,
             'long_name_e' => $this->long_name_e,
-            'is_default' => $this->is_default == 1 ? true : false,
+            'is_default' => $this->is_default,
             'is_active' => $this->is_active,
             "short_code" => $this->short_code,
             "phone_key" => $this->phone_key,

@@ -14,29 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/realestate', function (Request $request) {
-    return $request->user();
-});
+
+
+
+
 
 Route::prefix('real-estate')->group(function () {
-    //    Route::middleware ('auth:sanctum')->group (function (){
-    //        Route::resource ('property-types','PropertyTypeController')->except ('edit','create');
-    //    });
 
-    Route::resource('property-types', 'PropertyTypeController')->except('edit', 'create');
-    Route::get('property-types/logs/{id}', 'PropertyTypeController@logs');
 
-    Route::resource('rlst-buildings', 'RlstBuildingController')->except('edit', 'create');
-    Route::get('rlst-buildings/logs/{id}', 'RlstBuildingController@logs');
+    // Route::resource('property-types', 'PropertyTypeController')->except('edit', 'create');
+    // Route::get('property-types/logs/{id}', 'PropertyTypeController@logs');
 
-    Route::resource('rlst-units', 'RlstUnitController')->except('edit', 'create');
-    Route::get('rlst-units/logs/{id}', 'RlstUnitController@logs');
+    // Route::resource('rlst-buildings', 'RlstBuildingController')->except('edit', 'create');
+    // Route::get('rlst-buildings/logs/{id}', 'RlstBuildingController@logs');
 
-    Route::resource('rlst-unit-status', 'RlstUnitStatusController')->except('edit', 'create');
-    Route::get('rlst-unit-status/logs/{id}', 'RlstUnitStatusController@logs');
+    // Route::resource('rlst-units', 'RlstUnitController')->except('edit', 'create');
+    // Route::get('rlst-units/logs/{id}', 'RlstUnitController@logs');
 
-    Route::resource('rlst-wallet-building', 'RlstWalletBuildingController')->except('edit', 'create');
-    Route::get('rlst-wallet-building/logs/{id}', 'RlstWalletBuildingController@logs');
+    // Route::resource('rlst-unit-status', 'RlstUnitStatusController')->except('edit', 'create');
+    // Route::get('rlst-unit-status/logs/{id}', 'RlstUnitStatusController@logs');
+
+    // Route::resource('rlst-wallet-building', 'RlstWalletBuildingController')->except('edit', 'create');
+    // Route::get('rlst-wallet-building/logs/{id}', 'RlstWalletBuildingController@logs');
 
 
 
@@ -97,15 +96,13 @@ Route::prefix('real-estate')->group(function () {
 
 
 
-
-    Route::group(['prefix' => 'rlst'], function () {
-        Route::group(['prefix' => 'reservations'], function () {
-            Route::get('/', 'RlstReservationController@all')->name('rlst-Reservations.all');
-            Route::get('/logs', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
-            Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
-            Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
-            Route::post('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
-            Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
-        });
+    //reservations
+    Route::group(['prefix' => 'reservations'], function () {
+        Route::get('/', 'RlstReservationController@all')->name('rlst-Reservations.all');
+        Route::get('/logs', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
+        Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
+        Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
+        Route::post('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
+        Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
     });
 });
