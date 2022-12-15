@@ -2,7 +2,6 @@
 
 namespace Modules\RealEstate\Entities;
 
-use App\Models\Salesman;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
@@ -11,43 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstReservation extends Model
+class RlstReservationUnit extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
-        "salesman_id",
-        "customer_id",
-        "payment_plan_id",
-        "date"
+        'unit_code',
+
     ];
 
 
     // relations
 
-    public function salesman()
+    public function reservation()
     {
-        return $this->belongsTo(Salesman::class);
-    }
-
-    public function customer()
-    {
-        return $this->belongsTo(\Modules\RealEstate\Entities\RlstCustomer::class);
-    }
-
-    // public function paymentPlan()
-    // {
-    //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
-    // }
-
-    public function contracts()
-    {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstContracts::class);
-    }
-
-    public function units()
-    {
-        return $this->belongsToMany(RlstReservationUnit::class, "unit_code");
+        return $this->belongsTo(RlstReservation::class, "unit_code");
     }
     // scopes
 
@@ -85,7 +62,7 @@ class RlstReservation extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Rlst Reservation')
+            ->useLogName('Rlst Reservation Unit')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

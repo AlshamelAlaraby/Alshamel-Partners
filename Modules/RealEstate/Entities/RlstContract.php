@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RlstReservation extends Model
+class RlstContract extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
@@ -19,6 +19,7 @@ class RlstReservation extends Model
         "salesman_id",
         "customer_id",
         "payment_plan_id",
+        "reservation_id",
         "date"
     ];
 
@@ -35,20 +36,18 @@ class RlstReservation extends Model
         return $this->belongsTo(\Modules\RealEstate\Entities\RlstCustomer::class);
     }
 
+    public function reservation()
+    {
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstReservation::class);
+    }
+
     // public function paymentPlan()
     // {
     //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
     // }
 
-    public function contracts()
-    {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstContracts::class);
-    }
 
-    public function units()
-    {
-        return $this->belongsToMany(RlstReservationUnit::class, "unit_code");
-    }
+
     // scopes
 
     public function scopeSearch($query, $request)
@@ -68,6 +67,10 @@ class RlstReservation extends Model
             if ($request->customer_id) {
                 $q->where('customer_id', $request->customer_id);
             }
+
+            if ($request->reservation_id) {
+                $q->where('reservation_id', $request->reservation_id);
+            }
         });
     }
 
@@ -85,7 +88,7 @@ class RlstReservation extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Rlst Reservation')
+            ->useLogName('Rlst Contracts')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

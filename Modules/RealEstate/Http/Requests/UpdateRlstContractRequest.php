@@ -2,10 +2,9 @@
 
 namespace Modules\RealEstate\Http\Requests;
 
-use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstReservationRequest extends FormRequest
+class UpdateRlstContractRequest extends FormRequest
 {
 
     public function authorize()
@@ -16,10 +15,11 @@ class CreateRlstReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            "date" => "required|date",
-            "salesman_id" => "required|exists:salesmen,id",
-            "customer_id" => "required|exists:rlst_customers,id",
-            "payment_plan_id" => "required|numeric",
+            "date" => "nullable|date",
+            "salesman_id" => "nullable|exists:salesmen,id",
+            "reservation_id" => "nullable|exists:rlst_reservations,id",
+            "customer_id" => "nullable|exists:rlst_customers,id",
+            "payment_plan_id" => "nullable|numeric",
         ];
     }
 
@@ -27,15 +27,11 @@ class CreateRlstReservationRequest extends FormRequest
     public function messages()
     {
         return [
-            "date.required" => __("message.field is required"),
             "date.date" => __("message.field must be date"),
-            "salesman_id.required" => __("message.field is required"),
             "salesman_id.exists" => __("message.field must be exists"),
-            "customer_id.required" => __("message.field is required"),
+            "reservation_id.exists" => __("message.field must be exists"),
             "customer_id.exists" => __("message.field must be exists"),
-            "payment_plan_id.required" => __("message.field is required"),
             "payment_plan_id.numeric" => __("message.field must be numeric"),
-
         ];
     }
 }

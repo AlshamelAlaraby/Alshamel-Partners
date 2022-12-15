@@ -99,10 +99,30 @@ Route::prefix('real-estate')->group(function () {
     //reservations
     Route::group(['prefix' => 'reservations'], function () {
         Route::get('/', 'RlstReservationController@all')->name('rlst-Reservations.all');
-        Route::get('/logs', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
+        Route::get('/logs/{id}', 'RlstReservationController@logs')->name('rlst-Reservations.logs');
         Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
         Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
-        Route::post('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
+        Route::put('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
         Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
+    });
+    // reservation units
+    Route::group(['prefix' => 'reservation-units'], function () {
+        Route::get('/', 'RlstReservationUnitController@all')->name('rlst-reservation-units.all');
+        Route::get('/logs/{id}', 'RlstReservationUnitController@logs')->name('rlst-reservation-units.logs');
+        Route::get('/{id}', 'RlstReservationUnitController@find')->name('rlst-reservation-units.find');
+        Route::post('/', 'RlstReservationUnitController@create')->name('rlst-reservation-units.create');
+        Route::put('/{id}', 'RlstReservationUnitController@update')->name('rlst-reservation-units.update');
+        Route::delete('/{id}', 'RlstReservationUnitController@delete')->name('rlst-reservation-units.delete');
+    });
+
+    // contracts
+
+    Route::group(['prefix' => 'contracts'], function () {
+        Route::get('/', 'RlstContractController@all')->name('rlst-contracts.all');
+        Route::get('/logs/{id}', 'RlstContractController@logs')->name('rlst-contracts.logs');
+        Route::get('/{id}', 'RlstContractController@find')->name('rlst-contracts.find');
+        Route::post('/', 'RlstContractController@create')->name('rlst-contracts.create');
+        Route::put('/{id}', 'RlstContractController@update')->name('rlst-contracts.update');
+        Route::delete('/{id}', 'RlstContractController@delete')->name('rlst-contracts.delete');
     });
 });

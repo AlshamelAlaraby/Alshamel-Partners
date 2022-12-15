@@ -5,7 +5,7 @@ namespace Modules\RealEstate\Http\Requests;
 use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstReservationRequest extends FormRequest
+class CreateRlstContractRequest extends FormRequest
 {
 
     public function authorize()
@@ -18,6 +18,7 @@ class CreateRlstReservationRequest extends FormRequest
         return [
             "date" => "required|date",
             "salesman_id" => "required|exists:salesmen,id",
+            "reservation_id" => "required|exists:rlst_reservations,id",
             "customer_id" => "required|exists:rlst_customers,id",
             "payment_plan_id" => "required|numeric",
         ];
@@ -31,6 +32,8 @@ class CreateRlstReservationRequest extends FormRequest
             "date.date" => __("message.field must be date"),
             "salesman_id.required" => __("message.field is required"),
             "salesman_id.exists" => __("message.field must be exists"),
+            "reservation_id.required" => __("message.field is required"),
+            "reservation_id.exists" => __("message.field must be exists"),
             "customer_id.required" => __("message.field is required"),
             "customer_id.exists" => __("message.field must be exists"),
             "payment_plan_id.required" => __("message.field is required"),

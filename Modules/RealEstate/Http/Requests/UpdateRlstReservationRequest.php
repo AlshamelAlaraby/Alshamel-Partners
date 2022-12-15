@@ -10,6 +10,15 @@ class UpdateRlstReservationRequest extends FormRequest
 {
     use ValidationTrait;
     /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -21,17 +30,16 @@ class UpdateRlstReservationRequest extends FormRequest
             "salesman_id"      => "nullable|exists:salesmen,id",
             "customer_id"      => "nullable|exists:rlst_buildings,id",
             "payment_plan_id"  => "nullable|numeric",
-            // "payment_plan_id"  => "nullable|exists:rlst_Payment_plans,id" ,
         ];
     }
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function messages()
     {
-        return true;
+        return [
+            "date.date" => __("message.field must be date"),
+            "salesman_id.exists" => __("message.field must be exists"),
+            "customer_id.exists" => __("message.field must be exists"),
+            "payment_plan_id.numeric" => __("message.field must be numeric"),
+        ];
     }
 }
