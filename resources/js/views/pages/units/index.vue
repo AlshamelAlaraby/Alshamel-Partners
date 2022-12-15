@@ -519,7 +519,7 @@ export default {
                         >
                             <form>
                                 <div class="row">
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-12 direction" dir="rtl">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
                                                 {{ $t('general.Name') }}
@@ -555,7 +555,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
                                                 {{ $t('general.Name_en') }}
@@ -591,7 +591,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-1">
+                                    <div class="col-md-12 mt-1">
                                         <div class="form-group">
                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
                                                 {{ $t('general.Status') }}
@@ -789,7 +789,7 @@ export default {
                                         >
                                             <form @submit.stop.prevent="editSubmit(data.id)">
                                                 <div class="row">
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-12 direction" dir="rtl">
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
                                                                 {{ $t('general.Name') }}
@@ -830,7 +830,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
                                                                 {{ $t('general.Name_en') }}
@@ -871,7 +871,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-1">
+                                                    <div class="col-md-12 mt-1">
                                                         <div class="form-group">
                                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPrefs">
                                                                 {{ $t('general.Status') }}

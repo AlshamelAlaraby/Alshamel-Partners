@@ -4,10 +4,7 @@ namespace App\Http\Controllers\TreeProperty;
 
 use App\Http\Requests\TreeProperty\CreateTreePropertyRequest;
 use App\Http\Requests\TreeProperty\EditTreePropertyRequest;
-use App\Http\Requests\Unit\StoreUnitRequest;
-use App\Http\Requests\Unit\UpdateUnitRequest;
 use App\Http\Resources\TreeProperty\TreePropertyResource;
-use App\Http\Resources\Unit\UnitResource;
 use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -31,7 +28,7 @@ class TreePropertyController extends Controller
                 cachePut('tree_properties_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new UnitResource($model));
+        return responseJson(200, 'success', new TreePropertyResource($model));
     }
 
     public function index(Request $request)

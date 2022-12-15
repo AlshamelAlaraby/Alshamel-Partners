@@ -121,7 +121,6 @@ export default {
                 .then((res) => {
                     let l = res.data;
                     this.cities = l.data;
-                    console.log(l);
                     this.citiesPagination = l.pagination;
                     this.current_page = l.pagination.current_page;
                 })
@@ -296,7 +295,7 @@ export default {
                 this.errors = {};
                 adminApi.put(`/cities/${id}`,this.edit)
                     .then((res) => {
-                        this.$bvModal.hide(`modal-edit-${id}`);
+                        this.$bvModal.hide(`edit-${id}`);
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -328,6 +327,7 @@ export default {
         async resetModalEdit(id){
             let city = this.cities.find(e => id == e.id );
             await this.getCategory();
+            await this.getGovernorate(city.country.id);
             this.edit.name = city.name;
             this.edit.name_e = city.name_e;
             this.edit.is_active = city.is_active ? 1: 0;
@@ -375,14 +375,13 @@ export default {
         async getCategory(){
 
             this.countries = [];
-            this.cities = [];
             this.governorates = [];
             this.create.governorate_id = null;
             this.edit.governorate_id = null;
             this.create.city_id = null;
             this.edit.city_id = null;
 
-            await adminApi.get(`/countries`)
+            await adminApi.get(`/countries?is_active=active`)
                 .then((res) => {
                     let l = res.data;
                     this.countries = l.data;
@@ -396,14 +395,13 @@ export default {
                 });
 
         },
-        getGovernorate(){
+        async getGovernorate(id){
 
-            this.cities = [];
             this.governorates = [];
             this.create.city_id = null;
             this.edit.city_id = null;
 
-            adminApi.get(`/governorates`)
+            await adminApi.get(`/governorates?country_id=${id}`)
                 .then((res) => {
                     let l = res.data;
                     this.governorates = l.data;
@@ -483,7 +481,7 @@ export default {
                                     </button>
                                     <button
                                         class="custom-btn-dowonload"
-                                        @click="$bvModal.show(`modal-edit-${checkAll[0]}`)"
+                                        @click="$bvModal.show(`edit-${checkAll[0]}`)"
                                         v-if="checkAll.length == 1"
                                     >
                                         <i class="mdi mdi-square-edit-outline"></i>
@@ -641,7 +639,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
-                                                @select="getGovernorate"
+                                                @input="getGovernorate(create.country_id)"
                                                 v-model="create.country_id"
                                                 :options="countries.map(type => type.id)"
                                                 :custom-label="opt => countries.find(x => x.id == opt).name"
@@ -800,10 +798,10 @@ export default {
                                 <tbody v-if="cities.length > 0">
                                   <tr
                                       @click.capture="checkRow(data.id)"
-                                      @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
+                                      @dblclick.prevent="$bvModal.show(`edit-${data.id}`)"
                                       v-for="(data,index) in cities"
                                       :key="data.id"
-                                      class="body-tr-custom"
+                                      :class="['body-tr-custom ',data.id]"
                                   >
                                     <td>
                                         <div class="form-check custom-control" style="min-height: 1.9em;">
@@ -850,7 +848,7 @@ export default {
                                                 <a
                                                     class="dropdown-item"
                                                     href="#"
-                                                    @click="$bvModal.show(`modal-edit-${data.id}`)"
+                                                    @click.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                                 >
                                                     <div
                                                         class="d-flex justify-content-between align-items-center text-black"
@@ -874,14 +872,12 @@ export default {
 
                                         <!--  edit   -->
                                         <b-modal
-                                            :id="`modal-edit-${data.id}`"
+                                            :id="`edit-${data.id}`"
                                             :title="$t('city.editcity')"
                                             title-class="font-18"
                                             body-class="p-4"
-                                            :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
-
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
@@ -945,7 +941,7 @@ export default {
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
-                                                                @select="getGovernorate"
+                                                                @select="getGovernorate(edit.country_id)"
                                                                 v-model="edit.country_id"
                                                                 :options="countries.map(type => type.id)"
                                                                 :custom-label="opt => countries.find(x => x.id == opt).name"
@@ -1027,7 +1023,7 @@ export default {
                                                     <b-button
                                                         variant="secondary"
                                                         type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                        @click.prevent="$bvModal.hide(`edit-${data.id}`)"
                                                     >
                                                         {{ $t('general.Cancel') }}
                                                     </b-button>

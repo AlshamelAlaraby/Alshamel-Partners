@@ -1389,6 +1389,8 @@ var imgValid = function imgValid(value) {
       create: {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1400,6 +1402,8 @@ var imgValid = function imgValid(value) {
       edit: {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1425,6 +1429,18 @@ var imgValid = function imgValid(value) {
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      symbol: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
+      },
+      symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
@@ -1475,6 +1491,18 @@ var imgValid = function imgValid(value) {
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      symbol: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
+      },
+      symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
@@ -1652,6 +1680,8 @@ var imgValid = function imgValid(value) {
       this.create = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1674,6 +1704,8 @@ var imgValid = function imgValid(value) {
       this.create = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1770,6 +1802,8 @@ var imgValid = function imgValid(value) {
       });
       this.edit.name = currency.name;
       this.edit.name_e = currency.name_e;
+      this.edit.symbol = currency.symbol;
+      this.edit.symbol_e = currency.symbol_e;
       this.edit.code = currency.code;
       this.edit.code_e = currency.code_e;
       this.edit.fraction = currency.fraction;
@@ -1787,6 +1821,8 @@ var imgValid = function imgValid(value) {
       this.edit = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -5332,6 +5368,114 @@ var render = function render() {
   }, [_c("label", {
     staticClass: "control-label",
     attrs: {
+      "for": "field-45"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.symbol.$model,
+      expression: "$v.create.symbol.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.symbol.$error || _vm.errors.symbol,
+      "is-valid": !_vm.$v.create.symbol.$invalid && !_vm.errors.symbol
+    },
+    attrs: {
+      type: "text",
+      "data-create": "3",
+      id: "field-45"
+    },
+    domProps: {
+      value: _vm.$v.create.symbol.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 4);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.symbol, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.symbol.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-33"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.symbol_e.$model,
+      expression: "$v.create.symbol_e.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.symbol_e.$error || _vm.errors.symbol_e,
+      "is-valid": !_vm.$v.create.symbol_e.$invalid && !_vm.errors.symbol_e
+    },
+    attrs: {
+      type: "text",
+      "data-create": "4",
+      id: "field-33"
+    },
+    domProps: {
+      value: _vm.$v.create.symbol_e.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 5);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.symbol_e, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.symbol_e.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction",
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
       "for": "field-3"
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
@@ -5350,7 +5494,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "3",
+      "data-create": "5",
       id: "field-3"
     },
     domProps: {
@@ -5359,7 +5503,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 4);
+        return _vm.moveInput("input", "create", 6);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5404,7 +5548,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "4",
+      "data-create": "6",
       id: "field-4"
     },
     domProps: {
@@ -5413,7 +5557,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 5);
+        return _vm.moveInput("input", "create", 7);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5458,7 +5602,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "5",
+      "data-create": "7",
       id: "field-5"
     },
     domProps: {
@@ -5467,7 +5611,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 6);
+        return _vm.moveInput("input", "create", 8);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5512,7 +5656,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "6",
+      "data-create": "8",
       id: "field-6"
     },
     domProps: {
@@ -5521,7 +5665,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 7);
+        return _vm.moveInput("input", "create", 9);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5563,8 +5707,8 @@ var render = function render() {
     },
     attrs: {
       type: "number",
-      "data-create": "7",
-      step: "0.01",
+      "data-create": "9",
+      step: "0.1",
       id: "field-7"
     },
     domProps: {
@@ -5573,7 +5717,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("select", "create", 8);
+        return _vm.moveInput("select", "create", 10);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5607,13 +5751,13 @@ var render = function render() {
     },
     attrs: {
       id: "field-11",
-      "data-create": "8"
+      "data-create": "10"
     },
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
         $event.preventDefault();
-        return _vm.moveInput("select", "create", 9);
+        return _vm.moveInput("select", "create", 11);
       },
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -5667,7 +5811,7 @@ var render = function render() {
     },
     attrs: {
       id: "inlineFormCustomSelectPref",
-      "data-create": "9"
+      "data-create": "11"
     },
     on: {
       keypress: function keypress($event) {
@@ -6050,9 +6194,10 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("country.editcountry"),
+        title: _vm.$t("currency.editcurrency"),
         "title-class": "font-18",
         "body-class": "p-4",
+        size: "lg",
         "hide-footer": true
       },
       on: {
@@ -6183,6 +6328,114 @@ var render = function render() {
     }, [_c("label", {
       staticClass: "control-label",
       attrs: {
+        "for": "edit-45"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol.$model,
+        expression: "$v.edit.symbol.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol.$error || _vm.errors.symbol,
+        "is-valid": !_vm.$v.edit.symbol.$invalid && !_vm.errors.symbol
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "3",
+        id: "edit-45"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 4);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction-ltr",
+      attrs: {
+        dir: "ltr"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-33"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol_e.$model,
+        expression: "$v.edit.symbol_e.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol_e.$error || _vm.errors.symbol_e,
+        "is-valid": !_vm.$v.edit.symbol_e.$invalid && !_vm.errors.symbol_e
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "4",
+        id: "edit-33"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol_e.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 5);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol_e, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol_e.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction",
+      attrs: {
+        dir: "rtl"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
         "for": "edit-3"
       }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code")) + "\n                                                            "), _c("span", {
@@ -6201,7 +6454,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "3",
+        "data-edit": "5",
         id: "edit-3"
       },
       domProps: {
@@ -6210,7 +6463,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 4);
+          return _vm.moveInput("input", "edit", 6);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6255,7 +6508,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "4",
+        "data-edit": "6",
         id: "edit-4"
       },
       domProps: {
@@ -6264,7 +6517,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 5);
+          return _vm.moveInput("input", "edit", 7);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6309,7 +6562,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "5",
+        "data-edit": "7",
         id: "edit-5"
       },
       domProps: {
@@ -6318,7 +6571,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 6);
+          return _vm.moveInput("input", "edit", 8);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6363,7 +6616,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "6",
+        "data-edit": "8",
         id: "edit-6"
       },
       domProps: {
@@ -6372,7 +6625,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 7);
+          return _vm.moveInput("input", "edit", 9);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6414,8 +6667,8 @@ var render = function render() {
       },
       attrs: {
         type: "number",
-        step: "0.01",
-        "data-edit": "7",
+        step: "0.1",
+        "data-edit": "9",
         id: "edit-7"
       },
       domProps: {
@@ -6424,7 +6677,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("select", "edit", 8);
+          return _vm.moveInput("select", "edit", 10);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6458,13 +6711,13 @@ var render = function render() {
       },
       attrs: {
         id: "edit-11",
-        "data-edit": "8"
+        "data-edit": "10"
       },
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
           $event.preventDefault();
-          return _vm.moveInput("select", "edit", 9);
+          return _vm.moveInput("select", "edit", 11);
         },
         change: function change($event) {
           var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -6518,7 +6771,7 @@ var render = function render() {
       },
       attrs: {
         id: "edit-9",
-        "data-edit": "9"
+        "data-edit": "11"
       },
       on: {
         keypress: function keypress($event) {
@@ -7129,21 +7382,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -7158,16 +7396,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -7198,9 +7426,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,

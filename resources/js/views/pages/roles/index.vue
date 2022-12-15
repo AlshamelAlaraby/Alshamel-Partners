@@ -41,18 +41,17 @@ export default {
             create: {
                 name: '',
                 name_e: '',
-                roletype_id: 0,
+                roletype_id: null,
                 search: ''
             },
             edit: {
                 name: '',
                 name_e: '',
-                roletype_id: 0,
+                roletype_id: null,
                 search: ''
             },
             errors: {},
-            dropDownSenders: [],
-            isButton: true,
+            role_types: [],
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
@@ -207,7 +206,7 @@ export default {
          *  reset Modal (create)
          */
         resetModalHidden() {
-            this.create = {name: '', name_e: '', roletype_id: 0};
+            this.create = {name: '', name_e: '', roletype_id: null};
             this.$nextTick(() => {
                 this.$v.$reset()
             });
@@ -217,9 +216,10 @@ export default {
         /**
          *  hidden Modal (create)
          */
-         resetModal() {
-            this.create = {name: '', name_e: '', roletype_id: 0};
-            this.getParent();
+
+        async resetModal() {
+            await this.getRoleType();
+            this.create = {name: '', name_e: '', roletype_id: null};
             this.$nextTick(() => {
                 this.$v.$reset()
             });
@@ -308,26 +308,10 @@ export default {
             }
         },
         /**
-         *  get parent
-         */
-       async getParent() {
-           await adminApi.get(`/role_types`)
-                .then((res) => {
-                    this.dropDownSenders = res.data.data;
-                })
-                .catch((err) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${this.$t('general.Error')}`,
-                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                    });
-                });
-        },
-        /**
          *   show Modal (edit)
          */
         async resetModalEdit(id) {
-           await this.getParent();
+            await this.getRoleType();
             let module = this.roles.find(e => id == e.id);
             this.edit.name = module.name;
             this.edit.name_e = module.name_e;
@@ -342,7 +326,7 @@ export default {
             this.edit = {
                 name: '',
                 name_e: '',
-                roletype_id: 0
+                roletype_id: null
             };
         },
         /**
@@ -367,6 +351,25 @@ export default {
          */
         moveInput(tag, c, index) {
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
+        },
+        async getRoleType(){
+            this.isLoader = true;
+
+            await adminApi.get(`/role_types`)
+                .then((res) => {
+                    let l = res.data;
+                    this.role_types = l.data;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                })
+                .finally(() => {
+                    this.isLoader = false;
+                });
         }
     },
 };
@@ -536,7 +539,7 @@ export default {
                         >
                             <form>
                                 <div class="row">
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-12 direction" dir="rtl">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
                                                 {{ $t('general.Name') }}
@@ -572,7 +575,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
                                                 {{ $t('general.Name_en') }}
@@ -609,22 +612,14 @@ export default {
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group position-relative">
-                                            <label  class="control-label">
-                                                {{ $t('general.country') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="my-1 mr-2">{{ $t('general.IdParent') }}</label>
                                             <multiselect
                                                 v-model="create.roletype_id"
-                                                :options="dropDownSenders.map(type => type.id)"
-                                                :custom-label="opt => dropDownSenders.find(x => x.id == opt).name">
+                                                :options="role_types.map(type => type.id)"
+                                                :custom-label="opt => role_types.find(x => x.id == opt).name">
                                             </multiselect>
-                                            <div v-if="$v.create.roletype_id.$error || errors.roletype_id"
-                                                 class="text-danger"
-                                            >
-                                                {{ $t('general.fieldIsRequired') }}
-                                            </div>
                                             <template v-if="errors.roletype_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.roletype_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
@@ -636,7 +631,7 @@ export default {
                                     <b-button
                                         variant="success"
                                         type="button" class="mx-1"
-                                        v-if="!isLoader && isButton"
+                                        v-if="!isLoader"
                                         @click.prevent="AddSubmit"
                                     >
                                         {{ $t('general.Add') }}
@@ -779,7 +774,7 @@ export default {
                                         >
                                             <form @submit.stop.prevent="editSubmit(data.id)">
                                                 <div class="row">
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-12 direction" dir="rtl">
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
                                                                 {{ $t('general.Name') }}
@@ -820,7 +815,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
                                                                 {{ $t('general.Name_en') }}
@@ -862,22 +857,16 @@ export default {
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <div class="form-group position-relative">
-                                                            <label  class="control-label">
-                                                                {{ $t('general.country') }}
-                                                                <span class="text-danger">*</span>
+                                                    <div class="col-md-12 mt-1">
+                                                        <div class="form-group">
+                                                            <label class="my-1 mr-2">
+                                                                {{$t('general.IdParent') }}
                                                             </label>
                                                             <multiselect
                                                                 v-model="edit.roletype_id"
-                                                                :options="dropDownSenders.map(type => type.id)"
-                                                                :custom-label="opt => dropDownSenders.find(x => x.id == opt).name">
+                                                                :options="role_types.map(type => type.id)"
+                                                                :custom-label="opt => role_types.find(x => x.id == opt).name">
                                                             </multiselect>
-                                                            <div v-if="$v.edit.roletype_id.$error || errors.roletype_id"
-                                                                 class="text-danger"
-                                                            >
-                                                                {{ $t('general.fieldIsRequired') }}
-                                                            </div>
                                                             <template v-if="errors.roletype_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.roletype_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
@@ -887,7 +876,7 @@ export default {
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
                                                     <b-button variant="success" type="submit" class="mx-1"
-                                                              v-if="!isLoader && isButton">
+                                                              v-if="!isLoader">
                                                         {{ $t('general.Edit') }}
                                                     </b-button>
 

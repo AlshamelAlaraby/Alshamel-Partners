@@ -1396,18 +1396,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       create: {
         name: '',
         name_e: '',
-        roletype_id: 0,
+        roletype_id: null,
         search: ''
       },
       edit: {
         name: '',
         name_e: '',
-        roletype_id: 0,
+        roletype_id: null,
         search: ''
       },
       errors: {},
-      dropDownSenders: [],
-      isButton: true,
+      role_types: [],
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
@@ -1584,7 +1583,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.create = {
         name: '',
         name_e: '',
-        roletype_id: 0
+        roletype_id: null
       };
       this.$nextTick(function () {
         _this6.$v.$reset();
@@ -1597,16 +1596,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetModal: function resetModal() {
       var _this7 = this;
-      this.create = {
-        name: '',
-        name_e: '',
-        roletype_id: 0
-      };
-      this.getParent();
-      this.$nextTick(function () {
-        _this7.$v.$reset();
-      });
-      this.errors = {};
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this7.getRoleType();
+              case 2:
+                _this7.create = {
+                  name: '',
+                  name_e: '',
+                  roletype_id: null
+                };
+                _this7.$nextTick(function () {
+                  _this7.$v.$reset();
+                });
+                _this7.errors = {};
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
     /**
      *  create module
@@ -1691,38 +1704,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     /**
-     *  get parent
-     */
-    getParent: function getParent() {
-      var _this10 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role_types").then(function (res) {
-                  _this10.dropDownSenders = res.data.data;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this10.$t('general.Error')),
-                    text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
-                  });
-                });
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    /**
      *   show Modal (edit)
      */
     resetModalEdit: function resetModalEdit(id) {
-      var _this11 = this;
+      var _this10 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var module;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -1730,15 +1715,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this11.getParent();
+                return _this10.getRoleType();
               case 2:
-                module = _this11.roles.find(function (e) {
+                module = _this10.roles.find(function (e) {
                   return id == e.id;
                 });
-                _this11.edit.name = module.name;
-                _this11.edit.name_e = module.name_e;
-                _this11.edit.roletype_id = module.roletype_id;
-                _this11.errors = {};
+                _this10.edit.name = module.name;
+                _this10.edit.name_e = module.name_e;
+                _this10.edit.roletype_id = module.roletype_id;
+                _this10.errors = {};
               case 7:
               case "end":
                 return _context2.stop();
@@ -1755,7 +1740,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.edit = {
         name: '',
         name_e: '',
-        roletype_id: 0
+        roletype_id: null
       };
     },
     /**
@@ -1780,6 +1765,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     moveInput: function moveInput(tag, c, index) {
       document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
+    },
+    getRoleType: function getRoleType() {
+      var _this11 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this11.isLoader = true;
+                _context3.next = 3;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role_types").then(function (res) {
+                  var l = res.data;
+                  _this11.role_types = l.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this11.$t('general.Error')),
+                    text: "".concat(_this11.$t('general.Thereisanerrorinthesystem'))
+                  });
+                })["finally"](function () {
+                  _this11.isLoader = false;
+                });
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });
@@ -5125,7 +5139,7 @@ var render = function render() {
   }, [_c("form", [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-6 direction",
+    staticClass: "col-md-12 direction",
     attrs: {
       dir: "rtl"
     }
@@ -5180,7 +5194,7 @@ var render = function render() {
       key: index
     }, [_vm._v("\n                                                " + _vm._s(errorMessage) + "\n                                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6 direction-ltr",
+    staticClass: "col-md-12 direction-ltr",
     attrs: {
       dir: "ltr"
     }
@@ -5235,20 +5249,18 @@ var render = function render() {
       key: index
     }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6"
+    staticClass: "col-md-12"
   }, [_c("div", {
-    staticClass: "form-group position-relative"
+    staticClass: "form-group"
   }, [_c("label", {
-    staticClass: "control-label"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.country")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
+    staticClass: "my-1 mr-2"
+  }, [_vm._v(_vm._s(_vm.$t("general.IdParent")))]), _vm._v(" "), _c("multiselect", {
     attrs: {
-      options: _vm.dropDownSenders.map(function (type) {
+      options: _vm.role_types.map(function (type) {
         return type.id;
       }),
       "custom-label": function customLabel(opt) {
-        return _vm.dropDownSenders.find(function (x) {
+        return _vm.role_types.find(function (x) {
           return x.id == opt;
         }).name;
       }
@@ -5260,15 +5272,13 @@ var render = function render() {
       },
       expression: "create.roletype_id"
     }
-  }), _vm._v(" "), _vm.$v.create.roletype_id.$error || _vm.errors.roletype_id ? _c("div", {
-    staticClass: "text-danger"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.roletype_id ? _vm._l(_vm.errors.roletype_id, function (errorMessage, index) {
+  }), _vm._v(" "), _vm.errors.roletype_id ? _vm._l(_vm.errors.roletype_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
     staticClass: "mt-1 d-flex justify-content-end"
-  }, [!_vm.isLoader && _vm.isButton ? _c("b-button", {
+  }, [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5524,7 +5534,7 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-md-6 direction",
+      staticClass: "col-md-12 direction",
       attrs: {
         dir: "rtl"
       }
@@ -5574,7 +5584,7 @@ var render = function render() {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6 direction-ltr",
+      staticClass: "col-md-12 direction-ltr",
       attrs: {
         dir: "ltr"
       }
@@ -5624,20 +5634,18 @@ var render = function render() {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6"
+      staticClass: "col-md-12 mt-1"
     }, [_c("div", {
-      staticClass: "form-group position-relative"
+      staticClass: "form-group"
     }, [_c("label", {
-      staticClass: "control-label"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.country")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
+      staticClass: "my-1 mr-2"
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.IdParent")) + "\n                                                        ")]), _vm._v(" "), _c("multiselect", {
       attrs: {
-        options: _vm.dropDownSenders.map(function (type) {
+        options: _vm.role_types.map(function (type) {
           return type.id;
         }),
         "custom-label": function customLabel(opt) {
-          return _vm.dropDownSenders.find(function (x) {
+          return _vm.role_types.find(function (x) {
             return x.id == opt;
           }).name;
         }
@@ -5649,15 +5657,13 @@ var render = function render() {
         },
         expression: "edit.roletype_id"
       }
-    }), _vm._v(" "), _vm.$v.edit.roletype_id.$error || _vm.errors.roletype_id ? _c("div", {
-      staticClass: "text-danger"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.roletype_id ? _vm._l(_vm.errors.roletype_id, function (errorMessage, index) {
+    }), _vm._v(" "), _vm.errors.roletype_id ? _vm._l(_vm.errors.roletype_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
       staticClass: "mt-1 d-flex justify-content-end"
-    }, [!_vm.isLoader && _vm.isButton ? _c("b-button", {
+    }, [!_vm.isLoader ? _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6225,21 +6231,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6254,16 +6245,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6294,9 +6275,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,

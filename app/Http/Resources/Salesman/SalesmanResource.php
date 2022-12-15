@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Salesman;
 
 use App\Http\Resources\Roles\RoleResource;
+use App\Http\Resources\SalesmenType\SalesmenTypeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SalesmanResource extends JsonResource
@@ -18,7 +19,7 @@ class SalesmanResource extends JsonResource
         return [
             "name" => $this->name ,
             "name_e" => $this->name_e ,
-            "salesmanType" => $this->salesmanType
+            "salesmanType" => new SalesmenTypeResource($this->salesmanType)
         ];
     }
 }

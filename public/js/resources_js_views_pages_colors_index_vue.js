@@ -5073,7 +5073,7 @@ var render = function render() {
   }, [_c("form", [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-6 direction",
+    staticClass: "col-md-12 direction",
     attrs: {
       dir: "rtl"
     }
@@ -5128,7 +5128,7 @@ var render = function render() {
       key: index
     }, [_vm._v("\n                                                " + _vm._s(errorMessage) + "\n                                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6 direction-ltr",
+    staticClass: "col-md-12 direction-ltr",
     attrs: {
       dir: "ltr"
     }
@@ -5183,7 +5183,7 @@ var render = function render() {
       key: index
     }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-6 mt-1"
+    staticClass: "col-md-12 mt-1"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5520,7 +5520,7 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-md-6 direction",
+      staticClass: "col-md-12 direction",
       attrs: {
         dir: "rtl"
       }
@@ -5547,7 +5547,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name"),
         id: "field-u-1"
       },
       domProps: {
@@ -5570,7 +5569,7 @@ var render = function render() {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6 direction-ltr",
+      staticClass: "col-md-12 direction-ltr",
       attrs: {
         dir: "ltr"
       }
@@ -5597,7 +5596,6 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        placeholder: _vm.$t("general.Name_en"),
         id: "field-u-2"
       },
       domProps: {
@@ -5620,7 +5618,7 @@ var render = function render() {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6 mt-1"
+      staticClass: "col-md-12"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6243,21 +6241,6 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
-}, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
-}, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
-}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6272,16 +6255,6 @@ var menuItems = [{
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
-}, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
 }, {
   id: 10001,
   label: "menuitems.role.text",
@@ -6312,9 +6285,39 @@ var menuItems = [{
   icon: "fas fa-user-tag",
   isMenuCollapsed: false,
   subItems: [{
-    id: 10007,
+    id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
     link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
   }]
 }, {
   id: 10007,
