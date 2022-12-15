@@ -67,8 +67,8 @@ class GovernorateController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->have_children) {
-            return responseJson(400, __('message.parent have children'));
+        if ($model->hasChildren()) {
+            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
         }
         $this->modelInterface->delete($id);
 
