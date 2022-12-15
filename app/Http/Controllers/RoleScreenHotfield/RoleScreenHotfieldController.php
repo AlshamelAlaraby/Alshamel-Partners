@@ -38,7 +38,7 @@ class RoleScreenHotfieldController extends Controller
         }
 
         // return responseJson(200, 'success', RoleScreenHotfieldResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
-        return responseJson(200, 'success',$models);
+        return responseJson(200, 'success',RoleScreenHotfieldResource::collection ($models['data']));
 
     }
 

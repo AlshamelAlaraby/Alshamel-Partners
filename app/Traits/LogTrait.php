@@ -12,10 +12,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 trait LogTrait
 {
     use LogsActivity, CausesActivity;
-    protected static function newFactory()
-    {
-        return \Modules\RealEstate\Database\factories\RlstBuildingFactory::new();
-    }
+
 
     public function tapActivity(Activity $activity, string $eventName)
     {

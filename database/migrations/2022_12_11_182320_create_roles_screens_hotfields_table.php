@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_screen_hotfields');
+        Schema::dropIfExists('roles_screens_hotfields');
     }
 };
