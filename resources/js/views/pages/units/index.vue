@@ -41,13 +41,11 @@ export default {
                 name: '',
                 name_e: '',
                 is_active: 'active',
-                search: ''
             },
             edit: {
                 name: '',
                 name_e: '',
                 is_active: 'active',
-                search: ''
             },
             errors: {},
             dropDownSenders: [],
@@ -519,7 +517,7 @@ export default {
                         >
                             <form>
                                 <div class="row">
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-12 direction" dir="rtl">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
                                                 {{ $t('general.Name') }}
@@ -535,7 +533,7 @@ export default {
                                                 'is-invalid':$v.create.name.$error || errors.name,
                                                 'is-valid':!$v.create.name.$invalid && !errors.name
                                             }"
-                                                :placeholder="$t('general.Name')" id="field-1"
+                                                id="field-1"
                                             />
                                             <div v-if="!$v.create.name.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -555,7 +553,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
                                                 {{ $t('general.Name_en') }}
@@ -571,7 +569,7 @@ export default {
                                                 'is-invalid':$v.create.name_e.$error || errors.name_e,
                                                 'is-valid':!$v.create.name_e.$invalid && !errors.name_e
                                             }"
-                                                :placeholder="$t('general.Name_en')" id="field-2"
+                                               id="field-2"
                                             />
                                             <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">
                                                 {{ $t('general.Itmustbeatleast') }}
@@ -591,7 +589,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-1">
+                                    <div class="col-md-12 mt-1">
                                         <div class="form-group">
                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
                                                 {{ $t('general.Status') }}
@@ -789,7 +787,7 @@ export default {
                                         >
                                             <form @submit.stop.prevent="editSubmit(data.id)">
                                                 <div class="row">
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-12 direction" dir="rtl">
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
                                                                 {{ $t('general.Name') }}
@@ -803,7 +801,7 @@ export default {
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                :placeholder="$t('general.Name')" id="field-u-1"
+                                                                 id="field-u-1"
                                                             />
                                                             <div v-if="!$v.edit.name.alphaArabic"
                                                                  class="invalid-feedback">{{
@@ -830,7 +828,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
+                                                    <div class="col-md-12 direction-ltr" dir="ltr">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
                                                                 {{ $t('general.Name_en') }}
@@ -844,7 +842,7 @@ export default {
                                                                     'is-invalid':$v.edit.name_e.$error || errors.name_e,
                                                                     'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
-                                                                :placeholder="$t('general.Name_en')" id="field-u-2"
+                                                                 id="field-u-2"
                                                             />
                                                             <div v-if="!$v.edit.name_e.minLength"
                                                                  class="invalid-feedback">
@@ -871,7 +869,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-1">
+                                                    <div class="col-md-12 mt-1">
                                                         <div class="form-group">
                                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPrefs">
                                                                 {{ $t('general.Status') }}

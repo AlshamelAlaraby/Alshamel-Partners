@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Salesman;
 
 use App\Http\Resources\Roles\RoleResource;
+use App\Http\Resources\SalesmenType\SalesmenTypeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SalesmanResource extends JsonResource
@@ -16,9 +17,13 @@ class SalesmanResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "name" => $this->name ,
-            "name_e" => $this->name_e ,
-            "salesmanType" => $this->salesmanType
+            "id" => $this->id,
+            "name" => $this->name,
+            "name_e" => $this->name_e,
+            "salesmanType" => new SalesmenTypeResource($this->salesmanType),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+
         ];
     }
 }

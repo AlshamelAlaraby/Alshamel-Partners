@@ -24,6 +24,11 @@ class Employee extends Model
         return $this->hasOne(User::class);
     }
 
+    public function internalSalesman()
+    {
+        return $this->hasOne(InternalSalesman::class);
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;
@@ -37,7 +42,6 @@ class Employee extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Employee')
-            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
-
 }

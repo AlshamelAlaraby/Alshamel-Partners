@@ -114,6 +114,18 @@
         "serialsTable": "جدول سريل",
         "serial": "سريل"
     },
+    "salesmen": {
+        "add": "اضافه رجل مبيعات جديد",
+        "edit": "تعديل رجل مبيعات",
+        "Table": "جدول  رجال المبيعات",
+        "salesmen": " رجال المبيعات"
+    },
+    "internalSalesmen": {
+        "add": "اضافه رجل مبيعات داخلي جديد",
+        "edit": "تعديل رجل مبيعات داخلي",
+        "Table": "جدول  رجال المبيعات الداخلين",
+        "salesmen": " رجال المبيعات الداخلين"
+    },
     "navbar": {
         "search": {
             "text": "بحث..."
@@ -228,12 +240,6 @@
         "navigation": {
             "text": "التنقل"
         },
-        "country": {
-            "text": "الدول"
-        },
-        "city": {
-            "text": "المدن"
-        },
         "financialYear": {
             "text": "السنه الماليه"
         },
@@ -242,15 +248,6 @@
         },
         "employee": {
             "text": "الموظفين"
-        },
-        "governorate": {
-            "text": "المحافظات"
-        },
-        "avenue": {
-            "text": "المناطق"
-        },
-        "externalSalesmen": {
-            "text": "الباعه الخارجين"
         },
         "role": {
             "text": "الأدوار"
@@ -273,7 +270,9 @@
         "serial": {
             "text": "Serial"
         },
-
+        "area": {
+            "text": "الاماكن"
+        },
         "dashboard": {
             "text": "لوحة القيادة",
             "badge": "3",
@@ -282,6 +281,13 @@
                 "rolesType": "نوع الأدوار",
                 "roles": "الأدوار",
                 "salesMenType": "أنواع رجال المبيعات",
+                "salesMen": "رجال المبيعات",
+                "externalSalesmen": "الباعه الخارجين",
+                "internalSalesmen": "الباعه الداخليين",
+                "country": "الدول",
+                "city": "المدن",
+                "governorate": "المحافظات",
+                "avenue": "المناطق",
                 "crm": "CRM",
                 "analytics": "تحليلات"
             }
@@ -582,7 +588,11 @@
         "Yes": "نعم",
         "No": "لا",
         "branch": "فروع",
-
+        "store": "مخزن",
+        "symbol": "رمز (العربي)",
+        "symbol_e": "رمز (انجليزي)",
+        "salesManType" : "نوع رجل المبيعات",
+        "employee": "الموظف"
     }
 
 }

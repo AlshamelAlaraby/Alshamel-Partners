@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories\Salesman;
+namespace App\Repositories\InternalSalesman;
 
-interface SalesmanRepositoryInterface
+interface InternalSalesmanRepositoryInterface
 {
 
-    public function getAllSalesmans($request);
+    public function getAllInternalSalesmen($request);
 
     public function find($id);
 

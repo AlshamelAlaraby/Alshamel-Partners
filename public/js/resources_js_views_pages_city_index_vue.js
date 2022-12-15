@@ -1512,7 +1512,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
         var l = res.data;
         _this3.cities = l.data;
-        console.log(l);
         _this3.citiesPagination = l.pagination;
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
@@ -1679,7 +1678,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.isLoader = true;
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/cities/".concat(id), this.edit).then(function (res) {
-          _this9.$bvModal.hide("modal-edit-".concat(id));
+          _this9.$bvModal.hide("edit-".concat(id));
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1721,13 +1720,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 3;
                 return _this10.getCategory();
               case 3:
+                _context.next = 5;
+                return _this10.getGovernorate(city.country.id);
+              case 5:
                 _this10.edit.name = city.name;
                 _this10.edit.name_e = city.name_e;
                 _this10.edit.is_active = city.is_active ? 1 : 0;
                 _this10.edit.country_id = city.country.id;
                 _this10.edit.governorate_id = city.governorate.id;
                 _this10.errors = {};
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -1784,14 +1786,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this11.countries = [];
-                _this11.cities = [];
                 _this11.governorates = [];
                 _this11.create.governorate_id = null;
                 _this11.edit.governorate_id = null;
                 _this11.create.city_id = null;
                 _this11.edit.city_id = null;
-                _context2.next = 9;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries").then(function (res) {
+                _context2.next = 8;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?is_active=active").then(function (res) {
                   var l = res.data;
                   _this11.countries = l.data;
                 })["catch"](function (err) {
@@ -1801,7 +1802,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     text: "".concat(_this11.$t('general.Thereisanerrorinthesystem'))
                   });
                 });
-              case 9:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -1809,22 +1810,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getGovernorate: function getGovernorate() {
+    getGovernorate: function getGovernorate(id) {
       var _this12 = this;
-      this.cities = [];
-      this.governorates = [];
-      this.create.city_id = null;
-      this.edit.city_id = null;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates").then(function (res) {
-        var l = res.data;
-        _this12.governorates = l.data;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this12.$t('general.Error')),
-          text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
-        });
-      });
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this12.governorates = [];
+                _this12.create.city_id = null;
+                _this12.edit.city_id = null;
+                _context3.next = 5;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/governorates?country_id=".concat(id)).then(function (res) {
+                  var l = res.data;
+                  _this12.governorates = l.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this12.$t('general.Error')),
+                    text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
+                  });
+                });
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });
@@ -5077,7 +5090,7 @@ var render = function render() {
     staticClass: "custom-btn-dowonload",
     on: {
       click: function click($event) {
-        return _vm.$bvModal.show("modal-edit-".concat(_vm.checkAll[0]));
+        return _vm.$bvModal.show("edit-".concat(_vm.checkAll[0]));
       }
     }
   }, [_c("i", {
@@ -5322,7 +5335,9 @@ var render = function render() {
       }
     },
     on: {
-      select: _vm.getGovernorate
+      input: function input($event) {
+        return _vm.getGovernorate(_vm.create.country_id);
+      }
     },
     model: {
       value: _vm.create.country_id,
@@ -5614,14 +5629,14 @@ var render = function render() {
   })])])]), _vm._v(" "), _vm.cities.length > 0 ? _c("tbody", _vm._l(_vm.cities, function (data, index) {
     return _c("tr", {
       key: data.id,
-      staticClass: "body-tr-custom",
+      "class": ["body-tr-custom ", data.id],
       on: {
         "!click": function click($event) {
           return _vm.checkRow(data.id);
         },
         dblclick: function dblclick($event) {
           $event.preventDefault();
-          return _vm.$bvModal.show("modal-edit-".concat(data.id));
+          return _vm.$bvModal.show("edit-".concat(data.id));
         }
       }
     }, [_c("td", [_c("div", {
@@ -5692,6 +5707,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
+          $event.preventDefault();
           return _vm.$bvModal.show("modal-edit-".concat(data.id));
         }
       }
@@ -5715,13 +5731,12 @@ var render = function render() {
     }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.delete")))]), _vm._v(" "), _c("i", {
       staticClass: "fas fa-times text-danger"
     })])])])]), _vm._v(" "), _c("b-modal", {
-      ref: "edit-".concat(data.id),
-      refInFor: true,
       attrs: {
-        id: "modal-edit-".concat(data.id),
+        id: "edit-".concat(data.id),
         title: _vm.$t("city.editcity"),
         "title-class": "font-18",
         "body-class": "p-4",
+        size: "lg",
         "hide-footer": true
       },
       on: {
@@ -5862,7 +5877,9 @@ var render = function render() {
         }
       },
       on: {
-        select: _vm.getGovernorate
+        select: function select($event) {
+          return _vm.getGovernorate(_vm.edit.country_id);
+        }
       },
       model: {
         value: _vm.edit.country_id,
@@ -6003,7 +6020,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.$bvModal.hide("modal-edit-".concat(data.id));
+          return _vm.$bvModal.hide("edit-".concat(data.id));
         }
       }
     }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
@@ -6545,20 +6562,78 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
 }, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
 }, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
+}, {
+  id: 10006,
+  label: "menuitems.salesMen.text",
+  icon: "fas fa-user-tag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10027,
+    label: 'menuitems.dashboard.list.salesMenType',
+    link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
+  }]
+}, {
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
 }, {
   id: 5,
   label: 'menuitems.currency.text',
@@ -6575,30 +6650,6 @@ var menuItems = [{
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
 }, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
-}, {
-  id: 10001,
-  label: "menuitems.role.text",
-  icon: "ri-shield-user-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10002,
-    label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
-  }, {
-    id: 10003,
-    label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
-  }]
-}, {
   id: 10004,
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
@@ -6608,561 +6659,674 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/colors'
-}, {
-  id: 10006,
-  label: "menuitems.salesMen.text",
-  icon: "fas fa-user-tag",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10007,
-    label: 'menuitems.dashboard.list.salesMenType',
-    link: '/salesmenTypes'
-  }]
-}, {
-  id: 10007,
-  label: 'menuitems.branch.text',
-  icon: 'fas fa-code-branch',
-  link: '/branch'
-}, {
-  id: 10008,
-  label: 'menuitems.store.text',
-  icon: 'fas fa-store',
-  link: '/store'
-}, {
-  id: 10009,
-  label: 'menuitems.serial.text',
-  icon: 'fas fa-eraser',
-  link: '/serial'
-}, {
-  id: 1115,
-  label: "menuitems.dashboard.text",
-  icon: "ri-dashboard-line",
-  badge: {
-    variant: "success",
-    text: "menuitems.dashboard.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1114,
-    label: 'menuitems.dashboard.list.sales',
-    link: '/'
-  }, {
-    id: 1113,
-    label: 'menuitems.dashboard.list.crm',
-    link: '/dashboard/crm'
-  }, {
-    id: 1115,
-    label: 'menuitems.dashboard.list.analytics',
-    link: '/dashboard/analytics'
-  }]
-}, {
-  id: 1114,
-  label: "menuitems.apps.text",
-  isTitle: true
-}, {
-  id: 11113,
-  label: "menuitems.chat.text",
-  icon: "ri-message-2-line",
-  link: '/apps/chat'
-}, {
-  id: 1112,
-  label: "menuitems.ecommerce.text",
-  icon: "ri-shopping-cart-2-line",
-  badge: {
-    variant: "danger",
-    text: "menuitems.ecommerce.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1111,
-    label: "menuitems.ecommerce.list.products",
-    link: "/ecommerce/products"
-  }, {
-    id: 1110,
-    label: "menuitems.ecommerce.list.productsgrid",
-    link: "/ecommerce/products-grid"
-  }, {
-    id: 1109,
-    label: 'menuitems.ecommerce.list.productdetail',
-    link: '/ecommerce/product-detail/1'
-  }, {
-    id: 1108,
-    label: 'menuitems.ecommerce.list.createproduct',
-    link: '/ecommerce/product-create'
-  }, {
-    id: 1107,
-    label: "menuitems.ecommerce.list.customers",
-    link: "/ecommerce/customers"
-  }, {
-    id: 1106,
-    label: "menuitems.ecommerce.list.orders",
-    link: "/ecommerce/orders"
-  }, {
-    id: 1105,
-    label: "menuitems.ecommerce.list.orderdetail",
-    link: "/ecommerce/order-detail"
-  }, {
-    id: 1104,
-    label: "menuitems.ecommerce.list.sellers",
-    link: "/ecommerce/sellers"
-  }, {
-    id: 1103,
-    label: "menuitems.ecommerce.list.cart",
-    link: "/ecommerce/cart"
-  }, {
-    id: 1102,
-    label: "menuitems.ecommerce.list.checkout",
-    link: "/ecommerce/checkout"
-  }]
-}, {
-  id: 1101,
-  label: 'menuitems.calendar.text',
-  icon: 'ri-calendar-2-line',
-  link: '/apps/calendar'
-}, {
-  id: 1100,
-  label: 'menuitems.email.text',
-  icon: 'ri-mail-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1099,
-    label: 'menuitems.email.list.inbox',
-    link: '/email/inbox'
-  }, {
-    id: 1098,
-    label: 'menuitems.email.list.reademail',
-    link: '/email/reademail/1'
-  }, {
-    id: 1097,
-    label: 'menuitems.email.list.template',
-    link: '/email/templates'
-  }]
-}, {
-  id: 1096,
-  label: 'menuitems.companies.text',
-  icon: 'ri-building-4-line',
-  link: '/apps/companies'
-}, {
-  id: 1095,
-  label: 'menuitems.tasks.text',
-  icon: 'ri-task-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1093,
-    label: 'menuitems.tasks.list.list',
-    link: '/task/list'
-  }, {
-    id: 1092,
-    label: 'menuitems.tasks.list.detail',
-    link: '/task/detail'
-  }, {
-    id: 1091,
-    label: 'menuitems.tasks.list.kanban',
-    link: '/task/kanban'
-  }]
-}, {
-  id: 1090,
-  label: 'menuitems.ticket.text',
-  icon: 'ri-customer-service-2-line',
-  link: '/apps/tickets'
-}, {
-  id: 1089,
-  label: 'menuitems.contacts.text',
-  icon: 'ri-profile-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1088,
-    label: 'menuitems.contacts.list.members',
-    link: '/contacts/list'
-  }, {
-    id: 1087,
-    label: 'menuitems.contacts.list.profile',
-    link: '/contacts/profile'
-  }]
-}, {
-  id: 1086,
-  label: 'menuitems.filemanager.text',
-  icon: 'ri-folders-line',
-  link: '/apps/file-manager'
-}, {
-  id: 1085,
-  label: "menuitems.custom.text",
-  isTitle: true
-}, {
-  id: 1084,
-  label: 'menuitems.auth.text',
-  icon: 'ri-shield-user-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1083,
-    label: 'menuitems.auth.list.login',
-    link: '/auth/login-1'
-  }, {
-    id: 1082,
-    label: 'menuitems.auth.list.login-2',
-    link: '/auth/login-2'
-  }, {
-    id: 1081,
-    label: 'menuitems.auth.list.register',
-    link: '/auth/register-1'
-  }, {
-    id: 1080,
-    label: 'menuitems.auth.list.register-2',
-    link: '/auth/register-2'
-  }, {
-    id: 1079,
-    label: 'menuitems.auth.list.signin-signup',
-    link: '/auth/signin-signup'
-  }, {
-    id: 1078,
-    label: 'menuitems.auth.list.signin-signup-2',
-    link: '/auth/signin-signup-2'
-  }, {
-    id: 1077,
-    label: 'menuitems.auth.list.recoverpwd',
-    link: '/auth/recoverpwd'
-  }, {
-    id: 1076,
-    label: 'menuitems.auth.list.recoverpwd-2',
-    link: '/auth/recoverpwd-2'
-  }, {
-    id: 1075,
-    label: 'menuitems.auth.list.lock-screen',
-    link: '/auth/lock-screen'
-  }, {
-    id: 1074,
-    label: 'menuitems.auth.list.lock-screen-2',
-    link: '/auth/lock-screen-2'
-  }, {
-    id: 1073,
-    label: 'menuitems.auth.list.logout',
-    link: '/auth/logout-1'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.logout-2',
-    link: '/auth/logout-2'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail',
-    link: '/auth/confirm-mail'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail-2',
-    link: '/auth/confirm-mail-2'
-  }]
-}, {
-  id: 1071,
-  label: 'menuitems.extrapages.text',
-  icon: 'ri-pages-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1070,
-    label: 'menuitems.extrapages.list.starter',
-    link: '/extras/starter'
-  }, {
-    id: 1069,
-    label: 'menuitems.extrapages.list.timeline',
-    link: '/extras/timeline'
-  }, {
-    id: 1068,
-    label: 'menuitems.extrapages.list.sitemap',
-    link: '/extras/sitemap'
-  }, {
-    id: 1067,
-    label: 'menuitems.extrapages.list.invoice',
-    link: '/extras/invoice'
-  }, {
-    id: 1066,
-    label: 'menuitems.extrapages.list.faqs',
-    link: '/extras/faqs'
-  }, {
-    id: 1065,
-    label: 'menuitems.extrapages.list.search-results',
-    link: '/extras/search-results'
-  }, {
-    id: 1064,
-    label: 'menuitems.extrapages.list.pricing',
-    link: '/extras/pricing'
-  }, {
-    id: 1063,
-    label: 'menuitems.extrapages.list.maintenance',
-    link: '/extras/maintenance'
-  }, {
-    id: 1062,
-    label: 'menuitems.extrapages.list.comingsoon',
-    link: '/extras/coming-soon'
-  }, {
-    id: 1061,
-    label: 'menuitems.extrapages.list.lightbox',
-    link: '/extras/lightbox'
-  }, {
-    id: 1060,
-    label: 'menuitems.extrapages.list.error404',
-    link: '/error/404'
-  }, {
-    id: 1059,
-    label: 'menuitems.extrapages.list.error404-alt',
-    link: '/error/404-alt'
-  }, {
-    id: 1058,
-    label: 'menuitems.extrapages.list.error500',
-    link: '/error/500'
-  }]
-}, {
-  id: 1057,
-  label: "menuitems.components.text",
-  isTitle: true
-}, {
-  id: 1056,
-  label: 'menuitems.ui.text',
-  icon: 'ri-pencil-ruler-2-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1055,
-    label: 'menuitems.ui.list.avatars',
-    link: '/ui/avatars'
-  }, {
-    id: 1054,
-    label: 'menuitems.ui.list.buttons',
-    link: '/ui/buttons'
-  }, {
-    id: 1053,
-    label: 'menuitems.ui.list.cards',
-    link: '/ui/cards'
-  }, {
-    id: 1052,
-    label: 'menuitems.ui.list.carousel',
-    link: '/ui/carousel'
-  }, {
-    id: 1051,
-    label: 'menuitems.ui.list.dropdowns',
-    link: '/ui/dropdowns'
-  }, {
-    id: 1050,
-    label: 'menuitems.ui.list.video',
-    link: '/ui/video'
-  }, {
-    id: 1049,
-    label: 'menuitems.ui.list.general',
-    link: '/ui/general'
-  }, {
-    id: 1048,
-    label: 'menuitems.ui.list.grid',
-    link: '/ui/grid'
-  }, {
-    id: 1047,
-    label: 'menuitems.ui.list.images',
-    link: '/ui/images'
-  }, {
-    id: 1046,
-    label: 'menuitems.ui.list.listgroup',
-    link: '/ui/list-group'
-  }, {
-    id: 1045,
-    label: 'menuitems.ui.list.modals',
-    link: '/ui/modals'
-  }, {
-    id: 1044,
-    label: 'menuitems.ui.list.notifications',
-    link: '/ui/notifications'
-  }, {
-    id: 1043,
-    label: 'menuitems.ui.list.portlet',
-    link: '/ui/portlets'
-  }, {
-    id: 1042,
-    label: 'menuitems.ui.list.progress',
-    link: '/ui/progress'
-  }, {
-    id: 1041,
-    label: 'menuitems.ui.list.ribbons',
-    link: '/ui/ribbons'
-  }, {
-    id: 1040,
-    label: 'menuitems.ui.list.spinners',
-    link: '/ui/spinners'
-  }, {
-    id: 1039,
-    label: 'menuitems.ui.list.tabs',
-    link: '/ui/tabs-accordions'
-  }, {
-    id: 1038,
-    label: 'menuitems.ui.list.tooltip',
-    link: '/ui/tooltips-popovers'
-  }, {
-    id: 1037,
-    label: 'menuitems.ui.list.typography',
-    link: '/ui/typography'
-  }]
-}, {
-  id: 1036,
-  label: 'menuitems.extendedui.text',
-  icon: 'ri-stack-line',
-  badge: {
-    variant: "primary",
-    text: "menuitems.extendedui.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1035,
-    label: 'menuitems.extendedui.list.rangeslider',
-    link: '/extended/rangeslider'
-  }, {
-    id: 1034,
-    label: 'menuitems.extendedui.list.sweetalert',
-    link: '/extended/sweet-alert'
-  }, {
-    id: 1033,
-    label: 'menuitems.extendedui.list.tour',
-    link: '/extended/tour'
-  }, {
-    id: 1032,
-    label: 'menuitems.extendedui.list.scrollspy',
-    link: '/extended/scrollspy'
-  }]
-}, {
-  id: 1031,
-  label: 'menuitems.widgets.text',
-  icon: 'ri-honour-line',
-  link: '/widgets'
-}, {
-  id: 1024,
-  label: 'menuitems.icons.text',
-  icon: 'ri-markup-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1025,
-    label: 'menuitems.icons.list.feather',
-    link: '/icons/feather'
-  }, {
-    id: 1026,
-    label: 'menuitems.icons.list.remix',
-    link: '/icons/remix'
-  }, {
-    id: 1027,
-    label: 'menuitems.icons.list.boxicons',
-    link: '/icons/boxicons'
-  }, {
-    id: 1028,
-    label: 'menuitems.icons.list.materialdesign',
-    link: '/icons/mdi'
-  }, {
-    id: 1029,
-    label: 'menuitems.icons.list.fontawesome',
-    link: '/icons/font-awesome'
-  }, {
-    id: 1030,
-    label: 'menuitems.icons.list.weather',
-    link: '/icons/weather'
-  }]
-}, {
-  id: 1023,
-  label: 'menuitems.forms.text',
-  icon: 'ri-eraser-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1022,
-    label: 'menuitems.forms.list.elements',
-    link: '/forms/elements'
-  }, {
-    id: 1021,
-    label: 'menuitems.forms.list.advanced',
-    link: '/forms/advanced'
-  }, {
-    id: 1020,
-    label: 'menuitems.forms.list.validation',
-    link: '/forms/validation'
-  }, {
-    id: 1019,
-    label: 'menuitems.forms.list.wizard',
-    link: '/forms/wizard'
-  }, {
-    id: 1018,
-    label: 'menuitems.forms.list.mask',
-    link: '/forms/mask'
-  }, {
-    id: 1017,
-    label: 'menuitems.forms.list.editor',
-    link: '/forms/quill'
-  }, {
-    id: 1016,
-    label: 'menuitems.forms.list.fileupload',
-    link: '/forms/file-uploads'
-  }]
-}, {
-  id: 1015,
-  label: 'menuitems.tables.text',
-  icon: 'ri-table-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1014,
-    label: 'menuitems.tables.list.basic',
-    link: '/tables/basic'
-  }, {
-    id: 1013,
-    label: 'menuitems.tables.list.advanced',
-    link: '/tables/advanced'
-  }]
-}, {
-  id: 1012,
-  label: 'menuitems.charts.text',
-  icon: 'ri-bar-chart-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1007,
-    label: 'menuitems.charts.list.apex',
-    link: '/charts/apex'
-  }, {
-    id: 1008,
-    label: 'menuitems.charts.list.chartjs',
-    link: '/charts/chartjs'
-  }, {
-    id: 1009,
-    label: 'menuitems.charts.list.c3',
-    link: '/charts/c3'
-  }, {
-    id: 1010,
-    label: 'menuitems.charts.list.chartist',
-    link: '/charts/chartist'
-  }, {
-    id: 1011,
-    label: 'menuitems.charts.list.knob',
-    link: '/charts/knob'
-  }]
-}, {
-  id: 1006,
-  label: 'menuitems.maps.text',
-  icon: 'ri-map-pin-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1005,
-    label: 'menuitems.maps.list.googlemap',
-    link: '/maps/google'
-  }]
-}, {
-  id: 1004,
-  label: "menuitems.multilevel.text",
-  icon: "ri-share-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1003,
-    label: "menuitems.multilevel.list.level1.1",
-    link: "javascript: void(0);"
-  }, {
-    id: 1002,
-    label: "menuitems.multilevel.list.level1.2",
-    isMenuCollapsed: false,
-    subItems: [{
-      id: 1001,
-      label: "menuitems.multilevel.list.level1.level2.1",
-      link: "javascript: void(0);"
-    }, {
-      id: 1000,
-      label: "menuitems.multilevel.list.level1.level2.2",
-      link: "javascript: void(0);"
-    }]
-  }]
-}];
+}
+
+// {
+//     id: 1115,
+//     label: "menuitems.dashboard.text",
+//     icon: "ri-dashboard-line",
+//     badge: {
+//         variant: "success",
+//         text: "menuitems.dashboard.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1114,
+//             label: 'menuitems.dashboard.list.sales',
+//             link: '/'
+//         },
+//         {
+//             id: 1113,
+//             label: 'menuitems.dashboard.list.crm',
+//             link: '/dashboard/crm'
+//         },
+//         {
+//             id: 1115,
+//             label: 'menuitems.dashboard.list.analytics',
+//             link: '/dashboard/analytics'
+//         },
+//     ]
+// },
+// {
+//     id: 1114,
+//     label: "menuitems.apps.text",
+//     isTitle: true
+// },
+// {
+//     id: 11113,
+//     label: "menuitems.chat.text",
+//     icon: "ri-message-2-line",
+//     link: '/apps/chat'
+// },
+// {
+//     id: 1112,
+//     label: "menuitems.ecommerce.text",
+//     icon: "ri-shopping-cart-2-line",
+//     badge: {
+//         variant: "danger",
+//         text: "menuitems.ecommerce.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1111,
+//             label: "menuitems.ecommerce.list.products",
+//             link: "/ecommerce/products"
+//         },
+//         {
+//             id: 1110,
+//             label: "menuitems.ecommerce.list.productsgrid",
+//             link: "/ecommerce/products-grid"
+//         },
+//         {
+//             id: 1109,
+//             label: 'menuitems.ecommerce.list.productdetail',
+//             link: '/ecommerce/product-detail/1'
+//         },
+//         {
+//             id: 1108,
+//             label: 'menuitems.ecommerce.list.createproduct',
+//             link: '/ecommerce/product-create'
+//         },
+//         {
+//             id: 1107,
+//             label: "menuitems.ecommerce.list.customers",
+//             link: "/ecommerce/customers"
+//         },
+//         {
+//             id: 1106,
+//             label: "menuitems.ecommerce.list.orders",
+//             link: "/ecommerce/orders"
+//         },
+//         {
+//             id: 1105,
+//             label: "menuitems.ecommerce.list.orderdetail",
+//             link: "/ecommerce/order-detail"
+//         },
+//         {
+//             id: 1104,
+//             label: "menuitems.ecommerce.list.sellers",
+//             link: "/ecommerce/sellers"
+//         },
+//         {
+//             id: 1103,
+//             label: "menuitems.ecommerce.list.cart",
+//             link: "/ecommerce/cart"
+//         },
+//         {
+//             id: 1102,
+//             label: "menuitems.ecommerce.list.checkout",
+//             link: "/ecommerce/checkout"
+//         }
+//     ]
+// },
+// {
+//     id: 1101,
+//     label: 'menuitems.calendar.text',
+//     icon: 'ri-calendar-2-line',
+//     link: '/apps/calendar'
+// },
+// {
+//     id: 1100,
+//     label: 'menuitems.email.text',
+//     icon: 'ri-mail-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1099,
+//             label: 'menuitems.email.list.inbox',
+//             link: '/email/inbox'
+//         },
+//         {
+//             id: 1098,
+//             label: 'menuitems.email.list.reademail',
+//             link: '/email/reademail/1'
+//         },
+//         {
+//             id: 1097,
+//             label: 'menuitems.email.list.template',
+//             link: '/email/templates'
+//         }
+//     ]
+// },
+// {
+//     id: 1096,
+//     label: 'menuitems.companies.text',
+//     icon: 'ri-building-4-line',
+//     link: '/apps/companies'
+// },
+// {
+//     id: 1095,
+//     label: 'menuitems.tasks.text',
+//     icon: 'ri-task-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1093,
+//             label: 'menuitems.tasks.list.list',
+//             link: '/task/list'
+//         },
+//         {
+//             id: 1092,
+//             label: 'menuitems.tasks.list.detail',
+//             link: '/task/detail'
+//         },
+//         {
+//             id: 1091,
+//             label: 'menuitems.tasks.list.kanban',
+//             link: '/task/kanban'
+//         }
+//     ]
+// },
+// {
+//     id: 1090,
+//     label: 'menuitems.ticket.text',
+//     icon: 'ri-customer-service-2-line',
+//     link: '/apps/tickets'
+// },
+// {
+//     id: 1089,
+//     label: 'menuitems.contacts.text',
+//     icon: 'ri-profile-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1088,
+//             label: 'menuitems.contacts.list.members',
+//             link: '/contacts/list'
+//         },
+//         {
+//             id: 1087,
+//             label: 'menuitems.contacts.list.profile',
+//             link: '/contacts/profile'
+//         }
+//     ]
+// },
+// {
+//     id: 1086,
+//     label: 'menuitems.filemanager.text',
+//     icon: 'ri-folders-line',
+//     link: '/apps/file-manager'
+// },
+// {
+//     id: 1085,
+//     label: "menuitems.custom.text",
+//     isTitle: true
+// },
+// {
+//     id: 1084,
+//     label: 'menuitems.auth.text',
+//     icon: 'ri-shield-user-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1083,
+//             label: 'menuitems.auth.list.login',
+//             link: '/auth/login-1'
+//         },
+//         {
+//             id: 1082,
+//             label: 'menuitems.auth.list.login-2',
+//             link: '/auth/login-2'
+//         },
+//         {
+//             id: 1081,
+//             label: 'menuitems.auth.list.register',
+//             link: '/auth/register-1'
+//         },
+//         {
+//             id: 1080,
+//             label: 'menuitems.auth.list.register-2',
+//             link: '/auth/register-2'
+//         },
+//         {
+//             id: 1079,
+//             label: 'menuitems.auth.list.signin-signup',
+//             link: '/auth/signin-signup'
+//         },
+//         {
+//             id: 1078,
+//             label: 'menuitems.auth.list.signin-signup-2',
+//             link: '/auth/signin-signup-2'
+//         },
+//         {
+//             id: 1077,
+//             label: 'menuitems.auth.list.recoverpwd',
+//             link: '/auth/recoverpwd'
+//         },
+//         {
+//             id: 1076,
+//             label: 'menuitems.auth.list.recoverpwd-2',
+//             link: '/auth/recoverpwd-2'
+//         },
+//         {
+//             id: 1075,
+//             label: 'menuitems.auth.list.lock-screen',
+//             link: '/auth/lock-screen'
+//         },
+//         {
+//             id: 1074,
+//             label: 'menuitems.auth.list.lock-screen-2',
+//             link: '/auth/lock-screen-2'
+//         },
+//         {
+//             id: 1073,
+//             label: 'menuitems.auth.list.logout',
+//             link: '/auth/logout-1'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.logout-2',
+//             link: '/auth/logout-2'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail',
+//             link: '/auth/confirm-mail'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail-2',
+//             link: '/auth/confirm-mail-2'
+//         },
+//     ]
+// },
+// {
+//     id: 1071,
+//     label: 'menuitems.extrapages.text',
+//     icon: 'ri-pages-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1070,
+//             label: 'menuitems.extrapages.list.starter',
+//             link: '/extras/starter'
+//         },
+//         {
+//             id: 1069,
+//             label: 'menuitems.extrapages.list.timeline',
+//             link: '/extras/timeline'
+//         },
+//         {
+//             id: 1068,
+//             label: 'menuitems.extrapages.list.sitemap',
+//             link: '/extras/sitemap'
+//         },
+//         {
+//             id: 1067,
+//             label: 'menuitems.extrapages.list.invoice',
+//             link: '/extras/invoice'
+//         },
+//         {
+//             id: 1066,
+//             label: 'menuitems.extrapages.list.faqs',
+//             link: '/extras/faqs'
+//         },
+//         {
+//             id: 1065,
+//             label: 'menuitems.extrapages.list.search-results',
+//             link: '/extras/search-results'
+//         },
+//         {
+//             id: 1064,
+//             label: 'menuitems.extrapages.list.pricing',
+//             link: '/extras/pricing'
+//         },
+//         {
+//             id: 1063,
+//             label: 'menuitems.extrapages.list.maintenance',
+//             link: '/extras/maintenance'
+//         },
+//         {
+//             id: 1062,
+//             label: 'menuitems.extrapages.list.comingsoon',
+//             link: '/extras/coming-soon'
+//         },
+//         {
+//             id: 1061,
+//             label: 'menuitems.extrapages.list.lightbox',
+//             link: '/extras/lightbox'
+//         },
+//         {
+//             id: 1060,
+//             label: 'menuitems.extrapages.list.error404',
+//             link: '/error/404'
+//         },
+//         {
+//             id: 1059,
+//             label: 'menuitems.extrapages.list.error404-alt',
+//             link: '/error/404-alt'
+//         },
+//         {
+//             id: 1058,
+//             label: 'menuitems.extrapages.list.error500',
+//             link: '/error/500'
+//         }
+//     ]
+// },
+// {
+//     id: 1057,
+//     label: "menuitems.components.text",
+//     isTitle: true
+// },
+// {
+//     id: 1056,
+//     label: 'menuitems.ui.text',
+//     icon: 'ri-pencil-ruler-2-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1055,
+//             label: 'menuitems.ui.list.avatars',
+//             link: '/ui/avatars'
+//         },
+//         {
+//             id: 1054,
+//             label: 'menuitems.ui.list.buttons',
+//             link: '/ui/buttons'
+//         },
+//         {
+//             id: 1053,
+//             label: 'menuitems.ui.list.cards',
+//             link: '/ui/cards'
+//         },
+//         {
+//             id: 1052,
+//             label: 'menuitems.ui.list.carousel',
+//             link: '/ui/carousel'
+//         },
+//         {
+//             id: 1051,
+//             label: 'menuitems.ui.list.dropdowns',
+//             link: '/ui/dropdowns'
+//         },
+//         {
+//             id: 1050,
+//             label: 'menuitems.ui.list.video',
+//             link: '/ui/video'
+//         },
+//         {
+//             id: 1049,
+//             label: 'menuitems.ui.list.general',
+//             link: '/ui/general'
+//         },
+//         {
+//             id: 1048,
+//             label: 'menuitems.ui.list.grid',
+//             link: '/ui/grid'
+//         },
+//         {
+//             id: 1047,
+//             label: 'menuitems.ui.list.images',
+//             link: '/ui/images'
+//         },
+//         {
+//             id: 1046,
+//             label: 'menuitems.ui.list.listgroup',
+//             link: '/ui/list-group'
+//         },
+//         {
+//             id: 1045,
+//             label: 'menuitems.ui.list.modals',
+//             link: '/ui/modals'
+//         },
+//         {
+//             id: 1044,
+//             label: 'menuitems.ui.list.notifications',
+//             link: '/ui/notifications'
+//         },
+//         {
+//             id: 1043,
+//             label: 'menuitems.ui.list.portlet',
+//             link: '/ui/portlets'
+//         },
+//         {
+//             id: 1042,
+//             label: 'menuitems.ui.list.progress',
+//             link: '/ui/progress'
+//         },
+//         {
+//             id: 1041,
+//             label: 'menuitems.ui.list.ribbons',
+//             link: '/ui/ribbons'
+//         },
+//         {
+//             id: 1040,
+//             label: 'menuitems.ui.list.spinners',
+//             link: '/ui/spinners'
+//         },
+//         {
+//             id: 1039,
+//             label: 'menuitems.ui.list.tabs',
+//             link: '/ui/tabs-accordions'
+//         },
+//         {
+//             id: 1038,
+//             label: 'menuitems.ui.list.tooltip',
+//             link: '/ui/tooltips-popovers'
+//         },
+//         {
+//             id: 1037,
+//             label: 'menuitems.ui.list.typography',
+//             link: '/ui/typography'
+//         }
+//     ]
+// },
+// {
+//     id: 1036,
+//     label: 'menuitems.extendedui.text',
+//     icon: 'ri-stack-line',
+//     badge: {
+//         variant: "primary",
+//         text: "menuitems.extendedui.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1035,
+//             label: 'menuitems.extendedui.list.rangeslider',
+//             link: '/extended/rangeslider'
+//         },
+//         {
+//             id: 1034,
+//             label: 'menuitems.extendedui.list.sweetalert',
+//             link: '/extended/sweet-alert'
+//         },
+//         {
+//             id: 1033,
+//             label: 'menuitems.extendedui.list.tour',
+//             link: '/extended/tour'
+//         },
+//         {
+//             id: 1032,
+//             label: 'menuitems.extendedui.list.scrollspy',
+//             link: '/extended/scrollspy'
+//         },
+//     ]
+// },
+// {
+//     id: 1031,
+//     label: 'menuitems.widgets.text',
+//     icon: 'ri-honour-line',
+//     link: '/widgets'
+// },
+// {
+//     id: 1024,
+//     label: 'menuitems.icons.text',
+//     icon: 'ri-markup-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1025,
+//             label: 'menuitems.icons.list.feather',
+//             link: '/icons/feather'
+//         },
+//         {
+//             id: 1026,
+//             label: 'menuitems.icons.list.remix',
+//             link: '/icons/remix'
+//         },
+//         {
+//             id: 1027,
+//             label: 'menuitems.icons.list.boxicons',
+//             link: '/icons/boxicons'
+//         },
+//         {
+//             id: 1028,
+//             label: 'menuitems.icons.list.materialdesign',
+//             link: '/icons/mdi'
+//         },
+//         {
+//             id: 1029,
+//             label: 'menuitems.icons.list.fontawesome',
+//             link: '/icons/font-awesome'
+//         },
+//         {
+//             id: 1030,
+//             label: 'menuitems.icons.list.weather',
+//             link: '/icons/weather'
+//         }
+//     ]
+// },
+// {
+//     id: 1023,
+//     label: 'menuitems.forms.text',
+//     icon: 'ri-eraser-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1022,
+//             label: 'menuitems.forms.list.elements',
+//             link: '/forms/elements'
+//         },
+//         {
+//             id: 1021,
+//             label: 'menuitems.forms.list.advanced',
+//             link: '/forms/advanced'
+//         },
+//         {
+//             id: 1020,
+//             label: 'menuitems.forms.list.validation',
+//             link: '/forms/validation'
+//         },
+//         {
+//             id: 1019,
+//             label: 'menuitems.forms.list.wizard',
+//             link: '/forms/wizard'
+//         },
+//         {
+//             id: 1018,
+//             label: 'menuitems.forms.list.mask',
+//             link: '/forms/mask'
+//         },
+//         {
+//             id: 1017,
+//             label: 'menuitems.forms.list.editor',
+//             link: '/forms/quill'
+//         },
+//         {
+//             id: 1016,
+//             label: 'menuitems.forms.list.fileupload',
+//             link: '/forms/file-uploads'
+//         }
+//     ]
+// },
+// {
+//     id: 1015,
+//     label: 'menuitems.tables.text',
+//     icon: 'ri-table-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1014,
+//             label: 'menuitems.tables.list.basic',
+//             link: '/tables/basic'
+//         },
+//         {
+//             id: 1013,
+//             label: 'menuitems.tables.list.advanced',
+//             link: '/tables/advanced'
+//         },
+//     ]
+// },
+// {
+//     id: 1012,
+//     label: 'menuitems.charts.text',
+//     icon: 'ri-bar-chart-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1007,
+//             label: 'menuitems.charts.list.apex',
+//             link: '/charts/apex'
+//         },
+//         {
+//             id: 1008,
+//             label: 'menuitems.charts.list.chartjs',
+//             link: '/charts/chartjs'
+//         },
+//         {
+//             id: 1009,
+//             label: 'menuitems.charts.list.c3',
+//             link: '/charts/c3'
+//         },
+//         {
+//             id: 1010,
+//             label: 'menuitems.charts.list.chartist',
+//             link: '/charts/chartist'
+//         },
+//         {
+//             id: 1011,
+//             label: 'menuitems.charts.list.knob',
+//             link: '/charts/knob'
+//         }
+//     ]
+// },
+// {
+//     id: 1006,
+//     label: 'menuitems.maps.text',
+//     icon: 'ri-map-pin-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1005,
+//             label: 'menuitems.maps.list.googlemap',
+//             link: '/maps/google'
+//         }
+//     ]
+// },
+// {
+//     id: 1004,
+//     label: "menuitems.multilevel.text",
+//     icon: "ri-share-line",
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1003,
+//             label: "menuitems.multilevel.list.level1.1",
+//             link: "javascript: void(0);",
+//         },
+//         {
+//             id: 1002,
+//             label: "menuitems.multilevel.list.level1.2",
+//             isMenuCollapsed: false,
+//             subItems: [
+//                 {
+//                     id: 1001,
+//                     label: "menuitems.multilevel.list.level1.level2.1",
+//                     link: "javascript: void(0);"
+//                 },
+//                 {
+//                     id: 1000,
+//                     label: "menuitems.multilevel.list.level1.level2.2",
+//                     link: "javascript: void(0);"
+//                 }
+//             ]
+//         }
+//     ]
+// }
+];
 
 /***/ }),
 

@@ -62,11 +62,10 @@ export default {
                 media: null,
             },
             errors: {},
-            dropDownSenders: [],
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            image: '',
+            changeImage: false,
             dropzoneOptions: {
                 url: `${process.env.MIX_APP_URL}api/media`,
                 maxFilesize: 5,
@@ -103,7 +102,6 @@ export default {
             is_default: {required,integer},
             national_id_length: {required,minLength: minLength(1),maxLength: maxLength(20)},
             is_active: {required},
-            media:{required}
         },
     },
     watch: {
@@ -373,7 +371,7 @@ export default {
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
             this.edit.is_default = country.is_default;
-            this.edit.media = country.media.id;
+            // this.edit.media = country.media.id;
             this.errors = {};
         },
         /**
@@ -1306,6 +1304,27 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-12">
+                                                        <tamplate v-if="!changeImage">
+                                                            <!-- file upload -->
+                                                            <vue-dropzone
+                                                                id="dropzone_edit"
+                                                                ref="myCreateDropzone_edit"
+                                                                :use-custom-slot="true"
+                                                                :options="dropzoneOptions"
+                                                                @vdropzone-complete="afterUpload"
+                                                                @vdropzone-sending="sendingEvent"
+                                                            >
+                                                                <div class="dz-message needsclick">
+                                                                    <i class="h1 text-muted ri-upload-cloud-2-line"></i>
+                                                                    <h3>{{ $t('general.Dropfileshereorclicktoupload') }}</h3>
+                                                                    <span class="text-muted font-13">
+                                                                    {{ $t('general.Dropfileshereorclicktoupload') }}
+                                                                </span>
+                                                                </div>
+                                                            </vue-dropzone>
+                                                        </tamplate>
+                                                    </div>
                                                 </div>
                                                 <div class="mt-1 d-flex justify-content-end">
                                                     <!-- Emulate built in modal footer ok and cancel button actions -->
@@ -1350,4 +1369,8 @@ export default {
             </div>
         </div>
     </Layout>
+
 </template>
+
+
+

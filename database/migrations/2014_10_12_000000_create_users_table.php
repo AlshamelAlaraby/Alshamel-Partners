@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
 
+        // \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');

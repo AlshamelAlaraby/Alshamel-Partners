@@ -2,16 +2,15 @@
 
 namespace App\Repositories\Color;
 
+use App\Models\Color;
 use Illuminate\Support\Facades\DB;
 
 class ColorRepository implements ColorInterface
 {
 
-    public function __construct(private \App\Models\Color$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private Color $model)
     {
         $this->model = $model;
-        $this->media = $media;
-
     }
 
     public function all($request)
@@ -27,13 +26,11 @@ class ColorRepository implements ColorInterface
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
-
             }
 
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
-
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -63,9 +60,7 @@ class ColorRepository implements ColorInterface
             $model = $this->model->find($id);
             $model->update($request->all());
             $this->forget($id);
-
         });
-
     }
     public function logs($id)
     {
@@ -87,7 +82,5 @@ class ColorRepository implements ColorInterface
         foreach ($keys as $key) {
             cacheForget($key);
         }
-
     }
-
 }

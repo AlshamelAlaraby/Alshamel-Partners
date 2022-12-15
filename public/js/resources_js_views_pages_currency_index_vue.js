@@ -1389,6 +1389,8 @@ var imgValid = function imgValid(value) {
       create: {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1400,6 +1402,8 @@ var imgValid = function imgValid(value) {
       edit: {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1425,6 +1429,18 @@ var imgValid = function imgValid(value) {
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      symbol: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
+      },
+      symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
@@ -1475,6 +1491,18 @@ var imgValid = function imgValid(value) {
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
+      },
+      symbol: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
+      },
+      symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
         maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
@@ -1652,6 +1680,8 @@ var imgValid = function imgValid(value) {
       this.create = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1674,6 +1704,8 @@ var imgValid = function imgValid(value) {
       this.create = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -1770,6 +1802,8 @@ var imgValid = function imgValid(value) {
       });
       this.edit.name = currency.name;
       this.edit.name_e = currency.name_e;
+      this.edit.symbol = currency.symbol;
+      this.edit.symbol_e = currency.symbol_e;
       this.edit.code = currency.code;
       this.edit.code_e = currency.code_e;
       this.edit.fraction = currency.fraction;
@@ -1787,6 +1821,8 @@ var imgValid = function imgValid(value) {
       this.edit = {
         name: '',
         name_e: '',
+        symbol: '',
+        symbol_e: '',
         code: '',
         code_e: '',
         fraction: '',
@@ -5332,6 +5368,114 @@ var render = function render() {
   }, [_c("label", {
     staticClass: "control-label",
     attrs: {
+      "for": "field-45"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.symbol.$model,
+      expression: "$v.create.symbol.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.symbol.$error || _vm.errors.symbol,
+      "is-valid": !_vm.$v.create.symbol.$invalid && !_vm.errors.symbol
+    },
+    attrs: {
+      type: "text",
+      "data-create": "3",
+      id: "field-45"
+    },
+    domProps: {
+      value: _vm.$v.create.symbol.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 4);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.symbol, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.symbol.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-33"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.symbol_e.$model,
+      expression: "$v.create.symbol_e.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.symbol_e.$error || _vm.errors.symbol_e,
+      "is-valid": !_vm.$v.create.symbol_e.$invalid && !_vm.errors.symbol_e
+    },
+    attrs: {
+      type: "text",
+      "data-create": "4",
+      id: "field-33"
+    },
+    domProps: {
+      value: _vm.$v.create.symbol_e.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 5);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.symbol_e, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.symbol_e.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction",
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
       "for": "field-3"
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
@@ -5350,7 +5494,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "3",
+      "data-create": "5",
       id: "field-3"
     },
     domProps: {
@@ -5359,7 +5503,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 4);
+        return _vm.moveInput("input", "create", 6);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5404,7 +5548,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "4",
+      "data-create": "6",
       id: "field-4"
     },
     domProps: {
@@ -5413,7 +5557,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 5);
+        return _vm.moveInput("input", "create", 7);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5458,7 +5602,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "5",
+      "data-create": "7",
       id: "field-5"
     },
     domProps: {
@@ -5467,7 +5611,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 6);
+        return _vm.moveInput("input", "create", 8);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5512,7 +5656,7 @@ var render = function render() {
     },
     attrs: {
       type: "text",
-      "data-create": "6",
+      "data-create": "8",
       id: "field-6"
     },
     domProps: {
@@ -5521,7 +5665,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 7);
+        return _vm.moveInput("input", "create", 9);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5563,8 +5707,8 @@ var render = function render() {
     },
     attrs: {
       type: "number",
-      "data-create": "7",
-      step: "0.01",
+      "data-create": "9",
+      step: "0.1",
       id: "field-7"
     },
     domProps: {
@@ -5573,7 +5717,7 @@ var render = function render() {
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("select", "create", 8);
+        return _vm.moveInput("select", "create", 10);
       },
       input: function input($event) {
         if ($event.target.composing) return;
@@ -5607,13 +5751,13 @@ var render = function render() {
     },
     attrs: {
       id: "field-11",
-      "data-create": "8"
+      "data-create": "10"
     },
     on: {
       keypress: function keypress($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
         $event.preventDefault();
-        return _vm.moveInput("select", "create", 9);
+        return _vm.moveInput("select", "create", 11);
       },
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -5667,7 +5811,7 @@ var render = function render() {
     },
     attrs: {
       id: "inlineFormCustomSelectPref",
-      "data-create": "9"
+      "data-create": "11"
     },
     on: {
       keypress: function keypress($event) {
@@ -6050,9 +6194,10 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("country.editcountry"),
+        title: _vm.$t("currency.editcurrency"),
         "title-class": "font-18",
         "body-class": "p-4",
+        size: "lg",
         "hide-footer": true
       },
       on: {
@@ -6183,6 +6328,114 @@ var render = function render() {
     }, [_c("label", {
       staticClass: "control-label",
       attrs: {
+        "for": "edit-45"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol.$model,
+        expression: "$v.edit.symbol.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol.$error || _vm.errors.symbol,
+        "is-valid": !_vm.$v.edit.symbol.$invalid && !_vm.errors.symbol
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "3",
+        id: "edit-45"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 4);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction-ltr",
+      attrs: {
+        dir: "ltr"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-33"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol_e.$model,
+        expression: "$v.edit.symbol_e.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol_e.$error || _vm.errors.symbol_e,
+        "is-valid": !_vm.$v.edit.symbol_e.$invalid && !_vm.errors.symbol_e
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "4",
+        id: "edit-33"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol_e.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 5);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol_e, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol_e.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction",
+      attrs: {
+        dir: "rtl"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
         "for": "edit-3"
       }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code")) + "\n                                                            "), _c("span", {
@@ -6201,7 +6454,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "3",
+        "data-edit": "5",
         id: "edit-3"
       },
       domProps: {
@@ -6210,7 +6463,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 4);
+          return _vm.moveInput("input", "edit", 6);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6255,7 +6508,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "4",
+        "data-edit": "6",
         id: "edit-4"
       },
       domProps: {
@@ -6264,7 +6517,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 5);
+          return _vm.moveInput("input", "edit", 7);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6309,7 +6562,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "5",
+        "data-edit": "7",
         id: "edit-5"
       },
       domProps: {
@@ -6318,7 +6571,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 6);
+          return _vm.moveInput("input", "edit", 8);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6363,7 +6616,7 @@ var render = function render() {
       },
       attrs: {
         type: "text",
-        "data-edit": "6",
+        "data-edit": "8",
         id: "edit-6"
       },
       domProps: {
@@ -6372,7 +6625,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 7);
+          return _vm.moveInput("input", "edit", 9);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6414,8 +6667,8 @@ var render = function render() {
       },
       attrs: {
         type: "number",
-        step: "0.01",
-        "data-edit": "7",
+        step: "0.1",
+        "data-edit": "9",
         id: "edit-7"
       },
       domProps: {
@@ -6424,7 +6677,7 @@ var render = function render() {
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("select", "edit", 8);
+          return _vm.moveInput("select", "edit", 10);
         },
         input: function input($event) {
           if ($event.target.composing) return;
@@ -6458,13 +6711,13 @@ var render = function render() {
       },
       attrs: {
         id: "edit-11",
-        "data-edit": "8"
+        "data-edit": "10"
       },
       on: {
         keypress: function keypress($event) {
           if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
           $event.preventDefault();
-          return _vm.moveInput("select", "edit", 9);
+          return _vm.moveInput("select", "edit", 11);
         },
         change: function change($event) {
           var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -6518,7 +6771,7 @@ var render = function render() {
       },
       attrs: {
         id: "edit-9",
-        "data-edit": "9"
+        "data-edit": "11"
       },
       on: {
         keypress: function keypress($event) {
@@ -7129,20 +7382,78 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
-  id: 2,
-  label: 'menuitems.country.text',
-  icon: 'fas fa-flag',
-  link: '/country'
+  id: 10007,
+  label: 'menuitems.branch.text',
+  icon: 'fas fa-code-branch',
+  link: '/branch'
 }, {
-  id: 3,
-  label: 'menuitems.governorate.text',
-  icon: 'fas fa-city',
-  link: '/governorate'
+  id: 10008,
+  label: 'menuitems.store.text',
+  icon: 'fas fa-store',
+  link: '/store'
 }, {
-  id: 4,
-  label: 'menuitems.city.text',
-  icon: 'fas fa-city',
-  link: '/city'
+  id: 10009,
+  label: 'menuitems.serial.text',
+  icon: 'fas fa-eraser',
+  link: '/serial'
+}, {
+  id: 10006,
+  label: "menuitems.salesMen.text",
+  icon: "fas fa-user-tag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10027,
+    label: 'menuitems.dashboard.list.salesMenType',
+    link: '/salesmenTypes'
+  }, {
+    id: 100117,
+    label: 'menuitems.dashboard.list.salesMen',
+    link: '/salesmen'
+  }, {
+    id: 9,
+    label: 'menuitems.dashboard.list.externalSalesmen',
+    link: '/externalSalesmen'
+  }, {
+    id: 7636473,
+    label: 'menuitems.dashboard.list.internalSalesmen',
+    link: '/internalSalesman'
+  }]
+}, {
+  id: 1000544,
+  label: "menuitems.area.text",
+  icon: "fas fa-flag",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 2,
+    label: 'menuitems.dashboard.list.country',
+    link: '/country'
+  }, {
+    id: 3,
+    label: 'menuitems.dashboard.list.governorate',
+    link: '/governorate'
+  }, {
+    id: 4,
+    label: 'menuitems.dashboard.list.city',
+    link: '/city'
+  }, {
+    id: 8,
+    label: 'menuitems.dashboard.list.avenue',
+    link: '/avenue'
+  }]
+}, {
+  id: 10001,
+  label: "menuitems.role.text",
+  icon: "ri-shield-user-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 10002,
+    label: 'menuitems.dashboard.list.rolesType',
+    link: '/rolesType'
+  }, {
+    id: 10003,
+    label: 'menuitems.dashboard.list.roles',
+    link: '/roles'
+  }]
 }, {
   id: 5,
   label: 'menuitems.currency.text',
@@ -7159,30 +7470,6 @@ var menuItems = [{
   icon: 'fas fa-file-invoice-dollar',
   link: '/financialYear'
 }, {
-  id: 8,
-  label: 'menuitems.avenue.text',
-  icon: 'fas fa-file-invoice-dollar',
-  link: '/avenue'
-}, {
-  id: 9,
-  label: 'menuitems.externalSalesmen.text',
-  icon: 'fas fa-users',
-  link: '/externalSalesmen'
-}, {
-  id: 10001,
-  label: "menuitems.role.text",
-  icon: "ri-shield-user-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10002,
-    label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
-  }, {
-    id: 10003,
-    label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
-  }]
-}, {
   id: 10004,
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
@@ -7192,561 +7479,674 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/colors'
-}, {
-  id: 10006,
-  label: "menuitems.salesMen.text",
-  icon: "fas fa-user-tag",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 10007,
-    label: 'menuitems.dashboard.list.salesMenType',
-    link: '/salesmenTypes'
-  }]
-}, {
-  id: 10007,
-  label: 'menuitems.branch.text',
-  icon: 'fas fa-code-branch',
-  link: '/branch'
-}, {
-  id: 10008,
-  label: 'menuitems.store.text',
-  icon: 'fas fa-store',
-  link: '/store'
-}, {
-  id: 10009,
-  label: 'menuitems.serial.text',
-  icon: 'fas fa-eraser',
-  link: '/serial'
-}, {
-  id: 1115,
-  label: "menuitems.dashboard.text",
-  icon: "ri-dashboard-line",
-  badge: {
-    variant: "success",
-    text: "menuitems.dashboard.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1114,
-    label: 'menuitems.dashboard.list.sales',
-    link: '/'
-  }, {
-    id: 1113,
-    label: 'menuitems.dashboard.list.crm',
-    link: '/dashboard/crm'
-  }, {
-    id: 1115,
-    label: 'menuitems.dashboard.list.analytics',
-    link: '/dashboard/analytics'
-  }]
-}, {
-  id: 1114,
-  label: "menuitems.apps.text",
-  isTitle: true
-}, {
-  id: 11113,
-  label: "menuitems.chat.text",
-  icon: "ri-message-2-line",
-  link: '/apps/chat'
-}, {
-  id: 1112,
-  label: "menuitems.ecommerce.text",
-  icon: "ri-shopping-cart-2-line",
-  badge: {
-    variant: "danger",
-    text: "menuitems.ecommerce.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1111,
-    label: "menuitems.ecommerce.list.products",
-    link: "/ecommerce/products"
-  }, {
-    id: 1110,
-    label: "menuitems.ecommerce.list.productsgrid",
-    link: "/ecommerce/products-grid"
-  }, {
-    id: 1109,
-    label: 'menuitems.ecommerce.list.productdetail',
-    link: '/ecommerce/product-detail/1'
-  }, {
-    id: 1108,
-    label: 'menuitems.ecommerce.list.createproduct',
-    link: '/ecommerce/product-create'
-  }, {
-    id: 1107,
-    label: "menuitems.ecommerce.list.customers",
-    link: "/ecommerce/customers"
-  }, {
-    id: 1106,
-    label: "menuitems.ecommerce.list.orders",
-    link: "/ecommerce/orders"
-  }, {
-    id: 1105,
-    label: "menuitems.ecommerce.list.orderdetail",
-    link: "/ecommerce/order-detail"
-  }, {
-    id: 1104,
-    label: "menuitems.ecommerce.list.sellers",
-    link: "/ecommerce/sellers"
-  }, {
-    id: 1103,
-    label: "menuitems.ecommerce.list.cart",
-    link: "/ecommerce/cart"
-  }, {
-    id: 1102,
-    label: "menuitems.ecommerce.list.checkout",
-    link: "/ecommerce/checkout"
-  }]
-}, {
-  id: 1101,
-  label: 'menuitems.calendar.text',
-  icon: 'ri-calendar-2-line',
-  link: '/apps/calendar'
-}, {
-  id: 1100,
-  label: 'menuitems.email.text',
-  icon: 'ri-mail-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1099,
-    label: 'menuitems.email.list.inbox',
-    link: '/email/inbox'
-  }, {
-    id: 1098,
-    label: 'menuitems.email.list.reademail',
-    link: '/email/reademail/1'
-  }, {
-    id: 1097,
-    label: 'menuitems.email.list.template',
-    link: '/email/templates'
-  }]
-}, {
-  id: 1096,
-  label: 'menuitems.companies.text',
-  icon: 'ri-building-4-line',
-  link: '/apps/companies'
-}, {
-  id: 1095,
-  label: 'menuitems.tasks.text',
-  icon: 'ri-task-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1093,
-    label: 'menuitems.tasks.list.list',
-    link: '/task/list'
-  }, {
-    id: 1092,
-    label: 'menuitems.tasks.list.detail',
-    link: '/task/detail'
-  }, {
-    id: 1091,
-    label: 'menuitems.tasks.list.kanban',
-    link: '/task/kanban'
-  }]
-}, {
-  id: 1090,
-  label: 'menuitems.ticket.text',
-  icon: 'ri-customer-service-2-line',
-  link: '/apps/tickets'
-}, {
-  id: 1089,
-  label: 'menuitems.contacts.text',
-  icon: 'ri-profile-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1088,
-    label: 'menuitems.contacts.list.members',
-    link: '/contacts/list'
-  }, {
-    id: 1087,
-    label: 'menuitems.contacts.list.profile',
-    link: '/contacts/profile'
-  }]
-}, {
-  id: 1086,
-  label: 'menuitems.filemanager.text',
-  icon: 'ri-folders-line',
-  link: '/apps/file-manager'
-}, {
-  id: 1085,
-  label: "menuitems.custom.text",
-  isTitle: true
-}, {
-  id: 1084,
-  label: 'menuitems.auth.text',
-  icon: 'ri-shield-user-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1083,
-    label: 'menuitems.auth.list.login',
-    link: '/auth/login-1'
-  }, {
-    id: 1082,
-    label: 'menuitems.auth.list.login-2',
-    link: '/auth/login-2'
-  }, {
-    id: 1081,
-    label: 'menuitems.auth.list.register',
-    link: '/auth/register-1'
-  }, {
-    id: 1080,
-    label: 'menuitems.auth.list.register-2',
-    link: '/auth/register-2'
-  }, {
-    id: 1079,
-    label: 'menuitems.auth.list.signin-signup',
-    link: '/auth/signin-signup'
-  }, {
-    id: 1078,
-    label: 'menuitems.auth.list.signin-signup-2',
-    link: '/auth/signin-signup-2'
-  }, {
-    id: 1077,
-    label: 'menuitems.auth.list.recoverpwd',
-    link: '/auth/recoverpwd'
-  }, {
-    id: 1076,
-    label: 'menuitems.auth.list.recoverpwd-2',
-    link: '/auth/recoverpwd-2'
-  }, {
-    id: 1075,
-    label: 'menuitems.auth.list.lock-screen',
-    link: '/auth/lock-screen'
-  }, {
-    id: 1074,
-    label: 'menuitems.auth.list.lock-screen-2',
-    link: '/auth/lock-screen-2'
-  }, {
-    id: 1073,
-    label: 'menuitems.auth.list.logout',
-    link: '/auth/logout-1'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.logout-2',
-    link: '/auth/logout-2'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail',
-    link: '/auth/confirm-mail'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail-2',
-    link: '/auth/confirm-mail-2'
-  }]
-}, {
-  id: 1071,
-  label: 'menuitems.extrapages.text',
-  icon: 'ri-pages-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1070,
-    label: 'menuitems.extrapages.list.starter',
-    link: '/extras/starter'
-  }, {
-    id: 1069,
-    label: 'menuitems.extrapages.list.timeline',
-    link: '/extras/timeline'
-  }, {
-    id: 1068,
-    label: 'menuitems.extrapages.list.sitemap',
-    link: '/extras/sitemap'
-  }, {
-    id: 1067,
-    label: 'menuitems.extrapages.list.invoice',
-    link: '/extras/invoice'
-  }, {
-    id: 1066,
-    label: 'menuitems.extrapages.list.faqs',
-    link: '/extras/faqs'
-  }, {
-    id: 1065,
-    label: 'menuitems.extrapages.list.search-results',
-    link: '/extras/search-results'
-  }, {
-    id: 1064,
-    label: 'menuitems.extrapages.list.pricing',
-    link: '/extras/pricing'
-  }, {
-    id: 1063,
-    label: 'menuitems.extrapages.list.maintenance',
-    link: '/extras/maintenance'
-  }, {
-    id: 1062,
-    label: 'menuitems.extrapages.list.comingsoon',
-    link: '/extras/coming-soon'
-  }, {
-    id: 1061,
-    label: 'menuitems.extrapages.list.lightbox',
-    link: '/extras/lightbox'
-  }, {
-    id: 1060,
-    label: 'menuitems.extrapages.list.error404',
-    link: '/error/404'
-  }, {
-    id: 1059,
-    label: 'menuitems.extrapages.list.error404-alt',
-    link: '/error/404-alt'
-  }, {
-    id: 1058,
-    label: 'menuitems.extrapages.list.error500',
-    link: '/error/500'
-  }]
-}, {
-  id: 1057,
-  label: "menuitems.components.text",
-  isTitle: true
-}, {
-  id: 1056,
-  label: 'menuitems.ui.text',
-  icon: 'ri-pencil-ruler-2-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1055,
-    label: 'menuitems.ui.list.avatars',
-    link: '/ui/avatars'
-  }, {
-    id: 1054,
-    label: 'menuitems.ui.list.buttons',
-    link: '/ui/buttons'
-  }, {
-    id: 1053,
-    label: 'menuitems.ui.list.cards',
-    link: '/ui/cards'
-  }, {
-    id: 1052,
-    label: 'menuitems.ui.list.carousel',
-    link: '/ui/carousel'
-  }, {
-    id: 1051,
-    label: 'menuitems.ui.list.dropdowns',
-    link: '/ui/dropdowns'
-  }, {
-    id: 1050,
-    label: 'menuitems.ui.list.video',
-    link: '/ui/video'
-  }, {
-    id: 1049,
-    label: 'menuitems.ui.list.general',
-    link: '/ui/general'
-  }, {
-    id: 1048,
-    label: 'menuitems.ui.list.grid',
-    link: '/ui/grid'
-  }, {
-    id: 1047,
-    label: 'menuitems.ui.list.images',
-    link: '/ui/images'
-  }, {
-    id: 1046,
-    label: 'menuitems.ui.list.listgroup',
-    link: '/ui/list-group'
-  }, {
-    id: 1045,
-    label: 'menuitems.ui.list.modals',
-    link: '/ui/modals'
-  }, {
-    id: 1044,
-    label: 'menuitems.ui.list.notifications',
-    link: '/ui/notifications'
-  }, {
-    id: 1043,
-    label: 'menuitems.ui.list.portlet',
-    link: '/ui/portlets'
-  }, {
-    id: 1042,
-    label: 'menuitems.ui.list.progress',
-    link: '/ui/progress'
-  }, {
-    id: 1041,
-    label: 'menuitems.ui.list.ribbons',
-    link: '/ui/ribbons'
-  }, {
-    id: 1040,
-    label: 'menuitems.ui.list.spinners',
-    link: '/ui/spinners'
-  }, {
-    id: 1039,
-    label: 'menuitems.ui.list.tabs',
-    link: '/ui/tabs-accordions'
-  }, {
-    id: 1038,
-    label: 'menuitems.ui.list.tooltip',
-    link: '/ui/tooltips-popovers'
-  }, {
-    id: 1037,
-    label: 'menuitems.ui.list.typography',
-    link: '/ui/typography'
-  }]
-}, {
-  id: 1036,
-  label: 'menuitems.extendedui.text',
-  icon: 'ri-stack-line',
-  badge: {
-    variant: "primary",
-    text: "menuitems.extendedui.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1035,
-    label: 'menuitems.extendedui.list.rangeslider',
-    link: '/extended/rangeslider'
-  }, {
-    id: 1034,
-    label: 'menuitems.extendedui.list.sweetalert',
-    link: '/extended/sweet-alert'
-  }, {
-    id: 1033,
-    label: 'menuitems.extendedui.list.tour',
-    link: '/extended/tour'
-  }, {
-    id: 1032,
-    label: 'menuitems.extendedui.list.scrollspy',
-    link: '/extended/scrollspy'
-  }]
-}, {
-  id: 1031,
-  label: 'menuitems.widgets.text',
-  icon: 'ri-honour-line',
-  link: '/widgets'
-}, {
-  id: 1024,
-  label: 'menuitems.icons.text',
-  icon: 'ri-markup-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1025,
-    label: 'menuitems.icons.list.feather',
-    link: '/icons/feather'
-  }, {
-    id: 1026,
-    label: 'menuitems.icons.list.remix',
-    link: '/icons/remix'
-  }, {
-    id: 1027,
-    label: 'menuitems.icons.list.boxicons',
-    link: '/icons/boxicons'
-  }, {
-    id: 1028,
-    label: 'menuitems.icons.list.materialdesign',
-    link: '/icons/mdi'
-  }, {
-    id: 1029,
-    label: 'menuitems.icons.list.fontawesome',
-    link: '/icons/font-awesome'
-  }, {
-    id: 1030,
-    label: 'menuitems.icons.list.weather',
-    link: '/icons/weather'
-  }]
-}, {
-  id: 1023,
-  label: 'menuitems.forms.text',
-  icon: 'ri-eraser-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1022,
-    label: 'menuitems.forms.list.elements',
-    link: '/forms/elements'
-  }, {
-    id: 1021,
-    label: 'menuitems.forms.list.advanced',
-    link: '/forms/advanced'
-  }, {
-    id: 1020,
-    label: 'menuitems.forms.list.validation',
-    link: '/forms/validation'
-  }, {
-    id: 1019,
-    label: 'menuitems.forms.list.wizard',
-    link: '/forms/wizard'
-  }, {
-    id: 1018,
-    label: 'menuitems.forms.list.mask',
-    link: '/forms/mask'
-  }, {
-    id: 1017,
-    label: 'menuitems.forms.list.editor',
-    link: '/forms/quill'
-  }, {
-    id: 1016,
-    label: 'menuitems.forms.list.fileupload',
-    link: '/forms/file-uploads'
-  }]
-}, {
-  id: 1015,
-  label: 'menuitems.tables.text',
-  icon: 'ri-table-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1014,
-    label: 'menuitems.tables.list.basic',
-    link: '/tables/basic'
-  }, {
-    id: 1013,
-    label: 'menuitems.tables.list.advanced',
-    link: '/tables/advanced'
-  }]
-}, {
-  id: 1012,
-  label: 'menuitems.charts.text',
-  icon: 'ri-bar-chart-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1007,
-    label: 'menuitems.charts.list.apex',
-    link: '/charts/apex'
-  }, {
-    id: 1008,
-    label: 'menuitems.charts.list.chartjs',
-    link: '/charts/chartjs'
-  }, {
-    id: 1009,
-    label: 'menuitems.charts.list.c3',
-    link: '/charts/c3'
-  }, {
-    id: 1010,
-    label: 'menuitems.charts.list.chartist',
-    link: '/charts/chartist'
-  }, {
-    id: 1011,
-    label: 'menuitems.charts.list.knob',
-    link: '/charts/knob'
-  }]
-}, {
-  id: 1006,
-  label: 'menuitems.maps.text',
-  icon: 'ri-map-pin-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1005,
-    label: 'menuitems.maps.list.googlemap',
-    link: '/maps/google'
-  }]
-}, {
-  id: 1004,
-  label: "menuitems.multilevel.text",
-  icon: "ri-share-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1003,
-    label: "menuitems.multilevel.list.level1.1",
-    link: "javascript: void(0);"
-  }, {
-    id: 1002,
-    label: "menuitems.multilevel.list.level1.2",
-    isMenuCollapsed: false,
-    subItems: [{
-      id: 1001,
-      label: "menuitems.multilevel.list.level1.level2.1",
-      link: "javascript: void(0);"
-    }, {
-      id: 1000,
-      label: "menuitems.multilevel.list.level1.level2.2",
-      link: "javascript: void(0);"
-    }]
-  }]
-}];
+}
+
+// {
+//     id: 1115,
+//     label: "menuitems.dashboard.text",
+//     icon: "ri-dashboard-line",
+//     badge: {
+//         variant: "success",
+//         text: "menuitems.dashboard.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1114,
+//             label: 'menuitems.dashboard.list.sales',
+//             link: '/'
+//         },
+//         {
+//             id: 1113,
+//             label: 'menuitems.dashboard.list.crm',
+//             link: '/dashboard/crm'
+//         },
+//         {
+//             id: 1115,
+//             label: 'menuitems.dashboard.list.analytics',
+//             link: '/dashboard/analytics'
+//         },
+//     ]
+// },
+// {
+//     id: 1114,
+//     label: "menuitems.apps.text",
+//     isTitle: true
+// },
+// {
+//     id: 11113,
+//     label: "menuitems.chat.text",
+//     icon: "ri-message-2-line",
+//     link: '/apps/chat'
+// },
+// {
+//     id: 1112,
+//     label: "menuitems.ecommerce.text",
+//     icon: "ri-shopping-cart-2-line",
+//     badge: {
+//         variant: "danger",
+//         text: "menuitems.ecommerce.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1111,
+//             label: "menuitems.ecommerce.list.products",
+//             link: "/ecommerce/products"
+//         },
+//         {
+//             id: 1110,
+//             label: "menuitems.ecommerce.list.productsgrid",
+//             link: "/ecommerce/products-grid"
+//         },
+//         {
+//             id: 1109,
+//             label: 'menuitems.ecommerce.list.productdetail',
+//             link: '/ecommerce/product-detail/1'
+//         },
+//         {
+//             id: 1108,
+//             label: 'menuitems.ecommerce.list.createproduct',
+//             link: '/ecommerce/product-create'
+//         },
+//         {
+//             id: 1107,
+//             label: "menuitems.ecommerce.list.customers",
+//             link: "/ecommerce/customers"
+//         },
+//         {
+//             id: 1106,
+//             label: "menuitems.ecommerce.list.orders",
+//             link: "/ecommerce/orders"
+//         },
+//         {
+//             id: 1105,
+//             label: "menuitems.ecommerce.list.orderdetail",
+//             link: "/ecommerce/order-detail"
+//         },
+//         {
+//             id: 1104,
+//             label: "menuitems.ecommerce.list.sellers",
+//             link: "/ecommerce/sellers"
+//         },
+//         {
+//             id: 1103,
+//             label: "menuitems.ecommerce.list.cart",
+//             link: "/ecommerce/cart"
+//         },
+//         {
+//             id: 1102,
+//             label: "menuitems.ecommerce.list.checkout",
+//             link: "/ecommerce/checkout"
+//         }
+//     ]
+// },
+// {
+//     id: 1101,
+//     label: 'menuitems.calendar.text',
+//     icon: 'ri-calendar-2-line',
+//     link: '/apps/calendar'
+// },
+// {
+//     id: 1100,
+//     label: 'menuitems.email.text',
+//     icon: 'ri-mail-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1099,
+//             label: 'menuitems.email.list.inbox',
+//             link: '/email/inbox'
+//         },
+//         {
+//             id: 1098,
+//             label: 'menuitems.email.list.reademail',
+//             link: '/email/reademail/1'
+//         },
+//         {
+//             id: 1097,
+//             label: 'menuitems.email.list.template',
+//             link: '/email/templates'
+//         }
+//     ]
+// },
+// {
+//     id: 1096,
+//     label: 'menuitems.companies.text',
+//     icon: 'ri-building-4-line',
+//     link: '/apps/companies'
+// },
+// {
+//     id: 1095,
+//     label: 'menuitems.tasks.text',
+//     icon: 'ri-task-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1093,
+//             label: 'menuitems.tasks.list.list',
+//             link: '/task/list'
+//         },
+//         {
+//             id: 1092,
+//             label: 'menuitems.tasks.list.detail',
+//             link: '/task/detail'
+//         },
+//         {
+//             id: 1091,
+//             label: 'menuitems.tasks.list.kanban',
+//             link: '/task/kanban'
+//         }
+//     ]
+// },
+// {
+//     id: 1090,
+//     label: 'menuitems.ticket.text',
+//     icon: 'ri-customer-service-2-line',
+//     link: '/apps/tickets'
+// },
+// {
+//     id: 1089,
+//     label: 'menuitems.contacts.text',
+//     icon: 'ri-profile-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1088,
+//             label: 'menuitems.contacts.list.members',
+//             link: '/contacts/list'
+//         },
+//         {
+//             id: 1087,
+//             label: 'menuitems.contacts.list.profile',
+//             link: '/contacts/profile'
+//         }
+//     ]
+// },
+// {
+//     id: 1086,
+//     label: 'menuitems.filemanager.text',
+//     icon: 'ri-folders-line',
+//     link: '/apps/file-manager'
+// },
+// {
+//     id: 1085,
+//     label: "menuitems.custom.text",
+//     isTitle: true
+// },
+// {
+//     id: 1084,
+//     label: 'menuitems.auth.text',
+//     icon: 'ri-shield-user-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1083,
+//             label: 'menuitems.auth.list.login',
+//             link: '/auth/login-1'
+//         },
+//         {
+//             id: 1082,
+//             label: 'menuitems.auth.list.login-2',
+//             link: '/auth/login-2'
+//         },
+//         {
+//             id: 1081,
+//             label: 'menuitems.auth.list.register',
+//             link: '/auth/register-1'
+//         },
+//         {
+//             id: 1080,
+//             label: 'menuitems.auth.list.register-2',
+//             link: '/auth/register-2'
+//         },
+//         {
+//             id: 1079,
+//             label: 'menuitems.auth.list.signin-signup',
+//             link: '/auth/signin-signup'
+//         },
+//         {
+//             id: 1078,
+//             label: 'menuitems.auth.list.signin-signup-2',
+//             link: '/auth/signin-signup-2'
+//         },
+//         {
+//             id: 1077,
+//             label: 'menuitems.auth.list.recoverpwd',
+//             link: '/auth/recoverpwd'
+//         },
+//         {
+//             id: 1076,
+//             label: 'menuitems.auth.list.recoverpwd-2',
+//             link: '/auth/recoverpwd-2'
+//         },
+//         {
+//             id: 1075,
+//             label: 'menuitems.auth.list.lock-screen',
+//             link: '/auth/lock-screen'
+//         },
+//         {
+//             id: 1074,
+//             label: 'menuitems.auth.list.lock-screen-2',
+//             link: '/auth/lock-screen-2'
+//         },
+//         {
+//             id: 1073,
+//             label: 'menuitems.auth.list.logout',
+//             link: '/auth/logout-1'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.logout-2',
+//             link: '/auth/logout-2'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail',
+//             link: '/auth/confirm-mail'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail-2',
+//             link: '/auth/confirm-mail-2'
+//         },
+//     ]
+// },
+// {
+//     id: 1071,
+//     label: 'menuitems.extrapages.text',
+//     icon: 'ri-pages-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1070,
+//             label: 'menuitems.extrapages.list.starter',
+//             link: '/extras/starter'
+//         },
+//         {
+//             id: 1069,
+//             label: 'menuitems.extrapages.list.timeline',
+//             link: '/extras/timeline'
+//         },
+//         {
+//             id: 1068,
+//             label: 'menuitems.extrapages.list.sitemap',
+//             link: '/extras/sitemap'
+//         },
+//         {
+//             id: 1067,
+//             label: 'menuitems.extrapages.list.invoice',
+//             link: '/extras/invoice'
+//         },
+//         {
+//             id: 1066,
+//             label: 'menuitems.extrapages.list.faqs',
+//             link: '/extras/faqs'
+//         },
+//         {
+//             id: 1065,
+//             label: 'menuitems.extrapages.list.search-results',
+//             link: '/extras/search-results'
+//         },
+//         {
+//             id: 1064,
+//             label: 'menuitems.extrapages.list.pricing',
+//             link: '/extras/pricing'
+//         },
+//         {
+//             id: 1063,
+//             label: 'menuitems.extrapages.list.maintenance',
+//             link: '/extras/maintenance'
+//         },
+//         {
+//             id: 1062,
+//             label: 'menuitems.extrapages.list.comingsoon',
+//             link: '/extras/coming-soon'
+//         },
+//         {
+//             id: 1061,
+//             label: 'menuitems.extrapages.list.lightbox',
+//             link: '/extras/lightbox'
+//         },
+//         {
+//             id: 1060,
+//             label: 'menuitems.extrapages.list.error404',
+//             link: '/error/404'
+//         },
+//         {
+//             id: 1059,
+//             label: 'menuitems.extrapages.list.error404-alt',
+//             link: '/error/404-alt'
+//         },
+//         {
+//             id: 1058,
+//             label: 'menuitems.extrapages.list.error500',
+//             link: '/error/500'
+//         }
+//     ]
+// },
+// {
+//     id: 1057,
+//     label: "menuitems.components.text",
+//     isTitle: true
+// },
+// {
+//     id: 1056,
+//     label: 'menuitems.ui.text',
+//     icon: 'ri-pencil-ruler-2-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1055,
+//             label: 'menuitems.ui.list.avatars',
+//             link: '/ui/avatars'
+//         },
+//         {
+//             id: 1054,
+//             label: 'menuitems.ui.list.buttons',
+//             link: '/ui/buttons'
+//         },
+//         {
+//             id: 1053,
+//             label: 'menuitems.ui.list.cards',
+//             link: '/ui/cards'
+//         },
+//         {
+//             id: 1052,
+//             label: 'menuitems.ui.list.carousel',
+//             link: '/ui/carousel'
+//         },
+//         {
+//             id: 1051,
+//             label: 'menuitems.ui.list.dropdowns',
+//             link: '/ui/dropdowns'
+//         },
+//         {
+//             id: 1050,
+//             label: 'menuitems.ui.list.video',
+//             link: '/ui/video'
+//         },
+//         {
+//             id: 1049,
+//             label: 'menuitems.ui.list.general',
+//             link: '/ui/general'
+//         },
+//         {
+//             id: 1048,
+//             label: 'menuitems.ui.list.grid',
+//             link: '/ui/grid'
+//         },
+//         {
+//             id: 1047,
+//             label: 'menuitems.ui.list.images',
+//             link: '/ui/images'
+//         },
+//         {
+//             id: 1046,
+//             label: 'menuitems.ui.list.listgroup',
+//             link: '/ui/list-group'
+//         },
+//         {
+//             id: 1045,
+//             label: 'menuitems.ui.list.modals',
+//             link: '/ui/modals'
+//         },
+//         {
+//             id: 1044,
+//             label: 'menuitems.ui.list.notifications',
+//             link: '/ui/notifications'
+//         },
+//         {
+//             id: 1043,
+//             label: 'menuitems.ui.list.portlet',
+//             link: '/ui/portlets'
+//         },
+//         {
+//             id: 1042,
+//             label: 'menuitems.ui.list.progress',
+//             link: '/ui/progress'
+//         },
+//         {
+//             id: 1041,
+//             label: 'menuitems.ui.list.ribbons',
+//             link: '/ui/ribbons'
+//         },
+//         {
+//             id: 1040,
+//             label: 'menuitems.ui.list.spinners',
+//             link: '/ui/spinners'
+//         },
+//         {
+//             id: 1039,
+//             label: 'menuitems.ui.list.tabs',
+//             link: '/ui/tabs-accordions'
+//         },
+//         {
+//             id: 1038,
+//             label: 'menuitems.ui.list.tooltip',
+//             link: '/ui/tooltips-popovers'
+//         },
+//         {
+//             id: 1037,
+//             label: 'menuitems.ui.list.typography',
+//             link: '/ui/typography'
+//         }
+//     ]
+// },
+// {
+//     id: 1036,
+//     label: 'menuitems.extendedui.text',
+//     icon: 'ri-stack-line',
+//     badge: {
+//         variant: "primary",
+//         text: "menuitems.extendedui.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1035,
+//             label: 'menuitems.extendedui.list.rangeslider',
+//             link: '/extended/rangeslider'
+//         },
+//         {
+//             id: 1034,
+//             label: 'menuitems.extendedui.list.sweetalert',
+//             link: '/extended/sweet-alert'
+//         },
+//         {
+//             id: 1033,
+//             label: 'menuitems.extendedui.list.tour',
+//             link: '/extended/tour'
+//         },
+//         {
+//             id: 1032,
+//             label: 'menuitems.extendedui.list.scrollspy',
+//             link: '/extended/scrollspy'
+//         },
+//     ]
+// },
+// {
+//     id: 1031,
+//     label: 'menuitems.widgets.text',
+//     icon: 'ri-honour-line',
+//     link: '/widgets'
+// },
+// {
+//     id: 1024,
+//     label: 'menuitems.icons.text',
+//     icon: 'ri-markup-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1025,
+//             label: 'menuitems.icons.list.feather',
+//             link: '/icons/feather'
+//         },
+//         {
+//             id: 1026,
+//             label: 'menuitems.icons.list.remix',
+//             link: '/icons/remix'
+//         },
+//         {
+//             id: 1027,
+//             label: 'menuitems.icons.list.boxicons',
+//             link: '/icons/boxicons'
+//         },
+//         {
+//             id: 1028,
+//             label: 'menuitems.icons.list.materialdesign',
+//             link: '/icons/mdi'
+//         },
+//         {
+//             id: 1029,
+//             label: 'menuitems.icons.list.fontawesome',
+//             link: '/icons/font-awesome'
+//         },
+//         {
+//             id: 1030,
+//             label: 'menuitems.icons.list.weather',
+//             link: '/icons/weather'
+//         }
+//     ]
+// },
+// {
+//     id: 1023,
+//     label: 'menuitems.forms.text',
+//     icon: 'ri-eraser-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1022,
+//             label: 'menuitems.forms.list.elements',
+//             link: '/forms/elements'
+//         },
+//         {
+//             id: 1021,
+//             label: 'menuitems.forms.list.advanced',
+//             link: '/forms/advanced'
+//         },
+//         {
+//             id: 1020,
+//             label: 'menuitems.forms.list.validation',
+//             link: '/forms/validation'
+//         },
+//         {
+//             id: 1019,
+//             label: 'menuitems.forms.list.wizard',
+//             link: '/forms/wizard'
+//         },
+//         {
+//             id: 1018,
+//             label: 'menuitems.forms.list.mask',
+//             link: '/forms/mask'
+//         },
+//         {
+//             id: 1017,
+//             label: 'menuitems.forms.list.editor',
+//             link: '/forms/quill'
+//         },
+//         {
+//             id: 1016,
+//             label: 'menuitems.forms.list.fileupload',
+//             link: '/forms/file-uploads'
+//         }
+//     ]
+// },
+// {
+//     id: 1015,
+//     label: 'menuitems.tables.text',
+//     icon: 'ri-table-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1014,
+//             label: 'menuitems.tables.list.basic',
+//             link: '/tables/basic'
+//         },
+//         {
+//             id: 1013,
+//             label: 'menuitems.tables.list.advanced',
+//             link: '/tables/advanced'
+//         },
+//     ]
+// },
+// {
+//     id: 1012,
+//     label: 'menuitems.charts.text',
+//     icon: 'ri-bar-chart-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1007,
+//             label: 'menuitems.charts.list.apex',
+//             link: '/charts/apex'
+//         },
+//         {
+//             id: 1008,
+//             label: 'menuitems.charts.list.chartjs',
+//             link: '/charts/chartjs'
+//         },
+//         {
+//             id: 1009,
+//             label: 'menuitems.charts.list.c3',
+//             link: '/charts/c3'
+//         },
+//         {
+//             id: 1010,
+//             label: 'menuitems.charts.list.chartist',
+//             link: '/charts/chartist'
+//         },
+//         {
+//             id: 1011,
+//             label: 'menuitems.charts.list.knob',
+//             link: '/charts/knob'
+//         }
+//     ]
+// },
+// {
+//     id: 1006,
+//     label: 'menuitems.maps.text',
+//     icon: 'ri-map-pin-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1005,
+//             label: 'menuitems.maps.list.googlemap',
+//             link: '/maps/google'
+//         }
+//     ]
+// },
+// {
+//     id: 1004,
+//     label: "menuitems.multilevel.text",
+//     icon: "ri-share-line",
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1003,
+//             label: "menuitems.multilevel.list.level1.1",
+//             link: "javascript: void(0);",
+//         },
+//         {
+//             id: 1002,
+//             label: "menuitems.multilevel.list.level1.2",
+//             isMenuCollapsed: false,
+//             subItems: [
+//                 {
+//                     id: 1001,
+//                     label: "menuitems.multilevel.list.level1.level2.1",
+//                     link: "javascript: void(0);"
+//                 },
+//                 {
+//                     id: 1000,
+//                     label: "menuitems.multilevel.list.level1.level2.2",
+//                     link: "javascript: void(0);"
+//                 }
+//             ]
+//         }
+//     ]
+// }
+];
 
 /***/ }),
 
