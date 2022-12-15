@@ -71,7 +71,7 @@ class RlstWalletOwner extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Real Estate RlstWalletOwner.phps')
+            ->useLogName('Wallet Owner')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

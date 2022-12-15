@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Modules\RealEstate\Entities\RlstReservation;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Salesman extends Model
 {
@@ -29,6 +30,10 @@ class Salesman extends Model
         return $this->belongsTo(SalesmenType::class, 'salesman_type_id');
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(RlstReservation::class);
+    }
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;

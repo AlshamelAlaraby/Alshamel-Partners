@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\RealEstate\Http\Requests\RlstReservation;
+namespace Modules\RealEstate\Http\Requests;
 
 use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRlstReservationRequest extends FormRequest
+class CreateRlstReservationRequest extends FormRequest
 {
     use ValidationTrait;
     /**
@@ -16,10 +16,10 @@ class StoreRlstReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            "vdate"            => "required|date" ,
-            "salesman_id"      => "required|exists:salesmen,id" ,
-            "customer_id"      => "required|exists:rlst_buildings,id" ,
-            "payment_plan_id"  => "required|numeric" ,
+            "date" => "required|date",
+            "salesman_id" => "required|exists:salesmen,id",
+            "customer_id" => "required|exists:rlst_buildings,id",
+            "payment_plan_id" => "required|numeric",
             // "payment_plan_id"  => "required|exists:rlst_Payment_plans,id" ,
         ];
     }
@@ -33,5 +33,4 @@ class StoreRlstReservationRequest extends FormRequest
     {
         return true;
     }
-
 }

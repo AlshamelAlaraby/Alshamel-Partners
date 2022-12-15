@@ -3,18 +3,19 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Models\Country;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Modules\RealEstate\Entities\RlstReservation;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RlstCustomer extends Model
 {
-    use HasFactory,SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
 
     protected $fillable = [
         'name',
@@ -56,6 +57,10 @@ class RlstCustomer extends Model
         return $this->belongsTo(\App\Models\Country::class, 'nationality_id');
     }
 
+    public function reservations()
+    {
+        return $this->hasMany(RlstReservation::class);
+    }
     // attributes
 
     protected function categories(): Attribute

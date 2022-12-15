@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\RealEstate\Http\Requests\RlstReservation;
+namespace Modules\RealEstate\Http\Requests;
 
 use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,11 +17,11 @@ class UpdateRlstReservationRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            "vdate"            => "required|date" ,
-            "salesman_id"      => "required|exists:salesmen,id" ,
-            "customer_id"      => "required|exists:rlst_buildings,id" ,
-            "payment_plan_id"  => "required|numeric" ,
-            // "payment_plan_id"  => "required|exists:rlst_Payment_plans,id" ,
+            "date"            => "nullable|date",
+            "salesman_id"      => "nullable|exists:salesmen,id",
+            "customer_id"      => "nullable|exists:rlst_buildings,id",
+            "payment_plan_id"  => "nullable|numeric",
+            // "payment_plan_id"  => "nullable|exists:rlst_Payment_plans,id" ,
         ];
     }
 
@@ -34,5 +34,4 @@ class UpdateRlstReservationRequest extends FormRequest
     {
         return true;
     }
-
 }

@@ -11,6 +11,6 @@
 |
 */
 
-// Route::prefix('realestate')->group(function() {
-//     Route::get('/', 'RealEstateController@index');
-// });
+Route::prefix('realestate')->group(function() {
+    Route::get('/', 'RealEstateController@index');
+});
