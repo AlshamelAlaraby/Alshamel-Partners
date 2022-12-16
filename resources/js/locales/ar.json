@@ -594,7 +594,8 @@
         "salesManType" : "نوع رجل المبيعات",
         "employee": "الموظف",
         "DataEntry": "ادخال البيانات",
-        "ImageUploads": "تحميل الصور"
+        "ImageUploads": "تحميل الصور",
+        "AddNewRecord": "أضف سجل جديد"
     }
 
 }

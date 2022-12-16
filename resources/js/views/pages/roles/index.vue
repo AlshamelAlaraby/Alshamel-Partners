@@ -910,8 +910,7 @@ export default {
                             </table>
 
                         </div>
-                        <!-- end .table-responsive-->
-
+                        <!-- end .table-responsive -->
                     </div>
                 </div>
             </div>
