@@ -13,7 +13,7 @@
         "Loading": "Loading"
     },
     "country": {
-        "addcountry": "New Add Country",
+        "addcountry": "Add New Country",
         "editcountry": "Edit Country",
         "country": "Country",
         "countriesTable": "Countries Table"
@@ -525,9 +525,9 @@
         "letters": "characters long",
         "Itmustbeatmost": "It must be at most",
         "Choose": "Choose",
-        "Add": "Add",
+        "Add": "Save",
         "Edit": "Edit",
-        "Cancel": "Cancel",
+        "Cancel": "Discard",
         "IdParent": "Parent",
         "Addedsuccessfully": "Added successfully",
         "Editsuccessfully": "Edit successfully",
@@ -588,7 +588,8 @@
         "salesManType" : "Sale Man Type",
         "employee": "Employee",
         "DataEntry": "Data Entry",
-        "ImageUploads": "Image Uploads"
+        "ImageUploads": "Image Uploads",
+        "AddNewRecord": "Add New Record"
     }
 }
 
