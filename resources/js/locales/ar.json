@@ -595,7 +595,8 @@
         "employee": "الموظف",
         "DataEntry": "ادخال البيانات",
         "ImageUploads": "تحميل الصور",
-        "AddNewRecord": "أضف سجل جديد"
+        "AddNewRecord": "أضف سجل جديد",
+        "Save": "حفظ"
     }
 
 }
