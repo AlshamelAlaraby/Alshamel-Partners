@@ -44,6 +44,7 @@ export default {
                 phone_key: '',
                 national_id_length: null,
                 is_default: 0,
+                media: [],
                 is_active: 'active',
             },
             edit: {
@@ -62,6 +63,7 @@ export default {
             checkAll: [],
             images: [],
             media: {},
+            country_id: null,
             saveImageName: [],
             current_page: 1,
             showPhoto: './images/img-1.png',
@@ -287,11 +289,11 @@ export default {
                 national_id_length: null,
                 is_default: 1,
                 is_active: 'active',
-                media: null
             };
             this.$nextTick(() => {
                 this.$v.$reset()
             });
+            this.country_id = null;
             this.media = {};
             this.saveImageName = [];
             this.images = [];
@@ -300,7 +302,24 @@ export default {
         /**
          *  create countrie
          */
-
+        resetForm(){
+            this.create = {
+                name: '',
+                name_e: '',
+                long_name: '',
+                long_name_e: '',
+                short_code: '',
+                phone_key: '',
+                national_id_length: null,
+                is_default: 1,
+                is_active: 'active',
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.country_id = null;
+            this.media = {};
+        },
         AddSubmit() {
 
             this.$v.create.$touch();
@@ -313,8 +332,7 @@ export default {
 
                 adminApi.post(`/countries`, this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
-                        this.getData();
+                        this.country_id = res.data.data.id;
                         setTimeout(() => {
                             Swal.fire({
                                 icon: 'success',
@@ -322,9 +340,11 @@ export default {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                        }, 500);
+                        }, 200);
+                        this.getData();
                     })
                     .catch((err) => {
+                        console.log(err.response);
                         if (err.response.data) {
                             this.errors = err.response.data.errors;
                         } else {
@@ -471,15 +491,45 @@ export default {
         },
         addImage(file){
             this.media = file; //upload
-            this.saveImageName.push(file.name);
-            //preview of image
-            const reader = new FileReader();
-            reader.onload = (e)=> {
-                this.images.push(`${e.target.result}`);
-                this.showPhoto = `${e.target.result}`;
-            };
-            reader.readAsDataURL(file);
-            document.getElementById('uploadImageCreate').value = '';
+            if(file){
+                this.isLoader = true;
+                let formDate = new FormData();
+                formDate.append('media[0]',this.media);
+                adminApi.post(`/media`, formDate)
+                    .then((res) => {
+                        console.log(res.data.data);
+                        adminApi.put(`/countries/${this.country_id}`)
+                            .then((res) => {
+                                console.log(res.data.data);
+                                this.saveImageName.push(file.name);
+                                //preview of image
+                                const reader = new FileReader();
+                                reader.onload = (e)=> {
+                                    this.images.push(`${e.target.result}`);
+                                    this.showPhoto = `${e.target.result}`;
+                                };
+                                reader.readAsDataURL(file);
+                                document.getElementById('uploadImageCreate').value = '';
+                            })
+                            .catch(err => {
+                                console.log(err.response);
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(err.response);
+                        if (err.response.data) {
+                            this.errors = err.response.data.errors;
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: `${this.$t('general.Error')}`,
+                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                            });
+                        }
+                    }).finally(() => {
+                    this.isLoader = false;
+                });
+            }
         },
         deleteImageCreate(index){this.images.splice(index,1);},
         /**
@@ -705,25 +755,28 @@ export default {
                                             <!-- Emulate built in modal footer ok and cancel button actions -->
                                             <b-button
                                                 variant="success"
-                                                disabled
-                                                type="button" class="font-weight-bold px-2"
+                                                :disabled="!country_id"
+                                                @click.prevent="resetForm"
+                                                type="button" :class="['font-weight-bold px-2',country_id?'mx-2': '']"
                                             >
                                                 {{ $t('general.AddNewRecord') }}
                                             </b-button>
 
-                                            <b-button
-                                                variant="success"
-                                                type="button" class="mx-1 font-weight-bold px-3"
-                                                v-if="!isLoader"
-                                                @click.prevent="shootCountry"
-                                            >
-                                                {{ $t('general.Save') }}
-                                            </b-button>
+                                            <template v-if="!country_id">
+                                                <b-button
+                                                    variant="success"
+                                                    type="button" class="mx-1 font-weight-bold px-3"
+                                                    v-if="!isLoader"
+                                                    @click.prevent="AddSubmit"
+                                                >
+                                                    {{ $t('general.Save') }}
+                                                </b-button>
 
-                                            <b-button variant="success" class="mx-1" disabled v-else>
-                                                <b-spinner small></b-spinner>
-                                                <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                            </b-button>
+                                                <b-button variant="success" class="mx-1" disabled v-else>
+                                                    <b-spinner small></b-spinner>
+                                                    <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                </b-button>
+                                            </template>
 
                                             <b-button variant="danger" class="font-weight-bold" type="button" @click.prevent="resetModalHidden">
                                                 {{ $t('general.Cancel') }}
@@ -1090,7 +1143,7 @@ export default {
                                                 </div>
                                             </div>
                                         </b-tab>
-                                        <b-tab  :title="$t('general.ImageUploads')">
+                                        <b-tab :disabled="!country_id"  :title="$t('general.ImageUploads')">
                                             <div class="row">
                                                 <input
                                                     accept="image/png, image/gif, image/jpeg, image/jpg"
@@ -1117,7 +1170,12 @@ export default {
                                                                         <div class="p-2">
                                                                             <div class="row align-items-center">
                                                                                 <div class="col-auto" @click="showPhoto = photo">
-                                                                                    <img data-dz-thumbnail :src="photo" class="avatar-sm rounded bg-light" alt="">
+                                                                                    <img
+                                                                                        data-dz-thumbnail
+                                                                                        :src="photo"
+                                                                                        class="avatar-sm rounded bg-light"
+                                                                                        @error="src='./images/img-1.png'"
+                                                                                    >
                                                                                 </div>
                                                                                 <div class="col pl-0">
                                                                                     <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
@@ -1161,7 +1219,11 @@ export default {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="show-dropzone">
-                                                        <img :src="showPhoto" class="img-thumbnail" />
+                                                        <img
+                                                            :src="showPhoto"
+                                                            class="img-thumbnail"
+                                                            @error="src='./images/img-1.png'"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1785,7 +1847,11 @@ export default {
                                                                                     <div class="p-2">
                                                                                         <div class="row align-items-center">
                                                                                             <div class="col-auto" @click="showPhoto = photo">
-                                                                                                <img data-dz-thumbnail :src="photo" class="avatar-sm rounded bg-light" alt="">
+                                                                                                <img
+                                                                                                    data-dz-thumbnail
+                                                                                                    :src="photo" class="avatar-sm rounded bg-light"
+                                                                                                    @error="src='./images/img-1.png'"
+                                                                                                >
                                                                                             </div>
                                                                                             <div class="col pl-0">
                                                                                                 <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
@@ -1796,8 +1862,8 @@ export default {
                                                                                             <a
                                                                                                 href="javascript:void(0);"
                                                                                                 :class="['btn-danger text-muted dropzone-close',
-                                                                                $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
-                                                                            ]"
+                                                                                                    $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
+                                                                                                ]"
                                                                                                 data-dz-remove
                                                                                                 @click.prevent="deleteImageCreate(index)"
                                                                                             >
@@ -1904,10 +1970,3 @@ export default {
     max-height: 400px !important;
 }
 </style>
-
-
-
-
-
-
-
