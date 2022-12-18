@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 
 class CountryController extends Controller
 {
-    public function __construct(private \App\Repositories\Country\CountryInterface$modelInterface)
+    public function __construct(private \App\Repositories\Country\CountryInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
@@ -47,7 +47,7 @@ class CountryController extends Controller
     public function create(StoreCountryRequest $request)
     {
         $model = $this->modelInterface->create($request);
-        return responseJson(200, 'success');
+        return responseJson(200, 'success', new CountryResource($model));
     }
 
     public function update(UpdateCountryRequest $request, $id)
@@ -56,9 +56,9 @@ class CountryController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        $model = $this->modelInterface->update($request, $id);
+        $this->modelInterface->update($request, $id);
 
-        return responseJson(200, 'success');
+        return responseJson(200, 'success', new CountryResource($model));
     }
 
     public function logs($id)
@@ -70,7 +70,6 @@ class CountryController extends Controller
 
         $logs = $this->modelInterface->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
-
     }
 
     public function delete($id)
@@ -89,5 +88,4 @@ class CountryController extends Controller
 
         return responseJson(200, 'success');
     }
-
 }

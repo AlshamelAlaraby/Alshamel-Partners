@@ -3,15 +3,15 @@
 namespace App\Repositories\Country;
 
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CountryRepository implements CountryInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\Country $model, private \Spatie\MediaLibrary\MediaCollections\Models\Media $media)
     {
         $this->model = $model;
         $this->media = $media;
-
     }
 
     public function all($request)
@@ -37,9 +37,7 @@ class CountryRepository implements CountryInterface
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
-
             }
-
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -56,13 +54,18 @@ class CountryRepository implements CountryInterface
 
     public function create($request)
     {
-        DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request) {
             $model = $this->model->create($request->all());
-            $this->media::where('id', $request->media)->update([
-                'model_id' => $model->id,
-                'model_type' => get_class($this->model),
-            ]);
+            if ($request->media) {
+                foreach ($request->media as $media) {
+                    $this->media::where('id', $media)->update([
+                        'model_id' => $model->id,
+                        'model_type' => get_class($this->model),
+                    ]);
+                }
+            }
             cacheForget("countries");
+            return $model;
         });
     }
 
@@ -71,19 +74,35 @@ class CountryRepository implements CountryInterface
         DB::transaction(function () use ($id, $request) {
             $model = $this->model->find($id);
             $model->update($request->except(["media"]));
-            if ($request->media) {
+            if ($request->media && !$request->old_media) {
                 $model->clearMediaCollection('media');
+                foreach ($request->media as $media) {
+                    uploadImage($media, [
+                        'model_id' => $model->id,
+                        'model_type' => get_class($this->model),
+                    ]);
+                }
+            }
 
-                $this->media::where('id', $request->media)->update([
-                    'model_id' => $model->id,
-                    'model_type' => get_class($this->model),
-                ]);
+            if ($request->old_media && !$request->media) {
+                $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
+                    $media->delete();
+                });
+            }
 
+            if ($request->old_media && $request->media) {
+                $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
+                    $media->delete();
+                });
+                foreach ($request->media as $image) {
+                    uploadImage($image, [
+                        'model_id' => $model->id,
+                        'model_type' => get_class($this->model),
+                    ]);
+                }
             }
             $this->forget($id);
-
         });
-
     }
 
     public function logs($id)
@@ -106,7 +125,5 @@ class CountryRepository implements CountryInterface
         foreach ($keys as $key) {
             cacheForget($key);
         }
-
     }
-
 }
