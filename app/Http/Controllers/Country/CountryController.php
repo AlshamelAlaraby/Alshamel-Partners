@@ -47,6 +47,7 @@ class CountryController extends Controller
     public function create(StoreCountryRequest $request)
     {
         $model = $this->modelInterface->create($request);
+        $model->refresh();
         return responseJson(200, 'success', new CountryResource($model));
     }
 
@@ -57,7 +58,7 @@ class CountryController extends Controller
             return responseJson(404, __('message.data not found'));
         }
         $this->modelInterface->update($request, $id);
-
+        $model->refresh();
         return responseJson(200, 'success', new CountryResource($model));
     }
 
