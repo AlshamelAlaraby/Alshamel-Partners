@@ -12,10 +12,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 trait LogTrait
 {
     use LogsActivity, CausesActivity;
-    protected static function newFactory()
-    {
-        return \Modules\RealEstate\Database\factories\RlstBuildingFactory::new();
-    }
+
 
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -30,10 +27,10 @@ trait LogTrait
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Employee')
-            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-    public function scopeFilter($query,$request)
+    public function scopeFilter($query, $request)
     {
         return $query->where(function ($q) use ($request) {
             if ($request->search) {
@@ -41,9 +38,9 @@ trait LogTrait
                 $q->orWhere('name_e', 'like', '%' . $request->search . '%');
             }
 
-            if ($request->search && $request->columns){
-                foreach ($request->columns as $column){
-                    $q->orWhere($column,'like','%' . $request->search . '%');
+            if ($request->search && $request->columns) {
+                foreach ($request->columns as $column) {
+                    $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
             }
 
@@ -54,7 +51,6 @@ trait LogTrait
             if ($request->name_e) {
                 $q->orWhere('name_e', 'like', '%' . $request->name_e . '%');
             }
-
         });
     }
 }

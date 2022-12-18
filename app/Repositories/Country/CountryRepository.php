@@ -74,7 +74,7 @@ class CountryRepository implements CountryInterface
         DB::transaction(function () use ($id, $request) {
             $model = $this->model->find($id);
             $model->update($request->except(["media"]));
-            if ($request->media && !$request->old_media) {
+            if ($request->media && !$request->old_media) { // if there is new media and no old media
                 $model->clearMediaCollection('media');
                 foreach ($request->media as $media) {
                     uploadImage($media, [
@@ -84,13 +84,13 @@ class CountryRepository implements CountryInterface
                 }
             }
 
-            if ($request->old_media && !$request->media) {
+            if ($request->old_media && !$request->media) { // if there is old media and no new media
                 $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
                     $media->delete();
                 });
             }
 
-            if ($request->old_media && $request->media) {
+            if ($request->old_media && $request->media) { // if there is old media and new media
                 $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
                     $media->delete();
                 });
