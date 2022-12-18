@@ -33,7 +33,8 @@ class StoreCountryRequest extends FormRequest
             'long_name_e' => "required|max:100",
             'short_code' => "required|max:10",
             'is_active' => 'nullable|in:active,inactive',
-            "media" => ["required", "exists:media,id", new \App\Rules\MediaRule()],
+            "media" => "nullable|array",
+            "media.*" => ["nullable", "exists:media,id", new \App\Rules\MediaRule()],
         ];
     }
 
@@ -65,9 +66,11 @@ class StoreCountryRequest extends FormRequest
             'short_code.required' => __('message.field is required'),
             'short_code.max' => __('message.field must be less than 10 character'),
             'is_active.in' => __('message.field must be in active,inactive'),
-            'media.required' => __('message.field is required'),
-            'media.exists' => __('message.field must be exists'),
-            'media.media' => __('message.field must be media'),
+            'media.array' => __('message.field must be array'),
+            'media.*.exists' => __('message.field must be exists in media table'),
+            'media.*.media' => __('message.field must be media'),
+
+
 
 
         ];

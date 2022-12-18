@@ -20,7 +20,7 @@ class UpdateCountryRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
-     */public function rules()
+     */ public function rules()
     {
         return [
             'name' => 'string|max:255',
@@ -32,7 +32,9 @@ class UpdateCountryRequest extends FormRequest
             'long_name_e' => "max:100",
             'short_code' => "max:10",
             'is_active' => 'nullable|in:active,inactive',
-            "media" => ["nullable","exists:media,id", new \App\Rules\MediaRule()],
+            "media" => "nullable|array",
+            "media.*" => ["exists:media,id", new \App\Rules\MediaRule()],
+            'old_media.*' => ['exists:media,id', new \App\Rules\MediaRule("App\Models\Country")],
         ];
     }
 
@@ -61,5 +63,4 @@ class UpdateCountryRequest extends FormRequest
 
         ];
     }
-
 }

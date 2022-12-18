@@ -78,6 +78,6 @@ class Country extends Model implements HasMedia
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Country')
-            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }
