@@ -590,7 +590,9 @@
         "employee": "Employee",
         "DataEntry": "Data Entry",
         "ImageUploads": "Image Uploads",
-        "AddNewRecord": "Add New Record"
+        "AddNewRecord": "Add New Record",
+        "Thisfilehasalreadybeenuploaded": "This file has already been uploaded\n  To change the file, press Replace",
+        "Replace": "Replace"
     }
 }
 

@@ -596,7 +596,9 @@
         "DataEntry": "ادخال البيانات",
         "ImageUploads": "تحميل الصور",
         "AddNewRecord": "أضف سجل جديد",
-        "Save": "حفظ"
+        "Save": "حفظ",
+        "Thisfilehasalreadybeenuploaded": " تم رفع هذا الملف من قبل\n لتغيير الملف اضغط علي استبدال",
+        "Replace": "استبدال"
     }
 
 }
