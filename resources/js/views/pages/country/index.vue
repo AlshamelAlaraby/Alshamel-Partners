@@ -547,6 +547,7 @@ export default {
                                 .then((res) => {
                                     this.images = res.data.data.media;
                                     this.showPhoto = this.images[this.images.length - 1].webp;
+                                    this.getData();
                                 })
                                 .catch(err => {
                                     Swal.fire({
@@ -597,6 +598,7 @@ export default {
                                         .then((res) => {
                                             this.images = res.data.data.media;
                                             this.showPhoto = this.images[this.images.length - 1].webp;
+                                            this.getData();
                                         })
                                         .catch(err => {
                                             Swal.fire({
