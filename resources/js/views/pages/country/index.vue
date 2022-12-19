@@ -57,6 +57,7 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
+                old_media: []
             },
             errors: {},
             isCheckAll: false,
@@ -162,7 +163,6 @@ export default {
                     this.current_page = l.pagination.current_page;
                 })
                 .catch((err) => {
-                    console.log(err.response)
                     Swal.fire({
                         icon: 'error',
                         title: `${this.$t('general.Error')}`,
@@ -269,9 +269,8 @@ export default {
             this.$nextTick(() => {
                 this.$v.$reset()
             });
-            this.media = {};
-            this.saveImageName = [];
             this.images = [];
+            this.country_id = null;
             this.errors = {};
             this.$bvModal.hide(`create`);
         },
@@ -295,7 +294,6 @@ export default {
             });
             this.country_id = null;
             this.media = {};
-            this.saveImageName = [];
             this.images = [];
             this.errors = {};
         },
@@ -319,6 +317,7 @@ export default {
             });
             this.country_id = null;
             this.media = {};
+            this.images = [];
         },
         AddSubmit() {
 
@@ -344,7 +343,6 @@ export default {
                         this.getData();
                     })
                     .catch((err) => {
-                        console.log(err.response);
                         if (err.response.data) {
                             this.errors = err.response.data.errors;
                         } else {
@@ -365,7 +363,7 @@ export default {
          */
         editSubmit(id) {
             this.$v.edit.$touch();
-
+            this.images.forEach(e => {this.edit.old_media.push(e.id);});
             if (this.$v.edit.$invalid) {
                 return;
             } else {
@@ -428,6 +426,7 @@ export default {
          */
         resetModalEdit(id) {
             let country = this.countries.find(e => id == e.id);
+            this.country_id = id;
             this.edit.name = country.name;
             this.edit.name_e = country.name_e;
             this.edit.long_name_e = country.long_name_e;
@@ -437,7 +436,8 @@ export default {
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
             this.edit.is_default = country.is_default ? 1 : 0;
-            // this.edit.media = country.media.id;
+            this.images = country.media;
+            this.showPhoto = this.images[this.images.length - 1].webp;
             this.errors = {};
         },
         /**
@@ -455,8 +455,10 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: null
+                old_media: []
             };
+            this.country_id = null;
+            this.images = [];
         },
         /**
          *  start  dynamicSortString
@@ -485,6 +487,7 @@ export default {
          *  start Image ceate
          */
         changePhoto(){document.getElementById('uploadImageCreate').click();},
+        changePhotoEdit(){document.getElementById('uploadImageEdit').click();},
         onImageChanged(e){
             const file = e.target.files[0];
             this.addImage(file);
@@ -497,26 +500,25 @@ export default {
                 formDate.append('media[0]',this.media);
                 adminApi.post(`/media`, formDate)
                     .then((res) => {
-                        console.log(res.data.data);
-                        adminApi.put(`/countries/${this.country_id}`)
+                        let old_media = [];
+                        this.images.forEach(e => old_media.push(e.id));
+                        let new_media = [];
+                        res.data.data.forEach(e => new_media.push(e.id));
+
+                        adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
                             .then((res) => {
-                                console.log(res.data.data);
-                                this.saveImageName.push(file.name);
-                                //preview of image
-                                const reader = new FileReader();
-                                reader.onload = (e)=> {
-                                    this.images.push(`${e.target.result}`);
-                                    this.showPhoto = `${e.target.result}`;
-                                };
-                                reader.readAsDataURL(file);
-                                document.getElementById('uploadImageCreate').value = '';
+                                this.images = res.data.data.media;
+                                this.showPhoto = this.images[this.images.length - 1].webp;
                             })
                             .catch(err => {
-                                console.log(err.response);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: `${this.$t('general.Error')}`,
+                                    text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                                });
                             });
                     })
                     .catch((err) => {
-                        console.log(err.response);
                         if (err.response.data) {
                             this.errors = err.response.data.errors;
                         } else {
@@ -531,7 +533,26 @@ export default {
                 });
             }
         },
-        deleteImageCreate(index){this.images.splice(index,1);},
+        deleteImageCreate(id,index){
+            let old_media = [];
+            this.images.forEach(e => {
+                if(e.id != id){
+                    old_media.push(e.id);
+                }
+            });
+            adminApi.put(`/countries/${this.country_id}`,{old_media})
+                .then((res) => {
+                    this.images = res.data.data.media;
+                    this.showPhoto = this.images[this.images.length - 1].webp;
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
+        },
         /**
          *  end Image ceate
          */
@@ -1163,33 +1184,37 @@ export default {
                                                         <div class="col-12">
                                                             <div class="d-flex flex-wrap">
                                                                 <div
-                                                                    class="dropzone-previews col-4 position-relative mb-2"
+                                                                    :class="['dropzone-previews col-4 position-relative mb-2']"
                                                                     v-for="(photo,index) in images"
+                                                                    :key="photo.id"
                                                                 >
-                                                                    <div class="card mb-0 shadow-none border">
+                                                                    <div :class="['card mb-0 shadow-none border',(images.length - 1) == index ? 'bg-primary': '']">
                                                                         <div class="p-2">
                                                                             <div class="row align-items-center">
-                                                                                <div class="col-auto" @click="showPhoto = photo">
+                                                                                <div class="col-auto" @click="showPhoto = photo.webp">
                                                                                     <img
                                                                                         data-dz-thumbnail
-                                                                                        :src="photo"
+                                                                                        :src="photo.webp"
                                                                                         class="avatar-sm rounded bg-light"
                                                                                         @error="src='./images/img-1.png'"
                                                                                     >
                                                                                 </div>
                                                                                 <div class="col pl-0">
-                                                                                    <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
-                                                                                        {{ saveImageName[index] }}
+                                                                                    <a href="javascript:void(0);"
+                                                                                       :class="['font-weight-bold',(images.length - 1) == index ? 'text-white': 'text-muted']"
+                                                                                       data-dz-name
+                                                                                    >
+                                                                                        {{ photo.name }}
                                                                                     </a>
                                                                                 </div>
                                                                                 <!-- Button -->
                                                                                 <a
                                                                                     href="javascript:void(0);"
-                                                                                    :class="['btn-danger text-muted dropzone-close',
+                                                                                    :class="['btn-danger dropzone-close',
                                                                                 $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
                                                                             ]"
                                                                                     data-dz-remove
-                                                                                    @click.prevent="deleteImageCreate(index)"
+                                                                                    @click.prevent="deleteImageCreate(photo.id,index)"
                                                                                 >
                                                                                     <i class="fe-x"></i>
                                                                                 </a>
@@ -1444,6 +1469,7 @@ export default {
                                                         <!-- Emulate built in modal footer ok and cancel button actions -->
                                                         <b-button
                                                             variant="success"
+                                                            @click.prevent="editSubmit(data.id)"
                                                             type="button" class="mx-1 font-weight-bold px-3"
                                                             v-if="!isLoader"
                                                         >
@@ -1838,24 +1864,27 @@ export default {
                                                                 <!-- file upload -->
                                                                 <div class="row align-content-between" style="width: 100%;height: 100%">
                                                                     <div class="col-12">
-                                                                        <div class="d-flex">
+                                                                        <div class="d-flex flex-wrap">
                                                                             <div
                                                                                 class="dropzone-previews col-4 position-relative mb-2"
                                                                                 v-for="(photo,index) in images"
                                                                             >
-                                                                                <div class="card mb-0 shadow-none border">
+                                                                                <div :class="['card mb-0 shadow-none border',(images.length - 1) == index ? 'bg-primary': '']">
                                                                                     <div class="p-2">
                                                                                         <div class="row align-items-center">
-                                                                                            <div class="col-auto" @click="showPhoto = photo">
+                                                                                            <div class="col-auto" @click="showPhoto = photo.webp">
                                                                                                 <img
                                                                                                     data-dz-thumbnail
-                                                                                                    :src="photo" class="avatar-sm rounded bg-light"
+                                                                                                    :src="photo.webp" class="avatar-sm rounded bg-light"
                                                                                                     @error="src='./images/img-1.png'"
                                                                                                 >
                                                                                             </div>
                                                                                             <div class="col pl-0">
-                                                                                                <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
-                                                                                                    {{ saveImageName[index] }}
+                                                                                                <a href="javascript:void(0);"
+                                                                                                   :class="['font-weight-bold',(images.length - 1) == index ? 'text-white': 'text-muted']"
+                                                                                                   data-dz-name
+                                                                                                >
+                                                                                                    {{ photo.name }}
                                                                                                 </a>
                                                                                             </div>
                                                                                             <!-- Button -->
@@ -1865,7 +1894,7 @@ export default {
                                                                                                     $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
                                                                                                 ]"
                                                                                                 data-dz-remove
-                                                                                                @click.prevent="deleteImageCreate(index)"
+                                                                                                @click.prevent="deleteImageCreate(photo.id,index)"
                                                                                             >
                                                                                                 <i class="fe-x"></i>
                                                                                             </a>
@@ -1878,7 +1907,7 @@ export default {
                                                                     </div>
                                                                     <div class="footer-image col-12">
                                                                         <b-button
-                                                                            @click="changePhoto"
+                                                                            @click="changePhotoEdit"
                                                                             variant="success"
                                                                             type="button" class="mx-1 font-weight-bold px-3"
                                                                             v-if="!isLoader"
@@ -1895,7 +1924,7 @@ export default {
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="show-dropzone">
-                                                                    <img :src="showPhoto" class="img-thumbnail" />
+                                                                    <img :src="showPhoto" class="img-thumbnail" @error="src='./images/img-1.png'" />
                                                                 </div>
                                                             </div>
                                                         </div>
