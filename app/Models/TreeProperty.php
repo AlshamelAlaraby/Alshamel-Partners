@@ -12,9 +12,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class TreeProperty extends Model
 {
-    use HasFactory,LogsActivity, CausesActivity;
+    use HasFactory, LogsActivity, CausesActivity;
 
     protected $guarded = ['id'];
+
+    public function unitContracts()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstUnitContract::class, 'unit_code');
+    }
 
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -29,10 +34,12 @@ class TreeProperty extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Employee')
-            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-    public function scopeFilter($query,$request)
+
+
+    public function scopeFilter($query, $request)
     {
         return $query->where(function ($q) use ($request) {
             if ($request->search) {
@@ -47,7 +54,6 @@ class TreeProperty extends Model
             if ($request->name_e) {
                 $q->orWhere('name_e', 'like', '%' . $request->name_e . '%');
             }
-
         });
     }
 }
