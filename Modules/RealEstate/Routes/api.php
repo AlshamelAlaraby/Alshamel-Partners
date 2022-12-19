@@ -39,7 +39,6 @@ Route::prefix('real-estate')->group(function () {
 
 
 
-});
 
     // owners routes
     Route::group(['prefix' => 'owners'], function () {
@@ -127,3 +126,13 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstContractController@delete')->name('rlst-contracts.delete');
     });
 
+    //unit contracts
+    Route::group(['prefix' => 'unit-contracts'], function () {
+        Route::get('/', 'RlstUnitContractController@all')->name('rlst-unit-contracts.all');
+        Route::get('/logs/{id}', 'RlstUnitContractController@logs')->name('rlst-unit-contracts.logs');
+        Route::get('/{id}', 'RlstUnitContractController@find')->name('rlst-unit-contracts.find');
+        Route::post('/', 'RlstUnitContractController@create')->name('rlst-unit-contracts.create');
+        Route::put('/{id}', 'RlstUnitContractController@update')->name('rlst-unit-contracts.update');
+        Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
+    });
+});

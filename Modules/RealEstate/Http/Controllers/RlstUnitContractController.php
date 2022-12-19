@@ -27,11 +27,11 @@ class RlstUnitContractController extends Controller
 
         return responseJson(200, 'success', new RlstUnitContractResource($model));
     }
-    
+
 
     public function all(AllRequest $request)
     {
-        $models = $this->model->search($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             $models = ['data' => $models->paginate($request->per_page), 'paginate' => true];

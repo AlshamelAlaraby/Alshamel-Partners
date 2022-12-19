@@ -24,4 +24,16 @@ class RlstUnitContract extends Model
     {
         return $this->belongsTo(\App\Models\TreeProperty::class, 'unit_code');
     }
+
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Unit Contract')
+            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
 }
