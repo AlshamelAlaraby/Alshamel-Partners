@@ -7,8 +7,6 @@ import {required, minLength, maxLength, integer, alpha} from "vuelidate/lib/vali
 import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
-import alphaArabic from "../../../helper/alphaArabic";
-import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
 
 /**
@@ -80,15 +78,16 @@ export default {
                 is_default: true,
                 is_active: true
             },
+            idDelete: null,
             filterSetting: ['name', 'name_e', 'long_name', 'long_name_e', 'short_code', 'phone_key', 'national_id_length']
         }
     },
     validations: {
         create: {
-            name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
-            name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
-            long_name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
-            long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
+            name: {required, minLength: minLength(2), maxLength: maxLength(100),},
+            name_e: {required, minLength: minLength(2), maxLength: maxLength(100)},
+            long_name: {required, minLength: minLength(2), maxLength: maxLength(100)},
+            long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100),},
             short_code: {required, alpha,minLength: minLength(1), maxLength: maxLength(10)},
             phone_key: {required, integer,minLength: minLength(1), maxLength: maxLength(10)},
             is_default: {required, integer},
@@ -97,10 +96,10 @@ export default {
             media: {}
         },
         edit: {
-            name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
-            name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
-            long_name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
-            long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
+            name: {required, minLength: minLength(2), maxLength: maxLength(100), },
+            name_e: {required, minLength: minLength(2), maxLength: maxLength(100), },
+            long_name: {required, minLength: minLength(2), maxLength: maxLength(100),},
+            long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100),},
             short_code: {required, alpha,minLength: minLength(1), maxLength: maxLength(10)},
             phone_key: {required, integer,minLength: minLength(1), maxLength: maxLength(10)},
             is_default: {required, integer},
@@ -142,6 +141,34 @@ export default {
     },
     mounted() {
         this.getData();
+    },
+    updated(){
+        $(function(){
+            $(".englishInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return true;
+                if(65 <= ew && ew <= 90)
+                    return true;
+                if(97 <= ew && ew <= 122)
+                    return true;
+                return false;
+            });
+            $(".arabicInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return false;
+                if(48 <= ew && ew <= 57)
+                    return false;
+                if(65 <= ew && ew <= 90)
+                    return false;
+                if(97 <= ew && ew <= 122)
+                    return false;
+                return true;
+            });
+        });
     },
     methods: {
         /**
@@ -289,6 +316,7 @@ export default {
                 is_default: 1,
                 is_active: 'active',
             };
+            this.showPhoto =  './images/img-1.png';
             this.$nextTick(() => {
                 this.$v.$reset()
             });
@@ -320,6 +348,11 @@ export default {
             this.images = [];
         },
         AddSubmit() {
+
+            if(!this.create.name){ this.create.name = this.create.name_e}
+            if(!this.create.name_e){ this.create.name_e = this.create.name}
+            if(!this.create.long_name){ this.create.long_name = this.create.long_name_e}
+            if(!this.create.long_name_e){ this.create.long_name_e = this.create.long_name}
 
             this.$v.create.$touch();
 
@@ -495,42 +528,101 @@ export default {
         addImage(file){
             this.media = file; //upload
             if(file){
-                this.isLoader = true;
-                let formDate = new FormData();
-                formDate.append('media[0]',this.media);
-                adminApi.post(`/media`, formDate)
-                    .then((res) => {
-                        let old_media = [];
-                        this.images.forEach(e => old_media.push(e.id));
-                        let new_media = [];
-                        res.data.data.forEach(e => new_media.push(e.id));
 
-                        adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
-                            .then((res) => {
-                                this.images = res.data.data.media;
-                                this.showPhoto = this.images[this.images.length - 1].webp;
-                            })
-                            .catch(err => {
+                this.idDelete = null;
+                let is_media = this.images.find(e =>  e.name == file.name.slice(0,file.name.indexOf('.')));
+                this.idDelete = is_media? is_media.id: null;
+                if(!this.idDelete){
+                    this.isLoader = true;
+                    let formDate = new FormData();
+                    formDate.append('media[0]',this.media);
+                    adminApi.post(`/media`, formDate)
+                        .then((res) => {
+                            let old_media = [];
+                            this.images.forEach(e => old_media.push(e.id));
+                            let new_media = [];
+                            res.data.data.forEach(e => new_media.push(e.id));
+
+                            adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
+                                .then((res) => {
+                                    this.images = res.data.data.media;
+                                    this.showPhoto = this.images[this.images.length - 1].webp;
+                                })
+                                .catch(err => {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: `${this.$t('general.Error')}`,
+                                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                                    });
+                                });
+                        })
+                        .catch((err) => {
+                            if (err.response.data) {
+                                this.errors = err.response.data.errors;
+                            } else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: `${this.$t('general.Error')}`,
                                     text: `${this.$t('general.Thereisanerrorinthesystem')}`,
                                 });
+                            }
+                        }).finally(() => {
+                        this.isLoader = false;
+                    });
+                }else {
+                    Swal.fire({
+                        title: `${this.$t('general.Thisfilehasalreadybeenuploaded')}`,
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: `${this.$t('general.Replace')}`,
+                        cancelButtonText: `${this.$t('general.Nocancel')}`,
+                        confirmButtonClass: "btn btn-success mt-2",
+                        cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                        buttonsStyling: false,
+                    }).then((result) => {
+                        if (result.value) {
+
+                            this.isLoader = true;
+                            let formDate = new FormData();
+                            formDate.append('media[0]',this.media);
+                            adminApi.post(`/media`, formDate)
+                                .then((res) => {
+                                    let old_media = [];
+                                    this.images.forEach(e => old_media.push(e.id));
+                                    old_media.splice(old_media.indexOf(this.idDelete),1);
+                                    let new_media = [];
+                                    res.data.data.forEach(e => new_media.push(e.id));
+
+                                    adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
+                                        .then((res) => {
+                                            this.images = res.data.data.media;
+                                            this.showPhoto = this.images[this.images.length - 1].webp;
+                                        })
+                                        .catch(err => {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: `${this.$t('general.Error')}`,
+                                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                                            });
+                                        });
+                                })
+                                .catch((err) => {
+                                    if (err.response.data) {
+                                        this.errors = err.response.data.errors;
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: `${this.$t('general.Error')}`,
+                                            text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                                        });
+                                    }
+                                }).finally(() => {
+                                this.isLoader = false;
                             });
-                    })
-                    .catch((err) => {
-                        if (err.response.data) {
-                            this.errors = err.response.data.errors;
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: `${this.$t('general.Error')}`,
-                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                            });
+
                         }
-                    }).finally(() => {
-                    this.isLoader = false;
-                });
+                    });
+                }
             }
         },
         deleteImageCreate(id,index){
@@ -567,7 +659,6 @@ export default {
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-
                         <!-- start search -->
                         <div class="row justify-content-between align-items-center mb-2">
                             <h4 class="header-title"> {{ $t('country.countriesTable') }}</h4>
@@ -818,7 +909,7 @@ export default {
                                                                 <div dir="rtl">
                                                                     <input
                                                                         type="text"
-                                                                        class="form-control"
+                                                                        class="form-control arabicInput"
                                                                         data-create="1"
                                                                         @keypress.enter="moveInput('input','create',2)"
                                                                         v-model="$v.create.name.$model"
@@ -841,11 +932,7 @@ export default {
                                                                     {{ $v.create.name.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
                                                                 </div>
-                                                                <div v-if="!$v.create.name.alphaArabic"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaArabic')
-                                                                    }}
-                                                                </div>
+
                                                                 <template v-if="errors.name">
                                                                     <ErrorMessage
                                                                         v-for="(errorMessage,index) in errors.name"
@@ -863,7 +950,7 @@ export default {
                                                                 <div dir="rtl">
                                                                     <input
                                                                         type="text"
-                                                                        class="form-control"
+                                                                        class="form-control arabicInput"
                                                                         data-create="3"
                                                                         @keypress.enter="moveInput('input','create',4)"
                                                                         v-model="$v.create.long_name.$model"
@@ -886,11 +973,6 @@ export default {
                                                                     {{ $v.create.long_name.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
                                                                 </div>
-                                                                <div v-if="!$v.create.long_name.alphaArabic"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaArabic')
-                                                                    }}
-                                                                </div>
                                                                 <template v-if="errors.long_name">
                                                                     <ErrorMessage
                                                                         v-for="(errorMessage,index) in errors.long_name"
@@ -908,7 +990,7 @@ export default {
                                                                 <div dir="ltr">
                                                                     <input
                                                                         type="text"
-                                                                        class="form-control"
+                                                                        class="form-control englishInput"
                                                                         data-create="2"
                                                                         @keypress.enter="moveInput('input','create',3)"
                                                                         v-model="$v.create.name_e.$model"
@@ -931,11 +1013,6 @@ export default {
                                                                     {{ $v.create.name_e.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
                                                                 </div>
-                                                                <div v-if="!$v.create.name_e.alphaEnglish"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaEnglish')
-                                                                    }}
-                                                                </div>
                                                                 <template v-if="errors.name_e">
                                                                     <ErrorMessage
                                                                         v-for="(errorMessage,index) in errors.name_e"
@@ -953,7 +1030,7 @@ export default {
                                                                 <div dir="ltr">
                                                                     <input
                                                                         type="text"
-                                                                        class="form-control"
+                                                                        class="form-control englishInput"
                                                                         data-create="4"
                                                                         @keypress.enter="moveInput('input','create',5)"
                                                                         v-model="$v.create.long_name_e.$model"
@@ -974,11 +1051,6 @@ export default {
                                                                     {{ $t('general.Itmustbeatmost') }}
                                                                     {{ $v.create.long_name_e.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
-                                                                </div>
-                                                                <div v-if="!$v.create.long_name_e.alphaEnglish"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaEnglish')
-                                                                    }}
                                                                 </div>
                                                                 <template v-if="errors.long_name_e">
                                                                     <ErrorMessage
@@ -1500,7 +1572,7 @@ export default {
                                                                             <div dir="rtl">
                                                                                 <input
                                                                                     type="text"
-                                                                                    class="form-control"
+                                                                                    class="form-control arabicInput"
                                                                                     data-edit="1"
                                                                                     @keypress.enter="moveInput('input','edit',2)"
                                                                                     v-model="$v.edit.name.$model"
@@ -1545,7 +1617,7 @@ export default {
                                                                             <div dir="rtl">
                                                                                 <input
                                                                                     type="text"
-                                                                                    class="form-control"
+                                                                                    class="form-control arabicInput"
                                                                                     data-edit="3"
                                                                                     @keypress.enter="moveInput('input','edit',4)"
                                                                                     v-model="$v.edit.long_name.$model"
@@ -1590,7 +1662,7 @@ export default {
                                                                             <div dir="ltr">
                                                                                 <input
                                                                                     type="text"
-                                                                                    class="form-control"
+                                                                                    class="form-control englishInput"
                                                                                     data-edit="2"
                                                                                     @keypress.enter="moveInput('input','edit',3)"
                                                                                     v-model="$v.edit.name_e.$model"
@@ -1635,7 +1707,7 @@ export default {
                                                                             <div dir="ltr">
                                                                                 <input
                                                                                     type="text"
-                                                                                    class="form-control"
+                                                                                    class="form-control englishInput"
                                                                                     data-edit="4"
                                                                                     @keypress.enter="moveInput('input','edit',5)"
                                                                                     v-model="$v.edit.long_name_e.$model"
