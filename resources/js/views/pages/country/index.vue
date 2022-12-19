@@ -3,7 +3,7 @@ import Layout from "../../layouts/main";
 import PageHeader from "../../../components/Page-header";
 import adminApi from "../../../api/adminAxios";
 import Switches from "vue-switches";
-import {required, minLength, maxLength, integer} from "vuelidate/lib/validators";
+import {required, minLength, maxLength, integer, alpha} from "vuelidate/lib/validators";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
@@ -44,8 +44,8 @@ export default {
                 phone_key: '',
                 national_id_length: null,
                 is_default: 0,
+                media: [],
                 is_active: 'active',
-                media: []
             },
             edit: {
                 name: '',
@@ -57,16 +57,17 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: [],
+                old_media: []
             },
             errors: {},
             isCheckAll: false,
             checkAll: [],
-            isDrop: false,
             images: [],
-            counter: 0,
+            media: {},
+            country_id: null,
+            saveImageName: [],
             current_page: 1,
-            showPhoto: '',
+            showPhoto: './images/img-1.png',
             changeImage: false,
             setting: {
                 name: true,
@@ -88,10 +89,10 @@ export default {
             name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
             long_name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
             long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
-            short_code: {required, minLength: minLength(1), maxLength: maxLength(10)},
-            phone_key: {required, minLength: minLength(1), maxLength: maxLength(10)},
+            short_code: {required, alpha,minLength: minLength(1), maxLength: maxLength(10)},
+            phone_key: {required, integer,minLength: minLength(1), maxLength: maxLength(10)},
             is_default: {required, integer},
-            national_id_length: {required, minLength: minLength(1), maxLength: maxLength(20)},
+            national_id_length: {required, integer,minLength: minLength(8), maxLength: maxLength(20)},
             is_active: {required},
             media: {}
         },
@@ -100,10 +101,10 @@ export default {
             name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
             long_name: {required, minLength: minLength(2), maxLength: maxLength(100), alphaArabic},
             long_name_e: {required, minLength: minLength(2), maxLength: maxLength(100), alphaEnglish},
-            short_code: {required, minLength: minLength(1), maxLength: maxLength(10)},
-            phone_key: {required, minLength: minLength(1), maxLength: maxLength(10)},
+            short_code: {required, alpha,minLength: minLength(1), maxLength: maxLength(10)},
+            phone_key: {required, integer,minLength: minLength(1), maxLength: maxLength(10)},
             is_default: {required, integer},
-            national_id_length: {required, minLength: minLength(1), maxLength: maxLength(20)},
+            national_id_length: {required, integer,minLength: minLength(8), maxLength: maxLength(20)},
             is_active: {required},
             media: {}
         },
@@ -162,7 +163,6 @@ export default {
                     this.current_page = l.pagination.current_page;
                 })
                 .catch((err) => {
-                    console.log(err.response)
                     Swal.fire({
                         icon: 'error',
                         title: `${this.$t('general.Error')}`,
@@ -269,6 +269,8 @@ export default {
             this.$nextTick(() => {
                 this.$v.$reset()
             });
+            this.images = [];
+            this.country_id = null;
             this.errors = {};
             this.$bvModal.hide(`create`);
         },
@@ -286,17 +288,37 @@ export default {
                 national_id_length: null,
                 is_default: 1,
                 is_active: 'active',
-                media: null
             };
             this.$nextTick(() => {
                 this.$v.$reset()
             });
+            this.country_id = null;
+            this.media = {};
+            this.images = [];
             this.errors = {};
         },
         /**
          *  create countrie
          */
-
+        resetForm(){
+            this.create = {
+                name: '',
+                name_e: '',
+                long_name: '',
+                long_name_e: '',
+                short_code: '',
+                phone_key: '',
+                national_id_length: null,
+                is_default: 1,
+                is_active: 'active',
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.country_id = null;
+            this.media = {};
+            this.images = [];
+        },
         AddSubmit() {
 
             this.$v.create.$touch();
@@ -309,8 +331,7 @@ export default {
 
                 adminApi.post(`/countries`, this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
-                        this.getData();
+                        this.country_id = res.data.data.id;
                         setTimeout(() => {
                             Swal.fire({
                                 icon: 'success',
@@ -318,7 +339,8 @@ export default {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                        }, 500);
+                        }, 200);
+                        this.getData();
                     })
                     .catch((err) => {
                         if (err.response.data) {
@@ -341,7 +363,7 @@ export default {
          */
         editSubmit(id) {
             this.$v.edit.$touch();
-
+            this.images.forEach(e => {this.edit.old_media.push(e.id);});
             if (this.$v.edit.$invalid) {
                 return;
             } else {
@@ -404,6 +426,7 @@ export default {
          */
         resetModalEdit(id) {
             let country = this.countries.find(e => id == e.id);
+            this.country_id = id;
             this.edit.name = country.name;
             this.edit.name_e = country.name_e;
             this.edit.long_name_e = country.long_name_e;
@@ -413,7 +436,8 @@ export default {
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
             this.edit.is_default = country.is_default ? 1 : 0;
-            // this.edit.media = country.media.id;
+            this.images = country.media;
+            this.showPhoto = this.images[this.images.length - 1].webp;
             this.errors = {};
         },
         /**
@@ -431,8 +455,10 @@ export default {
                 national_id_length: null,
                 is_default: 0,
                 is_active: 'active',
-                media: null
+                old_media: []
             };
+            this.country_id = null;
+            this.images = [];
         },
         /**
          *  start  dynamicSortString
@@ -460,43 +486,72 @@ export default {
         /**
          *  start Image ceate
          */
-        onDragEnter(){
-            this.isDrop = true;
-            this.counter++;
-        },
-        onDragLeave(){
-            this.counter--;
-            this.isDrop = false;
-        },
-        onDrop(e){
-            this.create.media = [];
-            this.image = [];
-            this.isDrop = false;
-            const files = e.dataTransfer.files;
-            Array.from(files).forEach(file => this.addImage(file));
-        },
+        changePhoto(){document.getElementById('uploadImageCreate').click();},
+        changePhotoEdit(){document.getElementById('uploadImageEdit').click();},
         onImageChanged(e){
-            this.create.media = [];
-            this.image = [];
-            const files = e.target.files;
-            Array.from(files).forEach(file => this.addImage(file));
+            const file = e.target.files[0];
+            this.addImage(file);
         },
         addImage(file){
-            this.isDrop = true;
-            this.create.media.push(file); //upload
-            //preview of image
-            const reader = new FileReader();
-            reader.onload = (e)=> this.images.push(`${e.target.result}`);
-            reader.readAsDataURL(file);
-        },
-        deleteImageCreate(index){
-            this.create.media.splice(index,1);
-            this.images.splice(index,1);
-            if(this.create.media.length < 1){
-                this.isDrop = false;
-                let imageInput = document.getElementById('uploadImageCreate');
-                if(imageInput.value) {imageInput.value = ''}
+            this.media = file; //upload
+            if(file){
+                this.isLoader = true;
+                let formDate = new FormData();
+                formDate.append('media[0]',this.media);
+                adminApi.post(`/media`, formDate)
+                    .then((res) => {
+                        let old_media = [];
+                        this.images.forEach(e => old_media.push(e.id));
+                        let new_media = [];
+                        res.data.data.forEach(e => new_media.push(e.id));
+
+                        adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
+                            .then((res) => {
+                                this.images = res.data.data.media;
+                                this.showPhoto = this.images[this.images.length - 1].webp;
+                            })
+                            .catch(err => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: `${this.$t('general.Error')}`,
+                                    text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                                });
+                            });
+                    })
+                    .catch((err) => {
+                        if (err.response.data) {
+                            this.errors = err.response.data.errors;
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: `${this.$t('general.Error')}`,
+                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                            });
+                        }
+                    }).finally(() => {
+                    this.isLoader = false;
+                });
             }
+        },
+        deleteImageCreate(id,index){
+            let old_media = [];
+            this.images.forEach(e => {
+                if(e.id != id){
+                    old_media.push(e.id);
+                }
+            });
+            adminApi.put(`/countries/${this.country_id}`,{old_media})
+                .then((res) => {
+                    this.images = res.data.data.media;
+                    this.showPhoto = this.images[this.images.length - 1].webp;
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${this.$t('general.Error')}`,
+                        text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                    });
+                });
         },
         /**
          *  end Image ceate
@@ -721,25 +776,28 @@ export default {
                                             <!-- Emulate built in modal footer ok and cancel button actions -->
                                             <b-button
                                                 variant="success"
-                                                disabled
-                                                type="button" class="font-weight-bold px-2"
+                                                :disabled="!country_id"
+                                                @click.prevent="resetForm"
+                                                type="button" :class="['font-weight-bold px-2',country_id?'mx-2': '']"
                                             >
                                                 {{ $t('general.AddNewRecord') }}
                                             </b-button>
 
-                                            <b-button
-                                                variant="success"
-                                                type="button" class="mx-1 font-weight-bold px-3"
-                                                v-if="!isLoader"
-                                                @click.prevent="shootCountry"
-                                            >
-                                                {{ $t('general.Add') }}
-                                            </b-button>
+                                            <template v-if="!country_id">
+                                                <b-button
+                                                    variant="success"
+                                                    type="button" class="mx-1 font-weight-bold px-3"
+                                                    v-if="!isLoader"
+                                                    @click.prevent="AddSubmit"
+                                                >
+                                                    {{ $t('general.Save') }}
+                                                </b-button>
 
-                                            <b-button variant="success" class="mx-1" disabled v-else>
-                                                <b-spinner small></b-spinner>
-                                                <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                            </b-button>
+                                                <b-button variant="success" class="mx-1" disabled v-else>
+                                                    <b-spinner small></b-spinner>
+                                                    <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                </b-button>
+                                            </template>
 
                                             <b-button variant="danger" class="font-weight-bold" type="button" @click.prevent="resetModalHidden">
                                                 {{ $t('general.Cancel') }}
@@ -748,7 +806,7 @@ export default {
                                     </div>
                                     <b-tabs nav-class="nav-tabs nav-bordered">
                                         <b-tab :title="$t('general.DataEntry')" active>
-                                            <div class="row justify-content-between">
+                                            <div class="row">
                                                 <div class="col-md-7">
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -944,13 +1002,13 @@ export default {
                                                                 <input
                                                                     type="number"
                                                                     class="form-control input-Sender"
-                                                                    v-model.trim="create.national_id_length"
+                                                                    v-model.trim="$v.create.national_id_length.$model"
                                                                     data-create="5"
                                                                     @keypress.enter="moveInput('input','create',6)"
                                                                     :class="{
-                                                'is-invalid':$v.create.national_id_length.$error || errors.national_id_length,
-                                                'is-valid':!$v.create.national_id_length.$invalid && !errors.national_id_length
-                                                }"
+                                                                        'is-invalid':$v.create.national_id_length.$error || errors.national_id_length,
+                                                                        'is-valid':!$v.create.national_id_length.$invalid && !errors.national_id_length
+                                                                        }"
                                                                     id="create-20"
                                                                 />
                                                                 <div v-if="!$v.create.national_id_length.minLength"
@@ -986,9 +1044,9 @@ export default {
                                                                     @keypress.enter="moveInput('select','create',8)"
                                                                     v-model="$v.create.short_code.$model"
                                                                     :class="{
-                                                'is-invalid':$v.create.short_code.$error || errors.short_code,
-                                                'is-valid':!$v.create.short_code.$invalid && !errors.short_code
-                                                }"
+                                                                        'is-invalid':$v.create.short_code.$error || errors.short_code,
+                                                                        'is-valid':!$v.create.short_code.$invalid && !errors.short_code
+                                                                    }"
                                                                     id="field-6"
                                                                 />
                                                                 <div v-if="!$v.create.short_code.minLength"
@@ -1002,11 +1060,6 @@ export default {
                                                                     {{ $t('general.Itmustbeatmost') }}
                                                                     {{ $v.create.short_code.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
-                                                                </div>
-                                                                <div v-if="!$v.create.short_code.alphaEnglish"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaEnglish')
-                                                                    }}
                                                                 </div>
                                                                 <template v-if="errors.short_code">
                                                                     <ErrorMessage
@@ -1023,15 +1076,15 @@ export default {
                                                                     <span class="text-danger">*</span>
                                                                 </label>
                                                                 <input
-                                                                    type="text"
+                                                                    type="number"
                                                                     class="form-control"
                                                                     data-create="6"
                                                                     @keypress.enter="moveInput('input','create',7)"
                                                                     v-model="$v.create.phone_key.$model"
                                                                     :class="{
-                                                'is-invalid':$v.create.phone_key.$error || errors.phone_key,
-                                                'is-valid':!$v.create.phone_key.$invalid && !errors.phone_key
-                                                }"
+                                                                        'is-invalid':$v.create.phone_key.$error || errors.phone_key,
+                                                                        'is-valid':!$v.create.phone_key.$invalid && !errors.phone_key
+                                                                    }"
                                                                     id="field-5"
                                                                 />
                                                                 <div v-if="!$v.create.phone_key.minLength"
@@ -1045,11 +1098,6 @@ export default {
                                                                     {{ $t('general.Itmustbeatmost') }}
                                                                     {{ $v.create.phone_key.$params.maxLength.max }}
                                                                     {{ $t('general.letters') }}
-                                                                </div>
-                                                                <div v-if="!$v.create.phone_key.alphaEnglish"
-                                                                     class="invalid-feedback">{{
-                                                                        $t('general.alphaEnglish')
-                                                                    }}
                                                                 </div>
                                                                 <template v-if="errors.phone_key">
                                                                     <ErrorMessage
@@ -1071,16 +1119,16 @@ export default {
                                                                     @keypress.enter.prevent="moveInput('select','create',9)"
                                                                     v-model="$v.create.is_default.$model"
                                                                     :class="{
-                                                'is-invalid':$v.create.is_default.$error || errors.is_default,
-                                                'is-valid':!$v.create.is_default.$invalid && !errors.is_default
-                                            }"
+                                                                        'is-invalid':$v.create.is_default.$error || errors.is_default,
+                                                                        'is-valid':!$v.create.is_default.$invalid && !errors.is_default
+                                                                    }"
                                                                 >
                                                                     <option value="" selected>{{
                                                                             $t('general.Choose')
                                                                         }}...
                                                                     </option>
-                                                                    <option value="1">{{ $t('general.Active') }}</option>
-                                                                    <option value="0">{{ $t('general.Inactive') }}</option>
+                                                                    <option value="1">{{ $t('general.Yes') }}</option>
+                                                                    <option value="0">{{ $t('general.No') }}</option>
                                                                 </select>
                                                                 <template v-if="errors.is_default">
                                                                     <ErrorMessage
@@ -1103,31 +1151,7 @@ export default {
                                                                     <b-form-radio class="d-inline-block" v-model="$v.create.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
                                                                     <b-form-radio class="d-inline-block m-1" v-model="$v.create.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
                                                                 </b-form-group>
-                                                                <!--                                                                    <select-->
-                                                                <!--                                                                        class="custom-select mr-sm-2"-->
-                                                                <!--                                                                        id="inlineFormCustomSelectPref"-->
-                                                                <!--                                                                        data-create="9"-->
-                                                                <!--                                                                        @keypress.enter.prevent="moveInput('input','create',1)"-->
-                                                                <!--                                                                        v-model="$v.create.is_active.$model"-->
-                                                                <!--                                                                        :class="{-->
-                                                                <!--                                                                            'is-invalid':$v.create.is_active.$error || errors.is_active,-->
-                                                                <!--                                                                            'is-valid':!$v.create.is_active.$invalid && !errors.is_active-->
-                                                                <!--                                                                        }"-->
-                                                                <!--                                                                    >-->
-                                                                <!--                                                                        <option value="" selected>{{-->
-                                                                <!--                                                                                $t('general.Choose')-->
-                                                                <!--                                                                            }}...-->
-                                                                <!--                                                                        </option>-->
-                                                                <!--                                                                        <option value="active">{{-->
-                                                                <!--                                                                                $t('general.Active')-->
-                                                                <!--                                                                            }}-->
-                                                                <!--                                                                        </option>-->
-                                                                <!--                                                                        <option value="inactive">{{-->
-                                                                <!--                                                                                $t('general.Inactive')-->
-                                                                <!--                                                                            }}-->
-                                                                <!--                                                                        </option>-->
-                                                                <!--                                                                    </select>-->
-                                                                <template v-if="errors.is_active">
+                                                                 <template v-if="errors.is_active">
                                                                     <ErrorMessage
                                                                         v-for="(errorMessage,index) in errors.is_active"
                                                                         :key="index">{{ errorMessage }}
@@ -1140,70 +1164,57 @@ export default {
                                                 </div>
                                             </div>
                                         </b-tab>
-                                        <b-tab :title="$t('general.ImageUploads')">
+                                        <b-tab :disabled="!country_id"  :title="$t('general.ImageUploads')">
                                             <div class="row">
+                                                <input
+                                                    accept="image/png, image/gif, image/jpeg, image/jpg"
+                                                    type="file"
+                                                    id="uploadImageCreate"
+                                                    @change.prevent="onImageChanged"
+                                                    class="input-file-upload position-absolute"
+                                                    :class="[
+                                                            'd-none'
+                                                            ,{'is-invalid':$v.create.media.$error || errors.media,
+                                                            'is-valid':!$v.create.media.$invalid && !errors.media}
+                                                        ]"
+                                                >
                                                 <div class="col-md-8 my-1">
-                                                    <label class="mb-1">
-                                                        {{ $t('general.imagEUpload') }}
-                                                        <span class="text-danger">*</span>
-                                                    </label>
                                                     <!-- file upload -->
-                                                    <div
-                                                        class="dropzone-custom position-relative"
-                                                        :class="[!isDrop? 'd-flex justify-content-center align-items-center':'py-3']"
-                                                        :style="{minHeight: !isDrop? '200px':'200px'}"
-                                                        @dragenter.prevent="onDragEnter"
-                                                        @dragleave.prevent="onDragLeave"
-                                                        @dragover.prevent
-                                                        @drop.prevent.stop="onDrop"
-                                                    >
-                                                        <div
-                                                            class="dropzone-content text-center"
-                                                            v-if="!isDrop"
-                                                        >
-                                                            <div class="dropzone-icon">
-                                                                <i class="fas fa-cloud-download-alt"></i>
-                                                            </div>
-                                                            <h3>{{ $t('general.Dropfileshereorclicktoupload') }}</h3>
-                                                            <p>{{ $t('general.Dropfileshereorclicktoupload') }}</p>
-                                                        </div
-                                                        >
-
-                                                        <input
-                                                            accept="image/png, image/gif, image/jpeg, image/jpg"
-                                                            type="file"
-                                                            id="kdlksd"
-                                                            multiple
-                                                            @change.prevent="onImageChanged"
-                                                            class="input-file-upload position-absolute"
-                                                            :class="{
-                                                                'is-invalid':$v.create.media.$error || errors.media,
-                                                                'is-valid':!$v.create.media.$invalid && !errors.media
-                                                            }"
-                                                        >
-
-                                                        <template  v-if="isDrop && create.media">
+                                                    <div class="row align-content-between" style="width: 100%;height: 100%">
+                                                        <div class="col-12">
                                                             <div class="d-flex flex-wrap">
-                                                                <div class="dropzone-previews col-4 position-relative mb-1" v-for="(photo,index) in create.media">
-                                                                    <div class="card mt-1 mb-0 shadow-none border">
+                                                                <div
+                                                                    :class="['dropzone-previews col-4 position-relative mb-2']"
+                                                                    v-for="(photo,index) in images"
+                                                                    :key="photo.id"
+                                                                >
+                                                                    <div :class="['card mb-0 shadow-none border',(images.length - 1) == index ? 'bg-primary': '']">
                                                                         <div class="p-2">
                                                                             <div class="row align-items-center">
-                                                                                <div class="col-auto" @click="showPhoto = images[index]">
-                                                                                    <img data-dz-thumbnail :src="images[index]" class="avatar-sm rounded bg-light" alt="">
+                                                                                <div class="col-auto" @click="showPhoto = photo.webp">
+                                                                                    <img
+                                                                                        data-dz-thumbnail
+                                                                                        :src="photo.webp"
+                                                                                        class="avatar-sm rounded bg-light"
+                                                                                        @error="src='./images/img-1.png'"
+                                                                                    >
                                                                                 </div>
                                                                                 <div class="col pl-0">
-                                                                                    <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
+                                                                                    <a href="javascript:void(0);"
+                                                                                       :class="['font-weight-bold',(images.length - 1) == index ? 'text-white': 'text-muted']"
+                                                                                       data-dz-name
+                                                                                    >
                                                                                         {{ photo.name }}
                                                                                     </a>
                                                                                 </div>
                                                                                 <!-- Button -->
                                                                                 <a
                                                                                     href="javascript:void(0);"
-                                                                                    :class="['btn-danger text-muted dropzone-close',
-                                                                                            $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
-                                                                                        ]"
+                                                                                    :class="['btn-danger dropzone-close',
+                                                                                $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
+                                                                            ]"
                                                                                     data-dz-remove
-                                                                                    @click.prevent="deleteImageCreate(index)"
+                                                                                    @click.prevent="deleteImageCreate(photo.id,index)"
                                                                                 >
                                                                                     <i class="fe-x"></i>
                                                                                 </a>
@@ -1213,14 +1224,31 @@ export default {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </template>
-
+                                                        </div>
+                                                        <div class="footer-image col-12">
+                                                            <b-button
+                                                                @click="changePhoto"
+                                                                variant="success"
+                                                                type="button" class="mx-1 font-weight-bold px-3"
+                                                                v-if="!isLoader"
+                                                            >
+                                                                {{ $t('general.Add') }}
+                                                            </b-button>
+                                                            <b-button variant="success" class="mx-1" disabled v-else>
+                                                                <b-spinner small></b-spinner>
+                                                                <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                            </b-button>
+                                                        </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="show-dropzone">
-                                                        <img :src="showPhoto" class="img-thumbnail" />
+                                                        <img
+                                                            :src="showPhoto"
+                                                            class="img-thumbnail"
+                                                            @error="src='./images/img-1.png'"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1441,6 +1469,7 @@ export default {
                                                         <!-- Emulate built in modal footer ok and cancel button actions -->
                                                         <b-button
                                                             variant="success"
+                                                            @click.prevent="editSubmit(data.id)"
                                                             type="button" class="mx-1 font-weight-bold px-3"
                                                             v-if="!isLoader"
                                                         >
@@ -1452,14 +1481,14 @@ export default {
                                                             <span class="sr-only">{{ $t('login.Loading') }}...</span>
                                                         </b-button>
 
-                                                        <b-button variant="danger" class="font-weight-bold" type="button" @click.prevent="resetModalHidden">
+                                                        <b-button variant="danger" class="font-weight-bold" type="button" @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)">
                                                             {{ $t('general.Cancel') }}
                                                         </b-button>
                                                     </div>
                                                 </div>
                                                 <b-tabs nav-class="nav-tabs nav-bordered">
                                                     <b-tab :title="$t('general.DataEntry')" active>
-                                                        <div class="row justify-content-between">
+                                                        <div class="row">
                                                             <div class="col-md-7">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
@@ -1476,16 +1505,16 @@ export default {
                                                                                     @keypress.enter="moveInput('input','edit',2)"
                                                                                     v-model="$v.edit.name.$model"
                                                                                     :class="{
-                                                                                                'is-invalid':$v.edit.name.$error || errors.name,
-                                                                                                'is-valid':!$v.edit.name.$invalid && !errors.name
-                                                                                            }"
+                                                                                        'is-invalid':$v.edit.name.$error || errors.name,
+                                                                                        'is-valid':!$v.edit.name.$invalid && !errors.name
+                                                                                    }"
                                                                                     id="edit-1"
                                                                                 />
                                                                             </div>
                                                                             <div v-if="!$v.edit.name.minLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatleast') }}
-                                                                                {{ $v.edit.name.$params.minLength.min }}
+                                                                                {{ $v.create.name.$params.minLength.min }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
                                                                             <div v-if="!$v.edit.name.maxLength"
@@ -1517,26 +1546,26 @@ export default {
                                                                                 <input
                                                                                     type="text"
                                                                                     class="form-control"
-                                                                                    data-edit="2"
-                                                                                    @keypress.enter="moveInput('input','edit',3)"
+                                                                                    data-edit="3"
+                                                                                    @keypress.enter="moveInput('input','edit',4)"
                                                                                     v-model="$v.edit.long_name.$model"
                                                                                     :class="{
-                                                                                                    'is-invalid':$v.edit.long_name.$error || errors.long_name,
-                                                                                                    'is-valid':!$v.edit.long_name.$invalid && !errors.long_name
-                                                                                                }"
+                                                                                        'is-invalid':$v.edit.long_name.$error || errors.long_name,
+                                                                                        'is-valid':!$v.edit.long_name.$invalid && !errors.long_name
+                                                                                    }"
                                                                                     id="edit-3"
                                                                                 />
                                                                             </div>
                                                                             <div v-if="!$v.edit.long_name.minLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatleast') }}
-                                                                                {{ $v.create.long_name.$params.minLength.min }}
+                                                                                {{ $v.edit.long_name.$params.minLength.min }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
                                                                             <div v-if="!$v.edit.long_name.maxLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatmost') }}
-                                                                                {{ $v.create.long_name.$params.maxLength.max }}
+                                                                                {{ $v.edit.long_name.$params.maxLength.max }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
                                                                             <div v-if="!$v.edit.long_name.alphaArabic"
@@ -1562,20 +1591,20 @@ export default {
                                                                                 <input
                                                                                     type="text"
                                                                                     class="form-control"
-                                                                                    data-edit="3"
-                                                                                    @keypress.enter="moveInput('input','edit',4)"
+                                                                                    data-edit="2"
+                                                                                    @keypress.enter="moveInput('input','edit',3)"
                                                                                     v-model="$v.edit.name_e.$model"
                                                                                     :class="{
-                                                                                                'is-invalid':$v.edit.name_e.$error || errors.name_e,
-                                                                                                'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
-                                                                                            }"
+                                                                                        'is-invalid':$v.edit.name_e.$error || errors.name_e,
+                                                                                        'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
+                                                                                    }"
                                                                                     id="edit-2"
                                                                                 />
                                                                             </div>
                                                                             <div v-if="!$v.edit.name_e.minLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatleast') }}
-                                                                                {{ $v.create.name_e.$params.minLength.min }}
+                                                                                {{ $v.edit.name_e.$params.minLength.min }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
                                                                             <div v-if="!$v.edit.name_e.maxLength"
@@ -1611,9 +1640,9 @@ export default {
                                                                                     @keypress.enter="moveInput('input','edit',5)"
                                                                                     v-model="$v.edit.long_name_e.$model"
                                                                                     :class="{
-                                                                                                'is-invalid':$v.edit.long_name_e.$error || errors.long_name_e,
-                                                                                                'is-valid':!$v.edit.long_name_e.$invalid && !errors.long_name_e
-                                                                                            }" id="edit-4"
+                                                                                        'is-invalid':$v.edit.long_name_e.$error || errors.long_name_e,
+                                                                                        'is-valid':!$v.edit.long_name_e.$invalid && !errors.long_name_e
+                                                                                    }" id="edit-4"
                                                                                 />
                                                                             </div>
                                                                             <div v-if="!$v.edit.long_name_e.minLength"
@@ -1642,8 +1671,8 @@ export default {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
+                                                            </div>
                                                             <div class="col-md-4">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
@@ -1655,13 +1684,13 @@ export default {
                                                                             <input
                                                                                 type="number"
                                                                                 class="form-control input-Sender"
-                                                                                v-model.trim="edit.national_id_length"
+                                                                                v-model.trim="$v.edit.national_id_length.$model"
                                                                                 data-edit="5"
                                                                                 @keypress.enter="moveInput('input','edit',6)"
                                                                                 :class="{
-                                                                                        'is-invalid':$v.edit.national_id_length.$error || errors.national_id_length,
-                                                                                        'is-valid':!$v.edit.national_id_length.$invalid && !errors.national_id_length
-                                                                                        }"
+                                                                                'is-invalid':$v.edit.national_id_length.$error || errors.national_id_length,
+                                                                                'is-valid':!$v.edit.national_id_length.$invalid && !errors.national_id_length
+                                                                                }"
                                                                                 id="edit-20"
                                                                             />
                                                                             <div v-if="!$v.edit.national_id_length.minLength"
@@ -1697,15 +1726,15 @@ export default {
                                                                                 @keypress.enter="moveInput('select','edit',8)"
                                                                                 v-model="$v.edit.short_code.$model"
                                                                                 :class="{
-                                                                                            'is-invalid':$v.edit.short_code.$error || errors.short_code,
-                                                                                            'is-valid':!$v.edit.short_code.$invalid && !errors.short_code
-                                                                                            }"
+                                                                                    'is-invalid':$v.edit.short_code.$error || errors.short_code,
+                                                                                    'is-valid':!$v.edit.short_code.$invalid && !errors.short_code
+                                                                                }"
                                                                                 id="edit-6"
                                                                             />
                                                                             <div v-if="!$v.edit.short_code.minLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatleast') }}
-                                                                                {{ $v.create.short_code.$params.minLength.min }}
+                                                                                {{ $v.edit.short_code.$params.minLength.min }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
                                                                             <div v-if="!$v.edit.short_code.maxLength"
@@ -1713,11 +1742,6 @@ export default {
                                                                                 {{ $t('general.Itmustbeatmost') }}
                                                                                 {{ $v.edit.short_code.$params.maxLength.max }}
                                                                                 {{ $t('general.letters') }}
-                                                                            </div>
-                                                                            <div v-if="!$v.edit.short_code.alphaEnglish"
-                                                                                 class="invalid-feedback">{{
-                                                                                    $t('general.alphaEnglish')
-                                                                                }}
                                                                             </div>
                                                                             <template v-if="errors.short_code">
                                                                                 <ErrorMessage
@@ -1729,20 +1753,20 @@ export default {
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label for="field-4" class="control-label">
+                                                                            <label for="edit-4" class="control-label">
                                                                                 {{ $t('general.phone_key') }}
                                                                                 <span class="text-danger">*</span>
                                                                             </label>
                                                                             <input
-                                                                                type="text"
+                                                                                type="number"
                                                                                 class="form-control"
                                                                                 data-edit="6"
                                                                                 @keypress.enter="moveInput('input','edit',7)"
                                                                                 v-model="$v.edit.phone_key.$model"
                                                                                 :class="{
-                                                                                        'is-invalid':$v.edit.phone_key.$error || errors.phone_key,
-                                                                                        'is-valid':!$v.edit.phone_key.$invalid && !errors.phone_key
-                                                                                        }"
+                                                                                    'is-invalid':$v.edit.phone_key.$error || errors.phone_key,
+                                                                                    'is-valid':!$v.edit.phone_key.$invalid && !errors.phone_key
+                                                                                }"
                                                                                 id="edit-5"
                                                                             />
                                                                             <div v-if="!$v.edit.phone_key.minLength"
@@ -1751,16 +1775,11 @@ export default {
                                                                                 {{ $v.edit.phone_key.$params.minLength.min }}
                                                                                 {{ $t('general.letters') }}
                                                                             </div>
-                                                                            <div v-if="!$v.create.phone_key.maxLength"
+                                                                            <div v-if="!$v.edit.phone_key.maxLength"
                                                                                  class="invalid-feedback">
                                                                                 {{ $t('general.Itmustbeatmost') }}
-                                                                                {{ $v.create.phone_key.$params.maxLength.max }}
+                                                                                {{ $v.edit.phone_key.$params.maxLength.max }}
                                                                                 {{ $t('general.letters') }}
-                                                                            </div>
-                                                                            <div v-if="!$v.create.phone_key.alphaEnglish"
-                                                                                 class="invalid-feedback">{{
-                                                                                    $t('general.alphaEnglish')
-                                                                                }}
                                                                             </div>
                                                                             <template v-if="errors.phone_key">
                                                                                 <ErrorMessage
@@ -1772,26 +1791,26 @@ export default {
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label class=" mr-2" for="field-11">
+                                                                            <label class=" mr-2" for="edit-11">
                                                                                 {{ $t('general.is_default') }}
                                                                             </label>
                                                                             <select
                                                                                 class="custom-select  mr-sm-2"
                                                                                 id="edit-11"
-                                                                                data-create="8"
+                                                                                data-edit="8"
                                                                                 @keypress.enter.prevent="moveInput('select','edit',9)"
-                                                                                v-model="$v.create.is_default.$model"
+                                                                                v-model="$v.edit.is_default.$model"
                                                                                 :class="{
-                                                                                            'is-invalid':$v.edit.is_default.$error || errors.is_default,
-                                                                                            'is-valid':!$v.edit.is_default.$invalid && !errors.is_default
-                                                                                        }"
+                                                                                    'is-invalid':$v.edit.is_default.$error || errors.is_default,
+                                                                                    'is-valid':!$v.edit.is_default.$invalid && !errors.is_default
+                                                                                }"
                                                                             >
                                                                                 <option value="" selected>{{
                                                                                         $t('general.Choose')
                                                                                     }}...
                                                                                 </option>
-                                                                                <option value="1">{{ $t('general.Active') }}</option>
-                                                                                <option value="0">{{ $t('general.Inactive') }}</option>
+                                                                                <option value="1">{{ $t('general.Yes') }}</option>
+                                                                                <option value="0">{{ $t('general.No') }}</option>
                                                                             </select>
                                                                             <template v-if="errors.is_default">
                                                                                 <ErrorMessage
@@ -1808,13 +1827,12 @@ export default {
                                                                                 <span class="text-danger">*</span>
                                                                             </label>
                                                                             <b-form-group :class="{
-                                                                                'is-invalid':$v.edit.is_active.$error || errors.is_active,
-                                                                                'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
-                                                                            }">
+                                                                            'is-invalid':$v.edit.is_active.$error || errors.is_active,
+                                                                            'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
+                                                                        }">
                                                                                 <b-form-radio class="d-inline-block" v-model="$v.edit.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
                                                                                 <b-form-radio class="d-inline-block m-1" v-model="$v.edit.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
                                                                             </b-form-group>
-
                                                                             <template v-if="errors.is_active">
                                                                                 <ErrorMessage
                                                                                     v-for="(errorMessage,index) in errors.is_active"
@@ -1824,63 +1842,48 @@ export default {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
+                                                            </div>
                                                         </div>
                                                     </b-tab>
-                                                    <b-tab :title="$t('general.ImageUploads')">
+                                                    <b-tab  :title="$t('general.ImageUploads')">
                                                         <div class="row">
+                                                            <input
+                                                                accept="image/png, image/gif, image/jpeg, image/jpg"
+                                                                type="file"
+                                                                id="uploadImageEdit"
+                                                                @change.prevent="onImageChanged"
+                                                                class="input-file-upload position-absolute"
+                                                                :class="[
+                                                            'd-none'
+                                                            ,{'is-invalid':$v.edit.media.$error || errors.media,
+                                                            'is-valid':!$v.edit.media.$invalid && !errors.media}
+                                                        ]"
+                                                            >
                                                             <div class="col-md-8 my-1">
-                                                                <label class="mb-1">
-                                                                    {{ $t('general.imagEUpload') }}
-                                                                    <span class="text-danger">*</span>
-                                                                </label>
                                                                 <!-- file upload -->
-                                                                <div
-                                                                    class="dropzone-custom position-relative"
-                                                                    :class="[!isDrop? 'd-flex justify-content-center align-items-center':'py-3']"
-                                                                    :style="{minHeight: !isDrop? '200px':'200px'}"
-                                                                    @dragenter.prevent="onDragEnter"
-                                                                    @dragleave.prevent="onDragLeave"
-                                                                    @dragover.prevent
-                                                                    @drop.prevent.stop="onDrop"
-                                                                >
-                                                                    <div
-                                                                        class="dropzone-content text-center"
-                                                                        v-if="!isDrop"
-                                                                    >
-                                                                        <div class="dropzone-icon">
-                                                                            <i class="fas fa-cloud-download-alt"></i>
-                                                                        </div>
-                                                                        <h3>{{ $t('general.Dropfileshereorclicktoupload') }}</h3>
-                                                                        <p>{{ $t('general.Dropfileshereorclicktoupload') }}</p>
-                                                                    </div
-                                                                    >
-
-                                                                    <input
-                                                                        accept="image/png, image/gif, image/jpeg, image/jpg"
-                                                                        type="file"
-                                                                        id="uploadImageCreate"
-                                                                        multiple
-                                                                        @change.prevent="onImageChanged"
-                                                                        class="input-file-upload position-absolute"
-                                                                        :class="{
-                                                                    'is-invalid':$v.create.media.$error || errors.media,
-                                                                    'is-valid':!$v.create.media.$invalid && !errors.media
-                                                                }"
-                                                                    >
-
-                                                                    <template  v-if="isDrop && create.media">
+                                                                <div class="row align-content-between" style="width: 100%;height: 100%">
+                                                                    <div class="col-12">
                                                                         <div class="d-flex flex-wrap">
-                                                                            <div class="dropzone-previews col-4 position-relative mb-1" v-for="(photo,index) in create.media">
-                                                                                <div class="card mt-1 mb-0 shadow-none border">
+                                                                            <div
+                                                                                class="dropzone-previews col-4 position-relative mb-2"
+                                                                                v-for="(photo,index) in images"
+                                                                            >
+                                                                                <div :class="['card mb-0 shadow-none border',(images.length - 1) == index ? 'bg-primary': '']">
                                                                                     <div class="p-2">
                                                                                         <div class="row align-items-center">
-                                                                                            <div class="col-auto" @click="showPhoto = images[index]">
-                                                                                                <img data-dz-thumbnail :src="images[index]" class="avatar-sm rounded bg-light" alt="">
+                                                                                            <div class="col-auto" @click="showPhoto = photo.webp">
+                                                                                                <img
+                                                                                                    data-dz-thumbnail
+                                                                                                    :src="photo.webp" class="avatar-sm rounded bg-light"
+                                                                                                    @error="src='./images/img-1.png'"
+                                                                                                >
                                                                                             </div>
                                                                                             <div class="col pl-0">
-                                                                                                <a href="javascript:void(0);" class="text-muted font-weight-bold" data-dz-name>
+                                                                                                <a href="javascript:void(0);"
+                                                                                                   :class="['font-weight-bold',(images.length - 1) == index ? 'text-white': 'text-muted']"
+                                                                                                   data-dz-name
+                                                                                                >
                                                                                                     {{ photo.name }}
                                                                                                 </a>
                                                                                             </div>
@@ -1888,10 +1891,10 @@ export default {
                                                                                             <a
                                                                                                 href="javascript:void(0);"
                                                                                                 :class="['btn-danger text-muted dropzone-close',
-                                                                                                $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
-                                                                                            ]"
+                                                                                                    $i18n.locale == 'ar' ?'dropzone-close-rtl': ''
+                                                                                                ]"
                                                                                                 data-dz-remove
-                                                                                                @click.prevent="deleteImageCreate(index)"
+                                                                                                @click.prevent="deleteImageCreate(photo.id,index)"
                                                                                             >
                                                                                                 <i class="fe-x"></i>
                                                                                             </a>
@@ -1901,14 +1904,27 @@ export default {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </template>
-
+                                                                    </div>
+                                                                    <div class="footer-image col-12">
+                                                                        <b-button
+                                                                            @click="changePhotoEdit"
+                                                                            variant="success"
+                                                                            type="button" class="mx-1 font-weight-bold px-3"
+                                                                            v-if="!isLoader"
+                                                                        >
+                                                                            {{ $t('general.Add') }}
+                                                                        </b-button>
+                                                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                                                            <b-spinner small></b-spinner>
+                                                                            <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                                        </b-button>
+                                                                    </div>
                                                                 </div>
 
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="show-dropzone">
-                                                                    <img :src="showPhoto" class="img-thumbnail" />
+                                                                    <img :src="showPhoto" class="img-thumbnail" @error="src='./images/img-1.png'" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1961,8 +1977,10 @@ export default {
      background-color: #dff0fe;
  }
  .tab-content {
-     padding: 70px 60px;
+     padding: 70px 60px 40px;
+     min-height: 300px;
      background-color: #f5f5f5;
+     position: relative;
  }
 .nav-tabs .nav-link {
     border: 1px solid #b7b7b7 !important;
@@ -1976,4 +1994,15 @@ export default {
     background-color: hsl(0deg 0% 96%);
      border-bottom: 0 !important;
  }
+
+.img-thumbnail {
+    max-height: 400px !important;
+}
 </style>
+
+
+
+
+
+
+
