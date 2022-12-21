@@ -38,7 +38,7 @@ class WorkflowHotfieldController extends Controller
         }
 
         // return responseJson(200, 'success', WorkflowHotfieldResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
-        return responseJson(200, 'success',$models);
+        return responseJson(200, 'success',$models['data']);
 
     }
 
@@ -104,7 +104,7 @@ class WorkflowHotfieldController extends Controller
         }
     }
 
-        public function logs($id)
+    public function logs($id)
     {
         $model = $this->repository->find($id);
         if (!$model) {

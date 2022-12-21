@@ -24,6 +24,8 @@ use App\Repositories\FinancialYear\FinancialYearInterface;
 use App\Repositories\FinancialYear\FinancialYearRepository;
 use App\Repositories\Governorate\GovernorateInterface;
 use App\Repositories\Governorate\GovernorateRepository;
+use App\Repositories\InternalSalesman\InternalSalesmanRepository;
+use App\Repositories\InternalSalesman\InternalSalesmanRepositoryInterface;
 use App\Repositories\Module\ModuleInterface;
 use App\Repositories\Module\ModuleRepository;
 use App\Repositories\PaymentType\PaymentTypeInterface;
@@ -102,6 +104,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WorkflowHotfieldRepositoryInterface::class, WorkflowHotfieldRepository::class);
         $this->app->bind(SalesmanRepositoryInterface::class, SalesmanRepository::class);
         $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
+        $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
 
     }
 
