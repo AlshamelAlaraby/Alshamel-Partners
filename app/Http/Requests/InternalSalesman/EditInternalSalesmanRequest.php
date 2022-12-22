@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\RoleScreenHotfield;
+namespace App\Http\Requests\InternalSalesman;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoleScreenHotfieldRequest extends FormRequest
+class EditInternalSalesmanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class StoreRoleScreenHotfieldRequest extends FormRequest
     public function rules()
     {
         return [
-            "role_id"       => "required" ,
-            "workflow_id"     => "required|numeric" ,
-            "hotfield_id"   => "required|numeric" ,
+            "employee_id"     => [] ,
+            "is_active"   => [] ,
         ];
     }
 }

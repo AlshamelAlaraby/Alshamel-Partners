@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles_screens_hotfields', function (Blueprint $table) {
+        Schema::create('internal_salesmen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained('roles')->references("id");
-            $table->unsignedInteger('screen_id');
-            $table->unsignedInteger('hotfield_id');
-            $table->softDeletes();
+            $table->unsignedInteger ('employee_id');
+            $table->unsignedTinyInteger ('is_active')->nullable ()->default (1);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles_screens_hotfields');
+        Schema::dropIfExists('internal_salesmen');
     }
 };

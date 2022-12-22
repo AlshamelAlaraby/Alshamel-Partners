@@ -107,6 +107,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SalesmanRepositoryInterface::class, SalesmanRepository::class);
         $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
         $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
+        $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
+
     }
 
     /**

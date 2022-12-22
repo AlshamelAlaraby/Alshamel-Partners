@@ -80,4 +80,12 @@ class Country extends Model implements HasMedia
             ->useLogName('Country')
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
+
+
+    public function hasChildren(){
+        if ($this->avenues()->count() > 0 || $this->governorates()->count() > 0 || $this->cities()->count() > 0){
+            return true;
+        }
+        return false;
+    }
 }
