@@ -78118,3 +78118,7 @@ td i.fe-info {
   font-size: 22px;
   cursor: pointer;
 }
+
+.modal.show .modal-dialog {
+  height: 85%;
+}
