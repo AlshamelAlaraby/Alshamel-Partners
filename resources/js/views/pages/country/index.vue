@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
-
 /**
  * Advanced Table component
  */
@@ -850,15 +849,14 @@ export default {
                                 </div>
                             </div>
                         </div>
-
                         <!--  create   -->
                         <b-modal
                             id="create"
                             :title="$t('country.addcountry')"
                             title-class="font-18"
                             dialog-class="modal-full-width"
-                            body-class=""
                             :hide-footer="true"
+                            body-class="country"
                             @show="resetModal"
                             @hidden="resetModalHidden"
                         >
@@ -897,6 +895,7 @@ export default {
                                             </b-button>
                                         </div>
                                     </div>
+                                    
                                     <b-tabs nav-class="nav-tabs nav-bordered">
                                         <b-tab :title="$t('general.DataEntry')" active>
                                             <div class="row">
@@ -1530,12 +1529,12 @@ export default {
                                             :id="`modal-edit-${data.id}`"
                                             :title="$t('country.editcountry')"
                                             title-class="font-18"
-                                            body-class=""
                                             dialog-class="modal-full-width"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
+                                            body-class="country"
                                         >
                                             <div class="card">
                                                 <div class="card-body">
@@ -2038,7 +2037,7 @@ export default {
 .modal-dialog .card {
         margin: 0 !important;
  }
- .modal-body {
+ .country.modal-body {
      padding: 0 !important;
  }
  .modal-dialog .card-body {
