@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('rlst_buildings', function (Blueprint $table) {
             $table->id();
-            $table->string ('name',100);
-            $table->string ('name_e',100);
-            $table->text ('description')->nullable ();
-            $table->text ('description_e')->nullable ();
-            $table->double('land_area')->nullable ()->default (0);
-            $table->double('building_area')->nullable ()->default (0);
-            $table->char('construction_year',4)->nullable ()->default ('2018');
-            $table->unsignedInteger ('project_id')->nullable ()->default (0);
-            $table->unsignedInteger ('country_id')->nullable ()->default (0);
-            $table->unsignedInteger ('city_id')->nullable ()->default (0);
-            $table->unsignedInteger ('region_id')->nullable ()->default (0);
-            $table->unsignedInteger ('avenue_id')->nullable ()->default (0);
-            $table->double ('lng')->nullable ()->default (0);
-            $table->double ('lat')->nullable ()->default (0);
-            $table->text ('properties')->nullable ();
-            $table->text ('attachments')->nullable ();
+            $table->string('name', 100);
+            $table->string('name_e', 100);
+            $table->text('description')->nullable();
+            $table->text('description_e')->nullable();
+            $table->double('land_area')->nullable()->default(0);
+            $table->double('building_area')->nullable()->default(0);
+            $table->char('construction_year', 4)->nullable()->default('2018');
+            $table->unsignedInteger('project_id')->nullable()->default(0);
+            $table->unsignedInteger('country_id')->nullable()->default(0);
+            $table->unsignedInteger('city_id')->nullable()->default(0);
+            $table->unsignedInteger('region_id')->nullable()->default(0);
+            $table->unsignedInteger('avenue_id')->nullable()->default(0);
+            $table->double('lng')->nullable()->default(0);
+            $table->double('lat')->nullable()->default(0);
+            $table->text('properties')->nullable();
+            $table->text('attachments')->nullable();
             $table->timestamps();
         });
     }

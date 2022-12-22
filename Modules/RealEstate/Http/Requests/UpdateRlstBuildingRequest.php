@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstBuildingRequest extends FormRequest
+class UpdateRlstBuildingRequest extends FormRequest
 {
 
     /**
@@ -16,6 +16,7 @@ class CreateRlstBuildingRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +25,8 @@ class CreateRlstBuildingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'name_e' => 'required|string|max:255',
+            'name' => 'string|max:255',
+            'name_e' => 'string|max:255',
             'description' => [],
             'description_e' => [],
             'land_area' => [],
@@ -42,6 +43,7 @@ class CreateRlstBuildingRequest extends FormRequest
             'attachments' => [],
         ];
     }
+
     public function messages()
     {
         return [

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,15 +11,9 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
-
-
-
-
-
+ */
 
 Route::prefix('real-estate')->group(function () {
-
 
     // Route::resource('property-types', 'PropertyTypeController')->except('edit', 'create');
     // Route::get('property-types/logs/{id}', 'PropertyTypeController@logs');
@@ -37,9 +30,6 @@ Route::prefix('real-estate')->group(function () {
     // Route::resource('rlst-wallet-building', 'RlstWalletBuildingController')->except('edit', 'create');
     // Route::get('rlst-wallet-building/logs/{id}', 'RlstWalletBuildingController@logs');
 
-
-
-
     // owners routes
     Route::group(['prefix' => 'owners'], function () {
         Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
@@ -49,7 +39,6 @@ Route::prefix('real-estate')->group(function () {
         Route::put('/{id}', 'RlstOwnerController@update')->name('rlst-owners.update');
         Route::delete('/{id}', 'RlstOwnerController@delete')->name('rlst-owners.delete');
     });
-
 
     // customers routes
     Route::group(['prefix' => 'customers'], function () {
@@ -94,8 +83,6 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstInstallmentController@delete')->name('rlst-installments.delete');
     });
 
-
-
     //reservations
     Route::group(['prefix' => 'reservations'], function () {
         Route::get('/', 'RlstReservationController@all')->name('rlst-Reservations.all');
@@ -135,4 +122,25 @@ Route::prefix('real-estate')->group(function () {
         Route::put('/{id}', 'RlstUnitContractController@update')->name('rlst-unit-contracts.update');
         Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
     });
+
+    // property types
+    Route::group(['prefix' => 'property-types'], function () {
+        Route::get('/', 'RlstPropertyTypeController@all')->name('rlst-property-types.all');
+        Route::get('/logs/{id}', 'RlstPropertyTypeController@logs')->name('rlst-property-types.logs');
+        Route::get('/{id}', 'RlstPropertyTypeController@find')->name('rlst-property-types.find');
+        Route::post('/', 'RlstPropertyTypeController@create')->name('rlst-property-types.create');
+        Route::put('/{id}', 'RlstPropertyTypeController@update')->name('rlst-property-types.update');
+        Route::delete('/{id}', 'RlstPropertyTypeController@delete')->name('rlst-property-types.delete');
+    });
+
+    // buildings
+    Route::group(['prefix' => 'buildings'], function () {
+        Route::get('/', 'RlstBuildingController@all')->name('rlst-buildings.all');
+        Route::get('/logs/{id}', 'RlstBuildingController@logs')->name('rlst-buildings.logs');
+        Route::get('/{id}', 'RlstBuildingController@find')->name('rlst-buildings.find');
+        Route::post('/', 'RlstBuildingController@create')->name('rlst-buildings.create');
+        Route::put('/{id}', 'RlstBuildingController@update')->name('rlst-buildings.update');
+        Route::delete('/{id}', 'RlstBuildingController@delete')->name('rlst-buildings.delete');
+    });
+
 });
