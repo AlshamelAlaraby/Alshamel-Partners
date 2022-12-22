@@ -15,8 +15,8 @@ class RoleWorkflowResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'role_id'=>$this->role_id,
-            'workflow_id'=>$this->workflow_id,
+            'role_id' =>  $this->role_id,
+            'workflow_id' => $this->workflow_id,
         ];
     }
 }

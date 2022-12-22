@@ -69,7 +69,6 @@ class RoleWorkflowController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -82,18 +81,18 @@ class RoleWorkflowController extends Controller
     {
         $data = [];
 
-        if ($request->name){
+        if ($request->name) {
             $data['name'] = $request->name;
         }
 
-        if ($request->name_e){
+        if ($request->name_e) {
             $data['name_e'] = $request->name_e;
         }
 
         try {
             $this->repository->update($data, $id);
             return responseJson(200, __('updated'));
-        } catch (\Exception$exception) {
+        } catch (\Exception $exception) {
             return responseJson($exception->getCode(), $exception->getMessage());
         }
     }
@@ -118,6 +117,5 @@ class RoleWorkflowController extends Controller
 
         $logs = $this->repository->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
-
     }
 }

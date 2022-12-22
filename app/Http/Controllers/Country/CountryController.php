@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 
 class CountryController extends Controller
 {
-    public function __construct(private \App\Repositories\Country\CountryInterface $modelInterface)
+    public function __construct(private \App\Repositories\Country\CountryInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }

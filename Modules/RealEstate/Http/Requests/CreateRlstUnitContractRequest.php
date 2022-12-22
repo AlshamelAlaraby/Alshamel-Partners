@@ -16,7 +16,7 @@ class CreateRlstUnitContractRequest extends FormRequest
     public function rules()
     {
         return [
-            "unit_code" => "required|exists:tree_properties,code",
+            "unit_code" => "required|exists:tree_properties,id",
         ];
     }
 
