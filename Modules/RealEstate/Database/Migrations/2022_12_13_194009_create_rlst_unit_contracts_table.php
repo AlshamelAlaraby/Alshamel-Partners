@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('property_types', function (Blueprint $table) {
+        Schema::create('rlst_unit_contracts', function (Blueprint $table) {
             $table->id();
-            $table->string ('name',100);
-            $table->string ('name_e',100);
+            $table->foreignId("unit_code");
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_types');
+        Schema::dropIfExists('rlst_unit_contracts');
     }
 };

@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
-
 /**
  * Advanced Table component
  */
@@ -345,6 +344,7 @@ export default {
             this.country_id = null;
             this.media = {};
             this.images = [];
+            this.errors = {};
         },
         AddSubmit() {
 
@@ -468,8 +468,10 @@ export default {
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
             this.edit.is_default = country.is_default ? 1 : 0;
-            this.images = country.media;
-            this.showPhoto = this.images[this.images.length - 1].webp;
+            this.images = country.media ?? [];
+            if (this.images&&this.images.length>0){
+                this.showPhoto = this.images[this.images.length - 1].webp;
+            }else{this.images = './images/img-1.png';}
             this.errors = {};
         },
         /**
@@ -544,8 +546,10 @@ export default {
 
                             adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
                                 .then((res) => {
-                                    this.images = res.data.data.media;
-                                    this.showPhoto = this.images[this.images.length - 1].webp;
+                                    this.images = res.data.data.media ?? [];
+                                    if(this.images&&this.images.length>0){
+                                        this.showPhoto = this.images[this.images.length - 1].webp;
+                                    }else{this.images = './images/img-1.png';}
                                     this.getData();
                                 })
                                 .catch(err => {
@@ -595,8 +599,10 @@ export default {
 
                                     adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
                                         .then((res) => {
-                                            this.images = res.data.data.media;
-                                            this.showPhoto = this.images[this.images.length - 1].webp;
+                                            this.images = res.data.data.media ?? [];
+                                            if(this.images&&this.images.length>0){
+                                                this.showPhoto = this.images[this.images.length - 1].webp;
+                                            }else{this.images = './images/img-1.png';}
                                             this.getData();
                                         })
                                         .catch(err => {
@@ -635,8 +641,10 @@ export default {
             });
             adminApi.put(`/countries/${this.country_id}`,{old_media})
                 .then((res) => {
-                    this.images = res.data.data.media;
-                    this.showPhoto = this.images[this.images.length - 1].webp;
+                    this.images = res.data.data.media ?? [];
+                    if(this.images&&this.images.length>0){
+                        this.showPhoto = this.images[this.images.length - 1].webp;
+                    }else {this.images = './images/img-1.png';}
                 })
                 .catch(err => {
                     Swal.fire({
@@ -849,15 +857,14 @@ export default {
                                 </div>
                             </div>
                         </div>
-
                         <!--  create   -->
                         <b-modal
                             id="create"
                             :title="$t('country.addcountry')"
                             title-class="font-18"
                             dialog-class="modal-full-width"
-                            body-class=""
                             :hide-footer="true"
+                            body-class="country"
                             @show="resetModal"
                             @hidden="resetModalHidden"
                         >
@@ -896,6 +903,7 @@ export default {
                                             </b-button>
                                         </div>
                                     </div>
+
                                     <b-tabs nav-class="nav-tabs nav-bordered">
                                         <b-tab :title="$t('general.DataEntry')" active>
                                             <div class="row">
@@ -1529,12 +1537,12 @@ export default {
                                             :id="`modal-edit-${data.id}`"
                                             :title="$t('country.editcountry')"
                                             title-class="font-18"
-                                            body-class=""
                                             dialog-class="modal-full-width"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
+                                            body-class="country"
                                         >
                                             <div class="card">
                                                 <div class="card-body">
@@ -2037,7 +2045,7 @@ export default {
 .modal-dialog .card {
         margin: 0 !important;
  }
- .modal-body {
+ .country.modal-body {
      padding: 0 !important;
  }
  .modal-dialog .card-body {
@@ -2072,10 +2080,4 @@ export default {
     max-height: 400px !important;
 }
 </style>
-
-
-
-
-
-
 
