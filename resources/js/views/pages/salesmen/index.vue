@@ -7,10 +7,8 @@ import {required, minLength, maxLength, integer} from "vuelidate/lib/validators"
 import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
-import alphaArabic from "../../../helper/alphaArabic";
-import alphaEnglish from "../../../helper/alphaEnglish";
+import salesManType from "../../../components/create/salesManType";
 import {dynamicSortString} from "../../../helper/tableSort";
-import senderHoverHelper from "../../../helper/senderHoverHelper";
 import Multiselect from "vue-multiselect";
 
 /**
@@ -27,7 +25,8 @@ export default {
         Switches,
         ErrorMessage,
         loader,
-        Multiselect
+        Multiselect,
+        salesManType
     },
     data() {
         return {
@@ -53,18 +52,24 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
+            setting: {
+                name: true,
+                name_e: true,
+                salesman_type_id: true
+            },
+            is_disabled: false,
             filterSetting: ['name', 'name_e','salesman_type_id']
         }
     },
     validations: {
         create: {
-            name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
-            name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            name: {required, minLength: minLength(3), maxLength: maxLength(100),},
+            name_e: {required, minLength: minLength(3), maxLength: maxLength(100),},
             salesman_type_id: {required}
         },
         edit: {
-            name: {required, minLength: minLength(3), maxLength: maxLength(100), alphaArabic},
-            name_e: {required, minLength: minLength(3), maxLength: maxLength(100), alphaEnglish},
+            name: {required, minLength: minLength(3), maxLength: maxLength(100),},
+            name_e: {required, minLength: minLength(3), maxLength: maxLength(100),},
             salesman_type_id: {required}
         },
     },
@@ -102,14 +107,46 @@ export default {
     mounted() {
         this.getData();
     },
+    updated(){
+        $(function(){
+            $(".englishInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return true;
+                if(65 <= ew && ew <= 90)
+                    return true;
+                if(97 <= ew && ew <= 122)
+                    return true;
+                return false;
+            });
+            $(".arabicInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return false;
+                if(65 <= ew && ew <= 90)
+                    return false;
+                if(97 <= ew && ew <= 122)
+                    return false;
+                return true;
+            });
+        });
+    },
     methods: {
         /**
          *  start get Data module && pagination
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i > this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
-            adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}`)
+            adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.salesmens = l.data;
@@ -130,8 +167,12 @@ export default {
         getDataCurrentPage(page =1) {
             if (this.current_page <= this.salesmensPagination.last_page && this.current_page != this.salesmensPagination.current_page && this.current_page) {
                 this.isLoader = true;
+                let filter = '';
+                for (let i = 0; i > this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
 
-                adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
+                adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.salesmens = l.data;
@@ -230,12 +271,27 @@ export default {
             this.getSaleMenType();
             this.errors = {};
         },
+        resetForm() {
+            this.create = {
+                name: '',
+                name_e: '',
+                salesman_type_id: null,
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.getSaleMenType();
+            this.errors = {};
+            this.is_disabled = false;
+        },
         /**
          *  create module
          */
 
         AddSubmit() {
 
+            if(!this.create.name){ this.create.name = this.create.name_e}
+            if(!this.create.name_e){ this.create.name_e = this.create.name}
             this.$v.create.$touch();
 
             if (this.$v.create.$invalid) {
@@ -245,7 +301,7 @@ export default {
                 this.errors = {};
                 adminApi.post(`/salesmen`, this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
+                        this.is_disabled = true;
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -363,8 +419,9 @@ export default {
 
             await adminApi.get(`/salesmen-types?is_empolyee=1`)
                 .then((res) => {
-                    let l = res.data;
-                    this.salesmenTypes = l.data;
+                    let l = res.data.data;
+                    l.unshift({ id: 0, name: "اضف رجل مبيعات", name_e: "Add Sales Man Type" });
+                    this.salesmenTypes = l;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -376,7 +433,19 @@ export default {
                 .finally(() => {
                     this.isLoader = false;
                 });
-        }
+        },
+        showSaleManModal() {
+            if (this.create.salesman_type_id == 0) {
+                this.$bvModal.show("sales-man-type-create");
+                this.create.salesman_type_id = null;
+            }
+        },
+        showSaleManModalEdit() {
+            if (this.edit.salesman_type_id == 0) {
+                this.$bvModal.show("sales-man-type-create");
+                this.edit.salesman_type_id = null;
+            }
+        },
     },
 };
 </script>
@@ -384,6 +453,7 @@ export default {
 <template>
     <Layout>
         <PageHeader/>
+        <salesManType @created="getSaleMenType" />
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -490,12 +560,25 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{
+                                                    $t('general.Name')
+                                                }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">
+                                                {{ $t('general.Name_en') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.salesman_type_id" class="mb-1">
+                                                {{ $t('general.salesManType') }}
+                                            </b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -544,79 +627,38 @@ export default {
                             @hidden="resetModalHidden"
                         >
                             <form>
+                                <div class="mb-3 d-flex justify-content-end">
+
+                                    <b-button
+                                        variant="success"
+                                        :disabled="!is_disabled"
+                                        @click.prevent="resetForm"
+                                        type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                    >
+                                        {{ $t('general.AddNewRecord') }}
+                                    </b-button>
+                                    <template v-if="!is_disabled">
+                                        <b-button
+                                            variant="success"
+                                            type="button" class="mx-1"
+                                            v-if="!isLoader"
+                                            @click.prevent="AddSubmit"
+                                        >
+                                            {{ $t('general.Add') }}
+                                        </b-button>
+
+                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                            <b-spinner small></b-spinner>
+                                            <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                        </b-button>
+                                    </template>
+                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+
+                                    <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
+                                        {{ $t('general.Cancel') }}
+                                    </b-button>
+                                </div>
                                 <div class="row">
-                                    <div class="col-md-12 direction" dir="rtl">
-                                        <div class="form-group">
-                                            <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="1"
-                                                @keypress.enter="moveInput('input','create',2)"
-                                                v-model="$v.create.name.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.name.$error || errors.name,
-                                                'is-valid':!$v.create.name.$invalid && !errors.name
-                                            }"
-                                              id="field-1"
-                                            />
-                                            <div v-if="!$v.create.name.minLength" class="invalid-feedback">
-                                                {{ $t('general.Itmustbeatleast') }}
-                                                {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}
-                                            </div>
-                                            <div v-if="!$v.create.name.maxLength" class="invalid-feedback">
-                                                {{ $t('general.Itmustbeatmost') }}
-                                                {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}
-                                            </div>
-                                            <div v-if="!$v.create.name.alphaArabic" class="invalid-feedback">
-                                                {{ $t('general.alphaArabic') }}
-                                            </div>
-                                            <template v-if="errors.name">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">
-                                                    {{ errorMessage }}
-                                                </ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 direction-ltr" dir="ltr">
-                                        <div class="form-group">
-                                            <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="2"
-                                                @keypress.enter="moveInput('select','create',3)"
-                                                v-model="$v.create.name_e.$model"
-                                                :class="{
-                                                    'is-invalid':$v.create.name_e.$error || errors.name_e,
-                                                    'is-valid':!$v.create.name_e.$invalid && !errors.name_e
-                                                }"
-                                            id="field-2"
-                                            />
-                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">
-                                                {{ $t('general.Itmustbeatleast') }}
-                                                {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}
-                                            </div>
-                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">
-                                                {{ $t('general.Itmustbeatmost') }}
-                                                {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}
-                                            </div>
-                                            <div v-if="!$v.create.name_e.alphaEnglish" class="invalid-feedback">
-                                                {{ $t('general.alphaEnglish') }}
-                                            </div>
-                                            <template v-if="errors.name_e">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e"
-                                                              :key="index">{{ errorMessage }}
-                                                </ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">
@@ -624,6 +666,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
+                                                @input="showSaleManModal"
                                                 v-model="create.salesman_type_id"
                                                 :options="salesmenTypes.map(type => type.id)"
                                                 :custom-label="opt => salesmenTypes.find(x => x.id == opt).name">
@@ -640,26 +683,76 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-1 d-flex justify-content-end">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button
-                                        variant="success"
-                                        type="button" class="mx-1"
-                                        v-if="!isLoader"
-                                        @click.prevent="AddSubmit"
-                                    >
-                                        {{ $t('general.Add') }}
-                                    </b-button>
-
-                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                        <b-spinner small></b-spinner>
-                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                    </b-button>
-
-                                    <b-button variant="secondary" type="button" @click.prevent="resetModalHidden">
-                                        {{ $t('general.Cancel') }}
-                                    </b-button>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="field-1" class="control-label">
+                                                {{ $t('general.Name') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="1"
+                                                    @keypress.enter="moveInput('input','create',2)"
+                                                    v-model="$v.create.name.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.name.$error || errors.name,
+                                                        'is-valid':!$v.create.name.$invalid && !errors.name
+                                                    }"
+                                                    id="field-1"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.name.minLength" class="invalid-feedback">
+                                                {{ $t('general.Itmustbeatleast') }}
+                                                {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}
+                                            </div>
+                                            <div v-if="!$v.create.name.maxLength" class="invalid-feedback">
+                                                {{ $t('general.Itmustbeatmost') }}
+                                                {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}
+                                            </div>
+                                            <template v-if="errors.name">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">
+                                                    {{ errorMessage }}
+                                                </ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="field-2" class="control-label">
+                                                {{ $t('general.Name_en') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="2"
+                                                    @keypress.enter="moveInput('select','create',3)"
+                                                    v-model="$v.create.name_e.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.name_e.$error || errors.name_e,
+                                                        'is-valid':!$v.create.name_e.$invalid && !errors.name_e
+                                                    }"
+                                                    id="field-2"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">
+                                                {{ $t('general.Itmustbeatleast') }}
+                                                {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}
+                                            </div>
+                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">
+                                                {{ $t('general.Itmustbeatmost') }}
+                                                {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}
+                                            </div>
+                                            <template v-if="errors.name_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e"
+                                                              :key="index">{{ errorMessage }}
+                                                </ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </b-modal>
@@ -684,7 +777,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name') }}</span>
                                             <div class="arrow-sort">
@@ -695,7 +788,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name_en') }}</span>
                                             <div class="arrow-sort">
@@ -706,7 +799,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.salesman_type_id">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.salesManType') }}</span>
                                             <div class="arrow-sort">
@@ -742,13 +835,13 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name">
                                         <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                    <td>{{ $i18n.locale == 'ar' ? data.salesmanType.name :  data.salesmanType.name_e }}</td>
+                                    <td v-if="setting.salesman_type_id">{{ $i18n.locale == 'ar' ? data.salesmanType.name :  data.salesmanType.name_e }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button
@@ -799,27 +892,71 @@ export default {
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
+                                                <div class="mb-3 d-flex justify-content-end">
+                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                                    <b-button variant="success" type="submit" class="mx-1"
+                                                              v-if="!isLoader"
+                                                              @click.prevent="editSubmit(data.id)"
+                                                    >
+                                                        {{ $t('general.Edit') }}
+                                                    </b-button>
+
+                                                    <b-button variant="success" class="mx-1" disabled v-else>
+                                                        <b-spinner small></b-spinner>
+                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                    </b-button>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        type="button"
+                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                    >
+                                                        {{ $t('general.Cancel') }}
+                                                    </b-button>
+                                                </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 direction" dir="rtl">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group">
+                                                            <label class="my-1 mr-2">
+                                                                {{ $t('general.salesManType') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <multiselect
+                                                                @input="showSaleManModalEdit"
+                                                                v-model="edit.salesman_type_id"
+                                                                :options="salesmenTypes.map(type => type.id)"
+                                                                :custom-label="opt => salesmenTypes.find(x => x.id == opt).name">
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.salesman_type_id.$error || errors.salesman_type_id"
+                                                                 class="text-danger"
+                                                            >
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>
+                                                            <template v-if="errors.is_employee">
+                                                                <ErrorMessage
+                                                                    v-for="(errorMessage,index) in errors.is_employee"
+                                                                    :key="index">{{ errorMessage }}
+                                                                </ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
                                                                 {{ $t('general.Name') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                v-model="$v.edit.name.$model"
-                                                                :class="{
+                                                            <div  dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    v-model="$v.edit.name.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                 id="field-u-1"
-                                                            />
-                                                            <div v-if="!$v.edit.name.alphaArabic"
-                                                                 class="invalid-feedback">{{
-                                                                    $t('general.alphaArabic')
-                                                                }}
+                                                                    id="field-u-1"
+                                                                />
                                                             </div>
                                                             <div v-if="!$v.edit.name.minLength"
                                                                  class="invalid-feedback">
@@ -841,22 +978,24 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 direction-ltr" dir="ltr">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
                                                                 {{ $t('general.Name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                v-model="$v.edit.name_e.$model"
-                                                                :class="{
+                                                            <div dir="ltr">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control englishInput"
+                                                                    v-model="$v.edit.name_e.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.name_e.$error || errors.name_e,
                                                                     'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
                                                                 }"
-                                                                id="field-u-2"
-                                                            />
+                                                                    id="field-u-2"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.name_e.minLength"
                                                                  class="invalid-feedback">
                                                                 {{ $t('general.Itmustbeatleast') }}
@@ -869,11 +1008,6 @@ export default {
                                                                 {{ $v.edit.name_e.$params.maxLength.max }}
                                                                 {{ $t('general.letters') }}
                                                             </div>
-                                                            <div v-if="!$v.edit.name_e.alphaEnglish"
-                                                                 class="invalid-feedback">{{
-                                                                    $t('general.alphaEnglish')
-                                                                }}
-                                                            </div>
                                                             <template v-if="errors.name_e">
                                                                 <ErrorMessage
                                                                     v-for="(errorMessage,index) in errors.name_e"
@@ -882,50 +1016,6 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 ">
-                                                        <div class="form-group">
-                                                            <label class="my-1 mr-2">
-                                                                {{ $t('general.salesManType') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <multiselect
-                                                                v-model="edit.salesman_type_id"
-                                                                :options="salesmenTypes.map(type => type.id)"
-                                                                :custom-label="opt => salesmenTypes.find(x => x.id == opt).name">
-                                                            </multiselect>
-                                                            <div v-if="$v.edit.salesman_type_id.$error || errors.salesman_type_id"
-                                                                 class="text-danger"
-                                                            >
-                                                                {{ $t('general.fieldIsRequired') }}
-                                                            </div>
-                                                            <template v-if="errors.is_employee">
-                                                                <ErrorMessage
-                                                                    v-for="(errorMessage,index) in errors.is_employee"
-                                                                    :key="index">{{ errorMessage }}
-                                                                </ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-1 d-flex justify-content-end">
-                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button variant="success" type="button" class="mx-1"  @click.prevent="editSubmit(data.id)"
-                                                              v-if="!isLoader">
-                                                        {{ $t('general.Edit') }}
-                                                    </b-button>
-
-                                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                                        <b-spinner small></b-spinner>
-                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                                    </b-button>
-
-                                                    <b-button
-                                                        variant="secondary"
-                                                        type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
-                                                    >
-                                                        {{ $t('general.Cancel') }}
-                                                    </b-button>
                                                 </div>
                                             </form>
                                         </b-modal>

@@ -67,32 +67,46 @@ export default {
             checkAll: [],
             current_page: 1,
             image: '',
-            filterSetting: ['name','name_e','code','code_e','fraction','fraction_e']
+            setting: {
+                name: true,
+                name_e: true,
+                code : true,
+                code_e : true,
+                fraction: true,
+                fraction_e: true,
+                symbol: true,
+                symbol_e: true,
+                is_default: true ,
+                is_active: true,
+                fraction_no: true
+            },
+            is_disabled: false,
+            filterSetting: ['name','name_e','code','code_e','fraction','fraction_e','symbol','symbol_e']
         }
     },
     validations: {
         create: {
-            name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
-            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
-            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            code: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
-            code_e: {required,minLength: minLength(3),maxLength: maxLength(15),alphaEnglish},
-            fraction: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
-            fraction_e: {required,minLength: minLength(3),maxLength: maxLength(100),alphaEnglish},
+            name: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            code: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            code_e: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            fraction: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            fraction_e: {required,minLength: minLength(3),maxLength: maxLength(100),},
             fraction_no: {required,decimal},
             is_default: {required,integer},
             is_active: {required,integer},
         },
         edit: {
-            name: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
-            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),alphaArabic},
-            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),alphaEnglish},
-            code: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
-            code_e: {required,minLength: minLength(3),maxLength: maxLength(15),alphaEnglish},
-            fraction: {required,minLength: minLength(3),maxLength: maxLength(15),alphaArabic},
-            fraction_e: {required,minLength: minLength(3),maxLength: maxLength(15),alphaEnglish},
+            name: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            name_e: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            symbol: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            symbol_e: {required,minLength: minLength(2),maxLength: maxLength(100),},
+            code: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            code_e: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            fraction: {required,minLength: minLength(3),maxLength: maxLength(15),},
+            fraction_e: {required,minLength: minLength(3),maxLength: maxLength(15),},
             fraction_no: {required,decimal},
             is_default: {required,integer},
             is_active: {required,integer},
@@ -132,14 +146,46 @@ export default {
     mounted() {
         this.getData();
     },
+    updated(){
+        $(function(){
+            $(".englishInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return true;
+                if(65 <= ew && ew <= 90)
+                    return true;
+                if(97 <= ew && ew <= 122)
+                    return true;
+                return false;
+            });
+            $(".arabicInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return false;
+                if(65 <= ew && ew <= 90)
+                    return false;
+                if(97 <= ew && ew <= 122)
+                    return false;
+                return true;
+            });
+        });
+    },
     methods: {
         /**
          *  start get Data currencies && pagination
          */
         getData(page = 1){
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i > this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
-            adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}`)
+            adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.currencies = l.data;
@@ -160,8 +206,12 @@ export default {
         getDataCurrentPage(page = 1){
             if(this.current_page <= this.currenciesPagination.last_page && this.current_page != this.currenciesPagination.current_page && this.current_page){
                 this.isLoader = true;
+                let filter = '';
+                for (let i = 0; i > this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
 
-                adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
+                adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}&search=${this.search}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.currencies = l.data;
@@ -274,9 +324,35 @@ export default {
         /**
          *  create countrie
          */
+        resetForm(){
+            this.create = {
+                name: '',
+                name_e: '',
+                symbol: '',
+                symbol_e: '',
+                code:'',
+                code_e: '',
+                fraction:'',
+                fraction_e: '',
+                fraction_no: 0,
+                is_default: 0,
+                is_active: 1
+            };
+            this.$nextTick(() => { this.$v.$reset() });
+            this.errors = {};
+            this.is_disabled = false;
+        },
 
         AddSubmit(){
 
+            if(!this.create.name){ this.create.name = this.create.name_e}
+            if(!this.create.name_e){ this.create.name_e = this.create.name}
+            if(!this.create.code){ this.create.code = this.create.code_e}
+            if(!this.create.code_e){ this.create.code_e = this.create.code}
+            if(!this.create.symbol){ this.create.symbol = this.create.symbol_e}
+            if(!this.create.symbol_e){ this.create.symbol_e = this.create.symbol}
+            if(!this.create.fraction){ this.create.fraction = this.create.fraction_e}
+            if(!this.create.fraction_e){ this.create.fraction_e = this.create.fraction}
             this.$v.create.$touch();
 
             if (this.$v.create.$invalid) {
@@ -287,7 +363,7 @@ export default {
 
                 adminApi.post(`/currencies`,this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
+                        this.is_disabled = true;
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -525,12 +601,26 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{$t('general.Name') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.fraction" class="mb-1">{{$t('general.fraction') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.fraction_e" class="mb-1">{{ $t('general.fraction_e') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.symbol" class="mb-1">{{$t('general.symbol') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.symbol_e" class="mb-1">{{ $t('general.symbol_e') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.code" class="mb-1">{{$t('general.code') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.code_e" class="mb-1">{{ $t('general.code_e') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.fraction_no" class="mb-1">{{ $t('general.fraction_no') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_default" class="mb-1">{{$t('general.is_default') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">{{ $t('general.Status') }}</b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -572,221 +662,260 @@ export default {
                             id="create"
                             :title="$t('currency.addcurrency')"
                             title-class="font-18"
-                            size="lg"
+                            dialog-class="modal-full-width"
                             body-class="p-4 "
                             :hide-footer="true"
                             @show="resetModal"
                             @hidden="resetModalHidden"
                         >
                             <form>
+                                <div class="mb-3 d-flex justify-content-end">
+
+                                    <b-button
+                                        variant="success"
+                                        :disabled="!is_disabled"
+                                        @click.prevent="resetForm"
+                                        type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                    >
+                                        {{ $t('general.AddNewRecord') }}
+                                    </b-button>
+                                    <template v-if="!is_disabled">
+                                        <b-button
+                                            variant="success"
+                                            type="button" class="mx-1"
+                                            v-if="!isLoader"
+                                            @click.prevent="AddSubmit"
+                                        >
+                                            {{ $t('general.Add') }}
+                                        </b-button>
+
+                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                            <b-spinner small></b-spinner>
+                                            <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                        </b-button>
+                                    </template>
+                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+
+                                    <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
+                                        {{ $t('general.Cancel') }}
+                                    </b-button>
+                                </div>
                                 <div class="row">
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
                                                 {{ $t('general.Name') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="1"
-                                                @keypress.enter="moveInput('input','create',2)"
-                                                v-model="$v.create.name.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.name.$error || errors.name,
-                                                'is-valid':!$v.create.name.$invalid && !errors.name
-                                            }"
-                                                id="field-1"
-                                            />
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="1"
+                                                    @keypress.enter="moveInput('input','create',2)"
+                                                    v-model="$v.create.name.$model"
+                                                    :class="{
+                                                    'is-invalid':$v.create.name.$error || errors.name,
+                                                    'is-valid':!$v.create.name.$invalid && !errors.name
+                                                }"
+                                                    id="field-1"
+                                                />
+                                            </div>
                                             <div v-if="!$v.create.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                             <template v-if="errors.name">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                        <div class="form-group">
-                                            <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="2"
-                                                @keypress.enter="moveInput('input','create',3)"
-                                                v-model="$v.create.name_e.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.name_e.$error || errors.name_e,
-                                                'is-valid':!$v.create.name_e.$invalid && !errors.name_e
-                                            }"
-                                                id="field-2"
-                                            />
-                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                            <template v-if="errors.name_e">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-45" class="control-label">
                                                 {{ $t('general.symbol') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="3"
-                                                @keypress.enter="moveInput('input','create',4)"
-                                                v-model="$v.create.symbol.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.symbol.$error || errors.symbol,
-                                                'is-valid':!$v.create.symbol.$invalid && !errors.symbol
-                                            }"
-                                                id="field-45"
-                                            />
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="3"
+                                                    @keypress.enter="moveInput('input','create',4)"
+                                                    v-model="$v.create.symbol.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.symbol.$error || errors.symbol,
+                                                        'is-valid':!$v.create.symbol.$invalid && !errors.symbol
+                                                    }"
+                                                    id="field-45"
+                                                />
+                                            </div>
                                             <div v-if="!$v.create.symbol.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.symbol.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.symbol.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.symbol.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.symbol.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                             <template v-if="errors.symbol">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.symbol" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                        <div class="form-group">
-                                            <label for="field-33" class="control-label">
-                                                {{ $t('general.symbol_e') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="4"
-                                                @keypress.enter="moveInput('input','create',5)"
-                                                v-model="$v.create.symbol_e.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.symbol_e.$error || errors.symbol_e,
-                                                'is-valid':!$v.create.symbol_e.$invalid && !errors.symbol_e
-                                            }"
-                                                id="field-33"
-                                            />
-                                            <div v-if="!$v.create.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.symbol_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                            <template v-if="errors.symbol_e">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 direction" dir="rtl">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-3" class="control-label">
                                                 {{ $t('general.code') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="5"
-                                                @keypress.enter="moveInput('input','create',6)"
-                                                v-model="$v.create.code.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.code.$error || errors.code,
-                                                'is-valid':!$v.create.code.$invalid && !errors.code
-                                            }"
-                                                id="field-3"
-                                            />
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="5"
+                                                    @keypress.enter="moveInput('input','create',6)"
+                                                    v-model="$v.create.code.$model"
+                                                    :class="{
+                                                    'is-invalid':$v.create.code.$error || errors.code,
+                                                    'is-valid':!$v.create.code.$invalid && !errors.code
+                                                }"
+                                                    id="field-3"
+                                                />
+                                            </div>
                                             <div v-if="!$v.create.code.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.code.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.code.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.code.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.code.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                             <template v-if="errors.code">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.code" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                        <div class="form-group">
-                                            <label for="field-4" class="control-label">
-                                                {{ $t('general.code_e') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="6"
-                                                @keypress.enter="moveInput('input','create',7)"
-                                                v-model="$v.create.code_e.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.code_e.$error || errors.code_e,
-                                                'is-valid':!$v.create.code_e.$invalid && !errors.code_e
-                                            }" id="field-4"
-                                            />
-                                            <div v-if="!$v.create.code_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.code_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.code_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.code_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.code_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                            <template v-if="errors.code_e">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.code_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 direction" dir="rtl">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-5" class="control-label">
                                                 {{ $t('general.fraction') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="7"
-                                                @keypress.enter="moveInput('input','create',8)"
-                                                v-model="$v.create.fraction.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.fraction.$error || errors.fraction,
-                                                'is-valid':!$v.create.fraction.$invalid && !errors.fraction
-                                            }"
-                                                id="field-5"
-                                            />
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="7"
+                                                    @keypress.enter="moveInput('input','create',8)"
+                                                    v-model="$v.create.fraction.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.fraction.$error || errors.fraction,
+                                                        'is-valid':!$v.create.fraction.$invalid && !errors.fraction
+                                                    }"
+                                                    id="field-5"
+                                                />
+                                            </div>
                                             <div v-if="!$v.create.fraction.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.fraction.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.fraction.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.fraction.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.fraction.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                             <template v-if="errors.fraction">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.fraction" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 direction-ltr" dir="ltr">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="field-2" class="control-label">
+                                                {{ $t('general.Name_en') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="2"
+                                                    @keypress.enter="moveInput('input','create',3)"
+                                                    v-model="$v.create.name_e.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.name_e.$error || errors.name_e,
+                                                        'is-valid':!$v.create.name_e.$invalid && !errors.name_e
+                                                    }"
+                                                    id="field-2"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.name_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="field-33" class="control-label">
+                                                {{ $t('general.symbol_e') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="4"
+                                                    @keypress.enter="moveInput('input','create',5)"
+                                                    v-model="$v.create.symbol_e.$model"
+                                                    :class="{
+                                                'is-invalid':$v.create.symbol_e.$error || errors.symbol_e,
+                                                'is-valid':!$v.create.symbol_e.$invalid && !errors.symbol_e
+                                            }"
+                                                    id="field-33"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.symbol_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="field-4" class="control-label">
+                                                {{ $t('general.code_e') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="6"
+                                                    @keypress.enter="moveInput('input','create',7)"
+                                                    v-model="$v.create.code_e.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.code_e.$error || errors.code_e,
+                                                        'is-valid':!$v.create.code_e.$invalid && !errors.code_e
+                                                    }" id="field-4"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.code_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.code_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.code_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.code_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.code_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.code_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-6" class="control-label">
                                                 {{ $t('general.fraction_e') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="8"
-                                                @keypress.enter="moveInput('input','create',9)"
-                                                v-model="$v.create.fraction_e.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.fraction_e.$error || errors.fraction_e,
-                                                'is-valid':!$v.create.fraction_e.$invalid && !errors.fraction_e
-                                            }" id="field-6"
-                                            />
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="8"
+                                                    @keypress.enter="moveInput('input','create',9)"
+                                                    v-model="$v.create.fraction_e.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.fraction_e.$error || errors.fraction_e,
+                                                        'is-valid':!$v.create.fraction_e.$invalid && !errors.fraction_e
+                                                    }" id="field-6"
+                                                />
+                                            </div>
                                             <div v-if="!$v.create.fraction_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.fraction_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                             <div v-if="!$v.create.fraction_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.fraction_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.fraction_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
                                             <template v-if="errors.fraction_e">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.fraction_e" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-7" class="control-label">
                                                 {{ $t('general.fraction_no') }}
@@ -809,7 +938,7 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class=" mr-2" for="field-11">
                                                 {{ $t('general.is_default') }}
@@ -826,60 +955,32 @@ export default {
                                             }"
                                             >
                                                 <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                <option value="1">{{ $t('general.Active') }}</option>
-                                                <option value="0">{{ $t('general.Inactive') }}</option>
+                                                <option value="1">{{ $t('general.Yes') }}</option>
+                                                <option value="0">{{ $t('general.No') }}</option>
                                             </select>
                                             <template v-if="errors.is_default">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_default" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class=" mr-2" for="inlineFormCustomSelectPref">
+                                            <label class=" mr-2">
                                                 {{ $t('general.Status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <select
-                                                class="custom-select mr-sm-2"
-                                                id="inlineFormCustomSelectPref"
-                                                data-create="11"
-                                                @keypress.enter.prevent="moveInput('input','create',1)"
-                                                v-model="$v.create.is_active.$model"
-                                                :class="{
+                                            <b-form-group :class="{
                                                 'is-invalid':$v.create.is_active.$error || errors.is_active,
                                                 'is-valid':!$v.create.is_active.$invalid && !errors.is_active
-                                            }"
-                                            >
-                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                <option value="1">{{ $t('general.Active') }}</option>
-                                                <option value="0">{{ $t('general.Inactive') }}</option>
-                                            </select>
+                                            }">
+                                                <b-form-radio class="d-inline-block" v-model="$v.create.is_active.$model" name="some-radios" value="1">{{$t('general.Active')}}</b-form-radio>
+                                                <b-form-radio class="d-inline-block m-1" v-model="$v.create.is_active.$model" name="some-radios" value="0">{{$t('general.Inactive')}}</b-form-radio>
+                                            </b-form-group>
                                             <template v-if="errors.is_active">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-1 d-flex justify-content-end">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button
-                                        variant="success"
-                                        type="button" class="mx-1"
-                                        v-if="!isLoader"
-                                        @click.prevent="AddSubmit"
-                                    >
-                                        {{ $t('general.Add') }}
-                                    </b-button>
-
-                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                        <b-spinner small></b-spinner>
-                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                    </b-button>
-
-                                    <b-button variant="secondary" type="button" @click.prevent="resetModalHidden">
-                                        {{ $t('general.Cancel') }}
-                                    </b-button>
                                 </div>
                             </form>
                         </b-modal>
@@ -904,7 +1005,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name') }}</span>
                                             <div class="arrow-sort">
@@ -913,7 +1014,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name_en') }}</span>
                                             <div class="arrow-sort">
@@ -922,7 +1023,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.code">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.code') }}</span>
                                             <div class="arrow-sort">
@@ -931,7 +1032,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.code_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.code_e') }}</span>
                                             <div class="arrow-sort">
@@ -940,7 +1041,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.fraction">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.fraction') }}</span>
                                             <div class="arrow-sort">
@@ -949,7 +1050,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.fraction_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.fraction_e') }}</span>
                                             <div class="arrow-sort">
@@ -958,7 +1059,25 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.symbol">
+                                        <div class="d-flex justify-content-center">
+                                            <span>{{ $t('general.symbol') }}</span>
+                                            <div class="arrow-sort">
+                                                <i class="fas fa-arrow-up" @click="currencies.sort(sortString('symbol'))"></i>
+                                                <i class="fas fa-arrow-down" @click="currencies.sort(sortString('-symbol'))"></i>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th v-if="setting.symbol_e">
+                                        <div class="d-flex justify-content-center">
+                                            <span>{{ $t('general.symbol_e') }}</span>
+                                            <div class="arrow-sort">
+                                                <i class="fas fa-arrow-up" @click="currencies.sort(sortString('symbol_e'))"></i>
+                                                <i class="fas fa-arrow-down" @click="currencies.sort(sortString('-symbol_e'))"></i>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th v-if="setting.fraction_no">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.fraction_no') }}</span>
                                             <div class="arrow-sort">
@@ -967,12 +1086,12 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_default">
                                         <div class="d-flex justify-content-center">
                                             {{ $t('general.is_default') }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                             <div class="arrow-sort">
@@ -1006,18 +1125,20 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name">
                                         <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                      <td>{{ data.code }}</td>
-                                      <td>{{ data.code_e }}</td>
-                                      <td>{{ data.fraction }}</td>
-                                      <td>{{ data.fraction_e }}</td>
-                                      <td>{{ data.fraction_no }}</td>
-                                      <td>
+                                      <td v-if="setting.code">{{ data.code }}</td>
+                                      <td v-if="setting.code_e">{{ data.code_e }}</td>
+                                      <td v-if="setting.fraction">{{ data.fraction }}</td>
+                                      <td v-if="setting.fraction_e">{{ data.fraction_e }}</td>
+                                      <td v-if="setting.fraction_no">{{ data.fraction_no }}</td>
+                                      <td v-if="setting.symbol">{{ data.symbol }}</td>
+                                      <td v-if="setting.symbol_e">{{ data.symbol_e }}</td>
+                                      <td v-if="setting.is_default">
                                         <span :class="[
                                             data.is_default == 'active' ?
                                             'text-success':
@@ -1028,7 +1149,7 @@ export default {
                                             {{ data.is_default ? `${$t('general.Active')}`:`${$t('general.Inactive')}`}}
                                         </span>
                                       </td>
-                                      <td>
+                                      <td v-if="setting.is_active">
                                         <span :class="[
                                             data.is_active ?
                                             'text-success':
@@ -1082,221 +1203,251 @@ export default {
                                             :title="$t('currency.editcurrency')"
                                             title-class="font-18"
                                             body-class="p-4"
-                                            size="lg"
+                                            dialog-class="modal-full-width"
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
+                                                <div class="mb-3 d-flex justify-content-end">
+                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                                    <b-button variant="success" type="submit" class="mx-1"
+                                                              v-if="!isLoader"
+                                                              @click.prevent="editSubmit(data.id)"
+                                                    >
+                                                        {{ $t('general.Edit') }}
+                                                    </b-button>
+
+                                                    <b-button variant="success" class="mx-1" disabled v-else>
+                                                        <b-spinner small></b-spinner>
+                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                    </b-button>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        type="button"
+                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                    >
+                                                        {{ $t('general.Cancel') }}
+                                                    </b-button>
+                                                </div>
                                                 <div class="row">
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="edit-1" class="control-label">
                                                                 {{ $t('general.Name') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="1"
-                                                                @keypress.enter="moveInput('input','edit',2)"
-                                                                v-model="$v.edit.name.$model"
-                                                                :class="{
+                                                            <div  dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    data-edit="1"
+                                                                    @keypress.enter="moveInput('input','edit',2)"
+                                                                    v-model="$v.edit.name.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.name.$error || errors.name,
                                                                     'is-valid':!$v.edit.name.$invalid && !errors.name
                                                                 }"
-                                                                id="edit-1"
-                                                            />
+                                                                    id="edit-1"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <template v-if="errors.name">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                                        <div class="form-group">
-                                                            <label for="edit-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="2"
-                                                                @keypress.enter="moveInput('input','edit',3)"
-                                                                v-model="$v.edit.name_e.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.name_e.$error || errors.name_e,
-                                                                    'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
-                                                                }"
-                                                                id="edit-2"
-                                                            />
-                                                            <div v-if="!$v.edit.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                                            <template v-if="errors.name_e">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-3" >
                                                         <div class="form-group">
                                                             <label for="edit-45" class="control-label">
                                                                 {{ $t('general.symbol') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="3"
-                                                                @keypress.enter="moveInput('input','edit',4)"
-                                                                v-model="$v.edit.symbol.$model"
-                                                                :class="{
+                                                            <div dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    data-edit="3"
+                                                                    @keypress.enter="moveInput('input','edit',4)"
+                                                                    v-model="$v.edit.symbol.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.symbol.$error || errors.symbol,
                                                                     'is-valid':!$v.edit.symbol.$invalid && !errors.symbol
                                                                 }"
-                                                                id="edit-45"
-                                                            />
+                                                                    id="edit-45"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.symbol.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.symbol.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.symbol.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.symbol.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.symbol.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <template v-if="errors.symbol">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.symbol" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                                        <div class="form-group">
-                                                            <label for="edit-33" class="control-label">
-                                                                {{ $t('general.symbol_e') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="4"
-                                                                @keypress.enter="moveInput('input','edit',5)"
-                                                                v-model="$v.edit.symbol_e.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.symbol_e.$error || errors.symbol_e,
-                                                                    'is-valid':!$v.edit.symbol_e.$invalid && !errors.symbol_e
-                                                                }"
-                                                                id="edit-33"
-                                                            />
-                                                            <div v-if="!$v.edit.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.symbol_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                                            <template v-if="errors.symbol_e">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 direction" dir="rtl">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="edit-3" class="control-label">
                                                                 {{ $t('general.code') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="5"
-                                                                @keypress.enter="moveInput('input','edit',6)"
-                                                                v-model="$v.edit.code.$model"
-                                                                :class="{
+                                                            <div dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    data-edit="5"
+                                                                    @keypress.enter="moveInput('input','edit',6)"
+                                                                    v-model="$v.edit.code.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.code.$error || errors.code,
                                                                     'is-valid':!$v.edit.code.$invalid && !errors.code
                                                                 }"
-                                                                id="edit-3"
-                                                            />
+                                                                    id="edit-3"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.code.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.code.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.code.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.code.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.code.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <template v-if="errors.code">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.code" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 direction-ltr" dir="ltr">
-                                                        <div class="form-group">
-                                                            <label for="edit-4" class="control-label">
-                                                                {{ $t('general.code_e') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="6"
-                                                                @keypress.enter="moveInput('input','edit',7)"
-                                                                v-model="$v.edit.code_e.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.code_e.$error || errors.code_e,
-                                                                    'is-valid':!$v.edit.code_e.$invalid && !errors.code_e
-                                                                    }" id="edit-4"
-                                                                />
-                                                            <div v-if="!$v.edit.code_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.code_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.code_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.code_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.code_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                                            <template v-if="errors.code_e">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.code_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 direction" dir="rtl">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="edit-5" class="control-label">
                                                                 {{ $t('general.fraction') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="7"
-                                                                @keypress.enter="moveInput('input','edit',8)"
-                                                                v-model="$v.edit.fraction.$model"
-                                                                :class="{
+                                                            <div dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    data-edit="7"
+                                                                    @keypress.enter="moveInput('input','edit',8)"
+                                                                    v-model="$v.edit.fraction.$model"
+                                                                    :class="{
                                                                     'is-invalid':$v.edit.fraction.$error || errors.fraction,
                                                                     'is-valid':!$v.edit.fraction.$invalid && !errors.fraction
                                                                 }"
-                                                                id="edit-5"
-                                                            />
+                                                                    id="edit-5"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.fraction.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.fraction.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.fraction.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.fraction.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.fraction.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
                                                             <template v-if="errors.fraction">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.fraction" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4 direction-ltr" dir="ltr">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="edit-33" class="control-label">
+                                                                {{ $t('general.symbol_e') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <div dir="ltr">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control englishInput"
+                                                                    data-edit="4"
+                                                                    @keypress.enter="moveInput('input','edit',5)"
+                                                                    v-model="$v.edit.symbol_e.$model"
+                                                                    :class="{
+                                                                    'is-invalid':$v.edit.symbol_e.$error || errors.symbol_e,
+                                                                    'is-valid':!$v.edit.symbol_e.$invalid && !errors.symbol_e
+                                                                }"
+                                                                    id="edit-33"
+                                                                />
+                                                            </div>
+                                                            <div v-if="!$v.edit.symbol_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.symbol_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.symbol_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.symbol_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <template v-if="errors.symbol_e">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.symbol_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="edit-4" class="control-label">
+                                                                {{ $t('general.code_e') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <div dir="ltr">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control englishInput"
+                                                                    data-edit="6"
+                                                                    @keypress.enter="moveInput('input','edit',7)"
+                                                                    v-model="$v.edit.code_e.$model"
+                                                                    :class="{
+                                                                    'is-invalid':$v.edit.code_e.$error || errors.code_e,
+                                                                    'is-valid':!$v.edit.code_e.$invalid && !errors.code_e
+                                                                    }" id="edit-4"
+                                                                />
+                                                            </div>
+                                                            <div v-if="!$v.edit.code_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.code_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.code_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.code_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <template v-if="errors.code_e">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.code_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="edit-2" class="control-label">
+                                                                {{ $t('general.Name_en') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <div dir="ltr">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control englishInput"
+                                                                    data-edit="2"
+                                                                    @keypress.enter="moveInput('input','edit',3)"
+                                                                    v-model="$v.edit.name_e.$model"
+                                                                    :class="{
+                                                                    'is-invalid':$v.edit.name_e.$error || errors.name_e,
+                                                                    'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
+                                                                }"
+                                                                    id="edit-2"
+                                                                />
+                                                            </div>
+                                                            <div v-if="!$v.edit.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <template v-if="errors.name_e">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="field-6" class="control-label">
                                                                 {{ $t('general.code_e') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="8"
-                                                                @keypress.enter="moveInput('input','edit',9)"
-                                                                v-model="$v.edit.fraction_e.$model"
-                                                                :class="{
-                                                                'is-invalid':$v.edit.fraction_e.$error || errors.fraction_e,
-                                                                'is-valid':!$v.edit.fraction_e.$invalid && !errors.fraction_e
-                                                            }" id="edit-6"
-                                                            />
+                                                            <div dir="ltr">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control englishInput"
+                                                                    data-edit="8"
+                                                                    @keypress.enter="moveInput('input','edit',9)"
+                                                                    v-model="$v.edit.fraction_e.$model"
+                                                                    :class="{
+                                                                        'is-invalid':$v.edit.fraction_e.$error || errors.fraction_e,
+                                                                        'is-valid':!$v.edit.fraction_e.$invalid && !errors.fraction_e
+                                                                    }" id="edit-6"
+                                                                />
+                                                            </div>
                                                             <div v-if="!$v.edit.fraction_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.fraction_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
                                                             <div v-if="!$v.edit.fraction_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.fraction_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.fraction_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
                                                             <template v-if="errors.fraction_e">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.fraction_e" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="edit-7" class="control-label">
                                                                 {{ $t('general.fraction_no') }}
@@ -1319,7 +1470,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class=" mr-2" for="edit-11">
                                                                 {{ $t('general.is_default') }}
@@ -1336,63 +1487,32 @@ export default {
                                                                 }"
                                                             >
                                                                 <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                                <option value="1">{{ $t('general.Active') }}</option>
-                                                                <option value="0">{{ $t('general.Inactive') }}</option>
+                                                                <option value="1">{{ $t('general.Yes') }}</option>
+                                                                <option value="0">{{ $t('general.No') }}</option>
                                                             </select>
                                                             <template v-if="errors.is_default">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_default" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class=" mr-2" for="edit-9">
+                                                            <label class=" mr-2">
                                                                 {{ $t('general.Status') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <select
-                                                                class="custom-select mr-sm-2"
-                                                                id="edit-9"
-                                                                data-edit="11"
-                                                                @keypress.enter.prevent="moveInput('input','edit',1)"
-                                                                v-model="$v.edit.is_active.$model"
-                                                                :class="{
+                                                            <b-form-group :class="{
                                                                     'is-invalid':$v.edit.is_active.$error || errors.is_active,
                                                                     'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
-                                                                }"
-                                                            >
-                                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                                <option value="1">{{ $t('general.Active') }}</option>
-                                                                <option value="0">{{ $t('general.Inactive') }}</option>
-                                                            </select>
+                                                                }">
+                                                                <b-form-radio class="d-inline-block" v-model="$v.edit.is_active.$model" name="some-radios" value="1">{{$t('general.Active')}}</b-form-radio>
+                                                                <b-form-radio class="d-inline-block m-1" v-model="$v.edit.is_active.$model" name="some-radios" value="0">{{$t('general.Inactive')}}</b-form-radio>
+                                                            </b-form-group>
                                                             <template v-if="errors.is_active">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-1 d-flex justify-content-end">
-                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button
-                                                        variant="success" type="button"
-                                                        class="mx-1" v-if="!isLoader"
-                                                        @click.prevent="editSubmit(data.id)"
-                                                    >
-                                                        {{ $t('general.Edit') }}
-                                                    </b-button>
-
-                                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                                        <b-spinner small></b-spinner>
-                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                                    </b-button>
-
-                                                    <b-button
-                                                        variant="secondary"
-                                                        type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
-                                                    >
-                                                        {{ $t('general.Cancel') }}
-                                                    </b-button>
                                                 </div>
                                             </form>
                                         </b-modal>

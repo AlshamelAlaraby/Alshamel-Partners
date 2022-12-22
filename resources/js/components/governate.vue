@@ -274,7 +274,7 @@ export default {
       });
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
-        if (ew == 32) return false;
+        if (ew == 32) return true;
         if (48 <= ew && ew <= 57) return false;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
@@ -301,7 +301,6 @@ export default {
     return {
       isLoader: false,
       is_disabled: false,
-      errors: {},
       create: {
         name: "",
         name_e: "",
@@ -434,7 +433,7 @@ export default {
             this.isLoader = false;
           });
       }
-    },
+    }
   },
 };
 </script>
