@@ -23,7 +23,7 @@ export default {
         PageHeader,
         Switches,
         ErrorMessage,
-        loader,
+        loader
     },
     data() {
         return {
@@ -66,7 +66,6 @@ export default {
             saveImageName: [],
             current_page: 1,
             showPhoto: './images/img-1.png',
-            changeImage: false,
             setting: {
                 name: true,
                 name_e: true,
@@ -159,7 +158,7 @@ export default {
             $(".arabicInput").keypress(function(event){
                 var ew = event.which;
                 if(ew == 32)
-                    return false;
+                    return true;
                 if(48 <= ew && ew <= 57)
                     return false;
                 if(65 <= ew && ew <= 90)
