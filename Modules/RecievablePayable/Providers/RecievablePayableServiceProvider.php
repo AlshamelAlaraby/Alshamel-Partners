@@ -6,10 +6,18 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanDetailRepository;
 use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanDetailRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanRepository;
+use Modules\RecievablePayable\Repositories\RpInstallmentPaymentPlanRepositoryInterface;
 use Modules\RecievablePayable\Repositories\RpInstallmentPaymentTypeRepository;
 use Modules\RecievablePayable\Repositories\RpInstallmentPaymentTypeRepositoryInterface;
 use Modules\RecievablePayable\Repositories\RpInstallmentStatusRepository;
 use Modules\RecievablePayable\Repositories\RpInstallmentStatusRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpMainContactGroupRepository;
+use Modules\RecievablePayable\Repositories\RpMainContactGroupRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpPaymentPlanInstallmentRepository;
+use Modules\RecievablePayable\Repositories\RpPaymentPlanInstallmentRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpSubContactGroupRepository;
+use Modules\RecievablePayable\Repositories\RpSubContactGroupRepositoryInterface;
 
 class RecievablePayableServiceProvider extends ServiceProvider
 {
@@ -38,6 +46,10 @@ class RecievablePayableServiceProvider extends ServiceProvider
         $this->app->bind (RpInstallmentPaymentPlanDetailRepositoryInterface::class,RpInstallmentPaymentPlanDetailRepository::class);
         $this->app->bind (RpInstallmentPaymentTypeRepositoryInterface::class,RpInstallmentPaymentTypeRepository::class);
         $this->app->bind (RpInstallmentStatusRepositoryInterface::class,RpInstallmentStatusRepository::class);
+        $this->app->bind (RpPaymentPlanInstallmentRepositoryInterface::class,RpPaymentPlanInstallmentRepository::class);
+        $this->app->bind (RpMainContactGroupRepositoryInterface::class,RpMainContactGroupRepository::class);
+        $this->app->bind (RpSubContactGroupRepositoryInterface::class,RpSubContactGroupRepository::class);
+        $this->app->bind (RpInstallmentPaymentPlanRepositoryInterface::class,RpInstallmentPaymentPlanRepository::class);
     }
 
     /**
