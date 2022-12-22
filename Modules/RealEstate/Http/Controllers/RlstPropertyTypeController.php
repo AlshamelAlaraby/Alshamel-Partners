@@ -4,19 +4,17 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstContract;
-use Modules\RealEstate\Transformers\RlstContractResource;
-use Modules\RealEstate\Http\Requests\CreateRlstContractRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstContractRequest;
+use Modules\RealEstate\Entities\RlstPropertyType;
+use Modules\RealEstate\Http\Requests\CreatePropertyTypeRequest;
+use Modules\RealEstate\Transformers\RlstPropertyTypeResource;
 
-class RlstContractController extends Controller
+class RlstPropertyTypeController extends Controller
 {
 
-    public function __construct(private RlstContract $model)
+    public function __construct(private RlstPropertyType $model)
     {
         $this->model = $model;
     }
-
 
     public function find($id)
     {
@@ -25,12 +23,12 @@ class RlstContractController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstContractResource($model));
+        return responseJson(200, 'success', new RlstPropertyTypeResource($model));
     }
-
 
     public function all(AllRequest $request)
     {
+
         $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
@@ -39,20 +37,17 @@ class RlstContractController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-
-        return responseJson(200, 'success', RlstContractResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstPropertyTypeResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-
-    public function create(CreateRlstContractRequest $request)
+    public function create(CreatePropertyTypeRequest $request)
     {
         $this->model->create($request->validated());
 
         return responseJson(200, 'created');
     }
 
-
-    public function update($id, UpdateRlstContractRequest $request)
+    public function update($id, CreatePropertyTypeRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -74,7 +69,6 @@ class RlstContractController extends Controller
         $logs = $model->activities()->orderBy('created_at', 'DESC')->get();
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
-
 
     public function delete($id)
     {

@@ -17,8 +17,8 @@ class CreateRoleWorkflowRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id'=>['required'],
-            'workflow_id'=>['required'],
+            'role_id' => ['required'],
+            'workflow_id' => ['required'],
         ];
     }
 
@@ -30,35 +30,5 @@ class CreateRoleWorkflowRequest extends FormRequest
     public function authorize()
     {
         return true;
-    }
-
-    /*
-    * custom failedValidation response
-    */
-    public function failedValidation ( Validator $validator )
-    {
-        throw new HttpResponseException(response()->json(
-            [
-                'status'    => 422,
-
-                'success'   => false,
-
-                'message'   => __ ('validation errors'),
-
-                'data'      => $validator->errors()
-            ],
-            422
-        ));
-    }
-
-    /*
-     * translate failedValidation messages
-     */
-    public function messages ()
-    {
-        return [
-            'required'=>__ ('required'),
-            'unique'=>__ ('exists')
-        ];
     }
 }

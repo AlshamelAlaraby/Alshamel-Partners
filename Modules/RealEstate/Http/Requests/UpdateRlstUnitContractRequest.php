@@ -15,7 +15,7 @@ class UpdateRlstUnitContractRequest extends FormRequest
     public function rules()
     {
         return [
-            "unit_code" => "nullable|exists:tree_properties,code",
+            "unit_code" => "nullable|exists:tree_properties,id",
 
         ];
     }
@@ -24,6 +24,7 @@ class UpdateRlstUnitContractRequest extends FormRequest
     public function messages()
     {
         return [
-            "unit_code.exists" => __("message.field must be exists")];
+            "unit_code.exists" => __("message.field must be exists")
+        ];
     }
 }
