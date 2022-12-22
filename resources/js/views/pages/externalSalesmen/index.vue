@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString, dynamicSortNumber }   from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import Country from "../../../components/country.vue";
 
 /**
  * Advanced Table component
@@ -24,7 +25,8 @@ export default {
         Switches,
         Multiselect,
         ErrorMessage,
-        loader
+        loader,
+        Country
     },
     data() {
         return {
@@ -56,6 +58,16 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
+            setting: {
+                phone: true,
+                address: true,
+                rp_code: true,
+                email: true,
+                country_id: true,
+                national_id: true,
+                is_active: true,
+            },
+            is_disabled: false,
             filterSetting: ['phone','address','email','rp_code','country_id','national_id','is_active'],
             countries: []
         }
@@ -120,8 +132,12 @@ export default {
          */
         getData(page = 1){
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i > this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
-            adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}`)
+            adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.externalSalesmens = l.data;
@@ -142,8 +158,12 @@ export default {
         getDataCurrentPage(page = 1){
             if(this.current_page <= this.externalSalesmensPagination.last_page && this.current_page != this.externalSalesmensPagination.current_page && this.current_page){
                 this.isLoader = true;
+                let filter = '';
+                for (let i = 0; i > this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
 
-                adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
+                adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.externalSalesmens = l.data;
@@ -249,6 +269,21 @@ export default {
         /**
          *  create countrie
          */
+        resetForm(){
+            this.create = {
+                phone: '',
+                address: '',
+                rp_code: '',
+                email: '',
+                country_id: null,
+                national_id: null,
+                is_active: 'active',
+            };
+            this.$nextTick(() => { this.$v.$reset() });
+            this.is_disabled = false;
+            this.getCategory();
+            this.errors = {};
+        },
 
         AddSubmit(){
 
@@ -261,7 +296,7 @@ export default {
                 this.errors = {};
                 adminApi.post(`/external-salesmen`,this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
+                        this.is_disabled = true;
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -383,8 +418,9 @@ export default {
             this.countries = [];
             await adminApi.get(`/countries`)
                 .then((res) => {
-                    let l = res.data;
-                    this.countries = l.data;
+                    let l = res.data.data;
+                    l.unshift({ id: 0, name: "اضف دولة", name_e: "Add Country" });
+                    this.countries = l;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -396,7 +432,19 @@ export default {
                 .finally(() => {
                     this.isLoader = false;
                 });
-        }
+        },
+        showCountryModal() {
+            if (this.create.country_id == 0) {
+                this.$bvModal.show("country-create");
+                this.create.country_id = null;
+            }
+        },
+        showCountryModalEdit() {
+            if (this.edit.country_id == 0) {
+                this.$bvModal.show("country-create");
+                this.edit.country_id = null;
+            }
+        },
     },
 };
 </script>
@@ -404,6 +452,7 @@ export default {
 <template>
     <Layout>
         <PageHeader />
+        <Country @created="getCategory" />
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -510,12 +559,37 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.phone" class="mb-1">{{
+                                                    $t('general.mobile_no')
+                                                }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.email" class="mb-1">
+                                                {{ $t('login.Emailaddress') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.address" class="mb-1">
+                                                {{ $t('general.address') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.national_id" class="mb-1">
+                                                {{ $t('general.national') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">
+                                                {{ $t('country.country') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">
+                                                {{ $t('general.Status') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.rp_code" class="mb-1">
+                                                {{ $t('general.code') }}
+                                            </b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -564,7 +638,61 @@ export default {
                             @hidden="resetModalHidden"
                         >
                             <form>
+                                <div class="mb-3 d-flex justify-content-end">
+
+                                    <b-button
+                                        variant="success"
+                                        :disabled="!is_disabled"
+                                        @click.prevent="resetForm"
+                                        type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                    >
+                                        {{ $t('general.AddNewRecord') }}
+                                    </b-button>
+                                    <template v-if="!is_disabled">
+                                        <b-button
+                                            variant="success"
+                                            type="button" class="mx-1"
+                                            v-if="!isLoader"
+                                            @click.prevent="AddSubmit"
+                                        >
+                                            {{ $t('general.Add') }}
+                                        </b-button>
+
+                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                            <b-spinner small></b-spinner>
+                                            <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                        </b-button>
+                                    </template>
+                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+
+                                    <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
+                                        {{ $t('general.Cancel') }}
+                                    </b-button>
+                                </div>
                                 <div class="row">
+                                    <div class="col-md-6" >
+                                        <div class="form-group position-relative">
+                                            <label  class="control-label">
+                                                {{ $t('general.country') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <multiselect
+                                                @input="showCountryModal"
+                                                v-model="create.country_id"
+                                                :options="countries.map(type => type.id)"
+                                                :custom-label="opt => countries.find(x => x.id == opt).name"
+                                            >
+                                            </multiselect>
+                                            <div v-if="$v.create.country_id.$error || errors.country_id"
+                                                 class="text-danger"
+                                            >
+                                                {{ $t('general.fieldIsRequired') }}
+                                            </div>
+                                            <template v-if="errors.country_id">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6" >
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
@@ -614,28 +742,6 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-6" >
-                                        <div class="form-group position-relative">
-                                            <label  class="control-label">
-                                                {{ $t('general.country') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <multiselect
-                                                v-model="create.country_id"
-                                                :options="countries.map(type => type.id)"
-                                                :custom-label="opt => countries.find(x => x.id == opt).name"
-                                            >
-                                            </multiselect>
-                                            <div v-if="$v.create.country_id.$error || errors.country_id"
-                                                 class="text-danger"
-                                            >
-                                                {{ $t('general.fieldIsRequired') }}
-                                            </div>
-                                            <template v-if="errors.country_id">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="field-4" class="control-label">
@@ -661,27 +767,26 @@ export default {
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class=" mr-2" for="inlineFormCustomSelectPref">
-                                                {{ $t('general.Status') }}
+                                            <label for="field-7" class="control-label">
+                                                {{ $t('general.address') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <select
-                                                class="custom-select mr-sm-2"
-                                                id="inlineFormCustomSelectPref"
-                                                data-create="5"
-                                                @keypress.enter.prevent="moveInput('input','create',6)"
-                                                v-model="$v.create.is_active.$model"
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                data-create="7"
+                                                @keypress.enter="moveInput('input','create',1)"
+                                                v-model="$v.create.address.$model"
                                                 :class="{
-                                                'is-invalid':$v.create.is_active.$error || errors.is_active,
-                                                'is-valid':!$v.create.is_active.$invalid && !errors.is_active
+                                                'is-invalid':$v.create.address.$error || errors.address,
+                                                'is-valid':!$v.create.address.$invalid && !errors.address
                                             }"
-                                            >
-                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
-                                            </select>
-                                            <template v-if="errors.is_active">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                id="field-7"
+                                            />
+                                            <div v-if="!$v.create.address.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.address.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.address.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.address.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.address">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.address" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
@@ -709,51 +814,24 @@ export default {
                                             </template>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="field-7" class="control-label">
-                                                {{ $t('general.address') }}
+                                            <label class=" mr-2">
+                                                {{ $t('general.Status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input
-                                                type="email"
-                                                class="form-control"
-                                                data-create="7"
-                                                @keypress.enter="moveInput('input','create',1)"
-                                                v-model="$v.create.address.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.address.$error || errors.address,
-                                                'is-valid':!$v.create.address.$invalid && !errors.address
-                                            }"
-                                                id="field-7"
-                                            />
-                                            <div v-if="!$v.create.address.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.address.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.address.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.address.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <template v-if="errors.address">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.address" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            <b-form-group :class="{
+                                                'is-invalid':$v.create.is_active.$error || errors.is_active,
+                                                'is-valid':!$v.create.is_active.$invalid && !errors.is_active
+                                            }">
+                                                <b-form-radio class="d-inline-block" v-model="$v.create.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
+                                                <b-form-radio class="d-inline-block m-1" v-model="$v.create.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
+                                            </b-form-group>
+                                            <template v-if="errors.is_active">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-1 d-flex justify-content-end">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button
-                                        variant="success"
-                                        type="button" class="mx-1"
-                                        v-if="!isLoader"
-                                        @click.prevent="AddSubmit"
-                                    >
-                                        {{ $t('general.Add') }}
-                                    </b-button>
-
-                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                        <b-spinner small></b-spinner>
-                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                    </b-button>
-
-                                    <b-button variant="secondary" type="button" @click.prevent="resetModalHidden">
-                                        {{ $t('general.Cancel') }}
-                                    </b-button>
                                 </div>
                             </form>
                         </b-modal>
@@ -778,7 +856,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.phone">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.phone') }}</span>
                                             <div class="arrow-sort">
@@ -787,7 +865,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.email">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.email') }}</span>
                                             <div class="arrow-sort">
@@ -796,7 +874,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.country') }}</span>
                                             <div class="arrow-sort">
@@ -805,7 +883,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.national_id">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.national') }}</span>
                                             <div class="arrow-sort">
@@ -814,10 +892,10 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                        <th>
-                                            <div class="d-flex justify-content-center">{{ $t('general.code') }}</div>
-                                        </th>
-                                    <th>
+                                    <th v-if="setting.rp_code">
+                                        <div class="d-flex justify-content-center">{{ $t('general.code') }}</div>
+                                    </th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                             <div class="arrow-sort">
@@ -851,14 +929,14 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>{{ data.phone }}</td>
-                                    <td>
+                                    <td  v-if="setting.phone">{{ data.phone }}</td>
+                                    <td  v-if="setting.email">
                                         <h5 class="m-0 font-weight-normal">{{ data.email }}</h5>
                                     </td>
-                                      <td>{{ data.country.name }}</td>
-                                      <td>{{ data.national_id }}</td>
-                                      <td>{{ data.rp_code }}</td>
-                                      <td>
+                                      <td  v-if="setting.country_id">{{ data.country.name }}</td>
+                                      <td  v-if="setting.national_id">{{ data.national_id }}</td>
+                                      <td  v-if="setting.rp_code">{{ data.rp_code }}</td>
+                                      <td  v-if="setting.is_active">
                                         <span :class="[
                                             data.is_active == 'active' ?
                                             'text-success':
@@ -919,8 +997,52 @@ export default {
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
+                                                <div class="mb-3 d-flex justify-content-end">
+                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                                    <b-button variant="success" type="submit" class="mx-1"
+                                                              v-if="!isLoader"
+                                                              @click.prevent="editSubmit(data.id)"
+                                                    >
+                                                        {{ $t('general.Edit') }}
+                                                    </b-button>
+
+                                                    <b-button variant="success" class="mx-1" disabled v-else>
+                                                        <b-spinner small></b-spinner>
+                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                    </b-button>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        type="button"
+                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                    >
+                                                        {{ $t('general.Cancel') }}
+                                                    </b-button>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-6" >
+                                                        <div class="form-group position-relative">
+                                                            <label  class="control-label">
+                                                                {{ $t('general.country') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <multiselect
+                                                                @input="showCountryModalEdit"
+                                                                v-model="edit.country_id"
+                                                                :options="countries.map(type => type.id)"
+                                                                :custom-label="opt => countries.find(x => x.id == opt)['name']"
+                                                            >
+                                                            </multiselect>
+                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
+                                                                 class="text-danger">
+                                                                {{ $t('general.fieldIsRequired') }}
+                                                            </div>
+                                                            <template v-if="errors.country_id">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="edit-1" class="control-label">
                                                                 {{ $t('general.phone') }}
@@ -969,27 +1091,6 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6" >
-                                                        <div class="form-group position-relative">
-                                                            <label  class="control-label">
-                                                                {{ $t('general.country') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <multiselect
-                                                                v-model="edit.country_id"
-                                                                :options="countries.map(type => type.id)"
-                                                                :custom-label="opt => countries.find(x => x.id == opt)['name']"
-                                                            >
-                                                            </multiselect>
-                                                            <div v-if="$v.edit.country_id.$error || errors.country_id"
-                                                                 class="text-danger">
-                                                                {{ $t('general.fieldIsRequired') }}
-                                                            </div>
-                                                            <template v-if="errors.country_id">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.country_id" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">
@@ -1009,32 +1110,6 @@ export default {
                                                             />
                                                             <template v-if="errors.national_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.national_id" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class=" mr-2" for="edit-11">
-                                                                {{ $t('general.Status') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <select
-                                                                class="custom-select mr-sm-2"
-                                                                id="edit-11"
-                                                                data-edit="5"
-                                                                @keypress.enter.prevent="moveInput('input','edit',6)"
-                                                                v-model="$v.edit.is_active.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.is_active.$error || errors.is_active,
-                                                                    'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
-                                                                }"
-                                                            >
-                                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
-                                                            </select>
-                                                            <template v-if="errors.is_active">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
@@ -1062,7 +1137,7 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="edit-7" class="control-label">
                                                                 {{ $t('general.address') }}
@@ -1087,31 +1162,24 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-1 d-flex justify-content-end">
-                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button
-                                                        variant="success"
-                                                        type="submit"
-                                                        class="mx-1"
-                                                        @click.prevent="editSubmit(data.id)"
-                                                        v-if="!isLoader"
-                                                    >
-                                                        {{ $t('general.Edit') }}
-                                                    </b-button>
-
-                                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                                        <b-spinner small></b-spinner>
-                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                                    </b-button>
-
-                                                    <b-button
-                                                        variant="secondary"
-                                                        type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
-                                                    >
-                                                        {{ $t('general.Cancel') }}
-                                                    </b-button>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class=" mr-2">
+                                                                {{ $t('general.Status') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <b-form-group :class="{
+                                                                    'is-invalid':$v.edit.is_active.$error || errors.is_active,
+                                                                    'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
+                                                                }">
+                                                                <b-form-radio class="d-inline-block" v-model="$v.edit.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
+                                                                <b-form-radio class="d-inline-block m-1" v-model="$v.edit.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
+                                                            </b-form-group>
+                                                            <template v-if="errors.is_active">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </b-modal>
