@@ -4,15 +4,15 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstReservationUnit;
-use Modules\RealEstate\Http\Requests\CreateRlstReservationUnitRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstReservationUnitRequest;
-use Modules\RealEstate\Transformers\RlstReservationUnitResource;
+use Modules\RealEstate\Entities\RlstUnit;
+use Modules\RealEstate\Http\Requests\CreateRlstUnitRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstUnitRequest;
+use Modules\RealEstate\Transformers\RlstUnitResource;
 
-class RlstReservationUnitController extends Controller
+class RlstUnitController extends Controller
 {
 
-    public function __construct(private RlstReservationUnit $model)
+    public function __construct(private RlstUnit $model)
     {
         $this->model = $model;
     }
@@ -24,7 +24,7 @@ class RlstReservationUnitController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstReservationUnitResource($model));
+        return responseJson(200, 'success', new RlstUnitResource($model));
     }
 
     public function all(AllRequest $request)
@@ -37,18 +37,18 @@ class RlstReservationUnitController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-        return responseJson(200, 'success', RlstReservationUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstReservationUnitRequest $request)
+    public function create(CreateRlstUnitRequest $request)
     {
-
         $model = $this->model->create($request->validated());
 
-        return responseJson(200, 'created', new RlstReservationUnitResource($model));
+        return responseJson(200, 'created', new RlstUnitResource($model));
+
     }
 
-    public function update($id, UpdateRlstReservationUnitRequest $request)
+    public function update($id, UpdateRlstUnitRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -57,8 +57,7 @@ class RlstReservationUnitController extends Controller
 
         $model->update($request->validated());
         $model->refresh();
-        return responseJson(200, 'updated', new RlstReservationUnitResource($model));
-
+        return responseJson(200, 'updated', new RlstUnitResource($model));
     }
 
     public function logs($id)
@@ -78,6 +77,7 @@ class RlstReservationUnitController extends Controller
         if (!$model) {
             return responseJson(404, 'not found');
         }
+
         $model->delete();
         return responseJson(200, 'deleted');
     }

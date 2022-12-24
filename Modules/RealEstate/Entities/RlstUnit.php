@@ -8,20 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 
-class RlstReservationUnit extends Model
+class RlstUnit extends Model
 {
     use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
-        'unit_code',
+        "code",
+        'name',
+        "name_e",
+        'description',
+        'description_e',
+        'unit_ty',
+        'status_date',
+        'unit_area',
+        'building_id',
+        'owner_id',
+        'currency_id',
+        'wallet_id',
+        'unit_status_id',
+        'commission_ty',
+        'commission_value',
+        'price',
+        'rooms',
+        'path',
+        'view',
+        'floor',
+        'rank',
 
     ];
 
     // relations
 
-    public function reservation()
+    public function unitStatus()
     {
-        return $this->belongsTo(RlstReservation::class, "unit_code");
+        return $this->belongsTo(\Modules\RealEstate\Entities\RlstUnitStatus::class);
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -30,7 +50,7 @@ class RlstReservationUnit extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Rlst Reservation Unit')
+            ->useLogName('Rlst Unit')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

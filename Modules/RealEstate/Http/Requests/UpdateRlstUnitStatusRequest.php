@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstUnitStatusRequest extends FormRequest
+class UpdateRlstUnitStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,19 @@ class CreateRlstUnitStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
-            'name_e' => 'required|string|max:100',
+            'name' => 'string|max:100',
+            'name_e' => 'string|max:100',
         ];
     }
 
     public function messages()
     {
         return [
-            "name.required" => __("message.field is required"),
             'name.string' => __("message.field must be string"),
             'name.max' => __("message.field must be less than 100 characters"),
-            "name_e.required" => __("message.field is required"),
             'name_e.string' => __("message.field must be string"),
             'name_e.max' => __("message.field must be less than 100 characters"),
-
         ];
     }
+
 }

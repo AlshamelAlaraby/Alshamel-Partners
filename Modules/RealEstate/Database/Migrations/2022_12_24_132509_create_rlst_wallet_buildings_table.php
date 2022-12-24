@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('rlst_wallet_buildings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger ('wallet_Id')->nullable ()->default (0);
-            $table->unsignedInteger ('building_id')->nullable ()->default (0);
-            $table->unsignedInteger ('item_id')->nullable ()->default (0)->comment ('Id of building, unit');
-            $table->unsignedTinyInteger ('Bu_ty')->nullable ()->default (0)->comment ('1=building, 2=Unit');
+            $table->unsignedInteger('wallet_Id')->nullable()->default(0);
+            $table->unsignedInteger('building_id')->nullable()->default(0);
+            $table->unsignedInteger('item_id')->nullable()->default(0)->comment('Id of building, unit');
+            $table->unsignedTinyInteger('Bu_ty')->nullable()->default(0)->comment('1=building, 2=Unit');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

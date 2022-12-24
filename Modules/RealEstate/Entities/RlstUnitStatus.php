@@ -6,30 +6,32 @@ use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
 
-class RlstUnitContract extends Model
+class RlstUnitStatus extends Model
 {
-    use HasFactory, SoftDeletes, LogTrait;
+    use HasFactory, LogTrait, SoftDeletes;
 
     protected $fillable = [
-        'unit_code',
+        'name',
+        'name_e',
     ];
 
     // relations
 
-    public function property()
+    public function getActivitylogOptions(): LogOptions
     {
-        return $this->belongsTo(\App\Models\TreeProperty::class, 'unit_code');
-    }
-
-    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
-    {
-        $user = @auth()->user()->id ?: "system";
+        $user = auth()->user()->id ?? "system";
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Unit Contract')
+            ->useLogName('Real Estate Unit Status')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
+    public function units()
+    {
+        return $this->hasMany(RlstUnit::class);
     }
 
 }
