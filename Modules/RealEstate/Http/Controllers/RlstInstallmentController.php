@@ -5,9 +5,9 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstInstallment;
-use Modules\RealEstate\Transformers\RlstInstallmentResource;
 use Modules\RealEstate\Http\Requests\CreateRlstInstallmentRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstInstallmentRequest;
+use Modules\RealEstate\Transformers\RlstInstallmentResource;
 
 class RlstInstallmentController extends Controller
 {
@@ -16,7 +16,6 @@ class RlstInstallmentController extends Controller
     {
         $this->model = $model;
     }
-
 
     public function find($id)
     {
@@ -28,10 +27,9 @@ class RlstInstallmentController extends Controller
         return responseJson(200, 'success', new RlstInstallmentResource($model));
     }
 
-
     public function all(AllRequest $request)
     {
-        $models = $this->model->search($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             $models = ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -39,18 +37,16 @@ class RlstInstallmentController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-
         return responseJson(200, 'success', RlstInstallmentResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-
     public function create(CreateRlstInstallmentRequest $request)
     {
-        $this->model->create($request->validated());
+        $model = $this->model->create($request->validated());
 
-        return responseJson(200, 'created');
+        return responseJson(200, 'created', new RlstInstallmentResource($model));
+
     }
-
 
     public function update($id, UpdateRlstInstallmentRequest $request)
     {
@@ -60,8 +56,9 @@ class RlstInstallmentController extends Controller
         }
 
         $model->update($request->validated());
+        $model->refresh();
+        return responseJson(200, 'updated', new RlstInstallmentResource($model));
 
-        return responseJson(200, 'updated');
     }
 
     public function logs($id)
@@ -74,7 +71,6 @@ class RlstInstallmentController extends Controller
         $logs = $model->activities()->orderBy('created_at', 'DESC')->get();
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
-
 
     public function delete($id)
     {

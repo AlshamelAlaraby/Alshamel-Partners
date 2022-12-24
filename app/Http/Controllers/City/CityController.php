@@ -16,12 +16,15 @@ use App\Http\Resources\City\CityResource;
 use App\Http\Resources\Module\ModuleResource;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use App\Repositories\City\CityRepositoryInterface;
+use App\Traits\CanDeleteTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class CityController extends Controller
 {
+    use CanDeleteTrait;
+
     public $repository;
     public $resource = CityResource::class;
     public function __construct (CityRepositoryInterface $repository)
@@ -80,8 +83,8 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        if ($branch = $this->repository->find($id)){
-            return responseJson(200,__ ('Done'),new $this->resource($branch),200);
+        if ($city = $this->repository->find($id)){
+            return responseJson(200,__ ('Done'),new $this->resource($city),200);
         }
         return responseJson (404,__ ('not found'));
     }
@@ -151,14 +154,5 @@ class CityController extends Controller
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return \response
-     */
-    public function destroy($id)
-    {
-        $this->repository->delete($id);
-        return responseJson(200,__('deleted'));
-    }
+
 }

@@ -60,10 +60,10 @@ class Country extends Model implements HasMedia
         return $this->hasMany(\Modules\RealEstate\Entities\RlstOwner::class);
     }
 
-
-
-
-
+    public function banks()
+    {
+        return $this->hasMany(\App\Models\Bank::class);
+    }
     // logs activities
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -78,6 +78,14 @@ class Country extends Model implements HasMedia
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Country')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
+
+    public function hasChildren(){
+        if ($this->avenues()->count() > 0 || $this->governorates()->count() > 0 || $this->cities()->count() > 0){
+            return true;
+        }
+        return false;
     }
 }

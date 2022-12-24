@@ -3,17 +3,23 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Traits\LogTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 
 class RlstWalletBuilding extends Model
 {
-    use HasFactory,LogTrait;
+    use HasFactory, LogTrait;
 
     protected $guarded = [];
 
-    protected static function newFactory()
+    public function getActivitylogOptions(): LogOptions
     {
-        return \Modules\RealEstate\Database\factories\RlstWalletBuildingFactory::new();
+        $user = auth()->user()->id ?? "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Real Estate Wallets Building')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

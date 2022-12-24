@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rlst_reservations', function (Blueprint $table) {
+        Schema::create('rp_sub_contact_groups', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
-            $table->foreignId('salesman_id');
-            $table->foreignId('customer_id');
-            $table->integer('payment_plan_id');
-            $table->softDeletes();
+            $table->string ('name')->nullable ();
+            $table->string ('name_e')->nullable ();
+            $table->unsignedTinyInteger ('gl_acc_no')->nullable ()->default (0);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rlst_reservations');
+        Schema::dropIfExists('rp_sub_contact_groups');
     }
 };

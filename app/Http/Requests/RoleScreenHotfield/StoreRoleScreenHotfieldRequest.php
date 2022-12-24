@@ -24,8 +24,8 @@ class StoreRoleScreenHotfieldRequest extends FormRequest
     public function rules()
     {
         return [
-            "role_id"       => "required|exists:roles,id" ,
-            "screen_id"     => "required|numeric" ,
+            "role_id"       => "required" ,
+            "workflow_id"     => "required|numeric" ,
             "hotfield_id"   => "required|numeric" ,
         ];
     }

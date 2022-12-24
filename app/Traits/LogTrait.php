@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Traits;
-
 
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
@@ -12,7 +10,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 trait LogTrait
 {
     use LogsActivity, CausesActivity;
-
 
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -27,7 +24,7 @@ trait LogTrait
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Employee')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
     public function scopeFilter($query, $request)
@@ -51,6 +48,11 @@ trait LogTrait
             if ($request->name_e) {
                 $q->orWhere('name_e', 'like', '%' . $request->name_e . '%');
             }
+
+            if ($request->key && $request->value) {
+                $q->where($request->key, $request->value);
+            }
+
         });
     }
 }
