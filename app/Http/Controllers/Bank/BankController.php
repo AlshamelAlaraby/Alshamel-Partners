@@ -1,57 +1,56 @@
 <?php
 
-namespace App\Http\Controllers\Country;
+namespace App\Http\Controllers\Bank;
 
-use App\Http\Requests\Country\StoreCountryRequest;
-use App\Http\Requests\Country\UpdateCountryRequest;
-use App\Http\Resources\Country\CountryResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\AllRequest;
+use App\Http\Requests\Bank\StoreBankRequest;
+use App\Http\Requests\Bank\UpdateBankRequest;
+use App\Http\Resources\Bank\BankResource;
 use Illuminate\Routing\Controller;
 
-class CountryController extends Controller
+class BankController extends Controller
 {
-    public function __construct(private \App\Repositories\Country\CountryInterface$modelInterface)
+    public function __construct(private \App\Repositories\Bank\BankInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function find($id)
     {
-        $model = cacheGet('countries_' . $id);
+        $model = cacheGet('banks_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('countries_' . $id, $model);
+                cachePut('banks_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new CountryResource($model));
+        return responseJson(200, 'success', new BankResource($model));
     }
 
-    public function all(Request $request)
+    public function all(AllRequest $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('countries');
+            $models = cacheGet('banks');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('countries', $models);
+                cachePut('banks', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', CountryResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', BankResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(StoreCountryRequest $request)
+    public function create(StoreBankRequest $request)
     {
         $model = $this->modelInterface->create($request);
-        $model->refresh();
-        return responseJson(200, 'success', new CountryResource($model));
+        return responseJson(200, 'success', new BankResource($model));
     }
 
-    public function update(UpdateCountryRequest $request, $id)
+    public function update(UpdateBankRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
@@ -59,7 +58,7 @@ class CountryController extends Controller
         }
         $this->modelInterface->update($request, $id);
         $model->refresh();
-        return responseJson(200, 'success', new CountryResource($model));
+        return responseJson(200, 'success', new BankResource($model));
     }
 
     public function logs($id)
@@ -68,7 +67,6 @@ class CountryController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-
         $logs = $this->modelInterface->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
@@ -79,13 +77,8 @@ class CountryController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->governorates()->count() > 0 || $model->banks()->count() > 0) {
-            return responseJson(400, __('message.country has data'));
-        }
 
-        if ($model->avenues()->count) {
-            $this->modelInterface->delete($id);
-        }
+        $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
     }

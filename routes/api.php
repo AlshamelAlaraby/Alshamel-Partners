@@ -150,8 +150,6 @@ Route::group(['prefix' => 'colors'], function () {
     });
 });
 
-
-
 Route::group(['prefix' => 'salesmen-types'], function () {
     Route::controller(\App\Http\Controllers\SalesmenType\SalesmenTypeController::class)->group(function () {
         Route::get('/', 'all')->name('salesmen-types.index');
@@ -196,6 +194,16 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 
+Route::group(['prefix' => 'banks'], function () {
+    Route::controller(\App\Http\Controllers\Bank\BankController::class)->group(function () {
+        Route::get('/', 'all')->name('banks.index');
+        Route::get('logs/{id}', 'logs')->name('banks.logs');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('banks.create');
+        Route::put('/{id}', 'update')->name('banks.update');
+        Route::delete('/{id}', 'delete')->name('banks.destroy');
+    });
+});
 
 Route::group(['prefix' => 'role-screen-hotfield'], function () {
     Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {

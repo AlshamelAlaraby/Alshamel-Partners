@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Bank\BankInterface;
 use App\Repositories\Unit\UnitInterface;
 use App\Repositories\User\UserInterface;
+use App\Repositories\Bank\BankRepository;
 use App\Repositories\City\CityRepository;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Unit\UnitRepository;
@@ -93,6 +95,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(SalesmenTypeInterface::class, SalesmenTypeRepository::class);
         $this->app->bind(SalesmanInterface::class, SalesmanRepository::class);
+
+        $this->app->bind(BankInterface::class, BankRepository::class);
 
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);
