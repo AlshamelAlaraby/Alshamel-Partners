@@ -1392,7 +1392,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   },
   data: function data() {
     return {
-      per_page: 50,
+      per_page: 1,
       search: "",
       debounce: {},
       serialsPagination: {},
@@ -1432,7 +1432,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       checkAll: [],
       branches: [],
       stores: [],
-      companies: [],
       current_page: 1,
       filterSetting: ["perfix", "suffix", "start_no"]
     };
@@ -1555,7 +1554,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(page, "&per_page=").concat(this.per_page, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
         var l = res.data;
         _this4.serials = l.data;
         _this4.serialsPagination = l.pagination;
@@ -1575,7 +1574,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.serialsPagination.last_page && this.current_page != this.serialsPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
           var l = res.data;
           _this5.serials = l.data;
           _this5.serialsPagination = l.pagination;
@@ -1806,7 +1805,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         store_id: null,
         is_default: "active"
       };
-      this.companies = [];
       this.branches = [];
       this.stores = [];
     },
@@ -6907,8 +6905,13 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
-  id: 10003,
-  label: 'menuitems.users.text',
+  id: 222,
+  label: 'menuitems.Banks.text',
+  icon: 'fas fa-eraser',
+  link: '/banks'
+}, {
+  id: 223,
+  label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
 }, {

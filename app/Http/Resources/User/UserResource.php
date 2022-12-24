@@ -14,12 +14,13 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'name_e' => $this->name_e,
+            'employee_id' => $this->employee_id,
             'is_active' => $this->is_active,
             "email" => $this->email,
-            "media" => new FileResource($this->files[0]),
             "employee" => new EmployeeResource($this->employee),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            "media" =>  isset($this->files) ? FileResource::collection($this->files) : null,
         ];
     }
 }

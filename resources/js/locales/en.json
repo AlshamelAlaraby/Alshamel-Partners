@@ -240,8 +240,8 @@
         "currency": {
             "text": "Currencies"
         },
-        "users": {
-            "text": "Users"
+        "Banks": {
+            "text": "Banks"
         },
         "financialYear": {
             "text": "Financial Year"
@@ -502,7 +502,19 @@
     }
     },
     "general": {
+        "notMatch":"is not match with password",
+        "notValidEmail":"Invalid email",
+        "password":"Password",
+        "password_confirmation":"Password confirmation",
+        "BanksTable":"Banks Table",
+        "UsersTable":"Users table",
+        "AddUser":"Add User",
+        "EditUser":"Edit User",
+        "AddBank":"Add bank",
+        "EditBank":"Edit bank",
+        "SwiftCode":"Swift code",
         "Apply":"Apply",
+        "Users":"users",
         "Perfix":"Perfix",
         "Suffix":"Suffix",
         "StartNo":"Start number",
