@@ -1417,21 +1417,7 @@ var imgValid = function imgValid(value) {
       checkAll: [],
       current_page: 1,
       image: '',
-      setting: {
-        name: true,
-        name_e: true,
-        code: true,
-        code_e: true,
-        fraction: true,
-        fraction_e: true,
-        symbol: true,
-        symbol_e: true,
-        is_default: true,
-        is_active: true,
-        fraction_no: true
-      },
-      is_disabled: false,
-      filterSetting: ['name', 'name_e', 'code', 'code_e', 'fraction', 'fraction_e', 'symbol', 'symbol_e']
+      filterSetting: ['name', 'name_e', 'code', 'code_e', 'fraction', 'fraction_e']
     };
   },
   validations: {
@@ -1439,42 +1425,50 @@ var imgValid = function imgValid(value) {
       name: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       symbol: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       code: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       code_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       fraction: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       fraction_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       fraction_no: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
@@ -1493,42 +1487,50 @@ var imgValid = function imgValid(value) {
       name: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       symbol: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       symbol_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(100),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       code: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       code_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       fraction: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       fraction_e: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
         minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15)
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.maxLength)(15),
+        alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       fraction_no: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required,
@@ -1580,26 +1582,6 @@ var imgValid = function imgValid(value) {
   mounted: function mounted() {
     this.getData();
   },
-  updated: function updated() {
-    $(function () {
-      $(".englishInput").keypress(function (event) {
-        var ew = event.which;
-        if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return true;
-        if (65 <= ew && ew <= 90) return true;
-        if (97 <= ew && ew <= 122) return true;
-        return false;
-      });
-      $(".arabicInput").keypress(function (event) {
-        var ew = event.which;
-        if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
-        if (65 <= ew && ew <= 90) return false;
-        if (97 <= ew && ew <= 122) return false;
-        return true;
-      });
-    });
-  },
   methods: {
     /**
      *  start get Data currencies && pagination
@@ -1608,11 +1590,7 @@ var imgValid = function imgValid(value) {
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
-        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-      }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
         var l = res.data;
         _this3.currencies = l.data;
         _this3.currenciesPagination = l.pagination;
@@ -1632,11 +1610,7 @@ var imgValid = function imgValid(value) {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.currenciesPagination.last_page && this.current_page != this.currenciesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
-          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-        }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/currencies?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting)).then(function (res) {
           var l = res.data;
           _this4.currencies = l.data;
           _this4.currenciesPagination = l.pagination;
@@ -1748,53 +1722,8 @@ var imgValid = function imgValid(value) {
     /**
      *  create countrie
      */
-    resetForm: function resetForm() {
-      var _this8 = this;
-      this.create = {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
-        fraction_no: 0,
-        is_default: 0,
-        is_active: 1
-      };
-      this.$nextTick(function () {
-        _this8.$v.$reset();
-      });
-      this.errors = {};
-      this.is_disabled = false;
-    },
     AddSubmit: function AddSubmit() {
-      var _this9 = this;
-      if (!this.create.name) {
-        this.create.name = this.create.name_e;
-      }
-      if (!this.create.name_e) {
-        this.create.name_e = this.create.name;
-      }
-      if (!this.create.code) {
-        this.create.code = this.create.code_e;
-      }
-      if (!this.create.code_e) {
-        this.create.code_e = this.create.code;
-      }
-      if (!this.create.symbol) {
-        this.create.symbol = this.create.symbol_e;
-      }
-      if (!this.create.symbol_e) {
-        this.create.symbol_e = this.create.symbol;
-      }
-      if (!this.create.fraction) {
-        this.create.fraction = this.create.fraction_e;
-      }
-      if (!this.create.fraction_e) {
-        this.create.fraction_e = this.create.fraction;
-      }
+      var _this8 = this;
       this.$v.create.$touch();
       if (this.$v.create.$invalid) {
         return;
@@ -1802,12 +1731,49 @@ var imgValid = function imgValid(value) {
         this.isLoader = true;
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/currencies", this.create).then(function (res) {
-          _this9.is_disabled = true;
+          _this8.$bvModal.hide("create");
+          _this8.getData();
+          setTimeout(function () {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'success',
+              text: "".concat(_this8.$t('general.Addedsuccessfully')),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }, 500);
+        })["catch"](function (err) {
+          if (err.response.data) {
+            _this8.errors = err.response.data.errors;
+          } else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'error',
+              title: "".concat(_this8.$t('general.Error')),
+              text: "".concat(_this8.$t('general.Thereisanerrorinthesystem'))
+            });
+          }
+        })["finally"](function () {
+          _this8.isLoader = false;
+        });
+      }
+    },
+    /**
+     *  edit countrie
+     */
+    editSubmit: function editSubmit(id) {
+      var _this9 = this;
+      this.$v.edit.$touch();
+      if (this.$v.edit.$invalid) {
+        return;
+      } else {
+        this.isLoader = true;
+        this.errors = {};
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/currencies/".concat(id), this.edit).then(function (res) {
+          _this9.$bvModal.hide("modal-edit-".concat(id));
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
+              text: "".concat(_this9.$t('general.Editsuccessfully')),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1824,43 +1790,6 @@ var imgValid = function imgValid(value) {
           }
         })["finally"](function () {
           _this9.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  edit countrie
-     */
-    editSubmit: function editSubmit(id) {
-      var _this10 = this;
-      this.$v.edit.$touch();
-      if (this.$v.edit.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/currencies/".concat(id), this.edit).then(function (res) {
-          _this10.$bvModal.hide("modal-edit-".concat(id));
-          _this10.getData();
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this10.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
-            });
-          }
-        })["finally"](function () {
-          _this10.isLoader = false;
         });
       }
     },
@@ -5243,120 +5172,11 @@ var render = function render() {
     staticClass: "mx-1 custom-btn-background"
   }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
     staticClass: "fe-menu"
-  })]), _vm._v(" "), _c("b-dropdown", {
-    ref: "dropdown",
-    staticClass: "dropdown-custom-ali",
-    attrs: {
-      variant: "primary",
-      html: "".concat(_vm.$t("general.setting"), " <i class='fe-settings'></i>")
-    }
-  }, [_c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.name,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "name", $$v);
-      },
-      expression: "setting.name"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.name_e,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "name_e", $$v);
-      },
-      expression: "setting.name_e"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.fraction,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "fraction", $$v);
-      },
-      expression: "setting.fraction"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.fraction_e,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "fraction_e", $$v);
-      },
-      expression: "setting.fraction_e"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction_e")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.symbol,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "symbol", $$v);
-      },
-      expression: "setting.symbol"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.symbol")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.symbol_e,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "symbol_e", $$v);
-      },
-      expression: "setting.symbol_e"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.symbol_e")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.code,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "code", $$v);
-      },
-      expression: "setting.code"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.code")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.code_e,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "code_e", $$v);
-      },
-      expression: "setting.code_e"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.fraction_no,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "fraction_no", $$v);
-      },
-      expression: "setting.fraction_no"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction_no")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.is_default,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "is_default", $$v);
-      },
-      expression: "setting.is_default"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.is_default")))]), _vm._v(" "), _c("b-form-checkbox", {
-    staticClass: "mb-1",
-    model: {
-      value: _vm.setting.is_active,
-      callback: function callback($$v) {
-        _vm.$set(_vm.setting, "is_active", $$v);
-      },
-      expression: "setting.is_active"
-    }
-  }, [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
-    staticClass: "d-flex justify-content-end"
-  }, [_c("a", {
-    staticClass: "btn btn-primary btn-sm",
-    attrs: {
-      href: "javascript:void(0)"
-    }
-  }, [_vm._v("Apply")])])], 1)], 1), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("b-button", {
+    staticClass: "mx-1 custom-btn-background"
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.setting")) + "\n                                        "), _c("i", {
+    staticClass: "fe-settings"
+  })])], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex align-items-center pagination-custom"
   }, [_c("div", {
     staticClass: "d-inline-block",
@@ -5420,7 +5240,7 @@ var render = function render() {
       id: "create",
       title: _vm.$t("currency.addcurrency"),
       "title-class": "font-18",
-      "dialog-class": "modal-full-width",
+      size: "lg",
       "body-class": "p-4 ",
       "hide-footer": true
     },
@@ -5429,59 +5249,12 @@ var render = function render() {
       hidden: _vm.resetModalHidden
     }
   }, [_c("form", [_c("div", {
-    staticClass: "mb-3 d-flex justify-content-end"
-  }, [_c("b-button", {
-    "class": ["font-weight-bold px-2", _vm.is_disabled ? "mx-2" : ""],
-    attrs: {
-      variant: "success",
-      disabled: !_vm.is_disabled,
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.resetForm.apply(null, arguments);
-      }
-    }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
-    staticClass: "mx-1",
-    attrs: {
-      variant: "success",
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.AddSubmit.apply(null, arguments);
-      }
-    }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
-    staticClass: "mx-1",
-    attrs: {
-      variant: "success",
-      disabled: ""
-    }
-  }, [_c("b-spinner", {
-    attrs: {
-      small: ""
-    }
-  }), _vm._v(" "), _c("span", {
-    staticClass: "sr-only"
-  }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1)] : _vm._e(), _vm._v(" "), _c("b-button", {
-    attrs: {
-      variant: "danger",
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.resetModalHidden.apply(null, arguments);
-      }
-    }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-6 direction",
+    attrs: {
+      dir: "rtl"
+    }
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5491,18 +5264,14 @@ var render = function render() {
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "rtl"
-    }
-  }, [_c("input", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.$v.create.name.$model,
       expression: "$v.create.name.$model"
     }],
-    staticClass: "form-control arabicInput",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.$v.create.name.$error || _vm.errors.name,
       "is-valid": !_vm.$v.create.name.$invalid && !_vm.errors.name
@@ -5525,175 +5294,21 @@ var render = function render() {
         _vm.$set(_vm.$v.create.name, "$model", $event.target.value);
       }
     }
-  })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
+  }), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
   }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
-  }, [_c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    staticClass: "control-label",
+    staticClass: "col-md-6 direction-ltr",
     attrs: {
-      "for": "field-45"
+      dir: "ltr"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "rtl"
-    }
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.symbol.$model,
-      expression: "$v.create.symbol.$model"
-    }],
-    staticClass: "form-control arabicInput",
-    "class": {
-      "is-invalid": _vm.$v.create.symbol.$error || _vm.errors.symbol,
-      "is-valid": !_vm.$v.create.symbol.$invalid && !_vm.errors.symbol
-    },
-    attrs: {
-      type: "text",
-      "data-create": "3",
-      id: "field-45"
-    },
-    domProps: {
-      value: _vm.$v.create.symbol.$model
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 4);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.$v.create.symbol, "$model", $event.target.value);
-      }
-    }
-  })]), _vm._v(" "), !_vm.$v.create.symbol.minLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
-    return _c("ErrorMessage", {
-      key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
-  }, [_c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    staticClass: "control-label",
-    attrs: {
-      "for": "field-3"
-    }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "rtl"
-    }
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.code.$model,
-      expression: "$v.create.code.$model"
-    }],
-    staticClass: "form-control arabicInput",
-    "class": {
-      "is-invalid": _vm.$v.create.code.$error || _vm.errors.code,
-      "is-valid": !_vm.$v.create.code.$invalid && !_vm.errors.code
-    },
-    attrs: {
-      type: "text",
-      "data-create": "5",
-      id: "field-3"
-    },
-    domProps: {
-      value: _vm.$v.create.code.$model
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 6);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.$v.create.code, "$model", $event.target.value);
-      }
-    }
-  })]), _vm._v(" "), !_vm.$v.create.code.minLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code.maxLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
-    return _c("ErrorMessage", {
-      key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
-  }, [_c("div", {
-    staticClass: "form-group"
-  }, [_c("label", {
-    staticClass: "control-label",
-    attrs: {
-      "for": "field-5"
-    }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                            "), _c("span", {
-    staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "rtl"
-    }
-  }, [_c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.$v.create.fraction.$model,
-      expression: "$v.create.fraction.$model"
-    }],
-    staticClass: "form-control arabicInput",
-    "class": {
-      "is-invalid": _vm.$v.create.fraction.$error || _vm.errors.fraction,
-      "is-valid": !_vm.$v.create.fraction.$invalid && !_vm.errors.fraction
-    },
-    attrs: {
-      type: "text",
-      "data-create": "7",
-      id: "field-5"
-    },
-    domProps: {
-      value: _vm.$v.create.fraction.$model
-    },
-    on: {
-      keypress: function keypress($event) {
-        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-        return _vm.moveInput("input", "create", 8);
-      },
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.$set(_vm.$v.create.fraction, "$model", $event.target.value);
-      }
-    }
-  })]), _vm._v(" "), !_vm.$v.create.fraction.minLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction.maxLength ? _c("div", {
-    staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
-    return _c("ErrorMessage", {
-      key: index
-    }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5703,18 +5318,14 @@ var render = function render() {
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "ltr"
-    }
-  }, [_c("input", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.$v.create.name_e.$model,
       expression: "$v.create.name_e.$model"
     }],
-    staticClass: "form-control englishInput",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.$v.create.name_e.$error || _vm.errors.name_e,
       "is-valid": !_vm.$v.create.name_e.$invalid && !_vm.errors.name_e
@@ -5737,16 +5348,75 @@ var render = function render() {
         _vm.$set(_vm.$v.create.name_e, "$model", $event.target.value);
       }
     }
-  })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
+  }), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
   }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-6 direction",
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-45"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.symbol.$model,
+      expression: "$v.create.symbol.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.symbol.$error || _vm.errors.symbol,
+      "is-valid": !_vm.$v.create.symbol.$invalid && !_vm.errors.symbol
+    },
+    attrs: {
+      type: "text",
+      "data-create": "3",
+      id: "field-45"
+    },
+    domProps: {
+      value: _vm.$v.create.symbol.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 4);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.symbol, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.symbol.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5756,18 +5426,14 @@ var render = function render() {
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "ltr"
-    }
-  }, [_c("input", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.$v.create.symbol_e.$model,
       expression: "$v.create.symbol_e.$model"
     }],
-    staticClass: "form-control englishInput",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.$v.create.symbol_e.$error || _vm.errors.symbol_e,
       "is-valid": !_vm.$v.create.symbol_e.$invalid && !_vm.errors.symbol_e
@@ -5790,16 +5456,75 @@ var render = function render() {
         _vm.$set(_vm.$v.create.symbol_e, "$model", $event.target.value);
       }
     }
-  })]), _vm._v(" "), !_vm.$v.create.symbol_e.minLength ? _c("div", {
+  }), _vm._v(" "), !_vm.$v.create.symbol_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
   }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-6 direction",
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-3"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.code.$model,
+      expression: "$v.create.code.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.code.$error || _vm.errors.code,
+      "is-valid": !_vm.$v.create.code.$invalid && !_vm.errors.code
+    },
+    attrs: {
+      type: "text",
+      "data-create": "5",
+      id: "field-3"
+    },
+    domProps: {
+      value: _vm.$v.create.code.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 6);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.code, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.code.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5809,18 +5534,14 @@ var render = function render() {
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "ltr"
-    }
-  }, [_c("input", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.$v.create.code_e.$model,
       expression: "$v.create.code_e.$model"
     }],
-    staticClass: "form-control englishInput",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.$v.create.code_e.$error || _vm.errors.code_e,
       "is-valid": !_vm.$v.create.code_e.$invalid && !_vm.errors.code_e
@@ -5843,16 +5564,75 @@ var render = function render() {
         _vm.$set(_vm.$v.create.code_e, "$model", $event.target.value);
       }
     }
-  })]), _vm._v(" "), !_vm.$v.create.code_e.minLength ? _c("div", {
+  }), _vm._v(" "), !_vm.$v.create.code_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
   }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.code_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-4 direction",
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-5"
+    }
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                            "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.fraction.$model,
+      expression: "$v.create.fraction.$model"
+    }],
+    staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.$v.create.fraction.$error || _vm.errors.fraction,
+      "is-valid": !_vm.$v.create.fraction.$invalid && !_vm.errors.fraction
+    },
+    attrs: {
+      type: "text",
+      "data-create": "7",
+      id: "field-5"
+    },
+    domProps: {
+      value: _vm.$v.create.fraction.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 8);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.create.fraction, "$model", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), !_vm.$v.create.fraction.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction.alphaArabic ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
+    return _c("ErrorMessage", {
+      key: index
+    }, [_vm._v(_vm._s(errorMessage))]);
+  }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-4 direction-ltr",
+    attrs: {
+      dir: "ltr"
+    }
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5862,18 +5642,14 @@ var render = function render() {
     }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction_e")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-    attrs: {
-      dir: "ltr"
-    }
-  }, [_c("input", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.$v.create.fraction_e.$model,
       expression: "$v.create.fraction_e.$model"
     }],
-    staticClass: "form-control englishInput",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.$v.create.fraction_e.$error || _vm.errors.fraction_e,
       "is-valid": !_vm.$v.create.fraction_e.$invalid && !_vm.errors.fraction_e
@@ -5896,16 +5672,18 @@ var render = function render() {
         _vm.$set(_vm.$v.create.fraction_e, "$model", $event.target.value);
       }
     }
-  })]), _vm._v(" "), !_vm.$v.create.fraction_e.minLength ? _c("div", {
+  }), _vm._v(" "), !_vm.$v.create.fraction_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
   }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.fraction_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction_e.alphaEnglish ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-4"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -5951,7 +5729,7 @@ var render = function render() {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-4"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
@@ -6000,58 +5778,112 @@ var render = function render() {
     attrs: {
       value: "1"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Yes")))]), _vm._v(" "), _c("option", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
     attrs: {
       value: "0"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.No")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-4"
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
-    staticClass: "mr-2"
+    staticClass: "mr-2",
+    attrs: {
+      "for": "inlineFormCustomSelectPref"
+    }
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
+  }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.create.is_active.$model,
+      expression: "$v.create.is_active.$model"
+    }],
+    staticClass: "custom-select mr-sm-2",
     "class": {
       "is-invalid": _vm.$v.create.is_active.$error || _vm.errors.is_active,
       "is-valid": !_vm.$v.create.is_active.$invalid && !_vm.errors.is_active
-    }
-  }, [_c("b-form-radio", {
-    staticClass: "d-inline-block",
+    },
     attrs: {
-      name: "some-radios",
+      id: "inlineFormCustomSelectPref",
+      "data-create": "11"
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        $event.preventDefault();
+        return _vm.moveInput("input", "create", 1);
+      },
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.$v.create.is_active, "$model", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      value: "",
+      selected: ""
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+    attrs: {
       value: "1"
-    },
-    model: {
-      value: _vm.$v.create.is_active.$model,
-      callback: function callback($$v) {
-        _vm.$set(_vm.$v.create.is_active, "$model", $$v);
-      },
-      expression: "$v.create.is_active.$model"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("b-form-radio", {
-    staticClass: "d-inline-block m-1",
+  }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
     attrs: {
-      name: "some-radios",
       value: "0"
-    },
-    model: {
-      value: _vm.$v.create.is_active.$model,
-      callback: function callback($$v) {
-        _vm.$set(_vm.$v.create.is_active, "$model", $$v);
-      },
-      expression: "$v.create.is_active.$model"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])], 1), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
-  }) : _vm._e()], 2)])])])]), _vm._v(" "), _c("div", {
+  }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
+    staticClass: "mt-1 d-flex justify-content-end"
+  }, [!_vm.isLoader ? _c("b-button", {
+    staticClass: "mx-1",
+    attrs: {
+      variant: "success",
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.AddSubmit.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Add")) + "\n                                ")]) : _c("b-button", {
+    staticClass: "mx-1",
+    attrs: {
+      variant: "success",
+      disabled: ""
+    }
+  }, [_c("b-spinner", {
+    attrs: {
+      small: ""
+    }
+  }), _vm._v(" "), _c("span", {
+    staticClass: "sr-only"
+  }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1), _vm._v(" "), _c("b-button", {
+    attrs: {
+      variant: "secondary",
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.resetModalHidden.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 1)])]), _vm._v(" "), _c("div", {
     staticClass: "table-responsive mb-3 custom-table-theme position-relative"
   }, [_vm.isLoader ? _c("loader", {
     attrs: {
@@ -6104,7 +5936,7 @@ var render = function render() {
         }
       }
     }
-  })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
+  })])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6122,7 +5954,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-name"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6140,7 +5972,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.code ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.code")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6158,7 +5990,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-code"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.code_e ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6176,7 +6008,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-code_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6194,7 +6026,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-fraction"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_e ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction_e")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6212,43 +6044,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-fraction_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.symbol ? _c("th", [_c("div", {
-    staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.symbol")))]), _vm._v(" "), _c("div", {
-    staticClass: "arrow-sort"
-  }, [_c("i", {
-    staticClass: "fas fa-arrow-up",
-    on: {
-      click: function click($event) {
-        _vm.currencies.sort(_vm.sortString("symbol"));
-      }
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "fas fa-arrow-down",
-    on: {
-      click: function click($event) {
-        _vm.currencies.sort(_vm.sortString("-symbol"));
-      }
-    }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.symbol_e ? _c("th", [_c("div", {
-    staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.symbol_e")))]), _vm._v(" "), _c("div", {
-    staticClass: "arrow-sort"
-  }, [_c("i", {
-    staticClass: "fas fa-arrow-up",
-    on: {
-      click: function click($event) {
-        _vm.currencies.sort(_vm.sortString("symbol_e"));
-      }
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "fas fa-arrow-down",
-    on: {
-      click: function click($event) {
-        _vm.currencies.sort(_vm.sortString("-symbol_e"));
-      }
-    }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_no ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction_no")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6266,9 +6062,9 @@ var render = function render() {
         _vm.currencies.sort(_vm.SortNumber("-fraction_no"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
+  })])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6286,7 +6082,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.currencies.length > 0 ? _c("tbody", _vm._l(_vm.currencies, function (data, index) {
     return _c("tr", {
@@ -6343,15 +6139,15 @@ var render = function render() {
           }
         }
       }
-    })])]), _vm._v(" "), _vm.setting.name ? _c("td", [_c("h5", {
+    })])]), _vm._v(" "), _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(data.name))])]), _vm._v(" "), _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.code ? _c("td", [_vm._v(_vm._s(data.code))]) : _vm._e(), _vm._v(" "), _vm.setting.code_e ? _c("td", [_vm._v(_vm._s(data.code_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction ? _c("td", [_vm._v(_vm._s(data.fraction))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_e ? _c("td", [_vm._v(_vm._s(data.fraction_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_no ? _c("td", [_vm._v(_vm._s(data.fraction_no))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol ? _c("td", [_vm._v(_vm._s(data.symbol))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol_e ? _c("td", [_vm._v(_vm._s(data.symbol_e))]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("td", [_c("span", {
+    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.code))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.code_e))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.fraction))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.fraction_e))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.fraction_no))]), _vm._v(" "), _c("td", [_c("span", {
       "class": [data.is_default == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
+    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("span", {
       "class": [data.is_active ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_active ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                        " + _vm._s(data.is_active ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6401,7 +6197,7 @@ var render = function render() {
         title: _vm.$t("currency.editcurrency"),
         "title-class": "font-18",
         "body-class": "p-4",
-        "dialog-class": "modal-full-width",
+        size: "lg",
         "hide-footer": true
       },
       on: {
@@ -6413,46 +6209,12 @@ var render = function render() {
         }
       }
     }, [_c("form", [_c("div", {
-      staticClass: "mb-3 d-flex justify-content-end"
-    }, [!_vm.isLoader ? _c("b-button", {
-      staticClass: "mx-1",
-      attrs: {
-        variant: "success",
-        type: "submit"
-      },
-      on: {
-        click: function click($event) {
-          $event.preventDefault();
-          return _vm.editSubmit(data.id);
-        }
-      }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
-      staticClass: "mx-1",
-      attrs: {
-        variant: "success",
-        disabled: ""
-      }
-    }, [_c("b-spinner", {
-      attrs: {
-        small: ""
-      }
-    }), _vm._v(" "), _c("span", {
-      staticClass: "sr-only"
-    }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1), _vm._v(" "), _c("b-button", {
-      attrs: {
-        variant: "danger",
-        type: "button"
-      },
-      on: {
-        click: function click($event) {
-          $event.preventDefault();
-          return _vm.$bvModal.hide("modal-edit-".concat(data.id));
-        }
-      }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-md-3"
+      staticClass: "col-md-6 direction",
+      attrs: {
+        dir: "rtl"
+      }
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6462,18 +6224,14 @@ var render = function render() {
       }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "rtl"
-      }
-    }, [_c("input", {
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
         value: _vm.$v.edit.name.$model,
         expression: "$v.edit.name.$model"
       }],
-      staticClass: "form-control arabicInput",
+      staticClass: "form-control",
       "class": {
         "is-invalid": _vm.$v.edit.name.$error || _vm.errors.name,
         "is-valid": !_vm.$v.edit.name.$invalid && !_vm.errors.name
@@ -6496,281 +6254,21 @@ var render = function render() {
           _vm.$set(_vm.$v.edit.name, "$model", $event.target.value);
         }
       }
-    })]), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
     }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-45"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "rtl"
-      }
-    }, [_c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.symbol.$model,
-        expression: "$v.edit.symbol.$model"
-      }],
-      staticClass: "form-control arabicInput",
-      "class": {
-        "is-invalid": _vm.$v.edit.symbol.$error || _vm.errors.symbol,
-        "is-valid": !_vm.$v.edit.symbol.$invalid && !_vm.errors.symbol
-      },
-      attrs: {
-        type: "text",
-        "data-edit": "3",
-        id: "edit-45"
-      },
-      domProps: {
-        value: _vm.$v.edit.symbol.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 4);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.symbol, "$model", $event.target.value);
-        }
-      }
-    })]), _vm._v(" "), !_vm.$v.edit.symbol.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-3"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "rtl"
-      }
-    }, [_c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.code.$model,
-        expression: "$v.edit.code.$model"
-      }],
-      staticClass: "form-control arabicInput",
-      "class": {
-        "is-invalid": _vm.$v.edit.code.$error || _vm.errors.code,
-        "is-valid": !_vm.$v.edit.code.$invalid && !_vm.errors.code
-      },
-      attrs: {
-        type: "text",
-        "data-edit": "5",
-        id: "edit-3"
-      },
-      domProps: {
-        value: _vm.$v.edit.code.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 6);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.code, "$model", $event.target.value);
-        }
-      }
-    })]), _vm._v(" "), !_vm.$v.edit.code.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-5"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "rtl"
-      }
-    }, [_c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.fraction.$model,
-        expression: "$v.edit.fraction.$model"
-      }],
-      staticClass: "form-control arabicInput",
-      "class": {
-        "is-invalid": _vm.$v.edit.fraction.$error || _vm.errors.fraction,
-        "is-valid": !_vm.$v.edit.fraction.$invalid && !_vm.errors.fraction
-      },
-      attrs: {
-        type: "text",
-        "data-edit": "7",
-        id: "edit-5"
-      },
-      domProps: {
-        value: _vm.$v.edit.fraction.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 8);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.fraction, "$model", $event.target.value);
-        }
-      }
-    })]), _vm._v(" "), !_vm.$v.edit.fraction.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-33"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction-ltr",
       attrs: {
         dir: "ltr"
       }
-    }, [_c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.symbol_e.$model,
-        expression: "$v.edit.symbol_e.$model"
-      }],
-      staticClass: "form-control englishInput",
-      "class": {
-        "is-invalid": _vm.$v.edit.symbol_e.$error || _vm.errors.symbol_e,
-        "is-valid": !_vm.$v.edit.symbol_e.$invalid && !_vm.errors.symbol_e
-      },
-      attrs: {
-        type: "text",
-        "data-edit": "4",
-        id: "edit-33"
-      },
-      domProps: {
-        value: _vm.$v.edit.symbol_e.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 5);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.symbol_e, "$model", $event.target.value);
-        }
-      }
-    })]), _vm._v(" "), !_vm.$v.edit.symbol_e.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-4"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "ltr"
-      }
-    }, [_c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.code_e.$model,
-        expression: "$v.edit.code_e.$model"
-      }],
-      staticClass: "form-control englishInput",
-      "class": {
-        "is-invalid": _vm.$v.edit.code_e.$error || _vm.errors.code_e,
-        "is-valid": !_vm.$v.edit.code_e.$invalid && !_vm.errors.code_e
-      },
-      attrs: {
-        type: "text",
-        "data-edit": "6",
-        id: "edit-4"
-      },
-      domProps: {
-        value: _vm.$v.edit.code_e.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 7);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.code_e, "$model", $event.target.value);
-        }
-      }
-    })]), _vm._v(" "), !_vm.$v.edit.code_e.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code_e.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6780,18 +6278,14 @@ var render = function render() {
       }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "ltr"
-      }
-    }, [_c("input", {
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
         value: _vm.$v.edit.name_e.$model,
         expression: "$v.edit.name_e.$model"
       }],
-      staticClass: "form-control englishInput",
+      staticClass: "form-control",
       "class": {
         "is-invalid": _vm.$v.edit.name_e.$error || _vm.errors.name_e,
         "is-valid": !_vm.$v.edit.name_e.$invalid && !_vm.errors.name_e
@@ -6814,16 +6308,291 @@ var render = function render() {
           _vm.$set(_vm.$v.edit.name_e, "$model", $event.target.value);
         }
       }
-    })]), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
     }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
+      staticClass: "col-md-6 direction",
+      attrs: {
+        dir: "rtl"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-45"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol.$model,
+        expression: "$v.edit.symbol.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol.$error || _vm.errors.symbol,
+        "is-valid": !_vm.$v.edit.symbol.$invalid && !_vm.errors.symbol
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "3",
+        id: "edit-45"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 4);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction-ltr",
+      attrs: {
+        dir: "ltr"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-33"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.symbol_e.$model,
+        expression: "$v.edit.symbol_e.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.symbol_e.$error || _vm.errors.symbol_e,
+        "is-valid": !_vm.$v.edit.symbol_e.$invalid && !_vm.errors.symbol_e
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "4",
+        id: "edit-33"
+      },
+      domProps: {
+        value: _vm.$v.edit.symbol_e.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 5);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.symbol_e, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.symbol_e.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction",
+      attrs: {
+        dir: "rtl"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-3"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.code.$model,
+        expression: "$v.edit.code.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.code.$error || _vm.errors.code,
+        "is-valid": !_vm.$v.edit.code.$invalid && !_vm.errors.code
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "5",
+        id: "edit-3"
+      },
+      domProps: {
+        value: _vm.$v.edit.code.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 6);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.code, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.code.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6 direction-ltr",
+      attrs: {
+        dir: "ltr"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-4"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.code_e.$model,
+        expression: "$v.edit.code_e.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.code_e.$error || _vm.errors.code_e,
+        "is-valid": !_vm.$v.edit.code_e.$invalid && !_vm.errors.code_e
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "6",
+        id: "edit-4"
+      },
+      domProps: {
+        value: _vm.$v.edit.code_e.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 7);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.code_e, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.code_e.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code_e.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-4 direction",
+      attrs: {
+        dir: "rtl"
+      }
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
+        "for": "edit-5"
+      }
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                                            "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.fraction.$model,
+        expression: "$v.edit.fraction.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.fraction.$error || _vm.errors.fraction,
+        "is-valid": !_vm.$v.edit.fraction.$invalid && !_vm.errors.fraction
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "7",
+        id: "edit-5"
+      },
+      domProps: {
+        value: _vm.$v.edit.fraction.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 8);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.fraction, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.fraction.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction.alphaArabic ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaArabic")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-4 direction-ltr",
+      attrs: {
+        dir: "ltr"
+      }
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6833,18 +6602,14 @@ var render = function render() {
       }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
-      attrs: {
-        dir: "ltr"
-      }
-    }, [_c("input", {
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
         value: _vm.$v.edit.fraction_e.$model,
         expression: "$v.edit.fraction_e.$model"
       }],
-      staticClass: "form-control englishInput",
+      staticClass: "form-control",
       "class": {
         "is-invalid": _vm.$v.edit.fraction_e.$error || _vm.errors.fraction_e,
         "is-valid": !_vm.$v.edit.fraction_e.$invalid && !_vm.errors.fraction_e
@@ -6867,16 +6632,18 @@ var render = function render() {
           _vm.$set(_vm.$v.edit.fraction_e, "$model", $event.target.value);
         }
       }
-    })]), _vm._v(" "), !_vm.$v.edit.fraction_e.minLength ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.edit.fraction_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
     }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.fraction_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction_e.alphaEnglish ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
+      staticClass: "col-md-4"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6922,7 +6689,7 @@ var render = function render() {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
+      staticClass: "col-md-4"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
@@ -6971,58 +6738,112 @@ var render = function render() {
       attrs: {
         value: "1"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Yes")))]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
       attrs: {
         value: "0"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.No")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_default ? _vm._l(_vm.errors.is_default, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-3"
+      staticClass: "col-md-4"
     }, [_c("div", {
       staticClass: "form-group"
     }, [_c("label", {
-      staticClass: "mr-2"
+      staticClass: "mr-2",
+      attrs: {
+        "for": "edit-9"
+      }
     }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
+    }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.is_active.$model,
+        expression: "$v.edit.is_active.$model"
+      }],
+      staticClass: "custom-select mr-sm-2",
       "class": {
         "is-invalid": _vm.$v.edit.is_active.$error || _vm.errors.is_active,
         "is-valid": !_vm.$v.edit.is_active.$invalid && !_vm.errors.is_active
-      }
-    }, [_c("b-form-radio", {
-      staticClass: "d-inline-block",
+      },
       attrs: {
-        name: "some-radios",
+        id: "edit-9",
+        "data-edit": "11"
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          $event.preventDefault();
+          return _vm.moveInput("input", "edit", 1);
+        },
+        change: function change($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+          _vm.$set(_vm.$v.edit.is_active, "$model", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }
+      }
+    }, [_c("option", {
+      attrs: {
+        value: "",
+        selected: ""
+      }
+    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+      attrs: {
         value: "1"
-      },
-      model: {
-        value: _vm.$v.edit.is_active.$model,
-        callback: function callback($$v) {
-          _vm.$set(_vm.$v.edit.is_active, "$model", $$v);
-        },
-        expression: "$v.edit.is_active.$model"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("b-form-radio", {
-      staticClass: "d-inline-block m-1",
+    }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
       attrs: {
-        name: "some-radios",
         value: "0"
-      },
-      model: {
-        value: _vm.$v.edit.is_active.$model,
-        callback: function callback($$v) {
-          _vm.$set(_vm.$v.edit.is_active, "$model", $$v);
-        },
-        expression: "$v.edit.is_active.$model"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])], 1), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
+    }) : _vm._e()], 2)])]), _vm._v(" "), _c("div", {
+      staticClass: "mt-1 d-flex justify-content-end"
+    }, [!_vm.isLoader ? _c("b-button", {
+      staticClass: "mx-1",
+      attrs: {
+        variant: "success",
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.editSubmit(data.id);
+        }
+      }
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+      staticClass: "mx-1",
+      attrs: {
+        variant: "success",
+        disabled: ""
+      }
+    }, [_c("b-spinner", {
+      attrs: {
+        small: ""
+      }
+    }), _vm._v(" "), _c("span", {
+      staticClass: "sr-only"
+    }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1), _vm._v(" "), _c("b-button", {
+      attrs: {
+        variant: "secondary",
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.$bvModal.hide("modal-edit-".concat(data.id));
+        }
+      }
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1)])])], 1), _vm._v(" "), _c("td", [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
@@ -7575,6 +7396,11 @@ var menuItems = [{
   label: 'menuitems.serial.text',
   icon: 'fas fa-eraser',
   link: '/serial'
+}, {
+  id: 10003,
+  label: 'menuitems.users.text',
+  icon: 'fas fa-eraser',
+  link: '/users'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
