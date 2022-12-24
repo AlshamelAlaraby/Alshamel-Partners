@@ -22,7 +22,7 @@ export default {
         PageHeader,
         Switches,
         ErrorMessage,
-        loader,
+        loader
     },
     data() {
         return {
@@ -65,7 +65,6 @@ export default {
             saveImageName: [],
             current_page: 1,
             showPhoto: './images/img-1.png',
-            changeImage: false,
             setting: {
                 name: true,
                 name_e: true,
@@ -158,7 +157,7 @@ export default {
             $(".arabicInput").keypress(function(event){
                 var ew = event.which;
                 if(ew == 32)
-                    return false;
+                    return true;
                 if(48 <= ew && ew <= 57)
                     return false;
                 if(65 <= ew && ew <= 90)
@@ -345,6 +344,7 @@ export default {
             this.country_id = null;
             this.media = {};
             this.images = [];
+            this.errors = {};
         },
         AddSubmit() {
 
@@ -468,8 +468,10 @@ export default {
             this.edit.short_code = country.short_code;
             this.edit.is_active = country.is_active;
             this.edit.is_default = country.is_default ? 1 : 0;
-            this.images = country.media;
-            this.showPhoto = this.images[this.images.length - 1].webp;
+            this.images = country.media ?? [];
+            if (this.images&&this.images.length>0){
+                this.showPhoto = this.images[this.images.length - 1].webp;
+            }else{this.images = './images/img-1.png';}
             this.errors = {};
         },
         /**
@@ -544,8 +546,10 @@ export default {
 
                             adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
                                 .then((res) => {
-                                    this.images = res.data.data.media;
-                                    this.showPhoto = this.images[this.images.length - 1].webp;
+                                    this.images = res.data.data.media ?? [];
+                                    if(this.images&&this.images.length>0){
+                                        this.showPhoto = this.images[this.images.length - 1].webp;
+                                    }else{this.images = './images/img-1.png';}
                                     this.getData();
                                 })
                                 .catch(err => {
@@ -595,8 +599,10 @@ export default {
 
                                     adminApi.put(`/countries/${this.country_id}`,{old_media,'media':new_media})
                                         .then((res) => {
-                                            this.images = res.data.data.media;
-                                            this.showPhoto = this.images[this.images.length - 1].webp;
+                                            this.images = res.data.data.media ?? [];
+                                            if(this.images&&this.images.length>0){
+                                                this.showPhoto = this.images[this.images.length - 1].webp;
+                                            }else{this.images = './images/img-1.png';}
                                             this.getData();
                                         })
                                         .catch(err => {
@@ -635,8 +641,10 @@ export default {
             });
             adminApi.put(`/countries/${this.country_id}`,{old_media})
                 .then((res) => {
-                    this.images = res.data.data.media;
-                    this.showPhoto = this.images[this.images.length - 1].webp;
+                    this.images = res.data.data.media ?? [];
+                    if(this.images&&this.images.length>0){
+                        this.showPhoto = this.images[this.images.length - 1].webp;
+                    }else {this.images = './images/img-1.png';}
                 })
                 .catch(err => {
                     Swal.fire({
@@ -895,7 +903,7 @@ export default {
                                             </b-button>
                                         </div>
                                     </div>
-                                    
+
                                     <b-tabs nav-class="nav-tabs nav-bordered">
                                         <b-tab :title="$t('general.DataEntry')" active>
                                             <div class="row">
@@ -2072,10 +2080,4 @@ export default {
     max-height: 400px !important;
 }
 </style>
-
-
-
-
-
-
 
