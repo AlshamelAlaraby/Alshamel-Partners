@@ -43,34 +43,6 @@ class RlstContract extends Model
     //     return $this->belongsTo(RpInstallmentPaymentPlanDetail::class);
     // }
 
-    // scopes
-
-    public function scopeSearch($query, $request)
-    {
-        return $query->where(function ($q) use ($request) {
-
-            if ($request->search && $request->columns) {
-                foreach ($request->columns as $column) {
-                    $q->orWhere($column, 'like', '%' . $request->search . '%');
-                }
-            }
-
-            if ($request->salesman_id) {
-                $q->where('salesman_id', $request->salesman_id);
-            }
-
-            if ($request->customer_id) {
-                $q->where('customer_id', $request->customer_id);
-            }
-
-            if ($request->reservation_id) {
-                $q->where('reservation_id', $request->reservation_id);
-            }
-        });
-    }
-
-    // activities
-
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->id ?? "system";

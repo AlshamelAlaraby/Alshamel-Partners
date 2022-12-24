@@ -25,7 +25,6 @@ Route::prefix('real-estate')->group(function () {
     // Route::get('rlst-units/logs/{id}', 'RlstUnitController@logs');
 
     // Route::resource('rlst-unit-status', 'RlstUnitStatusController')->except('edit', 'create');
-    // Route::get('rlst-unit-status/logs/{id}', 'RlstUnitStatusController@logs');
 
     // Route::resource('rlst-wallet-building', 'RlstWalletBuildingController')->except('edit', 'create');
     // Route::get('rlst-wallet-building/logs/{id}', 'RlstWalletBuildingController@logs');
@@ -123,6 +122,25 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
     });
 
+    // units
+    Route::group(['prefix' => 'units'], function () {
+        Route::get('/', 'RlstUnitController@all')->name('rlst-units.all');
+        Route::get('/logs/{id}', 'RlstUnitController@logs')->name('rlst-units.logs');
+        Route::get('/{id}', 'RlstUnitController@find')->name('rlst-units.find');
+        Route::post('/', 'RlstUnitController@create')->name('rlst-units.create');
+        Route::put('/{id}', 'RlstUnitController@update')->name('rlst-units.update');
+        Route::delete('/{id}', 'RlstUnitController@delete')->name('rlst-units.delete');
+    });
+
+    // unit statuses
+    Route::group(['prefix' => 'unit-statuses'], function () {
+        Route::get('/', 'RlstUnitStatusController@all')->name('rlst-unit-statuses.all');
+        Route::get('/logs/{id}', 'RlstUnitStatusController@logs')->name('rlst-unit-statuses.logs');
+        Route::get('/{id}', 'RlstUnitStatusController@find')->name('rlst-unit-statuses.find');
+        Route::post('/', 'RlstUnitStatusController@create')->name('rlst-unit-statuses.create');
+        Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
+        Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
+    });
     // property types
     Route::group(['prefix' => 'property-types'], function () {
         Route::get('/', 'RlstPropertyTypeController@all')->name('rlst-property-types.all');

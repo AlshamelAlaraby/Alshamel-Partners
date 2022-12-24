@@ -13,11 +13,11 @@ use Spatie\Activitylog\LogOptions;
 class RoleScreenHotfield extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
     use CausesActivity;
 
-    protected $table = 'roles_screens_hotfields';
+    protected $table = 'role_screen_hotfields';
+
 
     protected $guarded = ["id"];
 

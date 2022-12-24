@@ -4,6 +4,7 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\City\CityController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Currency\CurrencyController;
+use App\Http\Controllers\InternalSalesman\InternalSalesmanController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
@@ -150,8 +151,6 @@ Route::group(['prefix' => 'colors'], function () {
     });
 });
 
-
-
 Route::group(['prefix' => 'salesmen-types'], function () {
     Route::controller(\App\Http\Controllers\SalesmenType\SalesmenTypeController::class)->group(function () {
         Route::get('/', 'all')->name('salesmen-types.index');
@@ -196,6 +195,38 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 
+Route::group(['prefix' => 'banks'], function () {
+    Route::controller(\App\Http\Controllers\Bank\BankController::class)->group(function () {
+        Route::get('/', 'all')->name('banks.index');
+        Route::get('logs/{id}', 'logs')->name('banks.logs');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('banks.create');
+        Route::put('/{id}', 'update')->name('banks.update');
+        Route::delete('/{id}', 'delete')->name('banks.destroy');
+    });
+});
+
+Route::group(['prefix' => 'bank-accounts'], function () {
+    Route::controller(\App\Http\Controllers\BankAccount\BankAccountController::class)->group(function () {
+        Route::get('/', 'all')->name('bank-accounts.index');
+        Route::get('logs/{id}', 'logs')->name('bank-accounts.logs');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('bank-accounts.create');
+        Route::put('/{id}', 'update')->name('bank-accounts.update');
+        Route::delete('/{id}', 'delete')->name('bank-accounts.destroy');
+    });
+});
+
+Route::group(['prefix' => 'role-screen-hotfield'], function () {
+    Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
+        Route::get('/', 'all')->name('role-screen-hotfield.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('role-screen-hotfield.create');
+        Route::post('/{id}', 'update')->name('role-screen-hotfield.update');
+        Route::delete('/{id}', 'delete')->name('role-screen-hotfield.destroy');
+        Route::get('logs/{id}', 'logs')->name('role-screen-hotfield.logs');
+    });
+});
 
 Route::group(['prefix' => 'role-screen-hotfield'], function () {
     Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
@@ -289,4 +320,6 @@ Route::resource('role_types', RoleTypeController::class)->except('create', 'edit
 Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
 Route::get('tree-properties/logs/{id}', [TreePropertyController::class, 'logs']);
 
+Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
+Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
 //------------------------------------------------------

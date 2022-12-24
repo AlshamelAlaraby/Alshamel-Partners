@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\RealEstate\Http\Requests;
+namespace Modules\RecievablePayable\Http\Requests;
 
 use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditRlstUnitStatusRequest extends FormRequest
+class EditRpSubContactGroupRequest extends FormRequest
 {
     use ValidationTrait;
     /**
@@ -16,8 +16,9 @@ class EditRlstUnitStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:100',
-            'name_e' => 'string|max:100',
+            'name' => 'required|string|max:255',
+            'name_e' => 'required|string|max:255',
+            'gl_acc_no'=>'required'
         ];
     }
 
