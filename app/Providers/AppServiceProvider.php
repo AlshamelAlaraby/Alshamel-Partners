@@ -5,6 +5,10 @@ namespace App\Providers;
 use App\Repositoriefs\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\Avenue\AvenueInterface;
 use App\Repositories\Avenue\AvenueRepository;
+use App\Repositories\BankAccount\BankAccountInterface;
+use App\Repositories\BankAccount\BankAccountRepository;
+use App\Repositories\Bank\BankInterface;
+use App\Repositories\Bank\BankRepository;
 use App\Repositories\Branch\BranchRepository;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use App\Repositories\City\CityRepository;
@@ -93,6 +97,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(SalesmenTypeInterface::class, SalesmenTypeRepository::class);
         $this->app->bind(SalesmanInterface::class, SalesmanRepository::class);
+
+        $this->app->bind(BankInterface::class, BankRepository::class);
+
+        $this->app->bind(BankAccountInterface::class, BankAccountRepository::class);
 
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);

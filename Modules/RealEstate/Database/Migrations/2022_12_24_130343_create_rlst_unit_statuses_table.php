@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rlst_reservations', function (Blueprint $table) {
+        Schema::create('rlst_unit_statuses', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
-            $table->foreignId('salesman_id');
-            $table->foreignId('customer_id');
-            $table->integer('payment_plan_id');
+            $table->string('name', 100);
+            $table->string('name_e', 100);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rlst_reservations');
+        Schema::dropIfExists('rlst_unit_statuses');
     }
 };

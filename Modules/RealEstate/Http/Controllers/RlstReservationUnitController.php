@@ -5,9 +5,9 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstReservationUnit;
-use Modules\RealEstate\Transformers\RlstReservationUnitResource;
 use Modules\RealEstate\Http\Requests\CreateRlstReservationUnitRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstReservationUnitRequest;
+use Modules\RealEstate\Transformers\RlstReservationUnitResource;
 
 class RlstReservationUnitController extends Controller
 {
@@ -16,7 +16,6 @@ class RlstReservationUnitController extends Controller
     {
         $this->model = $model;
     }
-
 
     public function find($id)
     {
@@ -28,10 +27,9 @@ class RlstReservationUnitController extends Controller
         return responseJson(200, 'success', new RlstReservationUnitResource($model));
     }
 
-
     public function all(AllRequest $request)
     {
-        $models = $this->model->search($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             $models = ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -39,18 +37,16 @@ class RlstReservationUnitController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-
         return responseJson(200, 'success', RlstReservationUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-
     public function create(CreateRlstReservationUnitRequest $request)
     {
-        $this->model->create($request->validated());
 
-        return responseJson(200, 'created');
+        $model = $this->model->create($request->validated());
+
+        return responseJson(200, 'created', new RlstReservationUnitResource($model));
     }
-
 
     public function update($id, UpdateRlstReservationUnitRequest $request)
     {
@@ -60,8 +56,9 @@ class RlstReservationUnitController extends Controller
         }
 
         $model->update($request->validated());
+        $model->refresh();
+        return responseJson(200, 'updated', new RlstReservationUnitResource($model));
 
-        return responseJson(200, 'updated');
     }
 
     public function logs($id)
@@ -74,7 +71,6 @@ class RlstReservationUnitController extends Controller
         $logs = $model->activities()->orderBy('created_at', 'DESC')->get();
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
-
 
     public function delete($id)
     {
