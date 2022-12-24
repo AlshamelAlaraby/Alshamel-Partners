@@ -103,7 +103,7 @@
         "store": "Stores"
     },
     "serial": {
-        "addserial": "New Add Serial",
+        "addserial": "Add New Serial",
         "editserial": "Edit Serial",
         "serialsTable": "Serials Table",
         "serial": "Serials"
@@ -239,6 +239,9 @@
         },
         "currency": {
             "text": "Currencies"
+        },
+        "users": {
+            "text": "Users"
         },
         "financialYear": {
             "text": "Financial Year"
@@ -499,6 +502,15 @@
     }
     },
     "general": {
+        "Apply":"Apply",
+        "Perfix":"Perfix",
+        "Suffix":"Suffix",
+        "StartNo":"Start number",
+        "RestartPeriod":"Restart period",
+        "Branch":"Branch",
+        "Store":"Store",
+        "Default":"Default",
+        "Nondefault":"Nondefault",
         "fieldIsRequired": "This field is required",
         "PleaseEnterValidEmail": "Please enter valid email.",
         "notDataFound": "Not Data Found",

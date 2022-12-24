@@ -268,7 +268,10 @@
             "text": "المخازن"
         },
         "serial": {
-            "text": "Serial"
+            "text": "مسلسل"
+        },
+        "users": {
+            "text": "المستخدمين"
         },
         "area": {
             "text": "الاماكن"
@@ -506,6 +509,15 @@
         }
     },
     "general": {
+        "Nondefault":"غير افتراضي",
+        "Apply":"تطبيق",
+        "Perfix":"بادئة ",
+        "Suffix":"لاحقة",
+        "StartNo":"رقم البداية",
+        "RestartPeriod":"فترة اعادة التشغل",
+        "Branch":"فرع",
+        "Store":"مخزن",
+        "Default":"افتراضي",
         "fieldIsRequired": "هذا الحقل مطلوب .",
         "PleaseEnterValidEmail": "الرجاء إدخال بريد إلكتروني صحيح .",
         "notDataFound": "لا يوجد بيانات .",
