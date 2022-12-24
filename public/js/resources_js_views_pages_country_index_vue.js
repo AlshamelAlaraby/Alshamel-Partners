@@ -1964,6 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
             }).then(function (res) {
               _this12.images = res.data.data.media;
               _this12.showPhoto = _this12.images[_this12.images.length - 1].webp;
+              _this12.getData();
             })["catch"](function (err) {
               sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                 icon: 'error',
@@ -2015,6 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
                 }).then(function (res) {
                   _this12.images = res.data.data.media;
                   _this12.showPhoto = _this12.images[_this12.images.length - 1].webp;
+                  _this12.getData();
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                     icon: 'error',
