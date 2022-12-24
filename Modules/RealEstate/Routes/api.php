@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('real-estate')->group(function () {
 
+    // Route::resource('property-types', 'PropertyTypeController')->except('edit', 'create');
+    // Route::get('property-types/logs/{id}', 'PropertyTypeController@logs');
+
     // Route::resource('rlst-buildings', 'RlstBuildingController')->except('edit', 'create');
     // Route::get('rlst-buildings/logs/{id}', 'RlstBuildingController@logs');
 
@@ -138,4 +141,24 @@ Route::prefix('real-estate')->group(function () {
         Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
         Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
     });
+    // property types
+    Route::group(['prefix' => 'property-types'], function () {
+        Route::get('/', 'RlstPropertyTypeController@all')->name('rlst-property-types.all');
+        Route::get('/logs/{id}', 'RlstPropertyTypeController@logs')->name('rlst-property-types.logs');
+        Route::get('/{id}', 'RlstPropertyTypeController@find')->name('rlst-property-types.find');
+        Route::post('/', 'RlstPropertyTypeController@create')->name('rlst-property-types.create');
+        Route::put('/{id}', 'RlstPropertyTypeController@update')->name('rlst-property-types.update');
+        Route::delete('/{id}', 'RlstPropertyTypeController@delete')->name('rlst-property-types.delete');
+    });
+
+    // buildings
+    Route::group(['prefix' => 'buildings'], function () {
+        Route::get('/', 'RlstBuildingController@all')->name('rlst-buildings.all');
+        Route::get('/logs/{id}', 'RlstBuildingController@logs')->name('rlst-buildings.logs');
+        Route::get('/{id}', 'RlstBuildingController@find')->name('rlst-buildings.find');
+        Route::post('/', 'RlstBuildingController@create')->name('rlst-buildings.create');
+        Route::put('/{id}', 'RlstBuildingController@update')->name('rlst-buildings.update');
+        Route::delete('/{id}', 'RlstBuildingController@delete')->name('rlst-buildings.delete');
+    });
+
 });

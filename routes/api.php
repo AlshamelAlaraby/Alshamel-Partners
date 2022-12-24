@@ -4,6 +4,7 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\City\CityController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Currency\CurrencyController;
+use App\Http\Controllers\InternalSalesman\InternalSalesmanController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
@@ -319,4 +320,6 @@ Route::resource('role_types', RoleTypeController::class)->except('create', 'edit
 Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
 Route::get('tree-properties/logs/{id}', [TreePropertyController::class, 'logs']);
 
+Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
+Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
 //------------------------------------------------------

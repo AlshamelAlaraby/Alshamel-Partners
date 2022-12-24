@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rlst_wallet_buildings', function (Blueprint $table) {
+        Schema::create('rlst_property_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('wallet_Id')->nullable()->default(0);
-            $table->unsignedInteger('building_id')->nullable()->default(0);
-            $table->unsignedInteger('item_id')->nullable()->default(0)->comment('Id of building, unit');
-            $table->unsignedTinyInteger('Bu_ty')->nullable()->default(0)->comment('1=building, 2=Unit');
+            $table->string('name', 100);
+            $table->string('name_e', 100);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rlst_wallet_buildings');
+        Schema::dropIfExists('rlst_property_types');
     }
 };

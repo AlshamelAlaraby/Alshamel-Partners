@@ -33,4 +33,16 @@ class Governorate extends Model
         return $this->hasMany(City::class);
     }
 
+    public function avenues()
+    {
+        return $this->hasMany(Avenue::class);
+    }
+
+    public function hasChildren(){
+        if ($this->avenues()->count() > 0 || $this->cities()->count() > 0){
+            return true;
+        }
+        return false;
+    }
+
 }

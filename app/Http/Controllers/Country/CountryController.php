@@ -79,13 +79,15 @@ class CountryController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->governorates()->count() > 0 || $model->banks()->count() > 0) {
-            return responseJson(400, __('message.country has data'));
+        if ($model->hasChildren()) {
+            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
         }
 
-        if ($model->avenues()->count) {
-            $this->modelInterface->delete($id);
-        }
+//        if ($model->avenues()->count) {
+//            $this->modelInterface->delete($id);
+//        }
+
+        $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
     }
