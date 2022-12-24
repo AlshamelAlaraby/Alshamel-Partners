@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      per_page: 50,
+      per_page: 1,
       search: "",
       debounce: {},
       serialsPagination: {},
@@ -71,7 +71,6 @@ export default {
       checkAll: [],
       branches: [],
       stores: [],
-      companies: [],
       current_page: 1,
       filterSetting: ["perfix", "suffix", "start_no"],
     };
@@ -155,7 +154,7 @@ export default {
 
       adminApi
         .get(
-          `/serials?page=${this.current_page}&per_page=${this.per_page}&columns=${this.filterSetting}&company_id=${this.company_id}`
+          `/serials?page=${page}&per_page=${this.per_page}&columns=${this.filterSetting}&company_id=${this.company_id}`
         )
         .then((res) => {
           let l = res.data;
@@ -184,7 +183,7 @@ export default {
 
         adminApi
           .get(
-            `/serials?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}&company_id=${this.company_id}`
+            `/serials?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}&company_id=${this.company_id}`
           )
           .then((res) => {
             let l = res.data;
@@ -410,7 +409,6 @@ export default {
         store_id: null,
         is_default: "active",
       };
-      this.companies = [];
       this.branches = [];
       this.stores = [];
     },

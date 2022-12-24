@@ -1393,15 +1393,12 @@ var imgValid = function imgValid(value) {
         partner_id: null,
         url: '',
         phone: '',
-        search: "",
         tax_id: null,
         vat_no: null,
         cr: '',
-        logo: {},
         address: '',
         website: '',
-        is_active: null,
-        type: ''
+        is_active: null
       },
       edit: {
         name: '',
@@ -1413,14 +1410,9 @@ var imgValid = function imgValid(value) {
         tax_id: null,
         vat_no: null,
         cr: '',
-        logo: {},
         address: '',
         website: '',
-        is_active: null,
-        type: '',
-        search: "",
-        file: '',
-        isImage: true
+        is_active: null
       },
       errors: {},
       isDrop: false,
@@ -7820,8 +7812,13 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
-  id: 10003,
-  label: 'menuitems.users.text',
+  id: 222,
+  label: 'menuitems.Banks.text',
+  icon: 'fas fa-eraser',
+  link: '/banks'
+}, {
+  id: 223,
+  label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
 }, {

@@ -13,7 +13,7 @@ import externalSalesmen from  "./routeChild/externalSalesmen";
 import rolesType from "./routeChild/rolesType";
 import roles from "./routeChild/roles";
 import units from "./routeChild/units";
-import users from "./routeChild/user";
+import banks from "./routeChild/banks";
 import colors from "./routeChild/colors";
 import salesmenTypes from "./routeChild/salesmenTypes";
 import branches from "./routeChild/branch";
@@ -29,7 +29,7 @@ export default [
     ...country,
     ...governorate,
     ...city,
-    ...users,
+    ...banks,
     ...currency,
     ...employee,
     ...financialYear,
@@ -63,11 +63,19 @@ export default [
         component: () => import('../views/pages/dashboard/crm/index')
     },
     {
+        path: '/banks',
+        name: 'banks',
+        meta: {
+            middleware: [auth,checkAuth]
+        },
+    component: () => import('../views/pages/banks/index')
+    },
+    {
         path: '/users',
         name: 'users',
         meta: {
             middleware: [auth,checkAuth]
-        },
+}    ,
     component: () => import('../views/pages/users/index')
     },
     {
