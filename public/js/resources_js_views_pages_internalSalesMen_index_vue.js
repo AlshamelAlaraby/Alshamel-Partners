@@ -5513,8 +5513,6 @@ var render = function render() {
       hidden: _vm.resetModalHidden
     }
   }, [_c("form", [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
     staticClass: "mb-3 d-flex justify-content-end"
   }, [_c("b-button", {
     "class": ["font-weight-bold px-2", _vm.is_disabled ? "mx-2" : ""],
@@ -5529,7 +5527,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                    ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5541,7 +5539,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Add")) + "\n                                        ")]) : _c("b-button", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5564,7 +5562,9 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Cancel")) + "\n                                    ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "form-group"
