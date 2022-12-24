@@ -5,9 +5,9 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstUnitContract;
-use Modules\RealEstate\Transformers\RlstUnitContractResource;
 use Modules\RealEstate\Http\Requests\CreateRlstUnitContractRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstUnitContractRequest;
+use Modules\RealEstate\Transformers\RlstUnitContractResource;
 
 class RlstUnitContractController extends Controller
 {
@@ -16,7 +16,6 @@ class RlstUnitContractController extends Controller
     {
         $this->model = $model;
     }
-
 
     public function find($id)
     {
@@ -28,7 +27,6 @@ class RlstUnitContractController extends Controller
         return responseJson(200, 'success', new RlstUnitContractResource($model));
     }
 
-
     public function all(AllRequest $request)
     {
         $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
@@ -39,18 +37,15 @@ class RlstUnitContractController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-
         return responseJson(200, 'success', RlstUnitContractResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-
     public function create(CreateRlstUnitContractRequest $request)
     {
-        $this->model->create($request->validated());
+        $model = $this->model->create($request->validated());
 
-        return responseJson(200, 'created');
+        return responseJson(200, 'created', new RlstUnitContractResource($model));
     }
-
 
     public function update($id, UpdateRlstUnitContractRequest $request)
     {
@@ -60,8 +55,9 @@ class RlstUnitContractController extends Controller
         }
 
         $model->update($request->validated());
+        $model->refresh();
+        return responseJson(200, 'updated', new RlstUnitContractResource($model));
 
-        return responseJson(200, 'updated');
     }
 
     public function logs($id)
@@ -74,7 +70,6 @@ class RlstUnitContractController extends Controller
         $logs = $model->activities()->orderBy('created_at', 'DESC')->get();
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
-
 
     public function delete($id)
     {
