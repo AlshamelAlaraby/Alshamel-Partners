@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('bank_id');
+            $table->string('account_number');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('email');
+            $table->unsignedBigInteger('emp_id');
+            $table->string("rp_code");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

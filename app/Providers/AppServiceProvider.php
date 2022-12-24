@@ -33,10 +33,12 @@ use App\Repositories\Salesman\SalesmanRepository;
 use App\Repositories\City\CityRepositoryInterface;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\BankAccount\BankAccountInterface;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use App\Repositories\Governorate\GovernorateInterface;
 use App\Repositories\PaymentType\PaymentTypeInterface;
 use App\Repositories\Serial\SerialRepositoryInterface;
+use App\Repositories\BankAccount\BankAccountRepository;
 use App\Repositories\Governorate\GovernorateRepository;
 use App\Repositories\PaymentType\PaymentTypeRepository;
 use App\Repositories\Company\CompanyRepositoryInterface;
@@ -97,6 +99,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SalesmanInterface::class, SalesmanRepository::class);
 
         $this->app->bind(BankInterface::class, BankRepository::class);
+
+        $this->app->bind(BankAccountInterface::class, BankAccountRepository::class);
 
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);

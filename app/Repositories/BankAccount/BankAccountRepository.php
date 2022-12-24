@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Country;
+namespace App\Repositories\BankAccount;
 
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class CountryRepository implements CountryInterface
+class BankAccountRepository implements BankAccountInterface
 {
 
-    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
+    public function __construct(private \App\Models\BankAccount$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
     {
         $this->model = $model;
         $this->media = $media;
@@ -18,21 +18,9 @@ class CountryRepository implements CountryInterface
     {
         $models = $this->model->where(function ($q) use ($request) {
 
-            if ($request->search) {
-                $q->where('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
+            if ($request->bank_id) {
+                $q->where('bank_id', $request->bank_id);
             }
-
-            if ($request->is_active) {
-                $q->where('is_active', $request->is_active);
-            }
-
-            if ($request->governorate_id) {
-                $q->whereHas('governorates', function ($q) use ($request) {
-                    $q->where('id', $request->governorate_id);
-                });
-            }
-
             if ($request->search && $request->columns) {
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
@@ -64,7 +52,7 @@ class CountryRepository implements CountryInterface
                     ]);
                 }
             }
-            cacheForget("countries");
+            cacheForget("banks");
             return $model;
         });
     }
@@ -101,12 +89,11 @@ class CountryRepository implements CountryInterface
                     ]);
                 }
             }
+
             if (!$request->old_media && !$request->media) { // if this is no old media and new media
                 $model->clearMediaCollection('media');
             }
-            if ($request->is_default == 1) {
-                $this->model->where('id', '!=', $id)->update(['is_default' => 0]);
-            }
+
             $this->forget($id);
         });
     }
@@ -125,8 +112,8 @@ class CountryRepository implements CountryInterface
     private function forget($id)
     {
         $keys = [
-            "countries",
-            "countries_" . $id,
+            "banks",
+            "banks_" . $id,
         ];
         foreach ($keys as $key) {
             cacheForget($key);

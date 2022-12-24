@@ -205,6 +205,28 @@ Route::group(['prefix' => 'banks'], function () {
     });
 });
 
+Route::group(['prefix' => 'bank-accounts'], function () {
+    Route::controller(\App\Http\Controllers\BankAccount\BankAccountController::class)->group(function () {
+        Route::get('/', 'all')->name('bank-accounts.index');
+        Route::get('logs/{id}', 'logs')->name('bank-accounts.logs');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('bank-accounts.create');
+        Route::put('/{id}', 'update')->name('bank-accounts.update');
+        Route::delete('/{id}', 'delete')->name('bank-accounts.destroy');
+    });
+});
+
+Route::group(['prefix' => 'role-screen-hotfield'], function () {
+    Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
+        Route::get('/', 'all')->name('role-screen-hotfield.index');
+        Route::get('/{id}', 'find');
+        Route::post('/', 'create')->name('role-screen-hotfield.create');
+        Route::post('/{id}', 'update')->name('role-screen-hotfield.update');
+        Route::delete('/{id}', 'delete')->name('role-screen-hotfield.destroy');
+        Route::get('logs/{id}', 'logs')->name('role-screen-hotfield.logs');
+    });
+});
+
 Route::group(['prefix' => 'role-screen-hotfield'], function () {
     Route::controller(\App\Http\Controllers\RoleScreenHotfield\RoleScreenHotfieldController::class)->group(function () {
         Route::get('/', 'all')->name('role-screen-hotfield.index');
