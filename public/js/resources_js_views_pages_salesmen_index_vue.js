@@ -4902,7 +4902,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\r\n                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\r\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -4914,7 +4914,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.Add")) + "\n                    ")]) : _c("b-button", {
+  }, [_vm._v("\r\n                        " + _vm._s(_vm.$t("general.Add")) + "\r\n                    ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -4937,7 +4937,7 @@ var render = function render() {
         return _vm.$bvModal.hide("sales-man-type-create");
       }
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                    " + _vm._s(_vm.$t("general.Cancel")) + "\r\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -4948,7 +4948,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Name")) + "\n                            "), _c("span", {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Name")) + "\r\n                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -4986,12 +4986,12 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                            " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\n                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\r\n                            " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\r\n                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                            " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\n                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\r\n                            " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\r\n                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v("\n                                " + _vm._s(errorMessage) + "\n                            ")]);
+    }, [_vm._v("\r\n                                " + _vm._s(errorMessage) + "\r\n                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
@@ -5001,7 +5001,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                            "), _c("span", {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Name_en")) + "\r\n                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5039,12 +5039,12 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                            " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\n                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\r\n                            " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\r\n                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                            " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\n                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\r\n                            " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\r\n                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage) + "\n                            ")]);
+    }, [_vm._v(_vm._s(errorMessage) + "\r\n                            ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
@@ -5054,7 +5054,7 @@ var render = function render() {
     attrs: {
       "for": "inlineFormCustomSelectPref"
     }
-  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                            "), _c("span", {
+  }, [_vm._v("\r\n                            " + _vm._s(_vm.$t("general.isEmployee")) + "\r\n                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
     directives: [{
@@ -5104,7 +5104,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.No")))])]), _vm._v(" "), _vm.errors.is_employee ? _vm._l(_vm.errors.is_employee, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage) + "\n                            ")]);
+    }, [_vm._v(_vm._s(errorMessage) + "\r\n                            ")]);
   }) : _vm._e()], 2)])])])]);
 };
 var staticRenderFns = [];
@@ -6795,6 +6795,16 @@ var menuItems = [{
   label: 'menuitems.serial.text',
   icon: 'fas fa-eraser',
   link: '/serial'
+}, {
+  id: 222,
+  label: 'menuitems.Banks.text',
+  icon: 'fas fa-eraser',
+  link: '/banks'
+}, {
+  id: 223,
+  label: 'general.Users',
+  icon: 'fas fa-eraser',
+  link: '/users'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",

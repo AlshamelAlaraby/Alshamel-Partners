@@ -27,9 +27,9 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'name_e' => 'required|string|max:255',
             'is_active' => 'nullable|in:active,inactive',
-            "media" => ["required", "exists:media,id", new \App\Rules\MediaRule()],
+            // "media" => ["required", "exists:media,id", new \App\Rules\MediaRule()],
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:0',
             'employee_id' => 'nullable|exists:employees,id',
         ];
     }
