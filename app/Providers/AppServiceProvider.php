@@ -36,6 +36,7 @@ use App\Repositories\Module\ModuleRepository;
 use App\Repositories\PaymentType\PaymentTypeInterface;
 use App\Repositories\PaymentType\PaymentTypeRepository;
 use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
+use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\RoleType\RoleTypeRepository;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
