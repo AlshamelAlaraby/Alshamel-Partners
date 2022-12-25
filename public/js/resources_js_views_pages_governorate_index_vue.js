@@ -970,10 +970,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
 /* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/loader */ "./resources/js/components/loader.vue");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -998,7 +994,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
-        if (ew == 32) return false;
+        if (ew == 32) return true;
         if (48 <= ew && ew <= 57) return false;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
@@ -1057,25 +1053,29 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     }
   },
   data: function data() {
-    var _ref;
-    return _ref = {
+    return {
       country_id: null,
       isLoader: false,
       errors: {},
       images: [],
-      media: {}
-    }, _defineProperty(_ref, "country_id", null), _defineProperty(_ref, "saveImageName", []), _defineProperty(_ref, "showPhoto", "./images/img-1.png"), _defineProperty(_ref, "changeImage", false), _defineProperty(_ref, "idDelete", null), _defineProperty(_ref, "create", {
-      name: "",
-      name_e: "",
-      long_name: "",
-      long_name_e: "",
-      short_code: "",
-      phone_key: "",
-      national_id_length: null,
-      is_default: 0,
-      media: [],
-      is_active: "active"
-    }), _ref;
+      media: {},
+      saveImageName: [],
+      showPhoto: "./images/img-1.png",
+      changeImage: false,
+      idDelete: null,
+      create: {
+        name: "",
+        name_e: "",
+        long_name: "",
+        long_name_e: "",
+        short_code: "",
+        phone_key: "",
+        national_id_length: null,
+        is_default: 0,
+        media: [],
+        is_active: "active"
+      }
+    };
   },
   methods: {
     /**
@@ -1790,7 +1790,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
-        if (ew == 32) return false;
+        if (ew == 32) return true;
         if (48 <= ew && ew <= 57) return false;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
@@ -7831,6 +7831,16 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
+  id: 222,
+  label: 'menuitems.Banks.text',
+  icon: 'fas fa-eraser',
+  link: '/banks'
+}, {
+  id: 223,
+  label: 'general.Users',
+  icon: 'fas fa-eraser',
+  link: '/users'
+}, {
   id: 10006,
   label: "menuitems.salesMen.text",
   icon: "fas fa-user-tag",
@@ -7913,536 +7923,674 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/colors'
-}, {
-  id: 1115,
-  label: "menuitems.dashboard.text",
-  icon: "ri-dashboard-line",
-  badge: {
-    variant: "success",
-    text: "menuitems.dashboard.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1114,
-    label: 'menuitems.dashboard.list.sales',
-    link: '/'
-  }, {
-    id: 1113,
-    label: 'menuitems.dashboard.list.crm',
-    link: '/dashboard/crm'
-  }, {
-    id: 1115,
-    label: 'menuitems.dashboard.list.analytics',
-    link: '/dashboard/analytics'
-  }]
-}, {
-  id: 1114,
-  label: "menuitems.apps.text",
-  isTitle: true
-}, {
-  id: 11113,
-  label: "menuitems.chat.text",
-  icon: "ri-message-2-line",
-  link: '/apps/chat'
-}, {
-  id: 1112,
-  label: "menuitems.ecommerce.text",
-  icon: "ri-shopping-cart-2-line",
-  badge: {
-    variant: "danger",
-    text: "menuitems.ecommerce.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1111,
-    label: "menuitems.ecommerce.list.products",
-    link: "/ecommerce/products"
-  }, {
-    id: 1110,
-    label: "menuitems.ecommerce.list.productsgrid",
-    link: "/ecommerce/products-grid"
-  }, {
-    id: 1109,
-    label: 'menuitems.ecommerce.list.productdetail',
-    link: '/ecommerce/product-detail/1'
-  }, {
-    id: 1108,
-    label: 'menuitems.ecommerce.list.createproduct',
-    link: '/ecommerce/product-create'
-  }, {
-    id: 1107,
-    label: "menuitems.ecommerce.list.customers",
-    link: "/ecommerce/customers"
-  }, {
-    id: 1106,
-    label: "menuitems.ecommerce.list.orders",
-    link: "/ecommerce/orders"
-  }, {
-    id: 1105,
-    label: "menuitems.ecommerce.list.orderdetail",
-    link: "/ecommerce/order-detail"
-  }, {
-    id: 1104,
-    label: "menuitems.ecommerce.list.sellers",
-    link: "/ecommerce/sellers"
-  }, {
-    id: 1103,
-    label: "menuitems.ecommerce.list.cart",
-    link: "/ecommerce/cart"
-  }, {
-    id: 1102,
-    label: "menuitems.ecommerce.list.checkout",
-    link: "/ecommerce/checkout"
-  }]
-}, {
-  id: 1101,
-  label: 'menuitems.calendar.text',
-  icon: 'ri-calendar-2-line',
-  link: '/apps/calendar'
-}, {
-  id: 1100,
-  label: 'menuitems.email.text',
-  icon: 'ri-mail-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1099,
-    label: 'menuitems.email.list.inbox',
-    link: '/email/inbox'
-  }, {
-    id: 1098,
-    label: 'menuitems.email.list.reademail',
-    link: '/email/reademail/1'
-  }, {
-    id: 1097,
-    label: 'menuitems.email.list.template',
-    link: '/email/templates'
-  }]
-}, {
-  id: 1096,
-  label: 'menuitems.companies.text',
-  icon: 'ri-building-4-line',
-  link: '/apps/companies'
-}, {
-  id: 1095,
-  label: 'menuitems.tasks.text',
-  icon: 'ri-task-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1093,
-    label: 'menuitems.tasks.list.list',
-    link: '/task/list'
-  }, {
-    id: 1092,
-    label: 'menuitems.tasks.list.detail',
-    link: '/task/detail'
-  }, {
-    id: 1091,
-    label: 'menuitems.tasks.list.kanban',
-    link: '/task/kanban'
-  }]
-}, {
-  id: 1090,
-  label: 'menuitems.ticket.text',
-  icon: 'ri-customer-service-2-line',
-  link: '/apps/tickets'
-}, {
-  id: 1089,
-  label: 'menuitems.contacts.text',
-  icon: 'ri-profile-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1088,
-    label: 'menuitems.contacts.list.members',
-    link: '/contacts/list'
-  }, {
-    id: 1087,
-    label: 'menuitems.contacts.list.profile',
-    link: '/contacts/profile'
-  }]
-}, {
-  id: 1086,
-  label: 'menuitems.filemanager.text',
-  icon: 'ri-folders-line',
-  link: '/apps/file-manager'
-}, {
-  id: 1085,
-  label: "menuitems.custom.text",
-  isTitle: true
-}, {
-  id: 1084,
-  label: 'menuitems.auth.text',
-  icon: 'ri-shield-user-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1083,
-    label: 'menuitems.auth.list.login',
-    link: '/auth/login-1'
-  }, {
-    id: 1082,
-    label: 'menuitems.auth.list.login-2',
-    link: '/auth/login-2'
-  }, {
-    id: 1081,
-    label: 'menuitems.auth.list.register',
-    link: '/auth/register-1'
-  }, {
-    id: 1080,
-    label: 'menuitems.auth.list.register-2',
-    link: '/auth/register-2'
-  }, {
-    id: 1079,
-    label: 'menuitems.auth.list.signin-signup',
-    link: '/auth/signin-signup'
-  }, {
-    id: 1078,
-    label: 'menuitems.auth.list.signin-signup-2',
-    link: '/auth/signin-signup-2'
-  }, {
-    id: 1077,
-    label: 'menuitems.auth.list.recoverpwd',
-    link: '/auth/recoverpwd'
-  }, {
-    id: 1076,
-    label: 'menuitems.auth.list.recoverpwd-2',
-    link: '/auth/recoverpwd-2'
-  }, {
-    id: 1075,
-    label: 'menuitems.auth.list.lock-screen',
-    link: '/auth/lock-screen'
-  }, {
-    id: 1074,
-    label: 'menuitems.auth.list.lock-screen-2',
-    link: '/auth/lock-screen-2'
-  }, {
-    id: 1073,
-    label: 'menuitems.auth.list.logout',
-    link: '/auth/logout-1'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.logout-2',
-    link: '/auth/logout-2'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail',
-    link: '/auth/confirm-mail'
-  }, {
-    id: 1072,
-    label: 'menuitems.auth.list.confirm-mail-2',
-    link: '/auth/confirm-mail-2'
-  }]
-}, {
-  id: 1071,
-  label: 'menuitems.extrapages.text',
-  icon: 'ri-pages-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1070,
-    label: 'menuitems.extrapages.list.starter',
-    link: '/extras/starter'
-  }, {
-    id: 1069,
-    label: 'menuitems.extrapages.list.timeline',
-    link: '/extras/timeline'
-  }, {
-    id: 1068,
-    label: 'menuitems.extrapages.list.sitemap',
-    link: '/extras/sitemap'
-  }, {
-    id: 1067,
-    label: 'menuitems.extrapages.list.invoice',
-    link: '/extras/invoice'
-  }, {
-    id: 1066,
-    label: 'menuitems.extrapages.list.faqs',
-    link: '/extras/faqs'
-  }, {
-    id: 1065,
-    label: 'menuitems.extrapages.list.search-results',
-    link: '/extras/search-results'
-  }, {
-    id: 1064,
-    label: 'menuitems.extrapages.list.pricing',
-    link: '/extras/pricing'
-  }, {
-    id: 1063,
-    label: 'menuitems.extrapages.list.maintenance',
-    link: '/extras/maintenance'
-  }, {
-    id: 1062,
-    label: 'menuitems.extrapages.list.comingsoon',
-    link: '/extras/coming-soon'
-  }, {
-    id: 1061,
-    label: 'menuitems.extrapages.list.lightbox',
-    link: '/extras/lightbox'
-  }, {
-    id: 1060,
-    label: 'menuitems.extrapages.list.error404',
-    link: '/error/404'
-  }, {
-    id: 1059,
-    label: 'menuitems.extrapages.list.error404-alt',
-    link: '/error/404-alt'
-  }, {
-    id: 1058,
-    label: 'menuitems.extrapages.list.error500',
-    link: '/error/500'
-  }]
-}, {
-  id: 1057,
-  label: "menuitems.components.text",
-  isTitle: true
-}, {
-  id: 1056,
-  label: 'menuitems.ui.text',
-  icon: 'ri-pencil-ruler-2-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1055,
-    label: 'menuitems.ui.list.avatars',
-    link: '/ui/avatars'
-  }, {
-    id: 1054,
-    label: 'menuitems.ui.list.buttons',
-    link: '/ui/buttons'
-  }, {
-    id: 1053,
-    label: 'menuitems.ui.list.cards',
-    link: '/ui/cards'
-  }, {
-    id: 1052,
-    label: 'menuitems.ui.list.carousel',
-    link: '/ui/carousel'
-  }, {
-    id: 1051,
-    label: 'menuitems.ui.list.dropdowns',
-    link: '/ui/dropdowns'
-  }, {
-    id: 1050,
-    label: 'menuitems.ui.list.video',
-    link: '/ui/video'
-  }, {
-    id: 1049,
-    label: 'menuitems.ui.list.general',
-    link: '/ui/general'
-  }, {
-    id: 1048,
-    label: 'menuitems.ui.list.grid',
-    link: '/ui/grid'
-  }, {
-    id: 1047,
-    label: 'menuitems.ui.list.images',
-    link: '/ui/images'
-  }, {
-    id: 1046,
-    label: 'menuitems.ui.list.listgroup',
-    link: '/ui/list-group'
-  }, {
-    id: 1045,
-    label: 'menuitems.ui.list.modals',
-    link: '/ui/modals'
-  }, {
-    id: 1044,
-    label: 'menuitems.ui.list.notifications',
-    link: '/ui/notifications'
-  }, {
-    id: 1043,
-    label: 'menuitems.ui.list.portlet',
-    link: '/ui/portlets'
-  }, {
-    id: 1042,
-    label: 'menuitems.ui.list.progress',
-    link: '/ui/progress'
-  }, {
-    id: 1041,
-    label: 'menuitems.ui.list.ribbons',
-    link: '/ui/ribbons'
-  }, {
-    id: 1040,
-    label: 'menuitems.ui.list.spinners',
-    link: '/ui/spinners'
-  }, {
-    id: 1039,
-    label: 'menuitems.ui.list.tabs',
-    link: '/ui/tabs-accordions'
-  }, {
-    id: 1038,
-    label: 'menuitems.ui.list.tooltip',
-    link: '/ui/tooltips-popovers'
-  }, {
-    id: 1037,
-    label: 'menuitems.ui.list.typography',
-    link: '/ui/typography'
-  }]
-}, {
-  id: 1036,
-  label: 'menuitems.extendedui.text',
-  icon: 'ri-stack-line',
-  badge: {
-    variant: "primary",
-    text: "menuitems.extendedui.badge"
-  },
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1035,
-    label: 'menuitems.extendedui.list.rangeslider',
-    link: '/extended/rangeslider'
-  }, {
-    id: 1034,
-    label: 'menuitems.extendedui.list.sweetalert',
-    link: '/extended/sweet-alert'
-  }, {
-    id: 1033,
-    label: 'menuitems.extendedui.list.tour',
-    link: '/extended/tour'
-  }, {
-    id: 1032,
-    label: 'menuitems.extendedui.list.scrollspy',
-    link: '/extended/scrollspy'
-  }]
-}, {
-  id: 1031,
-  label: 'menuitems.widgets.text',
-  icon: 'ri-honour-line',
-  link: '/widgets'
-}, {
-  id: 1024,
-  label: 'menuitems.icons.text',
-  icon: 'ri-markup-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1025,
-    label: 'menuitems.icons.list.feather',
-    link: '/icons/feather'
-  }, {
-    id: 1026,
-    label: 'menuitems.icons.list.remix',
-    link: '/icons/remix'
-  }, {
-    id: 1027,
-    label: 'menuitems.icons.list.boxicons',
-    link: '/icons/boxicons'
-  }, {
-    id: 1028,
-    label: 'menuitems.icons.list.materialdesign',
-    link: '/icons/mdi'
-  }, {
-    id: 1029,
-    label: 'menuitems.icons.list.fontawesome',
-    link: '/icons/font-awesome'
-  }, {
-    id: 1030,
-    label: 'menuitems.icons.list.weather',
-    link: '/icons/weather'
-  }]
-}, {
-  id: 1023,
-  label: 'menuitems.forms.text',
-  icon: 'ri-eraser-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1022,
-    label: 'menuitems.forms.list.elements',
-    link: '/forms/elements'
-  }, {
-    id: 1021,
-    label: 'menuitems.forms.list.advanced',
-    link: '/forms/advanced'
-  }, {
-    id: 1020,
-    label: 'menuitems.forms.list.validation',
-    link: '/forms/validation'
-  }, {
-    id: 1019,
-    label: 'menuitems.forms.list.wizard',
-    link: '/forms/wizard'
-  }, {
-    id: 1018,
-    label: 'menuitems.forms.list.mask',
-    link: '/forms/mask'
-  }, {
-    id: 1017,
-    label: 'menuitems.forms.list.editor',
-    link: '/forms/quill'
-  }, {
-    id: 1016,
-    label: 'menuitems.forms.list.fileupload',
-    link: '/forms/file-uploads'
-  }]
-}, {
-  id: 1015,
-  label: 'menuitems.tables.text',
-  icon: 'ri-table-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1014,
-    label: 'menuitems.tables.list.basic',
-    link: '/tables/basic'
-  }, {
-    id: 1013,
-    label: 'menuitems.tables.list.advanced',
-    link: '/tables/advanced'
-  }]
-}, {
-  id: 1012,
-  label: 'menuitems.charts.text',
-  icon: 'ri-bar-chart-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1007,
-    label: 'menuitems.charts.list.apex',
-    link: '/charts/apex'
-  }, {
-    id: 1008,
-    label: 'menuitems.charts.list.chartjs',
-    link: '/charts/chartjs'
-  }, {
-    id: 1009,
-    label: 'menuitems.charts.list.c3',
-    link: '/charts/c3'
-  }, {
-    id: 1010,
-    label: 'menuitems.charts.list.chartist',
-    link: '/charts/chartist'
-  }, {
-    id: 1011,
-    label: 'menuitems.charts.list.knob',
-    link: '/charts/knob'
-  }]
-}, {
-  id: 1006,
-  label: 'menuitems.maps.text',
-  icon: 'ri-map-pin-line',
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1005,
-    label: 'menuitems.maps.list.googlemap',
-    link: '/maps/google'
-  }]
-}, {
-  id: 1004,
-  label: "menuitems.multilevel.text",
-  icon: "ri-share-line",
-  isMenuCollapsed: false,
-  subItems: [{
-    id: 1003,
-    label: "menuitems.multilevel.list.level1.1",
-    link: "javascript: void(0);"
-  }, {
-    id: 1002,
-    label: "menuitems.multilevel.list.level1.2",
-    isMenuCollapsed: false,
-    subItems: [{
-      id: 1001,
-      label: "menuitems.multilevel.list.level1.level2.1",
-      link: "javascript: void(0);"
-    }, {
-      id: 1000,
-      label: "menuitems.multilevel.list.level1.level2.2",
-      link: "javascript: void(0);"
-    }]
-  }]
-}];
+}
+
+// {
+//     id: 1115,
+//     label: "menuitems.dashboard.text",
+//     icon: "ri-dashboard-line",
+//     badge: {
+//         variant: "success",
+//         text: "menuitems.dashboard.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1114,
+//             label: 'menuitems.dashboard.list.sales',
+//             link: '/'
+//         },
+//         {
+//             id: 1113,
+//             label: 'menuitems.dashboard.list.crm',
+//             link: '/dashboard/crm'
+//         },
+//         {
+//             id: 1115,
+//             label: 'menuitems.dashboard.list.analytics',
+//             link: '/dashboard/analytics'
+//         },
+//     ]
+// },
+// {
+//     id: 1114,
+//     label: "menuitems.apps.text",
+//     isTitle: true
+// },
+// {
+//     id: 11113,
+//     label: "menuitems.chat.text",
+//     icon: "ri-message-2-line",
+//     link: '/apps/chat'
+// },
+// {
+//     id: 1112,
+//     label: "menuitems.ecommerce.text",
+//     icon: "ri-shopping-cart-2-line",
+//     badge: {
+//         variant: "danger",
+//         text: "menuitems.ecommerce.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1111,
+//             label: "menuitems.ecommerce.list.products",
+//             link: "/ecommerce/products"
+//         },
+//         {
+//             id: 1110,
+//             label: "menuitems.ecommerce.list.productsgrid",
+//             link: "/ecommerce/products-grid"
+//         },
+//         {
+//             id: 1109,
+//             label: 'menuitems.ecommerce.list.productdetail',
+//             link: '/ecommerce/product-detail/1'
+//         },
+//         {
+//             id: 1108,
+//             label: 'menuitems.ecommerce.list.createproduct',
+//             link: '/ecommerce/product-create'
+//         },
+//         {
+//             id: 1107,
+//             label: "menuitems.ecommerce.list.customers",
+//             link: "/ecommerce/customers"
+//         },
+//         {
+//             id: 1106,
+//             label: "menuitems.ecommerce.list.orders",
+//             link: "/ecommerce/orders"
+//         },
+//         {
+//             id: 1105,
+//             label: "menuitems.ecommerce.list.orderdetail",
+//             link: "/ecommerce/order-detail"
+//         },
+//         {
+//             id: 1104,
+//             label: "menuitems.ecommerce.list.sellers",
+//             link: "/ecommerce/sellers"
+//         },
+//         {
+//             id: 1103,
+//             label: "menuitems.ecommerce.list.cart",
+//             link: "/ecommerce/cart"
+//         },
+//         {
+//             id: 1102,
+//             label: "menuitems.ecommerce.list.checkout",
+//             link: "/ecommerce/checkout"
+//         }
+//     ]
+// },
+// {
+//     id: 1101,
+//     label: 'menuitems.calendar.text',
+//     icon: 'ri-calendar-2-line',
+//     link: '/apps/calendar'
+// },
+// {
+//     id: 1100,
+//     label: 'menuitems.email.text',
+//     icon: 'ri-mail-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1099,
+//             label: 'menuitems.email.list.inbox',
+//             link: '/email/inbox'
+//         },
+//         {
+//             id: 1098,
+//             label: 'menuitems.email.list.reademail',
+//             link: '/email/reademail/1'
+//         },
+//         {
+//             id: 1097,
+//             label: 'menuitems.email.list.template',
+//             link: '/email/templates'
+//         }
+//     ]
+// },
+// {
+//     id: 1096,
+//     label: 'menuitems.companies.text',
+//     icon: 'ri-building-4-line',
+//     link: '/apps/companies'
+// },
+// {
+//     id: 1095,
+//     label: 'menuitems.tasks.text',
+//     icon: 'ri-task-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1093,
+//             label: 'menuitems.tasks.list.list',
+//             link: '/task/list'
+//         },
+//         {
+//             id: 1092,
+//             label: 'menuitems.tasks.list.detail',
+//             link: '/task/detail'
+//         },
+//         {
+//             id: 1091,
+//             label: 'menuitems.tasks.list.kanban',
+//             link: '/task/kanban'
+//         }
+//     ]
+// },
+// {
+//     id: 1090,
+//     label: 'menuitems.ticket.text',
+//     icon: 'ri-customer-service-2-line',
+//     link: '/apps/tickets'
+// },
+// {
+//     id: 1089,
+//     label: 'menuitems.contacts.text',
+//     icon: 'ri-profile-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1088,
+//             label: 'menuitems.contacts.list.members',
+//             link: '/contacts/list'
+//         },
+//         {
+//             id: 1087,
+//             label: 'menuitems.contacts.list.profile',
+//             link: '/contacts/profile'
+//         }
+//     ]
+// },
+// {
+//     id: 1086,
+//     label: 'menuitems.filemanager.text',
+//     icon: 'ri-folders-line',
+//     link: '/apps/file-manager'
+// },
+// {
+//     id: 1085,
+//     label: "menuitems.custom.text",
+//     isTitle: true
+// },
+// {
+//     id: 1084,
+//     label: 'menuitems.auth.text',
+//     icon: 'ri-shield-user-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1083,
+//             label: 'menuitems.auth.list.login',
+//             link: '/auth/login-1'
+//         },
+//         {
+//             id: 1082,
+//             label: 'menuitems.auth.list.login-2',
+//             link: '/auth/login-2'
+//         },
+//         {
+//             id: 1081,
+//             label: 'menuitems.auth.list.register',
+//             link: '/auth/register-1'
+//         },
+//         {
+//             id: 1080,
+//             label: 'menuitems.auth.list.register-2',
+//             link: '/auth/register-2'
+//         },
+//         {
+//             id: 1079,
+//             label: 'menuitems.auth.list.signin-signup',
+//             link: '/auth/signin-signup'
+//         },
+//         {
+//             id: 1078,
+//             label: 'menuitems.auth.list.signin-signup-2',
+//             link: '/auth/signin-signup-2'
+//         },
+//         {
+//             id: 1077,
+//             label: 'menuitems.auth.list.recoverpwd',
+//             link: '/auth/recoverpwd'
+//         },
+//         {
+//             id: 1076,
+//             label: 'menuitems.auth.list.recoverpwd-2',
+//             link: '/auth/recoverpwd-2'
+//         },
+//         {
+//             id: 1075,
+//             label: 'menuitems.auth.list.lock-screen',
+//             link: '/auth/lock-screen'
+//         },
+//         {
+//             id: 1074,
+//             label: 'menuitems.auth.list.lock-screen-2',
+//             link: '/auth/lock-screen-2'
+//         },
+//         {
+//             id: 1073,
+//             label: 'menuitems.auth.list.logout',
+//             link: '/auth/logout-1'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.logout-2',
+//             link: '/auth/logout-2'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail',
+//             link: '/auth/confirm-mail'
+//         },
+//         {
+//             id: 1072,
+//             label: 'menuitems.auth.list.confirm-mail-2',
+//             link: '/auth/confirm-mail-2'
+//         },
+//     ]
+// },
+// {
+//     id: 1071,
+//     label: 'menuitems.extrapages.text',
+//     icon: 'ri-pages-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1070,
+//             label: 'menuitems.extrapages.list.starter',
+//             link: '/extras/starter'
+//         },
+//         {
+//             id: 1069,
+//             label: 'menuitems.extrapages.list.timeline',
+//             link: '/extras/timeline'
+//         },
+//         {
+//             id: 1068,
+//             label: 'menuitems.extrapages.list.sitemap',
+//             link: '/extras/sitemap'
+//         },
+//         {
+//             id: 1067,
+//             label: 'menuitems.extrapages.list.invoice',
+//             link: '/extras/invoice'
+//         },
+//         {
+//             id: 1066,
+//             label: 'menuitems.extrapages.list.faqs',
+//             link: '/extras/faqs'
+//         },
+//         {
+//             id: 1065,
+//             label: 'menuitems.extrapages.list.search-results',
+//             link: '/extras/search-results'
+//         },
+//         {
+//             id: 1064,
+//             label: 'menuitems.extrapages.list.pricing',
+//             link: '/extras/pricing'
+//         },
+//         {
+//             id: 1063,
+//             label: 'menuitems.extrapages.list.maintenance',
+//             link: '/extras/maintenance'
+//         },
+//         {
+//             id: 1062,
+//             label: 'menuitems.extrapages.list.comingsoon',
+//             link: '/extras/coming-soon'
+//         },
+//         {
+//             id: 1061,
+//             label: 'menuitems.extrapages.list.lightbox',
+//             link: '/extras/lightbox'
+//         },
+//         {
+//             id: 1060,
+//             label: 'menuitems.extrapages.list.error404',
+//             link: '/error/404'
+//         },
+//         {
+//             id: 1059,
+//             label: 'menuitems.extrapages.list.error404-alt',
+//             link: '/error/404-alt'
+//         },
+//         {
+//             id: 1058,
+//             label: 'menuitems.extrapages.list.error500',
+//             link: '/error/500'
+//         }
+//     ]
+// },
+// {
+//     id: 1057,
+//     label: "menuitems.components.text",
+//     isTitle: true
+// },
+// {
+//     id: 1056,
+//     label: 'menuitems.ui.text',
+//     icon: 'ri-pencil-ruler-2-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1055,
+//             label: 'menuitems.ui.list.avatars',
+//             link: '/ui/avatars'
+//         },
+//         {
+//             id: 1054,
+//             label: 'menuitems.ui.list.buttons',
+//             link: '/ui/buttons'
+//         },
+//         {
+//             id: 1053,
+//             label: 'menuitems.ui.list.cards',
+//             link: '/ui/cards'
+//         },
+//         {
+//             id: 1052,
+//             label: 'menuitems.ui.list.carousel',
+//             link: '/ui/carousel'
+//         },
+//         {
+//             id: 1051,
+//             label: 'menuitems.ui.list.dropdowns',
+//             link: '/ui/dropdowns'
+//         },
+//         {
+//             id: 1050,
+//             label: 'menuitems.ui.list.video',
+//             link: '/ui/video'
+//         },
+//         {
+//             id: 1049,
+//             label: 'menuitems.ui.list.general',
+//             link: '/ui/general'
+//         },
+//         {
+//             id: 1048,
+//             label: 'menuitems.ui.list.grid',
+//             link: '/ui/grid'
+//         },
+//         {
+//             id: 1047,
+//             label: 'menuitems.ui.list.images',
+//             link: '/ui/images'
+//         },
+//         {
+//             id: 1046,
+//             label: 'menuitems.ui.list.listgroup',
+//             link: '/ui/list-group'
+//         },
+//         {
+//             id: 1045,
+//             label: 'menuitems.ui.list.modals',
+//             link: '/ui/modals'
+//         },
+//         {
+//             id: 1044,
+//             label: 'menuitems.ui.list.notifications',
+//             link: '/ui/notifications'
+//         },
+//         {
+//             id: 1043,
+//             label: 'menuitems.ui.list.portlet',
+//             link: '/ui/portlets'
+//         },
+//         {
+//             id: 1042,
+//             label: 'menuitems.ui.list.progress',
+//             link: '/ui/progress'
+//         },
+//         {
+//             id: 1041,
+//             label: 'menuitems.ui.list.ribbons',
+//             link: '/ui/ribbons'
+//         },
+//         {
+//             id: 1040,
+//             label: 'menuitems.ui.list.spinners',
+//             link: '/ui/spinners'
+//         },
+//         {
+//             id: 1039,
+//             label: 'menuitems.ui.list.tabs',
+//             link: '/ui/tabs-accordions'
+//         },
+//         {
+//             id: 1038,
+//             label: 'menuitems.ui.list.tooltip',
+//             link: '/ui/tooltips-popovers'
+//         },
+//         {
+//             id: 1037,
+//             label: 'menuitems.ui.list.typography',
+//             link: '/ui/typography'
+//         }
+//     ]
+// },
+// {
+//     id: 1036,
+//     label: 'menuitems.extendedui.text',
+//     icon: 'ri-stack-line',
+//     badge: {
+//         variant: "primary",
+//         text: "menuitems.extendedui.badge"
+//     },
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1035,
+//             label: 'menuitems.extendedui.list.rangeslider',
+//             link: '/extended/rangeslider'
+//         },
+//         {
+//             id: 1034,
+//             label: 'menuitems.extendedui.list.sweetalert',
+//             link: '/extended/sweet-alert'
+//         },
+//         {
+//             id: 1033,
+//             label: 'menuitems.extendedui.list.tour',
+//             link: '/extended/tour'
+//         },
+//         {
+//             id: 1032,
+//             label: 'menuitems.extendedui.list.scrollspy',
+//             link: '/extended/scrollspy'
+//         },
+//     ]
+// },
+// {
+//     id: 1031,
+//     label: 'menuitems.widgets.text',
+//     icon: 'ri-honour-line',
+//     link: '/widgets'
+// },
+// {
+//     id: 1024,
+//     label: 'menuitems.icons.text',
+//     icon: 'ri-markup-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1025,
+//             label: 'menuitems.icons.list.feather',
+//             link: '/icons/feather'
+//         },
+//         {
+//             id: 1026,
+//             label: 'menuitems.icons.list.remix',
+//             link: '/icons/remix'
+//         },
+//         {
+//             id: 1027,
+//             label: 'menuitems.icons.list.boxicons',
+//             link: '/icons/boxicons'
+//         },
+//         {
+//             id: 1028,
+//             label: 'menuitems.icons.list.materialdesign',
+//             link: '/icons/mdi'
+//         },
+//         {
+//             id: 1029,
+//             label: 'menuitems.icons.list.fontawesome',
+//             link: '/icons/font-awesome'
+//         },
+//         {
+//             id: 1030,
+//             label: 'menuitems.icons.list.weather',
+//             link: '/icons/weather'
+//         }
+//     ]
+// },
+// {
+//     id: 1023,
+//     label: 'menuitems.forms.text',
+//     icon: 'ri-eraser-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1022,
+//             label: 'menuitems.forms.list.elements',
+//             link: '/forms/elements'
+//         },
+//         {
+//             id: 1021,
+//             label: 'menuitems.forms.list.advanced',
+//             link: '/forms/advanced'
+//         },
+//         {
+//             id: 1020,
+//             label: 'menuitems.forms.list.validation',
+//             link: '/forms/validation'
+//         },
+//         {
+//             id: 1019,
+//             label: 'menuitems.forms.list.wizard',
+//             link: '/forms/wizard'
+//         },
+//         {
+//             id: 1018,
+//             label: 'menuitems.forms.list.mask',
+//             link: '/forms/mask'
+//         },
+//         {
+//             id: 1017,
+//             label: 'menuitems.forms.list.editor',
+//             link: '/forms/quill'
+//         },
+//         {
+//             id: 1016,
+//             label: 'menuitems.forms.list.fileupload',
+//             link: '/forms/file-uploads'
+//         }
+//     ]
+// },
+// {
+//     id: 1015,
+//     label: 'menuitems.tables.text',
+//     icon: 'ri-table-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1014,
+//             label: 'menuitems.tables.list.basic',
+//             link: '/tables/basic'
+//         },
+//         {
+//             id: 1013,
+//             label: 'menuitems.tables.list.advanced',
+//             link: '/tables/advanced'
+//         },
+//     ]
+// },
+// {
+//     id: 1012,
+//     label: 'menuitems.charts.text',
+//     icon: 'ri-bar-chart-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1007,
+//             label: 'menuitems.charts.list.apex',
+//             link: '/charts/apex'
+//         },
+//         {
+//             id: 1008,
+//             label: 'menuitems.charts.list.chartjs',
+//             link: '/charts/chartjs'
+//         },
+//         {
+//             id: 1009,
+//             label: 'menuitems.charts.list.c3',
+//             link: '/charts/c3'
+//         },
+//         {
+//             id: 1010,
+//             label: 'menuitems.charts.list.chartist',
+//             link: '/charts/chartist'
+//         },
+//         {
+//             id: 1011,
+//             label: 'menuitems.charts.list.knob',
+//             link: '/charts/knob'
+//         }
+//     ]
+// },
+// {
+//     id: 1006,
+//     label: 'menuitems.maps.text',
+//     icon: 'ri-map-pin-line',
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1005,
+//             label: 'menuitems.maps.list.googlemap',
+//             link: '/maps/google'
+//         }
+//     ]
+// },
+// {
+//     id: 1004,
+//     label: "menuitems.multilevel.text",
+//     icon: "ri-share-line",
+//     isMenuCollapsed: false,
+//     subItems: [
+//         {
+//             id: 1003,
+//             label: "menuitems.multilevel.list.level1.1",
+//             link: "javascript: void(0);",
+//         },
+//         {
+//             id: 1002,
+//             label: "menuitems.multilevel.list.level1.2",
+//             isMenuCollapsed: false,
+//             subItems: [
+//                 {
+//                     id: 1001,
+//                     label: "menuitems.multilevel.list.level1.level2.1",
+//                     link: "javascript: void(0);"
+//                 },
+//                 {
+//                     id: 1000,
+//                     label: "menuitems.multilevel.list.level1.level2.2",
+//                     link: "javascript: void(0);"
+//                 }
+//             ]
+//         }
+//     ]
+// }
+];
 
 /***/ }),
 

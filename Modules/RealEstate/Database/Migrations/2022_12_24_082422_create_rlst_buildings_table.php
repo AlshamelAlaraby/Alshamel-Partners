@@ -31,6 +31,8 @@ return new class extends Migration
             $table->double('lat')->nullable()->default(0);
             $table->text('properties')->nullable();
             $table->text('attachments')->nullable();
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

@@ -103,7 +103,7 @@
         "store": "Stores"
     },
     "serial": {
-        "addserial": "New Add Serial",
+        "addserial": "Add New Serial",
         "editserial": "Edit Serial",
         "serialsTable": "Serials Table",
         "serial": "Serials"
@@ -239,6 +239,9 @@
         },
         "currency": {
             "text": "Currencies"
+        },
+        "Banks": {
+            "text": "Banks"
         },
         "financialYear": {
             "text": "Financial Year"
@@ -499,6 +502,27 @@
     }
     },
     "general": {
+        "notMatch":"is not match with password",
+        "notValidEmail":"Invalid email",
+        "password":"Password",
+        "password_confirmation":"Password confirmation",
+        "BanksTable":"Banks Table",
+        "UsersTable":"Users table",
+        "AddUser":"Add User",
+        "EditUser":"Edit User",
+        "AddBank":"Add bank",
+        "EditBank":"Edit bank",
+        "SwiftCode":"Swift code",
+        "Apply":"Apply",
+        "Users":"users",
+        "Perfix":"Perfix",
+        "Suffix":"Suffix",
+        "StartNo":"Start number",
+        "RestartPeriod":"Restart period",
+        "Branch":"Branch",
+        "Store":"Store",
+        "Default":"Default",
+        "Nondefault":"Nondefault",
         "fieldIsRequired": "This field is required",
         "PleaseEnterValidEmail": "Please enter valid email.",
         "notDataFound": "Not Data Found",
@@ -560,12 +584,12 @@
         "edit": "Edit",
         "searchSetting": "Search Setting",
         "long_name": "Long Name(arabic)",
-        "long_name_e": "Long Name(English)",
+        "long_name_e": "Long Name(english)",
         "short_code": "Short Code",
         "codeAr": "Code(arabic)",
-        "code_e": "Code((English))",
+        "code_e": "Code((english))",
         "fraction": "Fraction(arabic)",
-        "fraction_e": "Fraction((English))",
+        "fraction_e": "Fraction((english))",
         "fraction_no": "Fraction Number",
         "phone_key": "Phone key",
         "national": "National Id",
@@ -584,8 +608,8 @@
         "No": "No",
         "branch": "Branch",
         "store": "Store",
-        "symbol_e": "Symbol (English)",
-        "symbol": "Symbol (Arabic)",
+        "symbol_e": "Symbol (english)",
+        "symbol": "Symbol (arabic)",
         "salesManType" : "Sale Man Type",
         "employee": "Employee",
         "DataEntry": "Data Entry",

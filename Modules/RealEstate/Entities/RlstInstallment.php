@@ -3,24 +3,22 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Models\Currency;
-use Spatie\Activitylog\LogOptions;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Contracts\Activity;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\CausesActivity;
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
 
 class RlstInstallment extends Model
 {
-    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
         'date',
         'pay_type',
         'amount',
         "currency_id",
-        "rest_amount"
+        "rest_amount",
     ];
 
     protected $casts = [
@@ -37,7 +35,6 @@ class RlstInstallment extends Model
     {
         return $this->belongsTo(Currency::class, 'currency_id');
     }
-
 
     // scopes
 
@@ -57,14 +54,6 @@ class RlstInstallment extends Model
         });
     }
 
-    // activities
-
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
-    }
-
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->id ?? "system";
@@ -72,6 +61,6 @@ class RlstInstallment extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Real Estate Installmentss')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

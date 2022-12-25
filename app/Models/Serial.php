@@ -15,9 +15,9 @@ class Serial extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'is_default' => 'App\Enums\IsDefault',
-    ];
+    // protected $casts = [
+    //     'is_default' => 'App\Enums\IsDefault',
+    // ];
 
     public function tapActivity(Activity $activity, string $eventName)
     {
@@ -33,5 +33,11 @@ class Serial extends Model
             ->logAll()
             ->useLogName('Serial')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
+    public function store(){
+        return $this->belongsTo(Store::class);
     }
 }

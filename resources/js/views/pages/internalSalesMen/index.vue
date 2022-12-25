@@ -9,7 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
-
+import employee from "../../../components/create/employee.vue";
 /**
  * Advanced Table component
  */
@@ -24,7 +24,8 @@ export default {
         Switches,
         ErrorMessage,
         loader,
-        Multiselect
+        Multiselect,
+        employee
     },
     data() {
         return {
@@ -50,6 +51,11 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
+            setting: {
+                employee_id: true,
+                is_active: true,
+            },
+            is_disabled: false,
             filterSetting: ['employee_id']
         }
     },
@@ -103,8 +109,12 @@ export default {
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i > this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
-            adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}`)
+            adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.inernalSales = l.data;
@@ -125,8 +135,12 @@ export default {
         getDataCurrentPage(page =1) {
             if (this.current_page <= this.inernalSalesPagination.last_page && this.current_page != this.inernalSalesPagination.current_page && this.current_page) {
                 this.isLoader = true;
+                let filter = '';
+                for (let i = 0; i > this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
 
-                adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`)
+                adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.inernalSales = l.data;
@@ -227,6 +241,18 @@ export default {
          *  create module
          */
 
+        resetForm() {
+            this.create = {
+                is_active: "active",
+                employee_id: null
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.is_disabled = false;
+            this.getEmployee();
+            this.errors = {};
+        },
         AddSubmit() {
 
             this.$v.create.$touch();
@@ -238,7 +264,7 @@ export default {
                 this.errors = {};
                 adminApi.post(`/internal-salesmen`, this.create)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
+                        this.is_disabled = true;
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -354,8 +380,9 @@ export default {
 
             await adminApi.get(`/employees`)
                 .then((res) => {
-                    let l = res.data;
-                    this.employees = l.data;
+                    let l = res.data.data;
+                    l.unshift({ id: 0, name: "اضف موظف", name_e: "Add Employee" });
+                    this.employees = l;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -367,7 +394,19 @@ export default {
                 .finally(() => {
                     this.isLoader = false;
                 });
-        }
+        },
+        showEmployeeModal() {
+            if (this.create.employee_id == 0) {
+                this.$bvModal.show("employee-create");
+                this.create.employee_id = null;
+            }
+        },
+        showEmployeeModalEdit() {
+            if (this.edit.employee_id == 0) {
+                this.$bvModal.show("employee-create");
+                this.edit.employee_id = null;
+            }
+        },
     },
 };
 </script>
@@ -375,6 +414,7 @@ export default {
 <template>
     <Layout>
         <PageHeader/>
+        <employee @created="getEmployee" />
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -389,11 +429,8 @@ export default {
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
-                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                                            {{ $t('general.Name') }}
-                                        </b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                                            {{ $t('general.Name_en') }}
+                                        <b-form-checkbox v-model="filterSetting" value="employee_id" class="mb-1">
+                                            {{ $t('employee.employee') }}
                                         </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
@@ -481,12 +518,22 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.employee_id" class="mb-1">{{
+                                                    $t('employee.employee')
+                                                }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">
+                                                {{ $t('general.Status') }}
+                                            </b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -536,6 +583,37 @@ export default {
                         >
                             <form>
                                 <div class="row">
+                                    <div class="mb-3 d-flex justify-content-end">
+
+                                        <b-button
+                                            variant="success"
+                                            :disabled="!is_disabled"
+                                            @click.prevent="resetForm"
+                                            type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                        >
+                                            {{ $t('general.AddNewRecord') }}
+                                        </b-button>
+                                        <template v-if="!is_disabled">
+                                            <b-button
+                                                variant="success"
+                                                type="button" class="mx-1"
+                                                v-if="!isLoader"
+                                                @click.prevent="AddSubmit"
+                                            >
+                                                {{ $t('general.Add') }}
+                                            </b-button>
+
+                                            <b-button variant="success" class="mx-1" disabled v-else>
+                                                <b-spinner small></b-spinner>
+                                                <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                            </b-button>
+                                        </template>
+                                        <!-- Emulate built in modal footer ok and cancel button actions -->
+
+                                        <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
+                                            {{ $t('general.Cancel') }}
+                                        </b-button>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">
@@ -543,6 +621,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
+                                                @input="showEmployeeModal"
                                                 v-model="create.employee_id"
                                                 :options="employees.map(type => type.id)"
                                                 :custom-label="opt => employees.find(x => x.id == opt).name">
@@ -561,50 +640,22 @@ export default {
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class=" mr-2" for="inlineFormCustomSelectPref">
+                                            <label class=" mr-2">
                                                 {{ $t('general.Status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <select
-                                                class="custom-select mr-sm-2"
-                                                id="inlineFormCustomSelectPref"
-                                                data-create="9"
-                                                @keypress.enter.prevent="moveInput('input','create',1)"
-                                                v-model="$v.create.is_active.$model"
-                                                :class="{
+                                            <b-form-group :class="{
                                                 'is-invalid':$v.create.is_active.$error || errors.is_active,
                                                 'is-valid':!$v.create.is_active.$invalid && !errors.is_active
-                                            }"
-                                            >
-                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
-                                            </select>
+                                            }">
+                                                <b-form-radio class="d-inline-block" v-model="$v.create.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
+                                                <b-form-radio class="d-inline-block m-1" v-model="$v.create.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
+                                            </b-form-group>
                                             <template v-if="errors.is_active">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-1 d-flex justify-content-end">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button
-                                        variant="success"
-                                        type="button" class="mx-1"
-                                        v-if="!isLoader && isButton"
-                                        @click.prevent="AddSubmit"
-                                    >
-                                        {{ $t('general.Add') }}
-                                    </b-button>
-
-                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                        <b-spinner small></b-spinner>
-                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                    </b-button>
-
-                                    <b-button variant="secondary" type="button" @click.prevent="resetModalHidden">
-                                        {{ $t('general.Cancel') }}
-                                    </b-button>
                                 </div>
                             </form>
                         </b-modal>
@@ -629,7 +680,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.employee_id">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.employee') }}</span>
                                             <div class="arrow-sort">
@@ -640,7 +691,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                         </div>
@@ -670,10 +721,10 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.employee_id">
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.employee.name : data.employee.name_e}}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.is_active">
                                         <span :class="[
                                            data.is_active  == 'active' ?
                                             'text-success':
@@ -733,7 +784,29 @@ export default {
                                             @show="resetModalEdit(data.id)"
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
-                                            <form @submit.stop.prevent="editSubmit(data.id)">
+                                            <form>
+                                                <div class="mb-3 d-flex justify-content-end">
+                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                                    <b-button variant="success" type="submit" class="mx-1"
+                                                              v-if="!isLoader"
+                                                              @click.prevent="editSubmit(data.id)"
+                                                    >
+                                                        {{ $t('general.Edit') }}
+                                                    </b-button>
+
+                                                    <b-button variant="success" class="mx-1" disabled v-else>
+                                                        <b-spinner small></b-spinner>
+                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                    </b-button>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        type="button"
+                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                    >
+                                                        {{ $t('general.Cancel') }}
+                                                    </b-button>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -742,6 +815,7 @@ export default {
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
+                                                                @input="showEmployeeModalEdit"
                                                                 v-model="edit.employee_id"
                                                                 :options="employees.map(type => type.id)"
                                                                 :custom-label="opt => employees.find(x => x.id == opt).name">
@@ -760,50 +834,22 @@ export default {
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label class=" mr-2" for="lsdklsd">
+                                                            <label class=" mr-2">
                                                                 {{ $t('general.Status') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
-                                                            <select
-                                                                class="custom-select mr-sm-2"
-                                                                id="lsdklsd"
-                                                                data-create="9"
-                                                                @keypress.enter.prevent="moveInput('select','create',1)"
-                                                                v-model="$v.edit.is_active.$model"
-                                                                :class="{
+                                                            <b-form-group :class="{
                                                                     'is-invalid':$v.edit.is_active.$error || errors.is_active,
                                                                     'is-valid':!$v.edit.is_active.$invalid && !errors.is_active
-                                                                }"
-                                                            >
-                                                                <option value="" selected>{{ $t('general.Choose') }}...</option>
-                                                                <option value="active">{{ $t('general.Active') }}</option>
-                                                                <option value="inactive">{{ $t('general.Inactive') }}</option>
-                                                            </select>
+                                                                }">
+                                                                <b-form-radio class="d-inline-block" v-model="$v.edit.is_active.$model" name="some-radios" value="active">{{$t('general.Active')}}</b-form-radio>
+                                                                <b-form-radio class="d-inline-block m-1" v-model="$v.edit.is_active.$model" name="some-radios" value="inactive">{{$t('general.Inactive')}}</b-form-radio>
+                                                            </b-form-group>
                                                             <template v-if="errors.is_active">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.is_active" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-1 d-flex justify-content-end">
-                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button variant="success" type="submit" class="mx-1"
-                                                              v-if="!isLoader && isButton">
-                                                        {{ $t('general.Edit') }}
-                                                    </b-button>
-
-                                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                                        <b-spinner small></b-spinner>
-                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                                    </b-button>
-
-                                                    <b-button
-                                                        variant="secondary"
-                                                        type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
-                                                    >
-                                                        {{ $t('general.Cancel') }}
-                                                    </b-button>
                                                 </div>
                                             </form>
                                         </b-modal>
