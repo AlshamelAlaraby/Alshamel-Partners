@@ -30,4 +30,10 @@ class RlstBuilding extends Model
         return json_decode($value);
     }
 
+
+    public function buildingWallet()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstBuildingWallet::class);
+    }
+
 }

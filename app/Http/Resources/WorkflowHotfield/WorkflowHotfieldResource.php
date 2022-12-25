@@ -18,8 +18,9 @@ class WorkflowHotfieldResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "workflow" => $this->workflow_id ,
-            "hotfield" => $this->hotfield_id ,
+            "id"=>$this->id,
+            "workflow_id" => $this->workflow_id ,
+            "hotfield_id" => $this->hotfield_id ,
         ];
     }
 

@@ -42,9 +42,9 @@ class RlstBuildingController extends Controller
 
     public function create(CreateRlstBuildingRequest $request)
     {
-        $this->model->create($request->validated());
+        $model = $this->model->create($request->validated());
 
-        return responseJson(200, 'created');
+        return responseJson(200, 'created', new RlstBuildingResource($model));
     }
 
     public function update($id, UpdateRlstBuildingRequest $request)
@@ -55,8 +55,8 @@ class RlstBuildingController extends Controller
         }
 
         $model->update($request->validated());
-
-        return responseJson(200, 'updated');
+        $model->refresh();
+        return responseJson(200, 'updated', new RlstBuildingResource($model));
     }
 
     public function logs($id)

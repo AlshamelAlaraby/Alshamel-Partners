@@ -2053,7 +2053,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/users/".concat(this.user_id), {
         old_media: old_media
       }).then(function (res) {
-        _this15.images = res.data.data.media ? res.data.data.media : _this15.images;
+        _this15.images = res.data.data.media ? res.data.data.media : [];
         if (_this15.images && _this15.images.length > 0) {
           {
             _this15.showPhoto = _this15.images[_this15.images.length - 1].webp;
@@ -7164,6 +7164,21 @@ var menuItems = [{
   label: 'menuitems.Banks.text',
   icon: 'fas fa-eraser',
   link: '/banks'
+}, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-eraser',
+  link: '/workflow-hotfields'
+}, {
+  id: 225,
+  label: 'general.ScreenProperties',
+  icon: 'fas fa-eraser',
+  link: '/screen-properties'
+}, {
+  id: 226,
+  label: 'general.TreeProperty',
+  icon: 'fas fa-eraser',
+  link: '/tree-properties'
 }, {
   id: 223,
   label: 'general.Users',

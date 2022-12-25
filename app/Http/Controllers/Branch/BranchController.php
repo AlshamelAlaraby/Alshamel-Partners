@@ -123,6 +123,13 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('not found'));
+        }
+        if ($model->hasChildren()) {
+            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+        }
         $this->repository->delete($id);
         return responseJson(200, __('deleted'));
     }
