@@ -36,7 +36,7 @@ class StoreRepository implements StoreInterface
                 $q->where('company_id', $request->parent_id);
             }
             if ($request->branch_id) {
-                $q->where('branch_id', $request->parent_id);
+                $q->where('branch_id', $request->branch_id);
             }
 
         })->with('branch')->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');

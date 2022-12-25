@@ -47,9 +47,7 @@ class BranchController extends Controller
     public function store(CreateBranchRequest $request)
     {
         try {
-            if (!DB::table('companies')->find($request->company_id)) {
-                return responseJson(404, __('company does\'t exist'));
-            }
+
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
         } catch (Exception $exception) {
@@ -89,12 +87,7 @@ class BranchController extends Controller
     public function update(EditBranchRequest $request, $id)
     {
         $data = [];
-        if ($request->company_id) {
-            if (!DB::table('companies')->find($request->company_id)) {
-                return responseJson(422, __('company does\'t exist'));
-            }
-            $data['company_id'] = $request->company_id;
-        }
+        $data['company_id'] = $request->company_id;
         if ($request->name) {
             $data['name'] = $request->name;
         }
