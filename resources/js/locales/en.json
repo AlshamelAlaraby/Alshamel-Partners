@@ -502,6 +502,18 @@
     }
     },
     "general": {
+        "ScreenPropertiesTable":"Screen and properties table",
+        "cantSelectCurrentNode":"Cant select current node",
+        "Required":"Required",
+        "TreePropertiesTable":"Tree properties table",
+        "Screen":"Screen",
+        "Property":"Property",
+        "TreeProperty":"Tree properties",
+        "ScreenProperties":"Screen with properties",
+        "workflowHotfieldTable":"Workflow with hotfields table",
+        "Workflow":"Workflow",
+        "Hotfield":"Hotfield",
+        "Workflowhotfields":"Workflow with hotfields",
         "notMatch":"is not match with password",
         "notValidEmail":"Invalid email",
         "password":"Password",

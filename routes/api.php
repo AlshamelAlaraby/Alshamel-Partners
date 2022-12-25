@@ -8,6 +8,7 @@ use App\Http\Controllers\InternalSalesman\InternalSalesmanController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\RoleType\RoleTypeController;
 use App\Http\Controllers\RoleWorkflow\RoleWorkflowController;
+use App\Http\Controllers\ScreenTreeProperty\ScreenTreePropertyController;
 use App\Http\Controllers\Serials\SerialController;
 use App\Http\Controllers\TreeProperty\TreePropertyController;
 use Illuminate\Support\Facades\Route;
@@ -317,8 +318,17 @@ Route::resource('currencies', CurrencyController::class)->except('create', 'edit
 Route::get('currencies/logs/{id}', [CurrencyController::class, 'logs']);
 Route::resource('roles', RoleController::class)->except('create', 'edit');
 Route::resource('role_types', RoleTypeController::class)->except('create', 'edit');
+Route::group(['prefix' => 'tree-properties'], function () {
+    Route::controller(TreePropertyController::class)->group(function () {
+        Route::get('root-nodes', 'getRootNodes');
+        Route::get('/child-nodes/{parentId}', 'getChildNodes');
+    });
+});
 Route::resource('tree-properties', TreePropertyController::class)->except('create', 'edit');
 Route::get('tree-properties/logs/{id}', [TreePropertyController::class, 'logs']);
+
+Route::resource('screen-tree-properties', ScreenTreePropertyController::class)->except('create', 'edit');
+Route::get('screen-tree-properties/logs/{id}', [ScreenTreePropertyController::class, 'logs']);
 
 Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
 Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);

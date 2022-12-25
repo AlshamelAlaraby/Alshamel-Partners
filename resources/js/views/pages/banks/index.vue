@@ -6,6 +6,7 @@ import Switches from "vue-switches";
 import {required, minLength, maxLength, integer} from "vuelidate/lib/validators";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
+import Country from "../../../components/country";
 import loader from "../../../components/loader";
 import {dynamicSortString, dynamicSortNumber} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
@@ -20,6 +21,7 @@ export default {
     },
     components: {
         Layout,
+        Country,
         PageHeader,
         Switches,
         ErrorMessage,
@@ -130,6 +132,18 @@ export default {
         });
     },
     methods: {
+        showCountryModal() {
+            if (this.create.country_id == 0) {
+                this.$bvModal.show("country-create");
+                this.create.country_id = null;
+            }
+        },
+        showCountryModalEdit() {
+            if (this.edit.country_id == 0) {
+                this.$bvModal.show("country-create");
+                this.edit.country_id = null;
+            }
+        },
         resetForm() {
             this.create = {
                 name: "",
@@ -142,17 +156,13 @@ export default {
             });
             this.is_disabled = false;
         },
-
         /**
          *  start get Data countrie && pagination
          */
         getData(page = 1) {
             this.isLoader = true;
-
             adminApi
-                .get(
-                    `/banks?page=${page}&per_page=${this.per_page}`
-                )
+                .get(`/banks?page=${page}&per_page=${this.per_page}`)
                 .then((res) => {
                     let l = res.data;
                     this.banks = l.data;
@@ -177,7 +187,6 @@ export default {
                 this.current_page
             ) {
                 this.isLoader = true;
-
                 adminApi
                     .get(
                         `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`
@@ -220,7 +229,6 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     this.isLoader = true;
-
                     adminApi
                         .delete(`/banks/${id}`)
                         .then((res) => {
@@ -286,7 +294,6 @@ export default {
         /**
          *  create countrie
          */
-
         AddSubmit() {
             if (!this.create.name) {
                 this.create.name = this.create.name_e;
@@ -295,20 +302,17 @@ export default {
                 this.create.name_e = this.create.name;
             }
             this.$v.create.$touch();
-
             if (this.$v.create.$invalid) {
                 return;
             } else {
                 this.isLoader = true;
                 this.errors = {};
                 this.is_disabled = false;
-
                 adminApi
                     .post(`/banks`, this.create)
                     .then((res) => {
                         this.getData();
                         this.is_disabled = true;
-
                         setTimeout(() => {
                             Swal.fire({
                                 icon: "success",
@@ -344,9 +348,7 @@ export default {
             if (!this.edit.name_e) {
                 this.edit.name_e = this.edit.name;
             }
-
             this.$v.edit.$touch();
-
             if (this.$v.edit.$invalid) {
                 return;
             } else {
@@ -438,8 +440,9 @@ export default {
             await adminApi
                 .get(`/countries`)
                 .then((res) => {
-                    let l = res.data;
-                    this.countries = l.data;
+                    let l = res.data.data;
+                    l.unshift({id: 0, name: "اضف دولة", name_e: "Add Country"});
+                    this.countries = l;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -459,6 +462,8 @@ export default {
 <template>
     <Layout>
         <PageHeader/>
+        <Country @created="getCountries"/>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -475,13 +480,10 @@ export default {
                                         ref="dropdown"
                                         class="btn-block setting-search"
                                     >
-                                        <b-form-checkbox
-                                            v-model="filterSetting"
-                                            value="name"
-                                            class="mb-1"
-                                        >{{ $t("general.Name") }}
-                                        </b-form-checkbox
-                                        >
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
+                                            $t("general.Name")
+                                            }}
+                                        </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="name_e"
@@ -602,7 +604,7 @@ export default {
                                             </b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">{{
-                                                        $t("general.Apply")
+                                                    $t("general.Apply")
                                                     }}</a>
                                             </div>
                                         </b-dropdown>
@@ -705,6 +707,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
+                                                @input="showCountryModal"
                                                 v-model="create.country_id"
                                                 :options="countries.map((type) => type.id)"
                                                 :custom-label="
@@ -724,6 +727,35 @@ export default {
                                             <template v-if="errors.country_id">
                                                 <ErrorMessage
                                                     v-for="(errorMessage, index) in errors.country_id"
+                                                    :key="index"
+                                                >{{ errorMessage }}
+                                                </ErrorMessage
+                                                >
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="field-15" class="control-label">
+                                                {{ $t("general.SwiftCode") }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                data-create="1"
+                                                @keypress.enter="moveInput('input', 'create', 2)"
+                                                v-model="$v.create.swift_code.$model"
+                                                :class="{
+                          'is-invalid': $v.create.swift_code.$error || errors.swift_code,
+                          'is-valid':
+                            !$v.create.swift_code.$invalid && !errors.swift_code,
+                        }"
+                                                id="field-15"
+                                            />
+                                            <template v-if="errors.swift_code">
+                                                <ErrorMessage
+                                                    v-for="(errorMessage, index) in errors.swift_code"
                                                     :key="index"
                                                 >{{ errorMessage }}
                                                 </ErrorMessage
@@ -807,35 +839,6 @@ export default {
                                                     :key="index"
                                                 >{{ errorMessage }}
                                                 </ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="field-15" class="control-label">
-                                                {{ $t("general.SwiftCode") }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="1"
-                                                @keypress.enter="moveInput('input', 'create', 2)"
-                                                v-model="$v.create.swift_code.$model"
-                                                :class="{
-                          'is-invalid': $v.create.swift_code.$error || errors.swift_code,
-                          'is-valid':
-                            !$v.create.swift_code.$invalid && !errors.swift_code,
-                        }"
-                                                id="field-15"
-                                            />
-                                            <template v-if="errors.swift_code">
-                                                <ErrorMessage
-                                                    v-for="(errorMessage, index) in errors.swift_code"
-                                                    :key="index"
-                                                >{{ errorMessage }}
-                                                </ErrorMessage
-                                                >
                                             </template>
                                         </div>
                                     </div>
@@ -965,7 +968,7 @@ export default {
                                     <td v-if="setting.country_id">
                                         <h5 class="m-0 font-weight-normal">
                                             {{
-                                                $i18n.locale == "ar" ? data.country.name : data.country.name_e
+                                            $i18n.locale == "ar" ? data.country.name : data.country.name_e
                                             }}
                                         </h5>
                                     </td>
@@ -1058,6 +1061,7 @@ export default {
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
+                                                                @input="showCountryModalEdit"
                                                                 v-model="edit.country_id"
                                                                 :options="countries.map((type) => type.id)"
                                                                 :custom-label="
@@ -1077,6 +1081,36 @@ export default {
                                                             <template v-if="errors.country_id">
                                                                 <ErrorMessage
                                                                     v-for="(errorMessage, index) in errors.country_id"
+                                                                    :key="index"
+                                                                >{{ errorMessage }}
+                                                                </ErrorMessage
+                                                                >
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="field-15" class="control-label">
+                                                                {{ $t("general.SwiftCode") }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                data-create="1"
+                                                                @keypress.enter="moveInput('input', 'create', 2)"
+                                                                v-model="$v.edit.swift_code.$model"
+                                                                :class="{
+                                    'is-invalid':
+                                      $v.edit.swift_code.$error || errors.swift_code,
+                                    'is-valid':
+                                      !$v.edit.swift_code.$invalid && !errors.swift_code,
+                                  }"
+                                                                id="field-15"
+                                                            />
+                                                            <template v-if="errors.swift_code">
+                                                                <ErrorMessage
+                                                                    v-for="(errorMessage, index) in errors.swift_code"
                                                                     :key="index"
                                                                 >{{ errorMessage }}
                                                                 </ErrorMessage
@@ -1174,36 +1208,6 @@ export default {
                                                                     :key="index"
                                                                 >{{ errorMessage }}
                                                                 </ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="field-15" class="control-label">
-                                                                {{ $t("general.SwiftCode") }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-create="1"
-                                                                @keypress.enter="moveInput('input', 'create', 2)"
-                                                                v-model="$v.edit.swift_code.$model"
-                                                                :class="{
-                                    'is-invalid':
-                                      $v.edit.swift_code.$error || errors.swift_code,
-                                    'is-valid':
-                                      !$v.edit.swift_code.$invalid && !errors.swift_code,
-                                  }"
-                                                                id="field-15"
-                                                            />
-                                                            <template v-if="errors.swift_code">
-                                                                <ErrorMessage
-                                                                    v-for="(errorMessage, index) in errors.swift_code"
-                                                                    :key="index"
-                                                                >{{ errorMessage }}
-                                                                </ErrorMessage
-                                                                >
                                                             </template>
                                                         </div>
                                                     </div>

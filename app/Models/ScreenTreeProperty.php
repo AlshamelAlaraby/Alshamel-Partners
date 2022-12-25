@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ScreenTreeProperty extends Model
 {
-    use HasFactory;
+    use HasFactory, LogTrait;
+
+    protected $guarded = ['id'];
+    public function property()
+    {
+        return $this->belongsTo(TreeProperty::class);
+    }
 }
