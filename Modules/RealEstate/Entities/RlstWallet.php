@@ -25,6 +25,11 @@ class RlstWallet extends Model
         return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
     }
 
+    public function buildingWallet()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstBuildingWallet::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->id ?? "system";

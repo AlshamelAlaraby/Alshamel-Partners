@@ -4,15 +4,15 @@ namespace Modules\RealEstate\Http\Controllers;
 
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
-use Modules\RealEstate\Entities\RlstBuilding;
-use Modules\RealEstate\Http\Requests\CreateRlstBuildingRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstBuildingRequest;
-use Modules\RealEstate\Transformers\RlstBuildingResource;
+use Modules\RealEstate\Entities\RlstBuildingWallet;
+use Modules\RealEstate\Http\Requests\CreateRlstBuildingWalletRequest;
+use Modules\RealEstate\Http\Requests\UpdateRlstBuildingWalletRequest;
+use Modules\RealEstate\Transformers\RlstBuildingWalletResource;
 
-class RlstBuildingController extends Controller
+class RlstBuildingWalletController extends Controller
 {
 
-    public function __construct(private RlstBuilding $model)
+    public function __construct(private RlstBuildingWallet $model)
     {
         $this->model = $model;
     }
@@ -24,7 +24,7 @@ class RlstBuildingController extends Controller
             return responseJson(404, 'not found');
         }
 
-        return responseJson(200, 'success', new RlstBuildingResource($model));
+        return responseJson(200, 'success', new RlstBuildingWalletResource($model));
     }
 
     public function all(AllRequest $request)
@@ -37,17 +37,18 @@ class RlstBuildingController extends Controller
             $models = ['data' => $models->get(), 'paginate' => false];
         }
 
-        return responseJson(200, 'success', RlstBuildingResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', RlstBuildingWalletResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstBuildingRequest $request)
+    public function create(CreateRlstBuildingWalletRequest $request)
     {
         $model = $this->model->create($request->validated());
 
-        return responseJson(200, 'created', new RlstBuildingResource($model));
+        return responseJson(200, 'created', new RlstBuildingWalletResource($model));
+
     }
 
-    public function update($id, UpdateRlstBuildingRequest $request)
+    public function update($id, UpdateRlstBuildingWalletRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -56,7 +57,8 @@ class RlstBuildingController extends Controller
 
         $model->update($request->validated());
         $model->refresh();
-        return responseJson(200, 'updated', new RlstBuildingResource($model));
+
+        return responseJson(200, 'updated', new RlstBuildingWalletResource($model));
     }
 
     public function logs($id)
