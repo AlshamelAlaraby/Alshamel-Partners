@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositoriefs\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
+
 use App\Repositories\Avenue\AvenueInterface;
 use App\Repositories\Avenue\AvenueRepository;
 use App\Repositories\BankAccount\BankAccountInterface;
