@@ -657,7 +657,7 @@ export default {
       adminApi
         .put(`/users/${this.user_id}`, { old_media })
         .then((res) => {
-          this.images = res.data.data.media ? res.data.data.media : this.images;
+          this.images = res.data.data.media ? res.data.data.media :[];
           if (this.images && this.images.length > 0) {
             {
               this.showPhoto = this.images[this.images.length - 1].webp;

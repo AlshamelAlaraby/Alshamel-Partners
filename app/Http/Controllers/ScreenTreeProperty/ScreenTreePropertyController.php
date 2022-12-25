@@ -73,7 +73,6 @@ class ScreenTreePropertyController extends Controller
         $model = $this->modelInterface->setting($request);
 
         return responseJson(200, 'success');
-
     }
 
     public function getSetting($user_id, $screen_id)
@@ -90,7 +89,6 @@ class ScreenTreePropertyController extends Controller
 
         $logs = $this->modelInterface->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
-
     }
 
     public function destroy($id)
@@ -103,5 +101,4 @@ class ScreenTreePropertyController extends Controller
 
         return responseJson(200, 'success');
     }
-
 }

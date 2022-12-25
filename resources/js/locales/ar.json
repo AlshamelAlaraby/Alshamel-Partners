@@ -509,6 +509,18 @@
         }
     },
     "general": {
+        "ScreenPropertiesTable":"جدول الشاشات والخصائص",
+        "cantSelectCurrentNode":"لا يمكن اختيار العنصر الحالي",
+        "Required":"مطلوب",
+        "TreePropertiesTable":"جدول شجرة الخصائص",
+        "TreeProperty":"شجرة الخصائص",
+        "ScreenProperties":"الشاشات مع الخصائص",
+        "workflowHotfieldTable":"جدول سير العمل مع الحقول",
+        "Screen":"الشاشة",
+        "Property":"الخاصية",
+        "Workflow":"سير العمل",
+        "Hotfield":"الحقل",
+        "Workflowhotfields":"سير العمل مع الحقول",
         "notMatch":"غير متطابقة مع كلمة المرور",
         "notValidEmail":"ليس بريد الكتروني",
         "password_confirmation":"تاكيد كلمة المرور",
