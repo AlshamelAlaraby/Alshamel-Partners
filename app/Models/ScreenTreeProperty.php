@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ScreenTreeProperty extends Model
 {
-    use HasFactory,LogTrait;
+    use HasFactory, LogTrait;
 
     protected $guarded = ['id'];
+    public function property()
+    {
+        return $this->belongsTo(TreeProperty::class);
+    }
 }

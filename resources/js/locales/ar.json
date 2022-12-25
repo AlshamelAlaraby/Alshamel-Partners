@@ -509,11 +509,12 @@
         }
     },
     "general": {
+        "ScreenPropertiesTable":"جدول الشاشات والخصائص",
         "cantSelectCurrentNode":"لا يمكن اختيار العنصر الحالي",
         "Required":"مطلوب",
         "TreePropertiesTable":"جدول شجرة الخصائص",
         "TreeProperty":"شجرة الخصائص",
-        "ScreenProperties":"الشاشات مع الحقول",
+        "ScreenProperties":"الشاشات مع الخصائص",
         "workflowHotfieldTable":"جدول سير العمل مع الحقول",
         "Screen":"الشاشة",
         "Property":"الخاصية",

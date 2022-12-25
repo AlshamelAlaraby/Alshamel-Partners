@@ -1365,10 +1365,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  */
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   page: {
-    title: "Workflow hotfield",
+    title: "Screen properties",
     meta: [{
       name: "description",
-      content: "Workflow hotfield"
+      content: "Screen properties"
     }]
   },
   components: {
@@ -1383,25 +1383,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       per_page: 50,
       search: "",
       debounce: {},
-      workflowhotfieldsPagination: {},
-      workflowhotfields: [],
-      workflows: [],
-      hotfields: [],
+      screenPropertiesPagination: {},
+      screenProperties: [],
+      screens: [],
+      properties: [],
       enabled3: false,
       isLoader: false,
       create: {
-        workflow_id: null,
-        hotfield_id: null
+        screen_id: null,
+        property_id: null
       },
       edit: {
-        workflow_id: null,
-        hotfield_id: null
+        screen_id: null,
+        property_id: null
       },
       setting: {
-        workflow_id: true,
-        hotfield_id: true
+        screen_id: true,
+        property_id: true
       },
-      filterSetting: ["workflow_id", "hotfield_id"],
+      filterSetting: ["screen_id", "property_id"],
       errors: {},
       isCheckAll: false,
       checkAll: [],
@@ -1412,18 +1412,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   validations: {
     create: {
-      workflow_id: {
+      screen_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
-      hotfield_id: {
+      property_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       }
     },
     edit: {
-      workflow_id: {
+      screen_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
-      hotfield_id: {
+      property_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       }
     }
@@ -1451,7 +1451,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     isCheckAll: function isCheckAll(after, befour) {
       var _this2 = this;
       if (after) {
-        this.workflowhotfields.forEach(function (el) {
+        this.screenProperties.forEach(function (el) {
           if (!_this2.checkAll.includes(el.id)) {
             _this2.checkAll.push(el.id);
           }
@@ -1466,7 +1466,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     /**
-     *  get Data workflowhotfields
+     *  get Data screenProperties
      */
     getData: function getData() {
       var _this3 = this;
@@ -1476,10 +1476,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       for (var i = 0; i > this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
-        _this3.workflowhotfields = l.data;
-        _this3.workflowhotfieldsPagination = l.pagination;
+        _this3.screenProperties = l.data;
+        _this3.screenPropertiesPagination = l.pagination;
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1493,16 +1493,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getDataCurrentPage: function getDataCurrentPage() {
       var _this4 = this;
-      if (this.current_page <= this.workflowhotfieldsPagination.last_page && this.current_page != this.workflowhotfieldsPagination.current_page && this.current_page) {
+      if (this.current_page <= this.screenPropertiesPagination.last_page && this.current_page != this.screenPropertiesPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = "";
         for (var i = 0; i > this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
-          _this4.workflowhotfields = l.data;
-          _this4.workflowhotfieldsPagination = l.pagination;
+          _this4.screenProperties = l.data;
+          _this4.screenPropertiesPagination = l.pagination;
           _this4.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1533,7 +1533,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (result) {
         if (result.value) {
           _this5.isLoader = true;
-          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/workflow-hotfield/".concat(id)).then(function (res) {
+          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/screen-tree-properties/".concat(id)).then(function (res) {
             _this5.getData();
             _this5.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1561,15 +1561,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalHidden: function resetModalHidden() {
       var _this6 = this;
       this.create = {
-        workflow_id: null,
-        hotfield_id: null
+        screen_id: null,
+        property_id: null
       };
       this.$nextTick(function () {
         _this6.$v.$reset();
       });
       this.errors = {};
-      this.workflows = [];
-      this.hotfields = [];
+      this.screens = [];
+      this.properties = [];
     },
     /**
      *  hidden Modal (create)
@@ -1582,14 +1582,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this7.getWorkflows();
+                return _this7.getScreens();
               case 2:
                 _context.next = 4;
-                return _this7.getHotfields();
+                return _this7.getProperties();
               case 4:
                 _this7.create = {
-                  workflow_id: null,
-                  hotfield_id: null
+                  screen_id: null,
+                  property_id: null
                 };
                 _this7.is_disabled = false;
                 _this7.$nextTick(function () {
@@ -1610,8 +1610,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetForm: function resetForm() {
       var _this8 = this;
       this.create = {
-        workflow_id: null,
-        hotfield_id: null
+        screen_id: null,
+        property_id: null
       };
       this.is_disabled = false;
       this.$nextTick(function () {
@@ -1627,7 +1627,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.isLoader = true;
         this.errors = {};
         this.is_disabled = false;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/workflow-hotfield", this.create).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/screen-tree-properties", this.create).then(function (res) {
           _this9.getData();
           _this9.is_disabled = true;
           setTimeout(function () {
@@ -1664,7 +1664,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.isLoader = true;
         this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/workflow-hotfield/".concat(id), this.edit).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/screen-tree-properties/".concat(id), this.edit).then(function (res) {
           _this10.$bvModal.hide("modal-edit-".concat(id));
           _this10.getData();
           setTimeout(function () {
@@ -1693,7 +1693,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /**
      *  get workflows
      */
-    getWorkflows: function getWorkflows() {
+    getScreens: function getScreens() {
       var _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -1701,8 +1701,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/workflow-trees/company-workflows/".concat(_this11.company_id)).then(function (res) {
-                  _this11.workflows = res.data;
+                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/screens").then(function (res) {
+                  _this11.screens = res.data.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                     icon: "error",
@@ -1718,7 +1718,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getHotfields: function getHotfields() {
+    getProperties: function getProperties() {
       var _this12 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -1726,8 +1726,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/hotfields").then(function (res) {
-                  _this12.hotfields = res.data.data;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/tree-properties").then(function (res) {
+                  _this12.properties = res.data.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                     icon: "error",
@@ -1749,22 +1749,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalEdit: function resetModalEdit(id) {
       var _this13 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        var workflowhotfield;
+        var screenProperty;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                workflowhotfield = _this13.workflowhotfields.find(function (e) {
+                screenProperty = _this13.screenProperties.find(function (e) {
                   return id == e.id;
                 });
                 _context4.next = 3;
-                return _this13.getWorkflows();
+                return _this13.getScreens();
               case 3:
                 _context4.next = 5;
-                return _this13.getHotfields();
+                return _this13.getProperties();
               case 5:
-                _this13.edit.workflow_id = workflowhotfield.workflow_id;
-                _this13.edit.hotfield_id = workflowhotfield.hotfield_id;
+                _this13.edit.screen_id = screenProperty.screen_id;
+                _this13.edit.property_id = screenProperty.property_id;
                 _this13.errors = {};
               case 8:
               case "end":
@@ -1780,8 +1780,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        workflow_id: null,
-        hotfield_id: null
+        screen_id: null,
+        property_id: null
       };
     },
     /**
@@ -4911,7 +4911,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(_vm._s(_vm.$t("general.workflowHotfieldTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.ScreenPropertiesTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -5099,11 +5099,11 @@ var render = function render() {
     staticStyle: {
       "font-size": "15px"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.workflowhotfieldsPagination.from) + "-" + _vm._s(_vm.workflowhotfieldsPagination.to) + "\n                    /\n                    " + _vm._s(_vm.workflowhotfieldsPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.screenPropertiesPagination.from) + "-" + _vm._s(_vm.screenPropertiesPagination.to) + "\n                    /\n                    " + _vm._s(_vm.screenPropertiesPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
-      "pointer-events": _vm.workflowhotfieldsPagination.current_page == 1 ? "none" : ""
+      "pointer-events": _vm.screenPropertiesPagination.current_page == 1 ? "none" : ""
     },
     attrs: {
       href: "javascript:void(0)"
@@ -5111,7 +5111,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.getData(_vm.workflowhotfieldsPagination.current_page - 1);
+        return _vm.getData(_vm.screenPropertiesPagination.current_page - 1);
       }
     }
   }, [_c("span", [_vm._v("<")])]), _vm._v(" "), _c("input", {
@@ -5140,7 +5140,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("a", {
     style: {
-      "pointer-events": _vm.workflowhotfieldsPagination.last_page == _vm.workflowhotfieldsPagination.current_page ? "none" : ""
+      "pointer-events": _vm.screenPropertiesPagination.last_page == _vm.screenPropertiesPagination.current_page ? "none" : ""
     },
     attrs: {
       href: "javascript:void(0)"
@@ -5148,7 +5148,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.getData(_vm.workflowhotfieldsPagination.current_page + 1);
+        return _vm.getData(_vm.screenPropertiesPagination.current_page + 1);
       }
     }
   }, [_c("span", [_vm._v(">")])])])])], 1)])]), _vm._v(" "), _c("b-modal", {
@@ -5267,9 +5267,9 @@ var render = function render() {
       "custom-label": function customLabel(opt) {
         return _vm.$i18n.locale == "ar" ? _vm.properties.find(function (x) {
           return x.id == opt;
-        }).field_title : _vm.properties.find(function (x) {
+        }).name : _vm.properties.find(function (x) {
           return x.id == opt;
-        }).field_title_en;
+        }).name_e;
       }
     },
     model: {
@@ -5346,14 +5346,14 @@ var render = function render() {
     staticClass: "fas fa-arrow-up",
     on: {
       click: function click($event) {
-        _vm.workflowhotfields.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "name" : "name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "name" : "name_e"));
       }
     }
   }), _vm._v(" "), _c("i", {
     staticClass: "fas fa-arrow-down",
     on: {
       click: function click($event) {
-        _vm.workflowhotfields.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-name" : "-name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-name" : "-name_e"));
       }
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("th", [_c("div", {
@@ -5364,19 +5364,19 @@ var render = function render() {
     staticClass: "fas fa-arrow-up",
     on: {
       click: function click($event) {
-        _vm.workflowhotfields.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "name" : "name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "name" : "name_e"));
       }
     }
   }), _vm._v(" "), _c("i", {
     staticClass: "fas fa-arrow-down",
     on: {
       click: function click($event) {
-        _vm.workflowhotfields.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-name" : "-name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-name" : "-name_e"));
       }
     }
   })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
-  })])])]), _vm._v(" "), _vm.workflowhotfields.length > 0 ? _c("tbody", _vm._l(_vm.workflowhotfields, function (data, index) {
+  })])])]), _vm._v(" "), _vm.screenProperties.length > 0 ? _c("tbody", _vm._l(_vm.screenProperties, function (data, index) {
     return _c("tr", {
       key: data.id,
       staticClass: "body-tr-custom",
@@ -5435,7 +5435,7 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v("\n                      " + _vm._s(data.screen_id) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                      " + _vm._s(data.hotfield_id) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.tree_property.name : data.tree_property.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -5540,32 +5540,32 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v(_vm._s(_vm.$t("general.Workflow")))]), _vm._v(" "), _c("multiselect", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Screen")))]), _vm._v(" "), _c("multiselect", {
       "class": {
-        "is-invalid": _vm.$v.edit.workflow_id.$error || _vm.errors.workflow_id
+        "is-invalid": _vm.$v.edit.screen_id.$error || _vm.errors.screen_id
       },
       attrs: {
-        options: _vm.workflows.map(function (type) {
+        options: _vm.screens.map(function (type) {
           return type.id;
         }),
         "custom-label": function customLabel(opt) {
-          return _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+          return _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
             return x.id == opt;
-          }).name : _vm.workflows.find(function (x) {
+          }).name : _vm.screens.find(function (x) {
             return x.id == opt;
           }).name_e;
         }
       },
       model: {
-        value: _vm.edit.workflow_id,
+        value: _vm.edit.screen_id,
         callback: function callback($$v) {
-          _vm.$set(_vm.edit, "workflow_id", $$v);
+          _vm.$set(_vm.edit, "screen_id", $$v);
         },
-        expression: "edit.workflow_id"
+        expression: "edit.screen_id"
       }
-    }), _vm._v(" "), !_vm.$v.edit.workflow_id.required ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.edit.screen_id.required ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.workflow ? _vm._l(_vm.errors.workflow, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.screen_id ? _vm._l(_vm.errors.screen_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5575,32 +5575,32 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v(_vm._s(_vm.$t("general.Hotfield")))]), _vm._v(" "), _c("multiselect", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Property")))]), _vm._v(" "), _c("multiselect", {
       "class": {
-        "is-invalid": _vm.$v.edit.hotfield_id.$error || _vm.errors.hotfield_id
+        "is-invalid": _vm.$v.edit.property_id.$error || _vm.errors.property_id
       },
       attrs: {
-        options: _vm.hotfields.map(function (type) {
+        options: _vm.properties.map(function (type) {
           return type.id;
         }),
         "custom-label": function customLabel(opt) {
-          return _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
+          return _vm.$i18n.locale == "ar" ? _vm.properties.find(function (x) {
             return x.id == opt;
-          }).field_title : _vm.hotfields.find(function (x) {
+          }).name : _vm.properties.find(function (x) {
             return x.id == opt;
-          }).field_title_en;
+          }).name_e;
         }
       },
       model: {
-        value: _vm.edit.hotfield_id,
+        value: _vm.edit.property_id,
         callback: function callback($$v) {
-          _vm.$set(_vm.edit, "hotfield_id", $$v);
+          _vm.$set(_vm.edit, "property_id", $$v);
         },
-        expression: "edit.hotfield_id"
+        expression: "edit.property_id"
       }
-    }), _vm._v(" "), !_vm.$v.edit.hotfield_id.required ? _c("div", {
+    }), _vm._v(" "), !_vm.$v.edit.property_id.required ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.hotfield_id ? _vm._l(_vm.errors.hotfield_id, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.property_id ? _vm._l(_vm.errors.property_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5640,7 +5640,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "http://localhost:8001/api/"
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
@@ -6208,7 +6208,7 @@ var menuItems = [{
   id: 226,
   label: 'general.TreeProperty',
   icon: 'fas fa-eraser',
-  link: '/property-trees'
+  link: '/tree-properties'
 }, {
   id: 223,
   label: 'general.Users',

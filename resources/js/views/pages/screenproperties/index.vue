@@ -15,8 +15,8 @@ import Multiselect from "vue-multiselect";
  */
 export default {
   page: {
-    title: "Workflow hotfield",
-    meta: [{ name: "description", content: "Workflow hotfield" }],
+    title: "Screen properties",
+    meta: [{ name: "description", content: "Screen properties" }],
   },
   components: {
     Layout,
@@ -30,25 +30,25 @@ export default {
       per_page: 50,
       search: "",
       debounce: {},
-      workflowhotfieldsPagination: {},
-      workflowhotfields: [],
-      workflows: [],
-      hotfields: [],
+      screenPropertiesPagination: {},
+      screenProperties: [],
+      screens: [],
+      properties: [],
       enabled3: false,
       isLoader: false,
       create: {
-        workflow_id: null,
-        hotfield_id: null,
+        screen_id: null,
+        property_id: null,
       },
       edit: {
-        workflow_id: null,
-        hotfield_id: null,
+        screen_id: null,
+        property_id: null,
       },
       setting: {
-        workflow_id: true,
-        hotfield_id: true,
+        screen_id: true,
+        property_id: true,
       },
-      filterSetting: ["workflow_id", "hotfield_id"],
+      filterSetting: ["screen_id", "property_id"],
       errors: {},
       isCheckAll: false,
       checkAll: [],
@@ -59,12 +59,12 @@ export default {
   },
   validations: {
     create: {
-      workflow_id: { required },
-      hotfield_id: { required },
+      screen_id: { required },
+      property_id: { required },
     },
     edit: {
-      workflow_id: { required },
-      hotfield_id: { required },
+      screen_id: { required },
+      property_id: { required },
     },
   },
   watch: {
@@ -88,7 +88,7 @@ export default {
      */
     isCheckAll(after, befour) {
       if (after) {
-        this.workflowhotfields.forEach((el) => {
+        this.screenProperties.forEach((el) => {
           if (!this.checkAll.includes(el.id)) {
             this.checkAll.push(el.id);
           }
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     /**
-     *  get Data workflowhotfields
+     *  get Data screenProperties
      */
     getData(page = 1) {
       this.isLoader = true;
@@ -114,12 +114,12 @@ export default {
       }
       adminApi
         .get(
-          `/workflow-hotfield?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`
+          `/screen-tree-properties?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`
         )
         .then((res) => {
           let l = res.data;
-          this.workflowhotfields = l.data;
-          this.workflowhotfieldsPagination = l.pagination;
+          this.screenProperties = l.data;
+          this.screenPropertiesPagination = l.pagination;
           this.current_page = l.pagination.current_page;
         })
         .catch((err) => {
@@ -135,8 +135,8 @@ export default {
     },
     getDataCurrentPage() {
       if (
-        this.current_page <= this.workflowhotfieldsPagination.last_page &&
-        this.current_page != this.workflowhotfieldsPagination.current_page &&
+        this.current_page <= this.screenPropertiesPagination.last_page &&
+        this.current_page != this.screenPropertiesPagination.current_page &&
         this.current_page
       ) {
         this.isLoader = true;
@@ -147,12 +147,12 @@ export default {
 
         adminApi
           .get(
-            `/workflow-hotfield?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`
+            `/screen-tree-properties?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`
           )
           .then((res) => {
             let l = res.data;
-            this.workflowhotfields = l.data;
-            this.workflowhotfieldsPagination = l.pagination;
+            this.screenProperties = l.data;
+            this.screenPropertiesPagination = l.pagination;
             this.current_page = l.pagination.current_page;
           })
           .catch((err) => {
@@ -186,7 +186,7 @@ export default {
           this.isLoader = true;
 
           adminApi
-            .delete(`/workflow-hotfield/${id}`)
+            .delete(`/screen-tree-properties/${id}`)
             .then((res) => {
               this.getData();
               this.checkAll = [];
@@ -215,21 +215,21 @@ export default {
      *  reset Modal (create)
      */
     resetModalHidden() {
-      this.create = { workflow_id: null, hotfield_id: null };
+      this.create = { screen_id: null, property_id: null };
       this.$nextTick(() => {
         this.$v.$reset();
       });
       this.errors = {};
-      this.workflows = [];
-      this.hotfields = [];
+      this.screens=[];
+      this.properties=[];
     },
     /**
      *  hidden Modal (create)
      */
     async resetModal() {
-      await this.getWorkflows();
-      await this.getHotfields();
-      this.create = { workflow_id: null, hotfield_id: null };
+      await this.getScreens();
+      await this.getProperties();
+      this.create ={ screen_id: null, property_id: null };
       this.is_disabled = false;
       this.$nextTick(() => {
         this.$v.$reset();
@@ -240,7 +240,7 @@ export default {
      *  create screen
      */
     resetForm() {
-      this.create = { workflow_id: null, hotfield_id: null };
+      this.create = { screen_id: null, property_id: null };
       this.is_disabled = false;
       this.$nextTick(() => {
         this.$v.$reset();
@@ -255,7 +255,7 @@ export default {
         this.errors = {};
         this.is_disabled = false;
         adminApi
-          .post(`/workflow-hotfield`, this.create)
+          .post(`/screen-tree-properties`, this.create)
           .then((res) => {
             this.getData();
             this.is_disabled = true;
@@ -296,7 +296,7 @@ export default {
         this.isLoader = true;
         this.errors = {};
         adminApi
-          .post(`/workflow-hotfield/${id}`, this.edit)
+          .put(`/screen-tree-properties/${id}`, this.edit)
           .then((res) => {
             this.$bvModal.hide(`modal-edit-${id}`);
             this.getData();
@@ -328,11 +328,11 @@ export default {
     /**
      *  get workflows
      */
-    async getWorkflows() {
+    async getScreens() {
       await outerAxios
-        .get(`/workflow-trees/company-workflows/${this.company_id}`)
+        .get(`/screens`)
         .then((res) => {
-          this.workflows = res.data;
+          this.screens = res.data.data;
         })
         .catch((err) => {
           Swal.fire({
@@ -343,11 +343,11 @@ export default {
         });
     },
 
-    async getHotfields() {
-      await outerAxios
-        .get(`/hotfields`)
+    async getProperties() {
+      await adminApi
+        .get(`/tree-properties`)
         .then((res) => {
-          this.hotfields = res.data.data;
+          this.properties = res.data.data;
         })
         .catch((err) => {
           Swal.fire({
@@ -361,11 +361,11 @@ export default {
      *   show Modal (edit)
      */
     async resetModalEdit(id) {
-      let workflowhotfield = this.workflowhotfields.find((e) => id == e.id);
-      await this.getWorkflows();
-      await this.getHotfields();
-      this.edit.workflow_id = workflowhotfield.workflow_id;
-      this.edit.hotfield_id = workflowhotfield.hotfield_id;
+      let screenProperty = this.screenProperties.find((e) => id == e.id);
+      await this.getScreens();
+      await this.getProperties();
+      this.edit.screen_id = screenProperty.screen_id;
+      this.edit.property_id = screenProperty.property_id;
       this.errors = {};
     },
     /**
@@ -374,8 +374,8 @@ export default {
     resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        workflow_id: null,
-        hotfield_id: null,
+        screen_id: null,
+        property_id: null,
       };
     },
 
@@ -405,7 +405,7 @@ export default {
         <div class="card">
           <div class="card-body">
             <div class="row justify-content-between align-items-center mb-2">
-              <h4 class="header-title">{{ $t("general.workflowHotfieldTable") }}</h4>
+              <h4 class="header-title">{{ $t("general.ScreenPropertiesTable") }}</h4>
               <div class="col-xs-10 col-md-9 col-lg-7" style="font-weight: 500">
                 <div class="d-inline-block" style="width: 22.2%">
                   <!-- Basic dropdown -->
@@ -530,21 +530,21 @@ export default {
                   <!-- start Pagination -->
                   <div class="d-inline-flex align-items-center pagination-custom">
                     <div class="d-inline-block" style="font-size: 15px">
-                      {{ workflowhotfieldsPagination.from }}-{{
-                        workflowhotfieldsPagination.to
+                      {{ screenPropertiesPagination.from }}-{{
+                        screenPropertiesPagination.to
                       }}
                       /
-                      {{ workflowhotfieldsPagination.total }}
+                      {{ screenPropertiesPagination.total }}
                     </div>
                     <div class="d-inline-block">
                       <a
                         href="javascript:void(0)"
                         :style="{
                           'pointer-events':
-                            workflowhotfieldsPagination.current_page == 1 ? 'none' : '',
+                            screenPropertiesPagination.current_page == 1 ? 'none' : '',
                         }"
                         @click.prevent="
-                          getData(workflowhotfieldsPagination.current_page - 1)
+                          getData(screenPropertiesPagination.current_page - 1)
                         "
                       >
                         <span>&lt;</span>
@@ -559,13 +559,13 @@ export default {
                         href="javascript:void(0)"
                         :style="{
                           'pointer-events':
-                            workflowhotfieldsPagination.last_page ==
-                            workflowhotfieldsPagination.current_page
+                            screenPropertiesPagination.last_page ==
+                            screenPropertiesPagination.current_page
                               ? 'none'
                               : '',
                         }"
                         @click.prevent="
-                          getData(workflowhotfieldsPagination.current_page + 1)
+                          getData(screenPropertiesPagination.current_page + 1)
                         "
                       >
                         <span>&gt;</span>
@@ -667,8 +667,8 @@ export default {
                         :custom-label="
                           (opt) =>
                             $i18n.locale == 'ar'
-                              ? properties.find((x) => x.id == opt).field_title
-                              : properties.find((x) => x.id == opt).field_title_en
+                              ? properties.find((x) => x.id == opt).name
+                              : properties.find((x) => x.id == opt).name_e
                         "
                         :class="{
                           'is-invalid':
@@ -722,7 +722,7 @@ export default {
                           <i
                             class="fas fa-arrow-up"
                             @click="
-                              workflowhotfields.sort(
+                              screenProperties.sort(
                                 sortString($i18n.locale == 'ar' ? 'name' : 'name_e')
                               )
                             "
@@ -730,7 +730,7 @@ export default {
                           <i
                             class="fas fa-arrow-down"
                             @click="
-                              workflowhotfields.sort(
+                              screenProperties.sort(
                                 sortString($i18n.locale == 'ar' ? '-name' : '-name_e')
                               )
                             "
@@ -745,7 +745,7 @@ export default {
                           <i
                             class="fas fa-arrow-up"
                             @click="
-                              workflowhotfields.sort(
+                              screenProperties.sort(
                                 sortString(
                                   $i18n.locale == 'ar' ? 'name' : 'name_e'
                                 )
@@ -755,7 +755,7 @@ export default {
                           <i
                             class="fas fa-arrow-down"
                             @click="
-                              workflowhotfields.sort(
+                              screenProperties.sort(
                                 sortString($i18n.locale == 'ar' ? '-name' : '-name_e')
                               )
                             "
@@ -769,11 +769,11 @@ export default {
                     <th><i class="fas fa-ellipsis-v"></i></th>
                   </tr>
                 </thead>
-                <tbody v-if="workflowhotfields.length > 0">
+                <tbody v-if="screenProperties.length > 0">
                   <tr
                     @click.capture="checkRow(data.id)"
                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
-                    v-for="(data, index) in workflowhotfields"
+                    v-for="(data, index) in screenProperties"
                     :key="data.id"
                     class="body-tr-custom"
                   >
@@ -795,7 +795,7 @@ export default {
                     </td>
                     <td v-if="setting.property_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ data.hotfield_id }}
+                        {{ $i18n.locale=='ar'?data.tree_property.name:data.tree_property.name_e }}
                       </h5>
                     </td>
                     <td>
@@ -878,33 +878,33 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.Workflow")
+                                  $t("general.Screen")
                                 }}</label>
                                 <multiselect
-                                  v-model="edit.workflow_id"
-                                  :options="workflows.map((type) => type.id)"
+                                  v-model="edit.screen_id"
+                                  :options="screens.map((type) => type.id)"
                                   :custom-label="
                                     (opt) =>
                                       $i18n.locale == 'ar'
-                                        ? workflows.find((x) => x.id == opt).name
-                                        : workflows.find((x) => x.id == opt).name_e
+                                        ? screens.find((x) => x.id == opt).name
+                                        : screens.find((x) => x.id == opt).name_e
                                   "
                                   :class="{
                           'is-invalid':
-                            $v.edit.workflow_id.$error || errors.workflow_id,
+                            $v.edit.screen_id.$error || errors.screen_id,
                         }"
                                 >
                                 </multiselect>
                                 <div
-                                  v-if="!$v.edit.workflow_id.required"
+                                  v-if="!$v.edit.screen_id.required"
                                   class="invalid-feedback"
                                 >
                                   {{ $t("general.fieldIsRequired") }}
                                 </div>
 
-                                <template v-if="errors.workflow">
+                                <template v-if="errors.screen_id">
                                   <ErrorMessage
-                                    v-for="(errorMessage, index) in errors.workflow"
+                                    v-for="(errorMessage, index) in errors.screen_id"
                                     :key="index"
                                     >{{ errorMessage }}</ErrorMessage
                                   >
@@ -914,34 +914,34 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.Hotfield")
+                                  $t("general.Property")
                                 }}</label>
                                 <multiselect
-                                  v-model="edit.hotfield_id"
-                                  :options="hotfields.map((type) => type.id)"
+                                  v-model="edit.property_id"
+                                  :options="properties.map((type) => type.id)"
                                   :custom-label="
                                     (opt) =>
                                       $i18n.locale == 'ar'
-                                        ? hotfields.find((x) => x.id == opt).field_title
-                                        : hotfields.find((x) => x.id == opt)
-                                            .field_title_en
+                                        ? properties.find((x) => x.id == opt).name
+                                        : properties.find((x) => x.id == opt)
+                                            .name_e
                                   "
                                   :class="{
                           'is-invalid':
-                            $v.edit.hotfield_id.$error || errors.hotfield_id,
+                            $v.edit.property_id.$error || errors.property_id,
                         }"
                                 >
                                 </multiselect>
                                 <div
-                                  v-if="!$v.edit.hotfield_id.required"
+                                  v-if="!$v.edit.property_id.required"
                                   class="invalid-feedback"
                                 >
                                   {{ $t("general.fieldIsRequired") }}
                                 </div>
 
-                                <template v-if="errors.hotfield_id">
+                                <template v-if="errors.property_id">
                                   <ErrorMessage
-                                    v-for="(errorMessage, index) in errors.hotfield_id"
+                                    v-for="(errorMessage, index) in errors.property_id"
                                     :key="index"
                                     >{{ errorMessage }}</ErrorMessage
                                   >

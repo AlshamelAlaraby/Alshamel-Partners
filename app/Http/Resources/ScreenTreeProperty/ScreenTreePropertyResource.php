@@ -18,6 +18,7 @@ class ScreenTreePropertyResource extends JsonResource
             'id' => $this->id,
             'screen_id' => $this->screen_id,
             'property_id' => $this->property_id,
+            "tree_property" => $this->property
         ];
     }
 }

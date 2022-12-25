@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const outerAxios = axios.create({
-    baseURL: `http://localhost:8001/api/`
+    baseURL: `${process.env.MIX_ADMIN_APP_URL}api/`
 });
 
 outerAxios.interceptors.request.use(

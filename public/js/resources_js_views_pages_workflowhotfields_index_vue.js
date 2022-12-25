@@ -5640,7 +5640,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "http://localhost:8001/api/"
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
@@ -6208,7 +6208,7 @@ var menuItems = [{
   id: 226,
   label: 'general.TreeProperty',
   icon: 'fas fa-eraser',
-  link: '/property-trees'
+  link: '/tree-properties'
 }, {
   id: 223,
   label: 'general.Users',

@@ -502,6 +502,7 @@
     }
     },
     "general": {
+        "ScreenPropertiesTable":"Screen and properties table",
         "cantSelectCurrentNode":"Cant select current node",
         "Required":"Required",
         "TreePropertiesTable":"Tree properties table",

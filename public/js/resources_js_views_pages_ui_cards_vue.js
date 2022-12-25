@@ -5479,7 +5479,7 @@ var menuItems = [{
   id: 226,
   label: 'general.TreeProperty',
   icon: 'fas fa-eraser',
-  link: '/property-trees'
+  link: '/tree-properties'
 }, {
   id: 223,
   label: 'general.Users',
