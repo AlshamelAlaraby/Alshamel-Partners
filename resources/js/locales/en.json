@@ -616,7 +616,20 @@
         "ImageUploads": "Image Uploads",
         "AddNewRecord": "Add New Record",
         "Thisfilehasalreadybeenuploaded": "This file has already been uploaded\n  To change the file, press Replace",
-        "Replace": "Replace"
+        "Replace": "Replace",
+        "paymentTypes": "Payment Types",
+        "payment-types-Table": "Payment Types Table",
+        "AddPaymentType": "Add Payment Type",
+        "EditPaymentType": "Edit Payment Type",
+        "bankAccounts": "Bank Accounts",
+        "bankAccountsTable": "Bank Accounts Table",
+        "bank_id": "Bank",
+        "account_number": "Account Number",
+        "emp_id": "emp id",
+        "rp_code": "rp code",
+        "addBankAccount": "Add Bank Account",
+        "editBankAccount": "Edit Bank Account",
+        "Bank": "Bank"
     }
 }
 

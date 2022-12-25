@@ -5350,10 +5350,20 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
   id: 223,
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",

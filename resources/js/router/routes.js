@@ -21,6 +21,8 @@ import serial from "./routeChild/serial";
 import store from "./routeChild/store";
 import salesmen from  "./routeChild/salesMen";
 import internalSalesmen from  "./routeChild/internalSalesman";
+import paymentTypes from "./routeChild/paymentTypes";
+import bankAccount from "./routeChild/bankAccount";
 
 
 export default [
@@ -45,6 +47,8 @@ export default [
     ...serial,
     ...salesmen,
     ...internalSalesmen,
+    ...paymentTypes,
+    ...bankAccount,
     //**********************************************
     {
         path: '/',
