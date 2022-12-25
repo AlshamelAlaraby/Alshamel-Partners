@@ -31,6 +31,11 @@ class SalesmenType extends Model
         return $this->hasMany(Salesman::class, 'salesman_type_id');
     }
 
+    public function hasChildren(){
+        $h = $this->salesmen ()->count () > 0;
+        return $h;
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;

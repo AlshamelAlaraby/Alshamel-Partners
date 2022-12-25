@@ -1,58 +1,62 @@
 <?php
 
-namespace App\Http\Controllers\TreeProperty;
+namespace App\Http\Controllers\ScreenTreeProperty;
 
+use App\Http\Requests\ScreenTreeProperty\CreateScreenTreePropertyRequest;
+use App\Http\Requests\ScreenTreeProperty\EditScreenTreePropertyRequest;
 use App\Http\Requests\TreeProperty\CreateTreePropertyRequest;
 use App\Http\Requests\TreeProperty\EditTreePropertyRequest;
+use App\Http\Resources\ScreenTreeProperty\ScreenTreePropertyResource;
 use App\Http\Resources\TreeProperty\TreePropertyResource;
+use App\Repositories\ScreenTreeProperty\ScreenTreePropertyRepositoryInterface;
 use App\Repositories\TreeProperty\TreePropertyRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class TreePropertyController extends Controller
+class ScreenTreePropertyController extends Controller
 {
     private $modelInterface;
-    public function __construct(TreePropertyRepositoryInterface $modelInterface)
+    public function __construct(ScreenTreePropertyRepositoryInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
 
     public function show($id)
     {
-        $model = cacheGet('tree_properties_' . $id);
+        $model = cacheGet('ScreenTreeProperty_' . $id);
         if (!$model) {
             $model = $this->modelInterface->find($id);
             if (!$model) {
                 return responseJson(404, __('message.data not found'));
             } else {
-                cachePut('tree_properties_' . $id, $model);
+                cachePut('ScreenTreeProperty_' . $id, $model);
             }
         }
-        return responseJson(200, 'success', new TreePropertyResource($model));
+        return responseJson(200, 'success', new ScreenTreePropertyResource($model));
     }
 
     public function index(Request $request)
     {
         if (count($_GET) == 0) {
-            $models = cacheGet('tree_properties');
+            $models = cacheGet('ScreenTreeProperty');
             if (!$models) {
                 $models = $this->modelInterface->all($request);
-                cachePut('tree_properties', $models);
+                cachePut('ScreenTreeProperty', $models);
             }
         } else {
             $models = $this->modelInterface->all($request);
         }
 
-        return responseJson(200, 'success', TreePropertyResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
+        return responseJson(200, 'success', ScreenTreePropertyResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function store(CreateTreePropertyRequest $request)
+    public function store(CreateScreenTreePropertyRequest $request)
     {
         $model = $this->modelInterface->create($request);
         return responseJson(200, 'success');
     }
 
-    public function update(EditTreePropertyRequest $request, $id)
+    public function update(EditScreenTreePropertyRequest $request, $id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
@@ -88,25 +92,16 @@ class TreePropertyController extends Controller
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
 
     }
-    
+
     public function destroy($id)
     {
         $model = $this->modelInterface->find($id);
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        if ($model->hasChildren()) {
-            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
-        }
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
-    }
-    public function getRootNodes(){
-        return $this->modelInterface->getRootNodes();
-    }
-    public function getChildNodes($parentId){
-        return $this->modelInterface->getChildNodes($parentId);
     }
 
 }

@@ -60,4 +60,13 @@ class TreeProperty extends Model
             }
         });
     }
+
+    public function children(){
+        return $this->hasMany (TreeProperty::class,'parent_id');
+    }
+
+    public function hasChildren(){
+        $h = $this->children ()->count () > 0 ;
+        return $h;
+    }
 }
