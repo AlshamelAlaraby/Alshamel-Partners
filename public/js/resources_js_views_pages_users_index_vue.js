@@ -2053,7 +2053,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/users/".concat(this.user_id), {
         old_media: old_media
       }).then(function (res) {
-        _this15.images = res.data.data.media ? res.data.data.media : _this15.images;
+        _this15.images = res.data.data.media ? res.data.data.media : [];
         if (_this15.images && _this15.images.length > 0) {
           {
             _this15.showPhoto = _this15.images[_this15.images.length - 1].webp;
