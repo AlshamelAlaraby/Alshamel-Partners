@@ -49,6 +49,8 @@ use App\Repositories\Salesman\SalesmanRepository;
 use App\Repositories\Salesman\SalesmanRepositoryInterface;
 use App\Repositories\SalesmenType\SalesmenTypeInterface;
 use App\Repositories\SalesmenType\SalesmenTypeRepository;
+use App\Repositories\ScreenTreeProperty\ScreenTreePropertyRepository;
+use App\Repositories\ScreenTreeProperty\ScreenTreePropertyRepositoryInterface;
 use App\Repositories\Serial\SerialRepository;
 use App\Repositories\Serial\SerialRepositoryInterface;
 use App\Repositories\Store\StoreInterface;
@@ -116,6 +118,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
         $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
         $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
+        $this->app->bind(ScreenTreePropertyRepositoryInterface::class, ScreenTreePropertyRepository::class);
 
     }
 
