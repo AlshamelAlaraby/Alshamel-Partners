@@ -37,6 +37,10 @@ class Store extends Model
         return $this->belongsTo(Branch::class);
     }
 
+    public function serials(){
+        return $this->hasMany (Serial::class);
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;
@@ -51,5 +55,10 @@ class Store extends Model
             ->logAll()
             ->useLogName('Store')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
+    public function hasChildren(){
+        $h = $this->serials ()->count () > 0;
+        return $h;
     }
 }

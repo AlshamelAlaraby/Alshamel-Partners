@@ -23,6 +23,16 @@ class Branch extends Model
         return $this->hasMany(Store::class);
     }
 
+    public function serials()
+    {
+        return $this->hasMany(Serial::class);
+    }
+
+    public function hasChildren(){
+        $h = $this->stores ()->count () > 0 || $this->serials ()->count () > 0;
+        return $h;
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;

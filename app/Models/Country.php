@@ -83,9 +83,13 @@ class Country extends Model implements HasMedia
 
 
     public function hasChildren(){
-        if ($this->avenues()->count() > 0 || $this->governorates()->count() > 0 || $this->cities()->count() > 0){
-            return true;
-        }
-        return false;
+        $h = $this->avenues()->count() > 0 ||
+             $this->governorates()->count() > 0 ||
+             $this->cities()->count() > 0 ||
+             $this->banks ()->count () > 0 ||
+             $this->rlstOwners()->count () > 0 ||
+             $this->externalSalesmen() > 0
+        ;
+        return $h;
     }
 }

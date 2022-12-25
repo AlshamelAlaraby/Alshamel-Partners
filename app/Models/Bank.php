@@ -28,4 +28,9 @@ class Bank extends Model
         return $this->hasMany(BankAccount::class);
     }
 
+    public function hasChildren(){
+        $h = $this->bankAccounts ()->exists ();
+        return $h;
+    }
+
 }

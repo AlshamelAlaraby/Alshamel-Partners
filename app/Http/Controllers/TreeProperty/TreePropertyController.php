@@ -95,6 +95,9 @@ class TreePropertyController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
+        if ($model->hasChildren()) {
+            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+        }
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
