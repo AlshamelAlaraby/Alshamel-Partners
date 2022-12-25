@@ -7,11 +7,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 
-class RlstWalletBuilding extends Model
+class RlstBuildingWallet extends Model
 {
     use HasFactory, LogTrait;
 
-    protected $guarded = [];
+    protected $table = 'rlst_building_wallet';
+    protected $fillable = [
+        'wallet_id',
+        'building_id',
+        'bu_ty',
+    ];
+
+
+    public function wallet()
+    {
+        return $this->belongsTo(RlstWallet::class, 'wallet_id');
+    }
+
+
+    public function building()
+    {
+        return $this->belongsTo(RlstBuilding::class, 'building_id');
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -19,7 +36,7 @@ class RlstWalletBuilding extends Model
 
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
-            ->useLogName('Real Estate Wallets Building')
+            ->useLogName('Real Estate  Building Wallet')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }
