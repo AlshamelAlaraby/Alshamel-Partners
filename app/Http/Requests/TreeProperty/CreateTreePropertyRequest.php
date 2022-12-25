@@ -29,7 +29,10 @@ class CreateTreePropertyRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'name_e' => 'required|string|max:255',
-            'parent_id'=>["nullable", new \App\Rules\TRNotInChildrenRule(), "exists:tree_properties,id", "not_in:" . $id]
+            'parent_id'=>["nullable"
+            // , new \App\Rules\TRNotInChildrenRule()
+            // , "exists:tree_properties,id", "not_in:" . $id
+            ]
         ];
     }
 

@@ -19,8 +19,12 @@ import salesmenTypes from "./routeChild/salesmenTypes";
 import branches from "./routeChild/branch";
 import serial from "./routeChild/serial";
 import store from "./routeChild/store";
+import workflowhotfields from "./routeChild/workflowhotfield";
+import screenproperties from "./routeChild/screen-property";
 import salesmen from  "./routeChild/salesMen";
 import internalSalesmen from  "./routeChild/internalSalesman";
+import users from  "./routeChild/users";
+import propertyTrees from  "./routeChild/property-tree";
 
 
 export default [
@@ -41,8 +45,12 @@ export default [
     ...colors,
     ...salesmenTypes,
     ...branches,
+    ...users,
+    ...screenproperties,
     ...store,
+    ...workflowhotfields,
     ...serial,
+    ...propertyTrees,
     ...salesmen,
     ...internalSalesmen,
     //**********************************************
@@ -61,22 +69,6 @@ export default [
             middleware: [auth,checkAuth]
         },
         component: () => import('../views/pages/dashboard/crm/index')
-    },
-    {
-        path: '/banks',
-        name: 'banks',
-        meta: {
-            middleware: [auth,checkAuth]
-        },
-    component: () => import('../views/pages/banks/index')
-    },
-    {
-        path: '/users',
-        name: 'users',
-        meta: {
-            middleware: [auth,checkAuth]
-}    ,
-    component: () => import('../views/pages/users/index')
     },
     {
         path: '/dashboard/analytics',

@@ -68,20 +68,6 @@ class UserRepository implements UserInterface
 
     public function update($request, $id)
     {
-        // DB::transaction(function () use ($id, $request) {
-        //     $model = $this->model->find($id);
-        //     $model->update($request->except(["media"]));
-        //     if ($request->media) {
-        //         $model->clearMediaCollection('media');
-        //         $this->media::where('id', $request->media)->update([
-        //             'model_id' => $model->id,
-        //             'model_type' => get_class($this->model),
-        //         ]);
-
-        //     }
-        //     $this->forget($id);
-
-        // });
         DB::transaction(function () use ($id, $request) {
             $model = $this->model->find($id);
             $model->update($request->except(["media"]));
@@ -94,13 +80,11 @@ class UserRepository implements UserInterface
                     ]);
                 }
             }
-
             if ($request->old_media && !$request->media) { // if there is old media and no new media
                 $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
                     $media->delete();
                 });
             }
-
             if ($request->old_media && $request->media) { // if there is old media and new media
                 $model->media->whereNotIn('id', $request->old_media)->each(function (Media $media) {
                     $media->delete();
@@ -114,9 +98,6 @@ class UserRepository implements UserInterface
             }
             if (!$request->old_media && !$request->media) { // if this is no old media and new media
                 $model->clearMediaCollection('media');
-            }
-            if ($request->is_default == 1) {
-                $this->model->where('id', '!=', $id)->update(['is_default' => 0]);
             }
             $this->forget($id);
         });

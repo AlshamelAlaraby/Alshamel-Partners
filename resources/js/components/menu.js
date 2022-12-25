@@ -29,6 +29,24 @@ export const menuItems = [
         link: '/banks'
     },
     {
+        id:224,
+        label: 'general.Workflowhotfields',
+        icon: 'fas fa-eraser',
+        link: '/workflow-hotfields'
+    },
+    {
+        id:225,
+        label: 'general.ScreenProperties',
+        icon: 'fas fa-eraser',
+        link: '/screen-properties'
+    },
+    {
+        id:226,
+        label: 'general.TreeProperty',
+        icon: 'fas fa-eraser',
+        link: '/property-trees'
+    },
+    {
         id: 223,
         label: 'general.Users',
         icon: 'fas fa-eraser',

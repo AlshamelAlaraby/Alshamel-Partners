@@ -15,6 +15,7 @@ class TreeProperty extends Model
     use HasFactory, LogsActivity, CausesActivity;
 
     protected $guarded = ['id'];
+    protected $appends = ['haveChildren'];
 
     public function unitContracts()
     {
@@ -37,7 +38,10 @@ class TreeProperty extends Model
             ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-
+    public function getHaveChildrenAttribute()
+    {
+        return static::where("parent_id", $this->id)->count() > 0;
+    }
 
     public function scopeFilter($query, $request)
     {

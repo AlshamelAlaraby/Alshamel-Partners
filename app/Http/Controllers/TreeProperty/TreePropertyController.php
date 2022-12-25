@@ -88,7 +88,7 @@ class TreePropertyController extends Controller
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
 
     }
-
+    
     public function destroy($id)
     {
         $model = $this->modelInterface->find($id);
@@ -98,6 +98,12 @@ class TreePropertyController extends Controller
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
+    }
+    public function getRootNodes(){
+        return $this->modelInterface->getRootNodes();
+    }
+    public function getChildNodes($parentId){
+        return $this->modelInterface->getChildNodes($parentId);
     }
 
 }
