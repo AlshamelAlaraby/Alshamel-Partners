@@ -634,6 +634,19 @@
         "AddNewRecord": "أضف سجل جديد",
         "Save": "حفظ",
         "Thisfilehasalreadybeenuploaded": " تم رفع هذا الملف من قبل\n لتغيير الملف اضغط علي استبدال",
-        "Replace": "استبدال"
+        "Replace": "استبدال",
+        "paymentTypes": "طرق الدفع",
+        "payment-types-Table": "جدول طرق البيع",
+        "AddPaymentType": "اضافة طريقة الدفع",
+        "EditPaymentType": "تعديل طريقة الدفع",
+        "bankAccounts": "حسابات البنوك",
+        "bankAccountsTable": "جدول حسابات البنوك",
+        "bank_id": "البنك",
+        "account_number": "رقم الحساب",
+        "emp_id": "emp id",
+        "rp_code": "rp code",
+        "addBankAccount" : "اضافة حساب بنك",
+        "editBankAccount": "تعديل حساب البنك",
+        "Bank": "البنك"
     }
 }

@@ -5637,10 +5637,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat("https://alshamelalaraby.com/", "api/")
+  baseURL: "".concat(process.env.MIX_ADMIN_APP_URL, "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
@@ -6195,6 +6196,11 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-eraser',
@@ -6214,6 +6220,11 @@ var menuItems = [{
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",

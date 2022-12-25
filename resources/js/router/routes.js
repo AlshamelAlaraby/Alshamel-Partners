@@ -23,6 +23,8 @@ import workflowhotfields from "./routeChild/workflowhotfield";
 import screenproperties from "./routeChild/screen-property";
 import salesmen from  "./routeChild/salesMen";
 import internalSalesmen from  "./routeChild/internalSalesman";
+import paymentTypes from "./routeChild/paymentTypes";
+import bankAccount from "./routeChild/bankAccount";
 import users from  "./routeChild/users";
 import propertyTrees from  "./routeChild/property-tree";
 
@@ -53,6 +55,8 @@ export default [
     ...propertyTrees,
     ...salesmen,
     ...internalSalesmen,
+    ...paymentTypes,
+    ...bankAccount,
     //**********************************************
     {
         path: '/',
