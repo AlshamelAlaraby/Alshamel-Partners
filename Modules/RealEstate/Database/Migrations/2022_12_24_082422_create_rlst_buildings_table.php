@@ -32,7 +32,6 @@ return new class extends Migration
             $table->text('properties')->nullable();
             $table->text('attachments')->nullable();
             $table->softDeletes();
-
             $table->timestamps();
         });
     }
