@@ -1901,6 +1901,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.company_id = this.$store.getters['auth/company_id'];
+    this.getWorkflow();
     this.getData();
   },
   methods: {
@@ -2263,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this14.isLoader = true;
                 _context5.next = 3;
-                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
+                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this14.screens = l.screen_all;
                   _this14.hotfields = l.hot_fields;
@@ -6366,9 +6367,17 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.role.name : data.role.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.hotfield_id))])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
+      return x.id == data.hotfield_id;
+    }).name : _vm.hotfields.find(function (x) {
+      return x.id == data.hotfield_id;
+    }).name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.screen_id))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
+      return x.id == data.screen_id;
+    }).name : _vm.screens.find(function (x) {
+      return x.id == data.screen_id;
+    }).name_e))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",

@@ -1891,6 +1891,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.company_id = this.$store.getters['auth/company_id'];
+    this.getWorkflow();
     this.getData();
   },
   methods: {
@@ -2248,7 +2249,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this14.isLoader = true;
                 _context5.next = 3;
-                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
+                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this14.workflows = l.work_flow_trees;
                 })["catch"](function (err) {
@@ -6173,11 +6174,9 @@ var render = function render() {
         return type.id;
       }),
       "custom-label": function customLabel(opt) {
-        return _vm.$i18n.locale == "ar" ? function (opt) {
-          return _vm.workflows.find(function (x) {
-            return x.id == opt;
-          }).name;
-        } : _vm.workflows.find(function (x) {
+        return _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+          return x.id == opt;
+        }).name : _vm.workflows.find(function (x) {
           return x.id == opt;
         }).name_e;
       }
@@ -6311,7 +6310,11 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.role.name : data.role.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name : _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name_e))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6454,12 +6457,10 @@ var render = function render() {
         options: _vm.workflows.map(function (type) {
           return type.id;
         }),
-        "custom-label": _vm.$i18n.locale == "ar" ? function (opt) {
-          return _vm.workflows.find(function (x) {
+        "custom-label": function customLabel(opt) {
+          return _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
             return x.id == opt;
-          }).name;
-        } : function (opt) {
-          return _vm.workflows.find(function (x) {
+          }).name : _vm.workflows.find(function (x) {
             return x.id == opt;
           }).name_e;
         }

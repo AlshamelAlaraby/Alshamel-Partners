@@ -1,4 +1,4 @@
-import auth from "../../middleware/auth";
+import companyId from "../../middleware/companyId";
 import checkAuth from "../../middleware/auth-check";
 
 export default [
@@ -6,7 +6,7 @@ export default [
         path: '/company',
         name: 'company',
         meta: {
-            middleware: [auth,checkAuth]
+            middleware: [companyId,checkAuth]
         },
         component: () => import('../../views/pages/company/index'),
     },
