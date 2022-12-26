@@ -21,7 +21,7 @@ class StoreResource extends JsonResource
             'name' => $this->name,
             'name_e' => $this->name_e,
             'is_active' => $this->is_active,
-             'company' => $this->company,
+             'company_id' => $this->company_id,
             'branch' => new BranchResource($this->branch),
 
         ];
