@@ -26,7 +26,6 @@
     </div>
 </template>
 
-<<<<<<< HEAD
 <script>
 export default {
     name: "index",
