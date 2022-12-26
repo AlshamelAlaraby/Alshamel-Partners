@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('screen_tree_properties', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger ('screen_id');
-            $table->unsignedInteger ('property_id');
+            $table->unsignedInteger('screen_id');
+            $table->unsignedInteger('property_id');
             $table->timestamps();
         });
     }
