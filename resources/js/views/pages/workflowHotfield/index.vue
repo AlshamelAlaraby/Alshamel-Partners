@@ -108,6 +108,7 @@ export default {
     },
     mounted() {
         this.company_id = this.$store.getters['auth/company_id'];
+        this.getWorkflow();
         this.getData();
     },
     methods: {
@@ -762,10 +763,10 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.hotfield_id">
-                                        <h5 class="m-0 font-weight-normal">{{ data.hotfield_id }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? hotfields.find(x => x.id == data.hotfield_id).name : hotfields.find(x => x.id == data.hotfield_id).name_e }}</h5>
                                     </td>
                                     <td v-if="setting.screen_id">
-                                        <h5 class="m-0 font-weight-normal">{{ data.screen_id }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).name : screens.find(x => x.id == data.screen_id).name_e }}</h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">

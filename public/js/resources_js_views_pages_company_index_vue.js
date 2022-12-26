@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.company[data-v-03416206] {\n    background-color: #dff0fe;\n    min-height: 100vh;\n    width: 100%;\n    padding: 40px 0;\n}\n.company-content[data-v-03416206] {\n    height: 100%;\n}\nimg[data-v-03416206] {\n    max-height: 150px;\n    max-width: 250px;\n}\n.company-item[data-v-03416206] {\n    cursor: pointer;\n    background: #fff;\n    padding: 40px 20px;\n    border-radius: 14px;\n}\n.container[data-v-03416206] {\n    max-width: 1100px !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.company[data-v-03416206] {\r\n    background-color: #dff0fe;\r\n    min-height: 100vh;\r\n    width: 100%;\r\n    padding: 40px 0;\n}\n.company-content[data-v-03416206] {\r\n    height: 100%;\n}\nimg[data-v-03416206] {\r\n    max-height: 150px;\r\n    max-width: 250px;\n}\n.company-item[data-v-03416206] {\r\n    cursor: pointer;\r\n    background: #fff;\r\n    padding: 40px 20px;\r\n    border-radius: 14px;\n}\n.container[data-v-03416206] {\r\n    max-width: 1100px !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

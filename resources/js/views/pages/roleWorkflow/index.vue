@@ -102,6 +102,7 @@ export default {
     },
     mounted() {
         this.company_id = this.$store.getters['auth/company_id'];
+        this.getWorkflow();
         this.getData();
     },
     methods: {
@@ -659,7 +660,7 @@ export default {
                                             <multiselect
                                                 v-model="create.workflow_id"
                                                 :options=" workflows.map(type => type.id)"
-                                                :custom-label="opt => $i18n.locale == 'ar' ? opt => workflows.find(x => x.id == opt).name: workflows.find(x => x.id == opt).name_e">
+                                                :custom-label="opt => $i18n.locale == 'ar' ? workflows.find(x => x.id == opt).name: workflows.find(x => x.id == opt).name_e">
                                             </multiselect>
                                             <template v-if="errors.workflow_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.workflow_id" :key="index">{{ errorMessage }}</ErrorMessage>
@@ -729,7 +730,7 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.workflow_id">
-                                        <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ?  workflows.find(x => x.id == data.workflow_id).name: workflows.find(x => x.id == data.workflow_id).name_e }}</h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -824,7 +825,7 @@ export default {
                                                             <multiselect
                                                                 v-model="edit.workflow_id"
                                                                 :options="workflows.map(type => type.id)"
-                                                                :custom-label="$i18n.locale == 'ar' ? opt => workflows.find(x => x.id == opt).name:opt => workflows.find(x => x.id == opt).name_e">
+                                                                :custom-label="opt => $i18n.locale == 'ar' ? workflows.find(x => x.id == opt).name: workflows.find(x => x.id == opt).name_e">
                                                             </multiselect>
                                                             <template v-if="errors.workflow_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.workflow_id" :key="index">{{ errorMessage }}</ErrorMessage>
