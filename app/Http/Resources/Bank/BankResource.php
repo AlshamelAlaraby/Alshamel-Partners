@@ -21,6 +21,7 @@ class BankResource extends JsonResource
             'name' => $this->name,
             'name_e' => $this->name_e,
             'swift_code' => $this->swift_code,
+            "country_id"=>$this->country_id,
             "country" => new CountryResource($this->country),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

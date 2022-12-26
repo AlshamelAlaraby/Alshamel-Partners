@@ -47,15 +47,15 @@ class SerialController extends Controller
     public function store(CreateSerialRequest $request)
     {
         try {
-            if (!DB::table('companies')->find($request->company_id)) {
-                return responseJson(404, __('company does\'t exist'));
-            }
-            if (!DB::table('branches')->find($request->branch_id)) {
-                return responseJson(404, __('branch does\'t exist'));
-            }
-            if (!DB::table('stores')->find($request->store_id)) {
-                return responseJson(404, __('store does\'t exist'));
-            }
+            // if (!DB::table('companies')->find($request->company_id)) {
+            //     return responseJson(404, __('company does\'t exist'));
+            // }
+            // if (!DB::table('branches')->find($request->branch_id)) {
+            //     return responseJson(404, __('branch does\'t exist'));
+            // }
+            // if (!DB::table('stores')->find($request->store_id)) {
+            //     return responseJson(404, __('store does\'t exist'));
+            // }
             $this->repository->create($request->validated());
             return responseJson(200, __('done'));
         } catch (Exception $exception) {

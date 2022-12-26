@@ -23,6 +23,18 @@ export const menuItems = [
         link: '/serial'
     },
     {
+        id:222,
+        label: 'menuitems.Banks.text',
+        icon: 'fas fa-eraser',
+        link: '/banks'
+    },
+    {
+        id: 223,
+        label: 'general.Users',
+        icon: 'fas fa-eraser',
+        link: '/users'
+    },
+    {
         id: 10006,
         label: "menuitems.salesMen.text",
         icon: "fas fa-user-tag",

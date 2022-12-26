@@ -47,7 +47,9 @@ class UserController extends Controller
     public function create(StoreUserRequest $request)
     {
         $model = $this->modelInterface->create($request);
-        return responseJson(200, 'success');
+        $model->refresh();
+        return responseJson(200, 'success', new UserResource($model));
+
     }
 
     public function update(UpdateUserRequest $request, $id)
@@ -56,9 +58,9 @@ class UserController extends Controller
         if (!$model) {
             return responseJson(404, __('message.data not found'));
         }
-        $model = $this->modelInterface->update($request, $id);
-
-        return responseJson(200, 'success');
+        $this->modelInterface->update($request, $id);
+        $model->refresh();
+        return responseJson(200, 'success', new UserResource($model));
     }
 
     public function logs($id)

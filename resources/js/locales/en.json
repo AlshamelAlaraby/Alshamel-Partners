@@ -103,7 +103,7 @@
         "store": "Stores"
     },
     "serial": {
-        "addserial": "New Add Serial",
+        "addserial": "Add New Serial",
         "editserial": "Edit Serial",
         "serialsTable": "Serials Table",
         "serial": "Serials"
@@ -239,6 +239,9 @@
         },
         "currency": {
             "text": "Currencies"
+        },
+        "Banks": {
+            "text": "Banks"
         },
         "financialYear": {
             "text": "Financial Year"
@@ -499,6 +502,27 @@
     }
     },
     "general": {
+        "notMatch":"is not match with password",
+        "notValidEmail":"Invalid email",
+        "password":"Password",
+        "password_confirmation":"Password confirmation",
+        "BanksTable":"Banks Table",
+        "UsersTable":"Users table",
+        "AddUser":"Add User",
+        "EditUser":"Edit User",
+        "AddBank":"Add bank",
+        "EditBank":"Edit bank",
+        "SwiftCode":"Swift code",
+        "Apply":"Apply",
+        "Users":"users",
+        "Perfix":"Perfix",
+        "Suffix":"Suffix",
+        "StartNo":"Start number",
+        "RestartPeriod":"Restart period",
+        "Branch":"Branch",
+        "Store":"Store",
+        "Default":"Default",
+        "Nondefault":"Nondefault",
         "fieldIsRequired": "This field is required",
         "PleaseEnterValidEmail": "Please enter valid email.",
         "notDataFound": "Not Data Found",
