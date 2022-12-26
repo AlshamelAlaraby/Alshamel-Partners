@@ -57,9 +57,15 @@ export default {
                       this.$store.commit('auth/editCompanies',l.partner.companies);
                       this.isSuccess = true;
 
-                      setTimeout(() => {
+                      if(l.partner.companies.length > 1 && l.partner.companies){
+                          this.$router.push({name:'company'});
+                      }else if(l.partner.companies.length == 1) {
+                          this.$store.commit('auth/editCompanyId',l.partner.companies[0].id);
                           this.$router.push({name:'home'});
-                      },100);
+                      }else {
+                          this.submitted = false;
+                      }
+
                   })
                   .catch((err) => {
                       this.isError = true;

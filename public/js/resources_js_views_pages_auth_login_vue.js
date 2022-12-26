@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
         this.isError = false;
         var _email = this.email,
           password = this.password;
-        axios.post("".concat("http://alshamel-administrator.com/", "api/partners/login"), {
+        axios.post("".concat("https://alshamelalaraby.com/", "api/partners/login"), {
           email: _email,
           password: password
         }).then(function (res) {
@@ -98,11 +98,18 @@ __webpack_require__.r(__webpack_exports__);
           _this.$store.commit('auth/editPartner', l.partner);
           _this.$store.commit('auth/editCompanies', l.partner.companies);
           _this.isSuccess = true;
-          setTimeout(function () {
+          if (l.partner.companies.length > 1 && l.partner.companies) {
+            _this.$router.push({
+              name: 'company'
+            });
+          } else if (l.partner.companies.length == 1) {
+            _this.$store.commit('auth/editCompanyId', l.partner.companies[0].id);
             _this.$router.push({
               name: 'home'
             });
-          }, 100);
+          } else {
+            _this.submitted = false;
+          }
         })["catch"](function (err) {
           _this.isError = true;
         })["finally"](function () {
