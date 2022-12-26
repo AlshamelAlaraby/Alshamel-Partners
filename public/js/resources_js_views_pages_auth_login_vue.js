@@ -89,19 +89,20 @@ __webpack_require__.r(__webpack_exports__);
         this.isError = false;
         var _email = this.email,
           password = this.password;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/auth/login", {
+        axios.post("".concat("http://alshamel-administrator.com/", "api/partners/login"), {
           email: _email,
           password: password
         }).then(function (res) {
           var l = res.data.data;
           _this.$store.commit('auth/editToken', l.token);
-          _this.$store.commit('auth/editAdmin', l.admin);
+          _this.$store.commit('auth/editPartner', l.partner);
+          _this.$store.commit('auth/editCompanies', l.partner.companies);
           _this.isSuccess = true;
           setTimeout(function () {
             _this.$router.push({
               name: 'home'
             });
-          });
+          }, 100);
         })["catch"](function (err) {
           _this.isError = true;
         })["finally"](function () {

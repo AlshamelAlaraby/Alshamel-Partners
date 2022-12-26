@@ -270,6 +270,9 @@
         "area": {
             "text": "Area"
         },
+        "company": {
+            "text": "Company"
+        },
         "dashboard": {
             "text": "Dashboards",
             "badge": "3",
@@ -280,6 +283,9 @@
                 "salesMenType": "Sales Men Type",
                 "externalSalesmen": "External Sales Men",
                 "internalSalesmen": "Internal Sales Men",
+                "roleWorkflow": "Role Workflow",
+                "roleWorkflowButton": "Role Workflow Button",
+                "RoleHotfieldScreen": "Role Hotfield Screen",
                 "country": "Country",
                 "city": "Cities",
                 "governorate": "Governorate",
@@ -629,6 +635,23 @@
         "AddNewRecord": "Add New Record",
         "Thisfilehasalreadybeenuploaded": "This file has already been uploaded\n  To change the file, press Replace",
         "Replace": "Replace",
+        "workflow": "Workflow",
+        "roleWorkflow": "Role Workflow",
+        "addroleWorkflow": "New Add Workflow",
+        "editroleWorkflow": "Edit Workflow",
+        "roleWorkflowsTable": "Role Workflows Table",
+        "workflowButton": "Workflow",
+        "roleWorkflowButton": "Role Workflow Button",
+        "addroleWorkflowButton": "New Add Workflow Button",
+        "editroleWorkflowButton": "Edit Workflow Button",
+        "roleWorkflowButtonsTable": "Role Workflow Buttons Table",
+        "button": "Button",
+        "roleWorkflowHotfield": "Role Screen Hotfield",
+        "addroleWorkflowHotfield": "New Add Role Screen Hotfield",
+        "editroleWorkflowHotfield": "Edit Role Screen Hotfield",
+        "roleWorkflowHotfieldsTable": "Role Screen Hotfields Table",
+        "screen": "Screen",
+        "hotfield": "Hotfield",
         "paymentTypes": "Payment Types",
         "payment-types-Table": "Payment Types Table",
         "AddPaymentType": "Add Payment Type",
@@ -644,7 +667,3 @@
         "Bank": "Bank"
     }
 }
-
-
-
-

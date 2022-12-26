@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\RoleWorkflow;
 
+use App\Http\Resources\Roles\RoleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoleWorkflowResource extends JsonResource
@@ -15,8 +16,8 @@ class RoleWorkflowResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'role_id' =>  $this->role_id,
-            'workflow_id' => $this->workflow_id,
+            'role' =>  RoleResource::collection($this->role_id),
+            'workflow_id' => $this->workflow_id
         ];
     }
 }

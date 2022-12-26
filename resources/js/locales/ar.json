@@ -276,6 +276,9 @@
         "area": {
             "text": "الاماكن"
         },
+        "company": {
+            "text": "الشركات"
+        },
         "dashboard": {
             "text": "لوحة القيادة",
             "badge": "3",
