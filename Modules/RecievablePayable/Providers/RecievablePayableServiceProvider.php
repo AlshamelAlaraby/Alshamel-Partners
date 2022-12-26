@@ -16,6 +16,8 @@ use Modules\RecievablePayable\Repositories\RpMainContactGroupRepository;
 use Modules\RecievablePayable\Repositories\RpMainContactGroupRepositoryInterface;
 use Modules\RecievablePayable\Repositories\RpPaymentPlanInstallmentRepository;
 use Modules\RecievablePayable\Repositories\RpPaymentPlanInstallmentRepositoryInterface;
+use Modules\RecievablePayable\Repositories\RpScreenSubContactGroupRepository;
+use Modules\RecievablePayable\Repositories\RpScreenSubContactGroupRepositoryInterface;
 use Modules\RecievablePayable\Repositories\RpSubContactGroupRepository;
 use Modules\RecievablePayable\Repositories\RpSubContactGroupRepositoryInterface;
 
@@ -50,6 +52,7 @@ class RecievablePayableServiceProvider extends ServiceProvider
         $this->app->bind (RpMainContactGroupRepositoryInterface::class,RpMainContactGroupRepository::class);
         $this->app->bind (RpSubContactGroupRepositoryInterface::class,RpSubContactGroupRepository::class);
         $this->app->bind (RpInstallmentPaymentPlanRepositoryInterface::class,RpInstallmentPaymentPlanRepository::class);
+        $this->app->bind (RpScreenSubContactGroupRepositoryInterface::class,RpScreenSubContactGroupRepository::class);
     }
 
     /**

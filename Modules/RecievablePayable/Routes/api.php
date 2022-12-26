@@ -46,4 +46,7 @@ Route::prefix ('recievable-payable')->group (function (){
 
     Route ::resource ( 'rp_installment_p_plan' , 'RpInstallmentPaymentPlanController' ) -> except ( 'edit' , 'create' );
     Route ::get ( 'rp_installment_p_plan/logs/{id}' , 'RpInstallmentPaymentPlanController@logs' );
+
+    Route ::resource ( 'rp_screen_sub_contact_group' , 'RpScreenSubContactGroupController' ) -> except ( 'edit' , 'create' );
+    Route ::get ( 'rp_screen_sub_contact_group/logs/{id}' , 'RpScreenSubContactGroupController@logs' );
 });
