@@ -62,3 +62,10 @@ function cacheForget($key)
 {
     return Cache::forget($key);
 }
+
+function hasChildren($model){
+    if ($model->hasChildren()){
+        return true;
+    }
+    return false;
+}

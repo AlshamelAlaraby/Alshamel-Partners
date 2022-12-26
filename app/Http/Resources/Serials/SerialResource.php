@@ -24,6 +24,8 @@ class SerialResource extends JsonResource
             'suffix'=>$this->suffix,
             'restart_period'=>$this->restart_period,
             'is_default'=>$this->is_default,
+            "branch"=>$this->branch,
+            "store"=>$this->store
         ];
     }
 }

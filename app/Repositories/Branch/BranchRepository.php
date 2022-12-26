@@ -33,6 +33,9 @@ class BranchRepository implements BranchRepositoryInterface
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
+            if ($request->company_id) {
+                $q->where('company_id', $request->company_id);
+            }
 
         })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 

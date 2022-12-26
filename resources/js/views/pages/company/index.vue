@@ -26,6 +26,7 @@
     </div>
 </template>
 
+<<<<<<< HEAD
 <script>
 export default {
     name: "index",
@@ -68,3 +69,4 @@ img {
     max-width: 1100px !important;
 }
 </style>
+

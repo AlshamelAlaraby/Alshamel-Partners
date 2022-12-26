@@ -103,7 +103,7 @@
         "store": "Stores"
     },
     "serial": {
-        "addserial": "New Add Serial",
+        "addserial": "Add New Serial",
         "editserial": "Edit Serial",
         "serialsTable": "Serials Table",
         "serial": "Serials"
@@ -239,6 +239,9 @@
         },
         "currency": {
             "text": "Currencies"
+        },
+        "Banks": {
+            "text": "Banks"
         },
         "financialYear": {
             "text": "Financial Year"
@@ -505,6 +508,39 @@
     }
     },
     "general": {
+        "ScreenPropertiesTable":"Screen and properties table",
+        "cantSelectCurrentNode":"Cant select current node",
+        "Required":"Required",
+        "TreePropertiesTable":"Tree properties table",
+        "Screen":"Screen",
+        "Property":"Property",
+        "TreeProperty":"Tree properties",
+        "ScreenProperties":"Screen with properties",
+        "workflowHotfieldTable":"Workflow with hotfields table",
+        "Workflow":"Workflow",
+        "Hotfield":"Hotfield",
+        "Workflowhotfields":"Workflow with hotfields",
+        "notMatch":"is not match with password",
+        "notValidEmail":"Invalid email",
+        "password":"Password",
+        "password_confirmation":"Password confirmation",
+        "BanksTable":"Banks Table",
+        "UsersTable":"Users table",
+        "AddUser":"Add User",
+        "EditUser":"Edit User",
+        "AddBank":"Add bank",
+        "EditBank":"Edit bank",
+        "SwiftCode":"Swift code",
+        "Apply":"Apply",
+        "Users":"users",
+        "Perfix":"Perfix",
+        "Suffix":"Suffix",
+        "StartNo":"Start number",
+        "RestartPeriod":"Restart period",
+        "Branch":"Branch",
+        "Store":"Store",
+        "Default":"Default",
+        "Nondefault":"Nondefault",
         "fieldIsRequired": "This field is required",
         "PleaseEnterValidEmail": "Please enter valid email.",
         "notDataFound": "Not Data Found",
@@ -615,6 +651,19 @@
         "editroleWorkflowHotfield": "Edit Role Screen Hotfield",
         "roleWorkflowHotfieldsTable": "Role Screen Hotfields Table",
         "screen": "Screen",
-        "hotfield": "Hotfield"
+        "hotfield": "Hotfield",
+        "paymentTypes": "Payment Types",
+        "payment-types-Table": "Payment Types Table",
+        "AddPaymentType": "Add Payment Type",
+        "EditPaymentType": "Edit Payment Type",
+        "bankAccounts": "Bank Accounts",
+        "bankAccountsTable": "Bank Accounts Table",
+        "bank_id": "Bank",
+        "account_number": "Account Number",
+        "emp_id": "emp id",
+        "rp_code": "rp code",
+        "addBankAccount": "Add Bank Account",
+        "editBankAccount": "Edit Bank Account",
+        "Bank": "Bank"
     }
 }

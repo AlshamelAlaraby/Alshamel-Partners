@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
-use App\Repositoriefs\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
+
 use App\Repositories\Avenue\AvenueInterface;
 use App\Repositories\Avenue\AvenueRepository;
+use App\Repositories\BankAccount\BankAccountInterface;
+use App\Repositories\BankAccount\BankAccountRepository;
+use App\Repositories\Bank\BankInterface;
+use App\Repositories\Bank\BankRepository;
 use App\Repositories\Branch\BranchRepository;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use App\Repositories\City\CityRepository;
@@ -32,6 +36,7 @@ use App\Repositories\Module\ModuleRepository;
 use App\Repositories\PaymentType\PaymentTypeInterface;
 use App\Repositories\PaymentType\PaymentTypeRepository;
 use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepository;
+use App\Repositories\RoleScreenHotfield\RoleScreenHotfieldRepositoryInterface;
 use App\Repositories\RoleType\RoleTypeRepository;
 use App\Repositories\RoleType\RoleTypeRepositoryInterface;
 use App\Repositories\RoleWorkflowButton\RoleWorkflowButtonRepository;
@@ -45,6 +50,8 @@ use App\Repositories\Salesman\SalesmanRepository;
 use App\Repositories\Salesman\SalesmanRepositoryInterface;
 use App\Repositories\SalesmenType\SalesmenTypeInterface;
 use App\Repositories\SalesmenType\SalesmenTypeRepository;
+use App\Repositories\ScreenTreeProperty\ScreenTreePropertyRepository;
+use App\Repositories\ScreenTreeProperty\ScreenTreePropertyRepositoryInterface;
 use App\Repositories\Serial\SerialRepository;
 use App\Repositories\Serial\SerialRepositoryInterface;
 use App\Repositories\Store\StoreInterface;
@@ -94,6 +101,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SalesmenTypeInterface::class, SalesmenTypeRepository::class);
         $this->app->bind(SalesmanInterface::class, SalesmanRepository::class);
 
+        $this->app->bind(BankInterface::class, BankRepository::class);
+
+        $this->app->bind(BankAccountInterface::class, BankAccountRepository::class);
+
         $this->app->bind(BranchRepositoryInterface::class, BranchRepository::class);
         $this->app->bind(SerialRepositoryInterface::class, SerialRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
@@ -107,6 +118,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(SalesmanRepositoryInterface::class, SalesmanRepository::class);
         $this->app->bind(TreePropertyRepositoryInterface::class, TreePropertyRepository::class);
         $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
+        $this->app->bind(InternalSalesmanRepositoryInterface::class, InternalSalesmanRepository::class);
+        $this->app->bind(ScreenTreePropertyRepositoryInterface::class, ScreenTreePropertyRepository::class);
+
     }
 
     /**

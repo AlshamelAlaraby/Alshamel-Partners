@@ -644,7 +644,7 @@ export default {
                     this.images = res.data.data.media ?? [];
                     if(this.images&&this.images.length>0){
                         this.showPhoto = this.images[this.images.length - 1].webp;
-                    }else {this.images = './images/img-1.png';}
+                    }else {this.showPhoto = './images/img-1.png';}
                 })
                 .catch(err => {
                     Swal.fire({

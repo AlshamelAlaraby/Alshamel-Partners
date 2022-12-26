@@ -25,4 +25,15 @@ class City extends Model
         return $this->belongsTo(Country::class);
     }
 
+    public function avenues(){
+        return $this->hasMany (Avenue::class);
+    }
+
+    public function hasChildren(){
+        if ($this->avenues()->count() > 0){
+            return true;
+        }
+        return false;
+    }
+
 }

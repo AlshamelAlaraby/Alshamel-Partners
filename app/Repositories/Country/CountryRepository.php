@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class CountryRepository implements CountryInterface
 {
 
-    public function __construct(private \App\Models\Country $model, private \Spatie\MediaLibrary\MediaCollections\Models\Media $media)
+    public function __construct(private \App\Models\Country$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media)
     {
         $this->model = $model;
         $this->media = $media;
@@ -101,7 +101,9 @@ class CountryRepository implements CountryInterface
                     ]);
                 }
             }
-
+            if (!$request->old_media && !$request->media) { // if this is no old media and new media
+                $model->clearMediaCollection('media');
+            }
             if ($request->is_default == 1) {
                 $this->model->where('id', '!=', $id)->update(['is_default' => 0]);
             }

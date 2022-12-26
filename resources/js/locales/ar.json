@@ -268,7 +268,10 @@
             "text": "المخازن"
         },
         "serial": {
-            "text": "Serial"
+            "text": "مسلسل"
+        },
+        "Banks": {
+            "text": "البنوك"
         },
         "area": {
             "text": "الاماكن"
@@ -509,6 +512,39 @@
         }
     },
     "general": {
+        "ScreenPropertiesTable":"جدول الشاشات والخصائص",
+        "cantSelectCurrentNode":"لا يمكن اختيار العنصر الحالي",
+        "Required":"مطلوب",
+        "TreePropertiesTable":"جدول شجرة الخصائص",
+        "TreeProperty":"شجرة الخصائص",
+        "ScreenProperties":"الشاشات مع الخصائص",
+        "workflowHotfieldTable":"جدول سير العمل مع الحقول",
+        "Screen":"الشاشة",
+        "Property":"الخاصية",
+        "Workflow":"سير العمل",
+        "Hotfield":"الحقل",
+        "Workflowhotfields":"سير العمل مع الحقول",
+        "notMatch":"غير متطابقة مع كلمة المرور",
+        "notValidEmail":"ليس بريد الكتروني",
+        "password_confirmation":"تاكيد كلمة المرور",
+        "password":"كلمة المرور",
+        "AddBank":"اضف بنك",
+        "EditUser":"تعديل المستخدم",
+        "AddUser":"اضف مستخدم",
+        "Users":"المستخدمين",
+        "EditBank":"تعديل البنك",
+        "BanksTable":"جدول البنوك",
+        "UsersTable":"جدول المستخدمين",
+        "SwiftCode":"سويفت كود",
+        "Nondefault": "غير افتراضي",
+        "Apply": "تطبيق",
+        "Perfix": "بادئة ",
+        "Suffix": "لاحقة",
+        "StartNo": "رقم البداية",
+        "RestartPeriod": "فترة اعادة التشغل",
+        "Branch": "فرع",
+        "Store": "مخزن",
+        "Default": "افتراضي",
         "fieldIsRequired": "هذا الحقل مطلوب .",
         "PleaseEnterValidEmail": "الرجاء إدخال بريد إلكتروني صحيح .",
         "notDataFound": "لا يوجد بيانات .",
@@ -594,14 +630,26 @@
         "store": "مخزن",
         "symbol": "رمز (العربي)",
         "symbol_e": "رمز (انجليزي)",
-        "salesManType" : "نوع رجل المبيعات",
+        "salesManType": "نوع رجل المبيعات",
         "employee": "الموظف",
         "DataEntry": "ادخال البيانات",
         "ImageUploads": "تحميل الصور",
         "AddNewRecord": "أضف سجل جديد",
         "Save": "حفظ",
         "Thisfilehasalreadybeenuploaded": " تم رفع هذا الملف من قبل\n لتغيير الملف اضغط علي استبدال",
-        "Replace": "استبدال"
+        "Replace": "استبدال",
+        "paymentTypes": "طرق الدفع",
+        "payment-types-Table": "جدول طرق البيع",
+        "AddPaymentType": "اضافة طريقة الدفع",
+        "EditPaymentType": "تعديل طريقة الدفع",
+        "bankAccounts": "حسابات البنوك",
+        "bankAccountsTable": "جدول حسابات البنوك",
+        "bank_id": "البنك",
+        "account_number": "رقم الحساب",
+        "emp_id": "emp id",
+        "rp_code": "rp code",
+        "addBankAccount" : "اضافة حساب بنك",
+        "editBankAccount": "تعديل حساب البنك",
+        "Bank": "البنك"
     }
-
 }

@@ -34,4 +34,16 @@ Route::prefix ('recievable-payable')->group (function (){
 
     Route ::resource ( 'rp_installment_status' , 'RpInstallmentStatusController' ) -> except ( 'edit' , 'create' );
     Route ::get ( 'rp_installment_status/logs/{id}' , 'RpInstallmentStatusController@logs' );
+
+    Route ::resource ( 'rp_payment_plan_installment' , 'RpPaymentPlanInstallmentController' ) -> except ( 'edit' , 'create' );
+    Route ::get ( 'rp_payment_plan_installment/logs/{id}' , 'RpPaymentPlanInstallmentController@logs' );
+
+    Route ::resource ( 'rp_main_contact_group' , 'RpMainContactGroupController' ) -> except ( 'edit' , 'create' );
+    Route ::get ( 'rp_main_contact_group/logs/{id}' , 'RpMainContactGroupController@logs' );
+
+    Route ::resource ( 'rp_sub_contact_group' , 'RpSubContactGroupController' ) -> except ( 'edit' , 'create' );
+    Route ::get ( 'rp_sub_contact_group/logs/{id}' , 'RpSubContactGroupController@logs' );
+
+    Route ::resource ( 'rp_installment_p_plan' , 'RpInstallmentPaymentPlanController' ) -> except ( 'edit' , 'create' );
+    Route ::get ( 'rp_installment_p_plan/logs/{id}' , 'RpInstallmentPaymentPlanController@logs' );
 });

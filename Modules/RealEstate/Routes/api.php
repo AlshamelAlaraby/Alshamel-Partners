@@ -15,21 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('real-estate')->group(function () {
 
-    // Route::resource('property-types', 'PropertyTypeController')->except('edit', 'create');
-    // Route::get('property-types/logs/{id}', 'PropertyTypeController@logs');
-
-    // Route::resource('rlst-buildings', 'RlstBuildingController')->except('edit', 'create');
-    // Route::get('rlst-buildings/logs/{id}', 'RlstBuildingController@logs');
-
-    // Route::resource('rlst-units', 'RlstUnitController')->except('edit', 'create');
-    // Route::get('rlst-units/logs/{id}', 'RlstUnitController@logs');
-
-    // Route::resource('rlst-unit-status', 'RlstUnitStatusController')->except('edit', 'create');
-    // Route::get('rlst-unit-status/logs/{id}', 'RlstUnitStatusController@logs');
-
-    // Route::resource('rlst-wallet-building', 'RlstWalletBuildingController')->except('edit', 'create');
-    // Route::get('rlst-wallet-building/logs/{id}', 'RlstWalletBuildingController@logs');
-
     // owners routes
     Route::group(['prefix' => 'owners'], function () {
         Route::get('/', 'RlstOwnerController@all')->name('rlst-owners.all');
@@ -123,6 +108,25 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
     });
 
+    // units
+    Route::group(['prefix' => 'units'], function () {
+        Route::get('/', 'RlstUnitController@all')->name('rlst-units.all');
+        Route::get('/logs/{id}', 'RlstUnitController@logs')->name('rlst-units.logs');
+        Route::get('/{id}', 'RlstUnitController@find')->name('rlst-units.find');
+        Route::post('/', 'RlstUnitController@create')->name('rlst-units.create');
+        Route::put('/{id}', 'RlstUnitController@update')->name('rlst-units.update');
+        Route::delete('/{id}', 'RlstUnitController@delete')->name('rlst-units.delete');
+    });
+
+    // unit statuses
+    Route::group(['prefix' => 'unit-statuses'], function () {
+        Route::get('/', 'RlstUnitStatusController@all')->name('rlst-unit-statuses.all');
+        Route::get('/logs/{id}', 'RlstUnitStatusController@logs')->name('rlst-unit-statuses.logs');
+        Route::get('/{id}', 'RlstUnitStatusController@find')->name('rlst-unit-statuses.find');
+        Route::post('/', 'RlstUnitStatusController@create')->name('rlst-unit-statuses.create');
+        Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
+        Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
+    });
     // property types
     Route::group(['prefix' => 'property-types'], function () {
         Route::get('/', 'RlstPropertyTypeController@all')->name('rlst-property-types.all');
@@ -141,6 +145,17 @@ Route::prefix('real-estate')->group(function () {
         Route::post('/', 'RlstBuildingController@create')->name('rlst-buildings.create');
         Route::put('/{id}', 'RlstBuildingController@update')->name('rlst-buildings.update');
         Route::delete('/{id}', 'RlstBuildingController@delete')->name('rlst-buildings.delete');
+    });
+
+    // building wallets
+
+    Route::group(['prefix' => 'building-wallet'], function () {
+        Route::get('/', 'RlstBuildingWalletController@all')->name('rlst-building-wallets.all');
+        Route::get('/logs/{id}', 'RlstBuildingWalletController@logs')->name('rlst-building-wallets.logs');
+        Route::get('/{id}', 'RlstBuildingWalletController@find')->name('rlst-building-wallets.find');
+        Route::post('/', 'RlstBuildingWalletController@create')->name('rlst-building-wallets.create');
+        Route::put('/{id}', 'RlstBuildingWalletController@update')->name('rlst-building-wallets.update');
+        Route::delete('/{id}', 'RlstBuildingWalletController@delete')->name('rlst-building-wallets.delete');
     });
 
 });
