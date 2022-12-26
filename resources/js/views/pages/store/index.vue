@@ -313,7 +313,14 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                adminApi.post(`/stores`,this.create)
+                let data = {
+                    name:this.create.name,
+                    name_e:this.create.name_e,
+                    branch_id: this.create.branch_id,
+                    is_active:this.create.is_active,
+                    company_id:this.company_id
+                };
+                adminApi.post(`/stores`,data)
                     .then((res) => {
                         this.is_disabled = true;
                         this.getData();
@@ -346,8 +353,8 @@ export default {
          *  edit countrie
          */
         editSubmit(id){
-            if(!this.create.name){ this.create.name = this.create.name_e}
-            if(!this.create.name_e){ this.create.name_e = this.create.name}
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {
@@ -355,8 +362,14 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let {name,name_e} = this.edit;
-                adminApi.put(`/stores/${id}`,{name,name_e})
+                let data = {
+                    name:this.edit.name,
+                    name_e:this.edit.name_e,
+                    branch_id: this.edit.branch_id,
+                    is_active:this.edit.is_active,
+                    company_id:this.company_id
+                };
+                adminApi.put(`/stores/${id}`,data)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
