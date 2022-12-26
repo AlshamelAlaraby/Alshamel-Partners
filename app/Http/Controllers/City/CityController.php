@@ -39,6 +39,9 @@ class CityController extends Controller
     public function index(Request $request)
     {
 
+        if(count($_GET) > 0){
+            cacheForget('cities');
+        }
         $data = cacheGet ('cities');
         if ($request->search || $request->is_active){
             cacheForget ('cities');
