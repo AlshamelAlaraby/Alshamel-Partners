@@ -39,6 +39,10 @@ class CurrencyController extends Controller
     public function index(Request $request)
     {
 
+        if(count($_GET) > 0){
+            cacheForget('currencies');
+        }
+
         $data = cacheGet ('currencies');
         if ($request->search || $request->is_active){
             cacheForget ('currencies');

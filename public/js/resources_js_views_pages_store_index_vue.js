@@ -1895,7 +1895,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.isLoader = true;
         this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores", this.create).then(function (res) {
+        var data = {
+          name: this.create.name,
+          name_e: this.create.name_e,
+          branch_id: this.create.branch_id,
+          is_active: this.create.is_active,
+          company_id: this.company_id
+        };
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores", data).then(function (res) {
           _this9.is_disabled = true;
           _this9.getData();
           setTimeout(function () {
@@ -1926,11 +1933,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     editSubmit: function editSubmit(id) {
       var _this10 = this;
-      if (!this.create.name) {
-        this.create.name = this.create.name_e;
+      if (!this.edit.name) {
+        this.edit.name = this.edit.name_e;
       }
-      if (!this.create.name_e) {
-        this.create.name_e = this.create.name;
+      if (!this.edit.name_e) {
+        this.edit.name_e = this.edit.name;
       }
       this.$v.edit.$touch();
       if (this.$v.edit.$invalid) {
@@ -1938,13 +1945,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.isLoader = true;
         this.errors = {};
-        var _this$edit = this.edit,
-          name = _this$edit.name,
-          name_e = _this$edit.name_e;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/stores/".concat(id), {
-          name: name,
-          name_e: name_e
-        }).then(function (res) {
+        var data = {
+          name: this.edit.name,
+          name_e: this.edit.name_e,
+          branch_id: this.edit.branch_id,
+          is_active: this.edit.is_active,
+          company_id: this.company_id
+        };
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/stores/".concat(id), data).then(function (res) {
           _this10.$bvModal.hide("modal-edit-".concat(id));
           _this10.getData();
           setTimeout(function () {
