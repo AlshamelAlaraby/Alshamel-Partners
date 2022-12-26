@@ -29,6 +29,10 @@ class BranchRepository implements BranchRepositoryInterface
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }
+
+            if ($request->is_active) {
+                $q->where('is_active', $request->is_active);
+            }
             if ($request->company_id) {
                 $q->where('company_id', $request->company_id);
             }

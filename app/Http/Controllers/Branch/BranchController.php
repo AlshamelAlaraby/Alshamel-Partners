@@ -26,6 +26,9 @@ class BranchController extends Controller
     public function index(Request $request)
     {
 
+        if(count($_GET) > 0){
+            cacheForget('branches');
+        }
         $branches = cacheGet('branches');
         if ($request->search || $request->is_active) {
             cacheForget('branches');
