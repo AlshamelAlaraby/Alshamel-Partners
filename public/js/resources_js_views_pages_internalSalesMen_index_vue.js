@@ -5513,8 +5513,6 @@ var render = function render() {
       hidden: _vm.resetModalHidden
     }
   }, [_c("form", [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
     staticClass: "mb-3 d-flex justify-content-end"
   }, [_c("b-button", {
     "class": ["font-weight-bold px-2", _vm.is_disabled ? "mx-2" : ""],
@@ -5529,7 +5527,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                    ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5541,7 +5539,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Add")) + "\n                                        ")]) : _c("b-button", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5564,7 +5562,9 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Cancel")) + "\n                                    ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "form-group"
@@ -6493,6 +6493,11 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
+  id: 100032,
+  label: 'menuitems.company.text',
+  icon: 'fas fa-city',
+  link: '/company'
+}, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
@@ -6513,6 +6518,11 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-eraser',
@@ -6532,6 +6542,11 @@ var menuItems = [{
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6589,6 +6604,18 @@ var menuItems = [{
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
     link: '/roles'
+  }, {
+    id: 100043,
+    label: 'menuitems.dashboard.list.roleWorkflow',
+    link: '/role-workflow'
+  }, {
+    id: 100088,
+    label: 'menuitems.dashboard.list.roleWorkflowButton',
+    link: '/role-workflow-button'
+  }, {
+    id: 100134,
+    label: 'menuitems.dashboard.list.RoleHotfieldScreen',
+    link: '/role-hotfield-screen'
   }]
 }, {
   id: 5,
@@ -6617,6 +6644,7 @@ var menuItems = [{
   link: '/colors'
 }
 
+//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

@@ -26,7 +26,7 @@ class UpdateStoreRequest extends FormRequest
         return [
             'name' => 'string|max:255',
             'name_e' => 'string|max:255',
-            'company_id' => 'integer|exists:companies,id',
+            'company_id' => 'integer',
             'branch_id' => 'integer|exists:branches,id',
             'is_active' => 'nullable|in:active,inactive',
 
@@ -48,7 +48,6 @@ class UpdateStoreRequest extends FormRequest
             'name_e.string' => __('message.field must be string'),
             'name_e.max' => __('message.field must be less than 255 character'),
             'company_id.integer' => __('message.field must be integer'),
-            'company_id.exists' => __('message.field must be exists'),
 
             'branch_id.integer' => __('message.field must be integer'),
             'branch_id.exists' => __('message.field must be exists'),

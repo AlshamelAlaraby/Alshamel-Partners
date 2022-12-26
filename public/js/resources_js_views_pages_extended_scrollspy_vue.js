@@ -5212,6 +5212,11 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
+  id: 100032,
+  label: 'menuitems.company.text',
+  icon: 'fas fa-city',
+  link: '/company'
+}, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
@@ -5232,6 +5237,11 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-eraser',
@@ -5251,6 +5261,11 @@ var menuItems = [{
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -5308,6 +5323,18 @@ var menuItems = [{
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
     link: '/roles'
+  }, {
+    id: 100043,
+    label: 'menuitems.dashboard.list.roleWorkflow',
+    link: '/role-workflow'
+  }, {
+    id: 100088,
+    label: 'menuitems.dashboard.list.roleWorkflowButton',
+    link: '/role-workflow-button'
+  }, {
+    id: 100134,
+    label: 'menuitems.dashboard.list.RoleHotfieldScreen',
+    link: '/role-hotfield-screen'
   }]
 }, {
   id: 5,
@@ -5336,6 +5363,7 @@ var menuItems = [{
   link: '/colors'
 }
 
+//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

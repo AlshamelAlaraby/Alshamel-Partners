@@ -33,7 +33,7 @@ class StoreRepository implements StoreInterface
             }
 
             if ($request->company_id) {
-                $q->where('company_id', $request->parent_id);
+                $q->where('company_id', $request->company_id);
             }
             if ($request->branch_id) {
                 $q->where('branch_id', $request->branch_id);
@@ -83,7 +83,6 @@ class StoreRepository implements StoreInterface
         $this->forget($id);
         $model->delete();
     }
-
     private function forget($id)
     {
         $keys = [

@@ -24,8 +24,12 @@ class BranchRepository implements BranchRepositoryInterface
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
-
             }
+
+            if ($request->company_id) {
+                $q->where('is_active', $request->company_id);
+            }
+
             if ($request->is_active) {
                 $q->where('is_active', $request->is_active);
             }

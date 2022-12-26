@@ -26,7 +26,7 @@ class StoreStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'name_e' => 'required|string|max:255',
-            'company_id' => 'required|integer|exists:companies,id',
+            'company_id' => 'required|integer',
             'branch_id' => 'required|integer|exists:branches,id',
             'is_active' => 'nullable|in:active,inactive',
         ];
@@ -50,7 +50,6 @@ class StoreStoreRequest extends FormRequest
             'name_e.max' => __('message.field must be less than 255 character'),
             'company_id.required' => __('message.field is required'),
             'company_id.integer' => __('message.field must be integer'),
-            'company_id.exists' => __('message.field must be exists'),
 
             'branch_id.required' => __('message.field is required'),
             'branch_id.integer' => __('message.field must be integer'),

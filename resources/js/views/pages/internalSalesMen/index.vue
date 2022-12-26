@@ -582,38 +582,38 @@ export default {
                             @hidden="resetModalHidden"
                         >
                             <form>
-                                <div class="row">
-                                    <div class="mb-3 d-flex justify-content-end">
+                                <div class="mb-3 d-flex justify-content-end">
 
+                                    <b-button
+                                        variant="success"
+                                        :disabled="!is_disabled"
+                                        @click.prevent="resetForm"
+                                        type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                    >
+                                        {{ $t('general.AddNewRecord') }}
+                                    </b-button>
+                                    <template v-if="!is_disabled">
                                         <b-button
                                             variant="success"
-                                            :disabled="!is_disabled"
-                                            @click.prevent="resetForm"
-                                            type="button" :class="['font-weight-bold px-2',is_disabled?'mx-2': '']"
+                                            type="button" class="mx-1"
+                                            v-if="!isLoader"
+                                            @click.prevent="AddSubmit"
                                         >
-                                            {{ $t('general.AddNewRecord') }}
+                                            {{ $t('general.Add') }}
                                         </b-button>
-                                        <template v-if="!is_disabled">
-                                            <b-button
-                                                variant="success"
-                                                type="button" class="mx-1"
-                                                v-if="!isLoader"
-                                                @click.prevent="AddSubmit"
-                                            >
-                                                {{ $t('general.Add') }}
-                                            </b-button>
 
-                                            <b-button variant="success" class="mx-1" disabled v-else>
-                                                <b-spinner small></b-spinner>
-                                                <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                            </b-button>
-                                        </template>
-                                        <!-- Emulate built in modal footer ok and cancel button actions -->
-
-                                        <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
-                                            {{ $t('general.Cancel') }}
+                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                            <b-spinner small></b-spinner>
+                                            <span class="sr-only">{{ $t('login.Loading') }}...</span>
                                         </b-button>
-                                    </div>
+                                    </template>
+                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+
+                                    <b-button variant="danger" type="button" @click.prevent="resetModalHidden">
+                                        {{ $t('general.Cancel') }}
+                                    </b-button>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">
