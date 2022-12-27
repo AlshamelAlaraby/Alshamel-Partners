@@ -6,7 +6,9 @@ import router from "../../router/index";
 export const state = {
     token: Cookies.get("token") || null,
     // permission: JSON.parse(localStorage.getItem("permission")) || [],
-    admin: JSON.parse(localStorage.getItem("admin")) || {},
+    partner: JSON.parse(localStorage.getItem("partner")) || {},
+    companies: JSON.parse(localStorage.getItem("companies")) || [],
+    company_id: JSON.parse(localStorage.getItem("company_id")) || null
 }
 
 // getters
@@ -14,8 +16,10 @@ export const getters = {
     token: state => state.token,
     permission: state => state.permission,
     loading: state => state.loading,
-    admin: state => state.admin,
+    partner: state => state.partner,
+    companies: state => state.companies,
     errors: state => state.errors,
+    company_id: state => state.company_id
 }
 
 // mutations
@@ -37,17 +41,29 @@ export const mutations = {
     //     state.permission = name;
     //     localStorage.setItem('permission',JSON.stringify(name));
     // },
-    editAdmin(state,admin){
-        state.admin = admin;
-        localStorage.setItem('admin',JSON.stringify(admin));
+    editPartner(state,partner){
+        state.partner = partner;
+        localStorage.setItem('partner',JSON.stringify(partner));
+    },
+    editCompanies(state,companies){
+        state.companies = companies;
+        localStorage.setItem('companies',JSON.stringify(companies));
+    },
+    editCompanyId(state,company_id){
+        state.company_id = company_id;
+        localStorage.setItem('company_id',JSON.stringify(company_id));
     },
     logoutToken(state){
         // state.roles = null;
         state.token = null;
-        state.admin = null;
-        // state.permission = null;
+        state.partner = {};
+        state.companies = [];
+        state.company_id = null;
+            // state.permission = null;
         // localStorage.removeItem('permission');
-        localStorage.removeItem('admin');
+        localStorage.removeItem('companies');
+        localStorage.removeItem('partner');
+        localStorage.removeItem('company_id');
         Cookies.remove('token')
     },
     editErrors(state,errors){

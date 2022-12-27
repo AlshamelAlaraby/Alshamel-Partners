@@ -49,16 +49,23 @@ export default {
               this.submitted = true;
               this.isError = false;
               const {email,password} = this;
-              adminApi.post(`/auth/login`,{email,password})
+              axios.post(`${process.env.MIX_APP_URL_OUTSIDE}api/partners/login`,{email,password})
                   .then((res) => {
                       let l =res.data.data;
                       this.$store.commit('auth/editToken',l.token);
-                      this.$store.commit('auth/editAdmin',l.admin);
+                      this.$store.commit('auth/editPartner',l.partner);
+                      this.$store.commit('auth/editCompanies',l.partner.companies);
                       this.isSuccess = true;
 
-                      setTimeout(() => {
+                      if(l.partner.companies.length > 1 && l.partner.companies){
+                          this.$router.push({name:'company'});
+                      }else if(l.partner.companies.length == 1) {
+                          this.$store.commit('auth/editCompanyId',l.partner.companies[0].id);
                           this.$router.push({name:'home'});
-                      });
+                      }else {
+                          this.submitted = false;
+                      }
+
                   })
                   .catch((err) => {
                       this.isError = true;

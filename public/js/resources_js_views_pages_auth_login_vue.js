@@ -89,19 +89,27 @@ __webpack_require__.r(__webpack_exports__);
         this.isError = false;
         var _email = this.email,
           password = this.password;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/auth/login", {
+        axios.post("".concat("https://alshamelalaraby.com/", "api/partners/login"), {
           email: _email,
           password: password
         }).then(function (res) {
           var l = res.data.data;
           _this.$store.commit('auth/editToken', l.token);
-          _this.$store.commit('auth/editAdmin', l.admin);
+          _this.$store.commit('auth/editPartner', l.partner);
+          _this.$store.commit('auth/editCompanies', l.partner.companies);
           _this.isSuccess = true;
-          setTimeout(function () {
+          if (l.partner.companies.length > 1 && l.partner.companies) {
+            _this.$router.push({
+              name: 'company'
+            });
+          } else if (l.partner.companies.length == 1) {
+            _this.$store.commit('auth/editCompanyId', l.partner.companies[0].id);
             _this.$router.push({
               name: 'home'
             });
-          });
+          } else {
+            _this.submitted = false;
+          }
         })["catch"](function (err) {
           _this.isError = true;
         })["finally"](function () {

@@ -1,11 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const partnerAxios = axios.create({
-    baseURL: `http://127.0.0.1:8001/api/`
+const outerAxios = axios.create({
+    baseURL: `${process.env.MIX_ADMIN_APP_URL}api/`
 });
 
-partnerAxios.interceptors.request.use(
+outerAxios.interceptors.request.use(
     function (config) {
         config.headers['lang'] = localStorage.getItem("lang") || 'ar';
         config.headers['Authorization'] = "Bearer " + (Cookies.get("token") || '');
@@ -15,7 +15,7 @@ partnerAxios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-partnerAxios.defaults.headers.common['secretApi'] = 'Snr92EUKCmrE06PiJ';
-partnerAxios.defaults.headers.common['Accept'] = 'application/json';
+outerAxios.defaults.headers.common['secretApi'] = 'Snr92EUKCmrE06PiJ';
+outerAxios.defaults.headers.common['Accept'] = 'application/json';
 
-export default partnerAxios;
+export default outerAxios;

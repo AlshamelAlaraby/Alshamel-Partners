@@ -6018,15 +6018,44 @@ var render = function render() {
           return _vm.resetModalHiddenEdit(data.id);
         }
       }
-    }, [_c("form", {
+    }, [_c("form", [_c("div", {
+      staticClass: "mb-3 d-flex justify-content-end"
+    }, [!_vm.isLoader ? _c("b-button", {
+      staticClass: "mx-1",
+      attrs: {
+        variant: "success",
+        type: "submit"
+      },
       on: {
-        submit: function submit($event) {
-          $event.stopPropagation();
+        click: function click($event) {
           $event.preventDefault();
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_c("div", {
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+      staticClass: "mx-1",
+      attrs: {
+        variant: "success",
+        disabled: ""
+      }
+    }, [_c("b-spinner", {
+      attrs: {
+        small: ""
+      }
+    }), _vm._v(" "), _c("span", {
+      staticClass: "sr-only"
+    }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1), _vm._v(" "), _c("b-button", {
+      attrs: {
+        variant: "danger",
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.$bvModal.hide("modal-edit-".concat(data.id));
+        }
+      }
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -6694,6 +6723,11 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
+  id: 100032,
+  label: 'menuitems.company.text',
+  icon: 'fas fa-city',
+  link: '/company'
+}, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
@@ -6714,10 +6748,35 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-eraser',
+  link: '/workflow-hotfields'
+}, {
+  id: 225,
+  label: 'general.ScreenProperties',
+  icon: 'fas fa-eraser',
+  link: '/screen-properties'
+}, {
+  id: 226,
+  label: 'general.TreeProperty',
+  icon: 'fas fa-eraser',
+  link: '/tree-properties'
+}, {
   id: 223,
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6775,6 +6834,18 @@ var menuItems = [{
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
     link: '/roles'
+  }, {
+    id: 100043,
+    label: 'menuitems.dashboard.list.roleWorkflow',
+    link: '/role-workflow'
+  }, {
+    id: 100088,
+    label: 'menuitems.dashboard.list.roleWorkflowButton',
+    link: '/role-workflow-button'
+  }, {
+    id: 100134,
+    label: 'menuitems.dashboard.list.RoleHotfieldScreen',
+    link: '/role-hotfield-screen'
   }]
 }, {
   id: 5,
@@ -6803,6 +6874,7 @@ var menuItems = [{
   link: '/colors'
 }
 
+//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

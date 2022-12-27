@@ -29,6 +29,11 @@ class Employee extends Model
         return $this->hasOne(InternalSalesman::class);
     }
 
+    public function hasChildren(){
+        $h = $this->internalSalesman ()->exists ();
+        return $h;
+    }
+
     public function tapActivity(Activity $activity, string $eventName)
     {
         $activity->causer_id = auth()->user()->id ?? 0;

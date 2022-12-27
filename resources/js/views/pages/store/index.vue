@@ -12,7 +12,7 @@ import alphaEnglish  from "../../../helper/alphaEnglish";
 import { dynamicSortString, dynamicSortNumber }   from "../../../helper/tableSort";
 import senderHoverHelper   from "../../../helper/senderHoverHelper";
 import Multiselect from "vue-multiselect";
-
+import Branch from "../../../components/create/branch.vue";
 /**
  * Advanced Table component
  */
@@ -27,7 +27,8 @@ export default {
         Switches,
         ErrorMessage,
         loader,
-        Multiselect
+        Multiselect,
+        Branch
     },
     data() {
         return {
@@ -55,6 +56,13 @@ export default {
             checkAll: [],
             branches: [],
             current_page: 1,
+            setting: {
+                name: true,
+                name_e: true,
+                branch_id: true,
+                is_active: true,
+            },
+            is_disabled: false,
             filterSetting: ['name','name_e']
         }
     },
@@ -104,7 +112,45 @@ export default {
         }
     },
     mounted() {
+        this.company_id = this.$store.getters['auth/company_id'];
         this.getData();
+    },
+    updated(){
+        $(function(){
+            $(".englishInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return true;
+                if(65 <= ew && ew <= 90)
+                    return true;
+                if(97 <= ew && ew <= 122)
+                    return true;
+                return false;
+            });
+            $(".arabicInput").keypress(function(event){
+                var ew = event.which;
+                if(ew == 32)
+                    return true;
+                if(48 <= ew && ew <= 57)
+                    return false;
+                if(65 <= ew && ew <= 90)
+                    return false;
+                if(97 <= ew && ew <= 122)
+                    return false;
+                return true;
+            });
+        });
+    },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            if (vm.$store.state.auth.company_id) {
+                return true;
+            } else {
+                return vm.$router.push({name: 'company'});
+            }
+        });
     },
     methods: {
         /**
@@ -112,8 +158,12 @@ export default {
          */
         getData(page = 1){
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i > this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
-            adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&company_id=${this.company_id}`)
+            adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.stores = l.data;
@@ -134,8 +184,12 @@ export default {
         getDataCurrentPage(page = 1){
             if(this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page){
                 this.isLoader = true;
+                let filter = '';
+                for (let i = 0; i > this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
 
-                adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}&company_id=${this.company_id}`)
+                adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}&company_id=${this.company_id}`)
                     .then((res) => {
                         let l = res.data;
                         this.stores = l.data;
@@ -221,22 +275,36 @@ export default {
         /**
          *  hidden Modal (create)
          */
-        resetModal(){
+        async resetModal(){
+            await this.getBranch();
             this.create =  {
                 name: '',
                 name_e: '',
-                branch_id: '',
+                branch_id: null,
                 is_active: 'active'
             };
-            this.getBranch();
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
         },
         /**
          *  create countrie
          */
+        async resetForm(){
+            await this.getBranch();
+            this.create =  {
+                name: '',
+                name_e: '',
+                branch_id: null,
+                is_active: 'active'
+            };
+            this.$nextTick(() => { this.$v.$reset() });
+            this.is_disabled = false;
+            this.errors = {};
+        },
 
         AddSubmit(){
+            if(!this.create.name){ this.create.name = this.create.name_e}
+            if(!this.create.name_e){ this.create.name_e = this.create.name}
 
             this.$v.create.$touch();
 
@@ -245,9 +313,16 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                adminApi.post(`/stores`,this.create)
+                let data = {
+                    name:this.create.name,
+                    name_e:this.create.name_e,
+                    branch_id: this.create.branch_id,
+                    is_active:this.create.is_active,
+                    company_id:this.company_id
+                };
+                adminApi.post(`/stores`,data)
                     .then((res) => {
-                        this.$bvModal.hide(`create`);
+                        this.is_disabled = true;
                         this.getData();
                         setTimeout(() => {
                             Swal.fire({
@@ -278,6 +353,8 @@ export default {
          *  edit countrie
          */
         editSubmit(id){
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {
@@ -285,8 +362,14 @@ export default {
             } else {
                 this.isLoader = true;
                 this.errors = {};
-                let {name,name_e} = this.edit;
-                adminApi.put(`/stores/${id}`,{name,name_e})
+                let data = {
+                    name:this.edit.name,
+                    name_e:this.edit.name_e,
+                    branch_id: this.edit.branch_id,
+                    is_active:this.edit.is_active,
+                    company_id:this.company_id
+                };
+                adminApi.put(`/stores/${id}`,data)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
@@ -318,11 +401,11 @@ export default {
          *   show Modal (edit)
          */
         async resetModalEdit(id){
+            await this.getBranch();
             let branch = this.stores.find(e => id == e.id );
             this.edit.name = branch.name;
             this.edit.name_e = branch.name_e;
             this.edit.is_active = branch.is_active;
-            await this.getBranch();
             this.edit.branch_id = branch.branch_id;
             this.errors = {};
         },
@@ -334,7 +417,7 @@ export default {
             this.edit = {
                 name: '',
                 name_e: '',
-                branch_id: '',
+                branch_id: null,
                 is_active: 'active'
             };
         },
@@ -365,8 +448,9 @@ export default {
 
             await adminApi.get(`/branches`)
                 .then((res) => {
-                    let l = res.data;
-                    this.branches = l.data;
+                    let l = res.data.data;
+                    l.unshift({ id: 0, name: "اضف فرع", name_e: "Add Branch" });
+                    this.branches  = l;
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -378,14 +462,27 @@ export default {
                 .finally(() => {
                     this.isLoader = false;
                 });
-        }
-    },
+        },
+        showBranchModal() {
+            if (this.create.branch_id == 0) {
+                this.$bvModal.show("branch-create");
+                this.create.branch_id = null;
+            }
+        },
+        showBranchModalEdit() {
+            if (this.edit.branch_id == 0) {
+                this.$bvModal.show("branch-create");
+                this.edit.branch_id = null;
+            }
+        },
+    }
 };
 </script>
 
 <template>
     <Layout>
         <PageHeader />
+        <Branch @created="getBranch" />
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -487,12 +584,28 @@ export default {
                                             {{ $t('general.group') }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button
-                                            class="mx-1 custom-btn-background"
-                                        >
-                                            {{ $t('general.setting') }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{
+                                                    $t('general.Name')
+                                                }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">
+                                                {{ $t('general.Name_en') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.branch_id" class="mb-1">
+                                                {{ $t('general.branch') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">
+                                                {{ $t('general.Status') }}
+                                            </b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -540,59 +653,41 @@ export default {
                             @hidden="resetModalHidden"
                         >
                             <form>
+                                <div class="mb-3 d-flex justify-content-end">
+                                    <b-button
+                                        variant="success"
+                                        :disabled="!is_disabled"
+                                        @click.prevent="resetForm"
+                                        type="button"
+                                        :class="['font-weight-bold px-2', is_disabled ? 'mx-2' : '']"
+                                    >
+                                        {{ $t("general.AddNewRecord") }}
+                                    </b-button>
+                                    <template v-if="!is_disabled">
+                                        <b-button
+                                            variant="success"
+                                            type="submit"
+                                            class="mx-1"
+                                            v-if="!isLoader"
+                                            @click.prevent="AddSubmit"
+                                        >
+                                            {{ $t("general.Add") }}
+                                        </b-button>
+
+                                        <b-button variant="success" class="mx-1" disabled v-else>
+                                            <b-spinner small></b-spinner>
+                                            <span class="sr-only">{{ $t("login.Loading") }}...</span>
+                                        </b-button>
+                                    </template>
+                                    <b-button
+                                        @click.prevent="$bvModal.hide(`create`)"
+                                        variant="danger"
+                                        type="button"
+                                    >
+                                        {{ $t("general.Cancel") }}
+                                    </b-button>
+                                </div>
                                 <div class="row">
-                                    <div class="col-md-12 direction" dir="rtl">
-                                        <div class="form-group">
-                                            <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="1"
-                                                @keypress.enter="moveInput('input','create',2)"
-                                                v-model="$v.create.name.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.name.$error || errors.name,
-                                                'is-valid':!$v.create.name.$invalid && !errors.name
-                                            }"
-                                                id="field-1"
-                                            />
-                                            <div v-if="!$v.create.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
-                                            <template v-if="errors.name">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 direction-ltr" dir="ltr">
-                                        <div class="form-group">
-                                            <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                data-create="2"
-                                                @keypress.enter="moveInput('select','create',4)"
-                                                v-model="$v.create.name_e.$model"
-                                                :class="{
-                                                'is-invalid':$v.create.name_e.$error || errors.name_e,
-                                                'is-valid':!$v.create.name_e.$invalid && !errors.name_e
-                                            }"
-                                                id="field-2"
-                                            />
-                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                            <div v-if="!$v.create.name_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                            <template v-if="errors.name_e">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                            </template>
-                                        </div>
-                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label  class="control-label">
@@ -600,6 +695,7 @@ export default {
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
+                                                @input="showBranchModal"
                                                 v-model="create.branch_id"
                                                 :options="branches.map(type => type.id)"
                                                 :custom-label="opt => branches.find(x => x.id == opt).name">
@@ -611,6 +707,60 @@ export default {
                                             </div>
                                             <template v-if="errors.branch_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.branch_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="field-1" class="control-label">
+                                                {{ $t('general.Name') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="rtl">
+                                                <input
+                                                    type="text"
+                                                    class="form-control arabicInput"
+                                                    data-create="1"
+                                                    @keypress.enter="moveInput('input','create',2)"
+                                                    v-model="$v.create.name.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.name.$error || errors.name,
+                                                        'is-valid':!$v.create.name.$invalid && !errors.name
+                                                    }"
+                                                    id="field-1"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.name">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="field-2" class="control-label">
+                                                {{ $t('general.Name_en') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <div dir="ltr">
+                                                <input
+                                                    type="text"
+                                                    class="form-control englishInput"
+                                                    data-create="2"
+                                                    @keypress.enter="moveInput('select','create',4)"
+                                                    v-model="$v.create.name_e.$model"
+                                                    :class="{
+                                                        'is-invalid':$v.create.name_e.$error || errors.name_e,
+                                                        'is-valid':!$v.create.name_e.$invalid && !errors.name_e
+                                                    }"
+                                                    id="field-2"
+                                                />
+                                            </div>
+                                            <div v-if="!$v.create.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.create.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                            <div v-if="!$v.create.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.create.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                            <template v-if="errors.name_e">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
@@ -640,26 +790,6 @@ export default {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-1 d-flex justify-content-end">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button
-                                        variant="success"
-                                        type="button" class="mx-1"
-                                        v-if="!isLoader"
-                                        @click.prevent="AddSubmit"
-                                    >
-                                        {{ $t('general.Add') }}
-                                    </b-button>
-
-                                    <b-button variant="success" class="mx-1" disabled v-else>
-                                        <b-spinner small></b-spinner>
-                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                    </b-button>
-
-                                    <b-button variant="secondary" type="button" @click.prevent="resetModalHidden">
-                                        {{ $t('general.Cancel') }}
-                                    </b-button>
-                                </div>
                             </form>
                         </b-modal>
                         <!--  /create   -->
@@ -683,7 +813,7 @@ export default {
                                             >
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name') }}</span>
                                             <div class="arrow-sort">
@@ -692,7 +822,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Name_en') }}</span>
                                             <div class="arrow-sort">
@@ -701,12 +831,12 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.branch_id">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.branch') }}</span>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t('general.Status') }}</span>
                                             <div class="arrow-sort">
@@ -740,14 +870,14 @@ export default {
                                             >
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name">
                                         <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                    <td>{{ data.branch.name }}</td>
-                                    <td>
+                                    <td v-if="setting.branch_id">{{ data.branch.name }}</td>
+                                    <td v-if="setting.is_active">
                                         <span :class="[
                                             data.is_active == 'active' ?
                                             'text-success':
@@ -804,63 +934,32 @@ export default {
                                             :ref="`edit-${data.id}`"
                                             :hide-footer="true"
                                             @show="resetModalEdit(data.id)"
-
                                             @hidden="resetModalHiddenEdit(data.id)"
                                         >
                                             <form>
+                                                <div class="mb-3 d-flex justify-content-end">
+                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                                    <b-button variant="success" type="submit" class="mx-1"
+                                                              v-if="!isLoader"
+                                                              @click.prevent="editSubmit(data.id)"
+                                                    >
+                                                        {{ $t('general.Edit') }}
+                                                    </b-button>
+
+                                                    <b-button variant="success" class="mx-1" disabled v-else>
+                                                        <b-spinner small></b-spinner>
+                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                                                    </b-button>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        type="button"
+                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
+                                                    >
+                                                        {{ $t('general.Cancel') }}
+                                                    </b-button>
+                                                </div>
                                                 <div class="row">
-                                                    <div class="col-md-12 direction" dir="rtl">
-                                                        <div class="form-group">
-                                                            <label for="edit-1" class="control-label">
-                                                                {{ $t('general.Name') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="1"
-                                                                @keypress.enter="moveInput('input','edit',2)"
-                                                                v-model="$v.edit.name.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.name.$error || errors.name,
-                                                                    'is-valid':!$v.edit.name.$invalid && !errors.name
-                                                                }"
-                                                                id="edit-1"
-                                                            />
-                                                            <div v-if="!$v.edit.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name.alphaArabic" class="invalid-feedback">{{ $t('general.alphaArabic') }}</div>
-                                                            <template v-if="errors.name">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 direction-ltr" dir="ltr">
-                                                        <div class="form-group">
-                                                            <label for="edit-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
-                                                                <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input
-                                                                type="text"
-                                                                class="form-control"
-                                                                data-edit="2"
-                                                                @keypress.enter="moveInput('select','edit',4)"
-                                                                v-model="$v.edit.name_e.$model"
-                                                                :class="{
-                                                                    'is-invalid':$v.edit.name_e.$error || errors.name_e,
-                                                                    'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
-                                                                }"
-                                                                id="edit-2"
-                                                            />
-                                                            <div v-if="!$v.edit.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
-                                                            <div v-if="!$v.edit.name_e.alphaEnglish" class="invalid-feedback">{{ $t('general.alphaEnglish') }}</div>
-                                                            <template v-if="errors.name_e">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
-                                                            </template>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group position-relative">
                                                             <label  class="control-label">
@@ -868,6 +967,7 @@ export default {
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
+                                                                @input="showBranchModalEdit"
                                                                 v-model="edit.branch_id"
                                                                 :options="branches.map(type => type.id)"
                                                                 :custom-label="opt => branches.find(x => x.id == opt).name">
@@ -879,6 +979,60 @@ export default {
                                                             </div>
                                                             <template v-if="errors.branch_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.branch_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="edit-1" class="control-label">
+                                                                {{ $t('general.Name') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                            <div dir="rtl">
+                                                                <input
+                                                                    type="text"
+                                                                    class="form-control arabicInput"
+                                                                    data-edit="1"
+                                                                    @keypress.enter="moveInput('input','edit',2)"
+                                                                    v-model="$v.edit.name.$model"
+                                                                    :class="{
+                                                                    'is-invalid':$v.edit.name.$error || errors.name,
+                                                                    'is-valid':!$v.edit.name.$invalid && !errors.name
+                                                                }"
+                                                                    id="edit-1"
+                                                                />
+                                                            </div>
+                                                            <div v-if="!$v.edit.name.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.name.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <template v-if="errors.name">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="edit-2" class="control-label">
+                                                                {{ $t('general.Name_en') }}
+                                                                <span class="text-danger">*</span>
+                                                            </label>
+                                                           <div dir="ltr">
+                                                               <input
+                                                                   type="text"
+                                                                   class="form-control englishInput"
+                                                                   data-edit="2"
+                                                                   @keypress.enter="moveInput('select','edit',4)"
+                                                                   v-model="$v.edit.name_e.$model"
+                                                                   :class="{
+                                                                    'is-invalid':$v.edit.name_e.$error || errors.name_e,
+                                                                    'is-valid':!$v.edit.name_e.$invalid && !errors.name_e
+                                                                }"
+                                                                   id="edit-2"
+                                                               />
+                                                           </div>
+                                                            <div v-if="!$v.edit.name_e.minLength" class="invalid-feedback">{{ $t('general.Itmustbeatleast') }} {{ $v.edit.name_e.$params.minLength.min }} {{ $t('general.letters') }}</div>
+                                                            <div v-if="!$v.edit.name_e.maxLength" class="invalid-feedback">{{ $t('general.Itmustbeatmost') }}  {{ $v.edit.name_e.$params.maxLength.max }} {{ $t('general.letters') }}</div>
+                                                            <template v-if="errors.name_e">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.name_e" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
@@ -907,25 +1061,6 @@ export default {
                                                             </template>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-1 d-flex justify-content-end">
-                                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                                    <b-button  variant="success" type="button" class="mx-1" v-if="!isLoader" @click.prevent="editSubmit(data.id)">
-                                                        {{ $t('general.Edit') }}
-                                                    </b-button>
-
-                                                    <b-button variant="success" class="mx-1" disabled v-else >
-                                                        <b-spinner small></b-spinner>
-                                                        <span class="sr-only">{{ $t('login.Loading') }}...</span>
-                                                    </b-button>
-
-                                                    <b-button
-                                                        variant="secondary"
-                                                        type="button"
-                                                        @click.prevent="$bvModal.hide(`modal-edit-${data.id}`)"
-                                                    >
-                                                        {{ $t('general.Cancel') }}
-                                                    </b-button>
                                                 </div>
                                             </form>
                                         </b-modal>

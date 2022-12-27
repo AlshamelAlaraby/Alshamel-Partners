@@ -2053,7 +2053,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/users/".concat(this.user_id), {
         old_media: old_media
       }).then(function (res) {
-        _this15.images = res.data.data.media ? res.data.data.media : _this15.images;
+        _this15.images = res.data.data.media ? res.data.data.media : [];
         if (_this15.images && _this15.images.length > 0) {
           {
             _this15.showPhoto = _this15.images[_this15.images.length - 1].webp;
@@ -7145,6 +7145,11 @@ var menuItems = [{
   label: "menuitems.navigation.text",
   isTitle: true
 }, {
+  id: 100032,
+  label: 'menuitems.company.text',
+  icon: 'fas fa-city',
+  link: '/company'
+}, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
@@ -7165,10 +7170,35 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/banks'
 }, {
+  id: 112202,
+  label: 'general.bankAccounts',
+  icon: 'fas fa-eraser',
+  link: '/bankAccount'
+}, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-eraser',
+  link: '/workflow-hotfields'
+}, {
+  id: 225,
+  label: 'general.ScreenProperties',
+  icon: 'fas fa-eraser',
+  link: '/screen-properties'
+}, {
+  id: 226,
+  label: 'general.TreeProperty',
+  icon: 'fas fa-eraser',
+  link: '/tree-properties'
+}, {
   id: 223,
   label: 'general.Users',
   icon: 'fas fa-eraser',
   link: '/users'
+}, {
+  id: 112201,
+  label: 'general.paymentTypes',
+  icon: 'fas fa-asterisk',
+  link: '/paymentTypes'
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -7226,6 +7256,18 @@ var menuItems = [{
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
     link: '/roles'
+  }, {
+    id: 100043,
+    label: 'menuitems.dashboard.list.roleWorkflow',
+    link: '/role-workflow'
+  }, {
+    id: 100088,
+    label: 'menuitems.dashboard.list.roleWorkflowButton',
+    link: '/role-workflow-button'
+  }, {
+    id: 100134,
+    label: 'menuitems.dashboard.list.RoleHotfieldScreen',
+    link: '/role-hotfield-screen'
   }]
 }, {
   id: 5,
@@ -7254,6 +7296,7 @@ var menuItems = [{
   link: '/colors'
 }
 
+//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

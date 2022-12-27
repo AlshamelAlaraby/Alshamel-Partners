@@ -83,12 +83,11 @@ class CountryController extends Controller
             return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
         }
 
-//        if ($model->avenues()->count) {
-//            $this->modelInterface->delete($id);
-//        }
 
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
     }
+
+
 }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('name_e', 100);
             $table->unsignedInteger('parent_id')->nullable()->default(0);
-//            $table->unsignedInteger ('screen_id')->nullable ()->default (0);
+            //            $table->unsignedInteger ('screen_id')->nullable ()->default (0);
             $table->unsignedTinyInteger('required')->nullable()->default(0);
-//            $table->string ('screen_node')->nullable ();
+            //            $table->string ('screen_node')->nullable ();
             $table->timestamps();
         });
     }
