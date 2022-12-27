@@ -41,7 +41,7 @@ export default {
             $(".arabicInput").keypress(function (event) {
                 var ew = event.which;
                 if (ew == 32) return true;
-                if (48 <= ew && ew <= 57) return false;
+                if (48 <= ew && ew <= 57) return true;
                 if (65 <= ew && ew <= 90) return false;
                 if (97 <= ew && ew <= 122) return false;
                 return true;
@@ -72,6 +72,14 @@ export default {
                 country_id: null,
                 is_default: 0,
                 is_active: "active",
+            },
+            setting: {
+                name: true,
+                name_e: true,
+                country_id: true,
+                phone_key: true,
+                is_default: true,
+                is_active: true
             },
             errors: {},
             dropDownSenders: [],
@@ -532,14 +540,14 @@ export default {
                                 </div>
 
                                 <div class="d-inline-block position-relative" style="width: 77%">
-                  <span
-                      :class="[
-                      'search-custom position-absolute',
-                      $i18n.locale == 'ar' ? 'search-custom-ar' : '',
-                    ]"
-                  >
-                    <i class="fe-search"></i>
-                  </span>
+                                  <span
+                                      :class="[
+                                      'search-custom position-absolute',
+                                      $i18n.locale == 'ar' ? 'search-custom-ar' : '',
+                                    ]"
+                                  >
+                                    <i class="fe-search"></i>
+                                  </span>
                                     <input
                                         class="form-control"
                                         style="display: block; width: 93%; padding-top: 3px"
@@ -612,10 +620,34 @@ export default {
                                             {{ $t("general.group") }}
                                             <i class="fe-menu"></i>
                                         </b-button>
-                                        <b-button class="mx-1 custom-btn-background">
-                                            {{ $t("general.setting") }}
-                                            <i class="fe-settings"></i>
-                                        </b-button>
+                                        <!-- Basic dropdown -->
+                                        <b-dropdown variant="primary"
+                                                    :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                                    ref="dropdown" class="dropdown-custom-ali">
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{
+                                                    $t('general.Name')
+                                                }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">
+                                                {{ $t('general.Name_en') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.phone_key" class="mb-1">
+                                                {{ $t('general.phone_key') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">
+                                                {{ $t('general.country') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_default" class="mb-1">
+                                                {{ $t('general.is_default') }}
+                                            </b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.is_active" class="mb-1">
+                                                {{ $t('general.Status') }}
+                                            </b-form-checkbox>
+                                            <div class="d-flex justify-content-end">
+                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                                            </div>
+                                        </b-dropdown>
+                                        <!-- Basic dropdown -->
                                     </div>
                                     <!-- end filter and setting -->
 
@@ -629,9 +661,9 @@ export default {
                                             <a
                                                 href="javascript:void(0)"
                                                 :style="{
-                          'pointer-events':
-                            governoratesPagination.current_page == 1 ? 'none' : '',
-                        }"
+                                                  'pointer-events':
+                                                    governoratesPagination.current_page == 1 ? 'none' : '',
+                                                }"
                                                 @click.prevent="getData(governoratesPagination.current_page - 1)"
                                             >
                                                 <span>&lt;</span>
@@ -939,7 +971,7 @@ export default {
                                             />
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t("general.Name") }}</span>
                                             <div class="arrow-sort">
@@ -954,7 +986,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t("general.Name_en") }}</span>
                                             <div class="arrow-sort">
@@ -969,22 +1001,22 @@ export default {
                                             </div>
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.phone_key">
                                         <div class="d-flex justify-content-center">
                                             {{ $t("general.phone_key") }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
                                             {{ $t("general.country") }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_default">
                                         <div class="d-flex justify-content-center">
                                             {{ $t("general.is_default") }}
                                         </div>
                                     </th>
-                                    <th>
+                                    <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
                                             <span>{{ $t("general.Status") }}</span>
                                             <div class="arrow-sort">
@@ -1024,17 +1056,17 @@ export default {
                                             />
                                         </div>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name">
                                         <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                                     </td>
-                                    <td>
+                                    <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                                     </td>
-                                    <td>{{ data.phone_key }}</td>
-                                    <td>
+                                    <td v-if="setting.phone_key">{{ data.phone_key }}</td>
+                                    <td v-if="setting.country_id">
                                         {{ $i18n.locale == "ar" ? data.country.name : data.country.name_e }}
                                     </td>
-                                    <td>
+                                    <td v-if="setting.is_default">
                       <span
                           :class="[
                           data.is_default == 'active' ? 'text-success' : 'text-danger',
@@ -1048,19 +1080,19 @@ export default {
                           }}
                       </span>
                                     </td>
-                                    <td>
-                      <span
-                          :class="[
-                          data.is_active == 'active' ? 'text-success' : 'text-danger',
-                          'badge',
-                        ]"
-                      >
-                        {{
-                              data.is_active == "active"
-                                  ? `${$t("general.Active")}`
-                                  : `${$t("general.Inactive")}`
-                          }}
-                      </span>
+                                    <td v-if="setting.is_active">
+                                      <span
+                                          :class="[
+                                          data.is_active == 'active' ? 'text-success' : 'text-danger',
+                                          'badge',
+                                        ]"
+                                      >
+                                        {{
+                                              data.is_active == "active"
+                                                  ? `${$t("general.Active")}`
+                                                  : `${$t("general.Inactive")}`
+                                          }}
+                                      </span>
                                     </td>
                                     <td>
                                         <div class="btn-group">

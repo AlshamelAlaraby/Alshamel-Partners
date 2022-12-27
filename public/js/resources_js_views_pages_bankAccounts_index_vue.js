@@ -2570,7 +2570,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (_this12.images && _this12.images.length > 0) {
                   _this12.showPhoto = _this12.images[_this12.images.length - 1].webp;
                 } else {
-                  _this12.images = './images/img-1.png';
+                  _this12.showPhoto = './images/img-1.png';
                 }
                 _this12.errors = {};
               case 14:
@@ -2666,7 +2666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               if (_this13.images && _this13.images.length > 0) {
                 _this13.showPhoto = _this13.images[_this13.images.length - 1].webp;
               } else {
-                _this13.images = './images/img-1.png';
+                _this13.showPhoto = './images/img-1.png';
               }
               _this13.getData();
             })["catch"](function (err) {
@@ -2723,7 +2723,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (_this13.images && _this13.images.length > 0) {
                     _this13.showPhoto = _this13.images[_this13.images.length - 1].webp;
                   } else {
-                    _this13.images = './images/img-1.png';
+                    _this13.showPhoto = './images/img-1.png';
                   }
                   _this13.getData();
                 })["catch"](function (err) {
@@ -2763,6 +2763,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         old_media: old_media
       }).then(function (res) {
         var _res$data$data$media3;
+        _this14.bankAccounts[index] = res.data.data;
         _this14.images = (_res$data$data$media3 = res.data.data.media) !== null && _res$data$data$media3 !== void 0 ? _res$data$data$media3 : [];
         if (_this14.images && _this14.images.length > 0) {
           _this14.showPhoto = _this14.images[_this14.images.length - 1].webp;
@@ -2791,7 +2792,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.next = 3;
                 return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks").then(function (res) {
                   var l = res.data.data;
-                  console.log(l);
                   l.unshift({
                     id: 0,
                     name: "اضف بنك",
@@ -10203,7 +10203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-dialog .card {\r\n    margin: 0 !important;\n}\n.bankAccount.modal-body {\r\n    padding: 0 !important;\n}\n.modal-dialog .card-body {\r\n    padding: 1.5rem 1.5rem 0 1.5rem !important;\n}\n.nav-bordered {\r\n    border: unset !important;\n}\n.nav {\r\n    background-color: #dff0fe;\n}\n.tab-content {\r\n    padding: 70px 60px 40px;\r\n    min-height: 300px;\r\n    background-color: #f5f5f5;\r\n    position: relative;\n}\n.nav-tabs .nav-link {\r\n    border: 1px solid #b7b7b7 !important;\r\n    background-color: #d7e5f2;\r\n    border-bottom: 0 !important;\r\n    margin-bottom: 1px;\n}\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\r\n    color: #000;\r\n    background-color: hsl(0deg 0% 96%);\r\n    border-bottom: 0 !important;\n}\n.img-thumbnail {\r\n    max-height: 400px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-dialog .card {\n    margin: 0 !important;\n}\n.bankAccount.modal-body {\n    padding: 0 !important;\n}\n.modal-dialog .card-body {\n    padding: 1.5rem 1.5rem 0 1.5rem !important;\n}\n.nav-bordered {\n    border: unset !important;\n}\n.nav {\n    background-color: #dff0fe;\n}\n.tab-content {\n    padding: 70px 60px 40px;\n    min-height: 300px;\n    background-color: #f5f5f5;\n    position: relative;\n}\n.nav-tabs .nav-link {\n    border: 1px solid #b7b7b7 !important;\n    background-color: #d7e5f2;\n    border-bottom: 0 !important;\n    margin-bottom: 1px;\n}\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\n    color: #000;\n    background-color: hsl(0deg 0% 96%);\n    border-bottom: 0 !important;\n}\n.img-thumbnail {\n    max-height: 400px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

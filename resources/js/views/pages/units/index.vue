@@ -59,7 +59,9 @@ export default {
                 name_e: true,
                 is_active: true
             },
-            filterSetting: ['name', 'name_e', 'is_active']
+            filterSetting: ['name', 'name_e', 'is_active'],
+            Tooltip: '',
+            mouseEnter: null
         }
     },
     validations: {
@@ -402,7 +404,35 @@ export default {
          */
         moveInput(tag, c, index) {
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
-        }
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/units/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }else {
+
+            }
+        },
     },
 };
 </script>
@@ -980,7 +1010,16 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                        <button
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            data-toggle="tooltip"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

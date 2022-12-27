@@ -38,12 +38,12 @@ export default {
             isLoader: false,
             create: {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             },
             edit: {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             },
             errors: {},
@@ -51,27 +51,27 @@ export default {
             checkAll: [],
             roles: [],
             hotfields: [],
-            screens: [],
+            workflows: [],
             current_page: 1,
             setting: {
                 role_id: true,
-                screen_id: true,
+                workflow_id: true,
                 hotfield_id: true
             },
             company_id: null,
             is_disabled: false,
-            filterSetting: ['role_id', 'screen_id','hotfield_id']
+            filterSetting: ['role_id', 'workflow_id','hotfield_id']
         }
     },
     validations: {
         create: {
             role_id:{required},
-            screen_id:{required},
+            workflow_id:{required},
             hotfield_id: {required}
         },
         edit: {
             role_id:{required},
-            screen_id:{required},
+            workflow_id:{required},
             hotfield_id: {required}
         },
     },
@@ -223,7 +223,7 @@ export default {
         resetModalHidden() {
             this.create = {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             };
             this.$nextTick(() => {
@@ -241,7 +241,7 @@ export default {
             await this.getWorkflow();
             this.create = {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             };
             this.$nextTick(() => {
@@ -257,7 +257,7 @@ export default {
             await this.getWorkflow();
             this.create = {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             };
             this.$nextTick(() => {
@@ -318,7 +318,7 @@ export default {
                 this.isLoader = true;
                 this.errors = {};
 
-                adminApi.put(`/role-screen-hotfield/${id}`, this.edit)
+                adminApi.post(`/role-screen-hotfield/${id}`, this.edit)
                     .then((res) => {
                         this.$bvModal.hide(`modal-edit-${id}`);
                         this.getData();
@@ -355,13 +355,13 @@ export default {
             let module = this.roleWorkflowHotfields.find(e => id == e.id);
             this.edit.role_id = module.role.id;
             this.edit.hotfield_id = module.hotfield_id;
-            this.edit.screen_id = module.screen_id;
+            this.edit.workflow_id = module.workflow_id;
             this.errors = {};
         },
         resetModalHiddenEdit(id){
             this.create = {
                 role_id: null,
-                screen_id: null,
+                workflow_id: null,
                 hotfield_id: null
             };
             this.$nextTick(() => {
@@ -416,7 +416,7 @@ export default {
             await axios.get(`${process.env.MIX_APP_URL_OUTSIDE}api/everything_about_the_company/${this.company_id}`)
                 .then((res) => {
                     let l = res.data.data;
-                    this.screens = l.screen_all;
+                    this.workflows = l.work_flow_trees;;
                     this.hotfields = l.hot_fields;
                 })
                 .catch((err) => {
@@ -564,8 +564,8 @@ export default {
                                             <b-form-checkbox v-model="setting.role_id" class="mb-1">
                                                 {{ $t('roles.roles') }}
                                             </b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.screen_id" class="mb-1">
-                                                {{ $t('general.screen') }}
+                                            <b-form-checkbox v-model="setting.workflow_id" class="mb-1">
+                                                {{ $t('general.workflow') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.hotfield_id" class="mb-1">
                                                 {{ $t('general.hotfield') }}
@@ -675,7 +675,7 @@ export default {
                                             <multiselect
                                                 v-model="create.hotfield_id"
                                                 :options="hotfields.map(type => type.id)"
-                                                :custom-label="opt => $i18n.locale == 'ar' ? hotfields.find(x => x.id == opt).name : hotfields.find(x => x.id == opt).name_e">
+                                                :custom-label="opt => $i18n.locale == 'ar' ? hotfields.find(x => x.id == opt).field_title : hotfields.find(x => x.id == opt).field_title_en">
                                             </multiselect>
                                             <template v-if="errors.hotfield_id">
                                                 <ErrorMessage v-for="(errorMessage,index) in errors.hotfield_id" :key="index">{{ errorMessage }}</ErrorMessage>
@@ -684,14 +684,14 @@ export default {
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="my-1 mr-2">{{ $t('general.screen') }}</label>
+                                            <label class="my-1 mr-2">{{ $t('general.workflow') }}</label>
                                             <multiselect
-                                                v-model="create.screen_id"
-                                                :options="screens.map(type => type.id)"
-                                                :custom-label="opt => $i18n.locale == 'ar' ? screens.find(x => x.id == opt).name : screens.find(x => x.id == opt).name_e">
+                                                v-model="create.workflow_id"
+                                                :options="workflows.map(type => type.id)"
+                                                :custom-label="opt => $i18n.locale == 'ar' ? workflows.find(x => x.id == opt).name : workflows.find(x => x.id == opt).name_e">
                                             </multiselect>
-                                            <template v-if="errors.screen_id">
-                                                <ErrorMessage v-for="(errorMessage,index) in errors.screen_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                            <template v-if="errors.workflow_id">
+                                                <ErrorMessage v-for="(errorMessage,index) in errors.workflow_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                             </template>
                                         </div>
                                     </div>
@@ -729,9 +729,9 @@ export default {
                                             <span>{{ $t('general.hotfield') }}</span>
                                         </div>
                                     </th>
-                                    <th v-if="setting.screen_id">
+                                    <th v-if="setting.workflow_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.screen') }}</span>
+                                            <span>{{ $t('general.workflow') }}</span>
                                         </div>
                                     </th>
                                     <th>
@@ -764,13 +764,16 @@ export default {
                                     </td>
                                     <td v-if="setting.hotfield_id">
                                         <h5 class="m-0 font-weight-normal">{{ hotfields.length > 0 ?
-                                            $i18n.locale == 'ar' ? hotfields.find(x => x.id == data.hotfield_id).name : hotfields.find(x => x.id == data.hotfield_id).name_e
+                                            $i18n.locale == 'ar' ? hotfields.find(x => x.id == data.hotfield_id).field_title : hotfields.find(x => x.id == data.hotfield_id).field_title
                                             : ''}}</h5>
                                     </td>
-                                    <td v-if="setting.screen_id">
-                                        <h5 class="m-0 font-weight-normal">{{ screens.length > 0  ?
-                                            $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).name : screens.find(x => x.id == data.screen_id).name_e
-                                          : ''  }}</h5>
+                                    <td v-if="setting.workflow_id">
+                                        <h5 class="m-0 font-weight-normal">
+                                            {{ workflows.length > 0  ?
+                                                $i18n.locale == 'ar' ? workflows.find(x => x.id == data.workflow_id).name : workflows.find(x => x.id == data.workflow_id).name_e
+                                                 : ''
+                                            }}
+                                        </h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -813,7 +816,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('editroleWorkflowHotfield')"
+                                            :title="$t('general.editroleWorkflowHotfield')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -865,7 +868,7 @@ export default {
                                                             <multiselect
                                                                 v-model="edit.hotfield_id"
                                                                 :options="hotfields.map(type => type.id)"
-                                                                :custom-label="opt => $i18n.locale == 'ar' ? hotfields.find(x => x.id == opt).name:hotfields.find(x => x.id == opt).name_e">
+                                                                :custom-label="opt => $i18n.locale == 'ar' ? hotfields.find(x => x.id == opt).field_title:hotfields.find(x => x.id == opt).field_title_en">
                                                             </multiselect>
                                                             <template v-if="errors.hotfield_id">
                                                                 <ErrorMessage v-for="(errorMessage,index) in errors.hotfield_id" :key="index">{{ errorMessage }}</ErrorMessage>
@@ -874,14 +877,14 @@ export default {
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label class="my-1 mr-2">{{ $t('general.screen') }}</label>
+                                                            <label class="my-1 mr-2">{{ $t('general.workflow') }}</label>
                                                             <multiselect
-                                                                v-model="edit.screen_id"
-                                                                :options="screens.map(type => type.id)"
-                                                                :custom-label="opt => $i18n.locale == 'ar' ? screens.find(x => x.id == opt).name:screens.find(x => x.id == opt).name_e">
+                                                                v-model="edit.workflow_id"
+                                                                :options="workflows.map(type => type.id)"
+                                                                :custom-label="opt => $i18n.locale == 'ar' ? workflows.find(x => x.id == opt).name:workflows.find(x => x.id == opt).name_e">
                                                             </multiselect>
-                                                            <template v-if="errors.screen_id">
-                                                                <ErrorMessage v-for="(errorMessage,index) in errors.screen_id" :key="index">{{ errorMessage }}</ErrorMessage>
+                                                            <template v-if="errors.workflow_id">
+                                                                <ErrorMessage v-for="(errorMessage,index) in errors.workflow_id" :key="index">{{ errorMessage }}</ErrorMessage>
                                                             </template>
                                                         </div>
                                                     </div>
@@ -910,3 +913,6 @@ export default {
         </div>
     </Layout>
 </template>
+
+
+
