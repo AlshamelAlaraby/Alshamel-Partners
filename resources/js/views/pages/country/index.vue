@@ -159,7 +159,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -394,6 +394,10 @@ export default {
          *  edit country
          */
         editSubmit(id) {
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
+            if(!this.edit.long_name){ this.edit.long_name = this.edit.long_name_e}
+            if(!this.edit.long_name_e){ this.edit.long_name_e = this.edit.long_name}
             this.$v.edit.$touch();
             this.images.forEach(e => {this.edit.old_media.push(e.id);});
             if (this.$v.edit.$invalid) {

@@ -6455,7 +6455,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("editroleWorkflowButton"),
+        title: _vm.$t("general.editroleWorkflowButton"),
         "title-class": "font-18",
         "body-class": "p-4",
         "hide-footer": true

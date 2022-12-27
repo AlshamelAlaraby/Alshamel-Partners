@@ -473,7 +473,7 @@ export default {
             if (this.images && this.images.length > 0) {
                 this.showPhoto = this.images[this.images.length - 1].webp;
             } else {
-                this.images = './images/img-1.png';
+                this.showPhoto = './images/img-1.png';
             }
             this.errors = {};
         },
@@ -555,7 +555,7 @@ export default {
                                     if (this.images && this.images.length > 0) {
                                         this.showPhoto = this.images[this.images.length - 1].webp;
                                     } else {
-                                        this.images = './images/img-1.png';
+                                        this.showPhoto = './images/img-1.png';
                                     }
                                     this.getData();
                                 })
@@ -613,7 +613,7 @@ export default {
                                             if (this.images && this.images.length > 0) {
                                                 this.showPhoto = this.images[this.images.length - 1].webp;
                                             } else {
-                                                this.images = './images/img-1.png';
+                                                this.showPhoto = './images/img-1.png';
                                             }
                                             this.getData();
                                         })
@@ -654,6 +654,7 @@ export default {
             });
             adminApi.put(`/bank-accounts/${this.bankAccount_id}`, {old_media})
                 .then((res) => {
+                    this.bankAccounts[index] = res.data.data;
                     this.images = res.data.data.media ?? [];
                     if (this.images && this.images.length > 0) {
                         this.showPhoto = this.images[this.images.length - 1].webp;
@@ -680,7 +681,6 @@ export default {
                 .get(`/banks`)
                 .then((res) => {
                     let l = res.data.data;
-                    console.log(l)
                     l.unshift({id: 0, name: "اضف بنك", name_e: "Add Bank"});
                     this.banks = l;
                 })
