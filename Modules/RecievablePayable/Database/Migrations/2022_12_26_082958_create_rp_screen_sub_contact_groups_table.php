@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('internal_salesmen', function (Blueprint $table) {
+        Schema::create('rp_screen_sub_contact_groups', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('employee_id');
-            $table->unsignedTinyInteger('is_active')->nullable()->default(1);
+            $table->unsignedInteger ('sub_contract_group_id')->default (0);
+            $table->unsignedInteger ('screen_id')->default (0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('internal_salesmen');
+        Schema::dropIfExists('rp_screen_sub_contact_groups');
     }
 };

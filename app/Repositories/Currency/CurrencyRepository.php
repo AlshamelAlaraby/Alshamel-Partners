@@ -1,9 +1,6 @@
 <?php
 
-
 namespace App\Repositories\Currency;
-
-use App\Models\City;
 
 use App\Models\Currency;
 use Illuminate\Support\Facades\DB;
@@ -11,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 class CurrencyRepository implements CurrencyRepositoryInterface
 {
     public $model;
-    public function __construct(Currency $model){
+    public function __construct(Currency $model)
+    {
         $this->model = $model;
     }
-    public function getAll ($request)
+    public function getAll($request)
     {
         $models = $this->model->where(function ($q) use ($request) {
 
@@ -41,27 +39,35 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         }
     }
 
-    public function create(array $data){
-        DB::transaction(function () use ($data) {
-            $this->model->create($data);
+    public function create(array $data)
+    {
+        return DB::transaction(function () use ($data) {
             cacheForget("currencies");
+            return $this->model->create($data);
+
         });
     }
 
-    public function find($id){
+    public function find($id)
+    {
         return $this->model->find($id);
     }
 
-    public function update($data,$id){
+    public function update($data, $id)
+    {
         DB::transaction(function () use ($id, $data) {
             $this->model->where("id", $id)->update($data);
+            if (request()->is_default == 1) {
+                $this->model->where('id', '!=', $id)->update(['is_default' => 0]);
+            }
             $this->forget($id);
         });
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $model = $this->find($id);
-        if ($model){
+        if ($model) {
             $this->forget($id);
             $model->delete();
         }

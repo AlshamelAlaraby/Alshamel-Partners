@@ -2,26 +2,10 @@
 
 namespace App\Http\Requests\Currency;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class EditCurrencyRequest extends FormRequest
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-//            'company_id'=>['required'],
-//            'name'=>['required'],
-//            'name_e'=>['required']
-        ];
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,34 +15,25 @@ class EditCurrencyRequest extends FormRequest
     {
         return true;
     }
-
-    /*
-     * custom failedValidation response
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
      */
-    public function failedValidation ( Validator $validator )
-    {
-        throw new HttpResponseException(response()->json(
-            [
-                'status'    => 422,
-
-                'success'   => false,
-
-                'message'   => __ ('validation errors'),
-
-                'data'      => $validator->errors()
-            ],
-            422
-        ));
-    }
-
-    /*
-     * translate failedValidation messages
-     */
-    public function messages ()
+    public function rules()
     {
         return [
-            'required'=>__ ('required'),
-            'unique'=>__ ('exists')
+            'name' => 'required|unique:currencies,name',
+            'name_e' => 'required|unique:currencies,name_e',
+            'symbol' => 'required|unique:currencies,symbol',
+            'symbol_e' => 'required|unique:currencies,symbol_e',
+            'code' => 'required|unique:currencies,code',
+            'code_e' => 'required|unique:currencies,code_e',
+            'is_active' => 'nullable|in:0,1',
+            "is_default" => "required|in:0,1",
+            'fraction' => [],
+            'fraction_e' => [],
+            'fraction_no' => [],
         ];
     }
 }

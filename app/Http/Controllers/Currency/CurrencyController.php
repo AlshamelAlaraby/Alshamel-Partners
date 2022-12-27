@@ -2,32 +2,17 @@
 
 namespace App\Http\Controllers\Currency;
 
-
-
-
-
-
-
 use App\Http\Controllers\Controller;
-
-
-
-
-
-
-
 use App\Http\Requests\Currency\CreateCurrencyRequest;
 use App\Http\Resources\Currency\CurrencyResource;
 use App\Repositories\Currency\CurrencyRepositoryInterface;
 use Illuminate\Http\Request;
 
-
-
 class CurrencyController extends Controller
 {
     public $repository;
     public $resource = CurrencyResource::class;
-    public function __construct (CurrencyRepositoryInterface $repository)
+    public function __construct(CurrencyRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -39,21 +24,22 @@ class CurrencyController extends Controller
     public function index(Request $request)
     {
 
-        $data = cacheGet ('currencies');
-        if ($request->search || $request->is_active){
-            cacheForget ('currencies');
+        if (count($_GET) > 0) {
+            cacheForget('currencies');
+        }
+
+        $data = cacheGet('currencies');
+        if ($request->search || $request->is_active) {
+            cacheForget('currencies');
             $data = $this->repository->getAll($request);
         }
-        if (!$data){
+        if (!$data) {
             $data = $this->repository->getAll($request);
             cachePut('currencies', $data);
         }
 
-
-        return responseJson(200, 'success', ($this->resource)::collection ($data['data']), $data['paginate'] ? getPaginates($data['data']) : null);
+        return responseJson(200, 'success', ($this->resource)::collection($data['data']), $data['paginate'] ? getPaginates($data['data']) : null);
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -62,12 +48,9 @@ class CurrencyController extends Controller
      */
     public function store(CreateCurrencyRequest $request)
     {
-        try {
-            $this->repository->create($request->validated ());
-            return responseJson (200,__ ('done'));
-        }catch (Exception $exception){
-            return responseJson ($exception->getCode (),$exception->getMessage ());
-        }
+        $model = $this->repository->create($request->validated());
+        return responseJson(200, __('done'), new $this->resource($model));
+
     }
 
     /**
@@ -77,10 +60,10 @@ class CurrencyController extends Controller
      */
     public function show($id)
     {
-        if ($branch = $this->repository->find($id)){
-            return responseJson(200,__ ('Done'),new $this->resource($branch),200);
+        if ($branch = $this->repository->find($id)) {
+            return responseJson(200, __('Done'), new $this->resource($branch));
         }
-        return responseJson (404,__ ('not found'));
+        return responseJson(404, __('not found'));
     }
 
     /**
@@ -101,13 +84,15 @@ class CurrencyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $model = $this->repository->find($id);
 
-        try {
-            $this->repository->update($request->all (),$id);
-            return responseJson(200,__('updated'));
-        }catch (\Exception $exception){
-            return responseJson($exception->getCode (),$exception->getMessage ());
+        if (!$model) {
+            return responseJson(404, __('message.data not found'));
         }
+        $model->refresh();
+        $this->repository->update($request->all(), $id);
+        return responseJson(200, __('updated'), new $this->resource($model));
+
     }
 
     /**
@@ -118,7 +103,7 @@ class CurrencyController extends Controller
     public function destroy($id)
     {
         $this->repository->delete($id);
-        return responseJson(200,__('deleted'));
+        return responseJson(200, __('deleted'));
     }
 
     public function logs($id)
