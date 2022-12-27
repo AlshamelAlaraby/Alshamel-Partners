@@ -17,8 +17,8 @@ class RoleWorkflowButtonResource extends JsonResource
     {
         return [
             "role" => new RoleResource($this->role),
-            // "workflow" => new WorkflowResource($this->workflow),
-            // "button" => new ButtonResource($this->button),
+             "workflow_id" => $this->workflow_id,
+             "button_id" => $this->button_id,
         ];
     }
 }
