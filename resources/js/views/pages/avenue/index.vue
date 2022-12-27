@@ -44,7 +44,7 @@ export default {
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return false;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -76,6 +76,14 @@ export default {
         city_id: null,
         is_active: "active",
       },
+        setting: {
+            name: true,
+            name_e: true,
+            country_id: true,
+            governorate_id: true,
+            city_id: true,
+            is_active: true
+        },
       errors: {},
       isCheckAll: false,
       checkAll: [],
@@ -691,10 +699,34 @@ export default {
                       {{ $t("general.group") }}
                       <i class="fe-menu"></i>
                     </b-button>
-                    <b-button class="mx-1 custom-btn-background">
-                      {{ $t("general.setting") }}
-                      <i class="fe-settings"></i>
-                    </b-button>
+                      <!-- Basic dropdown -->
+                      <b-dropdown variant="primary"
+                                  :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
+                                  ref="dropdown" class="dropdown-custom-ali">
+                          <b-form-checkbox v-model="setting.name" class="mb-1">{{
+                                  $t('general.Name')
+                              }}
+                          </b-form-checkbox>
+                          <b-form-checkbox v-model="setting.name_e" class="mb-1">
+                              {{ $t('general.Name_en') }}
+                          </b-form-checkbox>
+                          <b-form-checkbox v-model="setting.country_id" class="mb-1">
+                              {{ $t('general.country') }}
+                          </b-form-checkbox>
+                          <b-form-checkbox v-model="setting.governorate_id" class="mb-1">
+                              {{ $t('general.governorate') }}
+                          </b-form-checkbox>
+                          <b-form-checkbox v-model="setting.city_id" class="mb-1">
+                              {{ $t('general.city') }}
+                          </b-form-checkbox>
+                          <b-form-checkbox v-model="setting.is_active" class="mb-1">
+                              {{ $t('general.Status') }}
+                          </b-form-checkbox>
+                          <div class="d-flex justify-content-end">
+                              <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
+                          </div>
+                      </b-dropdown>
+                      <!-- Basic dropdown -->
                   </div>
                   <!-- end filter and setting -->
 
@@ -1001,7 +1033,7 @@ export default {
                         />
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.Name") }}</span>
                         <div class="arrow-sort">
@@ -1016,7 +1048,7 @@ export default {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.Name_en") }}</span>
                         <div class="arrow-sort">
@@ -1031,7 +1063,7 @@ export default {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.country") }}</span>
                         <div class="arrow-sort">
@@ -1046,7 +1078,7 @@ export default {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.governorate_id">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.governorate") }}</span>
                         <div class="arrow-sort">
@@ -1061,7 +1093,7 @@ export default {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.city_id">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.city") }}</span>
                         <div class="arrow-sort">
@@ -1076,7 +1108,7 @@ export default {
                         </div>
                       </div>
                     </th>
-                    <th>
+                    <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.Status") }}</span>
                         <div class="arrow-sort">
@@ -1114,26 +1146,26 @@ export default {
                         />
                       </div>
                     </td>
-                    <td>
+                    <td v-if="setting.name">
                       <h5 class="m-0 font-weight-normal">{{ data.name }}</h5>
                     </td>
-                    <td>
+                    <td v-if="setting.name_e">
                       <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
                     </td>
-                    <td>
+                    <td v-if="setting.country_id">
                       {{ $i18n.locale == "ar" ? data.country.name : data.country.name_e }}
                     </td>
-                    <td>
+                    <td v-if="setting.governorate_id">
                       {{
                         $i18n.locale == "ar"
                           ? data.governorate.name
                           : data.governorate.name_e
                       }}
                     </td>
-                    <td>
+                    <td v-if="setting.city_id">
                       {{ $i18n.locale == "ar" ? data.city.name : data.city.name_e }}
                     </td>
-                    <td>
+                    <td v-if="setting.is_active">
                       <span
                         :class="[
                           data.is_active == 'active' ? 'text-success' : 'text-danger',

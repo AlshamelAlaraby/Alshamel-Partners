@@ -1493,7 +1493,7 @@ __webpack_require__.r(__webpack_exports__);
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -1517,7 +1517,6 @@ __webpack_require__.r(__webpack_exports__);
         _this3.paymentTypes = l.data;
         _this3.paymentTypesPagination = l.pagination;
         _this3.current_page = l.pagination.current_page;
-        console.log(l.data);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: 'error',
@@ -1691,6 +1690,12 @@ __webpack_require__.r(__webpack_exports__);
      */
     editSubmit: function editSubmit(id) {
       var _this10 = this;
+      if (!this.edit.name) {
+        this.edit.name = this.edit.name_e;
+      }
+      if (!this.edit.name_e) {
+        this.edit.name_e = this.edit.name;
+      }
       this.$v.edit.$touch();
       if (this.$v.edit.$invalid) {
         return;

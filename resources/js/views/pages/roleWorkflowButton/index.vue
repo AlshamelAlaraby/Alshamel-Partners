@@ -816,7 +816,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('editroleWorkflowButton')"
+                                            :title="$t('general.editroleWorkflowButton')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"

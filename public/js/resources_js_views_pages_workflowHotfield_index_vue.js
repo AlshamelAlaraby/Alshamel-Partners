@@ -1817,12 +1817,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isLoader: false,
       create: {
         role_id: null,
-        screen_id: null,
+        workflow_id: null,
         hotfield_id: null
       },
       edit: {
         role_id: null,
-        screen_id: null,
+        workflow_id: null,
         hotfield_id: null
       },
       errors: {},
@@ -1830,16 +1830,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       checkAll: [],
       roles: [],
       hotfields: [],
-      screens: [],
+      workflows: [],
       current_page: 1,
       setting: {
         role_id: true,
-        screen_id: true,
+        workflow_id: true,
         hotfield_id: true
       },
       company_id: null,
       is_disabled: false,
-      filterSetting: ['role_id', 'screen_id', 'hotfield_id']
+      filterSetting: ['role_id', 'workflow_id', 'hotfield_id']
     };
   },
   validations: {
@@ -1847,7 +1847,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       role_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
-      screen_id: {
+      workflow_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
       hotfield_id: {
@@ -1858,7 +1858,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       role_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
-      screen_id: {
+      workflow_id: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
       },
       hotfield_id: {
@@ -2040,7 +2040,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this7 = this;
       this.create = {
         role_id: null,
-        screen_id: null,
+        workflow_id: null,
         hotfield_id: null
       };
       this.$nextTick(function () {
@@ -2067,7 +2067,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _this8.create = {
                   role_id: null,
-                  screen_id: null,
+                  workflow_id: null,
                   hotfield_id: null
                 };
                 _this8.$nextTick(function () {
@@ -2100,7 +2100,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _this9.create = {
                   role_id: null,
-                  screen_id: null,
+                  workflow_id: null,
                   hotfield_id: null
                 };
                 _this9.$nextTick(function () {
@@ -2161,7 +2161,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.isLoader = true;
         this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/role-screen-hotfield/".concat(id), this.edit).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/role-screen-hotfield/".concat(id), this.edit).then(function (res) {
           _this11.$bvModal.hide("modal-edit-".concat(id));
           _this11.getData();
           setTimeout(function () {
@@ -2209,7 +2209,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 _this12.edit.role_id = module.role.id;
                 _this12.edit.hotfield_id = module.hotfield_id;
-                _this12.edit.screen_id = module.screen_id;
+                _this12.edit.workflow_id = module.workflow_id;
                 _this12.errors = {};
               case 9:
               case "end":
@@ -2223,7 +2223,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this13 = this;
       this.create = {
         role_id: null,
-        screen_id: null,
+        workflow_id: null,
         hotfield_id: null
       };
       this.$nextTick(function () {
@@ -2297,7 +2297,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context7.next = 3;
                 return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
-                  _this15.screens = l.screen_all;
+                  _this15.workflows = l.work_flow_trees;
+                  ;
                   _this15.hotfields = l.hot_fields;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -6040,13 +6041,13 @@ var render = function render() {
   }, [_vm._v("\n                                            " + _vm._s(_vm.$t("roles.roles")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
-      value: _vm.setting.screen_id,
+      value: _vm.setting.workflow_id,
       callback: function callback($$v) {
-        _vm.$set(_vm.setting, "screen_id", $$v);
+        _vm.$set(_vm.setting, "workflow_id", $$v);
       },
-      expression: "setting.screen_id"
+      expression: "setting.workflow_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.screen")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.workflow")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.hotfield_id,
@@ -6232,9 +6233,9 @@ var render = function render() {
       "custom-label": function customLabel(opt) {
         return _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
           return x.id == opt;
-        }).name : _vm.hotfields.find(function (x) {
+        }).field_title : _vm.hotfields.find(function (x) {
           return x.id == opt;
-        }).name_e;
+        }).field_title_en;
       }
     },
     model: {
@@ -6254,27 +6255,27 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "my-1 mr-2"
-  }, [_vm._v(_vm._s(_vm.$t("general.screen")))]), _vm._v(" "), _c("multiselect", {
+  }, [_vm._v(_vm._s(_vm.$t("general.workflow")))]), _vm._v(" "), _c("multiselect", {
     attrs: {
-      options: _vm.screens.map(function (type) {
+      options: _vm.workflows.map(function (type) {
         return type.id;
       }),
       "custom-label": function customLabel(opt) {
-        return _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
+        return _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
           return x.id == opt;
-        }).name : _vm.screens.find(function (x) {
+        }).name : _vm.workflows.find(function (x) {
           return x.id == opt;
         }).name_e;
       }
     },
     model: {
-      value: _vm.create.screen_id,
+      value: _vm.create.workflow_id,
       callback: function callback($$v) {
-        _vm.$set(_vm.create, "screen_id", $$v);
+        _vm.$set(_vm.create, "workflow_id", $$v);
       },
-      expression: "create.screen_id"
+      expression: "create.workflow_id"
     }
-  }), _vm._v(" "), _vm.errors.screen_id ? _vm._l(_vm.errors.screen_id, function (errorMessage, index) {
+  }), _vm._v(" "), _vm.errors.workflow_id ? _vm._l(_vm.errors.workflow_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6335,9 +6336,9 @@ var render = function render() {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("roles.roles")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.hotfield")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("th", [_c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.hotfield")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.screen")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.workflow")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.roleWorkflowHotfields.length > 0 ? _c("tbody", _vm._l(_vm.roleWorkflowHotfields, function (data, index) {
     return _c("tr", {
@@ -6400,15 +6401,15 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(_vm.hotfields.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
-    }).name : _vm.hotfields.find(function (x) {
+    }).field_title : _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
-    }).name_e : ""))])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
+    }).field_title : ""))])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(_vm.screens.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
-      return x.id == data.screen_id;
-    }).name : _vm.screens.find(function (x) {
-      return x.id == data.screen_id;
-    }).name_e : ""))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                        " + _vm._s(_vm.workflows.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name : _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name_e : "") + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6455,7 +6456,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("editroleWorkflowHotfield"),
+        title: _vm.$t("general.editroleWorkflowHotfield"),
         "title-class": "font-18",
         "body-class": "p-4",
         "hide-footer": true
@@ -6554,9 +6555,9 @@ var render = function render() {
         "custom-label": function customLabel(opt) {
           return _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
             return x.id == opt;
-          }).name : _vm.hotfields.find(function (x) {
+          }).field_title : _vm.hotfields.find(function (x) {
             return x.id == opt;
-          }).name_e;
+          }).field_title_en;
         }
       },
       model: {
@@ -6576,27 +6577,27 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v(_vm._s(_vm.$t("general.screen")))]), _vm._v(" "), _c("multiselect", {
+    }, [_vm._v(_vm._s(_vm.$t("general.workflow")))]), _vm._v(" "), _c("multiselect", {
       attrs: {
-        options: _vm.screens.map(function (type) {
+        options: _vm.workflows.map(function (type) {
           return type.id;
         }),
         "custom-label": function customLabel(opt) {
-          return _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
+          return _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
             return x.id == opt;
-          }).name : _vm.screens.find(function (x) {
+          }).name : _vm.workflows.find(function (x) {
             return x.id == opt;
           }).name_e;
         }
       },
       model: {
-        value: _vm.edit.screen_id,
+        value: _vm.edit.workflow_id,
         callback: function callback($$v) {
-          _vm.$set(_vm.edit, "screen_id", $$v);
+          _vm.$set(_vm.edit, "workflow_id", $$v);
         },
-        expression: "edit.screen_id"
+        expression: "edit.workflow_id"
       }
-    }), _vm._v(" "), _vm.errors.screen_id ? _vm._l(_vm.errors.screen_id, function (errorMessage, index) {
+    }), _vm._v(" "), _vm.errors.workflow_id ? _vm._l(_vm.errors.workflow_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);

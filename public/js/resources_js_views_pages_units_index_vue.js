@@ -1409,7 +1409,9 @@ __webpack_require__.r(__webpack_exports__);
         name_e: true,
         is_active: true
       },
-      filterSetting: ['name', 'name_e', 'is_active']
+      filterSetting: ['name', 'name_e', 'is_active'],
+      Tooltip: '',
+      mouseEnter: null
     };
   },
   validations: {
@@ -1781,6 +1783,25 @@ __webpack_require__.r(__webpack_exports__);
      */
     moveInput: function moveInput(tag, c, index) {
       document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
+    },
+    log: function log(id) {
+      var _this11 = this;
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/units/logs/".concat(id)).then(function (res) {
+          var l = res.data.data;
+          l.forEach(function (e) {
+            _this11.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this11.formatDate(e.created_at), " \n");
+          });
+        })["catch"](function (err) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "error",
+            title: "".concat(_this11.$t("general.Error")),
+            text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+          });
+        });
+      } else {}
     }
   }
 });
@@ -5769,12 +5790,25 @@ var render = function render() {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
+    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn",
+      attrs: {
+        type: "button",
+        "data-toggle": "tooltip",
+        "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
+        title: _vm.Tooltip
+      },
+      on: {
+        mouseover: function mouseover($event) {
+          return _vm.log(data.id);
+        }
+      }
+    }, [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
       }
-    })])]);
+    })])])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {

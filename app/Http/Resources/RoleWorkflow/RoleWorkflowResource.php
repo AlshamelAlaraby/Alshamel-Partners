@@ -16,6 +16,7 @@ class RoleWorkflowResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'role' => new RoleResource($this->role),
             'workflow_id' => $this->workflow_id,
         ];

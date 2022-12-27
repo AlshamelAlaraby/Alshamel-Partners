@@ -2021,7 +2021,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return false;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -2059,6 +2059,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         country_id: null,
         governorate_id: null,
         is_active: 1
+      },
+      setting: {
+        name: true,
+        name_e: true,
+        country_id: true,
+        governorate_id: true,
+        is_active: true
       },
       errors: {},
       dropDownSenders: [],
@@ -6940,11 +6947,66 @@ var render = function render() {
     staticClass: "mx-1 custom-btn-background"
   }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
-  })]), _vm._v(" "), _c("b-button", {
-    staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.setting")) + "\n                    "), _c("i", {
-    staticClass: "fe-settings"
-  })])], 1), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("b-dropdown", {
+    ref: "dropdown",
+    staticClass: "dropdown-custom-ali",
+    attrs: {
+      variant: "primary",
+      html: "".concat(_vm.$t("general.setting"), " <i class='fe-settings'></i>")
+    }
+  }, [_c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.name,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "name", $$v);
+      },
+      expression: "setting.name"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.name_e,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "name_e", $$v);
+      },
+      expression: "setting.name_e"
+    }
+  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.country_id,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "country_id", $$v);
+      },
+      expression: "setting.country_id"
+    }
+  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.country")) + "\n                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.governorate_id,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "governorate_id", $$v);
+      },
+      expression: "setting.governorate_id"
+    }
+  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.governorate")) + "\n                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    model: {
+      value: _vm.setting.is_active,
+      callback: function callback($$v) {
+        _vm.$set(_vm.setting, "is_active", $$v);
+      },
+      expression: "setting.is_active"
+    }
+  }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Status")) + "\n                        ")]), _vm._v(" "), _c("div", {
+    staticClass: "d-flex justify-content-end"
+  }, [_c("a", {
+    staticClass: "btn btn-primary btn-sm",
+    attrs: {
+      href: "javascript:void(0)"
+    }
+  }, [_vm._v("Apply")])])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex align-items-center pagination-custom"
   }, [_c("div", {
     staticClass: "d-inline-block",
@@ -7357,7 +7419,7 @@ var render = function render() {
         }
       }
     }
-  })])]), _vm._v(" "), _c("th", [_c("div", {
+  })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -7375,7 +7437,7 @@ var render = function render() {
         _vm.cities.sort(_vm.sortString("-name"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -7393,7 +7455,7 @@ var render = function render() {
         _vm.cities.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.country_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.country")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -7411,7 +7473,7 @@ var render = function render() {
         _vm.cities.sort(_vm.SortNumber("-country_id"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.governorate_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.governorate")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -7429,7 +7491,7 @@ var render = function render() {
         _vm.cities.sort(_vm.SortNumber("-governorate_id"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -7447,7 +7509,7 @@ var render = function render() {
         _vm.cities.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.cities.length > 0 ? _c("tbody", _vm._l(_vm.cities, function (data, index) {
     return _c("tr", {
@@ -7504,13 +7566,13 @@ var render = function render() {
           }
         }
       }
-    })])]), _vm._v(" "), _c("td", [_c("h5", {
+    })])]), _vm._v(" "), _vm.setting.name ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name))])]), _vm._v(" "), _c("td", [_c("h5", {
+    }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]), _vm._v(" "), _c("td", [_vm._v("\n                    " + _vm._s(_vm.$i18n.locale == "ar" ? data.country.name : data.country.name_e) + "\n                  ")]), _vm._v(" "), _c("td", [_vm._v("\n                    " + _vm._s(_vm.$i18n.locale == "ar" ? data.governorate.name : data.governorate.name_e) + "\n                  ")]), _vm._v(" "), _c("td", [_c("span", {
+    }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.country_id ? _c("td", [_vm._v("\n                    " + _vm._s(_vm.$i18n.locale == "ar" ? data.country.name : data.country.name_e) + "\n                  ")]) : _vm._e(), _vm._v(" "), _vm.setting.governorate_id ? _c("td", [_vm._v("\n                    " + _vm._s(_vm.$i18n.locale == "ar" ? data.governorate.name : data.governorate.name_e) + "\n                  ")]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
       "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                      " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
