@@ -18,6 +18,8 @@ class TranslationController extends Controller
                 [
                     'company_id'=>$com_id,
                     'key'=>$key,
+                    'default_en'=>$translation['default_en'],
+                    'default_ar'=>$translation['default_ar'],
                     'new_ar'=>$translation['new_ar'],
                     'new_en'=>$translation['new_en'],
                 ]
