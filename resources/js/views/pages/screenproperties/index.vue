@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import { formatDateOnly } from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -36,6 +37,9 @@ export default {
       properties: [],
       enabled3: false,
       isLoader: false,
+      Tooltip: "",
+      mouseEnter: "",
+
       create: {
         screen_id: null,
         property_id: null,
@@ -98,21 +102,51 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getData();
+  async mounted() {
+    await this.getScreens();
+    await this.getData();
   },
   methods: {
+    formatDate(value) {
+      return formatDateOnly(value);
+    },
+    log(id) {
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        adminApi
+          .get(`/screen-tree-properties/logs/${id}`)
+          .then((res) => {
+            let l = res.data.data;
+            l.forEach((e) => {
+              this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                e.event
+              }; Description: ${e.description} ;Created At: ${this.formatDate(
+                e.created_at
+              )} \n`;
+            });
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: `${this.$t("general.Error")}`,
+              text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+            });
+          });
+      } else {
+      }
+    },
     /**
      *  get Data screenProperties
      */
-    getData(page = 1) {
+    async getData(page = 1) {
       this.isLoader = true;
 
       let filter = "";
       for (let i = 0; i > this.filterSetting.length; ++i) {
         filter += `columns[${i}]=${this.filterSetting[i]}&`;
       }
-      adminApi
+      await adminApi
         .get(
           `/screen-tree-properties?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`
         )
@@ -220,8 +254,7 @@ export default {
         this.$v.$reset();
       });
       this.errors = {};
-      this.screens=[];
-      this.properties=[];
+      this.properties = [];
     },
     /**
      *  hidden Modal (create)
@@ -229,7 +262,7 @@ export default {
     async resetModal() {
       await this.getScreens();
       await this.getProperties();
-      this.create ={ screen_id: null, property_id: null };
+      this.create = { screen_id: null, property_id: null };
       this.is_disabled = false;
       this.$nextTick(() => {
         this.$v.$reset();
@@ -329,9 +362,11 @@ export default {
      *  get workflows
      */
     async getScreens() {
+      this.isLoader = true;
       await outerAxios
         .get(`/screens`)
         .then((res) => {
+          this.isLoader = false;
           this.screens = res.data.data;
         })
         .catch((err) => {
@@ -637,15 +672,11 @@ export default {
                               : screens.find((x) => x.id == opt).name_e
                         "
                         :class="{
-                          'is-invalid':
-                            $v.create.screen_id.$error || errors.screen_id,
+                          'is-invalid': $v.create.screen_id.$error || errors.screen_id,
                         }"
                       >
                       </multiselect>
-                      <div
-                        v-if="!$v.create.screen_id.required"
-                        class="invalid-feedback"
-                      >
+                      <div v-if="!$v.create.screen_id.required" class="invalid-feedback">
                         {{ $t("general.fieldIsRequired") }}
                       </div>
 
@@ -723,7 +754,9 @@ export default {
                             class="fas fa-arrow-up"
                             @click="
                               screenProperties.sort(
-                                sortString($i18n.locale == 'ar' ? 'name' : 'name_e')
+                                sortString(
+                                  $i18n.locale == 'ar' ? 'screen.name' : 'screen.name_e'
+                                )
                               )
                             "
                           ></i>
@@ -731,7 +764,9 @@ export default {
                             class="fas fa-arrow-down"
                             @click="
                               screenProperties.sort(
-                                sortString($i18n.locale == 'ar' ? '-name' : '-name_e')
+                                sortString(
+                                  $i18n.locale == 'ar' ? '-screen.name' : '-screen.name_e'
+                                )
                               )
                             "
                           ></i>
@@ -746,9 +781,7 @@ export default {
                             class="fas fa-arrow-up"
                             @click="
                               screenProperties.sort(
-                                sortString(
-                                  $i18n.locale == 'ar' ? 'name' : 'name_e'
-                                )
+                                sortString($i18n.locale == 'ar' ? 'name' : 'name_e')
                               )
                             "
                           ></i>
@@ -790,12 +823,22 @@ export default {
                     </td>
                     <td v-if="setting.screen_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ data.screen_id }}
+                        {{
+                          screens.length > 0
+                            ? $i18n.locale == "ar"
+                              ? screens.find((x) => x.id == data.screen_id).name
+                              : screens.find((x) => x.id == data.screen_id).name_e
+                            : ""
+                        }}
                       </h5>
                     </td>
                     <td v-if="setting.property_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ $i18n.locale=='ar'?data.tree_property.name:data.tree_property.name_e }}
+                        {{
+                          $i18n.locale == "ar"
+                            ? data.tree_property.name
+                            : data.tree_property.name_e
+                        }}
                       </h5>
                     </td>
                     <td>
@@ -890,9 +933,9 @@ export default {
                                         : screens.find((x) => x.id == opt).name_e
                                   "
                                   :class="{
-                          'is-invalid':
-                            $v.edit.screen_id.$error || errors.screen_id,
-                        }"
+                                    'is-invalid':
+                                      $v.edit.screen_id.$error || errors.screen_id,
+                                  }"
                                 >
                                 </multiselect>
                                 <div
@@ -923,13 +966,12 @@ export default {
                                     (opt) =>
                                       $i18n.locale == 'ar'
                                         ? properties.find((x) => x.id == opt).name
-                                        : properties.find((x) => x.id == opt)
-                                            .name_e
+                                        : properties.find((x) => x.id == opt).name_e
                                   "
                                   :class="{
-                          'is-invalid':
-                            $v.edit.property_id.$error || errors.property_id,
-                        }"
+                                    'is-invalid':
+                                      $v.edit.property_id.$error || errors.property_id,
+                                  }"
                                 >
                                 </multiselect>
                                 <div
@@ -954,7 +996,17 @@ export default {
                       <!--  /edit   -->
                     </td>
                     <td>
-                      <i class="fe-info" style="font-size: 22px"></i>
+                      <button
+                        @mouseover="log(data.id)"
+                        @mousemove="log(data.id)"
+                        type="button"
+                        class="btn"
+                        data-toggle="tooltip"
+                        :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                        :title="Tooltip"
+                      >
+                        <i class="fe-info" style="font-size: 22px"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>

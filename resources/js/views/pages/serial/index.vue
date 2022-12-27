@@ -12,6 +12,7 @@ import alphaEnglish from "../../../helper/alphaEnglish";
 import { dynamicSortString, dynamicSortNumber } from "../../../helper/tableSort";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
 import Multiselect from "vue-multiselect";
+import { formatDateOnly } from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -38,6 +39,9 @@ export default {
       serials: [],
       is_disabled: false,
       isLoader: false,
+      Tooltip: "",
+      mouseEnter: "",
+
       create: {
         start_no: null,
         perfix: "",
@@ -127,9 +131,39 @@ export default {
     },
   },
   mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
     this.getData();
   },
   methods: {
+    formatDate(value) {
+      return formatDateOnly(value);
+    },
+    log(id) {
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        adminApi
+          .get(`/serials/logs/${id}`)
+          .then((res) => {
+            let l = res.data.data;
+            l.forEach((e) => {
+              this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                e.event
+              }; Description: ${e.description} ;Created At: ${this.formatDate(
+                e.created_at
+              )} \n`;
+            });
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: `${this.$t("general.Error")}`,
+              text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+            });
+          });
+      } else {
+      }
+    },
     resetForm() {
       this.create = {
         start_no: null,
@@ -151,10 +185,13 @@ export default {
      */
     getData(page = 1) {
       this.isLoader = true;
-
+      let filter = "";
+      for (let i = 0; i < this.filterSetting.length; ++i) {
+        filter += `columns[${i}]=${this.filterSetting[i]}&`;
+      }
       adminApi
         .get(
-          `/serials?page=${page}&per_page=${this.per_page}&columns=${this.filterSetting}&company_id=${this.company_id}`
+          `/serials?page=${page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`
         )
         .then((res) => {
           let l = res.data;
@@ -180,10 +217,13 @@ export default {
         this.current_page
       ) {
         this.isLoader = true;
-
+        let filter = "";
+        for (let i = 0; i < this.filterSetting.length; ++i) {
+          filter += `columns[${i}]=${this.filterSetting[i]}&`;
+        }
         adminApi
           .get(
-            `/serials?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}&company_id=${this.company_id}`
+            `/serials?page=${this.current_page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`
           )
           .then((res) => {
             let l = res.data;
@@ -1062,17 +1102,24 @@ export default {
                     <th v-if="setting.branch_id">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.Branch") }}</span>
-                                           <div class="arrow-sort">
+                        <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
-                            @click="serials.sort(sortString(($i18n.locale = 'ar' ? 'name' : 'name_e')))"
+                            @click="
+                              serials.sort(
+                                sortString(($i18n.locale = 'ar' ? 'name' : 'name_e'))
+                              )
+                            "
                           ></i>
                           <i
                             class="fas fa-arrow-down"
-                            @click="serials.sort(sortString(($i18n.locale = 'ar' ? '-name' : '-name_e')))"
+                            @click="
+                              serials.sort(
+                                sortString(($i18n.locale = 'ar' ? '-name' : '-name_e'))
+                              )
+                            "
                           ></i>
                         </div>
-
                       </div>
                     </th>
                     <th v-if="setting.store_id">
@@ -1508,7 +1555,19 @@ export default {
                       </b-modal>
                       <!--  /edit   -->
                     </td>
-                    <td><i class="fe-info" style="font-size: 22px"></i></td>
+                    <td>
+                      <button
+                        @mouseover="log(data.id)"
+                        @mousemove="log(data.id)"
+                        type="button"
+                        class="btn"
+                        data-toggle="tooltip"
+                        :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                        :title="Tooltip"
+                      >
+                        <i class="fe-info" style="font-size: 22px"></i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
                 <tbody v-else>
