@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 
 class SalesmanController extends Controller
 {
-    public function __construct(private \App\Repositories\Salesman\SalesmanInterface $modelInterface)
+    public function __construct(private \App\Repositories\Salesman\SalesmanInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
@@ -71,6 +71,9 @@ class SalesmanController extends Controller
         $logs = $this->modelInterface->logs($id);
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
     }
+
+    
+
 
     public function delete($id)
     {
