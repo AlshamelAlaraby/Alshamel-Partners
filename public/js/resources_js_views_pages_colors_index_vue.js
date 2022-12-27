@@ -1491,7 +1491,7 @@ __webpack_require__.r(__webpack_exports__);
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -1691,6 +1691,12 @@ __webpack_require__.r(__webpack_exports__);
      */
     editSubmit: function editSubmit(id) {
       var _this10 = this;
+      if (!this.edit.name) {
+        this.edit.name = this.edit.name_e;
+      }
+      if (!this.edit.name_e) {
+        this.edit.name_e = this.edit.name;
+      }
       this.$v.edit.$touch();
       if (this.$v.edit.$invalid) {
         return;
@@ -6321,40 +6327,19 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
-  id: 222,
-  label: 'menuitems.Banks.text',
-  icon: 'fas fa-eraser',
-  link: '/banks'
-}, {
-  id: 112202,
-  label: 'general.bankAccounts',
-  icon: 'fas fa-eraser',
-  link: '/bankAccount'
-}, {
-  id: 224,
-  label: 'general.Workflowhotfields',
-  icon: 'fas fa-eraser',
-  link: '/workflow-hotfields'
-}, {
-  id: 225,
-  label: 'general.ScreenProperties',
-  icon: 'fas fa-eraser',
-  link: '/screen-properties'
-}, {
-  id: 226,
-  label: 'general.TreeProperty',
-  icon: 'fas fa-eraser',
-  link: '/tree-properties'
-}, {
-  id: 223,
-  label: 'general.Users',
-  icon: 'fas fa-eraser',
-  link: '/users'
-}, {
-  id: 112201,
-  label: 'general.paymentTypes',
-  icon: 'fas fa-asterisk',
-  link: '/paymentTypes'
+  id: 113872,
+  label: "general.Properties",
+  icon: "fas fa-hand-spock",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 225,
+    label: 'general.ScreenProperties',
+    link: '/screen-properties'
+  }, {
+    id: 226,
+    label: 'general.TreeProperty',
+    link: '/tree-properties'
+  }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6376,6 +6361,24 @@ var menuItems = [{
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
     link: '/internalSalesman'
+  }]
+}, {
+  id: 1000548,
+  label: "menuitems.Banks.text",
+  icon: "fas fa-piggy-bank",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 112201,
+    label: 'general.paymentTypes',
+    link: '/paymentTypes'
+  }, {
+    id: 222,
+    label: 'menuitems.Banks.text',
+    link: '/banks'
+  }, {
+    id: 112202,
+    label: 'general.bankAccounts',
+    link: '/bankAccount'
   }]
 }, {
   id: 1000544,
@@ -6426,6 +6429,16 @@ var menuItems = [{
     link: '/role-hotfield-screen'
   }]
 }, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-hot-tub',
+  link: '/workflow-hotfields'
+}, {
+  id: 223,
+  label: 'general.Users',
+  icon: 'fas fa-network-wired',
+  link: '/users'
+}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6452,7 +6465,6 @@ var menuItems = [{
   link: '/colors'
 }
 
-//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

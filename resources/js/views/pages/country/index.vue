@@ -471,7 +471,7 @@ export default {
             this.images = country.media ?? [];
             if (this.images&&this.images.length>0){
                 this.showPhoto = this.images[this.images.length - 1].webp;
-            }else{this.images = './images/img-1.png';}
+            }else{this.showPhoto = './images/img-1.png';}
             this.errors = {};
         },
         /**
@@ -549,7 +549,7 @@ export default {
                                     this.images = res.data.data.media ?? [];
                                     if(this.images&&this.images.length>0){
                                         this.showPhoto = this.images[this.images.length - 1].webp;
-                                    }else{this.images = './images/img-1.png';}
+                                    }else{this.showPhoto = './images/img-1.png';}
                                     this.getData();
                                 })
                                 .catch(err => {
@@ -602,7 +602,7 @@ export default {
                                             this.images = res.data.data.media ?? [];
                                             if(this.images&&this.images.length>0){
                                                 this.showPhoto = this.images[this.images.length - 1].webp;
-                                            }else{this.images = './images/img-1.png';}
+                                            }else{this.showPhoto = './images/img-1.png';}
                                             this.getData();
                                         })
                                         .catch(err => {
@@ -641,6 +641,7 @@ export default {
             });
             adminApi.put(`/countries/${this.country_id}`,{old_media})
                 .then((res) => {
+                    this.countries[index] = res.data.data;
                     this.images = res.data.data.media ?? [];
                     if(this.images&&this.images.length>0){
                         this.showPhoto = this.images[this.images.length - 1].webp;

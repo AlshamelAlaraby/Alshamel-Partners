@@ -763,10 +763,10 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.workflow_id">
-                                        <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? workflows.find(x => x.id == data.workflow_id).name : workflows.find(x => x.id == data.workflow_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ data.workflow_id }}</h5>
                                     </td>
                                     <td v-if="setting.button_id">
-                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? buttons.find(x => x.id == data.button_id).name : workflows.find(x => x.id == data.button_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{  data.button_id }}</h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">

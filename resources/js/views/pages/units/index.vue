@@ -127,7 +127,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -173,7 +173,7 @@ export default {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
-                adminApi.get(`/units?page=${page}&per_page=${this.per_page}&search=${this.search}&search=${this.search}&${filter}`)
+                adminApi.get(`/units?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.units = l.data;
@@ -319,6 +319,8 @@ export default {
          *  edit module
          */
         editSubmit(id) {
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {
