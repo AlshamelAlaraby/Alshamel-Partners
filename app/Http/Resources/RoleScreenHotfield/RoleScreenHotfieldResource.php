@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\RoleScreenHotfield;
 
+use App\Http\Resources\Roles\RoleResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoleScreenHotfieldResource extends JsonResource
@@ -15,7 +16,8 @@ class RoleScreenHotfieldResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "role_id" => $this->role_id,
+            'id' => $this->id,
+            'role' => new RoleResource($this->role),
             "workflow_id" => $this->workflow_id,
             "hotfield_id" => $this->hotfield_id
         ];

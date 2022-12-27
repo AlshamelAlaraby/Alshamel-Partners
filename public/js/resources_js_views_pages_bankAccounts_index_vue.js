@@ -2570,7 +2570,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (_this12.images && _this12.images.length > 0) {
                   _this12.showPhoto = _this12.images[_this12.images.length - 1].webp;
                 } else {
-                  _this12.images = './images/img-1.png';
+                  _this12.showPhoto = './images/img-1.png';
                 }
                 _this12.errors = {};
               case 14:
@@ -2666,7 +2666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               if (_this13.images && _this13.images.length > 0) {
                 _this13.showPhoto = _this13.images[_this13.images.length - 1].webp;
               } else {
-                _this13.images = './images/img-1.png';
+                _this13.showPhoto = './images/img-1.png';
               }
               _this13.getData();
             })["catch"](function (err) {
@@ -2723,7 +2723,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (_this13.images && _this13.images.length > 0) {
                     _this13.showPhoto = _this13.images[_this13.images.length - 1].webp;
                   } else {
-                    _this13.images = './images/img-1.png';
+                    _this13.showPhoto = './images/img-1.png';
                   }
                   _this13.getData();
                 })["catch"](function (err) {
@@ -2763,6 +2763,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         old_media: old_media
       }).then(function (res) {
         var _res$data$data$media3;
+        _this14.bankAccounts[index] = res.data.data;
         _this14.images = (_res$data$data$media3 = res.data.data.media) !== null && _res$data$data$media3 !== void 0 ? _res$data$data$media3 : [];
         if (_this14.images && _this14.images.length > 0) {
           _this14.showPhoto = _this14.images[_this14.images.length - 1].webp;
@@ -2791,7 +2792,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.next = 3;
                 return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks").then(function (res) {
                   var l = res.data.data;
-                  console.log(l);
                   l.unshift({
                     id: 0,
                     name: "اضف بنك",

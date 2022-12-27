@@ -1574,7 +1574,7 @@ __webpack_require__.r(__webpack_exports__);
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -1804,6 +1804,18 @@ __webpack_require__.r(__webpack_exports__);
      */
     editSubmit: function editSubmit(id) {
       var _this10 = this;
+      if (!this.edit.name) {
+        this.edit.name = this.edit.name_e;
+      }
+      if (!this.edit.name_e) {
+        this.edit.name_e = this.edit.name;
+      }
+      if (!this.edit.long_name) {
+        this.edit.long_name = this.edit.long_name_e;
+      }
+      if (!this.edit.long_name_e) {
+        this.edit.long_name_e = this.edit.long_name;
+      }
       this.$v.edit.$touch();
       this.images.forEach(function (e) {
         _this10.edit.old_media.push(e.id);
