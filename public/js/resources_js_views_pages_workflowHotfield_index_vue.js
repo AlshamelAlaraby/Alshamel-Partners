@@ -2293,15 +2293,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
-<<<<<<< HEAD
-                _this14.isLoader = true;
-                _context5.next = 3;
-                return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
-=======
                 _this15.isLoader = true;
                 _context7.next = 3;
-                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
->>>>>>> 0570a50fce4495aae7f7f9fdd3a205b7f357de50
+                return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.screens = l.screen_all;
                   _this15.hotfields = l.hot_fields;
