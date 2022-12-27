@@ -73,6 +73,28 @@ class SalesmenTypeController extends Controller
 
     }
 
+    public function bulkDelete(Request $request)
+    {
+        if ($request->ids == null) {
+            return responseJson(400, __('message.data not found'));
+        }
+        foreach ($request->ids as $id) {
+            $model = $this->modelInterface->find($id);
+
+            $arr = [];
+            if ($model) {
+                if ($model->hasChildren()) {
+                    $arr[] = $id;
+                    continue;
+                }
+                $this->modelInterface->delete($id);}
+        }
+        if (count($arr) > 0) {
+            return responseJson(200, __("this item has children and can't be deleted remove it's children first"));
+        }
+        return responseJson(200, 'success');
+    }
+
     public function delete($id)
     {
         $model = $this->modelInterface->find($id);
@@ -81,7 +103,7 @@ class SalesmenTypeController extends Controller
         }
 
         if ($model->hasChildren()) {
-            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
         }
 
         $this->modelInterface->delete($id);

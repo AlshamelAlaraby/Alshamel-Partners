@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
         this.isError = false;
         var _email = this.email,
           password = this.password;
-        axios.post("".concat("http://alshamel-administrator.com/", "api/partners/login"), {
+        axios.post("".concat("http://127.0.0.1:8001/", "api/partners/login"), {
           email: _email,
           password: password
         }).then(function (res) {

@@ -159,10 +159,9 @@ export default {
         getData(page = 1){
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
-
             adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
@@ -185,11 +184,11 @@ export default {
             if(this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page){
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
-                adminApi.get(`/stores?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}&company_id=${this.company_id}`)
+                adminApi.get(`/stores?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}&company_id=${this.company_id}`)
                     .then((res) => {
                         let l = res.data;
                         this.stores = l.data;

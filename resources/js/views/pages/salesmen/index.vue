@@ -142,7 +142,7 @@ export default {
         getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -168,11 +168,10 @@ export default {
             if (this.current_page <= this.salesmensPagination.last_page && this.current_page != this.salesmensPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
-
-                adminApi.get(`/salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+                adminApi.get(`/salesmen?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.salesmens = l.data;
@@ -818,7 +817,7 @@ export default {
                                 </thead>
                                 <tbody v-if="salesmens.length > 0">
                                 <tr
-                                    @click.prevent="checkRow(data.id)"
+                                    @click.capture="checkRow(data.id)"
                                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                                     v-for="(data,index) in salesmens"
                                     :key="data.id"

@@ -133,10 +133,9 @@ export default {
         getData(page = 1){
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
-
             adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
@@ -159,11 +158,11 @@ export default {
             if(this.current_page <= this.externalSalesmensPagination.last_page && this.current_page != this.externalSalesmensPagination.current_page && this.current_page){
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
-                adminApi.get(`/external-salesmen?page=${page}&per_page=${this.per_page}}&search=${this.search}&${filter}`)
+                adminApi.get(`/external-salesmen?page=${this.current_page}&per_page=${this.per_page}}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.externalSalesmens = l.data;

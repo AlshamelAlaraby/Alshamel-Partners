@@ -127,6 +127,7 @@ export default {
     },
   },
   mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
     this.getData();
   },
   methods: {
@@ -151,10 +152,13 @@ export default {
      */
     getData(page = 1) {
       this.isLoader = true;
-
+      let filter = "";
+      for (let i = 0; i < this.filterSetting.length; ++i) {
+        filter += `columns[${i}]=${this.filterSetting[i]}&`;
+      }
       adminApi
         .get(
-          `/serials?page=${page}&per_page=${this.per_page}&columns=${this.filterSetting}&company_id=${this.company_id}`
+          `/serials?page=${page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`
         )
         .then((res) => {
           let l = res.data;
@@ -180,10 +184,13 @@ export default {
         this.current_page
       ) {
         this.isLoader = true;
-
+        let filter = "";
+        for (let i = 0; i < this.filterSetting.length; ++i) {
+          filter += `columns[${i}]=${this.filterSetting[i]}&`;
+        }
         adminApi
           .get(
-            `/serials?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}&company_id=${this.company_id}`
+            `/serials?page=${this.current_page}&per_page=${this.per_page}&company_id=${this.company_id}&search=${this.search}&${filter}`
           )
           .then((res) => {
             let l = res.data;
@@ -1062,17 +1069,24 @@ export default {
                     <th v-if="setting.branch_id">
                       <div class="d-flex justify-content-center">
                         <span>{{ $t("general.Branch") }}</span>
-                                           <div class="arrow-sort">
+                        <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
-                            @click="serials.sort(sortString(($i18n.locale = 'ar' ? 'name' : 'name_e')))"
+                            @click="
+                              serials.sort(
+                                sortString(($i18n.locale = 'ar' ? 'name' : 'name_e'))
+                              )
+                            "
                           ></i>
                           <i
                             class="fas fa-arrow-down"
-                            @click="serials.sort(sortString(($i18n.locale = 'ar' ? '-name' : '-name_e')))"
+                            @click="
+                              serials.sort(
+                                sortString(($i18n.locale = 'ar' ? '-name' : '-name_e'))
+                              )
+                            "
                           ></i>
                         </div>
-
                       </div>
                     </th>
                     <th v-if="setting.store_id">

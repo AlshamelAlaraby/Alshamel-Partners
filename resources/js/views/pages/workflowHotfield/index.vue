@@ -3,7 +3,7 @@ import Layout from "../../layouts/main";
 import PageHeader from "../../../components/Page-header";
 import adminApi from "../../../api/adminAxios";
 import Switches from "vue-switches";
-import {required, minLength, maxLength, integer} from "vuelidate/lib/validators";
+import {required} from "vuelidate/lib/validators";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
@@ -106,23 +106,23 @@ export default {
             }
         }
     },
-    mounted() {
+    async mounted() {
         this.company_id = this.$store.getters['auth/company_id'];
-        this.getWorkflow();
-        this.getData();
+        await this.getWorkflow();
+        await this.getData();
     },
     methods: {
         /**
          *  start get Data module && pagination
          */
-        getData(page = 1) {
+        async getData(page = 1) {
             this.isLoader = true;
             let filter = '';
             for (let i = 0; i > this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
-            adminApi.get(`/role-screen-hotfield?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+            await adminApi.get(`/role-screen-hotfield?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.roleWorkflowHotfields = l.data;
@@ -763,10 +763,14 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.hotfield_id">
-                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? hotfields.find(x => x.id == data.hotfield_id).name : hotfields.find(x => x.id == data.hotfield_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ hotfields.length > 0 ?
+                                            $i18n.locale == 'ar' ? hotfields.find(x => x.id == data.hotfield_id).name : hotfields.find(x => x.id == data.hotfield_id).name_e
+                                            : ''}}</h5>
                                     </td>
                                     <td v-if="setting.screen_id">
-                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).name : screens.find(x => x.id == data.screen_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ screens.length > 0  ?
+                                            $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).name : screens.find(x => x.id == data.screen_id).name_e
+                                          : ''  }}</h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">

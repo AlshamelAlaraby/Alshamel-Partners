@@ -1528,6 +1528,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     }
   },
   mounted: function mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
     this.getData();
   },
   methods: {
@@ -1554,7 +1555,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(page, "&per_page=").concat(this.per_page, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
+      var filter = "";
+      for (var i = 0; i < this.filterSetting.length; ++i) {
+        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+      }
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
         _this4.serials = l.data;
         _this4.serialsPagination = l.pagination;
@@ -1574,7 +1579,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.serialsPagination.last_page && this.current_page != this.serialsPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting, "&company_id=").concat(this.company_id)).then(function (res) {
+        var filter = "";
+        for (var i = 0; i < this.filterSetting.length; ++i) {
+          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+        }
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/serials?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
           _this5.serials = l.data;
           _this5.serialsPagination = l.pagination;

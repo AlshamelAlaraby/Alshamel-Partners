@@ -1691,7 +1691,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
+      for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1715,10 +1715,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.current_page <= this.salesmensPagination.last_page && this.current_page != this.salesmensPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
           _this4.salesmens = l.data;
           _this4.salesmensPagination = l.pagination;
@@ -5957,8 +5957,7 @@ var render = function render() {
       key: data.id,
       staticClass: "body-tr-custom",
       on: {
-        click: function click($event) {
-          $event.preventDefault();
+        "!click": function click($event) {
           return _vm.checkRow(data.id);
         },
         dblclick: function dblclick($event) {

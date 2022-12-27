@@ -1712,7 +1712,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
+      for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1736,10 +1736,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
           var l = res.data;
           _this4.stores = l.data;
           _this4.storesPagination = l.pagination;

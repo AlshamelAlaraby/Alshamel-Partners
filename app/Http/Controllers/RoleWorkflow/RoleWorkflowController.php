@@ -30,7 +30,6 @@ class RoleWorkflowController extends Controller
             $data = $this->repository->getAll($request);
             cachePut('RoleWorkflow', $data);
         }
-
         return responseJson(200, 'success', RoleWorkflowResource::collection($data['data']), $data['paginate'] ? getPaginates($data['data']) : null);
     }
 
@@ -92,7 +91,7 @@ class RoleWorkflowController extends Controller
         try {
             $this->repository->update($data, $id);
             return responseJson(200, __('updated'));
-        } catch (\Exception $exception) {
+        } catch (\Exception$exception) {
             return responseJson($exception->getCode(), $exception->getMessage());
         }
     }

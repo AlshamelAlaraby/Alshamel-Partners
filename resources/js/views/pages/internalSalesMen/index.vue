@@ -110,10 +110,9 @@ export default {
         getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
-
             adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
@@ -136,11 +135,10 @@ export default {
             if (this.current_page <= this.inernalSalesPagination.last_page && this.current_page != this.inernalSalesPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
-
-                adminApi.get(`/internal-salesmen?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+                adminApi.get(`/internal-salesmen?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.inernalSales = l.data;

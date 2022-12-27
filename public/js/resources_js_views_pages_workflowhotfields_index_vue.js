@@ -1462,56 +1462,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.getData();
+    var _this3 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this3.getHotfields();
+            case 2:
+              _context.next = 4;
+              return _this3.getWorkflows();
+            case 4:
+              _context.next = 6;
+              return _this3.getData();
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     /**
      *  get Data workflowhotfields
      */
     getData: function getData() {
-      var _this3 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.isLoader = true;
-      var filter = "";
-      for (var i = 0; i > this.filterSetting.length; ++i) {
-        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-      }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
-        var l = res.data;
-        _this3.workflowhotfields = l.data;
-        _this3.workflowhotfieldsPagination = l.pagination;
-        _this3.current_page = l.pagination.current_page;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: "error",
-          title: "".concat(_this3.$t("general.Error")),
-          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
-        });
-      })["finally"](function () {
-        _this3.isLoader = false;
-      });
+      var _arguments = arguments,
+        _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var page, filter, i;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                _this4.isLoader = true;
+                filter = "";
+                for (i = 0; i < _this4.filterSetting.length; ++i) {
+                  filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
+                }
+                _context2.next = 6;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield?page=".concat(page, "&per_page=").concat(_this4.per_page, "&search=").concat(_this4.search, "&").concat(filter)).then(function (res) {
+                  var l = res.data;
+                  _this4.workflowhotfields = l.data;
+                  _this4.workflowhotfieldsPagination = l.pagination;
+                  _this4.current_page = l.pagination.current_page;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: "error",
+                    title: "".concat(_this4.$t("general.Error")),
+                    text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+                  });
+                })["finally"](function () {
+                  _this4.isLoader = false;
+                });
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     getDataCurrentPage: function getDataCurrentPage() {
-      var _this4 = this;
+      var _this5 = this;
       if (this.current_page <= this.workflowhotfieldsPagination.last_page && this.current_page != this.workflowhotfieldsPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = "";
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
-          _this4.workflowhotfields = l.data;
-          _this4.workflowhotfieldsPagination = l.pagination;
-          _this4.current_page = l.pagination.current_page;
+          _this5.workflowhotfields = l.data;
+          _this5.workflowhotfieldsPagination = l.pagination;
+          _this5.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
             icon: "error",
-            title: "".concat(_this4.$t("general.Error")),
-            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+            title: "".concat(_this5.$t("general.Error")),
+            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
-          _this4.isLoader = false;
+          _this5.isLoader = false;
         });
       }
     },
@@ -1519,7 +1554,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  delete screen button
      */
     deleteScreenButton: function deleteScreenButton(id) {
-      var _this5 = this;
+      var _this6 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
         title: "".concat(this.$t("general.Areyousure")),
         text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
@@ -1532,25 +1567,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          _this5.isLoader = true;
+          _this6.isLoader = true;
           _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/workflow-hotfield/".concat(id)).then(function (res) {
-            _this5.getData();
-            _this5.checkAll = [];
+            _this6.getData();
+            _this6.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: "success",
-              title: "".concat(_this5.$t("general.Deleted")),
-              text: "".concat(_this5.$t("general.Yourrowhasbeendeleted")),
+              title: "".concat(_this6.$t("general.Deleted")),
+              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: "error",
-              title: "".concat(_this5.$t("general.Error")),
-              text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+              title: "".concat(_this6.$t("general.Error")),
+              text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
             });
           })["finally"](function () {
-            _this5.isLoader = false;
+            _this6.isLoader = false;
           });
         }
       });
@@ -1559,13 +1594,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  reset Modal (create)
      */
     resetModalHidden: function resetModalHidden() {
-      var _this6 = this;
+      var _this7 = this;
       this.create = {
         workflow_id: null,
         hotfield_id: null
       };
       this.$nextTick(function () {
-        _this6.$v.$reset();
+        _this7.$v.$reset();
       });
       this.errors = {};
       this.workflows = [];
@@ -1575,51 +1610,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
-      var _this7 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+      var _this8 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context.next = 2;
-                return _this7.getWorkflows();
+                _context3.next = 2;
+                return _this8.getWorkflows();
               case 2:
-                _context.next = 4;
-                return _this7.getHotfields();
+                _context3.next = 4;
+                return _this8.getHotfields();
               case 4:
-                _this7.create = {
+                _this8.create = {
                   workflow_id: null,
                   hotfield_id: null
                 };
-                _this7.is_disabled = false;
-                _this7.$nextTick(function () {
-                  _this7.$v.$reset();
+                _this8.is_disabled = false;
+                _this8.$nextTick(function () {
+                  _this8.$v.$reset();
                 });
-                _this7.errors = {};
+                _this8.errors = {};
               case 8:
               case "end":
-                return _context.stop();
+                return _context3.stop();
             }
           }
-        }, _callee);
+        }, _callee3);
       }))();
     },
     /**
      *  create screen
      */
     resetForm: function resetForm() {
-      var _this8 = this;
+      var _this9 = this;
       this.create = {
         workflow_id: null,
         hotfield_id: null
       };
       this.is_disabled = false;
       this.$nextTick(function () {
-        _this8.$v.$reset();
+        _this9.$v.$reset();
       });
     },
     AddSubmit: function AddSubmit() {
-      var _this9 = this;
+      var _this10 = this;
       if (this.$v.create.$invalid) {
         this.$v.create.$touch();
         return;
@@ -1628,49 +1663,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.errors = {};
         this.is_disabled = false;
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/workflow-hotfield", this.create).then(function (res) {
-          _this9.getData();
-          _this9.is_disabled = true;
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this9.$t("general.Addedsuccessfully")),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this9.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this9.$t("general.Error")),
-              text: "".concat(_this9.$t("general.Thereisanerrorinthesystem"))
-            });
-          }
-        })["finally"](function () {
-          _this9.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  edit screen
-     */
-    editSubmit: function editSubmit(id) {
-      var _this10 = this;
-      this.$v.edit.$touch();
-      if (this.$v.edit.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/workflow-hotfield/".concat(id), this.edit).then(function (res) {
-          _this10.$bvModal.hide("modal-edit-".concat(id));
           _this10.getData();
+          _this10.is_disabled = true;
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: "success",
-              text: "".concat(_this10.$t("general.Editsuccessfully")),
+              text: "".concat(_this10.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1691,43 +1689,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     /**
+     *  edit screen
+     */
+    editSubmit: function editSubmit(id) {
+      var _this11 = this;
+      this.$v.edit.$touch();
+      if (this.$v.edit.$invalid) {
+        return;
+      } else {
+        this.isLoader = true;
+        this.errors = {};
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/workflow-hotfield/".concat(id), this.edit).then(function (res) {
+          _this11.$bvModal.hide("modal-edit-".concat(id));
+          _this11.getData();
+          setTimeout(function () {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              text: "".concat(_this11.$t("general.Editsuccessfully")),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }, 500);
+        })["catch"](function (err) {
+          if (err.response.data) {
+            _this11.errors = err.response.data.errors;
+          } else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "error",
+              title: "".concat(_this11.$t("general.Error")),
+              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+            });
+          }
+        })["finally"](function () {
+          _this11.isLoader = false;
+        });
+      }
+    },
+    /**
      *  get workflows
      */
     getWorkflows: function getWorkflows() {
-      var _this11 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/workflow-trees/company-workflows/".concat(_this11.company_id)).then(function (res) {
-                  _this11.workflows = res.data;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: "error",
-                    title: "".concat(_this11.$t("general.Error")),
-                    text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
-                  });
-                });
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getHotfields: function getHotfields() {
       var _this12 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.next = 2;
-                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/hotfields").then(function (res) {
-                  _this12.hotfields = res.data.data;
+                _context4.next = 2;
+                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/workflow-trees/company-workflows/".concat(_this12.company_id)).then(function (res) {
+                  _this12.workflows = res.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                     icon: "error",
@@ -1737,41 +1747,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
               case 2:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
+      }))();
+    },
+    getHotfields: function getHotfields() {
+      var _this13 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/hotfields").then(function (res) {
+                  _this13.hotfields = res.data.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: "error",
+                    title: "".concat(_this13.$t("general.Error")),
+                    text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
+                  });
+                });
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
       }))();
     },
     /**
      *   show Modal (edit)
      */
     resetModalEdit: function resetModalEdit(id) {
-      var _this13 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var _this14 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var workflowhotfield;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                workflowhotfield = _this13.workflowhotfields.find(function (e) {
+                workflowhotfield = _this14.workflowhotfields.find(function (e) {
                   return id == e.id;
                 });
-                _context4.next = 3;
-                return _this13.getWorkflows();
+                _context6.next = 3;
+                return _this14.getWorkflows();
               case 3:
-                _context4.next = 5;
-                return _this13.getHotfields();
+                _context6.next = 5;
+                return _this14.getHotfields();
               case 5:
-                _this13.edit.workflow_id = workflowhotfield.workflow_id;
-                _this13.edit.hotfield_id = workflowhotfield.hotfield_id;
-                _this13.errors = {};
+                _this14.edit.workflow_id = workflowhotfield.workflow_id;
+                _this14.edit.hotfield_id = workflowhotfield.hotfield_id;
+                _this14.errors = {};
               case 8:
               case "end":
-                return _context4.stop();
+                return _context6.stop();
             }
           }
-        }, _callee4);
+        }, _callee6);
       }))();
     },
     /**
@@ -5433,9 +5468,17 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _vm.setting.workflow_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                      " + _vm._s(data.workflow_id) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.workflows.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name : _vm.workflows.find(function (x) {
+      return x.id == data.workflow_id;
+    }).name_e : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                      " + _vm._s(data.hotfield_id) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.hotfields.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
+      return x.id == data.hotfield_id;
+    }).field_title : _vm.hotfields.find(function (x) {
+      return x.id == data.hotfield_id;
+    }).field_title_en : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -5637,11 +5680,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat(process.env.MIX_ADMIN_APP_URL, "api/")
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';

@@ -29,7 +29,7 @@ export default {
     },
     data() {
         return {
-            per_page: 50,
+            per_page:2,
             search: '',
             debounce: {},
             salesmenTypesPagination: {},
@@ -143,10 +143,9 @@ export default {
         getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
-
             adminApi.get(`/salesmen-types?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
@@ -170,11 +169,10 @@ export default {
             if (this.current_page <= this.salesmenTypesPagination.last_page && this.current_page != this.salesmenTypesPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
-
-                adminApi.get(`/salesmen-types?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+                adminApi.get(`/salesmen-types?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.salesmenTypes = l.data;
