@@ -2264,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this14.isLoader = true;
                 _context5.next = 3;
-                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
+                return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this14.buttons = l.buttons;
                   _this14.workflows = l.work_flow_trees;
