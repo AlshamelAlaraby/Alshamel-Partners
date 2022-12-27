@@ -158,6 +158,7 @@ Route::group(['prefix' => 'salesmen-types'], function () {
         Route::get('logs/{id}', 'logs')->name('salesmen-types.logs');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('salesmen-types.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::put('/{id}', 'update')->name('salesmen-types.update');
         Route::delete('/{id}', 'delete')->name('salesmen-types.destroy');
     });
@@ -331,5 +332,5 @@ Route::resource('screen-tree-properties', ScreenTreePropertyController::class)->
 Route::get('screen-tree-properties/logs/{id}', [ScreenTreePropertyController::class, 'logs']);
 
 Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
-Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
+Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class, 'logs']);
 //------------------------------------------------------
