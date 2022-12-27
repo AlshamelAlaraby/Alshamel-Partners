@@ -332,4 +332,7 @@ Route::get('screen-tree-properties/logs/{id}', [ScreenTreePropertyController::cl
 
 Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
 Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
+
+Route::post ('translation-update',[\App\Http\Controllers\TranslationController::class,'update']);
+Route::post ('translation-delete',[\App\Http\Controllers\TranslationController::class,'delete']);
 //------------------------------------------------------
