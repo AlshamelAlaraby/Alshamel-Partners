@@ -5637,11 +5637,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.mjs");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat(process.env.MIX_ADMIN_APP_URL, "api/")
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
