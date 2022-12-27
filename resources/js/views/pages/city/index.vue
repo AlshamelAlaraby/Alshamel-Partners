@@ -11,6 +11,7 @@ import { dynamicSortString, dynamicSortNumber } from "../../../helper/tableSort"
 import Multiselect from "vue-multiselect";
 import Country from "../../../components/country.vue";
 import Governate from "../../../components/governate.vue";
+import {formatDateOnly} from "../../../helper/startDate";
 /**
  * Advanced Table component
  */
@@ -87,6 +88,8 @@ export default {
       countries: [],
       governorates: [],
       is_disabled: false,
+        Tooltip: '',
+        mouseEnter: null
     };
   },
   validations: {
@@ -302,7 +305,8 @@ export default {
     /**
      *  hidden Modal (create)
      */
-    resetModal() {
+    async resetModal() {
+        await this.getCategory();
       this.create = {
         name: "",
         name_e: "",
@@ -310,8 +314,7 @@ export default {
         governorate_id: null,
         is_active: 1,
       };
-      this.is_disabled = false;
-      this.getCategory();
+       this.is_disabled = false;
       this.governorates = [
         { id: 0, name: "اضف محافظة جديدة", name_e: "Add new governorate" },
       ];
@@ -507,7 +510,7 @@ export default {
         .get(`/governorates?country_id=${id}`)
         .then((res) => {
           let l = res.data.data;
-          l.unshift({id:0,name:"اضف مدينة",name_e:"Add City"})
+          l.unshift({id:0,name:"اضف محافظه",name_e:"Add Governorate"})
           this.governorates = l;
         })
         .catch((err) => {
@@ -518,6 +521,35 @@ export default {
           });
         });
     },
+      formatDate(value) {
+          return formatDateOnly(value);
+      },
+      log(id) {
+          if(this.mouseEnter != id){
+              this.Tooltip = "";
+              this.mouseEnter = id;
+              adminApi
+                  .get(`/cities/logs/${id}`)
+                  .then((res) => {
+                      let l = res.data.data;
+                      l.forEach((e) => {
+                          this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                              e.event
+                          }; Description: ${e.description} ;Created At: ${this.formatDate(
+                              e.created_at
+                          )} \n`;
+                      });
+                      $(`#tooltip-${id}`).tooltip();
+                  })
+                  .catch((err) => {
+                      Swal.fire({
+                          icon: "error",
+                          title: `${this.$t("general.Error")}`,
+                          text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                      });
+                  });
+          }
+      },
   },
 };
 </script>
@@ -1347,7 +1379,17 @@ export default {
                       <!--  /edit   -->
                     </td>
                     <td>
-                      <i class="fe-info" style="font-size: 22px"></i>
+                        <button
+                            @mousemove="log(data.id)"
+                            @mouseover="log(data.id)"
+                            type="button"
+                            class="btn"
+                            :id="`tooltip-${data.id}`"
+                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                            :title="Tooltip"
+                        >
+                            <i class="fe-info" style="font-size: 22px"></i>
+                        </button>
                     </td>
                   </tr>
                 </tbody>
