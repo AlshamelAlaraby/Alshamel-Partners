@@ -23,12 +23,12 @@ class CurrencyResource extends JsonResource
             'fraction' => $this->fraction,
             'fraction_e' => $this->fraction_e,
             'fraction_no' => $this->fraction_no,
-            'symbol'=>$this->symbol,
-            'symbol_e'=>$this->symbol_e,
+            'symbol' => $this->symbol,
+            'symbol_e' => $this->symbol_e,
             'is_default' => $this->is_default,
             'is_active' => $this->is_active,
-
-
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
