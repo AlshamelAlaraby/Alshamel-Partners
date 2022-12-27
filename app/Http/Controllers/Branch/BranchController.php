@@ -8,7 +8,6 @@ use App\Http\Requests\Branch\EditBranchRequest;
 use App\Http\Resources\Branch\BranchResource;
 use App\Repositories\Branch\BranchRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
 {
@@ -26,7 +25,7 @@ class BranchController extends Controller
     public function index(Request $request)
     {
 
-        if(count($_GET) > 0){
+        if (count($_GET) > 0) {
             cacheForget('branches');
         }
         $branches = cacheGet('branches');
@@ -131,7 +130,7 @@ class BranchController extends Controller
             return responseJson(404, __('not found'));
         }
         if ($model->hasChildren()) {
-            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
         }
         $this->repository->delete($id);
         return responseJson(200, __('deleted'));

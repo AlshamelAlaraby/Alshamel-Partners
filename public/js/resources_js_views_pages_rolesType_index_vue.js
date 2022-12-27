@@ -1337,7 +1337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1346,6 +1346,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../helper/alphaEnglish */ "./resources/js/helper/alphaEnglish.js");
 /* harmony import */ var _helper_tableSort__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/tableSort */ "./resources/js/helper/tableSort.js");
 /* harmony import */ var _helper_senderHoverHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../helper/senderHoverHelper */ "./resources/js/helper/senderHoverHelper.js");
+/* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
+
 
 
 
@@ -1404,32 +1406,34 @@ __webpack_require__.r(__webpack_exports__);
         name_e: true
       },
       is_disabled: false,
-      filterSetting: ['name', 'name_e']
+      filterSetting: ['name', 'name_e'],
+      Tooltip: '',
+      mouseEnter: null
     };
   },
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       }
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       }
     }
   },
@@ -1482,7 +1486,7 @@ __webpack_require__.r(__webpack_exports__);
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -1676,6 +1680,12 @@ __webpack_require__.r(__webpack_exports__);
      */
     editSubmit: function editSubmit(id) {
       var _this10 = this;
+      if (!this.edit.name) {
+        this.edit.name = this.edit.name_e;
+      }
+      if (!this.edit.name_e) {
+        this.edit.name_e = this.edit.name;
+      }
       this.$v.edit.$touch();
       if (this.$v.edit.$invalid) {
         return;
@@ -1760,6 +1770,29 @@ __webpack_require__.r(__webpack_exports__);
      */
     moveInput: function moveInput(tag, c, index) {
       document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
+    },
+    formatDate: function formatDate(value) {
+      return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_11__.formatDateOnly)(value);
+    },
+    log: function log(id) {
+      var _this11 = this;
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role_types/logs/".concat(id)).then(function (res) {
+          var l = res.data.data;
+          l.forEach(function (e) {
+            _this11.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this11.formatDate(e.created_at), " \n");
+          });
+          $("#tooltip-".concat(id)).tooltip();
+        })["catch"](function (err) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "error",
+            title: "".concat(_this11.$t("general.Error")),
+            text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+          });
+        });
+      }
     }
   }
 });
@@ -5633,12 +5666,28 @@ var render = function render() {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
+    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn",
+      attrs: {
+        type: "button",
+        id: "tooltip-".concat(data.id),
+        "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
+        title: _vm.Tooltip
+      },
+      on: {
+        mousemove: function mousemove($event) {
+          return _vm.log(data.id);
+        },
+        mouseover: function mouseover($event) {
+          return _vm.log(data.id);
+        }
+      }
+    }, [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
       }
-    })])]);
+    })])])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {
@@ -6192,40 +6241,19 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
-  id: 222,
-  label: 'menuitems.Banks.text',
-  icon: 'fas fa-eraser',
-  link: '/banks'
-}, {
-  id: 112202,
-  label: 'general.bankAccounts',
-  icon: 'fas fa-eraser',
-  link: '/bankAccount'
-}, {
-  id: 224,
-  label: 'general.Workflowhotfields',
-  icon: 'fas fa-eraser',
-  link: '/workflow-hotfields'
-}, {
-  id: 225,
-  label: 'general.ScreenProperties',
-  icon: 'fas fa-eraser',
-  link: '/screen-properties'
-}, {
-  id: 226,
-  label: 'general.TreeProperty',
-  icon: 'fas fa-eraser',
-  link: '/tree-properties'
-}, {
-  id: 223,
-  label: 'general.Users',
-  icon: 'fas fa-eraser',
-  link: '/users'
-}, {
-  id: 112201,
-  label: 'general.paymentTypes',
-  icon: 'fas fa-asterisk',
-  link: '/paymentTypes'
+  id: 113872,
+  label: "general.Properties",
+  icon: "fas fa-hand-spock",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 225,
+    label: 'general.ScreenProperties',
+    link: '/screen-properties'
+  }, {
+    id: 226,
+    label: 'general.TreeProperty',
+    link: '/tree-properties'
+  }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -6247,6 +6275,24 @@ var menuItems = [{
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
     link: '/internalSalesman'
+  }]
+}, {
+  id: 1000548,
+  label: "menuitems.Banks.text",
+  icon: "fas fa-piggy-bank",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 112201,
+    label: 'general.paymentTypes',
+    link: '/paymentTypes'
+  }, {
+    id: 222,
+    label: 'menuitems.Banks.text',
+    link: '/banks'
+  }, {
+    id: 112202,
+    label: 'general.bankAccounts',
+    link: '/bankAccount'
   }]
 }, {
   id: 1000544,
@@ -6297,6 +6343,16 @@ var menuItems = [{
     link: '/role-hotfield-screen'
   }]
 }, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-hot-tub',
+  link: '/workflow-hotfields'
+}, {
+  id: 223,
+  label: 'general.Users',
+  icon: 'fas fa-network-wired',
+  link: '/users'
+}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -6323,7 +6379,6 @@ var menuItems = [{
   link: '/colors'
 }
 
-//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",
@@ -7047,6 +7102,33 @@ __webpack_require__.r(__webpack_exports__);
   });
   e.target.classList.add('active');
 }
+
+/***/ }),
+
+/***/ "./resources/js/helper/startDate.js":
+/*!******************************************!*\
+  !*** ./resources/js/helper/startDate.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "formatDateOnly": () => (/* binding */ formatDateOnly),
+/* harmony export */   "formatDateTime": () => (/* binding */ formatDateTime)
+/* harmony export */ });
+function formatDateTime(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1] + ' ' + st[2];
+}
+;
+function formatDateOnly(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1];
+}
+;
 
 /***/ }),
 

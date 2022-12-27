@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::dropIfExists('roles_screens_hotfields');
         Schema::create('role_screen_hotfields', function (Blueprint $table) {
-            $table->id ();
-            $table->unsignedInteger ('role_id');
-            $table->unsignedInteger ('workflow_id');
-            $table->unsignedInteger ('hotfield_id');
-            $table->timestamps ();
+            $table->id();
+            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('workflow_id');
+            $table->unsignedInteger('hotfield_id');
+            $table->timestamps();
         });
     }
 

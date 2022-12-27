@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import Role from "../../../components/create/role.vue";
 import Multiselect from "vue-multiselect";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -31,6 +32,8 @@ export default {
         return {
             per_page: 50,
             search: '',
+            Tooltip: '',
+            mouseEnter: null,
             debounce: {},
             roleWorkflowsPagination: {},
             roleWorkflows: [],
@@ -100,23 +103,23 @@ export default {
             }
         }
     },
-    mounted() {
+    async mounted() {
         this.company_id = this.$store.getters['auth/company_id'];
-        this.getWorkflow();
-        this.getData();
+        await this.getWorkflow();
+        await this.getData();
     },
     methods: {
         /**
          *  start get Data module && pagination
          */
-        getData(page = 1) {
+        async getData(page = 1) {
             this.isLoader = true;
             let filter = '';
             for (let i = 0; i > this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
-            adminApi.get(`/role-workflows?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+            await adminApi.get(`/role-workflows?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.roleWorkflows = l.data;
@@ -430,6 +433,35 @@ export default {
                 this.edit.role_id = null;
             }
         },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/role-workflows/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -730,7 +762,13 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.workflow_id">
-                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ?  workflows.find(x => x.id == data.workflow_id).name: workflows.find(x => x.id == data.workflow_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">
+                                            {{
+                                                workflows.length > 0  ?
+                                                    $i18n.locale == 'ar' ? workflows.find(x => x.id == data.workflow_id).name : workflows.find(x => x.id == data.workflow_id).name_e
+                                                    : ''
+                                            }}
+                                        </h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -773,7 +811,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('editroleWorkflow')"
+                                            :title="$t('general.editroleWorkflow')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -838,7 +876,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

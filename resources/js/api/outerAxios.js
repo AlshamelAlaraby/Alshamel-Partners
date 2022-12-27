@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const outerAxios = axios.create({
-    baseURL: `${process.env.MIX_ADMIN_APP_URL}api/`
+    baseURL: `${process.env.MIX_APP_URL_OUTSIDE}api/`
 });
 
 outerAxios.interceptors.request.use(

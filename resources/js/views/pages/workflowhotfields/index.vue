@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -55,6 +56,8 @@ export default {
       is_disabled: false,
       current_page: 1,
       company_id: 48,
+        Tooltip: '',
+        mouseEnter: null
     };
   },
   validations: {
@@ -98,21 +101,24 @@ export default {
       }
     },
   },
-  mounted() {
-    this.getData();
+  async mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
+    await this.getHotfields();
+    await this.getWorkflows();
+    await this.getData();
   },
   methods: {
     /**
      *  get Data workflowhotfields
      */
-    getData(page = 1) {
+    async getData(page = 1) {
       this.isLoader = true;
 
       let filter = "";
-      for (let i = 0; i > this.filterSetting.length; ++i) {
+      for (let i = 0; i < this.filterSetting.length; ++i) {
         filter += `columns[${i}]=${this.filterSetting[i]}&`;
       }
-      adminApi
+      await adminApi
         .get(
           `/workflow-hotfield?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`
         )
@@ -141,7 +147,7 @@ export default {
       ) {
         this.isLoader = true;
         let filter = "";
-        for (let i = 0; i > this.filterSetting.length; ++i) {
+        for (let i = 0; i < this.filterSetting.length; ++i) {
           filter += `columns[${i}]=${this.filterSetting[i]}&`;
         }
 
@@ -220,8 +226,6 @@ export default {
         this.$v.$reset();
       });
       this.errors = {};
-      this.workflows = [];
-      this.hotfields = [];
     },
     /**
      *  hidden Modal (create)
@@ -329,9 +333,11 @@ export default {
      *  get workflows
      */
     async getWorkflows() {
+      this.isLoader = true;
       await outerAxios
         .get(`/workflow-trees/company-workflows/${this.company_id}`)
         .then((res) => {
+          this.isLoader = false;
           this.workflows = res.data;
         })
         .catch((err) => {
@@ -344,9 +350,11 @@ export default {
     },
 
     async getHotfields() {
+      this.isLoader = true;
       await outerAxios
         .get(`/hotfields`)
         .then((res) => {
+          this.isLoader = false;
           this.hotfields = res.data.data;
         })
         .catch((err) => {
@@ -393,6 +401,35 @@ export default {
         this.checkAll.splice(index, 1);
       }
     },
+      formatDate(value) {
+          return formatDateOnly(value);
+      },
+      log(id) {
+          if(this.mouseEnter != id){
+              this.Tooltip = "";
+              this.mouseEnter = id;
+              adminApi
+                  .get(`/workflow-trees/logs/${id}`)
+                  .then((res) => {
+                      let l = res.data.data;
+                      l.forEach((e) => {
+                          this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                              e.event
+                          }; Description: ${e.description} ;Created At: ${this.formatDate(
+                              e.created_at
+                          )} \n`;
+                      });
+                      $(`#tooltip-${id}`).tooltip();
+                  })
+                  .catch((err) => {
+                      Swal.fire({
+                          icon: "error",
+                          title: `${this.$t("general.Error")}`,
+                          text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                      });
+                  });
+          }
+      },
   },
 };
 </script>
@@ -790,12 +827,26 @@ export default {
                     </td>
                     <td v-if="setting.workflow_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ data.workflow_id }}
+                        {{
+                          workflows.length > 0
+                            ? $i18n.locale == "ar"
+                              ? workflows.find((x) => x.id == data.workflow_id).name
+                              : workflows.find((x) => x.id == data.workflow_id).name_e
+                            : ""
+                        }}
                       </h5>
                     </td>
                     <td v-if="setting.hotfield_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ data.hotfield_id }}
+                        {{
+                          hotfields.length > 0
+                            ? $i18n.locale == "ar"
+                              ? hotfields.find((x) => x.id == data.hotfield_id)
+                                  .field_title
+                              : hotfields.find((x) => x.id == data.hotfield_id)
+                                  .field_title_en
+                            : ""
+                        }}
                       </h5>
                     </td>
                     <td>
@@ -890,9 +941,9 @@ export default {
                                         : workflows.find((x) => x.id == opt).name_e
                                   "
                                   :class="{
-                          'is-invalid':
-                            $v.edit.workflow_id.$error || errors.workflow_id,
-                        }"
+                                    'is-invalid':
+                                      $v.edit.workflow_id.$error || errors.workflow_id,
+                                  }"
                                 >
                                 </multiselect>
                                 <div
@@ -927,9 +978,9 @@ export default {
                                             .field_title_en
                                   "
                                   :class="{
-                          'is-invalid':
-                            $v.edit.hotfield_id.$error || errors.hotfield_id,
-                        }"
+                                    'is-invalid':
+                                      $v.edit.hotfield_id.$error || errors.hotfield_id,
+                                  }"
                                 >
                                 </multiselect>
                                 <div
@@ -954,7 +1005,17 @@ export default {
                       <!--  /edit   -->
                     </td>
                     <td>
-                      <i class="fe-info" style="font-size: 22px"></i>
+                        <button
+                            @mousemove="log(data.id)"
+                            @mouseover="log(data.id)"
+                            type="button"
+                            class="btn"
+                            :id="`tooltip-${data.id}`"
+                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                            :title="Tooltip"
+                        >
+                            <i class="fe-info" style="font-size: 22px"></i>
+                        </button>
                     </td>
                   </tr>
                 </tbody>

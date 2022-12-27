@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import RoleType from "../../../components/create/roleType.vue";
 import {dynamicSortString} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -59,7 +60,9 @@ export default {
                 roletype_id: true
             },
             is_disabled: false,
-            filterSetting: ['name', 'name_e']
+            filterSetting: ['name', 'name_e'],
+            Tooltip: '',
+            mouseEnter: null
         }
     },
     validations: {
@@ -127,7 +130,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -322,6 +325,8 @@ export default {
          *  edit module
          */
         editSubmit(id) {
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {
@@ -433,6 +438,35 @@ export default {
             if (this.edit.roletype_id == 0) {
                 this.$bvModal.show("role-types-create");
                 this.edit.roletype_id = null;
+            }
+        },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/roles/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
             }
         },
     },
@@ -984,7 +1018,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -10,6 +10,7 @@ import Country from "../../../components/country";
 import loader from "../../../components/loader";
 import {dynamicSortString, dynamicSortNumber} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -56,6 +57,8 @@ export default {
                 swift_code: true,
             },
             countries: [],
+            Tooltip: '',
+            mouseEnter: null,
             errors: {},
             isCheckAll: false,
             checkAll: [],
@@ -124,7 +127,7 @@ export default {
             $(".arabicInput").keypress(function (event) {
                 var ew = event.which;
                 if (ew == 32) return true;
-                if (48 <= ew && ew <= 57) return false;
+                if (48 <= ew && ew <= 57) return true;
                 if (65 <= ew && ew <= 90) return false;
                 if (97 <= ew && ew <= 122) return false;
                 return true;
@@ -454,6 +457,35 @@ export default {
                 .finally(() => {
                     this.isLoader = false;
                 });
+        },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/banks/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
         },
     },
 };
@@ -1216,7 +1248,19 @@ export default {
                                         </b-modal>
                                         <!--  /edit   -->
                                     </td>
-                                    <td><i class="fe-info" style="font-size: 22px"></i></td>
+                                    <td>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 </tbody>
                                 <tbody v-else>

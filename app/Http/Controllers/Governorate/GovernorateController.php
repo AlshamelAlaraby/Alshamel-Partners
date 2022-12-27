@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 
 class GovernorateController extends Controller
 {
-    public function __construct(private \App\Repositories\Governorate\GovernorateInterface $modelInterface)
+    public function __construct(private \App\Repositories\Governorate\GovernorateInterface$modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
@@ -61,7 +61,6 @@ class GovernorateController extends Controller
         return responseJson(200, 'success');
     }
 
-
     public function logs($id)
     {
         $model = $this->modelInterface->find($id);
@@ -79,7 +78,7 @@ class GovernorateController extends Controller
             return responseJson(404, __('message.data not found'));
         }
         if ($model->hasChildren()) {
-            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
         }
         $this->modelInterface->delete($id);
 
