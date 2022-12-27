@@ -158,6 +158,7 @@ Route::group(['prefix' => 'salesmen-types'], function () {
         Route::get('logs/{id}', 'logs')->name('salesmen-types.logs');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('salesmen-types.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::put('/{id}', 'update')->name('salesmen-types.update');
         Route::delete('/{id}', 'delete')->name('salesmen-types.destroy');
     });

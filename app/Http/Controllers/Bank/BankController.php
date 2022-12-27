@@ -79,7 +79,7 @@ class BankController extends Controller
         }
 
         if ($model->hasChildren()) {
-            return responseJson(400,__("this item has children and can't be deleted remove it's children first"));
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
         }
 
         $this->modelInterface->delete($id);

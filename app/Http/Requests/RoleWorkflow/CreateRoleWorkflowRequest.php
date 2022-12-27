@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\RoleWorkflow;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class CreateRoleWorkflowRequest extends FormRequest
@@ -17,7 +15,7 @@ class CreateRoleWorkflowRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => ['required'],
+            'role_id' => ['required', 'exists:roles,id'],
             'workflow_id' => ['required'],
         ];
     }

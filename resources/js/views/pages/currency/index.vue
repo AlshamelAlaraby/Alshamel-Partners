@@ -14,7 +14,6 @@ import {dynamicSortNumber, dynamicSortString} from "../../../helper/tableSort";
 /**
  * Advanced Table component
  */
-const imgValid = (value) => ['image/png','image/jpg','image/jpeg','image/gif'].includes(value);
 
 export default {
     page: {
@@ -165,7 +164,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -211,7 +210,7 @@ export default {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
-                adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}&search=${this.search}&search=${this.search}&${filter}`)
+                adminApi.get(`/currencies?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                     .then((res) => {
                         let l = res.data;
                         this.currencies = l.data;
@@ -394,6 +393,15 @@ export default {
          *  edit countrie
          */
         editSubmit(id){
+
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
+            if(!this.edit.code){ this.edit.code = this.edit.code_e}
+            if(!this.edit.code_e){ this.edit.code_e = this.edit.code}
+            if(!this.edit.symbol){ this.edit.symbol = this.edit.symbol_e}
+            if(!this.edit.symbol_e){ this.edit.symbol_e = this.edit.symbol}
+            if(!this.edit.fraction){ this.edit.fraction = this.edit.fraction_e}
+            if(!this.edit.fraction_e){ this.edit.fraction_e = this.edit.fraction}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {

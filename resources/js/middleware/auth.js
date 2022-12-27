@@ -5,7 +5,7 @@ export default function auth({ next, store }){
         return router.push({name: 'login'});
     } else {
         if(!store.getters["auth/company_id"]){
-            return next({name: 'company'});
+            return router.push({name: 'company'});
         }else {
             return next();
         }

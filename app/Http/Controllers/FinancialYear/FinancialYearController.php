@@ -6,12 +6,12 @@ use App\Http\Requests\AllRequest;
 use App\Http\Requests\FinancialYear\StoreFinancialYearRequest;
 use App\Http\Requests\FinancialYear\UpdateFinancialYearRequest;
 use App\Http\Resources\FinancialYear\FinancialYearResource;
-use Illuminate\Http\Request;
+use App\Repositories\FinancialYear\FinancialYearInterface;
 use Illuminate\Routing\Controller;
 
 class FinancialYearController extends Controller
 {
-    public function __construct(private \App\Repositories\FinancialYear\FinancialYearInterface$modelInterface)
+    public function __construct(private FinancialYearInterface $modelInterface)
     {
         $this->modelInterface = $modelInterface;
     }
@@ -76,21 +76,6 @@ class FinancialYearController extends Controller
         return responseJson(200, 'success');
     }
 
-
-
-    public function setting(Request $request)
-    {
-        $model = $this->modelInterface->setting($request);
-
-        return responseJson(200, 'success');
-
-    }
-
-    public function getSetting($user_id, $screen_id)
-    {
-        $model = $this->modelInterface->getSetting($user_id, $screen_id);
-        return responseJson(200, 'success', new \App\Http\Resources\ScreenSetting\ScreenSettingResource($model));
-    }
     public function logs($id)
     {
         $model = $this->modelInterface->find($id);

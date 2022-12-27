@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
+import employee from "../../../components/create/employee.vue";
 
 /**
  * Advanced Table component
@@ -26,6 +27,7 @@ export default {
     ErrorMessage,
     loader,
     Multiselect,
+    employee
   },
   data() {
     return {
@@ -121,7 +123,7 @@ export default {
       $(".arabicInput").keypress(function (event) {
         var ew = event.which;
         if (ew == 32) return false;
-        if (48 <= ew && ew <= 57) return false;
+        if (48 <= ew && ew <= 57) return true;
         if (65 <= ew && ew <= 90) return false;
         if (97 <= ew && ew <= 122) return false;
         return true;
@@ -148,7 +150,6 @@ export default {
       },
     };
   },
-
   methods: {
     /**
      *  start get Data workflow && pagination
@@ -378,6 +379,8 @@ export default {
      *  edit workflow
      */
     editSubmit(id) {
+      if (!this.edit.name) {this.edit.name = this.edit.name_e;}
+      if (!this.edit.name_e) {this.edit.name_e = this.edit.name;}
       this.$v.edit.$touch();
       this.images.forEach((e) => {
         this.edit.old_media.push(e.id);
@@ -453,7 +456,7 @@ export default {
       this.images = user.media ? user.media : [];
       if (this.images && this.images.length > 0) {
         this.showPhoto = this.images[this.images.length - 1].webp;
-      }
+      }else {this.showPhoto = "./images/img-1.png";}
       this.$nextTick(() => {
         this.$v.$reset();
       });
@@ -484,7 +487,9 @@ export default {
       await adminApi
         .get(`/employees`)
         .then((res) => {
-          this.employees = res.data.data;
+            let l = res.data.data;
+            l.unshift({ id: 0, name: "اضف موظف", name_e: "Add Employee" });
+            this.employees = l;
         })
         .catch((err) => {
           Swal.fire({
@@ -556,7 +561,6 @@ export default {
                   media: new_media,
                 })
                 .then((res) => {
-                  console.log(res);
                   this.images = res.data.data.media ? res.data.data.media : [];
                   if (this.images && this.images.length > 0) {
                     this.showPhoto = this.images[this.images.length - 1].webp;
@@ -657,12 +661,11 @@ export default {
       adminApi
         .put(`/users/${this.user_id}`, { old_media })
         .then((res) => {
+          this.users[index] = res.data.data;
           this.images = res.data.data.media ? res.data.data.media :[];
           if (this.images && this.images.length > 0) {
-            {
               this.showPhoto = this.images[this.images.length - 1].webp;
-            }
-          }
+          }else {this.showPhoto = "./images/img-1.png";}
         })
         .catch((err) => {
           Swal.fire({
@@ -675,6 +678,18 @@ export default {
     /**
      *  end Image ceate
      */
+    showEmployeeModal() {
+        if (this.create.employee_id == 0) {
+            this.$bvModal.show("employee-create");
+            this.create.employee_id = null;
+        }
+    },
+    showEmployeeModalEdit() {
+        if(this.edit.employee_id == 0) {
+            this.$bvModal.show("employee-create");
+            this.edit.employee_id = null;
+        }
+    },
   },
 };
 </script>
@@ -682,6 +697,7 @@ export default {
 <template>
   <Layout>
     <PageHeader />
+    <employee @created="getEmployees" />
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -931,6 +947,7 @@ export default {
                               >
 
                               <multiselect
+                                @input="showEmployeeModal"
                                 v-model="create.employee_id"
                                 :options="employees.map((type) => type.id)"
                                 :custom-label="
@@ -1512,6 +1529,7 @@ export default {
                                         <span class="text-danger">*</span>
                                       </label>
                                       <multiselect
+                                        @input="showEmployeeModalEdit"
                                         v-model="edit.employee_id"
                                         :options="employees.map((type) => type.id)"
                                         :custom-label="

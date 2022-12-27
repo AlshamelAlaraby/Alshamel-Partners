@@ -1900,39 +1900,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.company_id = this.$store.getters['auth/company_id'];
-    this.getWorkflow();
-    this.getData();
+    var _this3 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this3.company_id = _this3.$store.getters['auth/company_id'];
+              _context.next = 3;
+              return _this3.getWorkflow();
+            case 3:
+              _context.next = 5;
+              return _this3.getData();
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     /**
      *  start get Data module && pagination
      */
     getData: function getData() {
-      var _this3 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.isLoader = true;
-      var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
-        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-      }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
-        var l = res.data;
-        _this3.roleWorkflowHotfields = l.data;
-        _this3.roleWorkflowHotfieldsPagination = l.pagination;
-        _this3.current_page = l.pagination.current_page;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this3.$t('general.Error')),
-          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
-        });
-      })["finally"](function () {
-        _this3.isLoader = false;
-      });
+      var _arguments = arguments,
+        _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var page, filter, i;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                _this4.isLoader = true;
+                filter = '';
+                for (i = 0; i > _this4.filterSetting.length; ++i) {
+                  filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
+                }
+                _context2.next = 6;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(_this4.per_page, "&search=").concat(_this4.search, "&").concat(filter)).then(function (res) {
+                  var l = res.data;
+                  _this4.roleWorkflowHotfields = l.data;
+                  _this4.roleWorkflowHotfieldsPagination = l.pagination;
+                  _this4.current_page = l.pagination.current_page;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this4.$t('general.Error')),
+                    text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+                  });
+                })["finally"](function () {
+                  _this4.isLoader = false;
+                });
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     getDataCurrentPage: function getDataCurrentPage() {
-      var _this4 = this;
+      var _this5 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.roleWorkflowHotfieldsPagination.last_page && this.current_page != this.roleWorkflowHotfieldsPagination.current_page && this.current_page) {
         this.isLoader = true;
@@ -1942,17 +1973,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
-          _this4.roleWorkflowHotfields = l.data;
-          _this4.roleWorkflowHotfieldsPagination = l.pagination;
-          _this4.current_page = l.pagination.current_page;
+          _this5.roleWorkflowHotfields = l.data;
+          _this5.roleWorkflowHotfieldsPagination = l.pagination;
+          _this5.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
             icon: 'error',
-            title: "".concat(_this4.$t('general.Error')),
-            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+            title: "".concat(_this5.$t('general.Error')),
+            text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
           });
         })["finally"](function () {
-          _this4.isLoader = false;
+          _this5.isLoader = false;
         });
       }
     },
@@ -1963,7 +1994,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  start delete module
      */
     deleteModule: function deleteModule(id) {
-      var _this5 = this;
+      var _this6 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
         title: "".concat(this.$t('general.Areyousure')),
         text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
@@ -1976,25 +2007,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          _this5.isLoader = true;
+          _this6.isLoader = true;
           _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/role-screen-hotfield/".concat(id)).then(function (res) {
-            _this5.getData();
-            _this5.checkAll = [];
+            _this6.getData();
+            _this6.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: 'success',
-              title: "".concat(_this5.$t('general.Deleted')),
-              text: "".concat(_this5.$t('general.Yourrowhasbeendeleted')),
+              title: "".concat(_this6.$t('general.Deleted')),
+              text: "".concat(_this6.$t('general.Yourrowhasbeendeleted')),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: 'error',
-              title: "".concat(_this5.$t('general.Error')),
-              text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
+              title: "".concat(_this6.$t('general.Error')),
+              text: "".concat(_this6.$t('general.Thereisanerrorinthesystem'))
             });
           })["finally"](function () {
-            _this5.isLoader = false;
+            _this6.isLoader = false;
           });
         }
       });
@@ -2006,14 +2037,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  reset Modal (create)
      */
     resetModalHidden: function resetModalHidden() {
-      var _this6 = this;
+      var _this7 = this;
       this.create = {
         role_id: null,
         screen_id: null,
         hotfield_id: null
       };
       this.$nextTick(function () {
-        _this6.$v.$reset();
+        _this7.$v.$reset();
       });
       this.errors = {};
       this.$bvModal.hide("create");
@@ -2022,49 +2053,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
-      var _this7 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this7.getRole();
-              case 2:
-                _context.next = 4;
-                return _this7.getWorkflow();
-              case 4:
-                _this7.create = {
-                  role_id: null,
-                  screen_id: null,
-                  hotfield_id: null
-                };
-                _this7.$nextTick(function () {
-                  _this7.$v.$reset();
-                });
-                _this7.errors = {};
-              case 7:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    /**
-     *  create module
-     */
-    resetForm: function resetForm() {
       var _this8 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return _this8.getRole();
               case 2:
-                _context2.next = 4;
+                _context3.next = 4;
                 return _this8.getWorkflow();
               case 4:
                 _this8.create = {
@@ -2075,18 +2073,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this8.$nextTick(function () {
                   _this8.$v.$reset();
                 });
-                _this8.is_disabled = false;
                 _this8.errors = {};
-              case 8:
+              case 7:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
+      }))();
+    },
+    /**
+     *  create module
+     */
+    resetForm: function resetForm() {
+      var _this9 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _this9.getRole();
+              case 2:
+                _context4.next = 4;
+                return _this9.getWorkflow();
+              case 4:
+                _this9.create = {
+                  role_id: null,
+                  screen_id: null,
+                  hotfield_id: null
+                };
+                _this9.$nextTick(function () {
+                  _this9.$v.$reset();
+                });
+                _this9.is_disabled = false;
+                _this9.errors = {};
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     AddSubmit: function AddSubmit() {
-      var _this9 = this;
+      var _this10 = this;
       this.$v.create.$touch();
       if (this.$v.create.$invalid) {
         return;
@@ -2094,49 +2125,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.isLoader = true;
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/role-screen-hotfield", this.create).then(function (res) {
-          _this9.is_disabled = true;
-          _this9.getData();
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this9.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this9.$t('general.Error')),
-              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
-            });
-          }
-        })["finally"](function () {
-          _this9.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  edit module
-     */
-    editSubmit: function editSubmit(id) {
-      var _this10 = this;
-      this.$v.edit.$touch();
-      if (this.$v.edit.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/role-screen-hotfield/".concat(id), this.edit).then(function (res) {
-          _this10.$bvModal.hide("modal-edit-".concat(id));
+          _this10.is_disabled = true;
           _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
+              text: "".concat(_this10.$t('general.Addedsuccessfully')),
               showConfirmButton: false,
               timer: 1500
             });
@@ -2157,46 +2151,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     /**
+     *  edit module
+     */
+    editSubmit: function editSubmit(id) {
+      var _this11 = this;
+      this.$v.edit.$touch();
+      if (this.$v.edit.$invalid) {
+        return;
+      } else {
+        this.isLoader = true;
+        this.errors = {};
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/role-screen-hotfield/".concat(id), this.edit).then(function (res) {
+          _this11.$bvModal.hide("modal-edit-".concat(id));
+          _this11.getData();
+          setTimeout(function () {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'success',
+              text: "".concat(_this11.$t('general.Editsuccessfully')),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }, 500);
+        })["catch"](function (err) {
+          if (err.response.data) {
+            _this11.errors = err.response.data.errors;
+          } else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'error',
+              title: "".concat(_this11.$t('general.Error')),
+              text: "".concat(_this11.$t('general.Thereisanerrorinthesystem'))
+            });
+          }
+        })["finally"](function () {
+          _this11.isLoader = false;
+        });
+      }
+    },
+    /**
      *   show Modal (edit)
      */
     resetModalEdit: function resetModalEdit(id) {
-      var _this11 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _this12 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         var module;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context3.next = 2;
-                return _this11.getRole();
+                _context5.next = 2;
+                return _this12.getRole();
               case 2:
-                _context3.next = 4;
-                return _this11.getWorkflow();
+                _context5.next = 4;
+                return _this12.getWorkflow();
               case 4:
-                module = _this11.roleWorkflowHotfields.find(function (e) {
+                module = _this12.roleWorkflowHotfields.find(function (e) {
                   return id == e.id;
                 });
-                _this11.edit.role_id = module.role.id;
-                _this11.edit.hotfield_id = module.hotfield_id;
-                _this11.edit.screen_id = module.screen_id;
-                _this11.errors = {};
+                _this12.edit.role_id = module.role.id;
+                _this12.edit.hotfield_id = module.hotfield_id;
+                _this12.edit.screen_id = module.screen_id;
+                _this12.errors = {};
               case 9:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3);
+        }, _callee5);
       }))();
     },
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
-      var _this12 = this;
+      var _this13 = this;
       this.create = {
         role_id: null,
         screen_id: null,
         hotfield_id: null
       };
       this.$nextTick(function () {
-        _this12.$v.$reset();
+        _this13.$v.$reset();
       });
       this.is_disabled = false;
       this.errors = {};
@@ -2222,14 +2253,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
     },
     getRole: function getRole() {
-      var _this13 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      var _this14 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _this13.isLoader = true;
-                _context4.next = 3;
+                _this14.isLoader = true;
+                _context6.next = 3;
                 return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/roles").then(function (res) {
                   var l = res.data.data;
                   l.unshift({
@@ -2237,37 +2268,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     name: "اضف  الدور",
                     name_e: "Add Role"
                   });
-                  _this13.roles = l;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this13.$t('general.Error')),
-                    text: "".concat(_this13.$t('general.Thereisanerrorinthesystem'))
-                  });
-                })["finally"](function () {
-                  _this13.isLoader = false;
-                });
-              case 3:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
-    getWorkflow: function getWorkflow() {
-      var _this14 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _this14.isLoader = true;
-                _context5.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this14.company_id)).then(function (res) {
-                  var l = res.data.data;
-                  _this14.screens = l.screen_all;
-                  _this14.hotfields = l.hot_fields;
+                  _this14.roles = l;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
                     icon: 'error',
@@ -2279,10 +2280,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
               case 3:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5);
+        }, _callee6);
+      }))();
+    },
+    getWorkflow: function getWorkflow() {
+      var _this15 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this15.isLoader = true;
+                _context7.next = 3;
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                  var l = res.data.data;
+                  _this15.screens = l.screen_all;
+                  _this15.hotfields = l.hot_fields;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: 'error',
+                    title: "".concat(_this15.$t('general.Error')),
+                    text: "".concat(_this15.$t('general.Thereisanerrorinthesystem'))
+                  });
+                })["finally"](function () {
+                  _this15.isLoader = false;
+                });
+              case 3:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
       }))();
     },
     showRoleModal: function showRoleModal() {
@@ -6367,17 +6398,17 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.role.name : data.role.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
+    }, [_vm._v(_vm._s(_vm.hotfields.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
     }).name : _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
-    }).name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
+    }).name_e : ""))])]) : _vm._e(), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
+    }, [_vm._v(_vm._s(_vm.screens.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
       return x.id == data.screen_id;
     }).name : _vm.screens.find(function (x) {
       return x.id == data.screen_id;
-    }).name_e))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }).name_e : ""))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -7128,40 +7159,19 @@ var menuItems = [{
   icon: 'fas fa-eraser',
   link: '/serial'
 }, {
-  id: 222,
-  label: 'menuitems.Banks.text',
-  icon: 'fas fa-eraser',
-  link: '/banks'
-}, {
-  id: 112202,
-  label: 'general.bankAccounts',
-  icon: 'fas fa-eraser',
-  link: '/bankAccount'
-}, {
-  id: 224,
-  label: 'general.Workflowhotfields',
-  icon: 'fas fa-eraser',
-  link: '/workflow-hotfields'
-}, {
-  id: 225,
-  label: 'general.ScreenProperties',
-  icon: 'fas fa-eraser',
-  link: '/screen-properties'
-}, {
-  id: 226,
-  label: 'general.TreeProperty',
-  icon: 'fas fa-eraser',
-  link: '/tree-properties'
-}, {
-  id: 223,
-  label: 'general.Users',
-  icon: 'fas fa-eraser',
-  link: '/users'
-}, {
-  id: 112201,
-  label: 'general.paymentTypes',
-  icon: 'fas fa-asterisk',
-  link: '/paymentTypes'
+  id: 113872,
+  label: "general.Properties",
+  icon: "fas fa-hand-spock",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 225,
+    label: 'general.ScreenProperties',
+    link: '/screen-properties'
+  }, {
+    id: 226,
+    label: 'general.TreeProperty',
+    link: '/tree-properties'
+  }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
@@ -7183,6 +7193,24 @@ var menuItems = [{
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
     link: '/internalSalesman'
+  }]
+}, {
+  id: 1000548,
+  label: "menuitems.Banks.text",
+  icon: "fas fa-piggy-bank",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 112201,
+    label: 'general.paymentTypes',
+    link: '/paymentTypes'
+  }, {
+    id: 222,
+    label: 'menuitems.Banks.text',
+    link: '/banks'
+  }, {
+    id: 112202,
+    label: 'general.bankAccounts',
+    link: '/bankAccount'
   }]
 }, {
   id: 1000544,
@@ -7233,6 +7261,16 @@ var menuItems = [{
     link: '/role-hotfield-screen'
   }]
 }, {
+  id: 224,
+  label: 'general.Workflowhotfields',
+  icon: 'fas fa-hot-tub',
+  link: '/workflow-hotfields'
+}, {
+  id: 223,
+  label: 'general.Users',
+  icon: 'fas fa-network-wired',
+  link: '/users'
+}, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
@@ -7259,7 +7297,6 @@ var menuItems = [{
   link: '/colors'
 }
 
-//
 // {
 //     id: 1115,
 //     label: "menuitems.dashboard.text",

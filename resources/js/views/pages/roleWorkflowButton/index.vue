@@ -106,23 +106,23 @@ export default {
             }
         }
     },
-    mounted() {
+    async mounted() {
         this.company_id = this.$store.getters['auth/company_id'];
-        this.getWorkflow();
-        this.getData();
+        await this.getWorkflow()
+        await this.getData()
     },
     methods: {
         /**
          *  start get Data module && pagination
          */
-        getData(page = 1) {
+        async getData(page = 1) {
             this.isLoader = true;
             let filter = '';
             for (let i = 0; i > this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
-            adminApi.get(`/role-workflow-button?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
+            await adminApi.get(`/role-workflow-button?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.roleWorkflowButtons = l.data;
@@ -763,10 +763,17 @@ export default {
                                         <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? data.role.name :  data.role.name_e }}</h5>
                                     </td>
                                     <td v-if="setting.workflow_id">
-                                        <h5 class="m-0 font-weight-normal">{{$i18n.locale == 'ar' ? workflows.find(x => x.id == data.workflow_id).name : workflows.find(x => x.id == data.workflow_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{
+                                                workflows.length > 0  ?
+                                            $i18n.locale == 'ar' ? workflows.find(x => x.id == data.workflow_id).name : workflows.find(x => x.id == data.workflow_id).name_e
+                                            : ''
+                                            }}</h5>
                                     </td>
                                     <td v-if="setting.button_id">
-                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? buttons.find(x => x.id == data.button_id).name : workflows.find(x => x.id == data.button_id).name_e }}</h5>
+                                        <h5 class="m-0 font-weight-normal">{{ buttons.length > 0  ?
+                                            $i18n.locale == 'ar' ? buttons.find(x => x.id == data.button_id).name : buttons.find(x => x.id == data.button_id).name_e
+                                            : ''
+                                            }}</h5>
                                     </td>
                                     <td>
                                         <div class="btn-group">
