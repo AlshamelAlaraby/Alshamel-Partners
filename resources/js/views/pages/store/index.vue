@@ -446,7 +446,7 @@ export default {
         async getBranch(){
             this.isLoader = true;
 
-            await adminApi.get(`/branches`)
+            await adminApi.get(`/branches?company_id=${this.company_id}`)
                 .then((res) => {
                     let l = res.data.data;
                     l.unshift({ id: 0, name: "اضف فرع", name_e: "Add Branch" });

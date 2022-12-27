@@ -8,7 +8,7 @@ export const state = {
     // permission: JSON.parse(localStorage.getItem("permission")) || [],
     partner: JSON.parse(localStorage.getItem("partner")) || {},
     companies: JSON.parse(localStorage.getItem("companies")) || [],
-    company_id: JSON.parse(localStorage.getItem("company_id")) || null
+    company_id: localStorage.getItem("company_id") || null
 }
 
 // getters

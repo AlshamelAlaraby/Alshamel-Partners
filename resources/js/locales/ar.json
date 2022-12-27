@@ -648,6 +648,7 @@
         "account_number": "رقم الحساب",
         "emp_id": "emp id",
         "rp_code": "rp code",
+        "Properties": "خاصيه",
         "addBankAccount" : "اضافة حساب بنك",
         "editBankAccount": "تعديل حساب البنك",
         "Bank": "البنك"
