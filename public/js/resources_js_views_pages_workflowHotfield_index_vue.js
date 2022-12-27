@@ -6406,9 +6406,9 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(_vm.screens.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
       return x.id == data.screen_id;
-    }).name : _vm.screens.find(function (x) {
+    }).field_title : _vm.screens.find(function (x) {
       return x.id == data.screen_id;
-    }).name_e : ""))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }).field_title_en : ""))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",

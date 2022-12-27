@@ -769,7 +769,7 @@ export default {
                                     </td>
                                     <td v-if="setting.screen_id">
                                         <h5 class="m-0 font-weight-normal">{{ screens.length > 0  ?
-                                            $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).name : screens.find(x => x.id == data.screen_id).name_e
+                                            $i18n.locale == 'ar' ? screens.find(x => x.id == data.screen_id).field_title : screens.find(x => x.id == data.screen_id).field_title_en
                                           : ''  }}</h5>
                                     </td>
                                     <td>
