@@ -1468,15 +1468,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _this3.company_id = _this3.$store.getters["auth/company_id"];
+              _context.next = 3;
               return _this3.getHotfields();
-            case 2:
-              _context.next = 4;
+            case 3:
+              _context.next = 5;
               return _this3.getWorkflows();
-            case 4:
-              _context.next = 6;
+            case 5:
+              _context.next = 7;
               return _this3.getData();
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -1603,8 +1604,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this7.$v.$reset();
       });
       this.errors = {};
-      this.workflows = [];
-      this.hotfields = [];
     },
     /**
      *  hidden Modal (create)
@@ -1735,8 +1734,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
+                _this12.isLoader = true;
+                _context4.next = 3;
                 return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/workflow-trees/company-workflows/".concat(_this12.company_id)).then(function (res) {
+                  _this12.isLoader = false;
                   _this12.workflows = res.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1745,7 +1746,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     text: "".concat(_this12.$t("general.Thereisanerrorinthesystem"))
                   });
                 });
-              case 2:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -1760,8 +1761,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _context5.next = 2;
+                _this13.isLoader = true;
+                _context5.next = 3;
                 return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/hotfields").then(function (res) {
+                  _this13.isLoader = false;
                   _this13.hotfields = res.data.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1770,7 +1773,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
                   });
                 });
-              case 2:
+              case 3:
               case "end":
                 return _context5.stop();
             }

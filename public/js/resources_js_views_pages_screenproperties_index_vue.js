@@ -1731,8 +1731,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
+                _this12.isLoader = true;
+                _context4.next = 3;
                 return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/screens").then(function (res) {
+                  _this12.isLoader = false;
                   _this12.screens = res.data.data;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
@@ -1741,7 +1743,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     text: "".concat(_this12.$t("general.Thereisanerrorinthesystem"))
                   });
                 });
-              case 2:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -5468,7 +5470,7 @@ var render = function render() {
       return x.id == data.screen_id;
     }).name : _vm.screens.find(function (x) {
       return x.id == data.screen_id;
-    }).name_e : "") + "\n                      \n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("td", [_c("h5", {
+    }).name_e : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.tree_property.name : data.tree_property.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"

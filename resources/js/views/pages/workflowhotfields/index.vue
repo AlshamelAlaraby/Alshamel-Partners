@@ -99,6 +99,7 @@ export default {
     },
   },
   async mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
     await this.getHotfields();
     await this.getWorkflows();
     await this.getData();
@@ -222,8 +223,6 @@ export default {
         this.$v.$reset();
       });
       this.errors = {};
-      this.workflows = [];
-      this.hotfields = [];
     },
     /**
      *  hidden Modal (create)
@@ -331,9 +330,11 @@ export default {
      *  get workflows
      */
     async getWorkflows() {
+      this.isLoader = true;
       await outerAxios
         .get(`/workflow-trees/company-workflows/${this.company_id}`)
         .then((res) => {
+          this.isLoader = false;
           this.workflows = res.data;
         })
         .catch((err) => {
@@ -346,9 +347,11 @@ export default {
     },
 
     async getHotfields() {
+      this.isLoader = true;
       await outerAxios
         .get(`/hotfields`)
         .then((res) => {
+          this.isLoader = false;
           this.hotfields = res.data.data;
         })
         .catch((err) => {

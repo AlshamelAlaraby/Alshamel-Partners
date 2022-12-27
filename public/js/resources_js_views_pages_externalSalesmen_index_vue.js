@@ -1767,7 +1767,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     title: "External Salesmen",
     meta: [{
       name: "description",
-      content: 'External Salesmen'
+      content: "External Salesmen"
     }]
   },
   components: {
@@ -1782,28 +1782,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       per_page: 50,
-      search: '',
+      search: "",
       debounce: {},
       externalSalesmensPagination: {},
       externalSalesmens: [],
       isLoader: false,
       create: {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       },
       edit: {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       },
       errors: {},
       isCheckAll: false,
@@ -1819,7 +1819,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         is_active: true
       },
       is_disabled: false,
-      filterSetting: ['phone', 'address', 'email', 'rp_code', 'country_id', 'national_id', 'is_active'],
+      filterSetting: ["phone", "address", "email", "rp_code", "country_id", "national_id", "is_active"],
       countries: []
     };
   },
@@ -1931,8 +1931,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = '';
-      for (var i = 0; i < this.filterSetting.length; ++i) {
+      var filter = "";
+      for (var i = 0; i > this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/external-salesmen?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1942,9 +1942,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this3.$t('general.Error')),
-          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
+          icon: "error",
+          title: "".concat(_this3.$t("general.Error")),
+          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
         });
       })["finally"](function () {
         _this3.isLoader = false;
@@ -1955,20 +1955,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.externalSalesmensPagination.last_page && this.current_page != this.externalSalesmensPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
-        for (var i = 0; i < this.filterSetting.length; ++i) {
+        var filter = "";
+        for (var i = 0; i > this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/external-salesmen?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "}&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/external-salesmen?page=".concat(page, "&per_page=").concat(this.per_page, "}&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
           _this4.externalSalesmens = l.data;
           _this4.externalSalesmensPagination = l.pagination;
           _this4.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: 'error',
-            title: "".concat(_this4.$t('general.Error')),
-            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+            icon: "error",
+            title: "".concat(_this4.$t("general.Error")),
+            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
           _this4.isLoader = false;
@@ -1984,12 +1984,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     deleteExternalSalesmen: function deleteExternalSalesmen(id) {
       var _this5 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-        title: "".concat(this.$t('general.Areyousure')),
-        text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
+        title: "".concat(this.$t("general.Areyousure")),
+        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
         type: "warning",
         showCancelButton: true,
-        confirmButtonText: "".concat(this.$t('general.Yesdeleteit')),
-        cancelButtonText: "".concat(this.$t('general.Nocancel')),
+        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+        cancelButtonText: "".concat(this.$t("general.Nocancel")),
         confirmButtonClass: "btn btn-success mt-2",
         cancelButtonClass: "btn btn-danger ml-2 mt-2",
         buttonsStyling: false
@@ -2000,17 +2000,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _this5.getData();
             _this5.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              title: "".concat(_this5.$t('general.Deleted')),
-              text: "".concat(_this5.$t('general.Yourrowhasbeendeleted')),
+              icon: "success",
+              title: "".concat(_this5.$t("general.Deleted")),
+              text: "".concat(_this5.$t("general.Yourrowhasbeendeleted")),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this5.$t('general.Error')),
-              text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this5.$t("general.Error")),
+              text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
             });
           })["finally"](function () {
             _this5.isLoader = false;
@@ -2027,13 +2027,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalHidden: function resetModalHidden() {
       var _this6 = this;
       this.create = {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       };
       this.$nextTick(function () {
         _this6.$v.$reset();
@@ -2047,13 +2047,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModal: function resetModal() {
       var _this7 = this;
       this.create = {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       };
       this.$nextTick(function () {
         _this7.$v.$reset();
@@ -2067,13 +2067,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetForm: function resetForm() {
       var _this8 = this;
       this.create = {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       };
       this.$nextTick(function () {
         _this8.$v.$reset();
@@ -2095,8 +2095,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
+              icon: "success",
+              text: "".concat(_this9.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -2106,9 +2106,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _this9.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this9.$t('general.Error')),
-              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this9.$t("general.Error")),
+              text: "".concat(_this9.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -2132,8 +2132,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
+              icon: "success",
+              text: "".concat(_this10.$t("general.Editsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -2143,9 +2143,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this10.$t("general.Error")),
+              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -2192,13 +2192,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        phone: '',
-        address: '',
-        rp_code: '',
-        email: '',
+        phone: "",
+        address: "",
+        rp_code: "",
+        email: "",
         country_id: null,
         national_id: null,
-        is_active: 'active'
+        is_active: "active"
       };
       this.countries = [];
     },
@@ -2248,9 +2248,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this12.countries = l;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this12.$t('general.Error')),
-                    text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
+                    icon: "error",
+                    title: "".concat(_this12.$t("general.Error")),
+                    text: "".concat(_this12.$t("general.Thereisanerrorinthesystem"))
                   });
                 })["finally"](function () {
                   _this12.isLoader = false;
@@ -6092,7 +6092,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("externalSalesmen.externalSalesmensTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("externalSalesmen.externalSalesmensTable")) + "\n            ")]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -6250,7 +6250,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -6299,11 +6299,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -6321,7 +6321,7 @@ var render = function render() {
       },
       expression: "setting.phone"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.mobile_no")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.$t("general.mobile_no")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.email,
@@ -6330,7 +6330,7 @@ var render = function render() {
       },
       expression: "setting.email"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("login.Emailaddress")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("login.Emailaddress")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.address,
@@ -6339,7 +6339,7 @@ var render = function render() {
       },
       expression: "setting.address"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.address")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.address")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.national_id,
@@ -6348,7 +6348,7 @@ var render = function render() {
       },
       expression: "setting.national_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.national")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.national")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.country_id,
@@ -6357,7 +6357,7 @@ var render = function render() {
       },
       expression: "setting.country_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("country.country")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("country.country")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_active,
@@ -6366,7 +6366,7 @@ var render = function render() {
       },
       expression: "setting.is_active"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Status")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.rp_code,
@@ -6375,7 +6375,7 @@ var render = function render() {
       },
       expression: "setting.rp_code"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.code")) + "\n                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -6389,7 +6389,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.externalSalesmensPagination.from) + "-" + _vm._s(_vm.externalSalesmensPagination.to) + " / " + _vm._s(_vm.externalSalesmensPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.externalSalesmensPagination.from) + "-" + _vm._s(_vm.externalSalesmensPagination.to) + "\n                    / " + _vm._s(_vm.externalSalesmensPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -6469,7 +6469,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6481,7 +6481,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6504,7 +6504,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6"
@@ -6512,7 +6512,7 @@ var render = function render() {
     staticClass: "form-group position-relative"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.country")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.country")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -6537,7 +6537,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.$v.create.country_id.$error || _vm.errors.country_id ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.country_id ? _vm._l(_vm.errors.country_id, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.country_id ? _vm._l(_vm.errors.country_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6550,7 +6550,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.phone")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.phone")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6584,9 +6584,9 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.phone.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.phone.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.phone.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.phone.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.phone.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.phone ? _vm._l(_vm.errors.phone, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.phone.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.phone ? _vm._l(_vm.errors.phone, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6599,7 +6599,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.email")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.email")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6633,7 +6633,7 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.email.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.email.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.email ? _vm._l(_vm.errors.email, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.email.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.email ? _vm._l(_vm.errors.email, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6646,7 +6646,7 @@ var render = function render() {
     attrs: {
       "for": "field-4"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.national")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.national")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6697,7 +6697,7 @@ var render = function render() {
     attrs: {
       "for": "field-7"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.address")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.address")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6731,9 +6731,9 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.address.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.address.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.address.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.address.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.address.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.address.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.address ? _vm._l(_vm.errors.address, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.address.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.address ? _vm._l(_vm.errors.address, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6746,7 +6746,7 @@ var render = function render() {
     attrs: {
       "for": "field-8"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.code")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6780,7 +6780,7 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.rp_code.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.rp_code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.rp_code ? _vm._l(_vm.errors.rp_code, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.rp_code.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.rp_code ? _vm._l(_vm.errors.rp_code, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6790,7 +6790,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "mr-2"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Status")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
     "class": {
@@ -6952,9 +6952,11 @@ var render = function render() {
         _vm.externalSalesmens.sort(_vm.SortNumber("-national_id"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.rp_code ? _c("th", [_c("div", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.address ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v(_vm._s(_vm.$t("general.code")))])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.address")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.rp_code ? _c("th", [_c("div", {
+    staticClass: "d-flex justify-content-center"
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.code")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
@@ -6972,7 +6974,7 @@ var render = function render() {
         _vm.externalSalesmens.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.externalSalesmens.length > 0 ? _c("tbody", _vm._l(_vm.externalSalesmens, function (data, index) {
     return _c("tr", {
@@ -7031,9 +7033,9 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _vm.setting.phone ? _c("td", [_vm._v(_vm._s(data.phone))]) : _vm._e(), _vm._v(" "), _vm.setting.email ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.email))])]) : _vm._e(), _vm._v(" "), _vm.setting.country_id ? _c("td", [_vm._v(_vm._s(data.country.name))]) : _vm._e(), _vm._v(" "), _vm.setting.national_id ? _c("td", [_vm._v(_vm._s(data.national_id))]) : _vm._e(), _vm._v(" "), _vm.setting.rp_code ? _c("td", [_vm._v(_vm._s(data.rp_code))]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
+    }, [_vm._v(_vm._s(data.email))])]) : _vm._e(), _vm._v(" "), _vm.setting.country_id ? _c("td", [_vm._v(_vm._s(data.country.name))]) : _vm._e(), _vm._v(" "), _vm.setting.national_id ? _c("td", [_vm._v(_vm._s(data.national_id))]) : _vm._e(), _vm._v(" "), _vm.setting.address ? _c("td", [_vm._v(_vm._s(data.address))]) : _vm._e(), _vm._v(" "), _vm.setting.rp_code ? _c("td", [_vm._v(_vm._s(data.rp_code))]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
       "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -7042,7 +7044,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -7108,7 +7110,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -7131,7 +7133,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-6"
@@ -7139,7 +7141,7 @@ var render = function render() {
       staticClass: "form-group position-relative"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.country")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.country")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -7164,7 +7166,7 @@ var render = function render() {
       }
     }), _vm._v(" "), _vm.$v.edit.country_id.$error || _vm.errors.country_id ? _c("div", {
       staticClass: "text-danger"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.country_id ? _vm._l(_vm.errors.country_id, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.country_id ? _vm._l(_vm.errors.country_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -7177,7 +7179,7 @@ var render = function render() {
       attrs: {
         "for": "edit-1"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.phone")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.phone")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -7211,9 +7213,9 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.phone.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.edit.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.phone.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.phone.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.edit.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.phone ? _vm._l(_vm.errors.phone, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.phone.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.phone ? _vm._l(_vm.errors.phone, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -7226,7 +7228,7 @@ var render = function render() {
       attrs: {
         "for": "edit-2"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.email")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.email")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -7260,7 +7262,7 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.email.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.email.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.email ? _vm._l(_vm.errors.email, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.email.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.email ? _vm._l(_vm.errors.email, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -7270,7 +7272,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.national")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.national")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -7318,9 +7320,58 @@ var render = function render() {
     }, [_c("label", {
       staticClass: "control-label",
       attrs: {
+        "for": "edit-7"
+      }
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.address")) + "\n                                "), _c("span", {
+      staticClass: "text-danger"
+    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.$v.edit.address.$model,
+        expression: "$v.edit.address.$model"
+      }],
+      staticClass: "form-control",
+      "class": {
+        "is-invalid": _vm.$v.edit.address.$error || _vm.errors.address,
+        "is-valid": !_vm.$v.edit.address.$invalid && !_vm.errors.address
+      },
+      attrs: {
+        type: "text",
+        "data-edit": "7",
+        id: "edit-7"
+      },
+      domProps: {
+        value: _vm.$v.edit.address.$model
+      },
+      on: {
+        keypress: function keypress($event) {
+          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+          return _vm.moveInput("input", "edit", 1);
+        },
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(_vm.$v.edit.address, "$model", $event.target.value);
+        }
+      }
+    }), _vm._v(" "), !_vm.$v.edit.address.minLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.address.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.address.maxLength ? _c("div", {
+      staticClass: "invalid-feedback"
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.address.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.address ? _vm._l(_vm.errors.address, function (errorMessage, index) {
+      return _c("ErrorMessage", {
+        key: index
+      }, [_vm._v(_vm._s(errorMessage))]);
+    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-md-6"
+    }, [_c("div", {
+      staticClass: "form-group"
+    }, [_c("label", {
+      staticClass: "control-label",
+      attrs: {
         "for": "edit-8"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.address")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.code")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -7354,56 +7405,7 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.rp_code.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.rp_code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.rp_code ? _vm._l(_vm.errors.rp_code, function (errorMessage, index) {
-      return _c("ErrorMessage", {
-        key: index
-      }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-6"
-    }, [_c("div", {
-      staticClass: "form-group"
-    }, [_c("label", {
-      staticClass: "control-label",
-      attrs: {
-        "for": "edit-7"
-      }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.address")) + "\n                                                            "), _c("span", {
-      staticClass: "text-danger"
-    }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: _vm.$v.edit.address.$model,
-        expression: "$v.edit.address.$model"
-      }],
-      staticClass: "form-control",
-      "class": {
-        "is-invalid": _vm.$v.edit.address.$error || _vm.errors.address,
-        "is-valid": !_vm.$v.edit.address.$invalid && !_vm.errors.address
-      },
-      attrs: {
-        type: "email",
-        "data-edit": "7",
-        id: "edit-7"
-      },
-      domProps: {
-        value: _vm.$v.edit.address.$model
-      },
-      on: {
-        keypress: function keypress($event) {
-          if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
-          return _vm.moveInput("input", "edit", 1);
-        },
-        input: function input($event) {
-          if ($event.target.composing) return;
-          _vm.$set(_vm.$v.edit.address, "$model", $event.target.value);
-        }
-      }
-    }), _vm._v(" "), !_vm.$v.edit.address.minLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.address.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.address.maxLength ? _c("div", {
-      staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.address.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.address ? _vm._l(_vm.errors.address, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.rp_code.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.rp_code ? _vm._l(_vm.errors.rp_code, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -7413,7 +7415,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "mr-2"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Status")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
       "class": {
@@ -7461,7 +7463,7 @@ var render = function render() {
     attrs: {
       colspan: "11"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

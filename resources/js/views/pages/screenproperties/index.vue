@@ -329,9 +329,11 @@ export default {
      *  get workflows
      */
     async getScreens() {
+      this.isLoader = true;
       await outerAxios
         .get(`/screens`)
         .then((res) => {
+          this.isLoader = false;
           this.screens = res.data.data;
         })
         .catch((err) => {
@@ -719,7 +721,9 @@ export default {
                             class="fas fa-arrow-up"
                             @click="
                               screenProperties.sort(
-                                sortString($i18n.locale == 'ar' ? 'screen.name' : 'screen.name_e')
+                                sortString(
+                                  $i18n.locale == 'ar' ? 'screen.name' : 'screen.name_e'
+                                )
                               )
                             "
                           ></i>
@@ -727,7 +731,9 @@ export default {
                             class="fas fa-arrow-down"
                             @click="
                               screenProperties.sort(
-                                sortString($i18n.locale == 'ar' ? '-screen.name' : '-screen.name_e')
+                                sortString(
+                                  $i18n.locale == 'ar' ? '-screen.name' : '-screen.name_e'
+                                )
                               )
                             "
                           ></i>
@@ -791,7 +797,6 @@ export default {
                               : screens.find((x) => x.id == data.screen_id).name_e
                             : ""
                         }}
-                        
                       </h5>
                     </td>
                     <td v-if="setting.property_id">
