@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import alphaArabic  from "../../../helper/alphaArabic";
 import alphaEnglish  from "../../../helper/alphaEnglish";
 import {dynamicSortNumber, dynamicSortString} from "../../../helper/tableSort";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -80,7 +81,9 @@ export default {
                 fraction_no: true
             },
             is_disabled: false,
-            filterSetting: ['name','name_e','code','code_e','fraction','fraction_e','symbol','symbol_e']
+            filterSetting: ['name','name_e','code','code_e','fraction','fraction_e','symbol','symbol_e'],
+            Tooltip: '',
+            mouseEnter: null
         }
     },
     validations: {
@@ -496,7 +499,36 @@ export default {
          */
         moveInput(tag,c,index){
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
-        }
+        },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/currencies/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -1527,7 +1559,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                       <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                          <button
+                                              @mousemove="log(data.id)"
+                                              @mouseover="log(data.id)"
+                                              type="button"
+                                              class="btn"
+                                              :id="`tooltip-${data.id}`"
+                                              :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                              :title="Tooltip"
+                                          >
+                                              <i class="fe-info" style="font-size: 22px"></i>
+                                          </button>
                                     </td>
                                 </tr>
                                 </tbody>

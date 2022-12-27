@@ -11,6 +11,7 @@ import alphaArabic from "../../../helper/alphaArabic";
 import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -405,6 +406,9 @@ export default {
         moveInput(tag, c, index) {
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
         },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
         log(id) {
             if(this.mouseEnter != id){
                 this.Tooltip = "";
@@ -420,7 +424,7 @@ export default {
                                 e.created_at
                             )} \n`;
                         });
-
+                        $(`#tooltip-${id}`).tooltip();
                     })
                     .catch((err) => {
                         Swal.fire({
@@ -429,8 +433,6 @@ export default {
                             text: `${this.$t("general.Thereisanerrorinthesystem")}`,
                         });
                     });
-            }else {
-
             }
         },
     },
@@ -1011,10 +1013,11 @@ export default {
                                     </td>
                                     <td>
                                         <button
+                                            @mousemove="log(data.id)"
                                             @mouseover="log(data.id)"
                                             type="button"
                                             class="btn"
-                                            data-toggle="tooltip"
+                                            :id="`tooltip-${data.id}`"
                                             :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
                                             :title="Tooltip"
                                         >

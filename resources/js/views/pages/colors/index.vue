@@ -421,7 +421,7 @@ export default {
                                 e.created_at
                             )} \n`;
                         });
-
+                        $(`#tooltip-${id}`).tooltip();
                     })
                     .catch((err) => {
                         Swal.fire({
@@ -430,8 +430,6 @@ export default {
                             text: `${this.$t("general.Thereisanerrorinthesystem")}`,
                         });
                     });
-            }else {
-
             }
         },
     },
@@ -1017,10 +1015,11 @@ export default {
                                     </td>
                                     <td>
                                         <button
+                                            @mousemove="log(data.id)"
                                             @mouseover="log(data.id)"
                                             type="button"
                                             class="btn"
-                                            data-toggle="tooltip"
+                                            :id="`tooltip-${data.id}`"
                                             :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
                                             :title="Tooltip"
                                         >
