@@ -87,7 +87,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            filterSetting: ["name", "name_e", "country_id", "phone_key"],
+            filterSetting: ["name", "name_e", this.$i18n.locale  == 'ar'?'country.name':'country.name_e', "phone_key"],
             countries: [],
             Tooltip: '',
             mouseEnter: null
@@ -555,7 +555,7 @@ export default {
                                         >
                                         <b-form-checkbox
                                             v-model="filterSetting"
-                                            value="country_id"
+                                            :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                                             class="mb-1"
                                         >{{ $t("general.country") }}
                                         </b-form-checkbox
@@ -1478,3 +1478,6 @@ export default {
         </div>
     </Layout>
 </template>
+
+
+

@@ -528,7 +528,7 @@ export default {
                         });
                     });
             }
-        },
+        }
     },
 };
 </script>
@@ -1180,7 +1180,7 @@ export default {
                                       <td v-if="setting.symbol_e">{{ data.symbol_e }}</td>
                                       <td v-if="setting.is_default">
                                         <span :class="[
-                                            data.is_default == 'active' ?
+                                            data.is_default == 1 ?
                                             'text-success':
                                             'text-danger',
                                             'badge'
@@ -1189,7 +1189,7 @@ export default {
                                             {{ data.is_default ? `${$t('general.Active')}`:`${$t('general.Inactive')}`}}
                                         </span>
                                       </td>
-                                      <td v-if="setting.is_active">
+                                      <td v-if="setting.is_active == 1">
                                         <span :class="[
                                             data.is_active ?
                                             'text-success':

@@ -1595,7 +1595,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         is_active: true
       },
       is_disabled: false,
-      filterSetting: ["name", "name_e"]
+      filterSetting: ["name", "name_e", this.$i18n.locale == 'ar' ? 'branch.name' : 'branch.name_e']
     };
   },
   validations: {
@@ -5513,7 +5513,19 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "branch.name" : "branch.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Branch")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"

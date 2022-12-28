@@ -84,7 +84,12 @@ export default {
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      filterSetting: ["name", "name_e", "country_id", "governorate_id"],
+      filterSetting: [
+          "name", "name_e",
+          this.$i18n.locale  == 'ar'?'country.name':'country.name_e',
+          this.$i18n.locale  == 'ar'?'governorate.name':'governorate.name_e',
+          "governorate_id"
+      ],
       countries: [],
       governorates: [],
       is_disabled: false,
@@ -586,13 +591,13 @@ export default {
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
-                      value="country_id"
+                      :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
                       >{{ $t("general.country") }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
-                      value="governorate_id"
+                      :value="$i18n.locale  == 'ar'?'governorate.name':'governorate.name_e'"
                       class="mb-1"
                       >{{ $t("general.governorate") }}</b-form-checkbox
                     >

@@ -63,7 +63,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            filterSetting: ["name", "name_e", "swift_code"],
+            filterSetting: ["name", "name_e", "swift_code",this.$i18n.locale  == 'ar'?'country.name':'country.name_e'],
         };
     },
     validations: {
@@ -521,8 +521,13 @@ export default {
                                             value="name_e"
                                             class="mb-1"
                                         >{{ $t("general.Name_en") }}
-                                        </b-form-checkbox
-                                        >
+                                        </b-form-checkbox>
+                                        <b-form-checkbox
+                                            v-model="filterSetting"
+                                            :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
+                                            class="mb-1"
+                                        >{{ $t("general.Name_en") }}
+                                        </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="swift_code"

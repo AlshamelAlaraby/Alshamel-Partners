@@ -77,7 +77,7 @@ create: {
         "address",
         "email",
         "rp_code",
-        "country_id",
+        this.$i18n.locale  == 'ar'?'country.name':'country.name_e',
         "national_id",
         "is_active",
       ],
@@ -545,7 +545,7 @@ create: {
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
-                      value="country_id"
+                      :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
                       >{{ $t("general.country") }}</b-form-checkbox
                     >
