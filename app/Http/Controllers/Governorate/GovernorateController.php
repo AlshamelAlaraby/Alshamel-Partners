@@ -98,7 +98,7 @@ class GovernorateController extends Controller
             $this->modelInterface->delete($id);
         }
         if (count($arr) > 0) {
-            return responseJson(200, __('some items has relation cant delete'));
+            return responseJson(400, __('some items has relation cant delete'));
         }
         return responseJson(200, __('Done'));
     }
