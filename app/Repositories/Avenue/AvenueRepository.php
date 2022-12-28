@@ -3,45 +3,17 @@
 namespace App\Repositories\Avenue;
 
 use App\Models\UserSettingScreen;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AvenueRepository implements AvenueInterface
 {
 
-    public function __construct(private \App\Models\Avenue$model, private UserSettingScreen $setting){}
+    public function __construct(private \App\Models\Avenue$model, private UserSettingScreen $setting)
+    {}
 
     public function all($request)
     {
-        $models = $this->model->with(["governorate", 'city', 'country'])->where(function ($q) use ($request) {
-
-            if ($request->search) {
-                $q->where('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-            }
-
-            if ($request->is_active) {
-                $q->where('is_active', $request->is_active);
-            }
-
-            if ($request->country_id) {
-                $q->where('country_id', $request->country_id);
-            }
-
-            if ($request->city_id) {
-                $q->where('city_id', $request->city_id);
-            }
-
-            if ($request->governorate_id) {
-                $q->where('governorate_id', $request->governorate_id);
-            }
-
-            if ($request->search && $request->columns) {
-                foreach ($request->columns as $column) {
-                    $q->orWhere($column, 'like', '%' . $request->search . '%');
-                }
-            }
-
-        })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->with(["governorate", 'city', 'country'])->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -80,7 +52,6 @@ class AvenueRepository implements AvenueInterface
         $this->forget($id);
         $model->delete();
     }
-
 
     public function getSetting($user_id, $screen_id)
     {
