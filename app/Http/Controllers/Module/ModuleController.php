@@ -6,6 +6,7 @@ use App\Http\Requests\AllRequest;
 use App\Http\Requests\Module\StoreModuleRequest;
 use App\Http\Requests\Module\UpdateModuleRequest;
 use App\Http\Resources\Module\ModuleResource;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class ModuleController extends Controller
@@ -73,6 +74,23 @@ class ModuleController extends Controller
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $model = $this->modelInterface->find($id);
+            $arr = [];
+            if ($model->have_children) {
+                $arr[] = $id;
+                continue;
+            }
+            $this->modelInterface->delete($id);
+        }
+        if (count($arr) > 0) {
+            return responseJson(200, __('some items has relation cant delete'));
+        }
+        return responseJson(200, __('Done'));
     }
 
 }
