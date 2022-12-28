@@ -1796,7 +1796,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     title: "Role Workflow Hotfield",
     meta: [{
       name: "Role Workflow Hotfield",
-      content: 'Role Workflow Hotfield'
+      content: "Role Workflow Hotfield"
     }]
   },
   components: {
@@ -1811,7 +1811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       per_page: 50,
-      search: '',
+      search: "",
       debounce: {},
       roleWorkflowHotfieldsPagination: {},
       roleWorkflowHotfields: [],
@@ -1841,8 +1841,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       company_id: null,
       is_disabled: false,
-      filterSetting: [this.$i18n.locale == 'ar' ? 'role.name' : 'role.name_e', 'workflow_id', 'hotfield_id'],
-      Tooltip: '',
+      filterSetting: [this.$i18n.locale == "ar" ? "role.name" : "role.name_e", "workflow_id", "hotfield_id"],
+      Tooltip: "",
       mouseEnter: null
     };
   },
@@ -1910,7 +1910,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this3.company_id = _this3.$store.getters['auth/company_id'];
+              _this3.company_id = _this3.$store.getters["auth/company_id"];
               _context.next = 3;
               return _this3.getWorkflow();
             case 3:
@@ -1939,7 +1939,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 _this4.isLoader = true;
-                filter = '';
+                filter = "";
                 for (i = 0; i > _this4.filterSetting.length; ++i) {
                   filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
                 }
@@ -1951,9 +1951,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this4.current_page = l.pagination.current_page;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this4.$t('general.Error')),
-                    text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+                    icon: "error",
+                    title: "".concat(_this4.$t("general.Error")),
+                    text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
                   });
                 })["finally"](function () {
                   _this4.isLoader = false;
@@ -1971,7 +1971,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.roleWorkflowHotfieldsPagination.last_page && this.current_page != this.roleWorkflowHotfieldsPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
+        var filter = "";
         for (var i = 0; i > this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
@@ -1982,9 +1982,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this5.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: 'error',
-            title: "".concat(_this5.$t('general.Error')),
-            text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
+            icon: "error",
+            title: "".concat(_this5.$t("general.Error")),
+            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
           _this5.isLoader = false;
@@ -1997,42 +1997,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /**
      *  start delete module
      */
-    deleteModule: function deleteModule(id) {
+    deleteModule: function deleteModule(id, index) {
       var _this6 = this;
-      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-        title: "".concat(this.$t('general.Areyousure')),
-        text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "".concat(this.$t('general.Yesdeleteit')),
-        cancelButtonText: "".concat(this.$t('general.Nocancel')),
-        confirmButtonClass: "btn btn-success mt-2",
-        cancelButtonClass: "btn btn-danger ml-2 mt-2",
-        buttonsStyling: false
-      }).then(function (result) {
-        if (result.value) {
-          _this6.isLoader = true;
-          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/role-screen-hotfield/".concat(id)).then(function (res) {
-            _this6.getData();
-            _this6.checkAll = [];
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              title: "".concat(_this6.$t('general.Deleted')),
-              text: "".concat(_this6.$t('general.Yourrowhasbeendeleted')),
-              showConfirmButton: false,
-              timer: 1500
+      if (Array.isArray(id)) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+          title: "".concat(this.$t("general.Areyousure")),
+          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+          cancelButtonText: "".concat(this.$t("general.Nocancel")),
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false
+        }).then(function (result) {
+          if (result.value) {
+            _this6.isLoader = true;
+            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/role-screen-hotfield/bulk-delete", {
+              ids: id
+            }).then(function (res) {
+              _this6.checkAll = [];
+              _this6.getData();
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "success",
+                title: "".concat(_this6.$t("general.Deleted")),
+                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+                showConfirmButton: false,
+                timer: 1500
+              });
+            })["catch"](function (err) {
+              if (err.response.status == 400) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this6.$t("general.Error")),
+                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
+                });
+                _this6.getData();
+              } else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this6.$t("general.Error")),
+                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
+                });
+              }
+            })["finally"](function () {
+              _this6.isLoader = false;
             });
-          })["catch"](function (err) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this6.$t('general.Error')),
-              text: "".concat(_this6.$t('general.Thereisanerrorinthesystem'))
+          }
+        });
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+          title: "".concat(this.$t("general.Areyousure")),
+          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+          cancelButtonText: "".concat(this.$t("general.Nocancel")),
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false
+        }).then(function (result) {
+          if (result.value) {
+            _this6.isLoader = true;
+            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/role-screen-hotfield/".concat(id)).then(function (res) {
+              _this6.checkAll = [];
+              _this6.getData();
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "success",
+                title: "".concat(_this6.$t("general.Deleted")),
+                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+                showConfirmButton: false,
+                timer: 1500
+              });
+            })["catch"](function (err) {
+              if (err.response.status == 400) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this6.$t("general.Error")),
+                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
+                });
+              } else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this6.$t("general.Error")),
+                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
+                });
+              }
+            })["finally"](function () {
+              _this6.isLoader = false;
             });
-          })["finally"](function () {
-            _this6.isLoader = false;
-          });
-        }
-      });
+          }
+        });
+      }
     },
     /**
      *  end delete module
@@ -2133,8 +2189,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Addedsuccessfully')),
+              icon: "success",
+              text: "".concat(_this10.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -2144,9 +2200,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this10.$t("general.Error")),
+              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -2170,8 +2226,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this11.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this11.$t('general.Editsuccessfully')),
+              icon: "success",
+              text: "".concat(_this11.$t("general.Editsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -2181,9 +2237,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             _this11.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this11.$t('general.Error')),
-              text: "".concat(_this11.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this11.$t("general.Error")),
+              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -2275,9 +2331,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this14.roles = l;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this14.$t('general.Error')),
-                    text: "".concat(_this14.$t('general.Thereisanerrorinthesystem'))
+                    icon: "error",
+                    title: "".concat(_this14.$t("general.Error")),
+                    text: "".concat(_this14.$t("general.Thereisanerrorinthesystem"))
                   });
                 })["finally"](function () {
                   _this14.isLoader = false;
@@ -2302,13 +2358,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
-                  ;
                   _this15.hotfields = l.hot_fields;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: 'error',
-                    title: "".concat(_this15.$t('general.Error')),
-                    text: "".concat(_this15.$t('general.Thereisanerrorinthesystem'))
+                    icon: "error",
+                    title: "".concat(_this15.$t("general.Error")),
+                    text: "".concat(_this15.$t("general.Thereisanerrorinthesystem"))
                   });
                 })["finally"](function () {
                   _this15.isLoader = false;
@@ -5896,7 +5951,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("general.roleWorkflowHotfieldsTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.roleWorkflowHotfieldsTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -5925,7 +5980,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("roles.roles")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("roles.roles")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "workflow_id"
@@ -5937,7 +5992,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.workflow")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.workflow")) + "\n                  ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5994,7 +6049,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -6030,7 +6085,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.deleteModule(_vm.checkAll);
+        return _vm.deleteModule(_vm.checkAll[0]);
       }
     }
   }, [_c("i", {
@@ -6043,11 +6098,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -6065,7 +6120,7 @@ var render = function render() {
       },
       expression: "setting.role_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("roles.roles")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("roles.roles")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.workflow_id,
@@ -6074,7 +6129,7 @@ var render = function render() {
       },
       expression: "setting.workflow_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.workflow")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.workflow")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.hotfield_id,
@@ -6083,7 +6138,7 @@ var render = function render() {
       },
       expression: "setting.hotfield_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.hotfield")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.hotfield")) + "\n                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -6097,7 +6152,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.roleWorkflowHotfieldsPagination.from) + "-" + _vm._s(_vm.roleWorkflowHotfieldsPagination.to) + " /\n                                        " + _vm._s(_vm.roleWorkflowHotfieldsPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.roleWorkflowHotfieldsPagination.from) + "-" + _vm._s(_vm.roleWorkflowHotfieldsPagination.to) + "\n                    /\n                    " + _vm._s(_vm.roleWorkflowHotfieldsPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -6176,7 +6231,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6188,7 +6243,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6211,7 +6266,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -6365,7 +6420,7 @@ var render = function render() {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.hotfield")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.workflow")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.workflow")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.roleWorkflowHotfields.length > 0 ? _c("tbody", _vm._l(_vm.roleWorkflowHotfields, function (data, index) {
     return _c("tr", {
@@ -6424,19 +6479,19 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _vm.setting.role_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.role.name : data.role.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.role.name : data.role.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.hotfield_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(_vm.hotfields.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
+    }, [_vm._v("\n                      " + _vm._s(_vm.hotfields.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
     }).field_title : _vm.hotfields.find(function (x) {
       return x.id == data.hotfield_id;
-    }).field_title : ""))])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("td", [_c("h5", {
+    }).field_title : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.workflow_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                                        " + _vm._s(_vm.workflows.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
+    }, [_vm._v("\n                      " + _vm._s(_vm.workflows.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.workflows.find(function (x) {
       return x.id == data.workflow_id;
     }).name : _vm.workflows.find(function (x) {
       return x.id == data.workflow_id;
-    }).name_e : "") + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }).name_e : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6445,7 +6500,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -6510,7 +6565,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6533,7 +6588,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -6655,7 +6710,7 @@ var render = function render() {
     attrs: {
       colspan: "6"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -238,10 +238,10 @@ Route::group(['prefix' => 'role-screen-hotfield'], function () {
         Route::get('/', 'all')->name('role-screen-hotfield.index');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('role-screen-hotfield.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::post('/{id}', 'update')->name('role-screen-hotfield.update');
         Route::delete('/{id}', 'delete')->name('role-screen-hotfield.destroy');
         Route::get('logs/{id}', 'logs')->name('role-screen-hotfield.logs');
-        Route::post("bulk-delete", "bulkDelete");
     });
 });
 
@@ -262,10 +262,10 @@ Route::group(['prefix' => 'role-workflow-button'], function () {
         Route::get('/', 'all')->name('role-workflow-button.index');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('role-workflow-button.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::post('/{id}', 'update')->name('role-workflow-button.update');
         Route::delete('/{id}', 'delete')->name('role-workflow-button.destroy');
         Route::get('logs/{id}', 'logs')->name('role-workflow-button.logs');
-        Route::post("bulk-delete", "bulkDelete");
     });
 });
 
@@ -274,10 +274,10 @@ Route::group(['prefix' => 'workflow-hotfield'], function () {
         Route::get('/', 'all')->name('workflow-hotfield.index');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('workflow-hotfield.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::post('/{id}', 'update')->name('workflow-hotfield.update');
         Route::delete('/{id}', 'delete')->name('workflow-hotfield.destroy');
         Route::get('logs/{id}', 'logs')->name('workflow-hotfield.logs');
-        Route::post("bulk-delete", "bulkDelete");
     });
 });
 
@@ -298,10 +298,10 @@ Route::group(['prefix' => 'internal-salesmen'], function () {
         Route::get('/', 'all')->name('internal-salesmen.index');
         Route::get('/{id}', 'find');
         Route::post('/', 'create')->name('internal-salesmen.create');
+        Route::post("bulk-delete", "bulkDelete");
         Route::post('/{id}', 'update')->name('internal-salesmen.update');
         Route::delete('/{id}', 'delete')->name('internal-salesmen.destroy');
         Route::get('logs/{id}', 'logs')->name('internal-salesmen.logs');
-        Route::post("bulk-delete", "bulkDelete");
     });
 });
 
@@ -361,7 +361,6 @@ Route::post('screen-tree-properties/bulk-delete', [ScreenTreePropertyController:
 
 Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
 Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
-Route::post('internal-salesman/bulk-delete', [InternalSalesmanController::class,'bulkDelete']);
 
 Route::post ('translation-update',[\App\Http\Controllers\TranslationController::class,'update']);
 Route::post ('translation-delete',[\App\Http\Controllers\TranslationController::class,'delete']);
