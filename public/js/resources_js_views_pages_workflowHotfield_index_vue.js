@@ -1841,7 +1841,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       company_id: null,
       is_disabled: false,
-      filterSetting: ['role_id', 'workflow_id', 'hotfield_id'],
+      filterSetting: [this.$i18n.locale == 'ar' ? 'role.name' : 'role.name_e', 'workflow_id', 'hotfield_id'],
       Tooltip: '',
       mouseEnter: null
     };
@@ -5916,7 +5916,7 @@ var render = function render() {
   }, [_c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "role_id"
+      value: _vm.$i18n.locale == "ar" ? "role.name" : "role.name_e"
     },
     model: {
       value: _vm.filterSetting,

@@ -21,15 +21,6 @@ class RoleWorkflowButton extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function workflow()
-    {
-        return $this->belongsTo(Workflow::class);
-    }
-
-    public function button()
-    {
-        return $this->belongsTo(Button::class);
-    }
 
     public function getActivitylogOptions(): LogOptions
     {

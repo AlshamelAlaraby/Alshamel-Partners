@@ -2092,7 +2092,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         rp_code: true
       },
       idDelete: null,
-      filterSetting: ['bank_id', 'account_number', 'phone', 'address', 'email', 'emp_id', 'rp_code'],
+      filterSetting: [this.$i18n.locale == 'ar' ? 'bank.name' : 'bank.name_e', 'account_number', 'phone', 'address', 'email', 'emp_id', 'rp_code'],
       banks: []
     };
   },
@@ -6943,7 +6943,7 @@ var render = function render() {
   }, [_c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "bank_id"
+      value: _vm.$i18n.locale == "ar" ? "bank.name" : "bank.name_e"
     },
     model: {
       value: _vm.filterSetting,
