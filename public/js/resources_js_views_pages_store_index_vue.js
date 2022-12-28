@@ -1507,7 +1507,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1519,13 +1519,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _components_create_branch_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../components/create/branch.vue */ "./resources/js/components/create/branch.vue");
-/* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
 
 
 
@@ -1548,7 +1545,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     title: "Store",
     meta: [{
       name: "description",
-      content: "Store"
+      content: 'Store'
     }]
   },
   components: {
@@ -1563,24 +1560,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       per_page: 50,
-      search: "",
+      search: '',
       debounce: {},
       storesPagination: {},
       stores: [],
       isLoader: false,
-      Tooltip: "",
-      mouseEnter: "",
       create: {
-        name: "",
-        name_e: "",
-        branch_id: "",
-        is_active: "active"
+        name: '',
+        name_e: '',
+        branch_id: '',
+        is_active: 'active'
       },
       edit: {
-        name: "",
-        name_e: "",
-        branch_id: "",
-        is_active: "active"
+        name: '',
+        name_e: '',
+        branch_id: '',
+        is_active: 'active'
       },
       company_id: null,
       errors: {},
@@ -1595,48 +1590,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         is_active: true
       },
       is_disabled: false,
-      filterSetting: ["name", "name_e"]
+      filterSetting: ['name', 'name_e']
     };
   },
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.maxLength)(100),
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100),
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.maxLength)(100),
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       branch_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       },
       is_active: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       }
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.maxLength)(100),
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100),
         alphaArabic: _helper_alphaArabic__WEBPACK_IMPORTED_MODULE_7__["default"]
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.maxLength)(100),
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100),
         alphaEnglish: _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__["default"]
       },
       branch_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       },
       is_active: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_14__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       }
     }
   },
@@ -1674,7 +1669,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.company_id = this.$store.getters["auth/company_id"];
+    this.company_id = this.$store.getters['auth/company_id'];
     this.getData();
   },
   updated: function updated() {
@@ -1703,82 +1698,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return true;
       } else {
         return vm.$router.push({
-          name: "company"
+          name: 'company'
         });
       }
     });
   },
   methods: {
-    formatDate: function formatDate(value) {
-      return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_13__.formatDateOnly)(value);
-    },
-    log: function log(id) {
-      var _this3 = this;
-      if (this.mouseEnter != id) {
-        this.Tooltip = "";
-        this.mouseEnter = id;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores/logs/".concat(id)).then(function (res) {
-          var l = res.data.data;
-          l.forEach(function (e) {
-            _this3.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this3.formatDate(e.created_at), " \n");
-          });
-        })["catch"](function (err) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: "error",
-            title: "".concat(_this3.$t("general.Error")),
-            text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
-          });
-        });
-      } else {}
-    },
     /**
      *  start get Data countrie && pagination
      */
     getData: function getData() {
-      var _this4 = this;
+      var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = "";
-      for (var i = 0; i < this.filterSetting.length; ++i) {
+      var filter = '';
+      for (var i = 0; i > this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
-        _this4.stores = l.data;
-        _this4.storesPagination = l.pagination;
-        _this4.current_page = l.pagination.current_page;
+        _this3.stores = l.data;
+        _this3.storesPagination = l.pagination;
+        _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: "error",
-          title: "".concat(_this4.$t("general.Error")),
-          text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+          icon: 'error',
+          title: "".concat(_this3.$t('general.Error')),
+          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
         });
       })["finally"](function () {
-        _this4.isLoader = false;
+        _this3.isLoader = false;
       });
     },
     getDataCurrentPage: function getDataCurrentPage() {
-      var _this5 = this;
+      var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = "";
-        for (var i = 0; i < this.filterSetting.length; ++i) {
+        var filter = '';
+        for (var i = 0; i > this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
           var l = res.data;
-          _this5.stores = l.data;
-          _this5.storesPagination = l.pagination;
-          _this5.current_page = l.pagination.current_page;
+          _this4.stores = l.data;
+          _this4.storesPagination = l.pagination;
+          _this4.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: "error",
-            title: "".concat(_this5.$t("general.Error")),
-            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+            icon: 'error',
+            title: "".concat(_this4.$t('general.Error')),
+            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
           });
         })["finally"](function () {
-          _this5.isLoader = false;
+          _this4.isLoader = false;
         });
       }
     },
@@ -1789,38 +1762,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  start delete countrie
      */
     deleteBranch: function deleteBranch(id) {
-      var _this6 = this;
+      var _this5 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-        title: "".concat(this.$t("general.Areyousure")),
-        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+        title: "".concat(this.$t('general.Areyousure')),
+        text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
         type: "warning",
         showCancelButton: true,
-        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-        cancelButtonText: "".concat(this.$t("general.Nocancel")),
+        confirmButtonText: "".concat(this.$t('general.Yesdeleteit')),
+        cancelButtonText: "".concat(this.$t('general.Nocancel')),
         confirmButtonClass: "btn btn-success mt-2",
         cancelButtonClass: "btn btn-danger ml-2 mt-2",
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          _this6.isLoader = true;
+          _this5.isLoader = true;
           _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/stores/".concat(id)).then(function (res) {
-            _this6.getData();
-            _this6.checkAll = [];
+            _this5.getData();
+            _this5.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              title: "".concat(_this6.$t("general.Deleted")),
-              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+              icon: 'success',
+              title: "".concat(_this5.$t('general.Deleted')),
+              text: "".concat(_this5.$t('general.Yourrowhasbeendeleted')),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this6.$t("general.Error")),
-              text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
+              icon: 'error',
+              title: "".concat(_this5.$t('general.Error')),
+              text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
             });
           })["finally"](function () {
-            _this6.isLoader = false;
+            _this5.isLoader = false;
           });
         }
       });
@@ -1832,15 +1805,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  reset Modal (create)
      */
     resetModalHidden: function resetModalHidden() {
-      var _this7 = this;
+      var _this6 = this;
       this.create = {
-        name: "",
-        name_e: "",
-        branch_id: "",
-        is_active: "active"
+        name: '',
+        name_e: '',
+        branch_id: '',
+        is_active: 'active'
       };
       this.$nextTick(function () {
-        _this7.$v.$reset();
+        _this6.$v.$reset();
       });
       this.errors = {};
       this.$bvModal.hide("create");
@@ -1849,25 +1822,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
-      var _this8 = this;
+      var _this7 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this8.getBranch();
+                return _this7.getBranch();
               case 2:
-                _this8.create = {
-                  name: "",
-                  name_e: "",
+                _this7.create = {
+                  name: '',
+                  name_e: '',
                   branch_id: null,
-                  is_active: "active"
+                  is_active: 'active'
                 };
-                _this8.$nextTick(function () {
-                  _this8.$v.$reset();
+                _this7.$nextTick(function () {
+                  _this7.$v.$reset();
                 });
-                _this8.errors = {};
+                _this7.errors = {};
               case 5:
               case "end":
                 return _context.stop();
@@ -1880,26 +1853,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  create countrie
      */
     resetForm: function resetForm() {
-      var _this9 = this;
+      var _this8 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this9.getBranch();
+                return _this8.getBranch();
               case 2:
-                _this9.create = {
-                  name: "",
-                  name_e: "",
+                _this8.create = {
+                  name: '',
+                  name_e: '',
                   branch_id: null,
-                  is_active: "active"
+                  is_active: 'active'
                 };
-                _this9.$nextTick(function () {
-                  _this9.$v.$reset();
+                _this8.$nextTick(function () {
+                  _this8.$v.$reset();
                 });
-                _this9.is_disabled = false;
-                _this9.errors = {};
+                _this8.is_disabled = false;
+                _this8.errors = {};
               case 6:
               case "end":
                 return _context2.stop();
@@ -1909,7 +1882,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     AddSubmit: function AddSubmit() {
-      var _this10 = this;
+      var _this9 = this;
       if (!this.create.name) {
         this.create.name = this.create.name_e;
       }
@@ -1930,28 +1903,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           company_id: this.company_id
         };
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores", data).then(function (res) {
-          _this10.is_disabled = true;
-          _this10.getData();
+          _this9.is_disabled = true;
+          _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this10.$t("general.Addedsuccessfully")),
+              icon: 'success',
+              text: "".concat(_this9.$t('general.Addedsuccessfully')),
               showConfirmButton: false,
               timer: 1500
             });
           }, 500);
         })["catch"](function (err) {
           if (err.response.data) {
-            _this10.errors = err.response.data.errors;
+            _this9.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this10.$t("general.Error")),
-              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
+              icon: 'error',
+              title: "".concat(_this9.$t('general.Error')),
+              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
             });
           }
         })["finally"](function () {
-          _this10.isLoader = false;
+          _this9.isLoader = false;
         });
       }
     },
@@ -1959,7 +1932,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  edit countrie
      */
     editSubmit: function editSubmit(id) {
-      var _this11 = this;
+      var _this10 = this;
       if (!this.edit.name) {
         this.edit.name = this.edit.name_e;
       }
@@ -1980,28 +1953,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           company_id: this.company_id
         };
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/stores/".concat(id), data).then(function (res) {
-          _this11.$bvModal.hide("modal-edit-".concat(id));
-          _this11.getData();
+          _this10.$bvModal.hide("modal-edit-".concat(id));
+          _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this11.$t("general.Editsuccessfully")),
+              icon: 'success',
+              text: "".concat(_this10.$t('general.Editsuccessfully')),
               showConfirmButton: false,
               timer: 1500
             });
           }, 500);
         })["catch"](function (err) {
           if (err.response.data) {
-            _this11.errors = err.response.data.errors;
+            _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this11.$t("general.Error")),
-              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+              icon: 'error',
+              title: "".concat(_this10.$t('general.Error')),
+              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
             });
           }
         })["finally"](function () {
-          _this11.isLoader = false;
+          _this10.isLoader = false;
         });
       }
     },
@@ -2009,7 +1982,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *   show Modal (edit)
      */
     resetModalEdit: function resetModalEdit(id) {
-      var _this12 = this;
+      var _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var branch;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -2017,16 +1990,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this12.getBranch();
+                return _this11.getBranch();
               case 2:
-                branch = _this12.stores.find(function (e) {
+                branch = _this11.stores.find(function (e) {
                   return id == e.id;
                 });
-                _this12.edit.name = branch.name;
-                _this12.edit.name_e = branch.name_e;
-                _this12.edit.is_active = branch.is_active;
-                _this12.edit.branch_id = branch.branch_id;
-                _this12.errors = {};
+                _this11.edit.name = branch.name;
+                _this11.edit.name_e = branch.name_e;
+                _this11.edit.is_active = branch.is_active;
+                _this11.edit.branch_id = branch.branch_id;
+                _this11.errors = {};
               case 8:
               case "end":
                 return _context3.stop();
@@ -2041,10 +2014,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        name: "",
-        name_e: "",
+        name: '',
+        name_e: '',
         branch_id: null,
-        is_active: "active"
+        is_active: 'active'
       };
     },
     /*
@@ -2074,30 +2047,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
     },
     getBranch: function getBranch() {
-      var _this13 = this;
+      var _this12 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this13.isLoader = true;
+                _this12.isLoader = true;
                 _context4.next = 3;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/branches?company_id=".concat(_this13.company_id)).then(function (res) {
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/branches?company_id=".concat(_this12.company_id)).then(function (res) {
                   var l = res.data.data;
                   l.unshift({
                     id: 0,
                     name: "اضف فرع",
                     name_e: "Add Branch"
                   });
-                  _this13.branches = l;
+                  _this12.branches = l;
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: "error",
-                    title: "".concat(_this13.$t("general.Error")),
-                    text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
+                    icon: 'error',
+                    title: "".concat(_this12.$t('general.Error')),
+                    text: "".concat(_this12.$t('general.Thereisanerrorinthesystem'))
                   });
                 })["finally"](function () {
-                  _this13.isLoader = false;
+                  _this12.isLoader = false;
                 });
               case 3:
               case "end":
@@ -5472,7 +5445,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(_vm._s(_vm.$t("store.storesTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.$t("store.storesTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -5570,7 +5543,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
+  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -5619,11 +5592,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -5641,7 +5614,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5650,7 +5623,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name_en")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.branch_id,
@@ -5659,7 +5632,7 @@ var render = function render() {
       },
       expression: "setting.branch_id"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.branch")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.branch")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_active,
@@ -5668,7 +5641,7 @@ var render = function render() {
       },
       expression: "setting.is_active"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Status")) + "\n                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                        ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5682,7 +5655,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.storesPagination.from) + "-" + _vm._s(_vm.storesPagination.to) + " /\n                    " + _vm._s(_vm.storesPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.storesPagination.from) + "-" + _vm._s(_vm.storesPagination.to) + " / " + _vm._s(_vm.storesPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -5761,7 +5734,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5773,7 +5746,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5796,7 +5769,7 @@ var render = function render() {
         return _vm.$bvModal.hide("create");
       }
     }
-  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -5804,7 +5777,7 @@ var render = function render() {
     staticClass: "form-group position-relative"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.branch")) + "\n                      "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.branch")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -5829,7 +5802,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.$v.create.branch_id.$error || _vm.errors.branch_id ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.branch_id ? _vm._l(_vm.errors.branch_id, function (errorMessage, index) {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.branch_id ? _vm._l(_vm.errors.branch_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5842,7 +5815,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name")) + "\n                      "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5880,9 +5853,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5895,7 +5868,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name_en")) + "\n                      "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5933,9 +5906,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5945,7 +5918,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "mr-2"
-  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Status")) + "\n                      "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
     directives: [{
@@ -6104,7 +6077,7 @@ var render = function render() {
         _vm.stores.sort(_vm.sortString("-name"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.stores.length > 0 ? _c("tbody", _vm._l(_vm.stores, function (data, index) {
     return _c("tr", {
@@ -6167,7 +6140,7 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.branch_id ? _c("td", [_vm._v(_vm._s(data.branch.name))]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
       "class": [data.is_active == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                      " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                        " + _vm._s(data.is_active == "active" ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6176,7 +6149,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
+    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -6241,7 +6214,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6264,7 +6237,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -6272,7 +6245,7 @@ var render = function render() {
       staticClass: "form-group position-relative"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.branch")) + "\n                                "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.branch")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -6297,7 +6270,7 @@ var render = function render() {
       }
     }), _vm._v(" "), _vm.$v.edit.branch_id.$error || _vm.errors.branch_id ? _c("div", {
       staticClass: "text-danger"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.branch_id ? _vm._l(_vm.errors.branch_id, function (errorMessage, index) {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.branch_id ? _vm._l(_vm.errors.branch_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6310,7 +6283,7 @@ var render = function render() {
       attrs: {
         "for": "edit-1"
       }
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Name")) + "\n                                "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6348,9 +6321,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6363,7 +6336,7 @@ var render = function render() {
       attrs: {
         "for": "edit-2"
       }
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Name_en")) + "\n                                "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6401,9 +6374,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6413,7 +6386,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "mr-2"
-    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Status")) + "\n                                "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
       directives: [{
@@ -6451,46 +6424,30 @@ var render = function render() {
         value: "",
         selected: ""
       }
-    }, [_vm._v("\n                                  " + _vm._s(_vm.$t("general.Choose")) + "...\n                                ")]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "active"
       }
-    }, [_vm._v("\n                                  " + _vm._s(_vm.$t("general.Active")) + "\n                                ")]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Active")))]), _vm._v(" "), _c("option", {
       attrs: {
         value: "inactive"
       }
-    }, [_vm._v("\n                                  " + _vm._s(_vm.$t("general.Inactive")) + "\n                                ")])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.Inactive")))])]), _vm._v(" "), _vm.errors.is_active ? _vm._l(_vm.errors.is_active, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
-      staticClass: "btn",
-      attrs: {
-        type: "button",
-        "data-toggle": "tooltip",
-        "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
-        title: _vm.Tooltip
-      },
-      on: {
-        mouseover: function mouseover($event) {
-          return _vm.log(data.id);
-        },
-        mousemove: function mousemove($event) {
-          return _vm.log(data.id);
-        }
-      }
-    }, [_c("i", {
+    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
       }
-    })])])]);
+    })])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {
       colspan: "11"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7899,33 +7856,6 @@ __webpack_require__.r(__webpack_exports__);
   });
   e.target.classList.add('active');
 }
-
-/***/ }),
-
-/***/ "./resources/js/helper/startDate.js":
-/*!******************************************!*\
-  !*** ./resources/js/helper/startDate.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "formatDateOnly": () => (/* binding */ formatDateOnly),
-/* harmony export */   "formatDateTime": () => (/* binding */ formatDateTime)
-/* harmony export */ });
-function formatDateTime(item) {
-  var now = new Date(item);
-  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
-  return st[1] + ' ' + st[2];
-}
-;
-function formatDateOnly(item) {
-  var now = new Date(item);
-  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
-  return st[1];
-}
-;
 
 /***/ }),
 
