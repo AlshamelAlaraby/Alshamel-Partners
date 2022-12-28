@@ -311,7 +311,7 @@ export default {
                 class="rounded-circle"
               />
               <span class="pro-user-name ml-1">
-                {{ $t("navbar.dropdown.name.text") }}
+                {{ $i18n.locale ? $store.getters['auth/partner'].name : $store.getters['auth/partner'].name_e }}
                 <i class="mdi mdi-chevron-down"></i>
               </span>
             </div>
@@ -331,14 +331,6 @@ export default {
           <b-dropdown-item href="#">
             <i class="remixicon-settings-3-line"></i>
             <span>{{ $t("navbar.dropdown.name.list.settings") }}</span>
-          </b-dropdown-item>
-
-          <b-dropdown-item href="#">
-            <i class="remixicon-wallet-line"></i>
-            <span>
-              {{ $t("navbar.dropdown.name.list.mywallet") }}
-              <span class="badge badge-success float-right">3</span>
-            </span>
           </b-dropdown-item>
 
           <b-dropdown-item href="#">

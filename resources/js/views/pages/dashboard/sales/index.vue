@@ -119,28 +119,6 @@ export default {
           productid: 200250,
         },
       ],
-      widgetData: [
-        {
-          number: "268",
-          text: "New Customers",
-          chartColor: "#1abc9c",
-        },
-        {
-          number: "8574",
-          text: "Online Orders",
-          chartColor: "#3bafda",
-        },
-        {
-          number: "$958.25",
-          text: "Revenue",
-          chartColor: "#f672a7",
-        },
-        {
-          number: "$89.25",
-          text: "Daily Average",
-          chartColor: "#6c757d",
-        },
-      ],
     };
   },
 };
@@ -150,17 +128,34 @@ export default {
   <Layout>
     <PageHeader :title="title" :items="items" />
     <div class="row">
-      <div
-        v-for="widget in widgetData"
-        :key="widget.text"
-        class="col-xl-3 col-md-6"
-      >
+      <div class="col-xl-3 col-md-6">
         <WidgetChart
           :number="widget.number"
           :text="widget.text"
           :chart-color="widget.chartColor"
         />
       </div>
+      <div class="col-xl-3 col-md-6">
+         <WidgetChart
+              :number="widget.number"
+              :text="widget.text"
+              :chart-color="widget.chartColor"
+        />
+      </div>
+        <div class="col-xl-3 col-md-6">
+            <WidgetChart
+                :number="widget.number"
+                :text="widget.text"
+                :chart-color="widget.chartColor"
+            />
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <WidgetChart
+                :number="widget.number"
+                :text="widget.text"
+                :chart-color="widget.chartColor"
+            />
+        </div>
       <!-- end col -->
     </div>
     <!-- end row -->
@@ -228,3 +223,9 @@ export default {
     <!-- end row -->
   </Layout>
 </template>
+
+<style scope>
+.content-page {
+    padding: 70px 15px 5px !important;
+}
+</style>
