@@ -2,28 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Serial extends Model
 {
-    use HasFactory, LogsActivity, CausesActivity;
+    use HasFactory, LogTrait;
 
     protected $guarded = ['id'];
 
-    // protected $casts = [
-    //     'is_default' => 'App\Enums\IsDefault',
-    // ];
-
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
-    }
+    protected $casts = [
+        'is_default' => 'App\Enums\IsDefault',
+    ];
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -34,10 +26,12 @@ class Serial extends Model
             ->useLogName('Serial')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
-    public function branch(){
+    public function branch()
+    {
         return $this->belongsTo(Branch::class);
     }
-    public function store(){
+    public function store()
+    {
         return $this->belongsTo(Store::class);
     }
 }

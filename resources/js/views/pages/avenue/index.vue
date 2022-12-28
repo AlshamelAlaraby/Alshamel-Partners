@@ -12,6 +12,7 @@ import Multiselect from "vue-multiselect";
 import Country from "../../../components/country.vue";
 import Governate from "../../../components/governate.vue";
 import City from "../../../components/city.vue";
+import {formatDateOnly} from "../../../helper/startDate";
 /**
  * Advanced Table component
  */
@@ -92,6 +93,8 @@ export default {
       countries: [],
       governorates: [],
       cities: [],
+        Tooltip: '',
+        mouseEnter: null
     };
   },
   validations: {
@@ -561,6 +564,35 @@ export default {
           });
         });
     },
+      formatDate(value) {
+          return formatDateOnly(value);
+      },
+      log(id) {
+          if(this.mouseEnter != id){
+              this.Tooltip = "";
+              this.mouseEnter = id;
+              adminApi
+                  .get(`/avenues/logs/${id}`)
+                  .then((res) => {
+                      let l = res.data.data;
+                      l.forEach((e) => {
+                          this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                              e.event
+                          }; Description: ${e.description} ;Created At: ${this.formatDate(
+                              e.created_at
+                          )} \n`;
+                      });
+                      $(`#tooltip-${id}`).tooltip();
+                  })
+                  .catch((err) => {
+                      Swal.fire({
+                          icon: "error",
+                          title: `${this.$t("general.Error")}`,
+                          text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                      });
+                  });
+          }
+      },
   },
 };
 </script>
@@ -1480,7 +1512,17 @@ export default {
                       <!--  /edit   -->
                     </td>
                     <td>
-                      <i class="fe-info" style="font-size: 22px"></i>
+                        <button
+                            @mousemove="log(data.id)"
+                            @mouseover="log(data.id)"
+                            type="button"
+                            class="btn"
+                            :id="`tooltip-${data.id}`"
+                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                            :title="Tooltip"
+                        >
+                            <i class="fe-info" style="font-size: 22px"></i>
+                        </button>
                     </td>
                   </tr>
                 </tbody>

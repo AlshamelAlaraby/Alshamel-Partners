@@ -88,7 +88,7 @@ class TreePropertyController extends Controller
         return responseJson(200, 'success', \App\Http\Resources\Log\LogResource::collection($logs));
 
     }
-    
+
     public function destroy($id)
     {
         $model = $this->modelInterface->find($id);
@@ -102,6 +102,25 @@ class TreePropertyController extends Controller
 
         return responseJson(200, 'success');
     }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $model = $this->modelInterface->find($id);
+            $arr = [];
+            if ($model->hasChildren()) {
+                $arr[] = $id;
+                continue;
+            }
+            $this->modelInterface->delete($id);
+        }
+        if (count($arr) > 0) {
+            return responseJson(200, __('some items has relation cant delete'));
+        }
+        return responseJson(200, __('Done'));
+    }
+
+
     public function getRootNodes(){
         return $this->modelInterface->getRootNodes();
     }

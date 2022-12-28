@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-use Spatie\Activitylog\LogOptions;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Contracts\Activity;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Modules\RealEstate\Entities\RlstReservation;
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\RealEstate\Entities\RlstReservation;
+use Spatie\Activitylog\LogOptions;
 
 class Salesman extends Model
 {
-    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
         'name',
@@ -22,7 +20,6 @@ class Salesman extends Model
     ];
 
     protected $table = "salesmen";
-
 
     // relations
     public function salesmanType()
@@ -34,11 +31,6 @@ class Salesman extends Model
     {
         return $this->hasMany(RlstReservation::class);
     }
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
-    }
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -47,24 +39,7 @@ class Salesman extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Salesman')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-    // scopes
-
-    public function scopeSearch($query, $request)
-    {
-        return $query->where(function ($q) use ($request) {
-
-            if ($request->search && $request->columns) {
-                foreach ($request->columns as $column) {
-                    $q->orWhere($column, 'like', '%' . $request->search . '%');
-                }
-            }
-
-            if ($request->salesman_type_id) {
-                $q->where('salesmen_type_id', $request->salesman_type_id);
-            }
-        });
-    }
 }
