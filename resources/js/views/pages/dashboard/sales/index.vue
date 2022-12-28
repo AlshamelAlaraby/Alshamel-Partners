@@ -8,7 +8,9 @@ import ProductsSales from "../../../../components/widgets/Products-sales";
 import MarketingReports from "../../../../components/widgets/Marketing-reports";
 import Portlet from "../../../../components/widgets/Portlet";
 import RevenueHistory from "../../../../components/widgets/Revenue-history";
-import Projections from "../../../../components/widgets/Projections";
+import Projections from "../../../../components/widgets/Projections"
+import adminApi from "../../../../api/adminAxios";
+
 
 /**
  * Sales-Dashboard component
@@ -119,30 +121,34 @@ export default {
           productid: 200250,
         },
       ],
-      widgetData: [
-        {
-          number: "268",
-          text: "New Customers",
-          chartColor: "#1abc9c",
-        },
-        {
-          number: "8574",
-          text: "Online Orders",
-          chartColor: "#3bafda",
-        },
-        {
-          number: "$958.25",
-          text: "Revenue",
-          chartColor: "#f672a7",
-        },
-        {
-          number: "$89.25",
-          text: "Daily Average",
-          chartColor: "#6c757d",
-        },
-      ],
+      isLoader : false,
+      statices: {}
     };
   },
+  mounted() {
+      this.getStatices();
+  },
+  methods: {
+      getStatices() {
+          this.isLoader = true;
+
+          adminApi.get(`/statices`)
+              .then((res) => {
+                  let l = res.data.data;
+                  this.statices = l;
+              })
+              .catch((err) => {
+                  Swal.fire({
+                      icon: 'error',
+                      title: `${this.$t('general.Error')}`,
+                      text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                  });
+              })
+              .finally(() => {
+                  this.isLoader = false;
+              });
+      },
+  }
 };
 </script>
 
@@ -150,17 +156,34 @@ export default {
   <Layout>
     <PageHeader :title="title" :items="items" />
     <div class="row">
-      <div
-        v-for="widget in widgetData"
-        :key="widget.text"
-        class="col-xl-3 col-md-6"
-      >
+      <div class="col-xl-3 col-md-6">
         <WidgetChart
-          :number="widget.number"
-          :text="widget.text"
-          :chart-color="widget.chartColor"
+          :number="statices.branches"
+          :text="'branches'"
+          :chart-color="'#1abc9c'"
         />
       </div>
+      <div class="col-xl-3 col-md-6">
+         <WidgetChart
+              :number="statices.users"
+              :text="'users'"
+              :chart-color="'#f1556c'"
+        />
+      </div>
+      <div class="col-xl-3 col-md-6">
+            <WidgetChart
+                :number="statices.employees"
+                :text="'employees'"
+                :chart-color="'#f1556c'"
+            />
+        </div>
+      <div class="col-xl-3 col-md-6">
+            <WidgetChart
+                :number="statices.salesmen"
+                :text="'salesmen'"
+                :chart-color="'#1abc9c'"
+            />
+        </div>
       <!-- end col -->
     </div>
     <!-- end row -->
@@ -228,3 +251,9 @@ export default {
     <!-- end row -->
   </Layout>
 </template>
+
+<style scope>
+.content-page {
+    padding: 70px 15px 5px !important;
+}
+</style>
