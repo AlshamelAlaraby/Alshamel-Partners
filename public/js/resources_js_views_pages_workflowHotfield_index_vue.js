@@ -1939,13 +1939,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 _this4.isLoader = true;
-<<<<<<< HEAD
                 filter = "";
                 for (i = 0; i > _this4.filterSetting.length; ++i) {
-=======
-                filter = '';
-                for (i = 0; i < _this4.filterSetting.length; ++i) {
->>>>>>> dev-test
                   filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
                 }
                 _context2.next = 6;
@@ -1971,34 +1966,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getDataCurrentPage: function getDataCurrentPage() {
-      var _this5 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      if (this.current_page <= this.roleWorkflowHotfieldsPagination.last_page && this.current_page != this.roleWorkflowHotfieldsPagination.current_page && this.current_page) {
-        this.isLoader = true;
-<<<<<<< HEAD
-        var filter = "";
-        for (var i = 0; i > this.filterSetting.length; ++i) {
-=======
-        var filter = '';
-        for (var i = 0; i < this.filterSetting.length; ++i) {
->>>>>>> dev-test
-          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-        }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
-          var l = res.data;
-          _this5.roleWorkflowHotfields = l.data;
-          _this5.roleWorkflowHotfieldsPagination = l.pagination;
-          _this5.current_page = l.pagination.current_page;
-        })["catch"](function (err) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: "error",
-            title: "".concat(_this5.$t("general.Error")),
-            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
-          });
-        })["finally"](function () {
-          _this5.isLoader = false;
-        });
+    methods: {
+      /**
+       *  start get Data module && pagination
+       */
+      getData: function getData() {
+        var _arguments2 = arguments,
+          _this5 = this;
+        return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+          var page, filter, i;
+          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  page = _arguments2.length > 0 && _arguments2[0] !== undefined ? _arguments2[0] : 1;
+                  _this5.isLoader = true;
+                  filter = '';
+                  for (i = 0; i < _this5.filterSetting.length; ++i) {
+                    filter += "columns[".concat(i, "]=").concat(_this5.filterSetting[i], "&");
+                  }
+                  _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(_this5.per_page, "&search=").concat(_this5.search, "&").concat(filter)).then(function (res) {
+                    var l = res.data;
+                    _this5.roleWorkflowHotfields = l.data;
+                    _this5.roleWorkflowHotfieldsPagination = l.pagination;
+                    _this5.current_page = l.pagination.current_page;
+                  })["catch"](function (err) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                      icon: "error",
+                      title: "".concat(_this5.$t("general.Error")),
+                      text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+                    });
+                  })["finally"](function () {
+                    _this5.isLoader = false;
+                  });
+                case 5:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }))();
       }
     },
     /**
@@ -2124,15 +2131,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetModal: function resetModal() {
       var _this8 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.next = 2;
+                _context4.next = 2;
                 return _this8.getRole();
               case 2:
-                _context3.next = 4;
+                _context4.next = 4;
                 return _this8.getWorkflow();
               case 4:
                 _this8.create = {
@@ -2146,10 +2153,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this8.errors = {};
               case 7:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     /**
@@ -2157,15 +2164,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetForm: function resetForm() {
       var _this9 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.next = 2;
+                _context5.next = 2;
                 return _this9.getRole();
               case 2:
-                _context4.next = 4;
+                _context5.next = 4;
                 return _this9.getWorkflow();
               case 4:
                 _this9.create = {
@@ -2180,10 +2187,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this9.errors = {};
               case 8:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     },
     AddSubmit: function AddSubmit() {
@@ -2262,16 +2269,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetModalEdit: function resetModalEdit(id) {
       var _this12 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         var module;
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context5.next = 2;
+                _context6.next = 2;
                 return _this12.getRole();
               case 2:
-                _context5.next = 4;
+                _context6.next = 4;
                 return _this12.getWorkflow();
               case 4:
                 module = _this12.roleWorkflowHotfields.find(function (e) {
@@ -2283,10 +2290,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this12.errors = {};
               case 9:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5);
+        }, _callee6);
       }))();
     },
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
@@ -2324,13 +2331,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getRole: function getRole() {
       var _this14 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 _this14.isLoader = true;
-                _context6.next = 3;
+                _context7.next = 3;
                 return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/roles").then(function (res) {
                   var l = res.data.data;
                   l.unshift({
@@ -2350,22 +2357,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
               case 3:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6);
+        }, _callee7);
       }))();
     },
     getWorkflow: function getWorkflow() {
       var _this15 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context8.prev = _context8.next) {
               case 0:
                 _this15.isLoader = true;
-                _context7.next = 3;
-                return axios.get("".concat("http://127.0.0.1:8001/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                _context8.next = 3;
+                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
                   _this15.hotfields = l.hot_fields;
@@ -2380,10 +2387,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
               case 3:
               case "end":
-                return _context7.stop();
+                return _context8.stop();
             }
           }
-        }, _callee7);
+        }, _callee8);
       }))();
     },
     showRoleModal: function showRoleModal() {
@@ -8217,7 +8224,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 90px;\r\n  height: 45px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

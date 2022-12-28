@@ -1593,13 +1593,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-<<<<<<< HEAD
-      var filter = "";
-      for (var i = 0; i > this.filterSetting.length; ++i) {
-=======
       var filter = '';
       for (var i = 0; i < this.filterSetting.length; ++i) {
->>>>>>> dev-test
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1609,9 +1604,9 @@ __webpack_require__.r(__webpack_exports__);
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: "error",
-          title: "".concat(_this3.$t("general.Error")),
-          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
+          icon: 'error',
+          title: "".concat(_this3.$t('general.Error')),
+          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
         });
       })["finally"](function () {
         _this3.isLoader = false;
@@ -1622,13 +1617,8 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.countriesPagination.last_page && this.current_page != this.countriesPagination.current_page && this.current_page) {
         this.isLoader = true;
-<<<<<<< HEAD
-        var filter = "";
-        for (var i = 0; i > this.filterSetting.length; ++i) {
-=======
         var filter = '';
         for (var i = 0; i < this.filterSetting.length; ++i) {
->>>>>>> dev-test
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/countries?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -6825,7 +6815,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 90px;\r\n  height: 45px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
