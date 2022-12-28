@@ -1337,7 +1337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../api/outerAxios */ "./resources/js/api/outerAxios.js");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1345,10 +1345,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_tableSort__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../helper/tableSort */ "./resources/js/helper/tableSort.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -1389,6 +1391,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       properties: [],
       enabled3: false,
       isLoader: false,
+      Tooltip: "",
+      mouseEnter: "",
       create: {
         screen_id: null,
         property_id: null
@@ -1413,18 +1417,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   validations: {
     create: {
       screen_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required
       },
       property_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required
       }
     },
     edit: {
       screen_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required
       },
       property_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_9__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_10__.required
       }
     }
   },
@@ -1462,37 +1466,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.getData();
+    var _this3 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this3.getScreens();
+            case 2:
+              _context.next = 4;
+              return _this3.getData();
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
+    formatDate: function formatDate(value) {
+      return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_9__.formatDateOnly)(value);
+    },
+    log: function log(id) {
+      var _this4 = this;
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties/logs/".concat(id)).then(function (res) {
+          var l = res.data.data;
+          l.forEach(function (e) {
+            _this4.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this4.formatDate(e.created_at), " \n");
+          });
+        })["catch"](function (err) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "error",
+            title: "".concat(_this4.$t("general.Error")),
+            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+          });
+        });
+      } else {}
+    },
     /**
      *  get Data screenProperties
      */
     getData: function getData() {
-      var _this3 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.isLoader = true;
-      var filter = "";
-      for (var i = 0; i > this.filterSetting.length; ++i) {
-        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
-      }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
-        var l = res.data;
-        _this3.screenProperties = l.data;
-        _this3.screenPropertiesPagination = l.pagination;
-        _this3.current_page = l.pagination.current_page;
-      })["catch"](function (err) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: "error",
-          title: "".concat(_this3.$t("general.Error")),
-          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
-        });
-      })["finally"](function () {
-        _this3.isLoader = false;
-      });
+      var _arguments = arguments,
+        _this5 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var page, filter, i;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                _this5.isLoader = true;
+                filter = "";
+                for (i = 0; i > _this5.filterSetting.length; ++i) {
+                  filter += "columns[".concat(i, "]=").concat(_this5.filterSetting[i], "&");
+                }
+                _context2.next = 6;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties?page=".concat(page, "&per_page=").concat(_this5.per_page, "&search=").concat(_this5.search, "&").concat(filter)).then(function (res) {
+                  var l = res.data;
+                  _this5.screenProperties = l.data;
+                  _this5.screenPropertiesPagination = l.pagination;
+                  _this5.current_page = l.pagination.current_page;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: "error",
+                    title: "".concat(_this5.$t("general.Error")),
+                    text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+                  });
+                })["finally"](function () {
+                  _this5.isLoader = false;
+                });
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     getDataCurrentPage: function getDataCurrentPage() {
-      var _this4 = this;
+      var _this6 = this;
       if (this.current_page <= this.screenPropertiesPagination.last_page && this.current_page != this.screenPropertiesPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = "";
@@ -1501,17 +1559,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/screen-tree-properties?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
-          _this4.screenProperties = l.data;
-          _this4.screenPropertiesPagination = l.pagination;
-          _this4.current_page = l.pagination.current_page;
+          _this6.screenProperties = l.data;
+          _this6.screenPropertiesPagination = l.pagination;
+          _this6.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
             icon: "error",
-            title: "".concat(_this4.$t("general.Error")),
-            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+            title: "".concat(_this6.$t("general.Error")),
+            text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
-          _this4.isLoader = false;
+          _this6.isLoader = false;
         });
       }
     },
@@ -1519,7 +1577,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  delete screen button
      */
     deleteScreenButton: function deleteScreenButton(id) {
-      var _this5 = this;
+      var _this7 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
         title: "".concat(this.$t("general.Areyousure")),
         text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
@@ -1532,25 +1590,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          _this5.isLoader = true;
+          _this7.isLoader = true;
           _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/screen-tree-properties/".concat(id)).then(function (res) {
-            _this5.getData();
-            _this5.checkAll = [];
+            _this7.getData();
+            _this7.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: "success",
-              title: "".concat(_this5.$t("general.Deleted")),
-              text: "".concat(_this5.$t("general.Yourrowhasbeendeleted")),
+              title: "".concat(_this7.$t("general.Deleted")),
+              text: "".concat(_this7.$t("general.Yourrowhasbeendeleted")),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
               icon: "error",
-              title: "".concat(_this5.$t("general.Error")),
-              text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+              title: "".concat(_this7.$t("general.Error")),
+              text: "".concat(_this7.$t("general.Thereisanerrorinthesystem"))
             });
           })["finally"](function () {
-            _this5.isLoader = false;
+            _this7.isLoader = false;
           });
         }
       });
@@ -1559,183 +1617,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      *  reset Modal (create)
      */
     resetModalHidden: function resetModalHidden() {
-      var _this6 = this;
+      var _this8 = this;
       this.create = {
         screen_id: null,
         property_id: null
       };
       this.$nextTick(function () {
-        _this6.$v.$reset();
+        _this8.$v.$reset();
       });
       this.errors = {};
-      this.screens = [];
       this.properties = [];
     },
     /**
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
-      var _this7 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this7.getScreens();
-              case 2:
-                _context.next = 4;
-                return _this7.getProperties();
-              case 4:
-                _this7.create = {
-                  screen_id: null,
-                  property_id: null
-                };
-                _this7.is_disabled = false;
-                _this7.$nextTick(function () {
-                  _this7.$v.$reset();
-                });
-                _this7.errors = {};
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    /**
-     *  create screen
-     */
-    resetForm: function resetForm() {
-      var _this8 = this;
-      this.create = {
-        screen_id: null,
-        property_id: null
-      };
-      this.is_disabled = false;
-      this.$nextTick(function () {
-        _this8.$v.$reset();
-      });
-    },
-    AddSubmit: function AddSubmit() {
       var _this9 = this;
-      if (this.$v.create.$invalid) {
-        this.$v.create.$touch();
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        this.is_disabled = false;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/screen-tree-properties", this.create).then(function (res) {
-          _this9.getData();
-          _this9.is_disabled = true;
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this9.$t("general.Addedsuccessfully")),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this9.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this9.$t("general.Error")),
-              text: "".concat(_this9.$t("general.Thereisanerrorinthesystem"))
-            });
-          }
-        })["finally"](function () {
-          _this9.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  edit screen
-     */
-    editSubmit: function editSubmit(id) {
-      var _this10 = this;
-      this.$v.edit.$touch();
-      if (this.$v.edit.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/screen-tree-properties/".concat(id), this.edit).then(function (res) {
-          _this10.$bvModal.hide("modal-edit-".concat(id));
-          _this10.getData();
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this10.$t("general.Editsuccessfully")),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this10.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this10.$t("general.Error")),
-              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
-            });
-          }
-        })["finally"](function () {
-          _this10.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  get workflows
-     */
-    getScreens: function getScreens() {
-      var _this11 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/screens").then(function (res) {
-                  _this11.screens = res.data.data;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: "error",
-                    title: "".concat(_this11.$t("general.Error")),
-                    text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
-                  });
-                });
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getProperties: function getProperties() {
-      var _this12 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/tree-properties").then(function (res) {
-                  _this12.properties = res.data.data;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: "error",
-                    title: "".concat(_this12.$t("general.Error")),
-                    text: "".concat(_this12.$t("general.Thereisanerrorinthesystem"))
-                  });
-                });
+                return _this9.getScreens();
               case 2:
+                _context3.next = 4;
+                return _this9.getProperties();
+              case 4:
+                _this9.create = {
+                  screen_id: null,
+                  property_id: null
+                };
+                _this9.is_disabled = false;
+                _this9.$nextTick(function () {
+                  _this9.$v.$reset();
+                });
+                _this9.errors = {};
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -1744,34 +1662,175 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     /**
-     *   show Modal (edit)
+     *  create screen
      */
-    resetModalEdit: function resetModalEdit(id) {
+    resetForm: function resetForm() {
+      var _this10 = this;
+      this.create = {
+        screen_id: null,
+        property_id: null
+      };
+      this.is_disabled = false;
+      this.$nextTick(function () {
+        _this10.$v.$reset();
+      });
+    },
+    AddSubmit: function AddSubmit() {
+      var _this11 = this;
+      if (this.$v.create.$invalid) {
+        this.$v.create.$touch();
+        return;
+      } else {
+        this.isLoader = true;
+        this.errors = {};
+        this.is_disabled = false;
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/screen-tree-properties", this.create).then(function (res) {
+          _this11.getData();
+          _this11.is_disabled = true;
+          setTimeout(function () {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              text: "".concat(_this11.$t("general.Addedsuccessfully")),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }, 500);
+        })["catch"](function (err) {
+          if (err.response.data) {
+            _this11.errors = err.response.data.errors;
+          } else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "error",
+              title: "".concat(_this11.$t("general.Error")),
+              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+            });
+          }
+        })["finally"](function () {
+          _this11.isLoader = false;
+        });
+      }
+    },
+    /**
+     *  edit screen
+     */
+    editSubmit: function editSubmit(id) {
+      var _this12 = this;
+      this.$v.edit.$touch();
+      if (this.$v.edit.$invalid) {
+        return;
+      } else {
+        this.isLoader = true;
+        this.errors = {};
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/screen-tree-properties/".concat(id), this.edit).then(function (res) {
+          _this12.$bvModal.hide("modal-edit-".concat(id));
+          _this12.getData();
+          setTimeout(function () {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              text: "".concat(_this12.$t("general.Editsuccessfully")),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }, 500);
+        })["catch"](function (err) {
+          if (err.response.data) {
+            _this12.errors = err.response.data.errors;
+          } else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "error",
+              title: "".concat(_this12.$t("general.Error")),
+              text: "".concat(_this12.$t("general.Thereisanerrorinthesystem"))
+            });
+          }
+        })["finally"](function () {
+          _this12.isLoader = false;
+        });
+      }
+    },
+    /**
+     *  get workflows
+     */
+    getScreens: function getScreens() {
       var _this13 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        var screenProperty;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                screenProperty = _this13.screenProperties.find(function (e) {
-                  return id == e.id;
-                });
+                _this13.isLoader = true;
                 _context4.next = 3;
-                return _this13.getScreens();
+                return _api_outerAxios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/screens").then(function (res) {
+                  _this13.isLoader = false;
+                  _this13.screens = res.data.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: "error",
+                    title: "".concat(_this13.$t("general.Error")),
+                    text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
+                  });
+                });
               case 3:
-                _context4.next = 5;
-                return _this13.getProperties();
-              case 5:
-                _this13.edit.screen_id = screenProperty.screen_id;
-                _this13.edit.property_id = screenProperty.property_id;
-                _this13.errors = {};
-              case 8:
               case "end":
                 return _context4.stop();
             }
           }
         }, _callee4);
+      }))();
+    },
+    getProperties: function getProperties() {
+      var _this14 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/tree-properties").then(function (res) {
+                  _this14.properties = res.data.data;
+                })["catch"](function (err) {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                    icon: "error",
+                    title: "".concat(_this14.$t("general.Error")),
+                    text: "".concat(_this14.$t("general.Thereisanerrorinthesystem"))
+                  });
+                });
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    /**
+     *   show Modal (edit)
+     */
+    resetModalEdit: function resetModalEdit(id) {
+      var _this15 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        var screenProperty;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                screenProperty = _this15.screenProperties.find(function (e) {
+                  return id == e.id;
+                });
+                _context6.next = 3;
+                return _this15.getScreens();
+              case 3:
+                _context6.next = 5;
+                return _this15.getProperties();
+              case 5:
+                _this15.edit.screen_id = screenProperty.screen_id;
+                _this15.edit.property_id = screenProperty.property_id;
+                _this15.errors = {};
+              case 8:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
       }))();
     },
     /**
@@ -5346,14 +5405,14 @@ var render = function render() {
     staticClass: "fas fa-arrow-up",
     on: {
       click: function click($event) {
-        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "name" : "name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "screen.name" : "screen.name_e"));
       }
     }
   }), _vm._v(" "), _c("i", {
     staticClass: "fas fa-arrow-down",
     on: {
       click: function click($event) {
-        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-name" : "-name_e"));
+        _vm.screenProperties.sort(_vm.sortString(_vm.$i18n.locale == "ar" ? "-screen.name" : "-screen.name_e"));
       }
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("th", [_c("div", {
@@ -5433,7 +5492,11 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _vm.setting.screen_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                      " + _vm._s(data.screen_id) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("td", [_c("h5", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.screens.length > 0 ? _vm.$i18n.locale == "ar" ? _vm.screens.find(function (x) {
+      return x.id == data.screen_id;
+    }).name : _vm.screens.find(function (x) {
+      return x.id == data.screen_id;
+    }).name_e : "") + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.property_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.tree_property.name : data.tree_property.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
@@ -5604,12 +5667,28 @@ var render = function render() {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
+    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn",
+      attrs: {
+        type: "button",
+        "data-toggle": "tooltip",
+        "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
+        title: _vm.Tooltip
+      },
+      on: {
+        mouseover: function mouseover($event) {
+          return _vm.log(data.id);
+        },
+        mousemove: function mousemove($event) {
+          return _vm.log(data.id);
+        }
+      }
+    }, [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
       }
-    })])]);
+    })])])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {
@@ -6999,6 +7078,33 @@ var menuItems = [{
 //     ]
 // }
 ];
+
+/***/ }),
+
+/***/ "./resources/js/helper/startDate.js":
+/*!******************************************!*\
+  !*** ./resources/js/helper/startDate.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "formatDateOnly": () => (/* binding */ formatDateOnly),
+/* harmony export */   "formatDateTime": () => (/* binding */ formatDateTime)
+/* harmony export */ });
+function formatDateTime(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1] + ' ' + st[2];
+}
+;
+function formatDateOnly(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1];
+}
+;
 
 /***/ }),
 
