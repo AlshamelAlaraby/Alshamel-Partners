@@ -1308,6 +1308,3 @@ export default {
     </div>
   </Layout>
 </template>
-
-
-
