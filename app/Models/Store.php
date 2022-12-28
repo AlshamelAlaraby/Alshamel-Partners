@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Store extends Model
 {
-    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
         "name_e",
@@ -37,14 +35,9 @@ class Store extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function serials(){
-        return $this->hasMany (Serial::class);
-    }
-
-    public function tapActivity(Activity $activity, string $eventName)
+    public function serials()
     {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
+        return $this->hasMany(Serial::class);
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -57,8 +50,9 @@ class Store extends Model
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-    public function hasChildren(){
-        $h = $this->serials ()->count () > 0;
+    public function hasChildren()
+    {
+        $h = $this->serials()->count() > 0;
         return $h;
     }
 }

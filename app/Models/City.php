@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    use HasFactory;
+    use HasFactory, LogTrait;
 
     protected $guarded = ['id'];
 
@@ -25,15 +26,27 @@ class City extends Model
         return $this->belongsTo(Country::class);
     }
 
-    public function avenues(){
-        return $this->hasMany (Avenue::class);
+    public function avenues()
+    {
+        return $this->hasMany(Avenue::class);
     }
 
-    public function hasChildren(){
-        if ($this->avenues()->count() > 0){
+    public function hasChildren()
+    {
+        if ($this->avenues()->count() > 0) {
             return true;
         }
         return false;
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('City')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
 }
