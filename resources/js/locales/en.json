@@ -508,8 +508,9 @@
     }
     },
     "general": {
+        "cantSelectChildToBeParent":"Cant select this item because it's one of current item's children",
         "ScreenPropertiesTable":"Screen and properties table",
-        "cantSelectCurrentNode":"Cant select current node",
+        "cantSelectSelfParent":"Item couldn't be parent to itself",
         "Required":"Required",
         "TreePropertiesTable":"Tree properties table",
         "Screen":"Screen",
