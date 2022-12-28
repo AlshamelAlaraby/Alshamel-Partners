@@ -508,6 +508,7 @@
     }
     },
     "general": {
+        "CantDeleteRelation":"You cannot delete an element that has a relationship with another element",
         "cantSelectChildToBeParent":"Cant select this item because it's one of current item's children",
         "ScreenPropertiesTable":"Screen and properties table",
         "cantSelectSelfParent":"Item couldn't be parent to itself",
