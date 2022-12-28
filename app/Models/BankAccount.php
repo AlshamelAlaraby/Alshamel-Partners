@@ -28,4 +28,14 @@ class BankAccount extends Model implements HasMedia
         return $this->belongsTo(Bank::class);
     }
 
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('BankAccount')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
 }

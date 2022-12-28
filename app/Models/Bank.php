@@ -28,9 +28,20 @@ class Bank extends Model
         return $this->hasMany(BankAccount::class);
     }
 
-    public function hasChildren(){
-        $h = $this->bankAccounts ()->exists ();
+    public function hasChildren()
+    {
+        $h = $this->bankAccounts()->exists();
         return $h;
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Bank')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
 }

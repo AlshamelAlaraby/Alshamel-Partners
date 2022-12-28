@@ -84,4 +84,12 @@ class PaymentTypeController extends Controller
         return responseJson(200, 'success');
     }
 
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $this->modelInterface->delete($id);
+        }
+        return responseJson(200, __('Done'));
+    }
+
 }

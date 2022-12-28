@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import Bank from "../../../components/create/bank";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -33,6 +34,8 @@ export default {
         return {
             per_page: 50,
             search: '',
+            Tooltip: '',
+            mouseEnter: null,
             debounce: {},
             bankAccountsPagination: {},
             bankAccounts: [],
@@ -434,26 +437,34 @@ export default {
         /*
         *  log bankAccount
         * */
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
         log(id) {
-
-            adminApi.get(`/bank-accounts/logs/${id}`)
-                .then((res) => {
-
-                    console.log(res.data.data);
-
-                })
-                .catch((err) => {
-                    if (err.response.data) {
-                        this.errors = err.response.data.errors;
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: `${this.$t('general.Error')}`,
-                            text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/bank-accounts/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
                         });
-                    }
-                })
-
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
         },
         /**
          *   show Modal (edit)
@@ -1858,10 +1869,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i
-                                            @mouseenter="log(data.id)"
-                                            class="fe-info"
-                                        ></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

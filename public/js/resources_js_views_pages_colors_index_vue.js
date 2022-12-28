@@ -1794,6 +1794,7 @@ __webpack_require__.r(__webpack_exports__);
           l.forEach(function (e) {
             _this11.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this11.formatDate(e.created_at), " \n");
           });
+          $("#tooltip-".concat(id)).tooltip();
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
             icon: "error",
@@ -1801,7 +1802,7 @@ __webpack_require__.r(__webpack_exports__);
             text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
           });
         });
-      } else {}
+      }
     }
   }
 });
@@ -5792,11 +5793,14 @@ var render = function render() {
       staticClass: "btn",
       attrs: {
         type: "button",
-        "data-toggle": "tooltip",
+        id: "tooltip-".concat(data.id),
         "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
         title: _vm.Tooltip
       },
       on: {
+        mousemove: function mousemove($event) {
+          return _vm.log(data.id);
+        },
         mouseover: function mouseover($event) {
           return _vm.log(data.id);
         }
