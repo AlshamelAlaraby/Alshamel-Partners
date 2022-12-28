@@ -60,7 +60,7 @@ export default {
         is_active: true,
       },
       is_disabled: false,
-      filterSetting: ["employee_id"],
+      filterSetting: [this.$i18n.locale  == 'ar'?'employee.name':'employee.name_e'],
     };
   },
   validations: {
@@ -206,46 +206,105 @@ export default {
     /**
      *  start delete module
      */
-    deleteModule(id) {
-      Swal.fire({
-        title: `${this.$t("general.Areyousure")}`,
-        text: `${this.$t("general.Youwontbeabletoreverthis")}`,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
-        cancelButtonText: `${this.$t("general.Nocancel")}`,
-        confirmButtonClass: "btn btn-success mt-2",
-        cancelButtonClass: "btn btn-danger ml-2 mt-2",
-        buttonsStyling: false,
-      }).then((result) => {
-        if (result.value) {
-          this.isLoader = true;
+   deleteModule(id, index) {
+      if (Array.isArray(id)) {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+            adminApi
+              .post(`/internal-salesmen/bulk-delete`, { ids: id })
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                  this.getData();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
 
-          adminApi
-            .delete(`/internal-salesmen/${id}`)
-            .then((res) => {
-              this.getData();
-              this.checkAll = [];
-              Swal.fire({
-                icon: "success",
-                title: `${this.$t("general.Deleted")}`,
-                text: `${this.$t("general.Yourrowhasbeendeleted")}`,
-                showConfirmButton: false,
-                timer: 1500,
+            adminApi
+              .delete(`/internal-salesmen/${id}`)
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
               });
-            })
-            .catch((err) => {
-              Swal.fire({
-                icon: "error",
-                title: `${this.$t("general.Error")}`,
-                text: `${this.$t("general.Thereisanerrorinthesystem")}`,
-              });
-            })
-            .finally(() => {
-              this.isLoader = false;
-            });
-        }
-      });
+          }
+        });
+      }
     },
     /**
      *  end delete module
@@ -477,7 +536,7 @@ export default {
                   >
                     <b-form-checkbox
                       v-model="filterSetting"
-                      value="employee_id"
+                      :value="$i18n.locale  == 'ar'?'employee.name':'employee.name_e'"
                       class="mb-1"
                     >
                       {{ $t("employee.employee") }}
@@ -545,7 +604,7 @@ export default {
                   <button
                     class="custom-btn-dowonload"
                     v-if="checkAll.length == 1"
-                    @click.prevent="deleteModule(checkAll)"
+                    @click.prevent="deleteModule(checkAll[0])"
                   >
                     <i class="fas fa-trash-alt"></i>
                   </button>
@@ -797,7 +856,7 @@ export default {
                 </thead>
                 <tbody v-if="inernalSales.length > 0">
                   <tr
-                    @click.prevent="checkRow(data.id)"
+                    @click.capture="checkRow(data.id)"
                     @dblclick.prevent="$bvModal.show(`modal-edit-${data.id}`)"
                     v-for="(data, index) in inernalSales"
                     :key="data.id"

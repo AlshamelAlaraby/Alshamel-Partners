@@ -147,6 +147,36 @@ class CityController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $model = $this->repository->find($id);
+        if (!$model) {
+            return responseJson(404, __('not found'));
+        }
+        if ($model->hasChildren()) {
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
+        }
+        $this->repository->delete($id);
+        return responseJson(200, __('deleted'));
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $model = $this->repository->find($id);
+            $arr = [];
+            if ($model->hasChildren()) {
+                $arr[] = $id;
+                continue;
+            }
+            $this->repository->delete($id);
+        }
+        if (count($arr) > 0) {
+            return responseJson(400, __('some items has relation cant delete'));
+        }
+        return responseJson(200, __('Done'));
+    }
+
     public function logs($id)
     {
         $model = $this->repository->find($id);

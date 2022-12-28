@@ -240,46 +240,105 @@ export default {
     /**
      *  delete module
      */
-    deleteModule(id) {
-      Swal.fire({
-        title: `${this.$t("general.Areyousure")}`,
-        text: `${this.$t("general.Youwontbeabletoreverthis")}`,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
-        cancelButtonText: `${this.$t("general.Nocancel")}`,
-        confirmButtonClass: "btn btn-success mt-2",
-        cancelButtonClass: "btn btn-danger ml-2 mt-2",
-        buttonsStyling: false,
-      }).then((result) => {
-        if (result.value) {
-          this.isLoader = true;
+     deleteModule(id, index) {
+      if (Array.isArray(id)) {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+            adminApi
+              .post(`/tree-properties/bulk-delete`, { ids: id })
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                  this.getData();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
 
-          adminApi
-            .delete(`/tree-properties/${id}`)
-            .then((res) => {
-              this.getData();
-              this.checkAll = [];
-              Swal.fire({
-                icon: "success",
-                title: `${this.$t("general.Deleted")}`,
-                text: `${this.$t("general.Yourrowhasbeendeleted")}`,
-                showConfirmButton: false,
-                timer: 1500,
+            adminApi
+              .delete(`/tree-properties/${id}`)
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
               });
-            })
-            .catch((err) => {
-              Swal.fire({
-                icon: "error",
-                title: `${this.$t("general.Error")}`,
-                text: `${this.$t("general.Thereisanerrorinthesystem")}`,
-              });
-            })
-            .finally(() => {
-              this.isLoader = false;
-            });
-        }
-      });
+          }
+        });
+      }
     },
     /**
      *  reset Modal (create)
@@ -525,12 +584,20 @@ export default {
         this.create.parent_id = null;
       }
     },
-    setUpdateParentId(node) {
+    setUpdateParentId(parents,node) {
+      if(parents.includes(this.current_id)){
+        Swal.fire({
+          icon: "error",
+          title: `${this.$t("general.Error")}`,
+          text: `${this.$t("general.cantSelectChildToBeParent")}`,
+        });
+        return;
+      }
       if (this.current_id == node.id) {
         Swal.fire({
           icon: "error",
           title: `${this.$t("general.Error")}`,
-          text: `${this.$t("general.cantSelectCurrentNode")}`,
+          text: `${this.$t("general.cantSelectSelfParent")}`,
         });
         return;
       }
@@ -796,7 +863,7 @@ export default {
                   <button
                     class="custom-btn-dowonload"
                     v-if="checkAll.length == 1"
-                    @click.prevent="deleteModule(checkAll)"
+                    @click.prevent="deleteModule(checkAll[0])"
                   >
                     <i class="fas fa-trash-alt"></i>
                   </button>
@@ -1408,7 +1475,7 @@ export default {
                                       "
                                     ></i>
                                     <span
-                                      @click="setUpdateParentId(node)"
+                                      @click="setUpdateParentId([],node)"
                                       :class="{
                                         'without-children': !node.haveChildren,
                                         active: node.id == edit.parent_id,
@@ -1441,7 +1508,7 @@ export default {
                                         >
                                         </i>
                                         <span
-                                          @click="setUpdateParentId(childNode)"
+                                          @click="setUpdateParentId([node.id],childNode)"
                                           :class="{
                                             'without-children': !childNode.haveChildren,
                                             active: childNode.id == edit.parent_id,
@@ -1484,7 +1551,7 @@ export default {
                                             >
                                             </i>
                                             <span
-                                              @click="setUpdateParentId(child)"
+                                              @click="setUpdateParentId([node.id,childNode.id],child)"
                                               :class="{
                                                 'without-children': !child.haveChildren,
                                                 active: child.id == edit.parent_id,
@@ -1526,7 +1593,7 @@ export default {
                                                 >
                                                 </i>
                                                 <span
-                                                  @click="setUpdateParentId(_child)"
+                                                  @click="setUpdateParentId([node.id,childNode.id,child.id],_child)"
                                                   :class="{
                                                     'without-children': !_child.haveChildren,
                                                     active: _child.id == edit.parent_id,

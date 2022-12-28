@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
+
 class Branch extends Model
 {
-    use HasFactory, LogsActivity, CausesActivity;
+    use HasFactory, LogTrait;
 
     protected $guarded = ['id'];
 
@@ -28,8 +28,9 @@ class Branch extends Model
         return $this->hasMany(Serial::class);
     }
 
-    public function hasChildren(){
-        $h = $this->stores ()->count () > 0 || $this->serials ()->count () > 0;
+    public function hasChildren()
+    {
+        $h = $this->stores()->count() > 0 || $this->serials()->count() > 0;
         return $h;
     }
 

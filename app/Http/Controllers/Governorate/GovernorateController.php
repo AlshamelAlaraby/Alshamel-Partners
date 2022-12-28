@@ -6,6 +6,7 @@ use App\Http\Requests\AllRequest;
 use App\Http\Requests\Governorate\StoreGovernorateRequest;
 use App\Http\Requests\Governorate\UpdateGovernorateRequest;
 use App\Http\Resources\Governorate\GovernorateResource;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class GovernorateController extends Controller
@@ -83,5 +84,22 @@ class GovernorateController extends Controller
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $model = $this->modelInterface->find($id);
+            $arr = [];
+            if ($model->hasChildren()) {
+                $arr[] = $id;
+                continue;
+            }
+            $this->modelInterface->delete($id);
+        }
+        if (count($arr) > 0) {
+            return responseJson(400, __('some items has relation cant delete'));
+        }
+        return responseJson(200, __('Done'));
     }
 }

@@ -60,7 +60,7 @@ export default {
                 roletype_id: true
             },
             is_disabled: false,
-            filterSetting: ['name', 'name_e'],
+            filterSetting: ['name', 'name_e', this.$i18n.locale  == 'ar'?'roleType.name':'roleType.name_e'],
             Tooltip: '',
             mouseEnter: null
         }
@@ -146,7 +146,7 @@ export default {
         getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -172,7 +172,7 @@ export default {
             if (this.current_page <= this.rolesPagination.last_page && this.current_page != this.rolesPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
@@ -201,47 +201,106 @@ export default {
         /**
          *  start delete module
          */
-        deleteModule(id) {
-            Swal.fire({
-                title: `${this.$t('general.Areyousure')}`,
-                text: `${this.$t('general.Youwontbeabletoreverthis')}`,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: `${this.$t('general.Yesdeleteit')}`,
-                cancelButtonText: `${this.$t('general.Nocancel')}`,
-                confirmButtonClass: "btn btn-success mt-2",
-                cancelButtonClass: "btn btn-danger ml-2 mt-2",
-                buttonsStyling: false,
-            }).then((result) => {
-                if (result.value) {
-
-                    this.isLoader = true;
-
-                    adminApi.delete(`/roles/${id}`)
-                        .then((res) => {
-                            this.getData();
-                            this.checkAll = [];
-                            Swal.fire({
-                                icon: 'success',
-                                title: `${this.$t('general.Deleted')}`,
-                                text: `${this.$t('general.Yourrowhasbeendeleted')}`,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        })
-                        .catch((err) => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: `${this.$t('general.Error')}`,
-                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                            });
-                        })
-                        .finally(() => {
-                            this.isLoader = false;
-                        });
+            deleteModule(id, index) {
+      if (Array.isArray(id)) {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+            adminApi
+              .post(`/roles/bulk-delete`, { ids: id })
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                  this.getData();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
                 }
-            });
-        },
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+
+            adminApi
+              .delete(`/roles/${id}`)
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      }
+    },
         /**
          *  end delete module
          */
@@ -497,6 +556,9 @@ export default {
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
                                             {{ $t('general.Name_en') }}
                                         </b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'roleType.name':'roleType.name_e'" class="mb-1">
+                                            {{ $t('rolesType.rolesType') }}
+                                        </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -557,7 +619,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length == 1"
-                                        @click.prevent="deleteModule(checkAll)"
+                                        @click.prevent="deleteModule(checkAll[0])"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -815,6 +877,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
+                                    <th v-if="setting.roletype_id"> {{$t('rolesType.rolesType')}} </th>
                                     <th>
                                         {{ $t('general.Action') }}
                                     </th>
@@ -845,6 +908,10 @@ export default {
                                     </td>
                                     <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
+                                    </td>
+
+                                    <td v-if="setting.roletype_id">
+                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? data.roletype.name :  data.roletype.name_e}}</h5>
                                     </td>
 
                                     <td>

@@ -7,6 +7,7 @@ use App\Http\Requests\FinancialYear\StoreFinancialYearRequest;
 use App\Http\Requests\FinancialYear\UpdateFinancialYearRequest;
 use App\Http\Resources\FinancialYear\FinancialYearResource;
 use App\Repositories\FinancialYear\FinancialYearInterface;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class FinancialYearController extends Controller
@@ -74,6 +75,23 @@ class FinancialYearController extends Controller
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $model = $this->modelInterface->find($id);
+            $arr = [];
+            if ($model->have_children) {
+                $arr[] = $id;
+                continue;
+            }
+            $this->modelInterface->delete($id);
+        }
+        if (count($arr) > 0) {
+            return responseJson(400, __('some items has relation cant delete'));
+        }
+        return responseJson(200, __('Done'));
     }
 
     public function logs($id)

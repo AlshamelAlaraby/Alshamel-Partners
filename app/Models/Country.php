@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use App\Traits\MediaTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 
 class Country extends Model implements HasMedia
 {
 
-    use HasFactory, MediaTrait, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, MediaTrait, SoftDeletes, LogTrait;
 
     protected $fillable = [
         'name',
@@ -65,11 +63,6 @@ class Country extends Model implements HasMedia
         return $this->hasMany(\App\Models\Bank::class);
     }
     // logs activities
-    public function tapActivity(Activity $activity, string $eventName)
-    {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
-    }
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -81,15 +74,14 @@ class Country extends Model implements HasMedia
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
-
-    public function hasChildren(){
+    public function hasChildren()
+    {
         $h = $this->avenues()->count() > 0 ||
-             $this->governorates()->count() > 0 ||
-             $this->cities()->count() > 0 ||
-             $this->banks ()->count () > 0 ||
-             $this->rlstOwners()->count () > 0 ||
-             $this->externalSalesmen() > 0
-        ;
+        $this->governorates()->count() > 0 ||
+        $this->cities()->count() > 0 ||
+        $this->banks()->count() > 0 ||
+        $this->rlstOwners()->count() > 0 ||
+        $this->externalSalesmen()->count() > 0;
         return $h;
     }
 }

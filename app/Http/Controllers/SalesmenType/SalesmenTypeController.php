@@ -90,7 +90,7 @@ class SalesmenTypeController extends Controller
                 $this->modelInterface->delete($id);}
         }
         if (count($arr) > 0) {
-            return responseJson(200, __("this item has children and can't be deleted remove it's children first"));
+            return responseJson(400, __("this item has children and can't be deleted remove it's children first"));
         }
         return responseJson(200, 'success');
     }

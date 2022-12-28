@@ -63,7 +63,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            filterSetting: ["name", "name_e", "swift_code"],
+            filterSetting: ["name", "name_e", "swift_code",this.$i18n.locale  == 'ar'?'country.name':'country.name_e'],
         };
     },
     validations: {
@@ -164,8 +164,12 @@ export default {
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = "";
+            for (let i = 0; i < this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
             adminApi
-                .get(`/banks?page=${page}&per_page=${this.per_page}`)
+                .get(`/banks?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.banks = l.data;
@@ -190,9 +194,13 @@ export default {
                 this.current_page
             ) {
                 this.isLoader = true;
+                let filter = "";
+                for (let i = 0; i < this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
                 adminApi
                     .get(
-                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`
+                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`
                     )
                     .then((res) => {
                         let l = res.data;
@@ -218,46 +226,106 @@ export default {
         /**
          *  start delete countrie
          */
-        deleteBranch(id) {
-            Swal.fire({
-                title: `${this.$t("general.Areyousure")}`,
-                text: `${this.$t("general.Youwontbeabletoreverthis")}`,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
-                cancelButtonText: `${this.$t("general.Nocancel")}`,
-                confirmButtonClass: "btn btn-success mt-2",
-                cancelButtonClass: "btn btn-danger ml-2 mt-2",
-                buttonsStyling: false,
-            }).then((result) => {
-                if (result.value) {
-                    this.isLoader = true;
-                    adminApi
-                        .delete(`/banks/${id}`)
-                        .then((res) => {
-                            this.getData();
-                            this.checkAll = [];
-                            Swal.fire({
-                                icon: "success",
-                                title: `${this.$t("general.Deleted")}`,
-                                text: `${this.$t("general.Yourrowhasbeendeleted")}`,
-                                showConfirmButton: false,
-                                timer: 1500,
-                            });
-                        })
-                        .catch((err) => {
-                            Swal.fire({
-                                icon: "error",
-                                title: `${this.$t("general.Error")}`,
-                                text: `${this.$t("general.Thereisanerrorinthesystem")}`,
-                            });
-                        })
-                        .finally(() => {
-                            this.isLoader = false;
-                        });
+            deleteBranch(id, index) {
+      if (Array.isArray(id)) {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+            adminApi
+              .post(`/banks/bulk-delete`, { ids: id })
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                  this.getData();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
                 }
-            });
-        },
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+
+            adminApi
+              .delete(`/banks/${id}`)
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      }
+    },
         /**
          *  end delete countrie
          */
@@ -521,8 +589,13 @@ export default {
                                             value="name_e"
                                             class="mb-1"
                                         >{{ $t("general.Name_en") }}
-                                        </b-form-checkbox
-                                        >
+                                        </b-form-checkbox>
+                                        <b-form-checkbox
+                                            v-model="filterSetting"
+                                            :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
+                                            class="mb-1"
+                                        >{{ $t("general.Name_en") }}
+                                        </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="swift_code"
@@ -593,7 +666,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length == 1"
-                                        @click.prevent="deleteBranch(checkAll)"
+                                        @click.prevent="deleteBranch(checkAll[0])"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>

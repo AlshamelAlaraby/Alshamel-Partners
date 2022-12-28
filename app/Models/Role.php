@@ -2,24 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Role extends Model
 {
-    use HasFactory, LogsActivity, CausesActivity;
+    use HasFactory, LogTrait;
     protected $guarded = ['id'];
 
-    public function tapActivity(Activity $activity, string $eventName)
+    public function roleType()
     {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
+        return $this->belongsTo(RoleType::class,'roletype_id','id');
     }
-
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -28,6 +24,6 @@ class Role extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Role')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

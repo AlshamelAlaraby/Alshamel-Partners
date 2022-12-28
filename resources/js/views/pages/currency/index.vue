@@ -183,7 +183,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -209,7 +209,7 @@ export default {
             if(this.current_page <= this.currenciesPagination.last_page && this.current_page != this.currenciesPagination.current_page && this.current_page){
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
@@ -238,47 +238,106 @@ export default {
         /**
          *  start delete countrie
          */
-        deleteCountry(id) {
-            Swal.fire({
-                title: `${this.$t('general.Areyousure')}`,
-                text: `${this.$t('general.Youwontbeabletoreverthis')}`,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonText: `${this.$t('general.Yesdeleteit')}`,
-                cancelButtonText: `${this.$t('general.Nocancel')}`,
-                confirmButtonClass: "btn btn-success mt-2",
-                cancelButtonClass: "btn btn-danger ml-2 mt-2",
-                buttonsStyling: false,
-            }).then((result) => {
-                if (result.value) {
-
-                    this.isLoader = true;
-
-                    adminApi.delete(`/currencies/${id}`)
-                        .then((res) => {
-                            this.getData();
-                            this.checkAll = [];
-                            Swal.fire({
-                                icon: 'success',
-                                title: `${this.$t('general.Deleted')}`,
-                                text: `${this.$t('general.Yourrowhasbeendeleted')}`,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        })
-                        .catch((err) => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: `${this.$t('general.Error')}`,
-                                text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                            });
-                        })
-                        .finally(() => {
-                            this.isLoader = false;
-                        });
+        deleteCountry(id, index) {
+      if (Array.isArray(id)) {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+            adminApi
+              .post(`/currencies/bulk-delete`, { ids: id })
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                  this.getData();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
                 }
-            });
-        },
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: `${this.$t("general.Areyousure")}`,
+          text: `${this.$t("general.Youwontbeabletoreverthis")}`,
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: `${this.$t("general.Yesdeleteit")}`,
+          cancelButtonText: `${this.$t("general.Nocancel")}`,
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false,
+        }).then((result) => {
+          if (result.value) {
+            this.isLoader = true;
+
+            adminApi
+              .delete(`/currencies/${id}`)
+              .then((res) => {
+                this.checkAll = [];
+                this.getData();
+                Swal.fire({
+                  icon: "success",
+                  title: `${this.$t("general.Deleted")}`,
+                  text: `${this.$t("general.Yourrowhasbeendeleted")}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+
+              .catch((err) => {
+                if (err.response.status == 400) {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.CantDeleteRelation")}`,
+                  });
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: `${this.$t("general.Error")}`,
+                    text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                  });
+                }
+              })
+              .finally(() => {
+                this.isLoader = false;
+              });
+          }
+        });
+      }
+    },
         /**
          *  end delete countrie
          */
@@ -528,7 +587,7 @@ export default {
                         });
                     });
             }
-        },
+        }
     },
 };
 </script>
@@ -606,7 +665,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length > 1"
-                                        @click.prevent="deletecountry(checkAll)"
+                                        @click.prevent="deleteCountry(checkAll)"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -615,7 +674,7 @@ export default {
                                     <button
                                         class="custom-btn-dowonload"
                                         v-if="checkAll.length == 1"
-                                        @click.prevent="deleteCountry(checkAll)"
+                                        @click.prevent="deleteCountry(checkAll[0])"
                                     >
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -1180,7 +1239,7 @@ export default {
                                       <td v-if="setting.symbol_e">{{ data.symbol_e }}</td>
                                       <td v-if="setting.is_default">
                                         <span :class="[
-                                            data.is_default == 'active' ?
+                                            data.is_default == 1 ?
                                             'text-success':
                                             'text-danger',
                                             'badge'
@@ -1189,7 +1248,7 @@ export default {
                                             {{ data.is_default ? `${$t('general.Active')}`:`${$t('general.Inactive')}`}}
                                         </span>
                                       </td>
-                                      <td v-if="setting.is_active">
+                                      <td v-if="setting.is_active == 1">
                                         <span :class="[
                                             data.is_active ?
                                             'text-success':
