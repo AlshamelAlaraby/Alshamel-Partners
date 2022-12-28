@@ -61,7 +61,7 @@ export default {
         salesman_type_id: true,
       },
       is_disabled: false,
-      filterSetting: ["name", "name_e", "salesman_type_id"],
+      filterSetting: ["name", "name_e", this.$i18n.locale  == 'ar'?'salesmanType.name':'salesmanType.name_e'],
     };
   },
   validations: {
@@ -516,6 +516,9 @@ export default {
                     <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
                       {{ $t("general.Name_en") }}
                     </b-form-checkbox>
+                      <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'salesmanType.name':'salesmanType.name_e'" class="mb-1">
+                          {{ $t("general.Name_en") }}
+                      </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
                 </div>

@@ -1437,7 +1437,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       branches: [],
       stores: [],
       current_page: 1,
-      filterSetting: ["perfix", "suffix", "start_no"]
+      filterSetting: ["perfix", "suffix", "start_no", this.$i18n.locale == 'ar' ? 'branch.name' : 'branch.name_e', this.$i18n.locale == 'ar' ? 'store.name' : 'store.name_e']
     };
   },
   validations: {
@@ -5100,7 +5100,31 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.StartNo")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("general.StartNo")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "branch.name" : "branch.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Branch")))]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "store.name" : "store.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Store")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"

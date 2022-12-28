@@ -1841,7 +1841,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       company_id: null,
       is_disabled: false,
-      filterSetting: ['role_id', 'workflow_id', 'hotfield_id'],
+      filterSetting: [this.$i18n.locale == 'ar' ? 'role.name' : 'role.name_e', 'workflow_id', 'hotfield_id'],
       Tooltip: '',
       mouseEnter: null
     };
@@ -2299,7 +2299,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this15.isLoader = true;
                 _context7.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
                   ;
@@ -5916,7 +5916,7 @@ var render = function render() {
   }, [_c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "role_id"
+      value: _vm.$i18n.locale == "ar" ? "role.name" : "role.name_e"
     },
     model: {
       value: _vm.filterSetting,

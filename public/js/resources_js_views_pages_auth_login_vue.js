@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
         this.isError = false;
         var _email = this.email,
           password = this.password;
-        axios.post("".concat("https://alshamelalaraby.com/", "api/partners/login"), {
+        axios.post("".concat("http://alshamel-administrator.com/", "api/partners/login"), {
           email: _email,
           password: password
         }).then(function (res) {

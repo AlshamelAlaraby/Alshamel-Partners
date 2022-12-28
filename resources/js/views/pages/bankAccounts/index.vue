@@ -78,7 +78,7 @@ export default {
                 rp_code: true,
             },
             idDelete: null,
-            filterSetting: ['bank_id', 'account_number', 'phone', 'address', 'email','emp_id', 'rp_code'],
+            filterSetting: [this.$i18n.locale  == 'ar'?'bank.name':'bank.name_e', 'account_number', 'phone', 'address', 'email','emp_id', 'rp_code'],
             banks: []
         }
     },
@@ -727,7 +727,7 @@ export default {
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
-                                        <b-form-checkbox v-model="filterSetting" value="bank_id" class="mb-1">
+                                        <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'bank.name':'bank.name_e'" class="mb-1">
                                             {{ $t('general.bank_id') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="account_number" class="mb-1">
