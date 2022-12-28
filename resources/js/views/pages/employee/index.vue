@@ -137,7 +137,7 @@ export default {
         getData(page = 1){
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -163,7 +163,7 @@ export default {
             if(this.current_page <= this.employeesPagination.last_page && this.current_page != this.employeesPagination.current_page && this.current_page){
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
