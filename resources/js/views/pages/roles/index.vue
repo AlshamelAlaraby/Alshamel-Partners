@@ -60,7 +60,7 @@ export default {
                 roletype_id: true
             },
             is_disabled: false,
-            filterSetting: ['name', 'name_e'],
+            filterSetting: ['name', 'name_e', this.$i18n.locale  == 'ar'?'roleType.name':'roleType.name_e'],
             Tooltip: '',
             mouseEnter: null
         }
@@ -146,7 +146,7 @@ export default {
         getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -172,7 +172,7 @@ export default {
             if (this.current_page <= this.rolesPagination.last_page && this.current_page != this.rolesPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
@@ -497,6 +497,9 @@ export default {
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
                                             {{ $t('general.Name_en') }}
                                         </b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'roleType.name':'roleType.name_e'" class="mb-1">
+                                            {{ $t('rolesType.rolesType') }}
+                                        </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -815,6 +818,7 @@ export default {
                                             </div>
                                         </div>
                                     </th>
+                                    <th v-if="setting.roletype_id"> {{$t('rolesType.rolesType')}} </th>
                                     <th>
                                         {{ $t('general.Action') }}
                                     </th>
@@ -845,6 +849,10 @@ export default {
                                     </td>
                                     <td v-if="setting.name_e">
                                         <h5 class="m-0 font-weight-normal">{{ data.name_e }}</h5>
+                                    </td>
+
+                                    <td v-if="setting.roletype_id">
+                                        <h5 class="m-0 font-weight-normal">{{ $i18n.locale == 'ar' ? data.roletype.name :  data.roletype.name_e}}</h5>
                                     </td>
 
                                     <td>

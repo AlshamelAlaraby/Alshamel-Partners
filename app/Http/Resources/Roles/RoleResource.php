@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Roles;
 
+use App\Http\Resources\RoleTypes\RoleTypeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoleResource extends JsonResource
@@ -18,7 +19,7 @@ class RoleResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'name_e'=>$this->name_e,
-            'roletype_id'=>$this->roletype_id,
+            'roletype'=> new RoleTypeResource($this->roleType),
         ];
     }
 }

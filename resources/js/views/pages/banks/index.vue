@@ -63,7 +63,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            filterSetting: ["name", "name_e", "swift_code"],
+            filterSetting: ["name", "name_e", "swift_code",this.$i18n.locale  == 'ar'?'country.name':'country.name_e'],
         };
     },
     validations: {
@@ -164,8 +164,12 @@ export default {
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = "";
+            for (let i = 0; i < this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
             adminApi
-                .get(`/banks?page=${page}&per_page=${this.per_page}`)
+                .get(`/banks?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.banks = l.data;
@@ -190,9 +194,13 @@ export default {
                 this.current_page
             ) {
                 this.isLoader = true;
+                let filter = "";
+                for (let i = 0; i < this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
                 adminApi
                     .get(
-                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`
+                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`
                     )
                     .then((res) => {
                         let l = res.data;
@@ -521,8 +529,13 @@ export default {
                                             value="name_e"
                                             class="mb-1"
                                         >{{ $t("general.Name_en") }}
-                                        </b-form-checkbox
-                                        >
+                                        </b-form-checkbox>
+                                        <b-form-checkbox
+                                            v-model="filterSetting"
+                                            :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
+                                            class="mb-1"
+                                        >{{ $t("general.Name_en") }}
+                                        </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="swift_code"

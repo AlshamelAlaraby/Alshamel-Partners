@@ -1500,7 +1500,7 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
+      for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/employees?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1524,7 +1524,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.current_page <= this.employeesPagination.last_page && this.current_page != this.employeesPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/employees?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {

@@ -1815,7 +1815,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      filterSetting: ["name", "name_e", "swift_code"]
+      filterSetting: ["name", "name_e", "swift_code", this.$i18n.locale == 'ar' ? 'country.name' : 'country.name_e']
     };
   },
   validations: {
@@ -1945,7 +1945,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
+      var filter = "";
+      for (var i = 0; i < this.filterSetting.length; ++i) {
+        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+      }
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
         _this4.banks = l.data;
         _this4.banksPagination = l.pagination;
@@ -1965,7 +1969,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.banksPagination.last_page && this.current_page != this.banksPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search)).then(function (res) {
+        var filter = "";
+        for (var i = 0; i < this.filterSetting.length; ++i) {
+          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+        }
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
           _this5.banks = l.data;
           _this5.banksPagination = l.pagination;
@@ -6125,6 +6133,18 @@ var render = function render() {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "country.name" : "country.name_e"
     },
     model: {
       value: _vm.filterSetting,

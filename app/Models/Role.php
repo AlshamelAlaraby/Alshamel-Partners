@@ -12,6 +12,11 @@ class Role extends Model
     use HasFactory, LogTrait;
     protected $guarded = ['id'];
 
+    public function roleType()
+    {
+        return $this->belongsTo(RoleType::class,'roletype_id','id');
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         $user = auth()->user()->id ?? "system";

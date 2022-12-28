@@ -133,4 +133,12 @@ class RoleController extends Controller
         $this->repository->delete($id);
         return responseJson(200, __('deleted'));
     }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $this->repository->delete($id);
+        }
+        return responseJson(200, __('Done'));
+    }
 }

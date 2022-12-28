@@ -76,7 +76,10 @@ export default {
       branches: [],
       stores: [],
       current_page: 1,
-      filterSetting: ["perfix", "suffix", "start_no"],
+      filterSetting: ["perfix", "suffix", "start_no",
+          this.$i18n.locale  == 'ar'?'branch.name':'branch.name_e',
+          this.$i18n.locale  == 'ar'?'store.name':'store.name_e'
+      ],
     };
   },
   validations: {
@@ -557,14 +560,22 @@ export default {
                       v-model="filterSetting"
                       value="suffix"
                       class="mb-1"
-                      >{{ $t("general.Suffix") }}</b-form-checkbox
-                    >
+                      >{{ $t("general.Suffix") }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="start_no"
                       class="mb-1"
-                      >{{ $t("general.StartNo") }}</b-form-checkbox
-                    >
+                      >{{ $t("general.StartNo") }}</b-form-checkbox>
+                      <b-form-checkbox
+                          v-model="filterSetting"
+                          :value="$i18n.locale  == 'ar'?'branch.name':'branch.name_e'"
+                          class="mb-1"
+                      >{{ $t("general.Branch") }}</b-form-checkbox>
+                      <b-form-checkbox
+                          v-model="filterSetting"
+                          :value="$i18n.locale  == 'ar'?'store.name':'store.name_e'"
+                          class="mb-1"
+                      >{{ $t("general.Store") }}</b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
                 </div>
