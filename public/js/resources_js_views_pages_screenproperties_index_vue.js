@@ -1576,42 +1576,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /**
      *  delete screen button
      */
-    deleteScreenButton: function deleteScreenButton(id) {
+    deleteScreenButton: function deleteScreenButton(id, index) {
       var _this7 = this;
-      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-        title: "".concat(this.$t("general.Areyousure")),
-        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-        cancelButtonText: "".concat(this.$t("general.Nocancel")),
-        confirmButtonClass: "btn btn-success mt-2",
-        cancelButtonClass: "btn btn-danger ml-2 mt-2",
-        buttonsStyling: false
-      }).then(function (result) {
-        if (result.value) {
-          _this7.isLoader = true;
-          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/screen-tree-properties/".concat(id)).then(function (res) {
-            _this7.getData();
-            _this7.checkAll = [];
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              title: "".concat(_this7.$t("general.Deleted")),
-              text: "".concat(_this7.$t("general.Yourrowhasbeendeleted")),
-              showConfirmButton: false,
-              timer: 1500
+      if (Array.isArray(id)) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+          title: "".concat(this.$t("general.Areyousure")),
+          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+          cancelButtonText: "".concat(this.$t("general.Nocancel")),
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false
+        }).then(function (result) {
+          if (result.value) {
+            _this7.isLoader = true;
+            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/screen-tree-properties/bulk-delete", {
+              ids: id
+            }).then(function (res) {
+              _this7.checkAll = [];
+              _this7.getData();
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "success",
+                title: "".concat(_this7.$t("general.Deleted")),
+                text: "".concat(_this7.$t("general.Yourrowhasbeendeleted")),
+                showConfirmButton: false,
+                timer: 1500
+              });
+            })["catch"](function (err) {
+              if (err.response.status == 400) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this7.$t("general.Error")),
+                  text: "".concat(_this7.$t("general.CantDeleteRelation"))
+                });
+                _this7.getData();
+              } else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this7.$t("general.Error")),
+                  text: "".concat(_this7.$t("general.Thereisanerrorinthesystem"))
+                });
+              }
+            })["finally"](function () {
+              _this7.isLoader = false;
             });
-          })["catch"](function (err) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this7.$t("general.Error")),
-              text: "".concat(_this7.$t("general.Thereisanerrorinthesystem"))
+          }
+        });
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+          title: "".concat(this.$t("general.Areyousure")),
+          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+          cancelButtonText: "".concat(this.$t("general.Nocancel")),
+          confirmButtonClass: "btn btn-success mt-2",
+          cancelButtonClass: "btn btn-danger ml-2 mt-2",
+          buttonsStyling: false
+        }).then(function (result) {
+          if (result.value) {
+            _this7.isLoader = true;
+            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/screen-tree-properties/".concat(id)).then(function (res) {
+              _this7.checkAll = [];
+              _this7.getData();
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "success",
+                title: "".concat(_this7.$t("general.Deleted")),
+                text: "".concat(_this7.$t("general.Yourrowhasbeendeleted")),
+                showConfirmButton: false,
+                timer: 1500
+              });
+            })["catch"](function (err) {
+              if (err.response.status == 400) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this7.$t("general.Error")),
+                  text: "".concat(_this7.$t("general.CantDeleteRelation"))
+                });
+              } else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this7.$t("general.Error")),
+                  text: "".concat(_this7.$t("general.Thereisanerrorinthesystem"))
+                });
+              }
+            })["finally"](function () {
+              _this7.isLoader = false;
             });
-          })["finally"](function () {
-            _this7.isLoader = false;
-          });
-        }
-      });
+          }
+        });
+      }
     },
     /**
      *  reset Modal (create)
@@ -1648,7 +1704,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   screen_id: null,
                   property_id: null
                 };
-                _this9.is_disabled = false;
+                _this9.is_disaled = false;
                 _this9.$nextTick(function () {
                   _this9.$v.$reset();
                 });
@@ -5104,7 +5160,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.deleteScreenButton(_vm.checkAll);
+        return _vm.deleteScreenButton(_vm.checkAll[0]);
       }
     }
   }, [_c("i", {
@@ -5719,7 +5775,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat("https://alshamelalaraby.com/", "api/")
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';

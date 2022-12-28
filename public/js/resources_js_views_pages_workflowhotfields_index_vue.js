@@ -5729,7 +5729,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat("https://alshamelalaraby.com/", "api/")
+  baseURL: "".concat("http://127.0.0.1:8001/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
