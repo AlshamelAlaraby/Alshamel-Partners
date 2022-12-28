@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(\App\Http\Controllers\MainController::class)->group(function () {
     Route::post("/media", "media");
+    Route::get("statices", "statices");
     Route::put("/setting", "setting");
     Route::get("/setting/{user_id}/{screen_id}", "getSetting");
 });
@@ -360,9 +361,13 @@ Route::get('screen-tree-properties/logs/{id}', [ScreenTreePropertyController::cl
 Route::post('screen-tree-properties/bulk-delete', [ScreenTreePropertyController::class, 'bulkDelete']);
 
 Route::resource('internal-salesman', InternalSalesmanController::class)->except('create', 'edit');
+
+Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class, 'logs']);
+
 Route::get('internal-salesman/logs/{id}', [InternalSalesmanController::class,'logs']);
 Route::post('internal-salesman/bulk-delete', [InternalSalesmanController::class,'bulkDelete']);
 
-Route::post ('translation-update',[\App\Http\Controllers\TranslationController::class,'update']);
-Route::post ('translation-delete',[\App\Http\Controllers\TranslationController::class,'delete']);
+
+Route::post('translation-update', [\App\Http\Controllers\TranslationController::class, 'update']);
+Route::post('translation-delete', [\App\Http\Controllers\TranslationController::class, 'delete']);
 //------------------------------------------------------

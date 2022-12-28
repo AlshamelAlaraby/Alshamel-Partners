@@ -665,6 +665,10 @@
         "Properties": "property",
         "addBankAccount": "Add Bank Account",
         "editBankAccount": "Edit Bank Account",
-        "Bank": "Bank"
+        "Bank": "Bank",
+        "branches": "Branches",
+        "users": "Users",
+        "employees": "Employees",
+        "salesmen": "Salesmen"
     }
 }

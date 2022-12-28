@@ -5,8 +5,9 @@
 export default {
     props: {
         number: {
-            type: String,
+            type: Number,
             required: true,
+            default: 0
         },
         chartColor: {
             type: String,
@@ -72,7 +73,7 @@ export default {
         </div>
         <div class="text-right">
             <h3 class="mb-1">{{ number }}</h3>
-            <p class="text-muted mb-1">{{ text }}</p>
+            <p class="text-muted mb-1">{{ $t(`general.${text}`) }}</p>
         </div>
     </div>
 </div>

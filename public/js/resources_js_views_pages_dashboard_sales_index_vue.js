@@ -1371,8 +1371,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     number: {
-      type: String,
-      required: true
+      type: Number,
+      required: true,
+      "default": 0
     },
     chartColor: {
       type: String,
@@ -1777,6 +1778,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_widgets_Portlet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/widgets/Portlet */ "./resources/js/components/widgets/Portlet.vue");
 /* harmony import */ var _components_widgets_Revenue_history__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/widgets/Revenue-history */ "./resources/js/components/widgets/Revenue-history.vue");
 /* harmony import */ var _components_widgets_Projections__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/widgets/Projections */ "./resources/js/components/widgets/Projections.vue");
+/* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
+
 
 
 
@@ -1885,8 +1888,31 @@ __webpack_require__.r(__webpack_exports__);
         date: "Nov 15, 2018",
         sales: 85,
         productid: 200250
-      }]
+      }],
+      isLoader: false,
+      statices: {}
     };
+  },
+  mounted: function mounted() {
+    this.getStatices();
+  },
+  methods: {
+    getStatices: function getStatices() {
+      var _this = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_9__["default"].get("/statices").then(function (res) {
+        var l = res.data.data;
+        _this.statices = l;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: 'error',
+          title: "".concat(_this.$t('general.Error')),
+          text: "".concat(_this.$t('general.Thereisanerrorinthesystem'))
+        });
+      })["finally"](function () {
+        _this.isLoader = false;
+      });
+    }
   }
 });
 
@@ -1915,7 +1941,7 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6 color"
-  }, [_vm._v("\n                " + _vm._s(new Date().getFullYear()) + " © Al Shamel Al Araby\n            ")]), _vm._v(" "), _vm._m(0)])])]);
+  }, [_vm._v("\r\n                " + _vm._s(new Date().getFullYear()) + " © Al Shamel Al Araby\r\n            ")]), _vm._v(" "), _vm._m(0)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -5266,7 +5292,7 @@ var render = function render() {
     staticClass: "mb-1"
   }, [_vm._v(_vm._s(_vm.number))]), _vm._v(" "), _c("p", {
     staticClass: "text-muted mb-1"
-  }, [_vm._v(_vm._s(_vm.text))])])])]);
+  }, [_vm._v(_vm._s(_vm.$t("general.".concat(_vm.text))))])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5485,33 +5511,33 @@ var render = function render() {
     staticClass: "col-xl-3 col-md-6"
   }, [_c("WidgetChart", {
     attrs: {
-      number: _vm.widget.number,
-      text: _vm.widget.text,
-      "chart-color": _vm.widget.chartColor
+      number: _vm.statices.branches,
+      text: "branches",
+      "chart-color": "#1abc9c"
     }
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6"
   }, [_c("WidgetChart", {
     attrs: {
-      number: _vm.widget.number,
-      text: _vm.widget.text,
-      "chart-color": _vm.widget.chartColor
+      number: _vm.statices.users,
+      text: "users",
+      "chart-color": "#f1556c"
     }
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6"
   }, [_c("WidgetChart", {
     attrs: {
-      number: _vm.widget.number,
-      text: _vm.widget.text,
-      "chart-color": _vm.widget.chartColor
+      number: _vm.statices.employees,
+      text: "employees",
+      "chart-color": "#f1556c"
     }
   })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6"
   }, [_c("WidgetChart", {
     attrs: {
-      number: _vm.widget.number,
-      text: _vm.widget.text,
-      "chart-color": _vm.widget.chartColor
+      number: _vm.statices.salesmen,
+      text: "salesmen",
+      "chart-color": "#1abc9c"
     }
   })], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row"
@@ -6976,7 +7002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.color {\n    color: #6c757d !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.color {\r\n    color: #6c757d !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -8,7 +8,9 @@ import ProductsSales from "../../../../components/widgets/Products-sales";
 import MarketingReports from "../../../../components/widgets/Marketing-reports";
 import Portlet from "../../../../components/widgets/Portlet";
 import RevenueHistory from "../../../../components/widgets/Revenue-history";
-import Projections from "../../../../components/widgets/Projections";
+import Projections from "../../../../components/widgets/Projections"
+import adminApi from "../../../../api/adminAxios";
+
 
 /**
  * Sales-Dashboard component
@@ -119,8 +121,34 @@ export default {
           productid: 200250,
         },
       ],
+      isLoader : false,
+      statices: {}
     };
   },
+  mounted() {
+      this.getStatices();
+  },
+  methods: {
+      getStatices() {
+          this.isLoader = true;
+
+          adminApi.get(`/statices`)
+              .then((res) => {
+                  let l = res.data.data;
+                  this.statices = l;
+              })
+              .catch((err) => {
+                  Swal.fire({
+                      icon: 'error',
+                      title: `${this.$t('general.Error')}`,
+                      text: `${this.$t('general.Thereisanerrorinthesystem')}`,
+                  });
+              })
+              .finally(() => {
+                  this.isLoader = false;
+              });
+      },
+  }
 };
 </script>
 
@@ -130,30 +158,30 @@ export default {
     <div class="row">
       <div class="col-xl-3 col-md-6">
         <WidgetChart
-          :number="widget.number"
-          :text="widget.text"
-          :chart-color="widget.chartColor"
+          :number="statices.branches"
+          :text="'branches'"
+          :chart-color="'#1abc9c'"
         />
       </div>
       <div class="col-xl-3 col-md-6">
          <WidgetChart
-              :number="widget.number"
-              :text="widget.text"
-              :chart-color="widget.chartColor"
+              :number="statices.users"
+              :text="'users'"
+              :chart-color="'#f1556c'"
         />
       </div>
-        <div class="col-xl-3 col-md-6">
+      <div class="col-xl-3 col-md-6">
             <WidgetChart
-                :number="widget.number"
-                :text="widget.text"
-                :chart-color="widget.chartColor"
+                :number="statices.employees"
+                :text="'employees'"
+                :chart-color="'#f1556c'"
             />
         </div>
-        <div class="col-xl-3 col-md-6">
+      <div class="col-xl-3 col-md-6">
             <WidgetChart
-                :number="widget.number"
-                :text="widget.text"
-                :chart-color="widget.chartColor"
+                :number="statices.salesmen"
+                :text="'salesmen'"
+                :chart-color="'#1abc9c'"
             />
         </div>
       <!-- end col -->
