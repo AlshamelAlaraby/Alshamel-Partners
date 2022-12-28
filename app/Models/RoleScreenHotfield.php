@@ -21,15 +21,6 @@ class RoleScreenHotfield extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function screen()
-    {
-        return $this->belongsTo(Screen::class);
-    }
-
-    public function hotfield()
-    {
-        return $this->belongsTo(Hotfield::class);
-    }
 
     public function getActivitylogOptions(): LogOptions
     {

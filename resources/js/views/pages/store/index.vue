@@ -68,7 +68,7 @@ export default {
         is_active: true,
       },
       is_disabled: false,
-      filterSetting: ["name", "name_e"],
+      filterSetting: ["name", "name_e",this.$i18n.locale  == 'ar'?'branch.name':'branch.name_e'],
     };
   },
   validations: {
@@ -573,8 +573,12 @@ export default {
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ $t("general.Name_en") }}</b-form-checkbox
-                    >
+                      >{{ $t("general.Name_en") }}</b-form-checkbox>
+                      <b-form-checkbox
+                          v-model="filterSetting"
+                          :value="$i18n.locale  == 'ar'?'branch.name':'branch.name_e'"
+                          class="mb-1"
+                      >{{ $t("general.Branch") }}</b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
                 </div>

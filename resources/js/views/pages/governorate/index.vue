@@ -87,7 +87,7 @@ export default {
             isCheckAll: false,
             checkAll: [],
             current_page: 1,
-            filterSetting: ["name", "name_e", "country_id", "phone_key"],
+            filterSetting: ["name", "name_e", this.$i18n.locale  == 'ar'?'country.name':'country.name_e', "phone_key"],
             countries: [],
             Tooltip: '',
             mouseEnter: null
@@ -186,8 +186,12 @@ export default {
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i < this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
             adminApi
-                .get(`/governorates?page=${page}&per_page=${this.per_page}`)
+                .get(`/governorates?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.governorates = l.data;
@@ -212,10 +216,13 @@ export default {
                 this.current_page
             ) {
                 this.isLoader = true;
-
+                let filter = '';
+                for (let i = 0; i < this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
                 adminApi
                     .get(
-                        `/governorates?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`
+                        `/governorates?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${filter}`
                     )
                     .then((res) => {
                         let l = res.data;
@@ -555,7 +562,7 @@ export default {
                                         >
                                         <b-form-checkbox
                                             v-model="filterSetting"
-                                            value="country_id"
+                                            :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                                             class="mb-1"
                                         >{{ $t("general.country") }}
                                         </b-form-checkbox
@@ -1478,3 +1485,6 @@ export default {
         </div>
     </Layout>
 </template>
+
+
+

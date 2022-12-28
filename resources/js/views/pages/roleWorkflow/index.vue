@@ -59,7 +59,7 @@ export default {
             },
             company_id: null,
             is_disabled: false,
-            filterSetting: ['role_id', 'workflow_id']
+            filterSetting: [this.$i18n.locale  == 'ar'?'role.name':'role.name_e', 'workflow_id']
         }
     },
     validations: {
@@ -115,7 +115,7 @@ export default {
         async getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -141,7 +141,7 @@ export default {
             if (this.current_page <= this.roleWorkflowsPagination.last_page && this.current_page != this.roleWorkflowsPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 
@@ -484,7 +484,7 @@ export default {
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
-                                        <b-form-checkbox v-model="filterSetting" value="role_id" class="mb-1">
+                                        <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'role.name':'role.name_e'" class="mb-1">
                                             {{ $t('roles.roles') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="workflow_id" class="mb-1">

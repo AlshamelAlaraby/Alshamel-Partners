@@ -1839,7 +1839,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       company_id: null,
       is_disabled: false,
-      filterSetting: ['role_id', 'workflow_id']
+      filterSetting: [this.$i18n.locale == 'ar' ? 'role.name' : 'role.name_e', 'workflow_id']
     };
   },
   validations: {
@@ -1930,7 +1930,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 _this4.isLoader = true;
                 filter = '';
-                for (i = 0; i > _this4.filterSetting.length; ++i) {
+                for (i = 0; i < _this4.filterSetting.length; ++i) {
                   filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
                 }
                 _context2.next = 6;
@@ -1962,7 +1962,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.current_page <= this.roleWorkflowsPagination.last_page && this.current_page != this.roleWorkflowsPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-workflows?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -2284,7 +2284,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this15.isLoader = true;
                 _context7.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
                 })["catch"](function (err) {
@@ -5899,7 +5899,7 @@ var render = function render() {
   }, [_c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "role_id"
+      value: _vm.$i18n.locale == "ar" ? "role.name" : "role.name_e"
     },
     model: {
       value: _vm.filterSetting,

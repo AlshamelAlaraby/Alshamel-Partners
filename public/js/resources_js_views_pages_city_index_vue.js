@@ -2074,7 +2074,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      filterSetting: ["name", "name_e", "country_id", "governorate_id"],
+      filterSetting: ["name", "name_e", this.$i18n.locale == 'ar' ? 'country.name' : 'country.name_e', this.$i18n.locale == 'ar' ? 'governorate.name' : 'governorate.name_e', "governorate_id"],
       countries: [],
       governorates: [],
       is_disabled: false,
@@ -2198,7 +2198,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page)).then(function (res) {
+      var filter = '';
+      for (var i = 0; i < this.filterSetting.length; ++i) {
+        filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+      }
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(filter)).then(function (res) {
         var l = res.data;
         _this4.cities = l.data;
         _this4.citiesPagination = l.pagination;
@@ -2218,7 +2222,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.citiesPagination.last_page && this.current_page != this.citiesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(this.filterSetting)).then(function (res) {
+        var filter = '';
+        for (var i = 0; i < this.filterSetting.length; ++i) {
+          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+        }
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/cities?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&columns=").concat(filter)).then(function (res) {
           var l = res.data;
           _this5.cities = l.data;
           _this5.citiesPagination = l.pagination;
@@ -6855,7 +6863,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "country_id"
+      value: _vm.$i18n.locale == "ar" ? "country.name" : "country.name_e"
     },
     model: {
       value: _vm.filterSetting,
@@ -6867,7 +6875,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.country")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "governorate_id"
+      value: _vm.$i18n.locale == "ar" ? "governorate.name" : "governorate.name_e"
     },
     model: {
       value: _vm.filterSetting,

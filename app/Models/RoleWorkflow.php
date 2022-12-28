@@ -24,10 +24,6 @@ class RoleWorkflow extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function workflow()
-    {
-        return $this->belongsTo(Workflow::class);
-    }
 
     public function getActivitylogOptions(): LogOptions
     {
