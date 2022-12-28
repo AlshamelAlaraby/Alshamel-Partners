@@ -121,7 +121,7 @@ export default {
         async getData(page = 1) {
             this.isLoader = true;
             let filter = '';
-            for (let i = 0; i > this.filterSetting.length; ++i) {
+            for (let i = 0; i < this.filterSetting.length; ++i) {
                 filter += `columns[${i}]=${this.filterSetting[i]}&`;
             }
 
@@ -147,7 +147,7 @@ export default {
             if (this.current_page <= this.roleWorkflowHotfieldsPagination.last_page && this.current_page != this.roleWorkflowHotfieldsPagination.current_page && this.current_page) {
                 this.isLoader = true;
                 let filter = '';
-                for (let i = 0; i > this.filterSetting.length; ++i) {
+                for (let i = 0; i < this.filterSetting.length; ++i) {
                     filter += `columns[${i}]=${this.filterSetting[i]}&`;
                 }
 

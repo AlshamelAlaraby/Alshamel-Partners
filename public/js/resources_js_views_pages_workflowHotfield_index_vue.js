@@ -1940,7 +1940,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 _this4.isLoader = true;
                 filter = '';
-                for (i = 0; i > _this4.filterSetting.length; ++i) {
+                for (i = 0; i < _this4.filterSetting.length; ++i) {
                   filter += "columns[".concat(i, "]=").concat(_this4.filterSetting[i], "&");
                 }
                 _context2.next = 6;
@@ -1972,7 +1972,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.current_page <= this.roleWorkflowHotfieldsPagination.last_page && this.current_page != this.roleWorkflowHotfieldsPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/role-screen-hotfield?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
