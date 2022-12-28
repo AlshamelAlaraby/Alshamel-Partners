@@ -1562,98 +1562,42 @@ __webpack_require__.r(__webpack_exports__);
     /**
      *  start delete module
      */
-    deleteModule: function deleteModule(id, index) {
+    deleteModule: function deleteModule(id) {
       var _this5 = this;
-      if (Array.isArray(id)) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this5.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/payment-types/bulk-delete", {
-              ids: id
-            }).then(function (res) {
-              _this5.checkAll = [];
-              _this5.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this5.$t("general.Deleted")),
-                text: "".concat(_this5.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this5.$t("general.Error")),
-                  text: "".concat(_this5.$t("general.CantDeleteRelation"))
-                });
-                _this5.getData();
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this5.$t("general.Error")),
-                  text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this5.isLoader = false;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+        title: "".concat(this.$t('general.Areyousure')),
+        text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "".concat(this.$t('general.Yesdeleteit')),
+        cancelButtonText: "".concat(this.$t('general.Nocancel')),
+        confirmButtonClass: "btn btn-success mt-2",
+        cancelButtonClass: "btn btn-danger ml-2 mt-2",
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          _this5.isLoader = true;
+          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/payment-types/".concat(id)).then(function (res) {
+            _this5.getData();
+            _this5.checkAll = [];
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'success',
+              title: "".concat(_this5.$t('general.Deleted')),
+              text: "".concat(_this5.$t('general.Yourrowhasbeendeleted')),
+              showConfirmButton: false,
+              timer: 1500
             });
-          }
-        });
-      } else {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this5.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/payment-types/".concat(id)).then(function (res) {
-              _this5.checkAll = [];
-              _this5.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this5.$t("general.Deleted")),
-                text: "".concat(_this5.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this5.$t("general.Error")),
-                  text: "".concat(_this5.$t("general.CantDeleteRelation"))
-                });
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this5.$t("general.Error")),
-                  text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this5.isLoader = false;
+          })["catch"](function (err) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: 'error',
+              title: "".concat(_this5.$t('general.Error')),
+              text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
             });
-          }
-        });
-      }
+          })["finally"](function () {
+            _this5.isLoader = false;
+          });
+        }
+      });
     },
     /**
      *  end delete module
@@ -5112,7 +5056,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.deleteModule(_vm.checkAll[0]);
+        return _vm.deleteModule(_vm.checkAll);
       }
     }
   }, [_c("i", {

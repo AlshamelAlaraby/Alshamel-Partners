@@ -1644,98 +1644,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /**
      *  delete module
      */
-    deleteModule: function deleteModule(id, index) {
+    deleteModule: function deleteModule(id) {
       var _this6 = this;
-      if (Array.isArray(id)) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this6.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/tree-properties/bulk-delete", {
-              ids: id
-            }).then(function (res) {
-              _this6.checkAll = [];
-              _this6.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this6.$t("general.Deleted")),
-                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
-                });
-                _this6.getData();
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this6.isLoader = false;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+        title: "".concat(this.$t("general.Areyousure")),
+        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+        cancelButtonText: "".concat(this.$t("general.Nocancel")),
+        confirmButtonClass: "btn btn-success mt-2",
+        cancelButtonClass: "btn btn-danger ml-2 mt-2",
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          _this6.isLoader = true;
+          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/tree-properties/".concat(id)).then(function (res) {
+            _this6.getData();
+            _this6.checkAll = [];
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              title: "".concat(_this6.$t("general.Deleted")),
+              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+              showConfirmButton: false,
+              timer: 1500
             });
-          }
-        });
-      } else {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this6.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/tree-properties/".concat(id)).then(function (res) {
-              _this6.checkAll = [];
-              _this6.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this6.$t("general.Deleted")),
-                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
-                });
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this6.isLoader = false;
+          })["catch"](function (err) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "error",
+              title: "".concat(_this6.$t("general.Error")),
+              text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
             });
-          }
-        });
-      }
+          })["finally"](function () {
+            _this6.isLoader = false;
+          });
+        }
+      });
     },
     /**
      *  reset Modal (create)
@@ -1984,20 +1928,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.create.parent_id = null;
       }
     },
-    setUpdateParentId: function setUpdateParentId(parents, node) {
-      if (parents.includes(this.current_id)) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: "error",
-          title: "".concat(this.$t("general.Error")),
-          text: "".concat(this.$t("general.cantSelectChildToBeParent"))
-        });
-        return;
-      }
+    setUpdateParentId: function setUpdateParentId(node) {
       if (this.current_id == node.id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: "error",
           title: "".concat(this.$t("general.Error")),
-          text: "".concat(this.$t("general.cantSelectSelfParent"))
+          text: "".concat(this.$t("general.cantSelectCurrentNode"))
         });
         return;
       }
@@ -5487,7 +5423,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.deleteModule(_vm.checkAll[0]);
+        return _vm.deleteModule(_vm.checkAll);
       }
     }
   }, [_c("i", {
@@ -6205,7 +6141,7 @@ var render = function render() {
         },
         on: {
           click: function click($event) {
-            return _vm.setUpdateParentId([], node);
+            return _vm.setUpdateParentId(node);
           }
         }
       }, [_vm._v("\n                                    " + _vm._s(_vm.$i18n.locale == "ar" ? node.name : node.name_e) + "\n                                  ")])]), _vm._v(" "), node.children && node.children.length ? _c("ul", {
@@ -6227,7 +6163,7 @@ var render = function render() {
           },
           on: {
             click: function click($event) {
-              return _vm.setUpdateParentId([node.id], childNode);
+              return _vm.setUpdateParentId(childNode);
             }
           }
         }, [_vm._v("\n                                        " + _vm._s(_vm.$i18n.locale == "ar" ? childNode.name : childNode.name_e) + "\n                                      ")])]), _vm._v(" "), childNode.children && childNode.children.length ? _c("ul", {
@@ -6249,7 +6185,7 @@ var render = function render() {
             },
             on: {
               click: function click($event) {
-                return _vm.setUpdateParentId([node.id, childNode.id], child);
+                return _vm.setUpdateParentId(child);
               }
             }
           }, [_vm._v("\n                                            " + _vm._s(_vm.$i18n.locale == "ar" ? child.name : child.name_e) + "\n                                          ")])]), _vm._v(" "), child.children && child.children.length ? _c("ul", {
@@ -6271,7 +6207,7 @@ var render = function render() {
               },
               on: {
                 click: function click($event) {
-                  return _vm.setUpdateParentId([node.id, childNode.id, child.id], _child);
+                  return _vm.setUpdateParentId(_child);
                 }
               }
             }, [_vm._v("\n                                                " + _vm._s(_vm.$i18n.locale == "ar" ? _child.name : _child.name_e) + "\n                                              ")])]), _vm._v(" "), _child.children && _child.children.length ? _c("ul", {
