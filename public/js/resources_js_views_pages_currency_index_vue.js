@@ -6397,8 +6397,8 @@ var render = function render() {
     }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.code ? _c("td", [_vm._v(_vm._s(data.code))]) : _vm._e(), _vm._v(" "), _vm.setting.code_e ? _c("td", [_vm._v(_vm._s(data.code_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction ? _c("td", [_vm._v(_vm._s(data.fraction))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_e ? _c("td", [_vm._v(_vm._s(data.fraction_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_no ? _c("td", [_vm._v(_vm._s(data.fraction_no))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol ? _c("td", [_vm._v(_vm._s(data.symbol))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol_e ? _c("td", [_vm._v(_vm._s(data.symbol_e))]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("td", [_c("span", {
-      "class": [data.is_default == "active" ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("td", [_c("span", {
+      "class": [data.is_default == 1 ? "text-success" : "text-danger", "badge"]
+    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active == 1 ? _c("td", [_c("span", {
       "class": [data.is_active ? "text-success" : "text-danger", "badge"]
     }, [_vm._v("\n                                        " + _vm._s(data.is_active ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"

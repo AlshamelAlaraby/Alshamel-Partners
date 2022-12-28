@@ -1823,7 +1823,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         is_active: true
       },
       is_disabled: false,
-      filterSetting: ["phone", "address", "email", "rp_code", "country_id", "national_id", "is_active"],
+      filterSetting: ["phone", "address", "email", "rp_code", this.$i18n.locale == 'ar' ? 'country.name' : 'country.name_e', "national_id", "is_active"],
       countries: []
     };
   },
@@ -6218,7 +6218,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.email")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "country_id"
+      value: _vm.$i18n.locale == "ar" ? "country.name" : "country.name_e"
     },
     model: {
       value: _vm.filterSetting,

@@ -2,8 +2,8 @@
 
 namespace App\Repositories\InternalSalesman;
 
-use App\Models\UserSettingScreen;
 use App\Models\InternalSalesman;
+use App\Models\UserSettingScreen;
 use Illuminate\Support\Facades\DB;
 
 class InternalSalesmanRepository implements InternalSalesmanRepositoryInterface
@@ -18,10 +18,7 @@ class InternalSalesmanRepository implements InternalSalesmanRepositoryInterface
     public function getAllInternalSalesmen($request)
     {
 
-
-        $models = $this->model->Filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
-
-
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -59,7 +56,6 @@ class InternalSalesmanRepository implements InternalSalesmanRepositoryInterface
         $model->delete();
     }
 
-
     public function setting($request)
     {
         DB::transaction(function () use ($request) {
@@ -75,7 +71,7 @@ class InternalSalesmanRepository implements InternalSalesmanRepositoryInterface
 
     public function getSetting($user_id, $screen_id)
     {
-        return  UserSettingScreen::where('user_id', $user_id)->where('screen_id', $screen_id)->first();
+        return UserSettingScreen::where('user_id', $user_id)->where('screen_id', $screen_id)->first();
     }
 
     public function logs($id)

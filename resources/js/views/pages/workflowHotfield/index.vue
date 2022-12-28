@@ -61,7 +61,7 @@ export default {
             },
             company_id: null,
             is_disabled: false,
-            filterSetting: ['role_id', 'workflow_id','hotfield_id'],
+            filterSetting: [this.$i18n.locale  == 'ar'?'role.name':'role.name_e', 'workflow_id','hotfield_id'],
             Tooltip: '',
             mouseEnter: null
         }
@@ -496,7 +496,7 @@ export default {
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
-                                        <b-form-checkbox v-model="filterSetting" value="role_id" class="mb-1">
+                                        <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'role.name':'role.name_e'" class="mb-1">
                                             {{ $t('roles.roles') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="workflow_id" class="mb-1">

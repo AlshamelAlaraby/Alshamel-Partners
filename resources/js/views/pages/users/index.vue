@@ -75,7 +75,12 @@ export default {
       idDelete: null,
         Tooltip: '',
         mouseEnter: null,
-      filterSetting: ["name", "name_e", "email"],
+      filterSetting: [
+          "name",
+          "name_e",
+          this.$i18n.locale == 'ar'?'employee.name':'employee.name_e',
+          "email"
+      ],
     };
   },
   watch: {
@@ -161,7 +166,7 @@ export default {
       this.isLoader = true;
 
       let filter = "";
-      for (let i = 0; i > this.filterSetting.length; ++i) {
+      for (let i = 0; i < this.filterSetting.length; ++i) {
         filter += `columns[${i}]=${this.filterSetting[i]}&`;
       }
 
@@ -194,7 +199,7 @@ export default {
       ) {
         this.isLoader = true;
         let filter = "";
-        for (let i = 0; i > this.filterSetting.length; ++i) {
+        for (let i = 0; i < this.filterSetting.length; ++i) {
           filter += `columns[${i}]=${this.filterSetting[i]}&`;
         }
 
@@ -737,6 +742,9 @@ export default {
                     <b-form-checkbox v-model="filterSetting" value="email" class="mb-1">
                       {{ $t("general.email") }}
                     </b-form-checkbox>
+                      <b-form-checkbox v-model="filterSetting" :value="this.$i18n.locale == 'ar'?'employee.name':'employee.name_e'" class="mb-1">
+                          {{ $t("general.employee") }}
+                      </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
                 </div>

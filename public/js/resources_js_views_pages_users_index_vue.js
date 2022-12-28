@@ -1599,7 +1599,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       idDelete: null,
       Tooltip: '',
       mouseEnter: null,
-      filterSetting: ["name", "name_e", "email"]
+      filterSetting: ["name", "name_e", this.$i18n.locale == 'ar' ? 'employee.name' : 'employee.name_e', "email"]
     };
   },
   watch: {
@@ -1718,7 +1718,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
       var filter = "";
-      for (var i = 0; i > this.filterSetting.length; ++i) {
+      for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/users?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -1742,7 +1742,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.current_page <= this.usersPagination.last_page && this.current_page != this.usersPagination.current_page && this.current_page) {
         this.isLoader = true;
         var filter = "";
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/users?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
@@ -5642,7 +5642,19 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.email")) + "\n                  ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.email")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: this.$i18n.locale == "ar" ? "employee.name" : "employee.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.employee")) + "\n                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"

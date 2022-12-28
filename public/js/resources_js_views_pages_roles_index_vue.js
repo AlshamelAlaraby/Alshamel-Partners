@@ -1584,7 +1584,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         roletype_id: true
       },
       is_disabled: false,
-      filterSetting: ['name', 'name_e'],
+      filterSetting: ['name', 'name_e', this.$i18n.locale == 'ar' ? 'roleType.name' : 'roleType.name_e'],
       Tooltip: '',
       mouseEnter: null
     };
@@ -5426,7 +5426,19 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "roleType.name" : "roleType.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("rolesType.rolesType")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5930,7 +5942,7 @@ var render = function render() {
         _vm.roles.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _vm.setting.roletype_id ? _c("th", [_vm._v(" " + _vm._s(_vm.$t("rolesType.rolesType")) + " ")]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.roles.length > 0 ? _c("tbody", _vm._l(_vm.roles, function (data, index) {
     return _c("tr", {
@@ -5991,7 +6003,9 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name))])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.roletype_id ? _c("td", [_c("h5", {
+      staticClass: "m-0 font-weight-normal"
+    }, [_vm._v(_vm._s(_vm.$i18n.locale == "ar" ? data.roletype.name : data.roletype.name_e))])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",

@@ -1839,7 +1839,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      filterSetting: ["name", "name_e", "country_id", "phone_key"],
+      filterSetting: ["name", "name_e", this.$i18n.locale == 'ar' ? 'country.name' : 'country.name_e', "phone_key"],
       countries: [],
       Tooltip: '',
       mouseEnter: null
@@ -6166,7 +6166,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.Name_en")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "country_id"
+      value: _vm.$i18n.locale == "ar" ? "country.name" : "country.name_e"
     },
     model: {
       value: _vm.filterSetting,

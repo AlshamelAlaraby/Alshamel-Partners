@@ -60,7 +60,7 @@ export default {
         is_active: true,
       },
       is_disabled: false,
-      filterSetting: ["employee_id"],
+      filterSetting: [this.$i18n.locale  == 'ar'?'employee.name':'employee.name_e'],
     };
   },
   validations: {
@@ -536,7 +536,7 @@ export default {
                   >
                     <b-form-checkbox
                       v-model="filterSetting"
-                      value="employee_id"
+                      :value="$i18n.locale  == 'ar'?'employee.name':'employee.name_e'"
                       class="mb-1"
                     >
                       {{ $t("employee.employee") }}

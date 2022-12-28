@@ -1594,7 +1594,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         salesman_type_id: true
       },
       is_disabled: false,
-      filterSetting: ["name", "name_e", "salesman_type_id"]
+      filterSetting: ["name", "name_e", this.$i18n.locale == 'ar' ? 'salesmanType.name' : 'salesmanType.name_e']
     };
   },
   validations: {
@@ -5507,7 +5507,19 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Name_en")) + "\n                  ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Name_en")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+    staticClass: "mb-1",
+    attrs: {
+      value: _vm.$i18n.locale == "ar" ? "salesmanType.name" : "salesmanType.name_e"
+    },
+    model: {
+      value: _vm.filterSetting,
+      callback: function callback($$v) {
+        _vm.filterSetting = $$v;
+      },
+      expression: "filterSetting"
+    }
+  }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"

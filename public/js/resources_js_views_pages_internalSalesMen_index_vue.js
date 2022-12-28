@@ -1584,7 +1584,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         is_active: true
       },
       is_disabled: false,
-      filterSetting: ["employee_id"]
+      filterSetting: [this.$i18n.locale == 'ar' ? 'employee.name' : 'employee.name_e']
     };
   },
   validations: {
@@ -5371,7 +5371,7 @@ var render = function render() {
   }, [_c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
-      value: "employee_id"
+      value: _vm.$i18n.locale == "ar" ? "employee.name" : "employee.name_e"
     },
     model: {
       value: _vm.filterSetting,
