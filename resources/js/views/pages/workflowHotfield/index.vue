@@ -150,17 +150,16 @@ export default {
           this.isLoader = false;
         });
     },
-    getDataCurrentPage(page = 1) {
-      if (
-        this.current_page <= this.roleWorkflowHotfieldsPagination.last_page &&
-        this.current_page != this.roleWorkflowHotfieldsPagination.current_page &&
-        this.current_page
-      ) {
-        this.isLoader = true;
-        let filter = "";
-        for (let i = 0; i > this.filterSetting.length; ++i) {
-          filter += `columns[${i}]=${this.filterSetting[i]}&`;
-        }
+    methods: {
+        /**
+         *  start get Data module && pagination
+         */
+        async getData(page = 1) {
+            this.isLoader = true;
+            let filter = '';
+            for (let i = 0; i < this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
 
         adminApi
           .get(

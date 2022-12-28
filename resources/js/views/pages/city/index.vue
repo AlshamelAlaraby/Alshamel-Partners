@@ -188,9 +188,13 @@ export default {
      */
     getData(page = 1) {
       this.isLoader = true;
+        let filter = '';
+        for (let i = 0; i < this.filterSetting.length; ++i) {
+            filter += `columns[${i}]=${this.filterSetting[i]}&`;
+        }
 
       adminApi
-        .get(`/cities?page=${page}&per_page=${this.per_page}`)
+        .get(`/cities?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${filter}`)
         .then((res) => {
           let l = res.data;
           this.cities = l.data;
@@ -215,10 +219,14 @@ export default {
         this.current_page
       ) {
         this.isLoader = true;
+          let filter = '';
+          for (let i = 0; i < this.filterSetting.length; ++i) {
+              filter += `columns[${i}]=${this.filterSetting[i]}&`;
+          }
 
         adminApi
           .get(
-            `/cities?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${this.filterSetting}`
+            `/cities?page=${page}&per_page=${this.per_page}&search=${this.search}&columns=${filter}`
           )
           .then((res) => {
             let l = res.data;

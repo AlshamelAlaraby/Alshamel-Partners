@@ -164,8 +164,12 @@ export default {
          */
         getData(page = 1) {
             this.isLoader = true;
+            let filter = "";
+            for (let i = 0; i < this.filterSetting.length; ++i) {
+                filter += `columns[${i}]=${this.filterSetting[i]}&`;
+            }
             adminApi
-                .get(`/banks?page=${page}&per_page=${this.per_page}`)
+                .get(`/banks?page=${page}&per_page=${this.per_page}&search=${this.search}&${filter}`)
                 .then((res) => {
                     let l = res.data;
                     this.banks = l.data;
@@ -190,9 +194,13 @@ export default {
                 this.current_page
             ) {
                 this.isLoader = true;
+                let filter = "";
+                for (let i = 0; i < this.filterSetting.length; ++i) {
+                    filter += `columns[${i}]=${this.filterSetting[i]}&`;
+                }
                 adminApi
                     .get(
-                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}`
+                        `/banks?page=${this.current_page}&per_page=${this.per_page}&search=${this.search}&${filter}`
                     )
                     .then((res) => {
                         let l = res.data;

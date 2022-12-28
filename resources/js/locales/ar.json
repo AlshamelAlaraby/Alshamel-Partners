@@ -653,6 +653,10 @@
         "Properties": "خاصيه",
         "addBankAccount" : "اضافة حساب بنك",
         "editBankAccount": "تعديل حساب البنك",
-        "Bank": "البنك"
+        "Bank": "البنك",
+        "branches": "الفروع",
+        "users": "المستخدمين",
+        "employees": "الموظفين",
+        "salesmen": "موظفين المبيعات"
     }
 }
