@@ -383,7 +383,11 @@ export default {
 </template>
 <style scoped>
 .logo-lg img {
-  width: 90px;
+  width: 70px;
+  height: 45px;
+}
+.logo-sm img {
+  width: 70px;
   height: 45px;
 }
 </style>
