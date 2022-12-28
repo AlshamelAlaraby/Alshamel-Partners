@@ -512,6 +512,7 @@
         }
     },
     "general": {
+        "elshamel":"الشامل",
         "CantDeleteRelation":"لا تستطيع حذف عنصر لديه علاقة مع عنصر اخر",
         "ScreenPropertiesTable":"جدول الشاشات والخصائص",
         "cantSelectChildToBeParent":"لا يمكن اختيار هذا العنصر لانه من ابناء العنصر الحالي",
