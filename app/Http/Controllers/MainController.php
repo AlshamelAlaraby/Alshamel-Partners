@@ -16,7 +16,7 @@ class MainController extends \Illuminate\Routing\Controller
         $this->setting = $setting;
     }
 
-    public function media(\App\Http\Requests\UploadMediaRequest $request)
+    public function media(\App\Http\Requests\UploadMediaRequest$request)
     {
 
         if (is_array($request->media)) {
@@ -69,5 +69,17 @@ class MainController extends \Illuminate\Routing\Controller
     {
         $model = $this->setting->where('user_id', $user_id)->where('screen_id', $screen_id)->first();
         return responseJson(200, 'success', new \App\Http\Resources\ScreenSetting\ScreenSettingResource($model));
+    }
+
+    public function statices()
+    {
+        $data = [
+            "employees" => \App\Models\Employee::count(),
+            "users" => \App\Models\User::count(),
+            'salesmen' => \App\Models\Salesman::count(),
+            'branches' => \App\Models\Branch::count(),
+
+        ];
+        return responseJson(200, 'success', $data);
     }
 }
