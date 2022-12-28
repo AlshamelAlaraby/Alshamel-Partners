@@ -124,7 +124,7 @@ var render = function render() {
     staticClass: "container"
   }, [_vm._t("default")], 2)]), _vm._v(" "), _c("footer", {
     staticClass: "footer footer-alt"
-  }, [_vm._v("\n    " + _vm._s(new Date().getFullYear()) + " © Minton theme by\n    "), _c("a", {
+  }, [_vm._v("\n    " + _vm._s(new Date().getFullYear()) + " © " + _vm._s(_vm.$t("general.elshamel")) + "\n    "), _c("a", {
     attrs: {
       href: ""
     }
