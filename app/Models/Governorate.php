@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Governorate extends Model
 {
-    use HasFactory;
+    use HasFactory, LogTrait;
 
     protected $fillable = [
         'name',
@@ -15,7 +16,7 @@ class Governorate extends Model
         'country_id',
         'is_active',
         'is_default',
-        "phone_key"
+        "phone_key",
     ];
 
     protected $casts = [
@@ -38,11 +39,22 @@ class Governorate extends Model
         return $this->hasMany(Avenue::class);
     }
 
-    public function hasChildren(){
-        if ($this->avenues()->count() > 0 || $this->cities()->count() > 0){
+    public function hasChildren()
+    {
+        if ($this->avenues()->count() > 0 || $this->cities()->count() > 0) {
             return true;
         }
         return false;
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Governorate')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
 }

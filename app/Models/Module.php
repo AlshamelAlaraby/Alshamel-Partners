@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Module extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
         'name',
@@ -36,10 +37,19 @@ class Module extends Model
         return $this->belongsToMany(Company::class, 'company_module', 'module_id', 'company_id');
     }
 
-
     public function getHaveChildrenAttribute()
     {
         return static::where("parent_id", $this->id)->count() > 0;
+    }
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = auth()->user()->id ?? "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Module')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
 }

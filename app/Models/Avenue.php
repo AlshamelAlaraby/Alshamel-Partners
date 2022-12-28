@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Avenue extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,LogTrait;
 
     protected $fillable = [
         'name',
@@ -36,6 +37,17 @@ class Avenue extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+
+    public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions
+    {
+        $user = @auth()->user()->id ?: "system";
+
+        return \Spatie\Activitylog\LogOptions::defaults()
+            ->logAll()
+            ->useLogName('Avenue')
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
 }

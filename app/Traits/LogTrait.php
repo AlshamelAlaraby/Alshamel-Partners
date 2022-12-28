@@ -30,23 +30,15 @@ trait LogTrait
     public function scopeFilter($query, $request)
     {
         return $query->where(function ($q) use ($request) {
-            if ($request->search) {
-                $q->where('name', 'like', '%' . $request->search . '%');
-                $q->orWhere('name_e', 'like', '%' . $request->search . '%');
-            }
+            // if ($request->search) {
+            //     $q->where('name', 'like', '%' . $request->search . '%');
+            //     $q->orWhere('name_e', 'like', '%' . $request->search . '%');
+            // }
 
             if ($request->search && $request->columns) {
                 foreach ($request->columns as $column) {
                     $q->orWhere($column, 'like', '%' . $request->search . '%');
                 }
-            }
-
-            if ($request->name) {
-                $q->orWhere('name', 'like', '%' . $request->name . '%');
-            }
-
-            if ($request->name_e) {
-                $q->orWhere('name_e', 'like', '%' . $request->name_e . '%');
             }
 
             if ($request->key && $request->value) {
