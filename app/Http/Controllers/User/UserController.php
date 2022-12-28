@@ -6,6 +6,7 @@ use App\Http\Requests\AllRequest;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\User\UserResource;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class UserController extends Controller
@@ -84,6 +85,14 @@ class UserController extends Controller
         $this->modelInterface->delete($id);
 
         return responseJson(200, 'success');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        foreach ($request->ids as $id) {
+            $this->modelInterface->delete($id);
+        }
+        return responseJson(200, __('Done'));
     }
 
 }

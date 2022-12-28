@@ -17,9 +17,6 @@ class Company extends Model
         return Storage::disk("companies")->url($photo);
     }
 
-
-
-
     public function stores()
     {
         return $this->hasMany(Store::class);
@@ -30,9 +27,10 @@ class Company extends Model
         return $this->hasMany(Serial::class);
     }
 
-    public function hasChildren(){
-        $h = $this->stores ()->count () > 0 ||
-             $this->serials ()->count () > 0
+    public function hasChildren()
+    {
+        $h = $this->stores()->count() > 0 ||
+        $this->serials()->count() > 0
         ;
         return $h;
     }
