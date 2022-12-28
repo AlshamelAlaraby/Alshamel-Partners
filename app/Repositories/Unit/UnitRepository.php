@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class UnitRepository implements UnitInterface
 {
 
-    public function __construct(private \App\Models\Unit$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media,private UserSettingScreen $setting)
+    public function __construct(private \App\Models\Unit$model, private \Spatie\MediaLibrary\MediaCollections\Models\Media$media, private UserSettingScreen $setting)
     {
         $this->model = $model;
         $this->media = $media;
@@ -17,9 +17,7 @@ class UnitRepository implements UnitInterface
 
     public function all($request)
     {
-        $models = $this->model->where(function ($q) use ($request) {
-            $this->model->scopeFilter($q , $request);
-        })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -59,7 +57,6 @@ class UnitRepository implements UnitInterface
         $this->forget($id);
         $model->delete();
     }
-
 
     public function setting($request)
     {
