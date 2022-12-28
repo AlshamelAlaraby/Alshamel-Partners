@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import Role from "../../../components/create/role.vue";
 import Multiselect from "vue-multiselect";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -31,6 +32,8 @@ export default {
         return {
             per_page: 50,
             search: '',
+            Tooltip: '',
+            mouseEnter: null,
             debounce: {},
             roleWorkflowsPagination: {},
             roleWorkflows: [],
@@ -430,6 +433,35 @@ export default {
                 this.edit.role_id = null;
             }
         },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/role-workflows/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -779,7 +811,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('editroleWorkflow')"
+                                            :title="$t('general.editroleWorkflow')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -844,7 +876,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

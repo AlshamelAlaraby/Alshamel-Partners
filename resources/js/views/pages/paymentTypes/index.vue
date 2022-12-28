@@ -11,6 +11,7 @@ import alphaArabic from "../../../helper/alphaArabic";
 import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
+import {formatDateOnly} from "../../../helper/startDate";
 
 /**
  * Advanced Table component
@@ -59,7 +60,9 @@ export default {
                 is_default: true
             },
             is_disabled: false,
-            filterSetting: ['name', 'name_e']
+            filterSetting: ['name', 'name_e'],
+            Tooltip: '',
+            mouseEnter: null
         }
     },
     validations: {
@@ -127,7 +130,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -153,7 +156,6 @@ export default {
                     this.paymentTypes = l.data;
                     this.paymentTypesPagination = l.pagination;
                     this.current_page = l.pagination.current_page;
-                    console.log(l.data)
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -319,6 +321,8 @@ export default {
          *  edit module
          */
         editSubmit(id) {
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
             this.$v.edit.$touch();
 
             if (this.$v.edit.$invalid) {
@@ -400,7 +404,36 @@ export default {
          */
         moveInput(tag, c, index) {
             document.querySelector(`${tag}[data-${c}='${index}']`).focus()
-        }
+        },
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/payment-types/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -1006,7 +1039,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i class="fe-info" style="font-size: 22px;"></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

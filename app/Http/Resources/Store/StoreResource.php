@@ -23,7 +23,7 @@ class StoreResource extends JsonResource
             'is_active' => $this->is_active,
              'company_id' => $this->company_id,
             'branch' => new BranchResource($this->branch),
-
+            "branch_id"=>$this->branch_id
         ];
     }
 }

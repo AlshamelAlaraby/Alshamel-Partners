@@ -64,7 +64,9 @@ export default {
                 end_date: true
             },
             is_disabled: false,
-            filterSetting: ['name','name_e']
+            filterSetting: ['name','name_e'],
+            Tooltip: '',
+            mouseEnter: null
         }
     },
     validations: {
@@ -450,7 +452,33 @@ export default {
                 this.edit.end_date = null;
             }
         },
-        formatDate(value){return formatDateOnly(value);}
+        formatDate(value){return formatDateOnly(value);},
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/financial-years/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -1013,7 +1041,19 @@ export default {
                                           </b-modal>
                                           <!--  /edit   -->
                                       </td>
-                                    <td><i class="fe-info" style="font-size: 22px;"></i></td>
+                                    <td>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 </tbody>
                                 <tbody v-else>

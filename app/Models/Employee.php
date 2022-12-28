@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Employee extends Model
 {
-    use HasFactory, SoftDeletes, LogsActivity, CausesActivity;
+    use HasFactory, SoftDeletes, LogTrait;
 
     protected $fillable = [
         'name',
@@ -29,15 +27,10 @@ class Employee extends Model
         return $this->hasOne(InternalSalesman::class);
     }
 
-    public function hasChildren(){
-        $h = $this->internalSalesman ()->exists ();
-        return $h;
-    }
-
-    public function tapActivity(Activity $activity, string $eventName)
+    public function hasChildren()
     {
-        $activity->causer_id = auth()->user()->id ?? 0;
-        $activity->causer_type = auth()->user()->role ?? "admin";
+        $h = $this->internalSalesman()->exists();
+        return $h;
     }
 
     public function getActivitylogOptions(): LogOptions
@@ -47,6 +40,6 @@ class Employee extends Model
         return \Spatie\Activitylog\LogOptions::defaults()
             ->logAll()
             ->useLogName('Employee')
-            ->setDescriptionForEvent(fn (string $eventName) => "This model has been {$eventName} by ($user)");
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 }

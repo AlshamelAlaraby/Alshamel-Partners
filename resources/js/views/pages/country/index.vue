@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
+import {formatDateOnly} from "../../../helper/startDate";
 /**
  * Advanced Table component
  */
@@ -77,6 +78,8 @@ export default {
                 is_active: true
             },
             idDelete: null,
+            Tooltip: '',
+            mouseEnter: null,
             filterSetting: ['name', 'name_e', 'long_name', 'long_name_e', 'short_code', 'phone_key', 'national_id_length']
         }
     },
@@ -159,7 +162,7 @@ export default {
                 if(ew == 32)
                     return true;
                 if(48 <= ew && ew <= 57)
-                    return false;
+                    return true;
                 if(65 <= ew && ew <= 90)
                     return false;
                 if(97 <= ew && ew <= 122)
@@ -394,6 +397,10 @@ export default {
          *  edit country
          */
         editSubmit(id) {
+            if(!this.edit.name){ this.edit.name = this.edit.name_e}
+            if(!this.edit.name_e){ this.edit.name_e = this.edit.name}
+            if(!this.edit.long_name){ this.edit.long_name = this.edit.long_name_e}
+            if(!this.edit.long_name_e){ this.edit.long_name_e = this.edit.long_name}
             this.$v.edit.$touch();
             this.images.forEach(e => {this.edit.old_media.push(e.id);});
             if (this.$v.edit.$invalid) {
@@ -432,27 +439,6 @@ export default {
         /*
         *  log country
         * */
-        log(id) {
-
-            adminApi.get(`/countries/logs/${id}`)
-                .then((res) => {
-
-                    console.log(res.data.data);
-
-                })
-                .catch((err) => {
-                    if (err.response.data) {
-                        this.errors = err.response.data.errors;
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: `${this.$t('general.Error')}`,
-                            text: `${this.$t('general.Thereisanerrorinthesystem')}`,
-                        });
-                    }
-                })
-
-        },
         /**
          *   show Modal (edit)
          */
@@ -658,6 +644,35 @@ export default {
         /**
          *  end Image ceate
          */
+        formatDate(value) {
+            return formatDateOnly(value);
+        },
+        log(id) {
+            if(this.mouseEnter != id){
+                this.Tooltip = "";
+                this.mouseEnter = id;
+                adminApi
+                    .get(`/countries/logs/${id}`)
+                    .then((res) => {
+                        let l = res.data.data;
+                        l.forEach((e) => {
+                            this.Tooltip += `Created By: ${e.causer_type}; Event: ${
+                                e.event
+                            }; Description: ${e.description} ;Created At: ${this.formatDate(
+                                e.created_at
+                            )} \n`;
+                        });
+                        $(`#tooltip-${id}`).tooltip();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: `${this.$t("general.Error")}`,
+                            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                        });
+                    });
+            }
+        },
     },
 };
 </script>
@@ -2017,10 +2032,17 @@ export default {
                                         <!--  /edit   -->
                                     </td>
                                     <td>
-                                        <i
-                                            @mouseenter="log(data.id)"
-                                            class="fe-info"
-                                        ></i>
+                                        <button
+                                            @mousemove="log(data.id)"
+                                            @mouseover="log(data.id)"
+                                            type="button"
+                                            class="btn"
+                                            :id="`tooltip-${data.id}`"
+                                            :data-placement="$i18n.locale == 'en' ? 'left' : 'right'"
+                                            :title="Tooltip"
+                                        >
+                                            <i class="fe-info" style="font-size: 22px"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

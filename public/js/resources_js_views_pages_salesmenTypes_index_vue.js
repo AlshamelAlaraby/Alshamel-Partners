@@ -1337,7 +1337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1346,6 +1346,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../helper/alphaEnglish */ "./resources/js/helper/alphaEnglish.js");
 /* harmony import */ var _helper_tableSort__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/tableSort */ "./resources/js/helper/tableSort.js");
 /* harmony import */ var _helper_senderHoverHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../helper/senderHoverHelper */ "./resources/js/helper/senderHoverHelper.js");
+/* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
+
 
 
 
@@ -1367,7 +1369,7 @@ __webpack_require__.r(__webpack_exports__);
     title: "Sales Men Type",
     meta: [{
       name: "Sales Men Type",
-      content: 'Sales Men Type'
+      content: "Sales Men Type"
     }]
   },
   components: {
@@ -1379,22 +1381,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      per_page: 50,
-      search: '',
+      per_page: 2,
+      search: "",
       debounce: {},
       salesmenTypesPagination: {},
       salesmenTypes: [],
       parents: [],
       enabled3: false,
       isLoader: false,
+      Tooltip: "",
+      mouseEnter: "",
       create: {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       },
       edit: {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       },
       errors: {},
@@ -1409,38 +1413,38 @@ __webpack_require__.r(__webpack_exports__);
         is_employee: true
       },
       is_disabled: false,
-      filterSetting: ['name', 'name_e']
+      filterSetting: ["name", "name_e"]
     };
   },
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       is_employee: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
       }
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       is_employee: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
       }
     }
   },
@@ -1501,55 +1505,77 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    formatDate: function formatDate(value) {
+      return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_11__.formatDateOnly)(value);
+    },
+    log: function log(id) {
+      var _this3 = this;
+      if (this.mouseEnter != id) {
+        this.Tooltip = "";
+        this.mouseEnter = id;
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen-types/logs/".concat(id)).then(function (res) {
+          var l = res.data.data;
+          l.forEach(function (e) {
+            _this3.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this3.formatDate(e.created_at), " \n");
+          });
+        })["catch"](function (err) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "error",
+            title: "".concat(_this3.$t("general.Error")),
+            text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
+          });
+        });
+      } else {}
+    },
     /**
      *  start get Data module && pagination
      */
     getData: function getData() {
-      var _this3 = this;
+      var _this4 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = '';
-      for (var i = 0; i > this.filterSetting.length; ++i) {
+      var filter = "";
+      for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen-types?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
         var l = res.data;
-        _this3.salesmenTypes = l.data;
-        _this3.salesmenTypesPagination = l.pagination;
-        _this3.current_page = l.pagination.current_page;
+        _this4.salesmenTypes = l.data;
+        _this4.salesmenTypesPagination = l.pagination;
+        _this4.current_page = l.pagination.current_page;
         console.log(l.data);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this3.$t('general.Error')),
-          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
+          icon: "error",
+          title: "".concat(_this4.$t("general.Error")),
+          text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
         });
       })["finally"](function () {
-        _this3.isLoader = false;
+        _this4.isLoader = false;
       });
     },
     getDataCurrentPage: function getDataCurrentPage() {
-      var _this4 = this;
+      var _this5 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.salesmenTypesPagination.last_page && this.current_page != this.salesmenTypesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
-        for (var i = 0; i > this.filterSetting.length; ++i) {
+        var filter = "";
+        for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen-types?page=".concat(page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/salesmen-types?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
           var l = res.data;
-          _this4.salesmenTypes = l.data;
-          _this4.salesmenTypesPagination = l.pagination;
-          _this4.current_page = l.pagination.current_page;
+          _this5.salesmenTypes = l.data;
+          _this5.salesmenTypesPagination = l.pagination;
+          _this5.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: 'error',
-            title: "".concat(_this4.$t('general.Error')),
-            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+            icon: "error",
+            title: "".concat(_this5.$t("general.Error")),
+            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
-          _this4.isLoader = false;
+          _this5.isLoader = false;
         });
       }
     },
@@ -1560,38 +1586,38 @@ __webpack_require__.r(__webpack_exports__);
      *  start delete module
      */
     deleteModule: function deleteModule(id) {
-      var _this5 = this;
+      var _this6 = this;
       sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-        title: "".concat(this.$t('general.Areyousure')),
-        text: "".concat(this.$t('general.Youwontbeabletoreverthis')),
+        title: "".concat(this.$t("general.Areyousure")),
+        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
         type: "warning",
         showCancelButton: true,
-        confirmButtonText: "".concat(this.$t('general.Yesdeleteit')),
-        cancelButtonText: "".concat(this.$t('general.Nocancel')),
+        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+        cancelButtonText: "".concat(this.$t("general.Nocancel")),
         confirmButtonClass: "btn btn-success mt-2",
         cancelButtonClass: "btn btn-danger ml-2 mt-2",
         buttonsStyling: false
       }).then(function (result) {
         if (result.value) {
-          _this5.isLoader = true;
+          _this6.isLoader = true;
           _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/salesmen-types/".concat(id)).then(function (res) {
-            _this5.getData();
-            _this5.checkAll = [];
+            _this6.getData();
+            _this6.checkAll = [];
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              title: "".concat(_this5.$t('general.Deleted')),
-              text: "".concat(_this5.$t('general.Yourrowhasbeendeleted')),
+              icon: "success",
+              title: "".concat(_this6.$t("general.Deleted")),
+              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
               showConfirmButton: false,
               timer: 1500
             });
           })["catch"](function (err) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this5.$t('general.Error')),
-              text: "".concat(_this5.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this6.$t("general.Error")),
+              text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
             });
           })["finally"](function () {
-            _this5.isLoader = false;
+            _this6.isLoader = false;
           });
         }
       });
@@ -1603,14 +1629,14 @@ __webpack_require__.r(__webpack_exports__);
      *  reset Modal (create)
      */
     resetModalHidden: function resetModalHidden() {
-      var _this6 = this;
+      var _this7 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       };
       this.$nextTick(function () {
-        _this6.$v.$reset();
+        _this7.$v.$reset();
       });
       this.errors = {};
       this.$bvModal.hide("create");
@@ -1619,14 +1645,14 @@ __webpack_require__.r(__webpack_exports__);
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
-      var _this7 = this;
+      var _this8 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       };
       this.$nextTick(function () {
-        _this7.$v.$reset();
+        _this8.$v.$reset();
       });
       this.errors = {};
     },
@@ -1634,20 +1660,20 @@ __webpack_require__.r(__webpack_exports__);
      *  create module
      */
     resetForm: function resetForm() {
-      var _this8 = this;
+      var _this9 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       };
       this.$nextTick(function () {
-        _this8.$v.$reset();
+        _this9.$v.$reset();
       });
       this.is_disabled = false;
       this.errors = {};
     },
     AddSubmit: function AddSubmit() {
-      var _this9 = this;
+      var _this10 = this;
       if (!this.create.name) {
         this.create.name = this.create.name_e;
       }
@@ -1661,28 +1687,28 @@ __webpack_require__.r(__webpack_exports__);
         this.isLoader = true;
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/salesmen-types", this.create).then(function (res) {
-          _this9.is_disabled = true;
-          _this9.getData();
+          _this10.is_disabled = true;
+          _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
+              icon: "success",
+              text: "".concat(_this10.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
           }, 500);
         })["catch"](function (err) {
           if (err.response.data) {
-            _this9.errors = err.response.data.errors;
+            _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this9.$t('general.Error')),
-              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this10.$t("general.Error")),
+              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
-          _this9.isLoader = false;
+          _this10.isLoader = false;
         });
       }
     },
@@ -1690,7 +1716,7 @@ __webpack_require__.r(__webpack_exports__);
      *  edit module
      */
     editSubmit: function editSubmit(id) {
-      var _this10 = this;
+      var _this11 = this;
       this.$v.edit.$touch();
       if (this.$v.edit.$invalid) {
         return;
@@ -1706,28 +1732,28 @@ __webpack_require__.r(__webpack_exports__);
           name_e: name_e,
           is_employee: is_employee
         }).then(function (res) {
-          _this10.$bvModal.hide("modal-edit-".concat(id));
-          _this10.getData();
+          _this11.$bvModal.hide("modal-edit-".concat(id));
+          _this11.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
+              icon: "success",
+              text: "".concat(_this11.$t("general.Editsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
           }, 500);
         })["catch"](function (err) {
           if (err.response.data) {
-            _this10.errors = err.response.data.errors;
+            _this11.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this11.$t("general.Error")),
+              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
-          _this10.isLoader = false;
+          _this11.isLoader = false;
         });
       }
     },
@@ -1749,8 +1775,8 @@ __webpack_require__.r(__webpack_exports__);
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         is_employee: 1
       };
     },
@@ -4890,7 +4916,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("salesmen-types.Table")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("salesmen-types.Table")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -4919,7 +4945,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Name")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -4931,7 +4957,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Name_en")) + "\n                  ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -4988,7 +5014,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -5037,11 +5063,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -5059,7 +5085,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5068,7 +5094,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name_en")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_employee,
@@ -5077,7 +5103,7 @@ var render = function render() {
       },
       expression: "setting.is_employee"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.isEmployee")) + "\n                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5091,7 +5117,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.salesmenTypesPagination.from) + "-" + _vm._s(_vm.salesmenTypesPagination.to) + " /\n                                        " + _vm._s(_vm.salesmenTypesPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.salesmenTypesPagination.from) + "-" + _vm._s(_vm.salesmenTypesPagination.to) + "\n                    /\n                    " + _vm._s(_vm.salesmenTypesPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -5170,7 +5196,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5182,7 +5208,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5205,7 +5231,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -5216,7 +5242,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5254,12 +5280,12 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                            " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                            " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v("\n                                                " + _vm._s(errorMessage) + "\n                                            ")]);
+    }, [_vm._v("\n                        " + _vm._s(errorMessage) + "\n                      ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
@@ -5269,7 +5295,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Name_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5307,12 +5333,12 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                            " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                            " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                      ")]);
   }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-md-12"
   }, [_c("div", {
@@ -5322,7 +5348,7 @@ var render = function render() {
     attrs: {
       "for": "inlineFormCustomSelectPref"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.isEmployee")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
     directives: [{
@@ -5372,7 +5398,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.$t("general.No")))])]), _vm._v(" "), _vm.errors.is_employee ? _vm._l(_vm.errors.is_employee, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                      ")]);
   }) : _vm._e()], 2)])])])]), _vm._v(" "), _c("div", {
     staticClass: "table-responsive mb-3 custom-table-theme position-relative"
   }, [_vm.isLoader ? _c("loader", {
@@ -5480,7 +5506,7 @@ var render = function render() {
         _vm.salesmenTypes.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.salesmenTypes.length > 0 ? _c("tbody", _vm._l(_vm.salesmenTypes, function (data, index) {
     return _c("tr", {
@@ -5543,7 +5569,7 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.is_employee ? _c("td", [_c("span", {
       "class": [parseInt(data.is_employee) == true ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(parseInt(data.is_employee) == true ? "".concat(_vm.$t("general.Yes")) : "".concat(_vm.$t("general.No"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(parseInt(data.is_employee) == true ? "".concat(_vm.$t("general.Yes")) : "".concat(_vm.$t("general.No"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -5552,7 +5578,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -5617,7 +5643,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -5640,7 +5666,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -5651,7 +5677,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-1"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Name")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -5684,12 +5710,12 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                            " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                                            " + _vm._s(_vm.$t("general.letters")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                            " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                                            " + _vm._s(_vm.$t("general.letters")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-12"
     }, [_c("div", {
@@ -5699,7 +5725,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-2"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Name_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -5732,14 +5758,14 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                                            " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                                            " + _vm._s(_vm.$t("general.letters")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                                            " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                                            " + _vm._s(_vm.$t("general.letters")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.alphaEnglish ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.alphaEnglish ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.alphaEnglish")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.alphaEnglish")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                ")]);
     }) : _vm._e()], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-md-12"
     }, [_c("div", {
@@ -5749,7 +5775,7 @@ var render = function render() {
       attrs: {
         "for": "inlineFormCustomSelectPrefs"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.isEmployee")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("select", {
       directives: [{
@@ -5782,30 +5808,46 @@ var render = function render() {
         value: "",
         selected: ""
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...\n                                                            ")]), _vm._v(" "), _c("option", {
+    }, [_vm._v("\n                                  " + _vm._s(_vm.$t("general.Choose")) + "...\n                                ")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "1"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Yes")) + "\n                                                            ")]), _vm._v(" "), _c("option", {
+    }, [_vm._v(_vm._s(_vm.$t("general.Yes")))]), _vm._v(" "), _c("option", {
       attrs: {
         value: "0"
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.No")) + "\n                                                            ")])]), _vm._v(" "), _vm.errors.is_employee ? _vm._l(_vm.errors.is_employee, function (errorMessage, index) {
+    }, [_vm._v(_vm._s(_vm.$t("general.No")))])]), _vm._v(" "), _vm.errors.is_employee ? _vm._l(_vm.errors.is_employee, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
-    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("i", {
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                ")]);
+    }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn",
+      attrs: {
+        type: "button",
+        "data-toggle": "tooltip",
+        "data-placement": _vm.$i18n.locale == "en" ? "left" : "right",
+        title: _vm.Tooltip
+      },
+      on: {
+        mouseover: function mouseover($event) {
+          return _vm.log(data.id);
+        },
+        mousemove: function mousemove($event) {
+          return _vm.log(data.id);
+        }
+      }
+    }, [_c("i", {
       staticClass: "fe-info",
       staticStyle: {
         "font-size": "22px"
       }
-    })])]);
+    })])])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {
       colspan: "6"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7214,6 +7256,33 @@ __webpack_require__.r(__webpack_exports__);
   });
   e.target.classList.add('active');
 }
+
+/***/ }),
+
+/***/ "./resources/js/helper/startDate.js":
+/*!******************************************!*\
+  !*** ./resources/js/helper/startDate.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "formatDateOnly": () => (/* binding */ formatDateOnly),
+/* harmony export */   "formatDateTime": () => (/* binding */ formatDateTime)
+/* harmony export */ });
+function formatDateTime(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1] + ' ' + st[2];
+}
+;
+function formatDateOnly(item) {
+  var now = new Date(item);
+  var st = now.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/);
+  return st[1];
+}
+;
 
 /***/ }),
 
