@@ -17,7 +17,7 @@ class WorkflowHotfieldRepository implements WorkflowHotfieldRepositoryInterface
 
     public function getAllWorkflowHotfields($request)
     {
-        $models = $this->model->Filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -57,18 +57,16 @@ class WorkflowHotfieldRepository implements WorkflowHotfieldRepositoryInterface
         $model->delete();
     }
 
-
     public function logs($id)
     {
         return $this->model->find($id)->activities()->orderBy('created_at', 'DESC')->get();
     }
 
-
     public function setting($request)
     {
         DB::transaction(function () use ($request) {
-            $screenSetting = UserSettingScreen::where('user_id',$request['user_id'])->where('screen_id',$request['screen_id'])->first();
-            $request['data_json'] =json_encode($request['data_json']);
+            $screenSetting = UserSettingScreen::where('user_id', $request['user_id'])->where('screen_id', $request['screen_id'])->first();
+            $request['data_json'] = json_encode($request['data_json']);
             if (!$screenSetting) {
                 UserSettingScreen::create($request);
             } else {
@@ -79,7 +77,7 @@ class WorkflowHotfieldRepository implements WorkflowHotfieldRepositoryInterface
 
     public function getSetting($user_id, $screen_id)
     {
-        return  UserSettingScreen::where('user_id',$user_id)->where('screen_id',$screen_id)->first();
+        return UserSettingScreen::where('user_id', $user_id)->where('screen_id', $screen_id)->first();
     }
 
     private function forget($id)

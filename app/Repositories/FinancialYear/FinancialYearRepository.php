@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class FinancialYearRepository implements FinancialYearInterface
 {
 
-    public function __construct(private \App\Models\FinancialYear$model,private UserSettingScreen $setting)
+    public function __construct(private \App\Models\FinancialYear$model, private UserSettingScreen $setting)
     {
         $this->model = $model;
 
@@ -16,9 +16,7 @@ class FinancialYearRepository implements FinancialYearInterface
 
     public function all($request)
     {
-        $models = $this->model->where(function ($q) use ($request) {
-            $this->model->scopeFilter($q , $request);
-        })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
@@ -56,7 +54,6 @@ class FinancialYearRepository implements FinancialYearInterface
         $this->forget($id);
         $model->delete();
     }
-
 
     public function setting($request)
     {

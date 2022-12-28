@@ -16,17 +16,7 @@ class BankAccountRepository implements BankAccountInterface
 
     public function all($request)
     {
-        $models = $this->model->where(function ($q) use ($request) {
-
-            if ($request->bank_id) {
-                $q->where('bank_id', $request->bank_id);
-            }
-            if ($request->search && $request->columns) {
-                foreach ($request->columns as $column) {
-                    $q->orWhere($column, 'like', '%' . $request->search . '%');
-                }
-            }
-        })->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
+        $models = $this->model->filter($request)->orderBy($request->order ? $request->order : 'updated_at', $request->sort ? $request->sort : 'DESC');
 
         if ($request->per_page) {
             return ['data' => $models->paginate($request->per_page), 'paginate' => true];
