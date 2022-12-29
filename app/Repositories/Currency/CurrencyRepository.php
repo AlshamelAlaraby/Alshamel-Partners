@@ -27,7 +27,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     {
         return DB::transaction(function () use ($data) {
             cacheForget("currencies");
-            return $this->model->create($data);
+            $model = $this->model->create($data);
+            if (request()->is_default == 1) {
+                $this->model->where('id', '!=', $model->id)->update(['is_default' => 0]);
+            }
+            return $model;
 
         });
     }

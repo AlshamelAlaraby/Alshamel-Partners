@@ -20,12 +20,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('description_e')->nullable();
             $table->double('land_area')->nullable()->default(0);
-            $table->double('building_area')->nullable()->default(0);
+            $table->double('building_area')->nullable()->default(0)->comment("Building area in Square Meter (<=land area)");
             $table->char('construction_year', 4)->nullable()->default('2018');
             $table->unsignedInteger('project_id')->nullable()->default(0);
             $table->unsignedInteger('country_id')->nullable()->default(0);
             $table->unsignedInteger('city_id')->nullable()->default(0);
-            $table->unsignedInteger('region_id')->nullable()->default(0);
             $table->unsignedInteger('avenue_id')->nullable()->default(0);
             $table->double('lng')->nullable()->default(0);
             $table->double('lat')->nullable()->default(0);
