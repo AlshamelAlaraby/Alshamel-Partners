@@ -12,6 +12,7 @@ import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
 import {formatDateOnly} from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -21,6 +22,8 @@ export default {
         title: "Payment Type",
         meta: [{name: "Payment Type", content: 'Payment Type'}],
     },
+  mixins: [translation],
+
     components: {
         Layout,
         PageHeader,
@@ -515,10 +518,10 @@ export default {
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
                                         <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                                            {{ $t('general.Name') }}
+                                            {{ getCompanyKey('payment_type_name_ar') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                                            {{ $t('general.Name_en') }}
+                                            {{ getCompanyKey('payment_type_name_en') }}
                                         </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
@@ -611,14 +614,14 @@ export default {
                                                     :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                                     ref="dropdown" class="dropdown-custom-ali">
                                             <b-form-checkbox v-model="setting.name" class="mb-1">{{
-                                                    $t('general.Name')
+                                                    getCompanyKey('payment_type_name_ar')
                                                 }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('payment_type_name_en') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.is_default" class="mb-1">
-                                                {{ $t('general.is_default') }}
+                                                {{ getCompanyKey('payment_type_default') }}
                                             </b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
@@ -665,7 +668,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('general.AddPaymentType')"
+                            :title="getCompanyKey('payment_type_create_form')"
                             title-class="font-18"
                             body-class="p-4 "
                             :hide-footer="true"
@@ -708,7 +711,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ getCompanyKey('payment_type_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="rtl">
@@ -743,7 +746,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('payment_type_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="ltr">
@@ -778,7 +781,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
-                                                {{ $t('general.is_default') }}
+                                                {{ getCompanyKey('payment_type_default') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <select
@@ -829,7 +832,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ getCompanyKey('payment_type_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="paymentTypes.sort(sortString('name'))"></i>
@@ -840,7 +843,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
+                                            <span>{{ getCompanyKey('payment_type_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="paymentTypes.sort(sortString('name_e'))"></i>
@@ -851,7 +854,7 @@ export default {
                                     </th>
                                     <th v-if="setting.is_default">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.is_default') }}</span>
+                                            <span>{{ getCompanyKey('payment_type_default') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="paymentTypes.sort(sortString('name_e'))"></i>
@@ -943,7 +946,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('general.EditPaymentType')"
+                                            :title="getCompanyKey('payment_type_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -978,7 +981,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
-                                                                {{ $t('general.Name') }}
+                                                                {{ getCompanyKey('payment_type_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1016,7 +1019,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
+                                                                {{ getCompanyKey('payment_type_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
@@ -1059,7 +1062,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="my-1 mr-2" for="inlineFormCustomSelectPrefs">
-                                                                {{ $t('general.is_default') }}
+                                                                {{ getCompanyKey('payment_type_default') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <select

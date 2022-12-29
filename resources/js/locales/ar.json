@@ -658,6 +658,12 @@
         "branches": "الفروع",
         "users": "المستخدمين",
         "employees": "الموظفين",
-        "salesmen": "موظفين المبيعات"
+        "salesmen": "موظفين المبيعات",
+        "realEstate": "العقارات",
+        "owner": "الملاك",
+        "building": "البنايات",
+        "customer": "عملاء",
+        "description": "الوصف(عربي)",
+        "description_e": "الوصف(انجليزي)"
     }
 }

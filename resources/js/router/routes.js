@@ -27,6 +27,7 @@ import paymentTypes from "./routeChild/paymentTypes";
 import bankAccount from "./routeChild/bankAccount";
 import users from  "./routeChild/users";
 import propertyTrees from  "./routeChild/property-tree";
+import realEstate from  "./routeChild/realEstate";
 
 
 export default [
@@ -57,6 +58,7 @@ export default [
     ...internalSalesmen,
     ...paymentTypes,
     ...bankAccount,
+    ...realEstate,
     //**********************************************
     {
         path: '/',
