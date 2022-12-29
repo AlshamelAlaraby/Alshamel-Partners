@@ -4,7 +4,7 @@
        <!--  create   -->
        <b-modal
            id="role-create"
-           :title="$t('roles.add')"
+           :title="getCompanyKey('role_create_form')"
            title-class="font-18"
            body-class="p-4 "
            :hide-footer="true"
@@ -46,7 +46,7 @@
                <div class="row">
                    <div class="col-md-12">
                        <div class="form-group">
-                           <label class="my-1 mr-2">{{ $t('rolesType.rolesType') }}</label>
+                           <label class="my-1 mr-2">{{ getCompanyKey('role_type') }}</label>
                            <multiselect
                                @input="showRoleTypeModal"
                                v-model="create.roletype_id"
@@ -61,7 +61,7 @@
                    <div class="col-md-12">
                        <div class="form-group">
                            <label for="field-1" class="control-label">
-                               {{ $t('general.Name') }}
+                               {{ getCompanyKey('role_name_ar') }}
                                <span class="text-danger">*</span>
                            </label>
                            <div  dir="rtl">
@@ -96,7 +96,7 @@
                    <div class="col-md-12" >
                        <div class="form-group">
                            <label for="field-2" class="control-label">
-                               {{ $t('general.Name_en') }}
+                               {{ getCompanyKey('role_name_en') }}
                                <span class="text-danger">*</span>
                            </label>
                            <div dir="ltr">
@@ -145,9 +145,11 @@ import Swal from "sweetalert2";
 import RoleType from "./roleType";
 import ErrorMessage from "../widgets/errorMessage";
 import Multiselect from "vue-multiselect";
+import translation from "../../helper/translation-mixin";
 
 export default {
     name: "role",
+    mixins:[translation],
     updated(){
         $(function(){
             $(".englishInput").keypress(function(event){

@@ -1385,7 +1385,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1395,6 +1395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _email_templates_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../email/templates.vue */ "./resources/js/views/pages/email/templates.vue");
 /* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
+/* harmony import */ var _helper_translation_mixin__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helper/translation-mixin */ "./resources/js/helper/translation-mixin.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1423,6 +1424,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * Advanced Table component
  */
@@ -1434,6 +1436,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       content: "Tree properties"
     }]
   },
+  mixins: [_helper_translation_mixin__WEBPACK_IMPORTED_MODULE_11__["default"]],
   components: {
     Layout: _layouts_main__WEBPACK_IMPORTED_MODULE_0__["default"],
     PageHeader: _components_Page_header__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -1503,32 +1506,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       required: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
       }
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       required: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
       }
     }
   },
@@ -5373,7 +5376,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("property_name_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -5385,7 +5388,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("property_name_en")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5509,7 +5512,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("property_name_ar")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5518,7 +5521,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Name_en")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("property_name_en")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.required,
@@ -5527,7 +5530,7 @@ var render = function render() {
       },
       expression: "setting.required"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Required")) + "\n                  ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("required")) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5596,7 +5599,7 @@ var render = function render() {
   }, [_c("span", [_vm._v(">")])])])])], 1)])]), _vm._v(" "), _c("b-modal", {
     attrs: {
       id: "create",
-      title: _vm.$t("general.Add"),
+      title: _vm.getCompanyKey("property_create_form"),
       "title-class": "font-18",
       "body-class": "p-4 ",
       "hide-footer": true,
@@ -5777,7 +5780,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                          " + _vm._s(_vm.$t("general.Name")) + "\n                          "), _c("span", {
+  }, [_vm._v("\n                          " + _vm._s(_vm.getCompanyKey("property_name_ar")) + "\n                          "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5824,7 +5827,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                          " + _vm._s(_vm.$t("general.Name_en")) + "\n                          "), _c("span", {
+  }, [_vm._v("\n                          " + _vm._s(_vm.getCompanyKey("property_name_en")) + "\n                          "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -5865,7 +5868,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "mr-2 mb-2"
-  }, [_vm._v("\n                          " + _vm._s(_vm.$t("general.Required")) + "\n                          "), _c("span", {
+  }, [_vm._v("\n                          " + _vm._s(_vm.getCompanyKey("required")) + "\n                          "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
     "class": {
@@ -5957,7 +5960,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("property_name_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5975,7 +5978,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("property_name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5993,7 +5996,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.required ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Required")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("required")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6119,7 +6122,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("general.Edit"),
+        title: _vm.getCompanyKey("property_edit_form"),
         "title-class": "font-18",
         "body-class": "p-4",
         size: "lg",
@@ -6291,7 +6294,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-1"
       }
-    }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Name")) + "\n                                    "), _c("span", {
+    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("property_name_ar")) + "\n                                    "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6339,7 +6342,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-2"
       }
-    }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Name_en")) + "\n                                    "), _c("span", {
+    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("property_name_en")) + "\n                                    "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6381,7 +6384,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "mr-2 mb-2"
-    }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Required")) + "\n                                    "), _c("span", {
+    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("required")) + "\n                                    "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
       "class": {
@@ -7883,6 +7886,90 @@ function dynamicSortDate(property) {
   };
 }
 ;
+
+/***/ }),
+
+/***/ "./resources/js/helper/translation-mixin.js":
+/*!**************************************************!*\
+  !*** ./resources/js/helper/translation-mixin.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/adminAxios */ "./resources/js/api/adminAxios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      defaultsKeys: [],
+      companyKeys: []
+    };
+  },
+  mounted: function mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
+    this.getDefaultKeys();
+    this.getCompanyKeys();
+  },
+  methods: {
+    getDefaultKeys: function getDefaultKeys() {
+      var _this = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: 0,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this.defaultsKeys = res.data.translations;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this.$t("general.Error")),
+          text: "".concat(_this.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this.isLoader = false;
+      });
+    },
+    getCompanyKeys: function getCompanyKeys() {
+      var _this2 = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: this.company_id,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this2.companyKeys = res.data.translations;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this2.$t("general.Error")),
+          text: "".concat(_this2.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this2.isLoader = false;
+      });
+    },
+    getCompanyKey: function getCompanyKey(key) {
+      var returnedKey = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.companyKeys[_key].new_ar : this.companyKeys[_key].new_en;
+          return returnedKey;
+        }
+      }
+      for (var _key2 in this.defaultsKeys) {
+        if (_key2 == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.defaultsKeys[_key2].default_ar : this.defaultsKeys[_key2].default_en;
+          return returnedKey;
+        }
+      }
+    }
+  }
+});
 
 /***/ }),
 

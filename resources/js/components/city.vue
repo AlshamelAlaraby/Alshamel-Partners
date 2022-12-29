@@ -2,7 +2,7 @@
   <!--  create   -->
   <b-modal
     id="city-create"
-    :title="$t('city.addcity')"
+    :title="getCompanyKey('city_create_form')"
     title-class="font-18"
     size="lg"
     body-class="p-4 "
@@ -45,7 +45,7 @@
         <div class="col-md-6">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.country") }}
+              {{ getCompanyKey('city_country') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -73,7 +73,7 @@
         <div class="col-md-6">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.governorate") }}
+              {{ getCompanyKey('city_governorate') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -100,7 +100,7 @@
         <div class="col-md-6 direction" dir="rtl">
           <div class="form-group">
             <label for="field-1" class="control-label">
-              {{ $t("general.Name") }}
+              {{ getCompanyKey('city_name_ar') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -135,7 +135,7 @@
         <div class="col-md-6 direction-ltr" dir="ltr">
           <div class="form-group">
             <label for="field-2" class="control-label">
-              {{ $t("general.Name_en") }}
+              {{ getCompanyKey('city_name_en') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -170,7 +170,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label class="mr-2" for="inlineFormCustomSelectPref">
-              {{ $t("general.Status") }}
+              {{ getCompanyKey('city_status') }}
               <span class="text-danger">*</span>
             </label>
             <select
@@ -211,7 +211,7 @@ import Switches from "vue-switches";
 import ErrorMessage from "../components/widgets/errorMessage";
 import loader from "../components/loader";
 import Multiselect from "vue-multiselect";
-
+import translation from "../helper/translation-mixin";
 export default {
   components: {
     Switches,
@@ -219,7 +219,7 @@ export default {
     ErrorMessage,
     loader,
   },
-
+  mixins:[translation],
   updated() {
     $(function () {
       $(".englishInput").keypress(function (event) {

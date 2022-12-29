@@ -12,6 +12,7 @@ import alphaEnglish from "../../../helper/alphaEnglish";
 import {dynamicSortString} from "../../../helper/tableSort";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
 import {formatDateOnly} from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -28,6 +29,8 @@ export default {
         ErrorMessage,
         loader
     },
+  mixins: [translation],
+
     data() {
         return {
             per_page: 50,
@@ -516,10 +519,10 @@ export default {
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
                                         <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                                            {{ $t('general.Name') }}
+                                            {{ getCompanyKey('unit_name_ar') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                                            {{ $t('general.Name_en') }}
+                                            {{ getCompanyKey('unit_name_en') }}
                                         </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
@@ -612,14 +615,14 @@ export default {
                                                     :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                                     ref="dropdown" class="dropdown-custom-ali">
                                             <b-form-checkbox v-model="setting.name" class="mb-1">{{
-                                                    $t('general.Name')
+                                                    getCompanyKey('unit_name_ar')
                                                 }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('unit_name_en') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                                                {{ $t('general.Status') }}
+                                                {{ getCompanyKey('unit_status') }}
                                             </b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
@@ -666,7 +669,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('units.add')"
+                            :title="getCompanyKey('unit_create_form')"
                             title-class="font-18"
                             body-class="p-4 "
                             :hide-footer="true"
@@ -709,7 +712,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ getCompanyKey('unit_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div  dir="rtl">
@@ -744,7 +747,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('unit_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="ltr">
@@ -779,7 +782,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="my-1 mr-2">
-                                                {{ $t('general.Status') }}
+                                                {{ getCompanyKey('unit_status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <b-form-group :class="{
@@ -822,7 +825,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ getCompanyKey('unit_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="units.sort(sortString('name'))"></i>
@@ -833,7 +836,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
+                                            <span>{{ getCompanyKey('unit_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="units.sort(sortString('name_e'))"></i>
@@ -844,7 +847,7 @@ export default {
                                     </th>
                                     <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Status') }}</span>
+                                            <span>{{ getCompanyKey('unit_status') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="units.sort(sortString('name_e'))"></i>
@@ -936,7 +939,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('units.edit')"
+                                            :title="getCompanyKey('unit_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -971,7 +974,7 @@ export default {
                                                     <div class="col-md-12 " >
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
-                                                                {{ $t('general.Name') }}
+                                                                {{ getCompanyKey('unit_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1009,7 +1012,7 @@ export default {
                                                     <div class="col-md-12 " >
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
+                                                                {{ getCompanyKey('unit_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
@@ -1047,7 +1050,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="mr-2">
-                                                                {{ $t('general.Status') }}
+                                                                {{ getCompanyKey('unit_status') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <b-form-group :class="{

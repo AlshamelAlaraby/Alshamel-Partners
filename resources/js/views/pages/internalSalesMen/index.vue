@@ -11,6 +11,7 @@ import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import employee from "../../../components/create/employee.vue";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -20,6 +21,7 @@ export default {
     title: "Internal Sales Men",
     meta: [{ name: "Internal Sales Men", content: "Internal Sales Men" }],
   },
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -539,7 +541,7 @@ export default {
                       :value="$i18n.locale  == 'ar'?'employee.name':'employee.name_e'"
                       class="mb-1"
                     >
-                      {{ $t("employee.employee") }}
+                      {{ getCompanyKey('internal_sale_man_employee') }}
                     </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -634,10 +636,10 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.employee_id" class="mb-1"
-                        >{{ $t("employee.employee") }}
+                        >{{ getCompanyKey('internal_sale_man_employee') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('internal_sale_man_status') }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -695,7 +697,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('internalSalesmen.add')"
+              :title="getCompanyKey('internal_sale_man_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -743,7 +745,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="my-1 mr-2">
-                        {{ $t("general.employee") }}
+                        {{ getCompanyKey('internal_sale_man_employee') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -771,7 +773,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="mr-2">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('internal_sale_man_status') }}
                         <span class="text-danger">*</span>
                       </label>
                       <b-form-group
@@ -830,7 +832,7 @@ export default {
                     </th>
                     <th v-if="setting.employee_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.employee") }}</span>
+                        <span>{{ getCompanyKey('internal_sale_man_employee') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -845,7 +847,7 @@ export default {
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey('internal_sale_man_status') }}</span>
                       </div>
                     </th>
                     <th>
@@ -936,7 +938,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('internalSalesmen.edit')"
+                        :title="getCompanyKey('internal_sale_man_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -974,7 +976,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">
-                                  {{ $t("general.employee") }}
+                                  {{ getCompanyKey('internal_sale_man_employee') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1004,7 +1006,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="mr-2">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey('internal_sale_man_status') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <b-form-group

@@ -61,7 +61,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.Name") }}
+                        {{ getCompanyKey('country_name_ar') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="rtl">
@@ -101,7 +101,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-3" class="control-label">
-                        {{ $t("general.long_name") }}
+                        {{ getCompanyKey('country_long_name_ar') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="rtl">
@@ -141,7 +141,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey('country_name_en') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="ltr">
@@ -180,7 +180,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-4" class="control-label">
-                        {{ $t("general.long_name_e") }}
+                        {{ getCompanyKey('country_long_name_en') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="ltr">
@@ -231,7 +231,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="create-20" class="control-label">
-                        {{ $t("general.national") }}
+                        {{ getCompanyKey('country_national_id') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -278,7 +278,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-4" class="control-label">
-                        {{ $t("general.short_code") }}
+                        {{ getCompanyKey('country_short_code') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -322,7 +322,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-4" class="control-label">
-                        {{ $t("general.phone_key") }}
+                        {{ getCompanyKey('country_phone_key') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -359,7 +359,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="mr-2" for="field-11">
-                        {{ $t("general.is_default") }}
+                        {{ getCompanyKey('country_default') }}
                       </label>
                       <select
                         class="custom-select mr-sm-2"
@@ -389,7 +389,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="mr-2">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('country_status') }}
                         <span class="text-danger">*</span>
                       </label>
                       <b-form-group
@@ -543,6 +543,7 @@ import Swal from "sweetalert2";
 import Switches from "vue-switches";
 import ErrorMessage from "../components/widgets/errorMessage";
 import loader from "../components/loader";
+import translation from "../helper/translation-mixin";
 
 export default {
   components: {
@@ -550,6 +551,7 @@ export default {
     ErrorMessage,
     loader,
   },
+  mixins:[translation],
   updated() {
     $(function () {
       $(".englishInput").keypress(function (event) {
