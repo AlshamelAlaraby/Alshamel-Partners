@@ -5776,7 +5776,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var outerAxios = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-  baseURL: "".concat("https://alshamelalaraby.com/", "api/")
+  baseURL: "".concat("http://alshamel-administrator.com/", "api/")
 });
 outerAxios.interceptors.request.use(function (config) {
   config.headers['lang'] = localStorage.getItem("lang") || 'ar';
@@ -6431,6 +6431,24 @@ var menuItems = [{
     id: 100134,
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
     link: '/role-hotfield-screen'
+  }]
+}, {
+  id: 10023578,
+  label: "general.realEstate",
+  icon: "fas fa-hotel",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 1000201,
+    label: 'general.owner',
+    link: '/realEstate/owner'
+  }, {
+    id: 10048103,
+    label: 'general.building',
+    link: '/realEstate/building'
+  }, {
+    id: 1022343,
+    label: 'general.customer',
+    link: '/realEstate/customer'
   }]
 }, {
   id: 224,
