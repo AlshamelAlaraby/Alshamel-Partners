@@ -672,6 +672,19 @@
         "branches": "Branches",
         "users": "Users",
         "employees": "Employees",
-        "salesmen": "Salesmen"
+        "salesmen": "Salesmen",
+        "realEstate": "RealEstate",
+        "owner": "Owners",
+        "building": "Buildings",
+        "customer": "Customers",
+        "description": "Description(arabic)",
+        "description_e": "Description(english)",
+        "land_area": "Land Area",
+        "building_area": "Building Area",
+        "construction_year": "Construction Year",
+        "project": "Project",
+        "region": "Region",
+        "lng": "",
+        "lat": ""
     }
 }

@@ -6550,6 +6550,24 @@ var menuItems = [{
     link: '/role-hotfield-screen'
   }]
 }, {
+  id: 10023578,
+  label: "general.realEstate",
+  icon: "fas fa-hotel",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 1000201,
+    label: 'general.owner',
+    link: '/realEstate/owner'
+  }, {
+    id: 10048103,
+    label: 'general.building',
+    link: '/realEstate/building'
+  }, {
+    id: 1022343,
+    label: 'general.customer',
+    link: '/realEstate/customer'
+  }]
+}, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
