@@ -68,7 +68,6 @@ else{
     document.querySelector('html').setAttribute('lang',localStorage.getItem('lang') || 'ar');
     style_dashboard.setAttribute('href','');
 }
-
 new Vue({
     router,
     store,

@@ -1337,7 +1337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1347,6 +1347,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
 /* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
 /* harmony import */ var _helper_tableSort__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helper/tableSort */ "./resources/js/helper/tableSort.js");
+/* harmony import */ var _helper_translation_mixin__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../helper/translation-mixin */ "./resources/js/helper/translation-mixin.js");
+
 
 
 
@@ -1369,9 +1371,10 @@ __webpack_require__.r(__webpack_exports__);
     title: "Financial Year",
     meta: [{
       name: "description",
-      content: 'Financial Year'
+      content: "Financial Year"
     }]
   },
+  mixins: [_helper_translation_mixin__WEBPACK_IMPORTED_MODULE_12__["default"]],
   components: {
     Layout: _layouts_main__WEBPACK_IMPORTED_MODULE_0__["default"],
     PageHeader: _components_Page_header__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -1383,22 +1386,22 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       per_page: 50,
-      search: '',
+      search: "",
       debounce: {},
       financialYearsPagination: {},
       financialYears: [],
       isLoader: false,
       create: {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: null,
         end_date: null,
         custom_date_start: new Date(),
         custom_date_end: null
       },
       edit: {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: null,
         end_date: null,
         custom_date_start: null,
@@ -1415,41 +1418,41 @@ __webpack_require__.r(__webpack_exports__);
         end_date: true
       },
       is_disabled: false,
-      filterSetting: ['name', 'name_e'],
-      Tooltip: '',
+      filterSetting: ["name", "name_e"],
+      Tooltip: "",
       mouseEnter: null
     };
   },
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100)
       },
       start_date: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       },
       end_date: {}
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.maxLength)(100)
       },
       start_date: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_13__.required
       },
       end_date: {}
     }
@@ -1518,7 +1521,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = '';
+      var filter = "";
       for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
@@ -1529,9 +1532,9 @@ __webpack_require__.r(__webpack_exports__);
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this3.$t('general.Error')),
-          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
+          icon: "error",
+          title: "".concat(_this3.$t("general.Error")),
+          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
         });
       })["finally"](function () {
         _this3.isLoader = false;
@@ -1542,7 +1545,7 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.financialYearsPagination.last_page && this.current_page != this.financialYearsPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
+        var filter = "";
         for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
@@ -1553,9 +1556,9 @@ __webpack_require__.r(__webpack_exports__);
           _this4.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: 'error',
-            title: "".concat(_this4.$t('general.Error')),
-            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+            icon: "error",
+            title: "".concat(_this4.$t("general.Error")),
+            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
           _this4.isLoader = false;
@@ -1670,8 +1673,8 @@ __webpack_require__.r(__webpack_exports__);
     resetModalHidden: function resetModalHidden() {
       var _this6 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: null,
         end_date: null,
         custom_date_start: new Date(),
@@ -1689,8 +1692,8 @@ __webpack_require__.r(__webpack_exports__);
     resetModal: function resetModal() {
       var _this7 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_9__.formatDateTime)(this.create.custom_date_start),
         end_date: null,
         custom_date_start: new Date(),
@@ -1707,8 +1710,8 @@ __webpack_require__.r(__webpack_exports__);
     resetForm: function resetForm() {
       var _this8 = this;
       this.create = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_9__.formatDateTime)(this.create.custom_date_start),
         end_date: null,
         custom_date_start: new Date(),
@@ -1749,8 +1752,8 @@ __webpack_require__.r(__webpack_exports__);
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
+              icon: "success",
+              text: "".concat(_this9.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1760,9 +1763,9 @@ __webpack_require__.r(__webpack_exports__);
             _this9.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this9.$t('general.Error')),
-              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this9.$t("general.Error")),
+              text: "".concat(_this9.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -1802,8 +1805,8 @@ __webpack_require__.r(__webpack_exports__);
           _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
+              icon: "success",
+              text: "".concat(_this10.$t("general.Editsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1813,9 +1816,9 @@ __webpack_require__.r(__webpack_exports__);
             _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this10.$t("general.Error")),
+              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -1844,8 +1847,8 @@ __webpack_require__.r(__webpack_exports__);
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        name: '',
-        name_e: '',
+        name: "",
+        name_e: "",
         start_date: null,
         end_date: null,
         custom_date_start: null,
@@ -5026,7 +5029,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("financialYear.financialYearsTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("financialYear.financialYearsTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -5055,7 +5058,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_name_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -5067,7 +5070,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_name_en")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5124,7 +5127,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -5173,11 +5176,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -5195,7 +5198,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_name_ar")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5204,7 +5207,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_name_en")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.start_date,
@@ -5213,7 +5216,7 @@ var render = function render() {
       },
       expression: "setting.start_date"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.startDate")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_start_date")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.end_date,
@@ -5222,7 +5225,7 @@ var render = function render() {
       },
       expression: "setting.end_date"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.endDate")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_end_date")) + "\n                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5236,7 +5239,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.financialYearsPagination.from) + "-" + _vm._s(_vm.financialYearsPagination.to) + " / " + _vm._s(_vm.financialYearsPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.financialYearsPagination.from) + "-" + _vm._s(_vm.financialYearsPagination.to) + "\n                    / " + _vm._s(_vm.financialYearsPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -5291,7 +5294,7 @@ var render = function render() {
   }, [_c("span", [_vm._v(">")])])])])])])]), _vm._v(" "), _c("b-modal", {
     attrs: {
       id: "create",
-      title: _vm.$t("financialYear.addfinancialYear"),
+      title: _vm.getCompanyKey("financial_year_create_form"),
       "title-class": "font-18",
       "body-class": "p-4 ",
       "hide-footer": true
@@ -5315,7 +5318,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5327,7 +5330,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5350,7 +5353,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -5361,7 +5364,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_name_ar")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5399,9 +5402,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5414,7 +5417,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_name_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5452,9 +5455,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5464,7 +5467,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.startDate")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_start_date")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("date-picker", {
     attrs: {
@@ -5484,7 +5487,7 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.start_date.required ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.fieldIsRequired")))]) : _vm._e(), _vm._v(" "), _vm.errors.start_date ? _vm._l(_vm.errors.start_date, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.start_date ? _vm._l(_vm.errors.start_date, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5494,7 +5497,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.endDate")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("financial_year_end_date")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("date-picker", {
     attrs: {
@@ -5513,7 +5516,7 @@ var render = function render() {
     }
   }), _vm._v(" "), !_vm.$v.create.end_date.required ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.fieldIsRequired")))]) : _vm._e(), _vm._v(" "), _vm.errors.end_date ? _vm._l(_vm.errors.end_date, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.end_date ? _vm._l(_vm.errors.end_date, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5572,7 +5575,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_name_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5590,7 +5593,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5608,7 +5611,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.start_date ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.startDate")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_start_date")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5626,7 +5629,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.end_date ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.endDate")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("financial_year_end_date")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5642,7 +5645,7 @@ var render = function render() {
         _vm.financialYears.sort(_vm.SortDate("-end_date"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.financialYears.length > 0 ? _c("tbody", _vm._l(_vm.financialYears, function (data, index) {
     return _c("tr", {
@@ -5712,7 +5715,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                              " + _vm._s(_vm.$t("general.commands")) + "\n                                              "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -5750,7 +5753,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("financialYear.editfinancialYear"),
+        title: _vm.getCompanyKey("financial_year_edit_form"),
         "title-class": "font-18",
         "body-class": "p-4",
         "hide-footer": true
@@ -5777,7 +5780,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                      " + _vm._s(_vm.$t("general.Edit")) + "\n                                                  ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -5800,7 +5803,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                      " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                  ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -5811,7 +5814,7 @@ var render = function render() {
       attrs: {
         "for": "edit-1"
       }
-    }, [_vm._v("\n                                                              " + _vm._s(_vm.$t("general.Name")) + "\n                                                              "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("financial_year_name_ar")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -5849,9 +5852,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5864,7 +5867,7 @@ var render = function render() {
       attrs: {
         "for": "edit-2"
       }
-    }, [_vm._v("\n                                                              " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                              "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("financial_year_name_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -5902,9 +5905,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5914,7 +5917,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                                              " + _vm._s(_vm.$t("general.startDate")) + "\n                                                              "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("financial_year_start_date")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("date-picker", {
       attrs: {
@@ -5934,7 +5937,7 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.start_date.required ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.fieldIsRequired")))]) : _vm._e(), _vm._v(" "), _vm.errors.start_date ? _vm._l(_vm.errors.start_date, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.start_date ? _vm._l(_vm.errors.start_date, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5944,7 +5947,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                                              " + _vm._s(_vm.$t("general.endDate")) + "\n                                                              "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("financial_year_end_date")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("date-picker", {
       attrs: {
@@ -5964,7 +5967,7 @@ var render = function render() {
       }
     }), _vm._v(" "), !_vm.$v.edit.end_date.required ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.fieldIsRequired")))]) : _vm._e(), _vm._v(" "), _vm.errors.end_date ? _vm._l(_vm.errors.end_date, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.end_date ? _vm._l(_vm.errors.end_date, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -5995,7 +5998,7 @@ var render = function render() {
     attrs: {
       colspan: "11"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7487,6 +7490,90 @@ function dynamicSortDate(property) {
   };
 }
 ;
+
+/***/ }),
+
+/***/ "./resources/js/helper/translation-mixin.js":
+/*!**************************************************!*\
+  !*** ./resources/js/helper/translation-mixin.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/adminAxios */ "./resources/js/api/adminAxios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      defaultsKeys: [],
+      companyKeys: []
+    };
+  },
+  mounted: function mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
+    this.getDefaultKeys();
+    this.getCompanyKeys();
+  },
+  methods: {
+    getDefaultKeys: function getDefaultKeys() {
+      var _this = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: 0,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this.defaultsKeys = res.data.translations;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this.$t("general.Error")),
+          text: "".concat(_this.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this.isLoader = false;
+      });
+    },
+    getCompanyKeys: function getCompanyKeys() {
+      var _this2 = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: this.company_id,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this2.companyKeys = res.data.translations;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this2.$t("general.Error")),
+          text: "".concat(_this2.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this2.isLoader = false;
+      });
+    },
+    getCompanyKey: function getCompanyKey(key) {
+      var returnedKey = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.companyKeys[_key].new_ar : this.companyKeys[_key].new_en;
+          return returnedKey;
+        }
+      }
+      for (var _key2 in this.defaultsKeys) {
+        if (_key2 == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.defaultsKeys[_key2].default_ar : this.defaultsKeys[_key2].default_en;
+          return returnedKey;
+        }
+      }
+    }
+  }
+});
 
 /***/ }),
 

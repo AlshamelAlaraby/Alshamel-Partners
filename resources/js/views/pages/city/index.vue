@@ -12,6 +12,8 @@ import Multiselect from "vue-multiselect";
 import Country from "../../../components/country.vue";
 import Governate from "../../../components/governate.vue";
 import {formatDateOnly} from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
+
 /**
  * Advanced Table component
  */
@@ -20,6 +22,7 @@ export default {
     title: "City",
     meta: [{ name: "description", content: "City" }],
   },
+  mixins: [translation],
   updated() {
     $(function () {
       $(".englishInput").keypress(function (event) {
@@ -648,25 +651,25 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
-                      $t("general.Name")
+                      getCompanyKey('city_name_ar')
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ $t("general.Name_en") }}</b-form-checkbox
+                      >{{ getCompanyKey('city_name_en') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
-                      >{{ $t("general.country") }}</b-form-checkbox
+                      >{{ getCompanyKey('city_country') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'governorate.name':'governorate.name_e'"
                       class="mb-1"
-                      >{{ $t("general.governorate") }}</b-form-checkbox
+                      >{{ getCompanyKey('city_governorate') }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -758,20 +761,20 @@ export default {
                                   :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                   ref="dropdown" class="dropdown-custom-ali">
                           <b-form-checkbox v-model="setting.name" class="mb-1">{{
-                                  $t('general.Name')
+                                  getCompanyKey('city_name_ar')
                               }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                              {{ $t('general.Name_en') }}
+                              {{ getCompanyKey('city_name_en') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                              {{ $t('general.country') }}
+                              {{ getCompanyKey('city_country') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.governorate_id" class="mb-1">
-                              {{ $t('general.governorate') }}
+                              {{ getCompanyKey('city_governorate') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                              {{ $t('general.Status') }}
+                              {{ getCompanyKey('city_status') }}
                           </b-form-checkbox>
                           <div class="d-flex justify-content-end">
                               <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
@@ -826,7 +829,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('city.addcity')"
+              :title="getCompanyKey('city_create_form')"
               title-class="font-18"
               size="lg"
               body-class="p-4 "
@@ -873,7 +876,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ $t("general.country") }}
+                        {{ getCompanyKey('city_country') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -901,7 +904,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ $t("general.governorate") }}
+                        {{ getCompanyKey('city_governorate') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -931,7 +934,7 @@ export default {
                   <div class="col-md-6 direction" dir="rtl">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.Name") }}
+                        {{ getCompanyKey('city_name_ar') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -968,7 +971,7 @@ export default {
                   <div class="col-md-6 direction-ltr" dir="ltr">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey('city_name_en') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -1005,7 +1008,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="mr-2" for="inlineFormCustomSelectPref">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('city_status') }}
                         <span class="text-danger">*</span>
                       </label>
                       <select
@@ -1058,7 +1061,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey('city_name_ar') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1073,7 +1076,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey('city_name_en') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1088,7 +1091,7 @@ export default {
                     </th>
                     <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.country") }}</span>
+                        <span>{{ getCompanyKey('city_country') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1103,7 +1106,7 @@ export default {
                     </th>
                     <th v-if="setting.governorate_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.governorate") }}</span>
+                        <span>{{ getCompanyKey('city_governorate') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1118,7 +1121,7 @@ export default {
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey('city_status') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1228,7 +1231,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('city.editcity')"
+                        :title="getCompanyKey('city_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         size="lg"
@@ -1267,7 +1270,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ $t("general.country") }}
+                                  {{ getCompanyKey('city_country') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1297,7 +1300,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ $t("general.governorate") }}
+                                  {{ getCompanyKey('city_governorate') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1327,7 +1330,7 @@ export default {
                             <div class="col-md-6 direction" dir="rtl">
                               <div class="form-group">
                                 <label for="edit-1" class="control-label">
-                                  {{ $t("general.Name") }}
+                                  {{ getCompanyKey('city_name_ar') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1370,7 +1373,7 @@ export default {
                             <div class="col-md-6 direction-ltr" dir="ltr">
                               <div class="form-group">
                                 <label for="edit-2" class="control-label">
-                                  {{ $t("general.Name_en") }}
+                                  {{ getCompanyKey('city_name_en') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1414,7 +1417,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="mr-2" for="edit-5">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey('city_status') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <select

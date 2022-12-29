@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -26,6 +27,7 @@ export default {
     loader,
     Multiselect,
   },
+  mixins: [translation],
   data() {
     return {
       per_page: 50,
@@ -519,7 +521,7 @@ export default {
                       v-model="filterSetting"
                       value="property_id"
                       class="mb-1"
-                      >{{ $t("general.Property") }}</b-form-checkbox
+                      >{{ getCompanyKey("screen") }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -612,7 +614,7 @@ export default {
                       >{{ $t("general.Screen") }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="setting.property_id" class="mb-1">
-                      {{ $t("general.Property") }}
+                      {{ getCompanyKey("screen") }}
                     </b-form-checkbox>
                     <div class="d-flex justify-content-end">
                       <a href="javascript:void(0)" class="btn btn-primary btn-sm">{{
@@ -674,7 +676,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('general.Add')"
+              :title="getCompanyKey('screen_property_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -720,7 +722,7 @@ export default {
                 <div class="row">
                   <div class="col-md-12 position-relative">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.Screen") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey("screen") }}</label>
                       <multiselect
                         v-model="create.screen_id"
                         :options="screens.map((type) => type.id)"
@@ -750,7 +752,7 @@ export default {
                   </div>
                   <div class="col-md-12 position-relative">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.Property") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey("property") }}</label>
                       <multiselect
                         v-model="create.property_id"
                         :options="properties.map((type) => type.id)"
@@ -807,7 +809,7 @@ export default {
                     </th>
                     <th v-if="setting.screen_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Screen") }}</span>
+                        <span>{{ getCompanyKey("screen")}}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -834,7 +836,7 @@ export default {
                     </th>
                     <th v-if="setting.property_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Property") }}</span>
+                        <span>{{ getCompanyKey("property") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -942,7 +944,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('general.Edit')"
+                        :title="getCompanyKey('screen_property_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"

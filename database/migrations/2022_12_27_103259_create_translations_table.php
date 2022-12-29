@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
-            $table->string ('key')->index ();
+            $table->string ('key')->index();
             $table->string ('default_en')->nullable ();
             $table->string ('default_ar')->nullable ();
             $table->string ('new_en')->nullable ();
             $table->string ('new_ar')->nullable ();
-            $table->unsignedInteger ('company_id')->nullable ();
+            $table->unsignedInteger ('company_id')->nullable();
             $table->timestamps();
         });
     }
