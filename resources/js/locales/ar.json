@@ -512,8 +512,11 @@
         }
     },
     "general": {
+        "elshamel":"الشامل",
+        "CantDeleteRelation":"لا تستطيع حذف عنصر لديه علاقة مع عنصر اخر",
         "ScreenPropertiesTable":"جدول الشاشات والخصائص",
-        "cantSelectCurrentNode":"لا يمكن اختيار العنصر الحالي",
+        "cantSelectChildToBeParent":"لا يمكن اختيار هذا العنصر لانه من ابناء العنصر الحالي",
+        "cantSelectSelfParent":"لايمكن ان يكون العنصر اب لنفسه",
         "Required":"مطلوب",
         "TreePropertiesTable":"جدول شجرة الخصائص",
         "TreeProperty":"شجرة الخصائص",
@@ -651,6 +654,10 @@
         "Properties": "خاصيه",
         "addBankAccount" : "اضافة حساب بنك",
         "editBankAccount": "تعديل حساب البنك",
-        "Bank": "البنك"
+        "Bank": "البنك",
+        "branches": "الفروع",
+        "users": "المستخدمين",
+        "employees": "الموظفين",
+        "salesmen": "موظفين المبيعات"
     }
 }

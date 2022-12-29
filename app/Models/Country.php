@@ -81,8 +81,7 @@ class Country extends Model implements HasMedia
         $this->cities()->count() > 0 ||
         $this->banks()->count() > 0 ||
         $this->rlstOwners()->count() > 0 ||
-        $this->externalSalesmen() > 0
-        ;
+        $this->externalSalesmen()->count() > 0;
         return $h;
     }
 }

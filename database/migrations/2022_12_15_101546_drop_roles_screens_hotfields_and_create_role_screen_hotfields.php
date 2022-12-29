@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('role_id');
             $table->unsignedInteger('workflow_id');
             $table->unsignedInteger('hotfield_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
