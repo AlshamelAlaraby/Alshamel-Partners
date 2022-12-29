@@ -44,7 +44,7 @@ trait LogTrait
                         //     $q->where($column[1], 'like', '%' . $request->search . '%');
                         // });
                     } else {
-//                        $q->orWhere($column, 'like', '%' . $request->search . '%');
+                        $q->orWhere($column, 'like', '%' . $request->search . '%');
                     }
                 }
             }

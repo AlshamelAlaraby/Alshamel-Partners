@@ -508,8 +508,11 @@
     }
     },
     "general": {
+        "elshamel":"Alshamel",
+        "CantDeleteRelation":"You cannot delete an element that has a relationship with another element",
+        "cantSelectChildToBeParent":"Cant select this item because it's one of current item's children",
+        "cantSelectSelfParent":"Item couldn't be parent to itself",
         "ScreenPropertiesTable":"Screen and properties table",
-        "cantSelectCurrentNode":"Cant select current node",
         "Required":"Required",
         "TreePropertiesTable":"Tree properties table",
         "Screen":"Screen",
@@ -665,6 +668,23 @@
         "Properties": "property",
         "addBankAccount": "Add Bank Account",
         "editBankAccount": "Edit Bank Account",
-        "Bank": "Bank"
+        "Bank": "Bank",
+        "branches": "Branches",
+        "users": "Users",
+        "employees": "Employees",
+        "salesmen": "Salesmen",
+        "realEstate": "RealEstate",
+        "owner": "Owners",
+        "building": "Buildings",
+        "customer": "Customers",
+        "description": "Description(arabic)",
+        "description_e": "Description(english)",
+        "land_area": "Land Area",
+        "building_area": "Building Area",
+        "construction_year": "Construction Year",
+        "project": "Project",
+        "region": "Region",
+        "lng": "",
+        "lat": ""
     }
 }

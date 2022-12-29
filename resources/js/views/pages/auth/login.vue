@@ -10,7 +10,7 @@ import adminApi from "../../../api/adminAxios";
 export default {
   page: {
     title: "Login",
-    meta: [{ name: "description", content: 'login' }],
+    meta: [{ name: "description", content: "login" }],
   },
   data() {
     return {
@@ -19,7 +19,7 @@ export default {
       submitted: false,
       isSuccess: false,
       isError: false,
-      type: 'password'
+      type: "password",
     };
   },
   components: {
@@ -37,44 +37,48 @@ export default {
     },
   },
   methods: {
-      // Try to log the user in with the username
-      // and password they provided.
-      tryToLogIn() {
-          // stop here if form is invalid
-          this.$v.$touch();
+    // Try to log the user in with the username
+    // and password they provided.
+    tryToLogIn() {
+      // stop here if form is invalid
+      this.$v.$touch();
 
-          if (this.$v.$invalid) {
-              return;
-          } else {
-              this.submitted = true;
-              this.isError = false;
-              const {email,password} = this;
-              axios.post(`${process.env.MIX_APP_URL_OUTSIDE}api/partners/login`,{email,password})
-                  .then((res) => {
-                      let l =res.data.data;
-                      this.$store.commit('auth/editToken',l.token);
-                      this.$store.commit('auth/editPartner',l.partner);
-                      this.$store.commit('auth/editCompanies',l.partner.companies);
-                      this.isSuccess = true;
+      if (this.$v.$invalid) {
+        return;
+      } else {
+        this.submitted = true;
+        this.isError = false;
+        const { email, password } = this;
+        axios
+          .post(`${process.env.MIX_APP_URL_OUTSIDE}api/partners/login`, {
+            email,
+            password,
+          })
+          .then((res) => {
+            let l = res.data.data;
+            this.$store.commit("auth/editToken", l.token);
+            this.$store.commit("auth/editPartner", l.partner);
+            this.$store.commit("auth/editCompanies", l.partner.companies);
+            this.isSuccess = true;
 
-                      if(l.partner.companies.length > 1 && l.partner.companies){
-                          this.$router.push({name:'company'});
-                      }else if(l.partner.companies.length == 1) {
-                          this.$store.commit('auth/editCompanyId',l.partner.companies[0].id);
-                          this.$router.push({name:'home'});
-                      }else {
-                          this.submitted = false;
-                      }
-
-                  })
-                  .catch((err) => {
-                      this.isError = true;
-                  }).finally(() => {
-                      this.submitted = false;
-                  });
-          }
+            if (l.partner.companies.length > 1 && l.partner.companies) {
+              this.$router.push({ name: "company" });
+            } else if (l.partner.companies.length == 1) {
+              this.$store.commit("auth/editCompanyId", l.partner.companies[0].id);
+              this.$router.push({ name: "home" });
+            } else {
+              this.submitted = false;
+            }
+          })
+          .catch((err) => {
+            this.isError = true;
+          })
+          .finally(() => {
+            this.submitted = false;
+          });
       }
-    }
+    },
+  },
 };
 </script>
 
@@ -88,26 +92,17 @@ export default {
               <div class="auth-logo">
                 <router-link to="/" class="logo logo-dark text-center">
                   <span class="logo-lg">
-                    <img
-                      src="../../../assets/images/logo-dark.png"
-                      alt=""
-                      height="22"
-                    />
+                    <img src="/images/shamel-logo-006.png" alt height="20" />
                   </span>
                 </router-link>
-
                 <router-link to="/" class="logo logo-light text-center">
                   <span class="logo-lg">
-                    <img
-                      src="../../../assets/images/logo-light.png"
-                      alt=""
-                      height="22"
-                    />
+                    <img src="/images/shamel-logo-006.png" alt height="20" />
                   </span>
                 </router-link>
               </div>
               <p class="text-muted mb-4 mt-3">
-                  {{ $t('login.Enteryouremailaddressandpasswordtoaccessadminpanel') }}
+                {{ $t("login.Enteryouremailaddressandpasswordtoaccessadminpanel") }}
               </p>
             </div>
 
@@ -118,7 +113,7 @@ export default {
                 v-if="isSuccess"
                 :show="5"
                 dismissible
-                >{{ $t('login.success') }}</b-alert
+                >{{ $t("login.success") }}</b-alert
               >
 
               <b-alert
@@ -127,10 +122,10 @@ export default {
                 v-if="isError"
                 :show="5"
                 dismissible
-                >{{ $t('login.danger') }}</b-alert
+                >{{ $t("login.danger") }}</b-alert
               >
               <div class="form-group mb-3">
-                <label for="emailaddress">{{ $t('login.Emailaddress') }}</label>
+                <label for="emailaddress">{{ $t("login.Emailaddress") }}</label>
                 <input
                   class="form-control"
                   v-model="email"
@@ -139,17 +134,18 @@ export default {
                   :placeholder="$t('login.Enteryouremail')"
                   :class="{ 'is-invalid': $v.email.$error }"
                 />
-                <div
-                  v-if="$v.email.$error"
-                  class="invalid-feedback"
-                >
-                  <span v-if="!$v.email.required">{{ $t('general.fieldIsRequired') }}</span>
-                  <span v-if="!$v.email.email">{{ $t('general.PleaseEnterValidEmail') }}</span>
+                <div v-if="$v.email.$error" class="invalid-feedback">
+                  <span v-if="!$v.email.required">{{
+                    $t("general.fieldIsRequired")
+                  }}</span>
+                  <span v-if="!$v.email.email">{{
+                    $t("general.PleaseEnterValidEmail")
+                  }}</span>
                 </div>
               </div>
 
               <div class="form-group mb-3">
-                <label for="password">{{ $t('login.Password') }}</label>
+                <label for="password">{{ $t("login.Password") }}</label>
                 <div class="input-group input-group-merge">
                   <input
                     v-model="password"
@@ -161,22 +157,23 @@ export default {
                   />
 
                   <div
-                      class="input-group-append"
-                      data-password="false"
-                      @click="type == 'password' && password? type = 'text': type = 'password'"
+                    class="input-group-append"
+                    data-password="false"
+                    @click="
+                      type == 'password' && password
+                        ? (type = 'text')
+                        : (type = 'password')
+                    "
                   >
-                    <div :class="['input-group-text',type == 'text' ? 'show':'']" >
+                    <div :class="['input-group-text', type == 'text' ? 'show' : '']">
                       <span
-                          :class="['password-eye',type == 'text' ? 'show':'']"
+                        :class="['password-eye', type == 'text' ? 'show' : '']"
                       ></span>
                     </div>
                   </div>
 
-                  <div
-                    v-if="!$v.password.required"
-                    class="invalid-feedback"
-                  >
-                      {{ $t('general.fieldIsRequired') }}
+                  <div v-if="!$v.password.required" class="invalid-feedback">
+                    {{ $t("general.fieldIsRequired") }}
                   </div>
                 </div>
               </div>
@@ -189,23 +186,22 @@ export default {
                     id="checkbox-signin"
                     checked
                   />
-                  <label class="custom-control-label" for="checkbox-signin"
-                    >{{ $t('login.Rememberme') }}</label
-                  >
+                  <label class="custom-control-label" for="checkbox-signin">{{
+                    $t("login.Rememberme")
+                  }}</label>
                 </div>
               </div>
 
               <div class="form-group mb-0 text-center">
                 <button class="btn btn-primary btn-block" type="submit" v-if="!submitted">
-                    {{ $t('login.loginIn') }}
+                  {{ $t("login.loginIn") }}
                 </button>
                 <b-button class="btn btn-primary btn-block" disabled v-else>
-                      <b-spinner small></b-spinner>
-                      <span class="sr-only">{{ $t('login.Loading') }}...</span>
+                  <b-spinner small></b-spinner>
+                  <span class="sr-only">{{ $t("login.Loading") }}...</span>
                 </b-button>
               </div>
             </form>
-
           </div>
           <!-- end card-body -->
         </div>
@@ -220,16 +216,20 @@ export default {
 </template>
 
 <style>
-    .input-group-text{
-        cursor: pointer;
-    }
-    .input-group-text.show {
-        background-color: #3bafda;
-    }
-    .input-group-text .password-eye.show {
-        color: #fff;
-    }
-    .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after{
-        background-color: #3bafda;
-    }
+.input-group-text {
+  cursor: pointer;
+}
+.input-group-text.show {
+  background-color: #3bafda;
+}
+.input-group-text .password-eye.show {
+  color: #fff;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-color: #3bafda;
+}
+.logo-lg img {
+  width: 70px;
+  height: 45px;
+}
 </style>
