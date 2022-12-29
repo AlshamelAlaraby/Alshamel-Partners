@@ -2381,7 +2381,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this15.isLoader = true;
                 _context8.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
                   _this15.hotfields = l.hot_fields;
@@ -7375,6 +7375,24 @@ var menuItems = [{
     id: 100134,
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
     link: '/role-hotfield-screen'
+  }]
+}, {
+  id: 10023578,
+  label: "general.realEstate",
+  icon: "fas fa-hotel",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 1000201,
+    label: 'general.owner',
+    link: '/realEstate/owner'
+  }, {
+    id: 10048103,
+    label: 'general.building',
+    link: '/realEstate/building'
+  }, {
+    id: 1022343,
+    label: 'general.customer',
+    link: '/realEstate/customer'
   }]
 }, {
   id: 224,
