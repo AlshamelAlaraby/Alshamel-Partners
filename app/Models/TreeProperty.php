@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 
 class TreeProperty extends Model
 {
-    use HasFactory, LogTrait;
+    use HasFactory, LogTrait,SoftDeletes;
 
     protected $guarded = ['id'];
     protected $appends = ['haveChildren'];

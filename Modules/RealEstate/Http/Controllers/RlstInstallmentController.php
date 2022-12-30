@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstInstallment;
-use Modules\RealEstate\Http\Requests\CreateRlstInstallmentRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstInstallmentRequest;
+use Modules\RealEstate\Http\Requests\RlstInstallmentRequest;
 use Modules\RealEstate\Transformers\RlstInstallmentResource;
 
 class RlstInstallmentController extends Controller
@@ -40,15 +39,16 @@ class RlstInstallmentController extends Controller
         return responseJson(200, 'success', RlstInstallmentResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstInstallmentRequest $request)
+    public function create(RlstInstallmentRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstInstallmentResource($model));
 
     }
 
-    public function update($id, UpdateRlstInstallmentRequest $request)
+    public function update($id, RlstInstallmentRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

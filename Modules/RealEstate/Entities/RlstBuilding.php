@@ -12,6 +12,7 @@ class RlstBuilding extends Model
 
     protected $guarded = ['id'];
 
+    // attributes
     public function setPropertiesAttribute($value)
     {
         $this->attributes['properties'] = json_encode($value);
@@ -30,10 +31,15 @@ class RlstBuilding extends Model
         return json_decode($value);
     }
 
-
+    // relations
     public function buildingWallet()
     {
         return $this->hasMany(\Modules\RealEstate\Entities\RlstBuildingWallet::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(\App\Models\Module::class);
     }
 
 }

@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //Branch
+
+        $this->call([
+            CountrySeeder::class,
+        ]);
+
         Translation::insert([
             [
                 "key" => "branch_create_form",
@@ -1379,5 +1383,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
     }
 }

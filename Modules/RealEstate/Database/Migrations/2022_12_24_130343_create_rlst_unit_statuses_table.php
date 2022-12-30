@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('name_e', 100);
+            $table->tinyInteger('is_default')->default(0);
+            $table->string("is_active")->default('active');
             $table->softDeletes();
             $table->timestamps();
         });

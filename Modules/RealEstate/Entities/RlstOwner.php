@@ -29,6 +29,7 @@ class RlstOwner extends Model
         'national_id',
         'whatsapp',
         'categories',
+        'attachments',
 
     ];
 
@@ -50,12 +51,20 @@ class RlstOwner extends Model
 
     public function walletOwner()
     {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class, "wallet_id");
     }
 
     // attributes
 
     protected function categories(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => json_decode($value),
+            set:fn($value) => json_encode($value),
+        );
+    }
+
+    protected function attachments(): Attribute
     {
         return Attribute::make(
             get:fn($value) => json_decode($value),

@@ -15,8 +15,14 @@ class RlstUnitStatus extends Model
     protected $fillable = [
         'name',
         'name_e',
+        'is_default',
+        'is_active',
     ];
 
+    protected $casts = [
+        'is_default' => '\App\Enums\IsDefault',
+        'is_active' => '\App\Enums\IsActive',
+    ];
     // relations
 
     public function getActivitylogOptions(): LogOptions
