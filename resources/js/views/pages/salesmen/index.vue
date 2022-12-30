@@ -11,6 +11,8 @@ import salesManType from "../../../components/create/salesManType";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
+
 /**
  * Advanced Table component
  */
@@ -19,6 +21,7 @@ export default {
     title: "Sales Men",
     meta: [{ name: "Sales Men", content: "Sales Men Type" }],
   },
+  mixins:[translation],
   components: {
     Layout,
     PageHeader,
@@ -570,13 +573,13 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                      {{ $t("general.Name") }}
+                      {{ getCompanyKey('sale_man_name_ar') }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                      {{ $t("general.Name_en") }}
+                      {{ getCompanyKey('sale_man_name_en') }}
                     </b-form-checkbox>
                       <b-form-checkbox v-model="filterSetting" :value="$i18n.locale  == 'ar'?'salesmanType.name':'salesmanType.name_e'" class="mb-1">
-                          {{ $t("general.Name_en") }}
+                          {{ getCompanyKey('sale_man_type') }}
                       </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -671,13 +674,13 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.name" class="mb-1"
-                        >{{ $t("general.Name") }}
+                        >{{ getCompanyKey('sale_man_name_ar') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey('sale_man_name_en') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.salesman_type_id" class="mb-1">
-                        {{ $t("general.salesManType") }}
+                        {{ getCompanyKey('sale_man_type') }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -735,7 +738,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('salesmen.add')"
+              :title="getCompanyKey('sale_man_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -783,7 +786,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="my-1 mr-2">
-                        {{ $t("general.salesManType") }}
+                        {{ getCompanyKey('sale_man_type') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -815,7 +818,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.Name") }}
+                        {{ getCompanyKey('sale_man_name_ar') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="rtl">
@@ -855,7 +858,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey('sale_man_name_en') }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="ltr">
@@ -917,7 +920,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey('sale_man_name_ar') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -932,7 +935,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey('sale_man_name_en') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -947,7 +950,7 @@ export default {
                     </th>
                     <th v-if="setting.salesman_type_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.salesManType") }}</span>
+                        <span>{{ getCompanyKey('sale_man_type') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1040,7 +1043,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('salesmen.edit')"
+                        :title="getCompanyKey('sale_man_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -1078,7 +1081,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">
-                                  {{ $t("general.salesManType") }}
+                                  {{ getCompanyKey('sale_man_type') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1111,7 +1114,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="field-u-1" class="control-label">
-                                  {{ $t("general.Name") }}
+                                  {{ getCompanyKey('sale_man_name_ar') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="rtl">
@@ -1154,7 +1157,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="field-u-2" class="control-label">
-                                  {{ $t("general.Name_en") }}
+                                  {{ getCompanyKey('sale_man_name_en') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="ltr">

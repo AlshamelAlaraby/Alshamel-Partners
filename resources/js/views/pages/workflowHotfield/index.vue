@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import Role from "../../../components/create/role.vue";
 import Multiselect from "vue-multiselect";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -19,6 +20,7 @@ export default {
     title: "Role Workflow Hotfield",
     meta: [{ name: "Role Workflow Hotfield", content: "Role Workflow Hotfield" }],
   },
+  mixins: [translation],
   components: {
     Role,
     Layout,
@@ -580,14 +582,14 @@ export default {
                       :value="$i18n.locale == 'ar' ? 'role.name' : 'role.name_e'"
                       class="mb-1"
                     >
-                      {{ $t("roles.roles") }}
+                      {{ getCompanyKey('role') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="workflow_id"
                       class="mb-1"
                     >
-                      {{ $t("general.workflow") }}
+                      {{ getCompanyKey('workflow') }}
                     </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -682,13 +684,13 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.role_id" class="mb-1">
-                        {{ $t("roles.roles") }}
+                        {{ getCompanyKey('role') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.workflow_id" class="mb-1">
-                        {{ $t("general.workflow") }}
+                        {{ getCompanyKey('workflow') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.hotfield_id" class="mb-1">
-                        {{ $t("general.hotfield") }}
+                        {{ getCompanyKey('hotfield') }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -755,7 +757,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('general.addroleWorkflowHotfield')"
+              :title="getCompanyKey('role_hotfield_screen_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -802,7 +804,7 @@ export default {
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("roles.roles") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey('role') }}</label>
                       <multiselect
                         @input="showRoleModal"
                         v-model="create.role_id"
@@ -826,7 +828,7 @@ export default {
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.hotfield") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey('hotfield') }}</label>
                       <multiselect
                         v-model="create.hotfield_id"
                         :options="hotfields.map((type) => type.id)"
@@ -849,7 +851,7 @@ export default {
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.workflow") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey('workflow') }}</label>
                       <multiselect
                         v-model="create.workflow_id"
                         :options="workflows.map((type) => type.id)"
@@ -896,17 +898,17 @@ export default {
                     </th>
                     <th v-if="setting.role_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("roles.roles") }}</span>
+                        <span>{{ getCompanyKey('role') }}</span>
                       </div>
                     </th>
                     <th v-if="setting.hotfield_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.hotfield") }}</span>
+                        <span>{{ getCompanyKey('hotfield') }}</span>
                       </div>
                     </th>
                     <th v-if="setting.workflow_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.workflow") }}</span>
+                        <span>{{ getCompanyKey('workflow') }}</span>
                       </div>
                     </th>
                     <th>
@@ -1005,7 +1007,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('general.editroleWorkflowHotfield')"
+                        :title="getCompanyKey('role_hotfield_screen_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -1042,7 +1044,7 @@ export default {
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label class="my-1 mr-2">{{ $t("roles.roles") }}</label>
+                                <label class="my-1 mr-2">{{ getCompanyKey('role') }}</label>
                                 <multiselect
                                   @input="showRoleModalEdit"
                                   v-model="edit.role_id"
@@ -1067,7 +1069,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.hotfield")
+                                  getCompanyKey('hotfield')
                                 }}</label>
                                 <multiselect
                                   v-model="edit.hotfield_id"
@@ -1093,7 +1095,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.workflow")
+                                  getCompanyKey('workflow')
                                 }}</label>
                                 <multiselect
                                   v-model="edit.workflow_id"

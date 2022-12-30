@@ -2,7 +2,7 @@
     <!--  create   -->
     <b-modal
         id="role-types-create"
-        :title="$t('rolesType.add')"
+        :title="getCompanyKey('role_type_create_form')"
         title-class="font-18"
         body-class="p-4 "
         :hide-footer="true"
@@ -45,7 +45,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-1" class="control-label">
-                            {{ $t('general.Name') }}
+                            {{ getCompanyKey('role_type_name_ar') }}
                             <span class="text-danger">*</span>
                         </label>
                         <div dir="rtl">
@@ -80,7 +80,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-2" class="control-label">
-                            {{ $t('general.Name_en') }}
+                            {{ getCompanyKey('role_type_name_en') }}
                             <span class="text-danger">*</span>
                         </label>
                         <div dir="ltr">
@@ -128,6 +128,7 @@ import Switches from "vue-switches";
 import ErrorMessage from "../../components/widgets/errorMessage";
 import loader from "../../components/loader";
 import Multiselect from "vue-multiselect";
+import translation from "../../helper/translation-mixin";
 
 export default {
     name: "roleType",
@@ -137,6 +138,7 @@ export default {
         ErrorMessage,
         loader,
     },
+    mixins:[translation],
     data(){
         return {
             create: {

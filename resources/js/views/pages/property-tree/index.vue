@@ -11,6 +11,7 @@ import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import Templates from "../email/templates.vue";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -20,6 +21,7 @@ export default {
     title: "Tree properties",
     meta: [{ name: "description", content: "Tree properties" }],
   },
+  mixins:[translation],
   components: {
     Layout,
     PageHeader,
@@ -794,13 +796,13 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
-                      $t("general.Name")
+                      getCompanyKey("property_name_ar")
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ $t("general.Name_en") }}</b-form-checkbox
+                      >{{ getCompanyKey("property_name_en") }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -890,13 +892,13 @@ export default {
                     class="dropdown-custom-ali"
                   >
                     <b-form-checkbox v-model="setting.name" class="mb-1"
-                      >{{ $t("general.Name") }}
+                      >{{ getCompanyKey("property_name_ar") }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                      {{ $t("general.Name_en") }}
+                      {{ getCompanyKey("property_name_en") }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="setting.required" class="mb-1">
-                      {{ $t("general.Required") }}
+                      {{ getCompanyKey("required") }}
                     </b-form-checkbox>
                     <div class="d-flex justify-content-end">
                       <a href="javascript:void(0)" class="btn btn-primary btn-sm">{{
@@ -958,7 +960,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('general.Add')"
+              :title="getCompanyKey('property_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -1152,7 +1154,7 @@ export default {
                       <div class="col-12 direction" dir="rtl">
                         <div class="form-group">
                           <label for="field-1" class="control-label">
-                            {{ $t("general.Name") }}
+                            {{ getCompanyKey("property_name_ar") }}
                             <span class="text-danger">*</span>
                           </label>
                           <input
@@ -1187,7 +1189,7 @@ export default {
                       <div class="col-12 direction-ltr" dir="ltr">
                         <div class="form-group">
                           <label for="field-2" class="control-label">
-                            {{ $t("general.Name_en") }}
+                            {{ getCompanyKey("property_name_en") }}
                             <span class="text-danger">*</span>
                           </label>
                           <input
@@ -1228,7 +1230,7 @@ export default {
                       <div class="col-12">
                         <div class="form-group">
                           <label class="mr-2 mb-2">
-                            {{ $t("general.Required") }}
+                            {{ getCompanyKey("required") }}
                             <span class="text-danger">*</span>
                           </label>
                           <b-form-group
@@ -1290,7 +1292,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey("property_name_ar") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1305,7 +1307,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey("property_name_en") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1320,7 +1322,7 @@ export default {
                     </th>
                     <th v-if="setting.required">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Required") }}</span>
+                        <span>{{ getCompanyKey("required") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1420,7 +1422,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('general.Edit')"
+                        :title="getCompanyKey('property_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         size="lg"
@@ -1638,7 +1640,7 @@ export default {
                                 <div class="col-12 direction" dir="rtl">
                                   <div class="form-group">
                                     <label for="field-u-1" class="control-label">
-                                      {{ $t("general.Name") }}
+                                      {{ getCompanyKey("property_name_ar") }}
                                       <span class="text-danger">*</span>
                                     </label>
                                     <input
@@ -1681,7 +1683,7 @@ export default {
                                 <div class="col-12 direction-ltr" dir="ltr">
                                   <div class="form-group">
                                     <label for="field-u-2" class="control-label">
-                                      {{ $t("general.Name_en") }}
+                                      {{ getCompanyKey("property_name_en") }}
                                       <span class="text-danger">*</span>
                                     </label>
                                     <input
@@ -1725,7 +1727,7 @@ export default {
                                 <div class="col-12">
                                   <div class="form-group">
                                     <label class="mr-2 mb-2">
-                                      {{ $t("general.Required") }}
+                                      {{ getCompanyKey("required") }}
                                       <span class="text-danger">*</span>
                                     </label>
                                     <b-form-group

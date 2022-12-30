@@ -11,6 +11,7 @@ import loader from "../../../components/loader";
 import {dynamicSortString, dynamicSortNumber} from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import {formatDateOnly} from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -20,6 +21,7 @@ export default {
         title: "Bank",
         meta: [{name: "description", content: "Bank"}],
     },
+  mixins: [translation],
     components: {
         Layout,
         Country,
@@ -581,26 +583,26 @@ export default {
                                         class="btn-block setting-search"
                                     >
                                         <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
-                                            $t("general.Name")
+                                            getCompanyKey('bank_name_ar')
                                             }}
                                         </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="name_e"
                                             class="mb-1"
-                                        >{{ $t("general.Name_en") }}
+                                        >{{ getCompanyKey('bank_name_en') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                                             class="mb-1"
-                                        >{{ $t("general.Name_en") }}
+                                        >{{ getCompanyKey('bank_name_en') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox
                                             v-model="filterSetting"
                                             value="swift_code"
                                             class="mb-1"
-                                        >{{ $t("general.SwiftCode") }}
+                                        >{{ getCompanyKey('bank_swiftcode') }}
                                         </b-form-checkbox
                                         >
                                         <!-- Basic dropdown -->
@@ -696,16 +698,16 @@ export default {
                                             class="dropdown-custom-ali"
                                         >
                                             <b-form-checkbox v-model="setting.name" class="mb-1"
-                                            >{{ $t("general.Name") }}
+                                            >{{ getCompanyKey('bank_name_ar') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                                                {{ $t("general.Name_en") }}
+                                                {{ getCompanyKey('bank_name_en') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                                                {{ $t("general.country") }}
+                                                {{ getCompanyKey('bank_country') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.swift_code" class="mb-1">
-                                                {{ $t("general.SwiftCode") }}
+                                                {{ getCompanyKey('bank_swiftcode') }}
                                             </b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">{{
@@ -760,7 +762,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('general.AddBank')"
+                            :title="getCompanyKey('bank_create_form')"
                             title-class="font-18"
                             body-class="p-4 "
                             size="lg"
@@ -808,7 +810,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.country") }}
+                                                {{ getCompanyKey('bank_country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -842,7 +844,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="field-15" class="control-label">
-                                                {{ $t("general.SwiftCode") }}
+                                                {{ getCompanyKey('bank_swiftcode') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -871,7 +873,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t("general.Name") }}
+                                                {{ getCompanyKey('bank_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="rtl">
@@ -911,7 +913,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t("general.Name_en") }}
+                                                {{ getCompanyKey('bank_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="ltr">
@@ -973,7 +975,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t("general.Name") }}</span>
+                                            <span>{{ getCompanyKey('bank_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i
                                                     class="fas fa-arrow-up"
@@ -988,7 +990,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t("general.Name_en") }}</span>
+                                            <span>{{ getCompanyKey('bank_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i
                                                     class="fas fa-arrow-up"
@@ -1003,7 +1005,7 @@ export default {
                                     </th>
                                     <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t("general.country") }}</span>
+                                            <span>{{ getCompanyKey('bank_country') }}</span>
                                             <div class="arrow-sort">
                                                 <i
                                                     class="fas fa-arrow-up"
@@ -1026,7 +1028,7 @@ export default {
                                     </th>
                                     <th v-if="setting.swift_code">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t("general.SwiftCode") }}</span>
+                                            <span>{{ getCompanyKey('bank_swiftcode') }}</span>
                                             <div class="arrow-sort">
                                                 <i
                                                     class="fas fa-arrow-up"
@@ -1122,7 +1124,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('general.EditBank')"
+                                            :title="getCompanyKey('bank_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             size="lg"
@@ -1162,7 +1164,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.country") }}
+                                                                {{ getCompanyKey('bank_country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1196,7 +1198,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="field-15" class="control-label">
-                                                                {{ $t("general.SwiftCode") }}
+                                                                {{ getCompanyKey('bank_swiftcode') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1226,7 +1228,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="field-1" class="control-label">
-                                                                {{ $t("general.Name") }}
+                                                                {{ getCompanyKey('bank_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1272,7 +1274,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="field-2" class="control-label">
-                                                                {{ $t("general.Name_en") }}
+                                                                {{ getCompanyKey('bank_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
