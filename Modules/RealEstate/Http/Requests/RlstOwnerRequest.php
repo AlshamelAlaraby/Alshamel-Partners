@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstOwnerRequest extends FormRequest
+class RlstOwnerRequest extends FormRequest
 {
     public function authorize()
     {
@@ -18,19 +18,19 @@ class CreateRlstOwnerRequest extends FormRequest
             'name_e' => 'required|string|max:100',
             'phone' => 'required|string|max:20',
             'email' => 'required|string|max:100',
-            'country_id' => 'required|integer',
-            'city_id' => 'required|integer',
+            'country_id' => 'required|integer|exists:countries,id,deleted_at,null',
+            'city_id' => 'required|integer|exists:cities,id,deleted_at,null',
             'rb_code' => 'required|string|max:255',
-            'nationality_id' => 'required|integer|exists:countries,id',
+            'nationality_id' => 'required|integer|exists:countries,id,deleted_at,null',
             "bank_account_id" => "required|integer",
             "contact_person" => "required|string|max:100",
             "contact_phones" => "required|string|max:100",
             "national_id" => "required|string|max:20",
             "whatsapp" => "required|string|max:20",
-            "categories" => "required",
+            "categories" => "required|array",
+            "attachments" => "required|array",
         ];
     }
-
 
     public function messages()
     {
@@ -53,6 +53,7 @@ class CreateRlstOwnerRequest extends FormRequest
             'city_id.integer' => __("message.field must be integer"),
             "rb_code.required" => __("message.field is required"),
             'rb_code.string' => __("message.field must be string"),
+            'rb_code.max' => __("message.field must be less than 255 characters"),
             "nationality_id.required" => __("message.field is required"),
             "nationality_id.integer" => __("message.field must be integer"),
             "nationality_id.exists" => __("message.field must be exists"),
@@ -71,10 +72,9 @@ class CreateRlstOwnerRequest extends FormRequest
             'whatsapp.string' => __("message.field must be string"),
             'whatsapp.max' => __("message.field must be less than 20 characters"),
             "categories.required" => __("message.field is required"),
-
-
-
-
+            "categories.array" => __("message.field must be array"),
+            "attachments.required" => __("message.field is required"),
+            "attachments.array" => __("message.field must be array"),
 
         ];
     }

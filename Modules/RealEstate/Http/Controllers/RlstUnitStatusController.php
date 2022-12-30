@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstUnitStatus;
-use Modules\RealEstate\Http\Requests\CreateRlstUnitStatusRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstUnitStatusRequest;
+use Modules\RealEstate\Http\Requests\RlstUnitStatusRequest;
 use Modules\RealEstate\Transformers\RlstUnitStatusResource;
 
 class RlstUnitStatusController extends Controller
@@ -40,14 +39,18 @@ class RlstUnitStatusController extends Controller
         return responseJson(200, 'success', RlstUnitStatusResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstUnitStatusRequest $request)
+    public function create(RlstUnitStatusRequest $request)
     {
         $model = $this->model->create($request->validated());
+        if ($request->is_default) {
+            $this->model->where('id', '!=', $model->id)->update(['is_default' => 0]);
+        }
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstUnitStatusResource($model));
     }
 
-    public function update($id, UpdateRlstUnitStatusRequest $request)
+    public function update($id, RlstUnitStatusRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -55,6 +58,9 @@ class RlstUnitStatusController extends Controller
         }
 
         $model->update($request->validated());
+        if ($request->is_default) {
+            $this->model->where('id', '!=', $model->id)->update(['is_default' => 0]);
+        }
         $model->refresh();
         return responseJson(200, 'updated', new RlstUnitStatusResource($model));
     }

@@ -3,6 +3,7 @@
 namespace Modules\RealEstate\Entities;
 
 use App\Traits\LogTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +35,9 @@ class RlstUnit extends Model
         'view',
         'floor',
         'rank',
+        'properties',
+        'attachments',
+        'module_id',
 
     ];
 
@@ -52,5 +56,23 @@ class RlstUnit extends Model
             ->logAll()
             ->useLogName('Rlst Unit')
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
+    }
+
+    // attributes
+
+    protected function attachments(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => json_decode($value),
+            set:fn($value) => json_encode($value),
+        );
+    }
+
+    protected function properties(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => json_decode($value),
+            set:fn($value) => json_encode($value),
+        );
     }
 }

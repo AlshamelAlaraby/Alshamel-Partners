@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstInstallmentRequest extends FormRequest
+class RlstInstallmentRequest extends FormRequest
 {
     public function authorize()
     {
@@ -17,12 +17,11 @@ class CreateRlstInstallmentRequest extends FormRequest
             'date' => 'required|date',
             "pay_type" => "required|in:down_payment,quarter_per,half_per,year_per,installment",
             'amount' => 'required|numeric',
-            "currency_id" => "required|integer|exists:currencies,id",
+            "currency_id" => "required|integer|exists:currencies,id,deleted_at,null",
             'rest_amount' => 'required|numeric',
 
         ];
     }
-
 
     public function messages()
     {

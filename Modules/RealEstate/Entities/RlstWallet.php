@@ -22,12 +22,12 @@ class RlstWallet extends Model
 
     public function walletOwner()
     {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class);
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstWalletOwner::class, 'wallet_id');
     }
 
     public function buildingWallet()
     {
-        return $this->hasMany(\Modules\RealEstate\Entities\RlstBuildingWallet::class);
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstBuildingWallet::class, 'wallet_id');
     }
 
     public function getActivitylogOptions(): LogOptions
