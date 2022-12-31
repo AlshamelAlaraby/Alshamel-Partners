@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstOwner;
-use Modules\RealEstate\Http\Requests\CreateRlstOwnerRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstOwnerRequest;
+use Modules\RealEstate\Http\Requests\RlstOwnerRequest;
 use Modules\RealEstate\Transformers\RlstOwnerResource;
 
 class RlstOwnerController extends Controller
@@ -40,15 +39,16 @@ class RlstOwnerController extends Controller
         return responseJson(200, 'success', RlstOwnerResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstOwnerRequest $request)
+    public function create(RlstOwnerRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstOwnerResource($model));
 
     }
 
-    public function update($id, UpdateRlstOwnerRequest $request)
+    public function update($id, RlstOwnerRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -77,6 +77,9 @@ class RlstOwnerController extends Controller
         $model = $this->model->find($id);
         if (!$model) {
             return responseJson(404, 'not found');
+        }
+        if ($model->walletOwner()->count() > 0) {
+            return responseJson(400, 'this owner has wallet');
         }
         $model->delete();
         return responseJson(200, 'deleted');

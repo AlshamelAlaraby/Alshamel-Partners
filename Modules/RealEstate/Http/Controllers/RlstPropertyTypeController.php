@@ -5,7 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstPropertyType;
-use Modules\RealEstate\Http\Requests\CreatePropertyTypeRequest;
+use Modules\RealEstate\Http\Requests\PropertyTypeRequest;
 use Modules\RealEstate\Transformers\RlstPropertyTypeResource;
 
 class RlstPropertyTypeController extends Controller
@@ -40,14 +40,15 @@ class RlstPropertyTypeController extends Controller
         return responseJson(200, 'success', RlstPropertyTypeResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreatePropertyTypeRequest $request)
+    public function create(PropertyTypeRequest $request)
     {
-        $this->model->create($request->validated());
+        $model = $this->model->create($request->validated());
+        $model->refresh();
 
-        return responseJson(200, 'created');
+        return responseJson(200, 'created', new RlstPropertyTypeResource($model));
     }
 
-    public function update($id, CreatePropertyTypeRequest $request)
+    public function update($id, PropertyTypeRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -55,8 +56,8 @@ class RlstPropertyTypeController extends Controller
         }
 
         $model->update($request->validated());
-
-        return responseJson(200, 'updated');
+        $model->refresh();
+        return responseJson(200, 'updated',new RlstPropertyTypeResource($model));
     }
 
     public function logs($id)

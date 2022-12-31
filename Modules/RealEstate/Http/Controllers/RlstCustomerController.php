@@ -5,9 +5,10 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstCustomer;
+use Modules\RealEstate\Http\Requests\RlstCustomerRequest;
+use Modules\RealEstate\Transformers\RlstCustomerResource;
 use Modules\RealEstate\Http\Requests\CreateRlstCustomerRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstCustomerRequest;
-use Modules\RealEstate\Transformers\RlstCustomerResource;
 
 class RlstCustomerController extends Controller
 {
@@ -40,14 +41,15 @@ class RlstCustomerController extends Controller
         return responseJson(200, 'success', RlstCustomerResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstCustomerRequest $request)
+    public function create(RlstCustomerRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstCustomerResource($model));
     }
 
-    public function update($id, UpdateRlstCustomerRequest $request)
+    public function update($id, RlstCustomerRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -76,6 +78,10 @@ class RlstCustomerController extends Controller
         if (!$model) {
             return responseJson(404, 'not found');
         }
+        if ($model->reservations()->count() > 0) {
+            return responseJson(400, 'can not delete this customer because it has reservations');
+        }
+
         $model->delete();
         return responseJson(200, 'deleted');
     }

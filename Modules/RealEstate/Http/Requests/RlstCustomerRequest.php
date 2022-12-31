@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstCustomerRequest extends FormRequest
+class RlstCustomerRequest extends FormRequest
 {
     public function authorize()
     {
@@ -18,10 +18,10 @@ class CreateRlstCustomerRequest extends FormRequest
             'name_e' => 'required|string|max:100',
             'phone' => 'required|string|max:20',
             'email' => 'required|string|max:100',
-            'country_id' => 'required|integer',
-            'city_id' => 'required|integer',
+            'country_id' => 'required|integer|exists:countries,id,deleted_at,null',
+            'city_id' => 'required|integer|exists:cities,id,deleted_at,null',
             'rb_code' => 'required|string|max:255',
-            'nationality_id' => 'required|integer|exists:countries,id',
+            'nationality_id' => 'required|integer|exists:countries,id,deleted_at,null',
             "bank_account_id" => "required|integer",
             "contact_person" => "required|string|max:100",
             "contact_phones" => "required|string|max:100",
@@ -35,9 +35,9 @@ class CreateRlstCustomerRequest extends FormRequest
             "note4" => 'required|max:100',
             "whatsapp" => "required|string|max:20",
             "categories" => "required",
+            "attachments" => 'required',
         ];
     }
-
 
     public function messages()
     {
@@ -78,6 +78,7 @@ class CreateRlstCustomerRequest extends FormRequest
             'whatsapp.string' => __("message.field must be string"),
             'whatsapp.max' => __("message.field must be less than 20 characters"),
             "categories.required" => __("message.field is required"),
+            "attachments.required" => __("message.field is required"),
             "note1.required" => __("message.field is required"),
             'note1.max' => __("message.field must be less than 100 characters"),
             "note2.required" => __("message.field is required"),
@@ -89,9 +90,6 @@ class CreateRlstCustomerRequest extends FormRequest
             "passport_no.required" => __("message.field is required"),
             'passport_no.string' => __("message.field must be string"),
             'passport_no.max' => __("message.field must be less than 20 characters"),
-
-
-
 
         ];
     }

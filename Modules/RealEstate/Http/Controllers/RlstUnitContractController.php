@@ -5,9 +5,10 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstUnitContract;
+use Modules\RealEstate\Http\Requests\RlstUnitContractRequest;
+use Modules\RealEstate\Transformers\RlstUnitContractResource;
 use Modules\RealEstate\Http\Requests\CreateRlstUnitContractRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstUnitContractRequest;
-use Modules\RealEstate\Transformers\RlstUnitContractResource;
 
 class RlstUnitContractController extends Controller
 {
@@ -40,14 +41,15 @@ class RlstUnitContractController extends Controller
         return responseJson(200, 'success', RlstUnitContractResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstUnitContractRequest $request)
+    public function create(RlstUnitContractRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstUnitContractResource($model));
     }
 
-    public function update($id, UpdateRlstUnitContractRequest $request)
+    public function update($id, RlstUnitContractRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

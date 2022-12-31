@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RlstWalletOwnerResource  extends JsonResource
+class RlstWalletOwnerResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

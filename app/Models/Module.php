@@ -22,6 +22,7 @@ class Module extends Model
         'is_active' => 'App\Enums\IsActive',
     ];
 
+    // relations
     public function parent()
     {
         return $this->hasMany(Module::class, 'parent_id', 'id');
@@ -52,4 +53,8 @@ class Module extends Model
             ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName} by ($user)");
     }
 
+    public function buildings()
+    {
+        return $this->hasMany(\Modules\RealEstate\Entities\RlstBuilding::class);
+    }
 }
