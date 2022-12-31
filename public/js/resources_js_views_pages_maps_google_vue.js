@@ -5495,6 +5495,11 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/colors'
+}, {
+  id: 10099,
+  label: 'general.dictionary',
+  icon: 'fas fa-palette',
+  link: '/dictionary'
 }
 
 // {

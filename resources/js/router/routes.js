@@ -19,6 +19,7 @@ import salesmenTypes from "./routeChild/salesmenTypes";
 import branches from "./routeChild/branch";
 import serial from "./routeChild/serial";
 import store from "./routeChild/store";
+import dictionary from "./routeChild/dictionary";
 import workflowhotfields from "./routeChild/workflowhotfield";
 import screenproperties from "./routeChild/screen-property";
 import salesmen from  "./routeChild/salesMen";
@@ -37,6 +38,7 @@ export default [
     ...governorate,
     ...city,
     ...banks,
+    ...dictionary,
     ...currency,
     ...employee,
     ...financialYear,
