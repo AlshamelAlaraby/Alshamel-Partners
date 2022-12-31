@@ -827,11 +827,11 @@ export default {
                     >
                       {{ $t("general.Add") }}
                     </b-button>
-
                     <b-button variant="success" class="mx-1" disabled v-else>
                       <b-spinner small></b-spinner>
                       <span class="sr-only">{{ $t("login.Loading") }}...</span>
                     </b-button>
+                    
                   </template>
                   <b-button
                     @click.prevent="$bvModal.hide(`create`)"

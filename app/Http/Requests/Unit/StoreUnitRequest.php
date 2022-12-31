@@ -27,6 +27,7 @@ class StoreUnitRequest extends FormRequest
             'name' => 'required|string|max:255',
             'name_e' => 'required|string|max:255',
             'is_active' => 'nullable|in:active,inactive',
+            "module_id" => "required",
         ];
     }
 
@@ -46,6 +47,7 @@ class StoreUnitRequest extends FormRequest
             'name_e.string' => __('message.field must be string'),
             'name_e.max' => __('message.field must be less than 255 character'),
             'is_active.in' => __('message.field must be in active,inactive'),
+            'module_id.required' => __('message.field is required'),
 
         ];
     }

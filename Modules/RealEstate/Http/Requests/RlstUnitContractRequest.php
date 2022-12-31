@@ -2,10 +2,9 @@
 
 namespace Modules\RealEstate\Http\Requests;
 
-use App\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstUnitContractRequest extends FormRequest
+class RlstUnitContractRequest extends FormRequest
 {
 
     public function authorize()
@@ -16,10 +15,9 @@ class CreateRlstUnitContractRequest extends FormRequest
     public function rules()
     {
         return [
-            "unit_code" => "required|exists:tree_properties,id",
+            "unit_code" => "required|exists:tree_properties,id,deleted_at,null",
         ];
     }
-
 
     public function messages()
     {

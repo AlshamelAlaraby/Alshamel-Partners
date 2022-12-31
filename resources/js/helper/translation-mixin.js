@@ -2,8 +2,9 @@ import adminApi from "../api/adminAxios";
 export default {
     data() {
         return {
-            defaultsKeys: [],
-            companyKeys: [],
+            defaultsKeys: {},
+            companyKeys: {},
+            filterResult:{}
         }
     },
     mounted() {
@@ -22,6 +23,7 @@ export default {
                 })
                 .then((res) => {
                     this.defaultsKeys = res.data.translations;
+                    this.filterResult={...this.defaultsKeys};
                 })
                 .catch((err) => {
                     Swal.fire({
@@ -77,5 +79,15 @@ export default {
               }
             }
           },
+          getKeyInfo(key) {
+            let keyInfo = null;
+            for (let _key in this.companyKeys) {
+                if (_key == key) {
+                    keyInfo = this.companyKeys[_key];
+                    return keyInfo;
+                }
+            }
+            return keyInfo;
+        }
     },
 }

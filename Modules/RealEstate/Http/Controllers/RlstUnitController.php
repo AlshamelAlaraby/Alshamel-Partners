@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstUnit;
-use Modules\RealEstate\Http\Requests\CreateRlstUnitRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstUnitRequest;
+use Modules\RealEstate\Http\Requests\RlstUnitRequest;
 use Modules\RealEstate\Transformers\RlstUnitResource;
 
 class RlstUnitController extends Controller
@@ -40,15 +39,16 @@ class RlstUnitController extends Controller
         return responseJson(200, 'success', RlstUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstUnitRequest $request)
+    public function create(RlstUnitRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstUnitResource($model));
 
     }
 
-    public function update($id, UpdateRlstUnitRequest $request)
+    public function update($id, RlstUnitRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

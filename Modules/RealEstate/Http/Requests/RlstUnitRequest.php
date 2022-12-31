@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRlstUnitRequest extends FormRequest
+class RlstUnitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,10 +31,10 @@ class CreateRlstUnitRequest extends FormRequest
             'unit_ty' => "nullable|integer",
             'status_date' => "nullable|date",
             'unit_area' => "nullable|numeric",
-            'building_id' => "nullable|integer",
-            'owner_id' => "nullable|integer",
-            'currency_id' => "nullable|integer",
-            'wallet_id' => "nullable|integer",
+            'building_id' => "nullable|integer|exists:rlst_buildings,id,deleted_at,null",
+            'owner_id' => "nullable|integer|exists:rlst_owners,id,deleted_at,null",
+            'currency_id' => "nullable|integer|exists:currencies,id,deleted_at,null",
+            'wallet_id' => "nullable|integer|exists:rlst_wallets,id,deleted_at,null",
             'unit_status_id' => "nullable|integer",
             'commission_ty' => "nullable|integer",
             'commission_value' => "nullable|numeric",
@@ -44,6 +44,9 @@ class CreateRlstUnitRequest extends FormRequest
             'view' => "nullable|integer",
             'floor' => "nullable|integer",
             'rank' => "nullable|integer",
+            'properties' => "required|array",
+            'attachments' => "required|array",
+            'module_id' => "required|integer",
 
         ];
     }
@@ -78,7 +81,10 @@ class CreateRlstUnitRequest extends FormRequest
             'view.integer' => __("message.field must be integer"),
             'floor.integer' => __("message.field must be integer"),
             'rank.integer' => __("message.field must be integer"),
-
+            'properties.array' => __("message.field must be array"),
+            'attachments.array' => __("message.field must be array"),
+            'module_id.required' => __("message.field is required"),
+            'module_id.integer' => __("message.field must be integer"),
         ];
     }
 }

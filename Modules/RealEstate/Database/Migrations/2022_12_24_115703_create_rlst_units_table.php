@@ -36,6 +36,9 @@ return new class extends Migration
             $table->unsignedInteger('view')->nullable()->default(0);
             $table->unsignedInteger('floor')->nullable()->default(0);
             $table->unsignedInteger('rank')->nullable()->default(0);
+            $table->json('properties');
+            $table->json('attachments');
+            $table->foreignId("module_id");
             $table->softDeletes();
             $table->timestamps();
         });

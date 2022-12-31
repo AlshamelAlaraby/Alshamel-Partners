@@ -88,7 +88,7 @@ export default {
      */
     search(after, befour) {
       clearTimeout(this.debounce);
-      this.debounce = setTimeout(() => {
+      this  .debounce = setTimeout(() => {
         this.getData();
       }, 400);
     },
@@ -727,7 +727,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="getCompanyKey('create_branch_form')"
+              :title="getCompanyKey('branch_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"

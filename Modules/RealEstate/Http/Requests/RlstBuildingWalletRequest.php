@@ -4,7 +4,7 @@ namespace Modules\RealEstate\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRlstBuildingWalletRequest extends FormRequest
+class RlstBuildingWalletRequest extends FormRequest
 {
 
     /**
@@ -24,8 +24,8 @@ class UpdateRlstBuildingWalletRequest extends FormRequest
     public function rules()
     {
         return [
-            'wallet_id' => 'required|integer|exists:rlst_wallets,id',
-            'building_id' => 'required|integer|exists:rlst_buildings,id',
+            'wallet_id' => 'required|integer|exists:rlst_wallets,id,deleted_at,null',
+            'building_id' => 'required|integer|exists:rlst_buildings,id,deleted_at,null',
             'bu_ty' => 'required|in:0,1',
         ];
     }

@@ -5,7 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstWallet;
-use Modules\RealEstate\Http\Requests\CreateRlstWalletRequest;
+use Modules\RealEstate\Http\Requests\RlstWalletRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstWalletRequest;
 use Modules\RealEstate\Transformers\RlstWalletResource;
 
@@ -40,14 +40,15 @@ class RlstWalletController extends Controller
         return responseJson(200, 'success', RlstWalletResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstWalletRequest $request)
+    public function create(RlstWalletRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstWalletResource($model));
     }
 
-    public function update($id, UpdateRlstWalletRequest $request)
+    public function update($id, RlstWalletRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
@@ -77,6 +78,10 @@ class RlstWalletController extends Controller
         if (!$model) {
             return responseJson(404, 'not found');
         }
+        if ($model->walletOwner()->count() > 0 || $model->buildingWallet()->count() > 0) {
+            return responseJson(400, 'this wallet is used in another place');
+        }
+
         $model->delete();
         return responseJson(200, 'deleted');
     }
