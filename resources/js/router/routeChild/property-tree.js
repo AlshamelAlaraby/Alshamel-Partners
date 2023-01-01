@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/tree-properties',
+        path: '/dashboard/tree-properties',
         name: 'tree-properties',
         meta: {
             middleware: [auth,checkAuth]

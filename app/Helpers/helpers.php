@@ -82,6 +82,7 @@ function get_trans(){
         $translations = $translations->where ('company_id',0);
     }
     $translations = $translations->get ();
+//    return \App\Http\Resources\TranslationResource::collection ($translations);
     $arr = [];
     foreach ($translations as $d){
         $arr[$d->key] = [

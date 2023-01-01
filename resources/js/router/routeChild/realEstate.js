@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/realEstate/owner',
+        path: '/dashboard/realEstate/owner',
         name: 'realEstate-owner',
         meta: {
             middleware: [auth,checkAuth]
@@ -11,7 +11,7 @@ export default [
         component: () => import('../../views/pages/realEstate/owner'),
     },
     {
-        path: '/realEstate/building',
+        path: '/dashboard/realEstate/building',
         name: 'realEstate-building',
         meta: {
             middleware: [auth,checkAuth]
@@ -19,7 +19,7 @@ export default [
         component: () => import('../../views/pages/realEstate/building'),
     },
     {
-        path: '/realEstate/customer',
+        path: '/dashboard/realEstate/customer',
         name: 'realEstate-customer',
         meta: {
             middleware: [auth,checkAuth]

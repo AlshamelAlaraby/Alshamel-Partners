@@ -110,7 +110,8 @@ class WorkflowHotfieldController extends Controller
         return responseJson(200, __('Done'));
     }
 
-        public function logs($id)
+
+    public function logs($id)
     {
         $model = $this->repository->find($id);
         if (!$model) {
