@@ -120,6 +120,59 @@
         "Table": "Internal Sales Men Table",
         "salesmen": "Internal Sales Men"
     },
+    "DocumentField": {
+        "AddDocumentField": " Add Document Field",
+        "EditDocumentField": "Edit Document Field",
+        "DocumentField": "Document Field",
+        "DocumentFieldsTable": "Document Fields Table"
+    },
+    "ArchiveClosedReference": {
+        "AddArchiveClosedReference": "Add Archive Closed Reference",
+        "EditArchiveClosedReference": "Edit Archive Closed Reference",
+        "ArchiveClosedReferencesTable": "Archive Closed Reference Table",
+        "ArcDocField": "Archive Doc Field",
+        "FieldValue": "Field Value"
+    },
+    "ArchDepartment": {
+        "AddArchDepartment": " Add Arch Department",
+        "EditArchDepartment": "Edit Arch Department",
+        "ArchDepartment": "Arch Department",
+        "ArchDepartmentTable": "Arch Department Table"
+    },
+    "ArchDocument": {
+        "AddArchDocument": " Add Arch Document",
+        "EditArchDocument": "Edit Arch Document",
+        "ArchDocument": "Arch Document",
+        "ArchDocumentTable": "Arch Document Table",
+        "DocStatus": "Doc Status",
+        "URLReference": "URL Reference",
+        "DocDescription": "Doc Description",
+        "GenArchDocType": "Gen Arch Doc Type"
+    },
+    "GenArchDocType": {
+        "AddGenArchDocType": " Add Gen Arch Doc Type",
+        "EditGenArchDocType": "Edit Gen Arch Doc Type",
+        "GenArchDocType": "Gen Arch Doc Type",
+        "GenArchDocTypeTable": "Gen Arch Doc Type Table"
+    },
+    "ArchDocTypeField": {
+        "AddArchDocTypeField": " Add Arch Doc Type Field",
+        "EditArchDocTypeField": "Edit Arch Doc Type Field",
+        "ArchDocTypeField": "Arch Doc Type Field",
+        "ArchDocTypeFieldTable": "Arch Doc Type Field Table"
+    },
+    "ArchDocumentDtl": {
+        "AddArchDocumentDtl": " Add Arch Document Dtl",
+        "EditArchDocumentDtl": "Edit Arch Document Dtl",
+        "ArchDocumentDtl": "Arch Document Dtl",
+        "ArchDocumentDtlTable": "Arch Document Dtl Table"
+    },
+    "ArchDocStatus": {
+        "AddArchDocStatus": " Add Arch Doc Status",
+        "EditArchDocStatus": "Edit Arch Doc Status",
+        "ArchDocStatus": "Arch Doc Status",
+        "ArchDocStatusTable": "Arch Doc Status Table"
+    },
     "navbar": {
         "search": {
             "text": "Search..."
@@ -272,6 +325,30 @@
         },
         "company": {
             "text": "Company"
+        },
+        "DocumentField": {
+            "text": "Document Fields"
+        },
+        "ArchiveClosedReference": {
+            "text": "Archieve Closed References"
+        },
+        "ArchDepartment": {
+            "text": "Archive Department"
+        },
+        "ArchDocument": {
+            "text": "Archive Document"
+        },
+        "GenArchDocType": {
+            "text": "Gen Arch Doc Type"
+        },
+        "ArchDocTypeField": {
+            "text": "Arch Doc Type Field"
+        },
+        "ArchDocumentDtl": {
+            "text": "Arch Document Dtl"
+        },
+        "ArchDocumentStatus": {
+            "text": "Arch Document Status"
         },
         "dashboard": {
             "text": "Dashboards",
@@ -679,12 +756,51 @@
         "customer": "Customers",
         "description": "Description(arabic)",
         "description_e": "Description(english)",
-        "land_area": "Land Area",
-        "building_area": "Building Area",
+        "land_area": "Land Area (m)",
+        "building_area": "Building Area (m)",
         "construction_year": "Construction Year",
-        "project": "Project",
-        "region": "Region",
-        "lng": "",
-        "lat": ""
+        "module": "Module",
+        "lng": "longitude",
+        "lat": "Latitude",
+        "avenue": "Avenue",
+        "buildsTable": "Buildings Table",
+        "addbuild": "Add Building",
+        "editbuild": "Edit Building",
+        "ownersTable": "Owners Table",
+        "addowner": "Add Owner",
+        "editowner": "Edit Owner",
+        "nationality": "Nationality",
+        "contact_person": "Contact Person",
+        "contact_phones": "Contact Phones",
+        "whatsapp": "Whatsapp",
+        "bankAccount": "Bank Account",
+        "customersTable": "Customers Table",
+        "addcustomer": "Add Customer",
+        "editcustomer": "Edit Customer",
+        "passport": "Passport Number",
+        "DocumentFieldNumeric": "Numeric",
+        "DocumentFieldDate": "Date",
+        "DocumentFieldDdlb": "ddlb{}",
+        "DocumentFieldLookup": "lookup(Table)",
+        "isReference": "Is Reference?",
+        "isReferenceYes": "Yes",
+        "isReferenceNo": "No",
+        "Archive": "No",
+        "ArchiveClosedReferenceDocField": "Archive Document Field",
+        "ArchiveClosedReferenceFieldValue": "Field Value",
+        "ArchDepartmentParentID": "Arch Department",
+        "ArchDocumentDocDesc": "Doc Description",
+        "ArchDocumentDocStatus": "Doc Status",
+        "ArchDocumentArchDocType": "Arch Doc Type",
+        "ArchDocumentDocURLreference": "URL Reference",
+        "isValid": "Is Valid",
+        "parentId": "Parent",
+        "genArchDocType": "Gen Arch Doc Type",
+        "archDocTypeField": "Arch Doc Field",
+        "fieldOrder": "Field Order",
+        "isRequired": "Is Required",
+        "fieldCharacter": "Field Character",
+        "numericValidation": "This field should contains positive value.",
+        "fieldValue": "Field Value"
     }
 }

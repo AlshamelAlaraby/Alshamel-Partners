@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 // website
 
-Route::get('/', function () {
+Route::get('/', function () {return redirect('/dashboard');});
+
+Route::get('/dashboard', function () {
     return view('welcome');
 });
 
-Route::get('{any?}', function ($any) {
+Route::get('/dashboard/{any?}', function ($any) {
   return view('welcome');
 })->where('any','.*');

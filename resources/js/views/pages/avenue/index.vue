@@ -565,7 +565,7 @@ export default {
       this.create.city_id = null;
       this.edit.city_id = null;
       await adminApi
-        .get(`/countries`)
+        .get(`/countries?is_active=active`)
         .then((res) => {
           let l = res.data.data;
           l.unshift({ id: 0, name: "اضافة دولة", name_e: "Add Country" });
@@ -635,10 +635,10 @@ export default {
           });
         });
     },
-      formatDate(value) {
-          return formatDateOnly(value);
-      },
-      log(id) {
+    formatDate(value) {
+        return formatDateOnly(value);
+    },
+    log(id) {
           if(this.mouseEnter != id){
               this.Tooltip = "";
               this.mouseEnter = id;

@@ -368,7 +368,7 @@ export default {
         async getCountries() {
             this.isLoader = true;
             await adminApi
-                .get(`/countries`)
+                .get(`/countries?is_active=active`)
                 .then((res) => {
                     let l = res.data.data;
                     l.unshift({id: 0, name: "اضف دولة", name_e: "Add Country"});

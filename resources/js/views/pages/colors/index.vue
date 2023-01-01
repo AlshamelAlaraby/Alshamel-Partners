@@ -107,6 +107,7 @@ export default {
         }
     },
     updated(){
+
         $(function(){
             $(".englishInput").keypress(function(event){
                 var ew = event.which;

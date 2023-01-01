@@ -347,8 +347,7 @@ export default {
         /**
          *  reset Modal (create)
          */
-        async resetModalHidden() {
-            await this.getBank();
+         resetModalHidden() {
             this.create = {
                 bank_id: null,
                 account_number: '',

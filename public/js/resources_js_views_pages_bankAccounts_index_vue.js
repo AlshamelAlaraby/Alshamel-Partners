@@ -1581,7 +1581,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this5.isLoader = true;
                 _context3.next = 3;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_4__["default"].get("/countries").then(function (res) {
+                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_4__["default"].get("/countries?is_active=active").then(function (res) {
                   var l = res.data.data;
                   l.unshift({
                     id: 0,
@@ -2399,50 +2399,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetModalHidden: function resetModalHidden() {
       var _this6 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this6.getBank();
-              case 2:
-                _this6.create = {
-                  bank_id: null,
-                  account_number: '',
-                  phone: '',
-                  address: '',
-                  email: '',
-                  emp_id: '',
-                  rp_code: '',
-                  media: null
-                };
-                _this6.$nextTick(function () {
-                  _this6.$v.$reset();
-                });
-                _this6.images = [];
-                _this6.bankAccount_id = null;
-                _this6.errors = {};
-                _this6.$bvModal.hide("create");
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      this.create = {
+        bank_id: null,
+        account_number: '',
+        phone: '',
+        address: '',
+        email: '',
+        emp_id: '',
+        rp_code: '',
+        media: null
+      };
+      this.$nextTick(function () {
+        _this6.$v.$reset();
+      });
+      this.images = [];
+      this.bankAccount_id = null;
+      this.errors = {};
+      this.$bvModal.hide("create");
     },
     /**
      *  hidden Modal (create)
      */
     resetModal: function resetModal() {
       var _this7 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context2.next = 2;
+                _context.next = 2;
                 return _this7.getBank();
               case 2:
                 _this7.create = {
@@ -2464,10 +2449,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this7.errors = {};
               case 9:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     },
     /**
@@ -2475,12 +2460,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetForm: function resetForm() {
       var _this8 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context3.next = 2;
+                _context2.next = 2;
                 return _this8.getBank();
               case 2:
                 _this8.create = {
@@ -2501,10 +2486,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this8.errors = {};
               case 8:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3);
+        }, _callee2);
       }))();
     },
     AddSubmit: function AddSubmit() {
@@ -2612,14 +2597,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     resetModalEdit: function resetModalEdit(id) {
       var _this12 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         var _bankAccount$media;
         var bankAccount;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context4.next = 2;
+                _context3.next = 2;
                 return _this12.getBank();
               case 2:
                 bankAccount = _this12.bankAccounts.find(function (e) {
@@ -2642,10 +2627,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this12.errors = {};
               case 14:
               case "end":
-                return _context4.stop();
+                return _context3.stop();
             }
           }
-        }, _callee4);
+        }, _callee3);
       }))();
     },
     /**
@@ -2850,13 +2835,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
      */
     getBank: function getBank() {
       var _this15 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 _this15.isLoader = true;
-                _context5.next = 3;
+                _context4.next = 3;
                 return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/banks").then(function (res) {
                   var l = res.data.data;
                   l.unshift({
@@ -2876,10 +2861,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
               case 3:
               case "end":
-                return _context5.stop();
+                return _context4.stop();
             }
           }
-        }, _callee5);
+        }, _callee4);
       }))();
     }
   }
@@ -9220,22 +9205,22 @@ var menuItems = [{
   id: 100032,
   label: 'menuitems.company.text',
   icon: 'fas fa-city',
-  link: '/company'
+  link: '/dashboard/company'
 }, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
-  link: '/branch'
+  link: '/dashboard/branch'
 }, {
   id: 10008,
   label: 'menuitems.store.text',
   icon: 'fas fa-store',
-  link: '/store'
+  link: '/dashboard/store'
 }, {
   id: 10009,
   label: 'menuitems.serial.text',
   icon: 'fas fa-eraser',
-  link: '/serial'
+  link: '/dashboard/serial'
 }, {
   id: 113872,
   label: "general.Properties",
@@ -9244,11 +9229,11 @@ var menuItems = [{
   subItems: [{
     id: 225,
     label: 'general.ScreenProperties',
-    link: '/screen-properties'
+    link: '/dashboard/screen-properties'
   }, {
     id: 226,
     label: 'general.TreeProperty',
-    link: '/tree-properties'
+    link: '/dashboard/tree-properties'
   }]
 }, {
   id: 10006,
@@ -9258,19 +9243,19 @@ var menuItems = [{
   subItems: [{
     id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
-    link: '/salesmenTypes'
+    link: '/dashboard/salesmenTypes'
   }, {
     id: 100117,
     label: 'menuitems.dashboard.list.salesMen',
-    link: '/salesmen'
+    link: '/dashboard/salesmen'
   }, {
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
-    link: '/externalSalesmen'
+    link: '/dashboard/externalSalesmen'
   }, {
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
-    link: '/internalSalesman'
+    link: '/dashboard/internalSalesman'
   }]
 }, {
   id: 1000548,
@@ -9280,15 +9265,15 @@ var menuItems = [{
   subItems: [{
     id: 112201,
     label: 'general.paymentTypes',
-    link: '/paymentTypes'
+    link: '/dashboard/paymentTypes'
   }, {
     id: 222,
     label: 'menuitems.Banks.text',
-    link: '/banks'
+    link: '/dashboard/banks'
   }, {
     id: 112202,
     label: 'general.bankAccounts',
-    link: '/bankAccount'
+    link: '/dashboard/bankAccount'
   }]
 }, {
   id: 1000544,
@@ -9298,19 +9283,19 @@ var menuItems = [{
   subItems: [{
     id: 2,
     label: 'menuitems.dashboard.list.country',
-    link: '/country'
+    link: '/dashboard/country'
   }, {
     id: 3,
     label: 'menuitems.dashboard.list.governorate',
-    link: '/governorate'
+    link: '/dashboard/governorate'
   }, {
     id: 4,
     label: 'menuitems.dashboard.list.city',
-    link: '/city'
+    link: '/dashboard/city'
   }, {
     id: 8,
     label: 'menuitems.dashboard.list.avenue',
-    link: '/avenue'
+    link: '/dashboard/avenue'
   }]
 }, {
   id: 10001,
@@ -9320,23 +9305,23 @@ var menuItems = [{
   subItems: [{
     id: 10002,
     label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
+    link: '/dashboard/rolesType'
   }, {
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
+    link: '/dashboard/roles'
   }, {
     id: 100043,
     label: 'menuitems.dashboard.list.roleWorkflow',
-    link: '/role-workflow'
+    link: '/dashboard/role-workflow'
   }, {
     id: 100088,
     label: 'menuitems.dashboard.list.roleWorkflowButton',
-    link: '/role-workflow-button'
+    link: '/dashboard/role-workflow-button'
   }, {
     id: 100134,
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
-    link: '/role-hotfield-screen'
+    link: '/dashboard/role-hotfield-screen'
   }]
 }, {
   id: 10023578,
@@ -9346,51 +9331,89 @@ var menuItems = [{
   subItems: [{
     id: 1000201,
     label: 'general.owner',
-    link: '/realEstate/owner'
+    link: '/dashboard/realEstate/owner'
   }, {
     id: 10048103,
     label: 'general.building',
-    link: '/realEstate/building'
+    link: '/dashboard/realEstate/building'
   }, {
     id: 1022343,
     label: 'general.customer',
-    link: '/realEstate/customer'
+    link: '/dashboard/realEstate/customer'
+  }]
+}, {
+  id: 1004346756,
+  label: "general.archive",
+  icon: "ri-share-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 38781,
+    label: 'menuitems.DocumentField.text',
+    link: '/document-fields'
+  }, {
+    id: 34343,
+    label: 'menuitems.ArchiveClosedReference.text',
+    link: '/dashboard/archive-closed-references'
+  }, {
+    id: 432234,
+    label: 'menuitems.GenArchDocType.text',
+    link: '/dashboard/gen-arch-doc-types'
+  }, {
+    id: 34561,
+    label: 'menuitems.ArchDocTypeField.text',
+    link: '/dashboard/arch-doc-type-fields'
+  }, {
+    id: 879756,
+    label: 'menuitems.ArchDepartment.text',
+    link: '/dashboard/arch-departments'
+  }, {
+    id: 1567443,
+    label: 'menuitems.ArchDocument.text',
+    link: '/dashboard/arch-documents'
+  }, {
+    id: 36462,
+    label: 'menuitems.ArchDocumentDtl.text',
+    link: '/dashboard/arch-document-dtls'
+  }, {
+    id: 32020,
+    label: 'menuitems.ArchDocumentStatus.text',
+    link: '/dashboard/arch-doc-status'
   }]
 }, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
-  link: '/workflow-hotfields'
+  link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
   label: 'general.Users',
   icon: 'fas fa-network-wired',
-  link: '/users'
+  link: '/dashboard/users'
 }, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
-  link: '/currency'
+  link: '/dashboard/currency'
 }, {
   id: 6,
   label: 'menuitems.employee.text',
   icon: 'fas fa-user-friends',
-  link: '/employee'
+  link: '/dashboard/employee'
 }, {
   id: 7,
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
-  link: '/financialYear'
+  link: '/dashboard/financialYear'
 }, {
   id: 10004,
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
-  link: '/units'
+  link: '/dashboard/units'
 }, {
   id: 10005,
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
-  link: '/colors'
+  link: '/dashboard/colors'
 }
 
 // {
@@ -9406,17 +9429,17 @@ var menuItems = [{
 //         {
 //             id: 1114,
 //             label: 'menuitems.dashboard.list.sales',
-//             link: '/'
+//             link: '/dashboard/'
 //         },
 //         {
 //             id: 1113,
 //             label: 'menuitems.dashboard.list.crm',
-//             link: '/dashboard/crm'
+//             link: '/dashboard/dashboard/crm'
 //         },
 //         {
 //             id: 1115,
 //             label: 'menuitems.dashboard.list.analytics',
-//             link: '/dashboard/analytics'
+//             link: '/dashboard/dashboard/analytics'
 //         },
 //     ]
 // },
@@ -9429,7 +9452,7 @@ var menuItems = [{
 //     id: 11113,
 //     label: "menuitems.chat.text",
 //     icon: "ri-message-2-line",
-//     link: '/apps/chat'
+//     link: '/dashboard/apps/chat'
 // },
 // {
 //     id: 1112,
@@ -9444,52 +9467,52 @@ var menuItems = [{
 //         {
 //             id: 1111,
 //             label: "menuitems.ecommerce.list.products",
-//             link: "/ecommerce/products"
+//             link: "/dashboard/ecommerce/products"
 //         },
 //         {
 //             id: 1110,
 //             label: "menuitems.ecommerce.list.productsgrid",
-//             link: "/ecommerce/products-grid"
+//             link: "/dashboard/ecommerce/products-grid"
 //         },
 //         {
 //             id: 1109,
 //             label: 'menuitems.ecommerce.list.productdetail',
-//             link: '/ecommerce/product-detail/1'
+//             link: '/dashboard/ecommerce/product-detail/1'
 //         },
 //         {
 //             id: 1108,
 //             label: 'menuitems.ecommerce.list.createproduct',
-//             link: '/ecommerce/product-create'
+//             link: '/dashboard/ecommerce/product-create'
 //         },
 //         {
 //             id: 1107,
 //             label: "menuitems.ecommerce.list.customers",
-//             link: "/ecommerce/customers"
+//             link: "/dashboard/ecommerce/customers"
 //         },
 //         {
 //             id: 1106,
 //             label: "menuitems.ecommerce.list.orders",
-//             link: "/ecommerce/orders"
+//             link: "/dashboard/ecommerce/orders"
 //         },
 //         {
 //             id: 1105,
 //             label: "menuitems.ecommerce.list.orderdetail",
-//             link: "/ecommerce/order-detail"
+//             link: "/dashboard/ecommerce/order-detail"
 //         },
 //         {
 //             id: 1104,
 //             label: "menuitems.ecommerce.list.sellers",
-//             link: "/ecommerce/sellers"
+//             link: "/dashboard/ecommerce/sellers"
 //         },
 //         {
 //             id: 1103,
 //             label: "menuitems.ecommerce.list.cart",
-//             link: "/ecommerce/cart"
+//             link: "/dashboard/ecommerce/cart"
 //         },
 //         {
 //             id: 1102,
 //             label: "menuitems.ecommerce.list.checkout",
-//             link: "/ecommerce/checkout"
+//             link: "/dashboard/ecommerce/checkout"
 //         }
 //     ]
 // },
@@ -9497,7 +9520,7 @@ var menuItems = [{
 //     id: 1101,
 //     label: 'menuitems.calendar.text',
 //     icon: 'ri-calendar-2-line',
-//     link: '/apps/calendar'
+//     link: '/dashboard/apps/calendar'
 // },
 // {
 //     id: 1100,
@@ -9508,17 +9531,17 @@ var menuItems = [{
 //         {
 //             id: 1099,
 //             label: 'menuitems.email.list.inbox',
-//             link: '/email/inbox'
+//             link: '/dashboard/email/inbox'
 //         },
 //         {
 //             id: 1098,
 //             label: 'menuitems.email.list.reademail',
-//             link: '/email/reademail/1'
+//             link: '/dashboard/email/reademail/1'
 //         },
 //         {
 //             id: 1097,
 //             label: 'menuitems.email.list.template',
-//             link: '/email/templates'
+//             link: '/dashboard/email/templates'
 //         }
 //     ]
 // },
@@ -9526,7 +9549,7 @@ var menuItems = [{
 //     id: 1096,
 //     label: 'menuitems.companies.text',
 //     icon: 'ri-building-4-line',
-//     link: '/apps/companies'
+//     link: '/dashboard/apps/companies'
 // },
 // {
 //     id: 1095,
@@ -9537,17 +9560,17 @@ var menuItems = [{
 //         {
 //             id: 1093,
 //             label: 'menuitems.tasks.list.list',
-//             link: '/task/list'
+//             link: '/dashboard/task/list'
 //         },
 //         {
 //             id: 1092,
 //             label: 'menuitems.tasks.list.detail',
-//             link: '/task/detail'
+//             link: '/dashboard/task/detail'
 //         },
 //         {
 //             id: 1091,
 //             label: 'menuitems.tasks.list.kanban',
-//             link: '/task/kanban'
+//             link: '/dashboard/task/kanban'
 //         }
 //     ]
 // },
@@ -9555,7 +9578,7 @@ var menuItems = [{
 //     id: 1090,
 //     label: 'menuitems.ticket.text',
 //     icon: 'ri-customer-service-2-line',
-//     link: '/apps/tickets'
+//     link: '/dashboard/apps/tickets'
 // },
 // {
 //     id: 1089,
@@ -9566,12 +9589,12 @@ var menuItems = [{
 //         {
 //             id: 1088,
 //             label: 'menuitems.contacts.list.members',
-//             link: '/contacts/list'
+//             link: '/dashboard/contacts/list'
 //         },
 //         {
 //             id: 1087,
 //             label: 'menuitems.contacts.list.profile',
-//             link: '/contacts/profile'
+//             link: '/dashboard/contacts/profile'
 //         }
 //     ]
 // },
@@ -9579,7 +9602,7 @@ var menuItems = [{
 //     id: 1086,
 //     label: 'menuitems.filemanager.text',
 //     icon: 'ri-folders-line',
-//     link: '/apps/file-manager'
+//     link: '/dashboard/apps/file-manager'
 // },
 // {
 //     id: 1085,
@@ -9595,72 +9618,72 @@ var menuItems = [{
 //         {
 //             id: 1083,
 //             label: 'menuitems.auth.list.login',
-//             link: '/auth/login-1'
+//             link: '/dashboard/auth/login-1'
 //         },
 //         {
 //             id: 1082,
 //             label: 'menuitems.auth.list.login-2',
-//             link: '/auth/login-2'
+//             link: '/dashboard/auth/login-2'
 //         },
 //         {
 //             id: 1081,
 //             label: 'menuitems.auth.list.register',
-//             link: '/auth/register-1'
+//             link: '/dashboard/auth/register-1'
 //         },
 //         {
 //             id: 1080,
 //             label: 'menuitems.auth.list.register-2',
-//             link: '/auth/register-2'
+//             link: '/dashboard/auth/register-2'
 //         },
 //         {
 //             id: 1079,
 //             label: 'menuitems.auth.list.signin-signup',
-//             link: '/auth/signin-signup'
+//             link: '/dashboard/auth/signin-signup'
 //         },
 //         {
 //             id: 1078,
 //             label: 'menuitems.auth.list.signin-signup-2',
-//             link: '/auth/signin-signup-2'
+//             link: '/dashboard/auth/signin-signup-2'
 //         },
 //         {
 //             id: 1077,
 //             label: 'menuitems.auth.list.recoverpwd',
-//             link: '/auth/recoverpwd'
+//             link: '/dashboard/auth/recoverpwd'
 //         },
 //         {
 //             id: 1076,
 //             label: 'menuitems.auth.list.recoverpwd-2',
-//             link: '/auth/recoverpwd-2'
+//             link: '/dashboard/auth/recoverpwd-2'
 //         },
 //         {
 //             id: 1075,
 //             label: 'menuitems.auth.list.lock-screen',
-//             link: '/auth/lock-screen'
+//             link: '/dashboard/auth/lock-screen'
 //         },
 //         {
 //             id: 1074,
 //             label: 'menuitems.auth.list.lock-screen-2',
-//             link: '/auth/lock-screen-2'
+//             link: '/dashboard/auth/lock-screen-2'
 //         },
 //         {
 //             id: 1073,
 //             label: 'menuitems.auth.list.logout',
-//             link: '/auth/logout-1'
+//             link: '/dashboard/auth/logout-1'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.logout-2',
-//             link: '/auth/logout-2'
+//             link: '/dashboard/auth/logout-2'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.confirm-mail',
-//             link: '/auth/confirm-mail'
+//             link: '/dashboard/auth/confirm-mail'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.confirm-mail-2',
-//             link: '/auth/confirm-mail-2'
+//             link: '/dashboard/auth/confirm-mail-2'
 //         },
 //     ]
 // },
@@ -9673,67 +9696,67 @@ var menuItems = [{
 //         {
 //             id: 1070,
 //             label: 'menuitems.extrapages.list.starter',
-//             link: '/extras/starter'
+//             link: '/dashboard/extras/starter'
 //         },
 //         {
 //             id: 1069,
 //             label: 'menuitems.extrapages.list.timeline',
-//             link: '/extras/timeline'
+//             link: '/dashboard/extras/timeline'
 //         },
 //         {
 //             id: 1068,
 //             label: 'menuitems.extrapages.list.sitemap',
-//             link: '/extras/sitemap'
+//             link: '/dashboard/extras/sitemap'
 //         },
 //         {
 //             id: 1067,
 //             label: 'menuitems.extrapages.list.invoice',
-//             link: '/extras/invoice'
+//             link: '/dashboard/extras/invoice'
 //         },
 //         {
 //             id: 1066,
 //             label: 'menuitems.extrapages.list.faqs',
-//             link: '/extras/faqs'
+//             link: '/dashboard/extras/faqs'
 //         },
 //         {
 //             id: 1065,
 //             label: 'menuitems.extrapages.list.search-results',
-//             link: '/extras/search-results'
+//             link: '/dashboard/extras/search-results'
 //         },
 //         {
 //             id: 1064,
 //             label: 'menuitems.extrapages.list.pricing',
-//             link: '/extras/pricing'
+//             link: '/dashboard/extras/pricing'
 //         },
 //         {
 //             id: 1063,
 //             label: 'menuitems.extrapages.list.maintenance',
-//             link: '/extras/maintenance'
+//             link: '/dashboard/extras/maintenance'
 //         },
 //         {
 //             id: 1062,
 //             label: 'menuitems.extrapages.list.comingsoon',
-//             link: '/extras/coming-soon'
+//             link: '/dashboard/extras/coming-soon'
 //         },
 //         {
 //             id: 1061,
 //             label: 'menuitems.extrapages.list.lightbox',
-//             link: '/extras/lightbox'
+//             link: '/dashboard/extras/lightbox'
 //         },
 //         {
 //             id: 1060,
 //             label: 'menuitems.extrapages.list.error404',
-//             link: '/error/404'
+//             link: '/dashboard/error/404'
 //         },
 //         {
 //             id: 1059,
 //             label: 'menuitems.extrapages.list.error404-alt',
-//             link: '/error/404-alt'
+//             link: '/dashboard/error/404-alt'
 //         },
 //         {
 //             id: 1058,
 //             label: 'menuitems.extrapages.list.error500',
-//             link: '/error/500'
+//             link: '/dashboard/error/500'
 //         }
 //     ]
 // },
@@ -9751,97 +9774,97 @@ var menuItems = [{
 //         {
 //             id: 1055,
 //             label: 'menuitems.ui.list.avatars',
-//             link: '/ui/avatars'
+//             link: '/dashboard/ui/avatars'
 //         },
 //         {
 //             id: 1054,
 //             label: 'menuitems.ui.list.buttons',
-//             link: '/ui/buttons'
+//             link: '/dashboard/ui/buttons'
 //         },
 //         {
 //             id: 1053,
 //             label: 'menuitems.ui.list.cards',
-//             link: '/ui/cards'
+//             link: '/dashboard/ui/cards'
 //         },
 //         {
 //             id: 1052,
 //             label: 'menuitems.ui.list.carousel',
-//             link: '/ui/carousel'
+//             link: '/dashboard/ui/carousel'
 //         },
 //         {
 //             id: 1051,
 //             label: 'menuitems.ui.list.dropdowns',
-//             link: '/ui/dropdowns'
+//             link: '/dashboard/ui/dropdowns'
 //         },
 //         {
 //             id: 1050,
 //             label: 'menuitems.ui.list.video',
-//             link: '/ui/video'
+//             link: '/dashboard/ui/video'
 //         },
 //         {
 //             id: 1049,
 //             label: 'menuitems.ui.list.general',
-//             link: '/ui/general'
+//             link: '/dashboard/ui/general'
 //         },
 //         {
 //             id: 1048,
 //             label: 'menuitems.ui.list.grid',
-//             link: '/ui/grid'
+//             link: '/dashboard/ui/grid'
 //         },
 //         {
 //             id: 1047,
 //             label: 'menuitems.ui.list.images',
-//             link: '/ui/images'
+//             link: '/dashboard/ui/images'
 //         },
 //         {
 //             id: 1046,
 //             label: 'menuitems.ui.list.listgroup',
-//             link: '/ui/list-group'
+//             link: '/dashboard/ui/list-group'
 //         },
 //         {
 //             id: 1045,
 //             label: 'menuitems.ui.list.modals',
-//             link: '/ui/modals'
+//             link: '/dashboard/ui/modals'
 //         },
 //         {
 //             id: 1044,
 //             label: 'menuitems.ui.list.notifications',
-//             link: '/ui/notifications'
+//             link: '/dashboard/ui/notifications'
 //         },
 //         {
 //             id: 1043,
 //             label: 'menuitems.ui.list.portlet',
-//             link: '/ui/portlets'
+//             link: '/dashboard/ui/portlets'
 //         },
 //         {
 //             id: 1042,
 //             label: 'menuitems.ui.list.progress',
-//             link: '/ui/progress'
+//             link: '/dashboard/ui/progress'
 //         },
 //         {
 //             id: 1041,
 //             label: 'menuitems.ui.list.ribbons',
-//             link: '/ui/ribbons'
+//             link: '/dashboard/ui/ribbons'
 //         },
 //         {
 //             id: 1040,
 //             label: 'menuitems.ui.list.spinners',
-//             link: '/ui/spinners'
+//             link: '/dashboard/ui/spinners'
 //         },
 //         {
 //             id: 1039,
 //             label: 'menuitems.ui.list.tabs',
-//             link: '/ui/tabs-accordions'
+//             link: '/dashboard/ui/tabs-accordions'
 //         },
 //         {
 //             id: 1038,
 //             label: 'menuitems.ui.list.tooltip',
-//             link: '/ui/tooltips-popovers'
+//             link: '/dashboard/ui/tooltips-popovers'
 //         },
 //         {
 //             id: 1037,
 //             label: 'menuitems.ui.list.typography',
-//             link: '/ui/typography'
+//             link: '/dashboard/ui/typography'
 //         }
 //     ]
 // },
@@ -9858,22 +9881,22 @@ var menuItems = [{
 //         {
 //             id: 1035,
 //             label: 'menuitems.extendedui.list.rangeslider',
-//             link: '/extended/rangeslider'
+//             link: '/dashboard/extended/rangeslider'
 //         },
 //         {
 //             id: 1034,
 //             label: 'menuitems.extendedui.list.sweetalert',
-//             link: '/extended/sweet-alert'
+//             link: '/dashboard/extended/sweet-alert'
 //         },
 //         {
 //             id: 1033,
 //             label: 'menuitems.extendedui.list.tour',
-//             link: '/extended/tour'
+//             link: '/dashboard/extended/tour'
 //         },
 //         {
 //             id: 1032,
 //             label: 'menuitems.extendedui.list.scrollspy',
-//             link: '/extended/scrollspy'
+//             link: '/dashboard/extended/scrollspy'
 //         },
 //     ]
 // },
@@ -9881,7 +9904,7 @@ var menuItems = [{
 //     id: 1031,
 //     label: 'menuitems.widgets.text',
 //     icon: 'ri-honour-line',
-//     link: '/widgets'
+//     link: '/dashboard/widgets'
 // },
 // {
 //     id: 1024,
@@ -9892,32 +9915,32 @@ var menuItems = [{
 //         {
 //             id: 1025,
 //             label: 'menuitems.icons.list.feather',
-//             link: '/icons/feather'
+//             link: '/dashboard/icons/feather'
 //         },
 //         {
 //             id: 1026,
 //             label: 'menuitems.icons.list.remix',
-//             link: '/icons/remix'
+//             link: '/dashboard/icons/remix'
 //         },
 //         {
 //             id: 1027,
 //             label: 'menuitems.icons.list.boxicons',
-//             link: '/icons/boxicons'
+//             link: '/dashboard/icons/boxicons'
 //         },
 //         {
 //             id: 1028,
 //             label: 'menuitems.icons.list.materialdesign',
-//             link: '/icons/mdi'
+//             link: '/dashboard/icons/mdi'
 //         },
 //         {
 //             id: 1029,
 //             label: 'menuitems.icons.list.fontawesome',
-//             link: '/icons/font-awesome'
+//             link: '/dashboard/icons/font-awesome'
 //         },
 //         {
 //             id: 1030,
 //             label: 'menuitems.icons.list.weather',
-//             link: '/icons/weather'
+//             link: '/dashboard/icons/weather'
 //         }
 //     ]
 // },
@@ -9930,37 +9953,37 @@ var menuItems = [{
 //         {
 //             id: 1022,
 //             label: 'menuitems.forms.list.elements',
-//             link: '/forms/elements'
+//             link: '/dashboard/forms/elements'
 //         },
 //         {
 //             id: 1021,
 //             label: 'menuitems.forms.list.advanced',
-//             link: '/forms/advanced'
+//             link: '/dashboard/forms/advanced'
 //         },
 //         {
 //             id: 1020,
 //             label: 'menuitems.forms.list.validation',
-//             link: '/forms/validation'
+//             link: '/dashboard/forms/validation'
 //         },
 //         {
 //             id: 1019,
 //             label: 'menuitems.forms.list.wizard',
-//             link: '/forms/wizard'
+//             link: '/dashboard/forms/wizard'
 //         },
 //         {
 //             id: 1018,
 //             label: 'menuitems.forms.list.mask',
-//             link: '/forms/mask'
+//             link: '/dashboard/forms/mask'
 //         },
 //         {
 //             id: 1017,
 //             label: 'menuitems.forms.list.editor',
-//             link: '/forms/quill'
+//             link: '/dashboard/forms/quill'
 //         },
 //         {
 //             id: 1016,
 //             label: 'menuitems.forms.list.fileupload',
-//             link: '/forms/file-uploads'
+//             link: '/dashboard/forms/file-uploads'
 //         }
 //     ]
 // },
@@ -9973,12 +9996,12 @@ var menuItems = [{
 //         {
 //             id: 1014,
 //             label: 'menuitems.tables.list.basic',
-//             link: '/tables/basic'
+//             link: '/dashboard/tables/basic'
 //         },
 //         {
 //             id: 1013,
 //             label: 'menuitems.tables.list.advanced',
-//             link: '/tables/advanced'
+//             link: '/dashboard/tables/advanced'
 //         },
 //     ]
 // },
@@ -9991,27 +10014,27 @@ var menuItems = [{
 //         {
 //             id: 1007,
 //             label: 'menuitems.charts.list.apex',
-//             link: '/charts/apex'
+//             link: '/dashboard/charts/apex'
 //         },
 //         {
 //             id: 1008,
 //             label: 'menuitems.charts.list.chartjs',
-//             link: '/charts/chartjs'
+//             link: '/dashboard/charts/chartjs'
 //         },
 //         {
 //             id: 1009,
 //             label: 'menuitems.charts.list.c3',
-//             link: '/charts/c3'
+//             link: '/dashboard/charts/c3'
 //         },
 //         {
 //             id: 1010,
 //             label: 'menuitems.charts.list.chartist',
-//             link: '/charts/chartist'
+//             link: '/dashboard/charts/chartist'
 //         },
 //         {
 //             id: 1011,
 //             label: 'menuitems.charts.list.knob',
-//             link: '/charts/knob'
+//             link: '/dashboard/charts/knob'
 //         }
 //     ]
 // },
@@ -10024,7 +10047,7 @@ var menuItems = [{
 //         {
 //             id: 1005,
 //             label: 'menuitems.maps.list.googlemap',
-//             link: '/maps/google'
+//             link: '/dashboard/maps/google'
 //         }
 //     ]
 // },
@@ -10368,7 +10391,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-dialog .card {\r\n    margin: 0 !important;\n}\n.bankAccount.modal-body {\r\n    padding: 0 !important;\n}\n.modal-dialog .card-body {\r\n    padding: 1.5rem 1.5rem 0 1.5rem !important;\n}\n.nav-bordered {\r\n    border: unset !important;\n}\n.nav {\r\n    background-color: #dff0fe;\n}\n.tab-content {\r\n    padding: 70px 60px 40px;\r\n    min-height: 300px;\r\n    background-color: #f5f5f5;\r\n    position: relative;\n}\n.nav-tabs .nav-link {\r\n    border: 1px solid #b7b7b7 !important;\r\n    background-color: #d7e5f2;\r\n    border-bottom: 0 !important;\r\n    margin-bottom: 1px;\n}\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\r\n    color: #000;\r\n    background-color: hsl(0deg 0% 96%);\r\n    border-bottom: 0 !important;\n}\n.img-thumbnail {\r\n    max-height: 400px !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-dialog .card {\n    margin: 0 !important;\n}\n.bankAccount.modal-body {\n    padding: 0 !important;\n}\n.modal-dialog .card-body {\n    padding: 1.5rem 1.5rem 0 1.5rem !important;\n}\n.nav-bordered {\n    border: unset !important;\n}\n.nav {\n    background-color: #dff0fe;\n}\n.tab-content {\n    padding: 70px 60px 40px;\n    min-height: 300px;\n    background-color: #f5f5f5;\n    position: relative;\n}\n.nav-tabs .nav-link {\n    border: 1px solid #b7b7b7 !important;\n    background-color: #d7e5f2;\n    border-bottom: 0 !important;\n    margin-bottom: 1px;\n}\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\n    color: #000;\n    background-color: hsl(0deg 0% 96%);\n    border-bottom: 0 !important;\n}\n.img-thumbnail {\n    max-height: 400px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/screen-properties',
+        path: '/dashboard/screen-properties',
         name: 'screen-properties',
         meta: {
             middleware: [auth,checkAuth]
