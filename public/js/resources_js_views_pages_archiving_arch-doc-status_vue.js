@@ -6356,7 +6356,7 @@ var menuItems = [{
   subItems: [{
     id: 38781,
     label: 'menuitems.DocumentField.text',
-    link: '/document-fields'
+    link: '/dashboard/document-fields'
   }, {
     id: 34343,
     label: 'menuitems.ArchiveClosedReference.text',
@@ -6421,6 +6421,11 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/dashboard/colors'
+}, {
+  id: 10099,
+  label: 'general.dictionary',
+  icon: 'fas fa-palette',
+  link: '/dashboard/dictionary'
 }
 
 // {

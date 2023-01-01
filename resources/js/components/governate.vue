@@ -2,7 +2,7 @@
   <!--  create   -->
   <b-modal
     id="governate-create"
-    :title="$t('governorate.addgovernorate')"
+    :title="getCompanyKey('governorate_create_form')"
     title-class="font-18"
     size="lg"
     body-class="p-4 "
@@ -49,7 +49,7 @@
         <div class="col-md-6">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.country") }}
+              {{ getCompanyKey('governorate_country') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -76,7 +76,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="field-5" class="control-label">
-              {{ $t("general.phone_key") }}
+              {{ getCompanyKey('governorate_phone_key') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -114,7 +114,7 @@
         <div class="col-md-6 direction" dir="rtl">
           <div class="form-group">
             <label for="field-1" class="control-label">
-              {{ $t("general.Name") }}
+              {{ getCompanyKey('governorate_name_ar') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -149,7 +149,7 @@
         <div class="col-md-6 direction-ltr" dir="ltr">
           <div class="form-group">
             <label for="field-2" class="control-label">
-              {{ $t("general.Name_en") }}
+              {{ getCompanyKey('governorate_name_en') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -184,7 +184,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label class="mr-2" for="field-11">
-              {{ $t("general.is_default") }}
+              {{ getCompanyKey('governorate_default') }}
             </label>
             <select
               class="custom-select mr-sm-2"
@@ -213,7 +213,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label class="mr-2" for="inlineFormCustomSelectPref">
-              {{ $t("general.Status") }}
+              {{ getCompanyKey('governorate_status') }}
               <span class="text-danger">*</span>
             </label>
             <select
@@ -254,6 +254,7 @@ import Switches from "vue-switches";
 import ErrorMessage from "../components/widgets/errorMessage";
 import loader from "../components/loader";
 import Multiselect from "vue-multiselect";
+import translation from "../helper/translation-mixin";
 
 export default {
   components: {
@@ -262,6 +263,7 @@ export default {
     loader,
     Multiselect,
   },
+  mixins:[translation],
   updated() {
     $(function () {
       $(".englishInput").keypress(function (event) {

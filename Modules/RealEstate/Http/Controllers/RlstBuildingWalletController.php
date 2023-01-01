@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstBuildingWallet;
-use Modules\RealEstate\Http\Requests\CreateRlstBuildingWalletRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstBuildingWalletRequest;
+use Modules\RealEstate\Http\Requests\RlstBuildingWalletRequest;
 use Modules\RealEstate\Transformers\RlstBuildingWalletResource;
 
 class RlstBuildingWalletController extends Controller
@@ -40,15 +39,16 @@ class RlstBuildingWalletController extends Controller
         return responseJson(200, 'success', RlstBuildingWalletResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstBuildingWalletRequest $request)
+    public function create(RlstBuildingWalletRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstBuildingWalletResource($model));
 
     }
 
-    public function update($id, UpdateRlstBuildingWalletRequest $request)
+    public function update($id, RlstBuildingWalletRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

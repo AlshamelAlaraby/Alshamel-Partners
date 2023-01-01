@@ -589,7 +589,17 @@
         }
     },
     "general": {
+        "CompanyNotHaveTranslation":"لاتحتوي الشركة على ترجمة لهذا الملصق",
+        "reset":"اعادة تعيين",
+        "cancel":"الغاء",
+        "search_source_text":"ابحث عن نص المصدر...",
+        "update_changes":"حفظ التغيرات",
+        "translate_to":"ترجم الى",
+        "lang":"عربي",
+        "dictionary":"القاموس",
         "elshamel":"الشامل",
+        "source_text":"النص المصدر",
+        "translation":"الترجمة",
         "CantDeleteRelation":"لا تستطيع حذف عنصر لديه علاقة مع عنصر اخر",
         "ScreenPropertiesTable":"جدول الشاشات والخصائص",
         "cantSelectChildToBeParent":"لا يمكن اختيار هذا العنصر لانه من ابناء العنصر الحالي",
@@ -786,6 +796,7 @@
         "isRequired": "Is Required",
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
-        "fieldValue": "Field Value"
+        "fieldValue": "Field Value",
+        "archive": "ارشيف"
     }
 }

@@ -35,6 +35,7 @@ class RlstCustomer extends Model
         'note4',
         'whatsapp',
         'categories',
+        "attachments",
 
     ];
 
@@ -56,11 +57,19 @@ class RlstCustomer extends Model
 
     public function reservations()
     {
-        return $this->hasMany(RlstReservation::class);
+        return $this->hasMany(RlstReservation::class,'customer_id');
     }
     // attributes
 
     protected function categories(): Attribute
+    {
+        return Attribute::make(
+            get:fn($value) => json_decode($value),
+            set:fn($value) => json_encode($value),
+        );
+    }
+
+    protected function attachments(): Attribute
     {
         return Attribute::make(
             get:fn($value) => json_decode($value),

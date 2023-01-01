@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string("national_id", 20);
             $table->string("whatsapp", 20);
             $table->text('categories');
+            $table->text('attachments');
             $table->softDeletes();
             $table->timestamps();
         });

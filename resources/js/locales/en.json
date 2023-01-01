@@ -585,6 +585,16 @@
     }
     },
     "general": {
+        "CompanyNotHaveTranslation":"Company doesn't have translation for this key",
+        "reset":"Reset",
+        "cancel":"Cancel",
+        "search_source_text":"Search source text...",
+        "translate_to":"Translation to",
+        "lang":"english",
+        "update_changes":"Update changes",
+        "dictionary":"Dictionary",
+        "source_text":"Source text",
+        "translation":"Translation",
         "elshamel":"Alshamel",
         "CantDeleteRelation":"You cannot delete an element that has a relationship with another element",
         "cantSelectChildToBeParent":"Cant select this item because it's one of current item's children",
@@ -801,6 +811,7 @@
         "isRequired": "Is Required",
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
-        "fieldValue": "Field Value"
+        "fieldValue": "Field Value",
+        "archive": "Archive"
     }
 }

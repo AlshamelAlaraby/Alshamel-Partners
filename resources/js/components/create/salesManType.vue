@@ -2,7 +2,7 @@
 <!--  create   -->
   <b-modal
         id="sales-man-type-create"
-        :title="$t('salesmen-types.add')"
+        :title="getCompanyKey('sale_man_type_create_form')"
         title-class="font-18"
         body-class="p-4 "
         :hide-footer="true"
@@ -45,7 +45,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-1" class="control-label">
-                            {{ $t('general.Name') }}
+                            {{ getCompanyKey('sale_man_type_name_ar') }}
                             <span class="text-danger">*</span>
                         </label>
                         <div dir="rtl">
@@ -80,7 +80,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-2" class="control-label">
-                            {{ $t('general.Name_en') }}
+                            {{ getCompanyKey('sale_man_type_name_en') }}
                             <span class="text-danger">*</span>
                         </label>
                         <div dir="ltr">
@@ -115,7 +115,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">
-                            {{ $t('general.isEmployee') }}
+                            {{ getCompanyKey('is_employee') }}
                             <span class="text-danger">*</span>
                         </label>
                         <select
@@ -154,6 +154,7 @@ import ErrorMessage from "../widgets/errorMessage";
 import loader from "../loader";
 import adminApi from "../../api/adminAxios";
 import Swal from "sweetalert2";
+import translation from "../../helper/translation-mixin";
 
 export default {
     name: "salesManType",
@@ -163,6 +164,7 @@ export default {
         ErrorMessage,
         loader,
     },
+    mixins:[translation],
     updated() {
         $(function () {
             $(".englishInput").keypress(function (event) {

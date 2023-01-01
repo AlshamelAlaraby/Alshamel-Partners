@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import alphaArabic from "../../../helper/alphaArabic";
 import alphaEnglish from "../../../helper/alphaEnglish";
 import { dynamicSortString, dynamicSortNumber } from "../../../helper/tableSort";
+import translation from "../../../helper/translation-mixin";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
 import { formatDateOnly } from "../../../helper/startDate";
 
@@ -21,6 +22,7 @@ export default {
     title: "Branch",
     meta: [{ name: "description", content: "Branch" }],
   },
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -38,7 +40,6 @@ export default {
       isLoader: false,
       Tooltip: "",
       mouseEnter: "",
-
       create: {
         name: "",
         name_e: "",
@@ -87,7 +88,7 @@ export default {
      */
     search(after, befour) {
       clearTimeout(this.debounce);
-      this.debounce = setTimeout(() => {
+      this  .debounce = setTimeout(() => {
         this.getData();
       }, 400);
     },
@@ -240,7 +241,7 @@ export default {
     /**
      *  start delete countrie
      */
-   deleteBranch(id, index) {
+    deleteBranch(id, index) {
       if (Array.isArray(id)) {
         Swal.fire({
           title: `${this.$t("general.Areyousure")}`,
@@ -561,13 +562,13 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
-                      $t("general.Name")
+                      getCompanyKey("branch_name_ar")
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ $t("general.Name_en") }}</b-form-checkbox
+                      >{{ getCompanyKey("branch_name_en")}}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -662,13 +663,13 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.name" class="mb-1"
-                        >{{ $t("general.Name") }}
+                        >{{ getCompanyKey("branch_name_ar") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey("branch_name_en") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey("branch_status")}}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -726,7 +727,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('branch.addbranch')"
+              :title="getCompanyKey('branch_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -774,7 +775,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.Name") }}
+                        {{ getCompanyKey("branch_name_ar") }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="rtl">
@@ -813,7 +814,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey("branch_name_en") }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="ltr">
@@ -852,7 +853,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="mr-2">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey("branch_status") }}
                         <span class="text-danger">*</span>
                       </label>
                       <b-form-group
@@ -895,7 +896,6 @@ export default {
               <!--       start loader       -->
               <loader size="large" v-if="isLoader" />
               <!--       end loader       -->
-
               <table class="table table-borderless table-hover table-centered m-0">
                 <thead>
                   <tr>
@@ -911,7 +911,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey("branch_name_ar") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -926,7 +926,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey("branch_name_en") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -941,7 +941,7 @@ export default {
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey("branch_status") }}</span>
                       </div>
                     </th>
                     <th>
@@ -1018,7 +1018,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('branch.editbranch')"
+                        :title="getCompanyKey('branch_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -1056,7 +1056,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="edit-1" class="control-label">
-                                  {{ $t("general.Name") }}
+                                  {{ getCompanyKey("branch_name_ar") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="rtl">
@@ -1101,7 +1101,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="edit-2" class="control-label">
-                                  {{ $t("general.Name_en") }}
+                                  {{ getCompanyKey("branch_name_en") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="ltr">
@@ -1148,7 +1148,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="mr-2">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey("branch_status") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <b-form-group

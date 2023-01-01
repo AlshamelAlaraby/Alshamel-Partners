@@ -5,9 +5,10 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstReservationUnit;
+use Modules\RealEstate\Http\Requests\RlstReservationUnitRequest;
+use Modules\RealEstate\Transformers\RlstReservationUnitResource;
 use Modules\RealEstate\Http\Requests\CreateRlstReservationUnitRequest;
 use Modules\RealEstate\Http\Requests\UpdateRlstReservationUnitRequest;
-use Modules\RealEstate\Transformers\RlstReservationUnitResource;
 
 class RlstReservationUnitController extends Controller
 {
@@ -40,15 +41,16 @@ class RlstReservationUnitController extends Controller
         return responseJson(200, 'success', RlstReservationUnitResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstReservationUnitRequest $request)
+    public function create(RlstReservationUnitRequest $request)
     {
 
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstReservationUnitResource($model));
     }
 
-    public function update($id, UpdateRlstReservationUnitRequest $request)
+    public function update($id, RlstReservationUnitRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

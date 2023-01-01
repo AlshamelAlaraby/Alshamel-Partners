@@ -3,7 +3,6 @@
 namespace Modules\RealEstate\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\RealEstate\Entities\RlstUnitStatus;
 
 class RlstUnitResource extends JsonResource
 {
@@ -40,6 +39,11 @@ class RlstUnitResource extends JsonResource
             'view' => $this->view,
             'floor' => $this->floor,
             'rank' => $this->rank,
+            'properties' => $this->properties,
+            'attachments' => $this->attachments,
+            'module_id' => $this->module_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

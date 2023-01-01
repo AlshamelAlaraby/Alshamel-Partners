@@ -28,7 +28,10 @@ class SerialRepository implements SerialRepositoryInterface
     public function create(array $data)
     {
         DB::transaction(function () use ($data) {
-            $this->model->create($data);
+          $model=  $this->model->create($data);
+            if (request()->is_default == 1) {
+                $this->model->where('id', '!=', $model->id)->update(['is_default' => 0]);
+            }
             cacheForget("serials");
         });
     }

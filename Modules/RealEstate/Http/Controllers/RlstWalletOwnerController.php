@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstWalletOwner;
-use Modules\RealEstate\Http\Requests\CreateRlstWalletOwnerRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstWalletOwnerRequest;
+use Modules\RealEstate\Http\Requests\RlstWalletOwnerRequest;
 use Modules\RealEstate\Transformers\RlstWalletOwnerResource;
 
 class RlstWalletOwnerController extends Controller
@@ -40,15 +39,16 @@ class RlstWalletOwnerController extends Controller
         return responseJson(200, 'success', RlstWalletOwnerResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstWalletOwnerRequest $request)
+    public function create(RlstWalletOwnerRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstWalletOwnerResource($model));
 
     }
 
-    public function update($id, UpdateRlstWalletOwnerRequest $request)
+    public function update($id, RlstWalletOwnerRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {
