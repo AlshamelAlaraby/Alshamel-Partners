@@ -248,14 +248,14 @@ export default {
                 <button
                   @click="updateChange"
                   :disabled="!currentKey || !newText"
-                  class="btn update-changes"
+                  class="btn update-changes mb-3"
                 >
                   {{ $t("general.update_changes") }}
                 </button>
                 <button
                   @click="cancelUpdate"
                   :disabled="!currentKey || !newText"
-                  class="btn btn-danger"
+                  class="btn btn-danger mb-3"
                 >
                   {{ $t("general.cancel") }}
                 </button>
