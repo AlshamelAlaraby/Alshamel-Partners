@@ -4646,7 +4646,7 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), !_vm.isLoader ? [_c("button", {
-    staticClass: "btn update-changes",
+    staticClass: "btn update-changes mb-3",
     attrs: {
       disabled: !_vm.currentKey || !_vm.newText
     },
@@ -4654,7 +4654,7 @@ var render = function render() {
       click: _vm.updateChange
     }
   }, [_vm._v("\n                " + _vm._s(_vm.$t("general.update_changes")) + "\n              ")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-danger",
+    staticClass: "btn btn-danger mb-3",
     attrs: {
       disabled: !_vm.currentKey || !_vm.newText
     },
