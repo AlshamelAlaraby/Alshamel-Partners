@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/colors',
+        path: '/dashboard/colors',
         name: 'colors',
         meta: {
             middleware: [auth,checkAuth]
