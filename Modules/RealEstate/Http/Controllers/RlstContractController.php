@@ -5,8 +5,7 @@ namespace Modules\RealEstate\Http\Controllers;
 use App\Http\Requests\AllRequest;
 use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstContract;
-use Modules\RealEstate\Http\Requests\CreateRlstContractRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstContractRequest;
+use Modules\RealEstate\Http\Requests\RlstContractRequest;
 use Modules\RealEstate\Transformers\RlstContractResource;
 
 class RlstContractController extends Controller
@@ -40,14 +39,15 @@ class RlstContractController extends Controller
         return responseJson(200, 'success', RlstContractResource::collection($models['data']), $models['paginate'] ? getPaginates($models['data']) : null);
     }
 
-    public function create(CreateRlstContractRequest $request)
+    public function create(RlstContractRequest $request)
     {
         $model = $this->model->create($request->validated());
+        $model->refresh();
 
         return responseJson(200, 'created', new RlstContractResource($model));
     }
 
-    public function update($id, UpdateRlstContractRequest $request)
+    public function update($id, RlstContractRequest $request)
     {
         $model = $this->model->find($id);
         if (!$model) {

@@ -28,9 +28,13 @@ class GovernorateRepository implements GovernorateInterface
 
     public function create($request)
     {
-        DB::transaction(function () use ($request) {
-            $this->model->create($request->all());
+      return  DB::transaction(function () use ($request) {
+          $model=  $this->model->create($request->all());
+            if ($request->is_default == 1) {
+                $this->model->where('id', '!=', $model->id)->update(['is_default' => 0]);
+            }
             cacheForget("governorates");
+            return $model;
         });
     }
 

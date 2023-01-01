@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import alphaArabic from "../../../helper/alphaArabic";
 import alphaEnglish from "../../../helper/alphaEnglish";
 import { dynamicSortString, dynamicSortNumber } from "../../../helper/tableSort";
+import translation from "../../../helper/translation-mixin";
 import senderHoverHelper from "../../../helper/senderHoverHelper";
 import Multiselect from "vue-multiselect";
 import Branch from "../../../components/create/branch.vue";
@@ -23,6 +24,7 @@ export default {
     title: "Store",
     meta: [{ name: "description", content: "Store" }],
   },
+  mixins:[translation],
   components: {
     Layout,
     PageHeader,
@@ -626,18 +628,18 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{
-                      $t("general.Name")
+                      getCompanyKey("store_name_ar")
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ $t("general.Name_en") }}</b-form-checkbox>
+                      >{{ getCompanyKey("store_name_en") }}</b-form-checkbox>
                       <b-form-checkbox
                           v-model="filterSetting"
                           :value="$i18n.locale  == 'ar'?'branch.name':'branch.name_e'"
                           class="mb-1"
-                      >{{ $t("general.Branch") }}</b-form-checkbox>
+                      >{{ getCompanyKey("branch") }}</b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
                 </div>
@@ -731,16 +733,16 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.name" class="mb-1"
-                        >{{ $t("general.Name") }}
+                        >{{ getCompanyKey("store_name_ar") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey("store_name_en") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.branch_id" class="mb-1">
-                        {{ $t("general.branch") }}
+                        {{ getCompanyKey("branch") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey("store_status") }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -797,7 +799,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('store.addstore')"
+              :title="getCompanyKey('store_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -825,11 +827,11 @@ export default {
                     >
                       {{ $t("general.Add") }}
                     </b-button>
-
                     <b-button variant="success" class="mx-1" disabled v-else>
                       <b-spinner small></b-spinner>
                       <span class="sr-only">{{ $t("login.Loading") }}...</span>
                     </b-button>
+                    
                   </template>
                   <b-button
                     @click.prevent="$bvModal.hide(`create`)"
@@ -843,7 +845,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ $t("general.branch") }}
+                        {{ getCompanyKey("branch") }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -871,7 +873,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.Name") }}
+                        {{ getCompanyKey("store_name_ar") }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="rtl">
@@ -910,7 +912,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey("store_name_en") }}
                         <span class="text-danger">*</span>
                       </label>
                       <div dir="ltr">
@@ -949,7 +951,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="mr-2">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey("store_status") }}
                         <span class="text-danger">*</span>
                       </label>
                       <select
@@ -1001,7 +1003,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey("store_name_ar") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1016,7 +1018,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey("store_name_en") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1031,12 +1033,12 @@ export default {
                     </th>
                     <th v-if="setting.branch_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.branch") }}</span>
+                        <span>{{ getCompanyKey("branch") }}</span>
                       </div>
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey("store_status") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1137,7 +1139,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('store.editstore')"
+                        :title="getCompanyKey('store_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -1175,7 +1177,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ $t("general.branch") }}
+                                  {{ getCompanyKey("branch") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1205,7 +1207,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="edit-1" class="control-label">
-                                  {{ $t("general.Name") }}
+                                  {{ getCompanyKey("store_name_ar") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="rtl">
@@ -1250,7 +1252,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="edit-2" class="control-label">
-                                  {{ $t("general.Name_en") }}
+                                  {{ getCompanyKey("store_name_en") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="ltr">
@@ -1297,7 +1299,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="mr-2">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey("store_status") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <select

@@ -19,6 +19,7 @@ import salesmenTypes from "./routeChild/salesmenTypes";
 import branches from "./routeChild/branch";
 import serial from "./routeChild/serial";
 import store from "./routeChild/store";
+import dictionary from "./routeChild/dictionary";
 import workflowhotfields from "./routeChild/workflowhotfield";
 import screenproperties from "./routeChild/screen-property";
 import salesmen from  "./routeChild/salesMen";
@@ -27,6 +28,7 @@ import paymentTypes from "./routeChild/paymentTypes";
 import bankAccount from "./routeChild/bankAccount";
 import users from  "./routeChild/users";
 import propertyTrees from  "./routeChild/property-tree";
+import realEstate from  "./routeChild/realEstate";
 
 
 export default [
@@ -36,6 +38,7 @@ export default [
     ...governorate,
     ...city,
     ...banks,
+    ...dictionary,
     ...currency,
     ...employee,
     ...financialYear,
@@ -57,6 +60,7 @@ export default [
     ...internalSalesmen,
     ...paymentTypes,
     ...bankAccount,
+    ...realEstate,
     //**********************************************
     {
         path: '/',

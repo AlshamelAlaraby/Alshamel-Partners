@@ -1337,7 +1337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Page_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Page-header */ "./resources/js/components/Page-header.vue");
 /* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api/adminAxios */ "./resources/js/api/adminAxios.js");
 /* harmony import */ var vue_switches__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-switches */ "./node_modules/vue-switches/src/switches.vue");
-/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_widgets_errorMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/widgets/errorMessage */ "./resources/js/components/widgets/errorMessage.vue");
@@ -1346,6 +1346,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_alphaEnglish__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../helper/alphaEnglish */ "./resources/js/helper/alphaEnglish.js");
 /* harmony import */ var _helper_tableSort__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../helper/tableSort */ "./resources/js/helper/tableSort.js");
 /* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
+/* harmony import */ var _helper_translation_mixin__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../helper/translation-mixin */ "./resources/js/helper/translation-mixin.js");
+
 
 
 
@@ -1368,9 +1370,10 @@ __webpack_require__.r(__webpack_exports__);
     title: "Currency",
     meta: [{
       name: "description",
-      content: 'Currency'
+      content: "Currency"
     }]
   },
+  mixins: [_helper_translation_mixin__WEBPACK_IMPORTED_MODULE_11__["default"]],
   components: {
     Layout: _layouts_main__WEBPACK_IMPORTED_MODULE_0__["default"],
     PageHeader: _components_Page_header__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -1381,33 +1384,33 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       per_page: 50,
-      search: '',
+      search: "",
       debounce: {},
       currenciesPagination: {},
       currencies: [],
       isLoader: false,
       create: {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
       },
       edit: {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
@@ -1416,7 +1419,7 @@ __webpack_require__.r(__webpack_exports__);
       isCheckAll: false,
       checkAll: [],
       current_page: 1,
-      image: '',
+      image: "",
       setting: {
         name: true,
         name_e: true,
@@ -1431,118 +1434,118 @@ __webpack_require__.r(__webpack_exports__);
         fraction_no: true
       },
       is_disabled: false,
-      filterSetting: ['name', 'name_e', 'code', 'code_e', 'fraction', 'fraction_e', 'symbol', 'symbol_e'],
-      Tooltip: '',
+      filterSetting: ["name", "name_e", "code", "code_e", "fraction", "fraction_e", "symbol", "symbol_e"],
+      Tooltip: "",
       mouseEnter: null
     };
   },
   validations: {
     create: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       symbol: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       symbol_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       code: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       code_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       fraction: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       fraction_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       fraction_no: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.decimal
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.decimal
       },
       is_default: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.integer
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.integer
       },
       is_active: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.integer
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.integer
       }
     },
     edit: {
       name: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       name_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       symbol: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       symbol_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(2),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(100)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(2),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(100)
       },
       code: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       code_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       fraction: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       fraction_e: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.minLength)(3),
-        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.maxLength)(15)
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.minLength)(3),
+        maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.maxLength)(15)
       },
       fraction_no: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.decimal
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.decimal
       },
       is_default: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.integer
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.integer
       },
       is_active: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.integer
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.required,
+        integer: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_12__.integer
       }
     }
   },
@@ -1610,7 +1613,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.isLoader = true;
-      var filter = '';
+      var filter = "";
       for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
@@ -1621,9 +1624,9 @@ __webpack_require__.r(__webpack_exports__);
         _this3.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          icon: 'error',
-          title: "".concat(_this3.$t('general.Error')),
-          text: "".concat(_this3.$t('general.Thereisanerrorinthesystem'))
+          icon: "error",
+          title: "".concat(_this3.$t("general.Error")),
+          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
         });
       })["finally"](function () {
         _this3.isLoader = false;
@@ -1634,7 +1637,7 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       if (this.current_page <= this.currenciesPagination.last_page && this.current_page != this.currenciesPagination.current_page && this.current_page) {
         this.isLoader = true;
-        var filter = '';
+        var filter = "";
         for (var i = 0; i < this.filterSetting.length; ++i) {
           filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
         }
@@ -1645,9 +1648,9 @@ __webpack_require__.r(__webpack_exports__);
           _this4.current_page = l.pagination.current_page;
         })["catch"](function (err) {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: 'error',
-            title: "".concat(_this4.$t('general.Error')),
-            text: "".concat(_this4.$t('general.Thereisanerrorinthesystem'))
+            icon: "error",
+            title: "".concat(_this4.$t("general.Error")),
+            text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
           });
         })["finally"](function () {
           _this4.isLoader = false;
@@ -1762,14 +1765,14 @@ __webpack_require__.r(__webpack_exports__);
     resetModalHidden: function resetModalHidden() {
       var _this6 = this;
       this.create = {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
@@ -1786,14 +1789,14 @@ __webpack_require__.r(__webpack_exports__);
     resetModal: function resetModal() {
       var _this7 = this;
       this.create = {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
@@ -1809,14 +1812,14 @@ __webpack_require__.r(__webpack_exports__);
     resetForm: function resetForm() {
       var _this8 = this;
       this.create = {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
@@ -1864,8 +1867,8 @@ __webpack_require__.r(__webpack_exports__);
           _this9.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this9.$t('general.Addedsuccessfully')),
+              icon: "success",
+              text: "".concat(_this9.$t("general.Addedsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1875,9 +1878,9 @@ __webpack_require__.r(__webpack_exports__);
             _this9.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this9.$t('general.Error')),
-              text: "".concat(_this9.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this9.$t("general.Error")),
+              text: "".concat(_this9.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -1925,8 +1928,8 @@ __webpack_require__.r(__webpack_exports__);
           _this10.getData();
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'success',
-              text: "".concat(_this10.$t('general.Editsuccessfully')),
+              icon: "success",
+              text: "".concat(_this10.$t("general.Editsuccessfully")),
               showConfirmButton: false,
               timer: 1500
             });
@@ -1936,9 +1939,9 @@ __webpack_require__.r(__webpack_exports__);
             _this10.errors = err.response.data.errors;
           } else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: 'error',
-              title: "".concat(_this10.$t('general.Error')),
-              text: "".concat(_this10.$t('general.Thereisanerrorinthesystem'))
+              icon: "error",
+              title: "".concat(_this10.$t("general.Error")),
+              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
             });
           }
         })["finally"](function () {
@@ -1972,14 +1975,14 @@ __webpack_require__.r(__webpack_exports__);
     resetModalHiddenEdit: function resetModalHiddenEdit(id) {
       this.errors = {};
       this.edit = {
-        name: '',
-        name_e: '',
-        symbol: '',
-        symbol_e: '',
-        code: '',
-        code_e: '',
-        fraction: '',
-        fraction_e: '',
+        name: "",
+        name_e: "",
+        symbol: "",
+        symbol_e: "",
+        code: "",
+        code_e: "",
+        fraction: "",
+        fraction_e: "",
         fraction_no: 0,
         is_default: 0,
         is_active: 1
@@ -5138,7 +5141,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("currency.currenciesTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.$t("currency.currenciesTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -5167,7 +5170,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -5179,7 +5182,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "code"
@@ -5191,7 +5194,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "code_e"
@@ -5203,7 +5206,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "fraction"
@@ -5215,7 +5218,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "fraction_e"
@@ -5227,7 +5230,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction_e")))])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_en")))])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5284,7 +5287,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -5333,11 +5336,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -5355,7 +5358,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5364,7 +5367,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.fraction,
@@ -5373,7 +5376,7 @@ var render = function render() {
       },
       expression: "setting.fraction"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.fraction_e,
@@ -5382,7 +5385,7 @@ var render = function render() {
       },
       expression: "setting.fraction_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.symbol,
@@ -5391,7 +5394,7 @@ var render = function render() {
       },
       expression: "setting.symbol"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.symbol")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_symbol_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.symbol_e,
@@ -5400,7 +5403,7 @@ var render = function render() {
       },
       expression: "setting.symbol_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.symbol_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_symbol_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.code,
@@ -5409,7 +5412,7 @@ var render = function render() {
       },
       expression: "setting.code"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.code")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_ar")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.code_e,
@@ -5418,7 +5421,7 @@ var render = function render() {
       },
       expression: "setting.code_e"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_en")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.fraction_no,
@@ -5427,7 +5430,7 @@ var render = function render() {
       },
       expression: "setting.fraction_no"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.fraction_no")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_number")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_default,
@@ -5436,7 +5439,7 @@ var render = function render() {
       },
       expression: "setting.is_default"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.is_default")))]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_default")))]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_active,
@@ -5445,7 +5448,7 @@ var render = function render() {
       },
       expression: "setting.is_active"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("currency_status")))]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5459,7 +5462,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.currenciesPagination.from) + "-" + _vm._s(_vm.currenciesPagination.to) + " / " + _vm._s(_vm.currenciesPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.currenciesPagination.from) + "-" + _vm._s(_vm.currenciesPagination.to) + " /\n                    " + _vm._s(_vm.currenciesPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -5514,7 +5517,7 @@ var render = function render() {
   }, [_c("span", [_vm._v(">")])])])])])])]), _vm._v(" "), _c("b-modal", {
     attrs: {
       id: "create",
-      title: _vm.$t("currency.addcurrency"),
+      title: _vm.getCompanyKey("currency_create_form"),
       "title-class": "font-18",
       "dialog-class": "modal-full-width",
       "body-class": "p-4 ",
@@ -5539,7 +5542,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5551,7 +5554,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -5574,7 +5577,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-3"
@@ -5585,7 +5588,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_name_ar")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5623,9 +5626,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5638,7 +5641,7 @@ var render = function render() {
     attrs: {
       "for": "field-45"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_symbol_ar")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5676,9 +5679,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.symbol.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.symbol.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.symbol.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5691,7 +5694,7 @@ var render = function render() {
     attrs: {
       "for": "field-3"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_code_ar")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5729,9 +5732,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.code.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.code.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.code.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5744,7 +5747,7 @@ var render = function render() {
     attrs: {
       "for": "field-5"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_fraction_ar")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5782,9 +5785,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.fraction.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.fraction.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.fraction.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5797,7 +5800,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_name_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5835,9 +5838,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.name_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.name_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.name_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5850,7 +5853,7 @@ var render = function render() {
     attrs: {
       "for": "field-33"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_symbol_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5888,9 +5891,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.symbol_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.symbol_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.symbol_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.symbol_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5903,7 +5906,7 @@ var render = function render() {
     attrs: {
       "for": "field-4"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_code_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5941,9 +5944,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.code_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.code_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.code_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.code_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.code_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -5956,7 +5959,7 @@ var render = function render() {
     attrs: {
       "for": "field-6"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction_e")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_fraction_en")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5994,9 +5997,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), !_vm.$v.create.fraction_e.minLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.create.fraction_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction_e.maxLength ? _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                      " + _vm._s(_vm.$v.create.fraction_e.$params.minLength.min) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), !_vm.$v.create.fraction_e.maxLength ? _c("div", {
     staticClass: "invalid-feedback"
-  }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.create.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                      " + _vm._s(_vm.$v.create.fraction_e.$params.maxLength.max) + "\n                      " + _vm._s(_vm.$t("general.letters")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6009,7 +6012,7 @@ var render = function render() {
     attrs: {
       "for": "field-7"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fraction_no")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_fraction_number")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6055,7 +6058,7 @@ var render = function render() {
     attrs: {
       "for": "field-11"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.is_default")) + "\n                                        ")]), _vm._v(" "), _c("select", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_default")) + "\n                    ")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6110,7 +6113,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "mr-2"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_status")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
     "class": {
@@ -6202,7 +6205,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6220,7 +6223,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Name_en")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6238,7 +6241,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.code ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.code")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6256,7 +6259,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.code_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.code_e")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_code_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6274,7 +6277,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6292,7 +6295,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction_e")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6310,7 +6313,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.symbol ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.symbol")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_symbol_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6328,7 +6331,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.symbol_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.symbol_e")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_symbol_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6346,7 +6349,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_no ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.fraction_no")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_fraction_number")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6364,9 +6367,9 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.is_default")) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("currency_default")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.Status")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("currency_status")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6382,7 +6385,7 @@ var render = function render() {
         _vm.currencies.sort(_vm.sortString("-name_e"));
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  })])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.currencies.length > 0 ? _c("tbody", _vm._l(_vm.currencies, function (data, index) {
     return _c("tr", {
@@ -6445,9 +6448,9 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(data.name_e))])]) : _vm._e(), _vm._v(" "), _vm.setting.code ? _c("td", [_vm._v(_vm._s(data.code))]) : _vm._e(), _vm._v(" "), _vm.setting.code_e ? _c("td", [_vm._v(_vm._s(data.code_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction ? _c("td", [_vm._v(_vm._s(data.fraction))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_e ? _c("td", [_vm._v(_vm._s(data.fraction_e))]) : _vm._e(), _vm._v(" "), _vm.setting.fraction_no ? _c("td", [_vm._v(_vm._s(data.fraction_no))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol ? _c("td", [_vm._v(_vm._s(data.symbol))]) : _vm._e(), _vm._v(" "), _vm.setting.symbol_e ? _c("td", [_vm._v(_vm._s(data.symbol_e))]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("td", [_c("span", {
       "class": [data.is_default == 1 ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active == 1 ? _c("td", [_c("span", {
+    }, [_vm._v("\n                      " + _vm._s(data.is_default ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active == 1 ? _c("td", [_c("span", {
       "class": [data.is_active ? "text-success" : "text-danger", "badge"]
-    }, [_vm._v("\n                                        " + _vm._s(data.is_active ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(data.is_active ? "".concat(_vm.$t("general.Active")) : "".concat(_vm.$t("general.Inactive"))) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6456,7 +6459,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -6494,7 +6497,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.$t("currency.editcurrency"),
+        title: _vm.getCompanyKey("currency_edit_form"),
         "title-class": "font-18",
         "body-class": "p-4",
         "dialog-class": "modal-full-width",
@@ -6522,7 +6525,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6545,7 +6548,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-3"
@@ -6556,7 +6559,7 @@ var render = function render() {
       attrs: {
         "for": "edit-1"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_name_ar")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6594,9 +6597,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name ? _vm._l(_vm.errors.name, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6609,7 +6612,7 @@ var render = function render() {
       attrs: {
         "for": "edit-45"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_symbol_ar")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6647,9 +6650,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.symbol.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.symbol.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.symbol.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.symbol ? _vm._l(_vm.errors.symbol, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6662,7 +6665,7 @@ var render = function render() {
       attrs: {
         "for": "edit-3"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_code_ar")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6700,9 +6703,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.code.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.code.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.code.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.code ? _vm._l(_vm.errors.code, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6715,7 +6718,7 @@ var render = function render() {
       attrs: {
         "for": "edit-5"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fraction")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_fraction_ar")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6753,9 +6756,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.fraction.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.fraction.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.fraction.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.fraction.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.fraction ? _vm._l(_vm.errors.fraction, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6768,7 +6771,7 @@ var render = function render() {
       attrs: {
         "for": "edit-33"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.symbol_e")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_symbol_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6806,9 +6809,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.symbol_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.symbol_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.symbol_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.symbol_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.symbol_e ? _vm._l(_vm.errors.symbol_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6821,7 +6824,7 @@ var render = function render() {
       attrs: {
         "for": "edit-4"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_code_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6859,9 +6862,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.code_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.code_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.code_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.code_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.code_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.code_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.code_e ? _vm._l(_vm.errors.code_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6874,7 +6877,7 @@ var render = function render() {
       attrs: {
         "for": "edit-2"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Name_en")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_name_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6912,9 +6915,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.name_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.name_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.name_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.name_e ? _vm._l(_vm.errors.name_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6927,7 +6930,7 @@ var render = function render() {
       attrs: {
         "for": "field-6"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.code_e")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_code_en")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6965,9 +6968,9 @@ var render = function render() {
       }
     })]), _vm._v(" "), !_vm.$v.edit.fraction_e.minLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatleast")) + " " + _vm._s(_vm.$v.edit.fraction_e.$params.minLength.min) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction_e.maxLength ? _c("div", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n                                " + _vm._s(_vm.$v.edit.fraction_e.$params.minLength.min) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), !_vm.$v.edit.fraction_e.maxLength ? _c("div", {
       staticClass: "invalid-feedback"
-    }, [_vm._v(_vm._s(_vm.$t("general.Itmustbeatmost")) + "  " + _vm._s(_vm.$v.edit.fraction_e.$params.maxLength.max) + " " + _vm._s(_vm.$t("general.letters")))]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n                                " + _vm._s(_vm.$v.edit.fraction_e.$params.maxLength.max) + "\n                                " + _vm._s(_vm.$t("general.letters")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.fraction_e ? _vm._l(_vm.errors.fraction_e, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6980,7 +6983,7 @@ var render = function render() {
       attrs: {
         "for": "edit-7"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fraction_no")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_fraction_number")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -7026,7 +7029,7 @@ var render = function render() {
       attrs: {
         "for": "edit-11"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.is_default")) + "\n                                                        ")]), _vm._v(" "), _c("select", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_default")) + "\n                              ")]), _vm._v(" "), _c("select", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -7063,7 +7066,7 @@ var render = function render() {
         value: "",
         selected: ""
       }
-    }, [_vm._v(_vm._s(_vm.$t("general.Choose")) + "...")]), _vm._v(" "), _c("option", {
+    }, [_vm._v("\n                                  " + _vm._s(_vm.$t("general.Choose")) + "...\n                                ")]), _vm._v(" "), _c("option", {
       attrs: {
         value: "1"
       }
@@ -7081,7 +7084,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "mr-2"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.Status")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("currency_status")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("b-form-group", {
       "class": {
@@ -7145,7 +7148,7 @@ var render = function render() {
     attrs: {
       colspan: "11"
     }
-  }, [_vm._v(_vm._s(_vm.$t("general.notDataFound")))])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -7795,6 +7798,24 @@ var menuItems = [{
     link: '/role-hotfield-screen'
   }]
 }, {
+  id: 10023578,
+  label: "general.realEstate",
+  icon: "fas fa-hotel",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 1000201,
+    label: 'general.owner',
+    link: '/realEstate/owner'
+  }, {
+    id: 10048103,
+    label: 'general.building',
+    link: '/realEstate/building'
+  }, {
+    id: 1022343,
+    label: 'general.customer',
+    link: '/realEstate/customer'
+  }]
+}, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
@@ -7829,6 +7850,11 @@ var menuItems = [{
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/colors'
+}, {
+  id: 10099,
+  label: 'general.dictionary',
+  icon: 'fas fa-palette',
+  link: '/dictionary'
 }
 
 // {
@@ -8619,6 +8645,108 @@ function dynamicSortDate(property) {
   };
 }
 ;
+
+/***/ }),
+
+/***/ "./resources/js/helper/translation-mixin.js":
+/*!**************************************************!*\
+  !*** ./resources/js/helper/translation-mixin.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/adminAxios */ "./resources/js/api/adminAxios.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      defaultsKeys: {},
+      companyKeys: {},
+      filterResult: {}
+    };
+  },
+  mounted: function mounted() {
+    this.company_id = this.$store.getters["auth/company_id"];
+    this.getDefaultKeys();
+    this.getCompanyKeys();
+  },
+  methods: {
+    getDefaultKeys: function getDefaultKeys() {
+      var _this = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: 0,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this.defaultsKeys = res.data.translations;
+        _this.filterResult = _objectSpread({}, _this.defaultsKeys);
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this.$t("general.Error")),
+          text: "".concat(_this.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this.isLoader = false;
+      });
+    },
+    getCompanyKeys: function getCompanyKeys() {
+      var _this2 = this;
+      this.isLoader = true;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/translation-update", {
+        company_id: this.company_id,
+        translations: {},
+        get_translation: true
+      }).then(function (res) {
+        _this2.companyKeys = res.data.translations;
+      })["catch"](function (err) {
+        Swal.fire({
+          icon: "error",
+          title: "".concat(_this2.$t("general.Error")),
+          text: "".concat(_this2.$t("general.Thereisanerrorinthesystem"))
+        });
+      })["finally"](function () {
+        _this2.isLoader = false;
+      });
+    },
+    getCompanyKey: function getCompanyKey(key) {
+      var returnedKey = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.companyKeys[_key].new_ar : this.companyKeys[_key].new_en;
+          return returnedKey;
+        }
+      }
+      for (var _key2 in this.defaultsKeys) {
+        if (_key2 == key) {
+          returnedKey = this.$i18n.locale == "ar" ? this.defaultsKeys[_key2].default_ar : this.defaultsKeys[_key2].default_en;
+          return returnedKey;
+        }
+      }
+    },
+    getKeyInfo: function getKeyInfo(key) {
+      var keyInfo = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          keyInfo = this.companyKeys[_key];
+          return keyInfo;
+        }
+      }
+      return keyInfo;
+    }
+  }
+});
 
 /***/ }),
 

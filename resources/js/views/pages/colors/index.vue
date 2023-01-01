@@ -9,6 +9,7 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import {dynamicSortString} from "../../../helper/tableSort";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -18,6 +19,7 @@ export default {
         title: "Colors",
         meta: [{name: "Colors", content: 'Colors'}],
     },
+    mixins:[translation],
     components: {
         Layout,
         PageHeader,
@@ -513,10 +515,10 @@ export default {
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown"
                                                 class="btn-block setting-search">
                                         <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                                            {{ $t('general.Name') }}
+                                            {{ getCompanyKey('color_name_ar') }}
                                         </b-form-checkbox>
                                         <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                                            {{ $t('general.Name_en') }}
+                                            {{ getCompanyKey('color_name_en') }}
                                         </b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
@@ -609,14 +611,14 @@ export default {
                                                     :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                                     ref="dropdown" class="dropdown-custom-ali">
                                             <b-form-checkbox v-model="setting.name" class="mb-1">{{
-                                                    $t('general.Name')
+                                                    getCompanyKey('color_name_ar')
                                                 }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('color_name_en') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                                                {{ $t('general.Status') }}
+                                                {{ getCompanyKey('color_status') }}
                                             </b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
@@ -663,7 +665,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('colors.add')"
+                            :title="getCompanyKey('color_create_form')"
                             title-class="font-18"
                             body-class="p-4 "
                             :hide-footer="true"
@@ -706,7 +708,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ getCompanyKey('color_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="rtl">
@@ -741,7 +743,7 @@ export default {
                                     <div class="col-md-12 ">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('color_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div>
@@ -776,7 +778,7 @@ export default {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="mr-2">
-                                                {{ $t('general.Status') }}
+                                                {{ getCompanyKey('color_status') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <b-form-group :class="{
@@ -819,7 +821,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ getCompanyKey('color_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="colors.sort(sortString('name'))"></i>
@@ -830,7 +832,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
+                                            <span>{{ getCompanyKey('color_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="colors.sort(sortString('name_e'))"></i>
@@ -841,7 +843,7 @@ export default {
                                     </th>
                                     <th v-if="setting.is_active">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Status') }}</span>
+                                            <span>{{ getCompanyKey('color_status') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up"
                                                    @click="colors.sort(sortString('name_e'))"></i>
@@ -933,7 +935,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('colors.edit')"
+                                            :title="getCompanyKey('color_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             :ref="`edit-${data.id}`"
@@ -968,7 +970,7 @@ export default {
                                                     <div class="col-md-12" >
                                                         <div class="form-group">
                                                             <label for="field-u-1" class="control-label">
-                                                                {{ $t('general.Name') }}
+                                                                {{ getCompanyKey('color_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1006,7 +1008,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="field-u-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
+                                                                {{ getCompanyKey('color_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
@@ -1049,7 +1051,7 @@ export default {
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="mr-2">
-                                                                {{ $t('general.Status') }}
+                                                                {{ getCompanyKey('color_status') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <b-form-group :class="{

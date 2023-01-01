@@ -508,6 +508,16 @@
     }
     },
     "general": {
+        "CompanyNotHaveTranslation":"Company doesn't have translation for this key",
+        "reset":"Reset",
+        "cancel":"Cancel",
+        "search_source_text":"Search source text...",
+        "translate_to":"Translation to",
+        "lang":"english",
+        "update_changes":"Update changes",
+        "dictionary":"Dictionary",
+        "source_text":"Source text",
+        "translation":"Translation",
         "elshamel":"Alshamel",
         "CantDeleteRelation":"You cannot delete an element that has a relationship with another element",
         "cantSelectChildToBeParent":"Cant select this item because it's one of current item's children",
@@ -672,6 +682,19 @@
         "branches": "Branches",
         "users": "Users",
         "employees": "Employees",
-        "salesmen": "Salesmen"
+        "salesmen": "Salesmen",
+        "realEstate": "RealEstate",
+        "owner": "Owners",
+        "building": "Buildings",
+        "customer": "Customers",
+        "description": "Description(arabic)",
+        "description_e": "Description(english)",
+        "land_area": "Land Area",
+        "building_area": "Building Area",
+        "construction_year": "Construction Year",
+        "project": "Project",
+        "region": "Region",
+        "lng": "",
+        "lat": ""
     }
 }

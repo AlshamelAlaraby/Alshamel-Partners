@@ -11,6 +11,7 @@ import { dynamicSortString, dynamicSortNumber } from "../../../helper/tableSort"
 import Multiselect from "vue-multiselect";
 import Country from "../../../components/country.vue";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -20,6 +21,7 @@ export default {
     title: "External Salesmen",
     meta: [{ name: "description", content: "External Salesmen" }],
   },
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -597,40 +599,40 @@ create: {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="phone" class="mb-1">{{
-                      $t("general.phone")
+                      getCompanyKey("external_sale_man_phone")
                     }}</b-form-checkbox>
                     <b-form-checkbox v-model="filterSetting" value="email" class="mb-1">{{
-                      $t("general.email")
+                      getCompanyKey("external_sale_man_email")
                     }}</b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
-                      >{{ $t("general.country") }}</b-form-checkbox
+                      >{{ getCompanyKey('external_sale_man_country') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="national_id"
                       class="mb-1"
-                      >{{ $t("general.national") }}</b-form-checkbox
+                      >{{ getCompanyKey('external_sale_man_national_id') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="address"
                       class="mb-1"
-                      >{{ $t("general.address") }}</b-form-checkbox
+                      >{{ getCompanyKey('external_sale_man_address') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="rp_code"
                       class="mb-1"
-                      >{{ $t("general.code") }}</b-form-checkbox
+                      >{{getCompanyKey('external_sale_man_code') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="is_active"
                       class="mb-1"
-                      >{{ $t("general.Status") }}</b-form-checkbox
+                      >{{ getCompanyKey('external_sale_man_status') }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -725,25 +727,25 @@ create: {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.phone" class="mb-1"
-                        >{{ $t("general.mobile_no") }}
+                        >{{ getCompanyKey('external_sale_man_phone') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.email" class="mb-1">
-                        {{ $t("login.Emailaddress") }}
+                        {{ getCompanyKey('external_sale_man_email') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.address" class="mb-1">
-                        {{ $t("general.address") }}
+                        {{ getCompanyKey('external_sale_man_address') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.national_id" class="mb-1">
-                        {{ $t("general.national") }}
+                        {{ getCompanyKey('external_sale_man_national_id') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                        {{ $t("country.country") }}
+                        {{ getCompanyKey('external_sale_man_country') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('external_sale_man_status') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.rp_code" class="mb-1">
-                        {{ $t("general.code") }}
+                        {{getCompanyKey('external_sale_man_code') }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -807,7 +809,7 @@ create: {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('externalSalesmen.addexternalSalesmen')"
+              :title="getCompanyKey('external_sale_man_create_form')"
               title-class="font-18"
               size="lg"
               body-class="p-4 "
@@ -856,7 +858,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ $t("general.country") }}
+                        {{ getCompanyKey('external_sale_man_country') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -884,7 +886,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-1" class="control-label">
-                        {{ $t("general.phone") }}
+                        {{ getCompanyKey("external_sale_man_phone") }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -921,7 +923,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-2" class="control-label">
-                        {{ $t("general.email") }}
+                        {{ getCompanyKey("external_sale_man_email") }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -953,7 +955,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-4" class="control-label">
-                        {{ $t("general.national") }}
+                        {{ getCompanyKey('external_sale_man_national_id') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -982,7 +984,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-7" class="control-label">
-                        {{ $t("general.address") }}
+                        {{ getCompanyKey('external_sale_man_address') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -1019,7 +1021,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="field-8" class="control-label">
-                        {{ $t("general.code") }}
+                        {{getCompanyKey('external_sale_man_code') }}
                         <span class="text-danger">*</span>
                       </label>
                       <input
@@ -1051,7 +1053,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="mr-2">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('external_sale_man_status') }}
                         <span class="text-danger">*</span>
                       </label>
                       <b-form-group
@@ -1110,7 +1112,7 @@ create: {
                     </th>
                     <th v-if="setting.phone">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.phone") }}</span>
+                        <span>{{ getCompanyKey("external_sale_man_phone") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1125,7 +1127,7 @@ create: {
                     </th>
                     <th v-if="setting.email">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.email") }}</span>
+                        <span>{{ getCompanyKey("external_sale_man_email") }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1140,7 +1142,7 @@ create: {
                     </th>
                     <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.country") }}</span>
+                        <span>{{ getCompanyKey('external_sale_man_country') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1155,7 +1157,7 @@ create: {
                     </th>
                     <th v-if="setting.national_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.national") }}</span>
+                        <span>{{ getCompanyKey('external_sale_man_national_id') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1170,17 +1172,17 @@ create: {
                     </th>
                     <th v-if="setting.address">
                       <div class="d-flex justify-content-center">
-                        {{ $t("general.address") }}
+                        {{ getCompanyKey('external_sale_man_address') }}
                       </div>
                     </th>
                     <th v-if="setting.rp_code">
                       <div class="d-flex justify-content-center">
-                        {{ $t("general.code") }}
+                        {{getCompanyKey('external_sale_man_code') }}
                       </div>
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey('external_sale_man_status') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1282,7 +1284,7 @@ create: {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('externalSalesmen.editexternalSalesmen')"
+                        :title="getCompanyKey('external_sale_man_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         size="lg"
@@ -1321,7 +1323,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ $t("general.country") }}
+                                  {{ getCompanyKey('external_sale_man_country') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1351,7 +1353,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="edit-1" class="control-label">
-                                  {{ $t("general.phone") }}
+                                  {{ getCompanyKey("external_sale_man_phone") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1394,7 +1396,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="edit-2" class="control-label">
-                                  {{ $t("general.email") }}
+                                  {{ getCompanyKey("external_sale_man_email") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1429,7 +1431,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="control-label">
-                                  {{ $t("general.national") }}
+                                  {{ getCompanyKey('external_sale_man_national_id') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1458,7 +1460,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="edit-7" class="control-label">
-                                  {{ $t("general.address") }}
+                                  {{ getCompanyKey('external_sale_man_address') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1503,7 +1505,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="edit-8" class="control-label">
-                                  {{ $t("general.code") }}
+                                  {{getCompanyKey('external_sale_man_code') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1540,7 +1542,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="mr-2">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey('external_sale_man_status') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <b-form-group

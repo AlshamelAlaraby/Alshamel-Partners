@@ -9,6 +9,8 @@ import ErrorMessage from "../../../components/widgets/errorMessage";
 import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import { formatDateOnly } from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
+
 /**
  * Advanced Table component
  */
@@ -18,6 +20,7 @@ export default {
     title: "Country",
     meta: [{ name: "description", content: "Country" }],
   },
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -807,44 +810,44 @@ export default {
                     class="btn-block setting-search"
                   >
                     <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">
-                      {{ $t("general.Name") }}
+                      {{ getCompanyKey('country_name_ar') }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">
-                      {{ $t("general.Name_en") }}
+                      {{ getCompanyKey('country_name_en') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="long_name"
                       class="mb-1"
                     >
-                      {{ $t("general.long_name") }}
+                      {{ getCompanyKey('country_long_name_ar') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="long_name_e"
                       class="mb-1"
                     >
-                      {{ $t("general.long_name_e") }}
+                      {{ getCompanyKey('country_long_name_en') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="short_code"
                       class="mb-1"
                     >
-                      {{ $t("general.short_code") }}
+                      {{ getCompanyKey('country_short_code') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="phone_key"
                       class="mb-1"
                     >
-                      {{ $t("general.phone_key") }}
+                      {{ getCompanyKey('country_phone_key') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="national_id_length"
                       class="mb-1"
-                      >{{ $t("general.national") }}
+                      >{{ getCompanyKey('country_national_id') }}
                     </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -939,31 +942,31 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.name" class="mb-1"
-                        >{{ $t("general.Name") }}
+                        >{{ getCompanyKey('country_name_ar') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.name_e" class="mb-1">
-                        {{ $t("general.Name_en") }}
+                        {{ getCompanyKey('country_name_en') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.long_name" class="mb-1">
-                        {{ $t("general.long_name") }}
+                        {{ getCompanyKey('country_long_name_ar') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.long_name_e" class="mb-1">
-                        {{ $t("general.long_name_e") }}
+                        {{ getCompanyKey('country_long_name_en') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.short_code" class="mb-1">
-                        {{ $t("general.short_code") }}
+                        {{ getCompanyKey('country_short_code') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.phone_key" class="mb-1">
-                        {{ $t("general.phone_key") }}
+                        {{ getCompanyKey('country_phone_key') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.national_id_length" class="mb-1">
-                        {{ $t("general.national") }}
+                        {{ getCompanyKey('country_national_id') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_default" class="mb-1">
-                        {{ $t("general.is_default") }}
+                        {{ getCompanyKey('country_default') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
-                        {{ $t("general.Status") }}
+                        {{ getCompanyKey('country_status') }}
                       </b-form-checkbox>
                       <div class="d-flex justify-content-end">
                         <a href="javascript:void(0)" class="btn btn-primary btn-sm"
@@ -1020,7 +1023,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('country.addcountry')"
+              :title="getCompanyKey('country_create_form')"
               title-class="font-18"
               dialog-class="modal-full-width"
               :hide-footer="true"
@@ -1079,7 +1082,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-1" class="control-label">
-                                  {{ $t("general.Name") }}
+                                  {{ getCompanyKey('country_name_ar') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="rtl">
@@ -1126,7 +1129,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-3" class="control-label">
-                                  {{ $t("general.long_name") }}
+                                  {{ getCompanyKey('country_long_name_ar') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="rtl">
@@ -1174,7 +1177,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-2" class="control-label">
-                                  {{ $t("general.Name_en") }}
+                                  {{ getCompanyKey('country_name_en') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="ltr">
@@ -1221,7 +1224,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">
-                                  {{ $t("general.long_name_e") }}
+                                  {{ getCompanyKey('country_long_name_en') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <div dir="ltr">
@@ -1274,7 +1277,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="create-20" class="control-label">
-                                  {{ $t("general.national") }}
+                                  {{ getCompanyKey('country_national_id') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1323,7 +1326,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">
-                                  {{ $t("general.short_code") }}
+                                  {{ getCompanyKey('country_short_code') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1369,7 +1372,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label for="field-4" class="control-label">
-                                  {{ $t("general.phone_key") }}
+                                  {{ getCompanyKey('country_phone_key') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <input
@@ -1414,7 +1417,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="mr-2" for="field-11">
-                                  {{ $t("general.is_default") }}
+                                  {{ getCompanyKey('country_default') }}
                                 </label>
                                 <select
                                   class="custom-select mr-sm-2"
@@ -1450,7 +1453,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="mr-2">
-                                  {{ $t("general.Status") }}
+                                  {{ getCompanyKey('country_status') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <b-form-group
@@ -1630,7 +1633,7 @@ export default {
                     </th>
                     <th v-if="setting.name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name") }}</span>
+                        <span>{{ getCompanyKey('country_name_ar') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1645,7 +1648,7 @@ export default {
                     </th>
                     <th v-if="setting.name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Name_en") }}</span>
+                        <span>{{ getCompanyKey('country_name_en') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1660,7 +1663,7 @@ export default {
                     </th>
                     <th v-if="setting.long_name">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.long_name") }}</span>
+                        <span>{{ getCompanyKey('country_long_name_ar') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1675,7 +1678,7 @@ export default {
                     </th>
                     <th v-if="setting.long_name_e">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.long_name_e") }}</span>
+                        <span>{{ getCompanyKey('country_long_name_en') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1690,22 +1693,22 @@ export default {
                     </th>
                     <th v-if="setting.phone_key">
                       <div class="d-flex justify-content-center">
-                        {{ $t("general.phone_key") }}
+                        {{ getCompanyKey('country_phone_key') }}
                       </div>
                     </th>
                     <th v-if="setting.short_code">
                       <div class="d-flex justify-content-center">
-                        {{ $t("general.short_code") }}
+                        {{ getCompanyKey('country_short_code') }}
                       </div>
                     </th>
                     <th v-if="setting.is_default">
                       <div class="d-flex justify-content-center">
-                        {{ $t("general.is_default") }}
+                        {{ getCompanyKey('country_default') }}
                       </div>
                     </th>
                     <th v-if="setting.is_active">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Status") }}</span>
+                        <span>{{ getCompanyKey('country_status') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1827,7 +1830,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('country.editcountry')"
+                        :title="getCompanyKey('country_edit_form')"
                         title-class="font-18"
                         dialog-class="modal-full-width"
                         :ref="`edit-${data.id}`"
@@ -1873,7 +1876,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-1" class="control-label">
-                                          {{ $t("general.Name") }}
+                                          {{ getCompanyKey('country_name_ar') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <div dir="rtl">
@@ -1928,7 +1931,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-3" class="control-label">
-                                          {{ $t("general.long_name") }}
+                                          {{ getCompanyKey('country_long_name_ar') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <div dir="rtl">
@@ -1987,7 +1990,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-2" class="control-label">
-                                          {{ $t("general.Name_en") }}
+                                          {{ getCompanyKey('country_name_en') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <div dir="ltr">
@@ -2043,7 +2046,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-4" class="control-label">
-                                          {{ $t("general.long_name_e") }}
+                                          {{ getCompanyKey('country_long_name_en') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <div dir="ltr">
@@ -2106,7 +2109,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-20" class="control-label">
-                                          {{ $t("general.national") }}
+                                          {{ getCompanyKey('country_national_id') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <input
@@ -2161,7 +2164,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-4" class="control-label">
-                                          {{ $t("general.short_code") }}
+                                          {{ getCompanyKey('country_short_code') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <input
@@ -2210,7 +2213,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label for="edit-4" class="control-label">
-                                          {{ $t("general.phone_key") }}
+                                          {{ getCompanyKey('country_phone_key') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <input
@@ -2259,7 +2262,7 @@ export default {
                                     <div class="col-md-6">
                                       <div class="form-group">
                                         <label class="mr-2" for="edit-11">
-                                          {{ $t("general.is_default") }}
+                                          {{ getCompanyKey('country_default') }}
                                         </label>
                                         <select
                                           class="custom-select mr-sm-2"
@@ -2302,7 +2305,7 @@ export default {
                                     <div class="col-md-12">
                                       <div class="form-group">
                                         <label class="mr-2">
-                                          {{ $t("general.Status") }}
+                                          {{ getCompanyKey('country_status') }}
                                           <span class="text-danger">*</span>
                                         </label>
                                         <b-form-group

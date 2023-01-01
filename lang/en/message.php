@@ -23,9 +23,10 @@ return [
     "field must be exists" => "field must be exists",
     "field must be array" => "field must be array",
     "field must be less than 20 character" => "field must be less than 20 character",
-    "field must be less than 100 character" => "field must be less than 100 character",
     "field must be exists" => "field must be exists",
     "field must be less than land area" => "field must be less than land area",
     "field must be greater than 2018" => "field must be greater than 2018",
+    "field must be less than 255 character" => "field must be less than 255 character",
+    "field must be exists" => "field must be exists",
 
 ];

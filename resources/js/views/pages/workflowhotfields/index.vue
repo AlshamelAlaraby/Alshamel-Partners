@@ -10,6 +10,7 @@ import loader from "../../../components/loader";
 import { dynamicSortString } from "../../../helper/tableSort";
 import Multiselect from "vue-multiselect";
 import {formatDateOnly} from "../../../helper/startDate";
+import translation from "../../../helper/translation-mixin";
 
 /**
  * Advanced Table component
@@ -19,6 +20,7 @@ export default {
     title: "Workflow hotfield",
     meta: [{ name: "description", content: "Workflow hotfield" }],
   },
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -515,13 +517,13 @@ export default {
                       v-model="filterSetting"
                       value="workflow_id"
                       class="mb-1"
-                      >{{ $t("general.Workflow") }}</b-form-checkbox
+                      >{{ getCompanyKey('workflow') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       value="hotfield_id"
                       class="mb-1"
-                      >{{ $t("general.Hotfield") }}</b-form-checkbox
+                      >{{ getCompanyKey('hotfield') }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -611,10 +613,10 @@ export default {
                     class="dropdown-custom-ali"
                   >
                     <b-form-checkbox v-model="setting.workflow_id" class="mb-1"
-                      >{{ $t("general.Workflow") }}
+                      >{{ getCompanyKey('workflow') }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="setting.hotfield_id" class="mb-1">
-                      {{ $t("general.Hotfield") }}
+                      {{ getCompanyKey('hotfield') }}
                     </b-form-checkbox>
                     <div class="d-flex justify-content-end">
                       <a href="javascript:void(0)" class="btn btn-primary btn-sm">{{
@@ -676,7 +678,7 @@ export default {
             <!--  create   -->
             <b-modal
               id="create"
-              :title="$t('general.Add')"
+              :title="getCompanyKey('workflow_hotfield_create_form')"
               title-class="font-18"
               body-class="p-4 "
               :hide-footer="true"
@@ -722,7 +724,7 @@ export default {
                 <div class="row">
                   <div class="col-md-12 position-relative">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.Workflow") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey('workflow') }}</label>
                       <multiselect
                         v-model="create.workflow_id"
                         :options="workflows.map((type) => type.id)"
@@ -756,7 +758,7 @@ export default {
                   </div>
                   <div class="col-md-12 position-relative">
                     <div class="form-group">
-                      <label class="my-1 mr-2">{{ $t("general.Hotfield") }}</label>
+                      <label class="my-1 mr-2">{{ getCompanyKey('hotfield') }}</label>
                       <multiselect
                         v-model="create.hotfield_id"
                         :options="hotfields.map((type) => type.id)"
@@ -813,7 +815,7 @@ export default {
                     </th>
                     <th v-if="setting.workflow_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Workflow") }}</span>
+                        <span>{{ getCompanyKey('workflow') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -836,7 +838,7 @@ export default {
                     </th>
                     <th v-if="setting.hotfield_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.Hotfield") }}</span>
+                        <span>{{ getCompanyKey('hotfield') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -950,7 +952,7 @@ export default {
                       <!--  edit   -->
                       <b-modal
                         :id="`modal-edit-${data.id}`"
-                        :title="$t('general.Edit')"
+                        :title="getCompanyKey('workflow_hotfield_edit_form')"
                         title-class="font-18"
                         body-class="p-4"
                         :ref="`edit-${data.id}`"
@@ -988,7 +990,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.Workflow")
+                                  getCompanyKey('workflow')
                                 }}</label>
                                 <multiselect
                                   v-model="edit.workflow_id"
@@ -1024,7 +1026,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">{{
-                                  $t("general.Hotfield")
+                                  getCompanyKey('hotfield')
                                 }}</label>
                                 <multiselect
                                   v-model="edit.hotfield_id"
