@@ -88,6 +88,28 @@ export default {
                 }
             }
             return keyInfo;
-        }
+        },
+        getCompanyKeyLang(key,lang) {
+            let returnedKey = null;
+            for (let _key in this.companyKeys) {
+              if (_key == key) {
+                returnedKey =
+                  lang == "ar"
+                    ? this.companyKeys[_key].new_ar
+                    : this.companyKeys[_key].new_en;
+                return returnedKey;
+              }
+            }
+            for (let _key in this.defaultsKeys) {
+              if (_key == key) {
+                returnedKey =
+                  lang == "ar"
+                    ? this.defaultsKeys[_key].default_ar
+                    : this.defaultsKeys[_key].default_en;
+                return returnedKey;
+              }
+            }
+          },
+        
     },
 }

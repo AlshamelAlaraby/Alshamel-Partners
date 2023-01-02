@@ -5,6 +5,7 @@ import adminApi from "../../../api/adminAxios";
 import loader from "../../../components/loader";
 import translation from "../../../helper/translation-mixin";
 import Swal from "sweetalert2";
+import { required, minLength, maxLength, integer } from "vuelidate/lib/validators";
 
 /**
  * Advanced Table component
@@ -25,20 +26,52 @@ export default {
       isLoader: false,
       currentKey: "",
       newText: "",
+      text_ar: "",
+      text_en: "",
       company_id: null,
       search: "",
     };
+  },
+  validations: {
+    text_ar: { required, minLength: minLength(2), maxLength: maxLength(100) },
+    text_en: { required, minLength: minLength(2), maxLength: maxLength(100) },
+  },
+  updated() {
+    $(function () {
+      $(".englishInput").keypress(function (event) {
+        var ew = event.which;
+        if (ew == 32) return true;
+        if (48 <= ew && ew <= 57) return true;
+        if (65 <= ew && ew <= 90) return true;
+        if (97 <= ew && ew <= 122) return true;
+        return false;
+      });
+      $(".arabicInput").keypress(function (event) {
+        var ew = event.which;
+        if (ew == 32) return true;
+        if (48 <= ew && ew <= 57) return false;
+        if (65 <= ew && ew <= 90) return false;
+        if (97 <= ew && ew <= 122) return false;
+        return true;
+      });
+    });
   },
   mounted() {
     this.company_id = this.$store.getters["auth/company_id"];
   },
   methods: {
+    moveInput(tag, c, index) {
+      document.querySelector(`${tag}[data-${c}='${index}']`).focus();
+    },
     cancelUpdate() {
       this.currentKey = "";
       this.newText = "";
     },
     setCurrentKey(propertyName) {
+      this.$bvModal.show(`create`);
       this.currentKey = propertyName;
+      this.text_ar = this.getCompanyKeyLang(this.currentKey, "ar");
+      this.text_en = this.getCompanyKeyLang(this.currentKey, "en");
     },
     filteringResult() {
       let filterResult = {};
@@ -50,10 +83,18 @@ export default {
       this.filterResult = filterResult;
     },
     updateChange() {
+      if (!this.text_ar) {
+        this.text_ar = this.text_en;
+      }
+      if (!this.text_en) {
+        this.text_en = this.text_ar;
+      }
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
       this.isLoader = true;
       let currentKey = this.currentKey;
-      let currentKeyInfo = this.getKeyInfo(currentKey);
-      let currentLang = this.$i18n.locale;
       let formValue = {
         company_id: this.company_id,
         get_translation: false,
@@ -62,24 +103,13 @@ export default {
       formValue.translations[currentKey] = {
         default_en: "",
         default_ar: "",
-        new_ar:
-          currentLang == "ar"
-            ? this.newText
-            : currentKeyInfo && currentKeyInfo.new_ar
-            ? currentKeyInfo.new_ar
-            : this.newText,
-        new_en:
-          currentLang == "en"
-            ? this.newText
-            : currentKeyInfo && currentKeyInfo.new_en
-            ? currentKeyInfo.new_en
-            : this.newText,
+        new_ar: this.text_ar,
+        new_en: this.text_en,
       };
       adminApi
         .post("/translation-update", formValue)
         .then(() => {
-          this.newText = "";
-          this.currentKey = "";
+          this.$bvModal.hide("create");
           this.getCompanyKeys();
           setTimeout(() => {
             Swal.fire({
@@ -110,7 +140,7 @@ export default {
           showConfirmButton: false,
         });
       } else {
-      this.isLoader = true;
+        this.isLoader = true;
         adminApi
           .post("/translation-delete", {
             get_translation: false,
@@ -146,6 +176,108 @@ export default {
 <template>
   <Layout>
     <PageHeader />
+    <!--  create   -->
+    <b-modal
+      id="create"
+      :title="$t('general.translation')"
+      title-class="font-18"
+      body-class="p-4 "
+      :hide-footer="true"
+    >
+      <form>
+        <div class="mb-3 d-flex justify-content-end">
+          <b-button
+            variant="success"
+            type="button"
+            class="mx-1"
+            v-if="!isLoader"
+            @click.prevent="updateChange"
+          >
+            {{ $t("general.Edit") }}
+          </b-button>
+
+          <b-button variant="success" class="mx-1" disabled v-else>
+            <b-spinner small></b-spinner>
+            <span class="sr-only">{{ $t("login.Loading") }}...</span>
+          </b-button>
+          <!-- Emulate built in modal footer ok and cancel button actions -->
+          <b-button
+            variant="danger"
+            type="button"
+            @click.prevent="$bvModal.hide('create')"
+          >
+            {{ $t("general.Cancel") }}
+          </b-button>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="field-1" class="control-label">
+                {{ $t("general.text_ar") }}
+                <span class="text-danger">*</span>
+              </label>
+              <div dir="rtl">
+                <input
+                  type="text"
+                  class="form-control arabicInput"
+                  data-create="1"
+                  @keypress.enter="moveInput('input', 'create', 2)"
+                  v-model="$v.text_ar.$model"
+                  :class="{
+                    'is-invalid': $v.text_ar.$error,
+                    'is-valid': !$v.text_ar.$invalid,
+                  }"
+                  id="field-1"
+                />
+              </div>
+              <div v-if="!$v.text_ar.minLength" class="invalid-feedback">
+                {{ $t("general.Itmustbeatleast") }}
+                {{ $v.text_ar.$params.minLength.min }}
+                {{ $t("general.letters") }}
+              </div>
+              <div v-if="!$v.text_ar.maxLength" class="invalid-feedback">
+                {{ $t("general.Itmustbeatmost") }}
+                {{ $v.text_ar.$params.maxLength.max }}
+                {{ $t("general.letters") }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="field-2" class="control-label">
+                {{ $t("general.text_en") }}
+                <span class="text-danger">*</span>
+              </label>
+              <div dir="ltr">
+                <input
+                  type="text"
+                  class="form-control englishInput"
+                  data-create="2"
+                  @keypress.enter="moveInput('select', 'create', 3)"
+                  v-model="$v.text_en.$model"
+                  :class="{
+                    'is-invalid': $v.text_en.$error,
+                    'is-valid': !$v.text_en.$invalid,
+                  }"
+                  id="field-2"
+                />
+              </div>
+              <div v-if="!$v.text_en.minLength" class="invalid-feedback">
+                {{ $t("general.Itmustbeatleast") }}
+                {{ $v.text_en.$params.minLength.min }}
+                {{ $t("general.letters") }}
+              </div>
+              <div v-if="!$v.text_en.maxLength" class="invalid-feedback">
+                {{ $t("general.Itmustbeatmost") }}
+                {{ $v.text_en.$params.maxLength.max }}
+                {{ $t("general.letters") }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </b-modal>
+    <!--  /create   -->
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -184,7 +316,12 @@ export default {
                     </th>
                     <th>
                       <div class="d-flex justify-content-center">
-                        <span>{{ $t("general.translation") }}</span>
+                        <span>{{ $t("general.text_ar") }}</span>
+                      </div>
+                    </th>
+                    <th>
+                      <div class="d-flex justify-content-center">
+                        <span>{{ $t("general.text_en") }}</span>
                       </div>
                     </th>
                     <th>
@@ -196,74 +333,72 @@ export default {
                   <tr
                     v-for="(value, propertyName) in filterResult"
                     :key="propertyName"
-                    @click="setCurrentKey(propertyName)"
+                    @dblclick="setCurrentKey(propertyName)"
                   >
                     <td>
                       <h5 class="m-0 font-weight-normal">{{ propertyName }}</h5>
                     </td>
                     <td>
                       <h5 class="m-0 font-weight-normal">
-                        {{ getCompanyKey(propertyName) }}
+                        {{ getCompanyKeyLang(propertyName, "ar") }}
+                      </h5>
+                    </td>
+                    <td>
+                      <h5 class="m-0 font-weight-normal">
+                        {{ getCompanyKeyLang(propertyName, "en") }}
                       </h5>
                     </td>
                     <td>
                       <div class="btn-group">
-                         <a
-                            class="dropdown-item text-black"
-                            href="#"
-                            @click.prevent="reset(propertyName)"
+                        <div class="btn-group">
+                          <button
+                            type="button"
+                            class="btn btn-sm dropdown-toggle dropdown-coustom"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
                           >
-                            <div
-                              class="d-flex justify-content-between align-items-center text-black"
+                            {{ $t("general.commands") }}
+                            <i class="fas fa-angle-down"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-custom">
+                            <a
+                              class="dropdown-item"
+                              href="#"
+                              @click="setCurrentKey(propertyName)"
                             >
-                              <span>{{ $t("general.reset") }}</span>
-                              <i class="mx-2 fas fa-times text-danger"></i>
-                            </div>
-                          </a>
+                              <div
+                                class="d-flex justify-content-between align-items-center text-black"
+                              >
+                                <span>{{ $t("general.edit") }}</span>
+                                <i class="mdi mdi-square-edit-outline text-info"></i>
+                              </div>
+                            </a>
+                            <a
+                              class="dropdown-item text-black"
+                              href="#"
+                              @click.prevent="reset(propertyName)"
+                            >
+                              <div
+                                class="d-flex justify-content-between align-items-center text-black"
+                              >
+                                <span>{{ $t("general.reset") }}</span>
+                                <i class="fas fa-times text-danger"></i>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
                 </tbody>
                 <tbody v-else>
                   <tr>
-                    <th class="text-center" colspan="2">
+                    <th class="text-center" colspan="4">
                       {{ $t("general.notDataFound") }}
                     </th>
                   </tr>
                 </tbody>
               </table>
-            </div>
-            <div class="px-3">
-              <div class="mb-3">
-                <span>{{ $t("general.source_text") }}</span> :
-                <span>{{ currentKey }}</span>
-              </div>
-              <div class="mb-1">
-                {{ $t("general.translate_to") + " " + $t("general.lang") }}
-              </div>
-              <div class="mb-3">
-                <textarea v-model="newText" rows="4" class="form-control"> </textarea>
-              </div>
-              <template v-if="!isLoader">
-                <button
-                  @click="updateChange"
-                  :disabled="!currentKey || !newText"
-                  class="btn update-changes mb-3"
-                >
-                  {{ $t("general.update_changes") }}
-                </button>
-                <button
-                  @click="cancelUpdate"
-                  :disabled="!currentKey || !newText"
-                  class="btn btn-danger mb-3"
-                >
-                  {{ $t("general.cancel") }}
-                </button>
-              </template>
-              <b-button variant="success" class="mx-1" disabled v-else>
-                <b-spinner small></b-spinner>
-                <span class="sr-only">{{ $t("login.Loading") }}...</span>
-              </b-button>
             </div>
           </div>
         </div>
@@ -279,19 +414,5 @@ export default {
 thead {
   background-color: #269dc9;
   color: #fff;
-}
-table tbody {
-  display: block;
-  max-height: 300px;
-  overflow-y: scroll;
-}
-table thead,
-table tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-table tr:hover {
-  cursor: pointer;
 }
 </style>
