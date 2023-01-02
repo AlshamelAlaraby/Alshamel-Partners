@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/workflow-hotfields',
+        path: '/dashboard/workflow-hotfields',
         name: 'workflow-hotfields',
         meta: {
             middleware: [auth,checkAuth]

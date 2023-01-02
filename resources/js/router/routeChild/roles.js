@@ -3,7 +3,7 @@ import checkAuth from "../../middleware/auth-check";
 
 export default [
     {
-        path: '/roles',
+        path: '/dashboard/roles',
         name: 'roles',
         meta: {
             middleware: [auth,checkAuth]
@@ -11,7 +11,7 @@ export default [
         component: () => import('../../views/pages/roles/index'),
     },
     {
-        path: '/role-workflow',
+        path: '/dashboard/role-workflow',
         name: 'role-workflow',
         meta: {
             middleware: [auth,checkAuth]
@@ -19,7 +19,7 @@ export default [
         component: () => import('../../views/pages/roleWorkflow/index'),
     },
     {
-        path: '/role-workflow-button',
+        path: '/dashboard/role-workflow-button',
         name: 'role-workflow-button',
         meta: {
             middleware: [auth,checkAuth]
@@ -27,7 +27,7 @@ export default [
         component: () => import('../../views/pages/roleWorkflowButton/index'),
     },
     {
-        path: '/role-hotfield-screen',
+        path: '/dashboard/role-hotfield-screen',
         name: 'role-hotfield-screen',
         meta: {
             middleware: [auth,checkAuth]

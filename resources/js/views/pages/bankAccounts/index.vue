@@ -370,78 +370,77 @@ export default {
         });
       }
     },
-    /**
-     *  end delete countrie
-     */
-    /**
-     *  reset Modal (create)
-     */
-    async resetModalHidden() {
-      await this.getBank();
-      this.create = {
-        bank_id: null,
-        account_number: "",
-        phone: "",
-        address: "",
-        email: "",
-        emp_id: "",
-        rp_code: "",
-        media: null,
-      };
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.images = [];
-      this.bankAccount_id = null;
-      this.errors = {};
-      this.$bvModal.hide(`create`);
-    },
-    /**
-     *  hidden Modal (create)
-     */
-    async resetModal() {
-      await this.getBank();
-      this.create = {
-        bank_id: null,
-        account_number: "",
-        phone: "",
-        address: "",
-        email: "",
-        emp_id: "",
-        rp_code: "",
-      };
-      this.showPhoto = "./images/img-1.png";
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.bankAccount_id = null;
-      this.media = {};
-      this.images = [];
-      this.errors = {};
-    },
-    /**
-     *  create countrie
-     */
-    async resetForm() {
-      await this.getBank();
-      this.create = {
-        bank_id: null,
-        account_number: "",
-        phone: "",
-        address: "",
-        email: "",
-        emp_id: "",
-        rp_code: "",
-      };
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.bankAccount_id = null;
-      this.media = {};
-      this.images = [];
-      this.errors = {};
-    },
+        /**
+         *  end delete countrie
+         */
+        /**
+         *  reset Modal (create)
+         */
+         resetModalHidden() {
+            this.create = {
+                bank_id: null,
+                account_number: '',
+                phone: '',
+                address: '',
+                email: '',
+                emp_id: '',
+                rp_code: '',
+                media: null
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.images = [];
+            this.bankAccount_id = null;
+            this.errors = {};
+            this.$bvModal.hide(`create`);
 
+        },
+        /**
+         *  hidden Modal (create)
+         */
+        async resetModal() {
+            await this.getBank();
+            this.create = {
+                bank_id: null,
+                account_number: '',
+                phone: '',
+                address: '',
+                email: '',
+                emp_id: '',
+                rp_code: '',
+            };
+            this.showPhoto = './images/img-1.png';
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.bankAccount_id = null;
+            this.media = {};
+            this.images = [];
+            this.errors = {};
+        },
+        /**
+         *  create countrie
+         */
+        async resetForm() {
+            await this.getBank();
+            this.create = {
+                bank_id: null,
+                account_number: '',
+                phone: '',
+                address: '',
+                email: '',
+                emp_id: '',
+                rp_code: '',
+            };
+            this.$nextTick(() => {
+                this.$v.$reset()
+            });
+            this.bankAccount_id = null;
+            this.media = {};
+            this.images = [];
+            this.errors = {};
+        },
     AddSubmit() {
       this.$v.create.$touch();
 

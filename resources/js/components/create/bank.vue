@@ -203,183 +203,180 @@ import Country from "../../components/country.vue";
 import translation from "../../helper/translation-mixin";
 
 export default {
-  name: "bank",
-  components: {
-    Switches,
-    Multiselect,
-    ErrorMessage,
-    loader,
-    Country,
-  },
-  mixins: [translation],
+    name: "bank",
+    components: {
+        Switches,
+        Multiselect,
+        ErrorMessage,
+        loader,
+        Country,
+    },
+    mixins: [translation],
 
-  updated() {
-    $(function () {
-      $(".englishInput").keypress(function (event) {
-        var ew = event.which;
-        if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return true;
-        if (65 <= ew && ew <= 90) return true;
-        if (97 <= ew && ew <= 122) return true;
-        return false;
-      });
-      $(".arabicInput").keypress(function (event) {
-        var ew = event.which;
-        if (ew == 32) return true;
-        if (48 <= ew && ew <= 57) return false;
-        if (65 <= ew && ew <= 90) return false;
-        if (97 <= ew && ew <= 122) return false;
-        return true;
-      });
-    });
-  },
-  data() {
-    return {
-      isLoader: false,
-      create: {
-        name: "",
-        name_e: "",
-        country_id: null,
-        swift_code: "",
-      },
-      errors: {},
-      is_disabled: false,
-      countries: [],
-    };
-  },
-  validations: {
-    create: {
-      name: { required, minLength: minLength(2), maxLength: maxLength(100) },
-      name_e: { required, minLength: minLength(2), maxLength: maxLength(100) },
-      swift_code: { required },
-      country_id: { required },
-    },
-  },
-  methods: {
-    showCountryModal() {
-      if (this.create.country_id == 0) {
-        this.$bvModal.show("country-create");
-        this.create.country_id = null;
-      }
-    },
-    resetModalHidden() {
-      this.create = {
-        name: "",
-        name_e: "",
-        country_id: null,
-        swift_code: "",
-      };
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.errors = {};
-    },
-    /**
-     *  hidden Modal (create)
-     */
-    async resetModal() {
-      await this.getCountries();
-      this.create = {
-        name: "",
-        name_e: "",
-        country_id: null,
-        swift_code: "",
-      };
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.errors = {};
-    },
-    /**
-     *  create countrie
-     */
-    async resetForm() {
-      await this.getCountries();
-      this.create = {
-        name: "",
-        name_e: "",
-        country_id: null,
-        swift_code: "",
-      };
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
-      this.is_disabled = false;
-      this.errors = {};
-    },
-
-    AddSubmit() {
-      if (!this.create.name) {
-        this.create.name = this.create.name_e;
-      }
-      if (!this.create.name_e) {
-        this.create.name_e = this.create.name;
-      }
-      this.$v.create.$touch();
-
-      if (this.$v.create.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        this.is_disabled = false;
-
-        adminApi
-          .post(`/banks`, this.create)
-          .then((res) => {
-            this.$emit("created");
-            this.is_disabled = true;
-
-            setTimeout(() => {
-              Swal.fire({
-                icon: "success",
-                text: `${this.$t("general.Addedsuccessfully")}`,
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            }, 500);
-          })
-          .catch((err) => {
-            if (err.response.data) {
-              this.errors = err.response.data.errors;
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: `${this.$t("general.Error")}`,
-                text: `${this.$t("general.Thereisanerrorinthesystem")}`,
-              });
-            }
-          })
-          .finally(() => {
-            this.isLoader = false;
-          });
-      }
-    },
-    moveInput(tag, c, index) {
-      document.querySelector(`${tag}[data-${c}='${index}']`).focus();
-    },
-    async getCountries() {
-      this.isLoader = true;
-      await adminApi
-        .get(`/countries`)
-        .then((res) => {
-          let l = res.data.data;
-          l.unshift({ id: 0, name: "اضف دولة", name_e: "Add Country" });
-          this.countries = l;
-        })
-        .catch((err) => {
-          Swal.fire({
-            icon: "error",
-            title: `${this.$t("general.Error")}`,
-            text: `${this.$t("general.Thereisanerrorinthesystem")}`,
-          });
-        })
-        .finally(() => {
-          this.isLoader = false;
+    updated() {
+        $(function () {
+            $(".englishInput").keypress(function (event) {
+                var ew = event.which;
+                if (ew == 32) return true;
+                if (48 <= ew && ew <= 57) return true;
+                if (65 <= ew && ew <= 90) return true;
+                if (97 <= ew && ew <= 122) return true;
+                return false;
+            });
+            $(".arabicInput").keypress(function (event) {
+                var ew = event.which;
+                if (ew == 32) return true;
+                if (48 <= ew && ew <= 57) return false;
+                if (65 <= ew && ew <= 90) return false;
+                if (97 <= ew && ew <= 122) return false;
+                return true;
+            });
         });
     },
-  },
-};
+    data() {
+        return {
+            isLoader: false,
+            create: {
+                name: "",
+                name_e: "",
+                country_id: null,
+                swift_code: "",
+            },
+            errors: {},
+            is_disabled: false,
+            countries: [],
+        };
+    },
+    validations: {
+        create: {
+            name: {required, minLength: minLength(2), maxLength: maxLength(100)},
+            name_e: {required, minLength: minLength(2), maxLength: maxLength(100)},
+            swift_code: {required},
+            country_id: {required},
+        },
+    },
+    methods: {
+        showCountryModal() {
+            if (this.create.country_id == 0) {
+                this.$bvModal.show("country-create");
+                this.create.country_id = null;
+            }
+        },
+        resetModalHidden() {
+            this.create = {
+                name: "",
+                name_e: "",
+                country_id: null,
+                swift_code: "",
+            };
+            this.$nextTick(() => {
+                this.$v.$reset();
+            });
+            this.errors = {};
+        },
+        /**
+         *  hidden Modal (create)
+         */
+        async resetModal() {
+            await this.getCountries();
+            this.create = {
+                name: "",
+                name_e: "",
+                country_id: null,
+                swift_code: "",
+            };
+            this.$nextTick(() => {
+                this.$v.$reset();
+            });
+            this.errors = {};
+        },
+        /**
+         *  create countrie
+         */
+        async resetForm() {
+            await this.getCountries();
+            this.create = {
+                name: "",
+                name_e: "",
+                country_id: null,
+                swift_code: "",
+            };
+            this.$nextTick(() => {
+                this.$v.$reset();
+            });
+            this.is_disabled = false;
+            this.errors = {};
+        },
+
+        AddSubmit() {
+            if (!this.create.name) {
+                this.create.name = this.create.name_e;
+            }
+            if (!this.create.name_e) {
+                this.create.name_e = this.create.name;
+            }
+            this.$v.create.$touch();
+
+            if (this.$v.create.$invalid) {
+                return;
+            } else {
+                this.isLoader = true;
+                this.errors = {};
+                this.is_disabled = false;
+
+                adminApi
+                    .post(`/banks`, this.create)
+                    .then((res) => {
+                        this.$emit("created");
+                        this.is_disabled = true;
+
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: "success",
+                                text: `${this.$t("general.Addedsuccessfully")}`,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        }, 500);
+                    })
+                    .catch((err) => {
+                        if (err.response.data) {
+                            this.errors = err.response.data.errors;
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: `${this.$t("general.Error")}`,
+                                text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                            });
+                        }
+                    });
+            }
+        },
+        moveInput(tag,c,index){
+            document.querySelector(`${tag}[data-${c}='${index}']`).focus()
+        },
+        async getCountries() {
+            this.isLoader = true;
+            await adminApi
+                .get(`/countries?is_active=active`)
+                .then((res) => {
+                    let l = res.data.data;
+                    l.unshift({id: 0, name: "اضف دولة", name_e: "Add Country"});
+                    this.countries = l;
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: "error",
+                        title: `${this.$t("general.Error")}`,
+                        text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                    });
+                })
+                .finally(() => {
+                    this.isLoader = false;
+                });
+        }
+    }
+}
 </script>
 
 <style scoped></style>
