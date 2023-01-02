@@ -407,12 +407,11 @@ export default {
   </Layout>
 </template>
 <style scoped>
-.update-changes {
+thead {
   background-color: #3bafda;
   color: #fff;
 }
-thead {
-  background-color: #269dc9;
-  color: #fff;
+table td{
+padding: 0.13rem !important;
 }
 </style>
