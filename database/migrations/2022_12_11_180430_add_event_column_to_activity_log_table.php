@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddEventColumnToActivityLogTable extends Migration
 {
+    use \App\Traits\ConnTrait;
     public function up()
     {
         Schema::connection(config('activitylog.database_connection'))->table(config('activitylog.table_name'), function (Blueprint $table) {

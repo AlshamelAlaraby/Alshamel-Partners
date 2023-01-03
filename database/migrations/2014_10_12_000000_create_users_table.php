@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
+    use \App\Traits\ConnTrait;
+
     /**
      * Run the migrations.
      *
