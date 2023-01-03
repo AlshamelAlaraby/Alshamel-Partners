@@ -115,6 +115,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitController@find')->name('rlst-units.find');
         Route::post('/', 'RlstUnitController@create')->name('rlst-units.create');
         Route::put('/{id}', 'RlstUnitController@update')->name('rlst-units.update');
+        Route::delete("/bulk-delete","RlstUnitController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitController@delete')->name('rlst-units.delete');
     });
 
@@ -125,7 +126,9 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitStatusController@find')->name('rlst-unit-statuses.find');
         Route::post('/', 'RlstUnitStatusController@create')->name('rlst-unit-statuses.create');
         Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
+        Route::delete("/bulk-delete","RlstUnitStatusController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
+
     });
     // property types
     Route::group(['prefix' => 'property-types'], function () {
