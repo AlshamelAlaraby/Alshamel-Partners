@@ -34,8 +34,8 @@ class RlstCustomerRequest extends FormRequest
             "note3" => 'required|max:100',
             "note4" => 'required|max:100',
             "whatsapp" => "required|string|max:20",
-            "categories" => "required",
-            "attachments" => 'required',
+            // "categories" => "required",
+            // "attachments" => 'required',
         ];
     }
 
