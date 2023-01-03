@@ -87,7 +87,7 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstReservationUnitController@delete')->name('rlst-reservation-units.delete');
     });
 
-    // contracts
+    // contracs
 
     Route::group(['prefix' => 'contracts'], function () {
         Route::get('/', 'RlstContractController@all')->name('rlst-contracts.all');

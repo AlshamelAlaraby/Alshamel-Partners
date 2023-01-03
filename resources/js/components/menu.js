@@ -165,6 +165,17 @@ export const menuItems = [
         isMenuCollapsed: false,
         subItems: [
             {
+                id: 100001,
+                label: 'general.unitstatus',
+                link: '/dashboard/realEstate/unitstatus'
+            },
+            {
+                id: 100021,
+                label: 'general.contractunit',
+                link: '/dashboard/realEstate/contractunit'
+            },
+            
+            {
                 id: 1000201,
                 label: 'general.owner',
                 link: '/dashboard/realEstate/owner'

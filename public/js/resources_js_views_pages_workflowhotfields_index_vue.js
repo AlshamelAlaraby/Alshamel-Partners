@@ -1907,7 +1907,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.mouseEnter != id) {
         this.Tooltip = "";
         this.mouseEnter = id;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-trees/logs/".concat(id)).then(function (res) {
+        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/workflow-hotfield/logs/".concat(id)).then(function (res) {
           var l = res.data.data;
           l.forEach(function (e) {
             _this15.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this15.formatDate(e.created_at), " \n");
@@ -6441,6 +6441,14 @@ var menuItems = [{
   icon: "fas fa-hotel",
   isMenuCollapsed: false,
   subItems: [{
+    id: 100001,
+    label: 'general.unitstatus',
+    link: '/dashboard/realEstate/unitstatus'
+  }, {
+    id: 100021,
+    label: 'general.contractunit',
+    link: '/dashboard/realEstate/contractunit'
+  }, {
     id: 1000201,
     label: 'general.owner',
     link: '/dashboard/realEstate/owner'

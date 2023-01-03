@@ -56,6 +56,57 @@ class TranslationSeeder extends Seeder
                 "company_id" => 0,
             ],
         ]);
+        //Unit status
+        Translation::insert([
+            [
+                "key" => "unitstatus_create_form",
+                "default_en" => "Add new unit status",
+                "default_ar" => "اضف حالة وحدة جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "unitstatus_edit_form",
+                "default_en" => "Edit unit status form",
+                "default_ar" => "نموذج تعديل حالة الوحدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "unitstatus_name_ar",
+                "default_en" => "Unit status name (arabic)",
+                "default_ar" => "اسم حالة الوحدة (عربي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "unitstatus_name_en",
+                "default_en" => "Unit status name (english)",
+                "default_ar" => "اسم حالة الوحدة (انجليزي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "unitstatus_status",
+                "default_en" => "Unit status",
+                "default_ar" => "حالة الوحدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "unitstatus_default",
+                "default_en" => "Unit status default",
+                "default_ar" => "الحالة الافتراضية لحالة الوحدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+        ]);
         //Store
         Translation::insert([
             [
@@ -1365,6 +1416,25 @@ class TranslationSeeder extends Seeder
                 "key" => "color_status",
                 "default_en" => "Color status",
                 "default_ar" => "حالة اللون",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+        ]);
+        //Contract unit
+        Translation::insert([
+            [
+                "key" => "contractunit_create_form",
+                "default_en" => "Add new contract unit form",
+                "default_ar" => "اضف وحدة عقد جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "contractunit_edit_form",
+                "default_en" => "Edit contract unit form",
+                "default_ar" => "نموذج تعديل وحدة عقد",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,

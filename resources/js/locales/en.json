@@ -585,6 +585,10 @@
     }
     },
     "general": {
+        "contractunit":"Contract unit",
+        "ContractUnitTable":"Contract units table",
+        "unitstatus":"Unit status",
+        "unitStatusTable":"Unit status table",
         "text_ar":"Text (arabic)",
         "text_en":"Text (english)",
         "CompanyNotHaveTranslation":"Company doesn't have translation for this key",
