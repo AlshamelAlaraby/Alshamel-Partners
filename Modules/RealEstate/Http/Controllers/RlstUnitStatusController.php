@@ -82,10 +82,27 @@ class RlstUnitStatusController extends Controller
         if (!$model) {
             return responseJson(404, 'not found');
         }
-        if ($model->rlstUnits()->count() > 0) {
+        if ($model->units()->count() > 0) {
             return responseJson(400, 'this status is used in units');
         }
         $model->delete();
+        return responseJson(200, 'deleted');
+    }
+
+
+    public function bulkDelete()
+    {
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        foreach ($models as $model) {
+            if ($model->units()->count() > 0) {
+                return responseJson(400, 'this status is used in units');
+            }
+        }
+        $this->model->whereIn('id', $ids)->delete();
         return responseJson(200, 'deleted');
     }
 }
