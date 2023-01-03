@@ -57,7 +57,7 @@ class RlstPropertyTypeController extends Controller
 
         $model->update($request->validated());
         $model->refresh();
-        return responseJson(200, 'updated',new RlstPropertyTypeResource($model));
+        return responseJson(200, 'updated', new RlstPropertyTypeResource($model));
     }
 
     public function logs($id)
@@ -78,6 +78,22 @@ class RlstPropertyTypeController extends Controller
             return responseJson(404, 'not found');
         }
         $model->delete();
+        return responseJson(200, 'deleted');
+    }
+
+    public function bulkDelete()
+    {
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        if ($models->count() != count($ids)) {
+            return responseJson(404, 'not found');
+        }
+        $models->each(function ($model) {
+            $model->delete();
+        });
         return responseJson(200, 'deleted');
     }
 }

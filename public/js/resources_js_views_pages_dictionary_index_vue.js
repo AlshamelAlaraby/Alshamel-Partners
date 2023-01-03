@@ -1323,6 +1323,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_translation_mixin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../helper/translation-mixin */ "./resources/js/helper/translation-mixin.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+
 
 
 
@@ -1352,20 +1354,60 @@ __webpack_require__.r(__webpack_exports__);
       isLoader: false,
       currentKey: "",
       newText: "",
+      text_ar: "",
+      text_en: "",
       company_id: null,
       search: ""
     };
+  },
+  validations: {
+    text_ar: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.required,
+      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.minLength)(2),
+      maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(100)
+    },
+    text_en: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.required,
+      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.minLength)(2),
+      maxLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_6__.maxLength)(100)
+    }
+  },
+  updated: function updated() {
+    $(function () {
+      $(".englishInput").keypress(function (event) {
+        var ew = event.which;
+        if (ew == 32) return true;
+        if (48 <= ew && ew <= 57) return true;
+        if (65 <= ew && ew <= 90) return true;
+        if (97 <= ew && ew <= 122) return true;
+        return false;
+      });
+      $(".arabicInput").keypress(function (event) {
+        var ew = event.which;
+        if (ew == 32) return true;
+        if (48 <= ew && ew <= 57) return false;
+        if (65 <= ew && ew <= 90) return false;
+        if (97 <= ew && ew <= 122) return false;
+        return true;
+      });
+    });
   },
   mounted: function mounted() {
     this.company_id = this.$store.getters["auth/company_id"];
   },
   methods: {
+    moveInput: function moveInput(tag, c, index) {
+      document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
+    },
     cancelUpdate: function cancelUpdate() {
       this.currentKey = "";
       this.newText = "";
     },
     setCurrentKey: function setCurrentKey(propertyName) {
+      this.$bvModal.show("create");
       this.currentKey = propertyName;
+      this.text_ar = this.getCompanyKeyLang(this.currentKey, "ar");
+      this.text_en = this.getCompanyKeyLang(this.currentKey, "en");
     },
     filteringResult: function filteringResult() {
       var filterResult = {};
@@ -1378,10 +1420,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateChange: function updateChange() {
       var _this = this;
+      if (!this.text_ar) {
+        this.text_ar = this.text_en;
+      }
+      if (!this.text_en) {
+        this.text_en = this.text_ar;
+      }
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
       this.isLoader = true;
       var currentKey = this.currentKey;
-      var currentKeyInfo = this.getKeyInfo(currentKey);
-      var currentLang = this.$i18n.locale;
       var formValue = {
         company_id: this.company_id,
         get_translation: false,
@@ -1390,12 +1440,11 @@ __webpack_require__.r(__webpack_exports__);
       formValue.translations[currentKey] = {
         default_en: "",
         default_ar: "",
-        new_ar: currentLang == "ar" ? this.newText : currentKeyInfo && currentKeyInfo.new_ar ? currentKeyInfo.new_ar : this.newText,
-        new_en: currentLang == "en" ? this.newText : currentKeyInfo && currentKeyInfo.new_en ? currentKeyInfo.new_en : this.newText
+        new_ar: this.text_ar,
+        new_en: this.text_en
       };
       _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/translation-update", formValue).then(function () {
-        _this.newText = "";
-        _this.currentKey = "";
+        _this.$bvModal.hide("create");
         _this.getCompanyKeys();
         setTimeout(function () {
           sweetalert2__WEBPACK_IMPORTED_MODULE_5___default().fire({
@@ -4517,7 +4566,152 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("Layout", [_c("PageHeader"), _vm._v(" "), _c("div", {
+  return _c("Layout", [_c("PageHeader"), _vm._v(" "), _c("b-modal", {
+    attrs: {
+      id: "create",
+      title: _vm.$t("general.translation"),
+      "title-class": "font-18",
+      "body-class": "p-4 ",
+      "hide-footer": true
+    }
+  }, [_c("form", [_c("div", {
+    staticClass: "mb-3 d-flex justify-content-end"
+  }, [!_vm.isLoader ? _c("b-button", {
+    staticClass: "mx-1",
+    attrs: {
+      variant: "success",
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.updateChange.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("\n          " + _vm._s(_vm.$t("general.Edit")) + "\n        ")]) : _c("b-button", {
+    staticClass: "mx-1",
+    attrs: {
+      variant: "success",
+      disabled: ""
+    }
+  }, [_c("b-spinner", {
+    attrs: {
+      small: ""
+    }
+  }), _vm._v(" "), _c("span", {
+    staticClass: "sr-only"
+  }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1), _vm._v(" "), _c("b-button", {
+    attrs: {
+      variant: "danger",
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.$bvModal.hide("create");
+      }
+    }
+  }, [_vm._v("\n          " + _vm._s(_vm.$t("general.Cancel")) + "\n        ")])], 1), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-12"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-1"
+    }
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.text_ar")) + "\n              "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
+    attrs: {
+      dir: "rtl"
+    }
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.text_ar.$model,
+      expression: "$v.text_ar.$model"
+    }],
+    staticClass: "form-control arabicInput",
+    "class": {
+      "is-invalid": _vm.$v.text_ar.$error,
+      "is-valid": !_vm.$v.text_ar.$invalid
+    },
+    attrs: {
+      type: "text",
+      "data-create": "1",
+      id: "field-1"
+    },
+    domProps: {
+      value: _vm.$v.text_ar.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("input", "create", 2);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.text_ar, "$model", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), !_vm.$v.text_ar.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n              " + _vm._s(_vm.$v.text_ar.$params.minLength.min) + "\n              " + _vm._s(_vm.$t("general.letters")) + "\n            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.text_ar.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n              " + _vm._s(_vm.$v.text_ar.$params.maxLength.max) + "\n              " + _vm._s(_vm.$t("general.letters")) + "\n            ")]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-12"
+  }, [_c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    staticClass: "control-label",
+    attrs: {
+      "for": "field-2"
+    }
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.text_en")) + "\n              "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
+    attrs: {
+      dir: "ltr"
+    }
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.$v.text_en.$model,
+      expression: "$v.text_en.$model"
+    }],
+    staticClass: "form-control englishInput",
+    "class": {
+      "is-invalid": _vm.$v.text_en.$error,
+      "is-valid": !_vm.$v.text_en.$invalid
+    },
+    attrs: {
+      type: "text",
+      "data-create": "2",
+      id: "field-2"
+    },
+    domProps: {
+      value: _vm.$v.text_en.$model
+    },
+    on: {
+      keypress: function keypress($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
+        return _vm.moveInput("select", "create", 3);
+      },
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.$v.text_en, "$model", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), !_vm.$v.text_en.minLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.Itmustbeatleast")) + "\n              " + _vm._s(_vm.$v.text_en.$params.minLength.min) + "\n              " + _vm._s(_vm.$t("general.letters")) + "\n            ")]) : _vm._e(), _vm._v(" "), !_vm.$v.text_en.maxLength ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.Itmustbeatmost")) + "\n              " + _vm._s(_vm.$v.text_en.$params.maxLength.max) + "\n              " + _vm._s(_vm.$t("general.letters")) + "\n            ")]) : _vm._e()])])])])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-12"
@@ -4582,11 +4776,13 @@ var render = function render() {
     staticClass: "d-flex justify-content-center"
   }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.source_text")))])])]), _vm._v(" "), _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.translation")))])])]), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")])])]), _vm._v(" "), Object.keys(_vm.filterResult).length > 0 ? _c("tbody", _vm._l(_vm.filterResult, function (value, propertyName) {
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.text_ar")))])])]), _vm._v(" "), _c("th", [_c("div", {
+    staticClass: "d-flex justify-content-center"
+  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.text_en")))])])]), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")])])]), _vm._v(" "), Object.keys(_vm.filterResult).length > 0 ? _c("tbody", _vm._l(_vm.filterResult, function (value, propertyName) {
     return _c("tr", {
       key: propertyName,
       on: {
-        click: function click($event) {
+        dblclick: function dblclick($event) {
           return _vm.setCurrentKey(propertyName);
         }
       }
@@ -4594,9 +4790,38 @@ var render = function render() {
       staticClass: "m-0 font-weight-normal"
     }, [_vm._v(_vm._s(propertyName))])]), _vm._v(" "), _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey(propertyName)) + "\n                    ")])]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKeyLang(propertyName, "ar")) + "\n                    ")])]), _vm._v(" "), _c("td", [_c("h5", {
+      staticClass: "m-0 font-weight-normal"
+    }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKeyLang(propertyName, "en")) + "\n                    ")])]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
+    }, [_c("div", {
+      staticClass: "btn-group"
+    }, [_c("button", {
+      staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
+      attrs: {
+        type: "button",
+        "data-toggle": "dropdown",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                          " + _vm._s(_vm.$t("general.commands")) + "\n                          "), _c("i", {
+      staticClass: "fas fa-angle-down"
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "dropdown-menu dropdown-menu-custom"
     }, [_c("a", {
+      staticClass: "dropdown-item",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.setCurrentKey(propertyName);
+        }
+      }
+    }, [_c("div", {
+      staticClass: "d-flex justify-content-between align-items-center text-black"
+    }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.edit")))]), _vm._v(" "), _c("i", {
+      staticClass: "mdi mdi-square-edit-outline text-info"
+    })])]), _vm._v(" "), _c("a", {
       staticClass: "dropdown-item text-black",
       attrs: {
         href: "#"
@@ -4610,70 +4835,14 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "d-flex justify-content-between align-items-center text-black"
     }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.reset")))]), _vm._v(" "), _c("i", {
-      staticClass: "mx-2 fas fa-times text-danger"
-    })])])])])]);
+      staticClass: "fas fa-times text-danger"
+    })])])])])])])]);
   }), 0) : _c("tbody", [_c("tr", [_c("th", {
     staticClass: "text-center",
     attrs: {
-      colspan: "2"
+      colspan: "4"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1), _vm._v(" "), _c("div", {
-    staticClass: "px-3"
-  }, [_c("div", {
-    staticClass: "mb-3"
-  }, [_c("span", [_vm._v(_vm._s(_vm.$t("general.source_text")))]), _vm._v(" :\n              "), _c("span", [_vm._v(_vm._s(_vm.currentKey))])]), _vm._v(" "), _c("div", {
-    staticClass: "mb-1"
-  }, [_vm._v("\n              " + _vm._s(_vm.$t("general.translate_to") + " " + _vm.$t("general.lang")) + "\n            ")]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
-  }, [_c("textarea", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.newText,
-      expression: "newText"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      rows: "4"
-    },
-    domProps: {
-      value: _vm.newText
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.newText = $event.target.value;
-      }
-    }
-  })]), _vm._v(" "), !_vm.isLoader ? [_c("button", {
-    staticClass: "btn update-changes mb-3",
-    attrs: {
-      disabled: !_vm.currentKey || !_vm.newText
-    },
-    on: {
-      click: _vm.updateChange
-    }
-  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.update_changes")) + "\n              ")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-danger mb-3",
-    attrs: {
-      disabled: !_vm.currentKey || !_vm.newText
-    },
-    on: {
-      click: _vm.cancelUpdate
-    }
-  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.cancel")) + "\n              ")])] : _c("b-button", {
-    staticClass: "mx-1",
-    attrs: {
-      variant: "success",
-      disabled: ""
-    }
-  }, [_c("b-spinner", {
-    attrs: {
-      small: ""
-    }
-  }), _vm._v(" "), _c("span", {
-    staticClass: "sr-only"
-  }, [_vm._v(_vm._s(_vm.$t("login.Loading")) + "...")])], 1)], 2)])])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)])])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5204,22 +5373,22 @@ var menuItems = [{
   id: 100032,
   label: 'menuitems.company.text',
   icon: 'fas fa-city',
-  link: '/company'
+  link: '/dashboard/company'
 }, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
-  link: '/branch'
+  link: '/dashboard/branch'
 }, {
   id: 10008,
   label: 'menuitems.store.text',
   icon: 'fas fa-store',
-  link: '/store'
+  link: '/dashboard/store'
 }, {
   id: 10009,
   label: 'menuitems.serial.text',
   icon: 'fas fa-eraser',
-  link: '/serial'
+  link: '/dashboard/serial'
 }, {
   id: 113872,
   label: "general.Properties",
@@ -5228,11 +5397,11 @@ var menuItems = [{
   subItems: [{
     id: 225,
     label: 'general.ScreenProperties',
-    link: '/screen-properties'
+    link: '/dashboard/screen-properties'
   }, {
     id: 226,
     label: 'general.TreeProperty',
-    link: '/tree-properties'
+    link: '/dashboard/tree-properties'
   }]
 }, {
   id: 10006,
@@ -5242,19 +5411,19 @@ var menuItems = [{
   subItems: [{
     id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
-    link: '/salesmenTypes'
+    link: '/dashboard/salesmenTypes'
   }, {
     id: 100117,
     label: 'menuitems.dashboard.list.salesMen',
-    link: '/salesmen'
+    link: '/dashboard/salesmen'
   }, {
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
-    link: '/externalSalesmen'
+    link: '/dashboard/externalSalesmen'
   }, {
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
-    link: '/internalSalesman'
+    link: '/dashboard/internalSalesman'
   }]
 }, {
   id: 1000548,
@@ -5264,15 +5433,15 @@ var menuItems = [{
   subItems: [{
     id: 112201,
     label: 'general.paymentTypes',
-    link: '/paymentTypes'
+    link: '/dashboard/paymentTypes'
   }, {
     id: 222,
     label: 'menuitems.Banks.text',
-    link: '/banks'
+    link: '/dashboard/banks'
   }, {
     id: 112202,
     label: 'general.bankAccounts',
-    link: '/bankAccount'
+    link: '/dashboard/bankAccount'
   }]
 }, {
   id: 1000544,
@@ -5282,19 +5451,19 @@ var menuItems = [{
   subItems: [{
     id: 2,
     label: 'menuitems.dashboard.list.country',
-    link: '/country'
+    link: '/dashboard/country'
   }, {
     id: 3,
     label: 'menuitems.dashboard.list.governorate',
-    link: '/governorate'
+    link: '/dashboard/governorate'
   }, {
     id: 4,
     label: 'menuitems.dashboard.list.city',
-    link: '/city'
+    link: '/dashboard/city'
   }, {
     id: 8,
     label: 'menuitems.dashboard.list.avenue',
-    link: '/avenue'
+    link: '/dashboard/avenue'
   }]
 }, {
   id: 10001,
@@ -5304,23 +5473,23 @@ var menuItems = [{
   subItems: [{
     id: 10002,
     label: 'menuitems.dashboard.list.rolesType',
-    link: '/rolesType'
+    link: '/dashboard/rolesType'
   }, {
     id: 10003,
     label: 'menuitems.dashboard.list.roles',
-    link: '/roles'
+    link: '/dashboard/roles'
   }, {
     id: 100043,
     label: 'menuitems.dashboard.list.roleWorkflow',
-    link: '/role-workflow'
+    link: '/dashboard/role-workflow'
   }, {
     id: 100088,
     label: 'menuitems.dashboard.list.roleWorkflowButton',
-    link: '/role-workflow-button'
+    link: '/dashboard/role-workflow-button'
   }, {
     id: 100134,
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
-    link: '/role-hotfield-screen'
+    link: '/dashboard/role-hotfield-screen'
   }]
 }, {
   id: 10023578,
@@ -5330,56 +5499,94 @@ var menuItems = [{
   subItems: [{
     id: 1000201,
     label: 'general.owner',
-    link: '/realEstate/owner'
+    link: '/dashboard/realEstate/owner'
   }, {
     id: 10048103,
     label: 'general.building',
-    link: '/realEstate/building'
+    link: '/dashboard/realEstate/building'
   }, {
     id: 1022343,
     label: 'general.customer',
-    link: '/realEstate/customer'
+    link: '/dashboard/realEstate/customer'
+  }]
+}, {
+  id: 1004346756,
+  label: "general.archive",
+  icon: "ri-share-line",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 38781,
+    label: 'menuitems.DocumentField.text',
+    link: '/dashboard/document-fields'
+  }, {
+    id: 34343,
+    label: 'menuitems.ArchiveClosedReference.text',
+    link: '/dashboard/archive-closed-references'
+  }, {
+    id: 432234,
+    label: 'menuitems.GenArchDocType.text',
+    link: '/dashboard/gen-arch-doc-types'
+  }, {
+    id: 34561,
+    label: 'menuitems.ArchDocTypeField.text',
+    link: '/dashboard/arch-doc-type-fields'
+  }, {
+    id: 879756,
+    label: 'menuitems.ArchDepartment.text',
+    link: '/dashboard/arch-departments'
+  }, {
+    id: 1567443,
+    label: 'menuitems.ArchDocument.text',
+    link: '/dashboard/arch-documents'
+  }, {
+    id: 36462,
+    label: 'menuitems.ArchDocumentDtl.text',
+    link: '/dashboard/arch-document-dtls'
+  }, {
+    id: 32020,
+    label: 'menuitems.ArchDocumentStatus.text',
+    link: '/dashboard/arch-doc-status'
   }]
 }, {
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
-  link: '/workflow-hotfields'
+  link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
   label: 'general.Users',
   icon: 'fas fa-network-wired',
-  link: '/users'
+  link: '/dashboard/users'
 }, {
   id: 5,
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
-  link: '/currency'
+  link: '/dashboard/currency'
 }, {
   id: 6,
   label: 'menuitems.employee.text',
   icon: 'fas fa-user-friends',
-  link: '/employee'
+  link: '/dashboard/employee'
 }, {
   id: 7,
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
-  link: '/financialYear'
+  link: '/dashboard/financialYear'
 }, {
   id: 10004,
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
-  link: '/units'
+  link: '/dashboard/units'
 }, {
   id: 10005,
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
-  link: '/colors'
+  link: '/dashboard/colors'
 }, {
   id: 10099,
   label: 'general.dictionary',
   icon: 'fas fa-palette',
-  link: '/dictionary'
+  link: '/dashboard/dictionary'
 }
 
 // {
@@ -5395,17 +5602,17 @@ var menuItems = [{
 //         {
 //             id: 1114,
 //             label: 'menuitems.dashboard.list.sales',
-//             link: '/'
+//             link: '/dashboard/'
 //         },
 //         {
 //             id: 1113,
 //             label: 'menuitems.dashboard.list.crm',
-//             link: '/dashboard/crm'
+//             link: '/dashboard/dashboard/crm'
 //         },
 //         {
 //             id: 1115,
 //             label: 'menuitems.dashboard.list.analytics',
-//             link: '/dashboard/analytics'
+//             link: '/dashboard/dashboard/analytics'
 //         },
 //     ]
 // },
@@ -5418,7 +5625,7 @@ var menuItems = [{
 //     id: 11113,
 //     label: "menuitems.chat.text",
 //     icon: "ri-message-2-line",
-//     link: '/apps/chat'
+//     link: '/dashboard/apps/chat'
 // },
 // {
 //     id: 1112,
@@ -5433,52 +5640,52 @@ var menuItems = [{
 //         {
 //             id: 1111,
 //             label: "menuitems.ecommerce.list.products",
-//             link: "/ecommerce/products"
+//             link: "/dashboard/ecommerce/products"
 //         },
 //         {
 //             id: 1110,
 //             label: "menuitems.ecommerce.list.productsgrid",
-//             link: "/ecommerce/products-grid"
+//             link: "/dashboard/ecommerce/products-grid"
 //         },
 //         {
 //             id: 1109,
 //             label: 'menuitems.ecommerce.list.productdetail',
-//             link: '/ecommerce/product-detail/1'
+//             link: '/dashboard/ecommerce/product-detail/1'
 //         },
 //         {
 //             id: 1108,
 //             label: 'menuitems.ecommerce.list.createproduct',
-//             link: '/ecommerce/product-create'
+//             link: '/dashboard/ecommerce/product-create'
 //         },
 //         {
 //             id: 1107,
 //             label: "menuitems.ecommerce.list.customers",
-//             link: "/ecommerce/customers"
+//             link: "/dashboard/ecommerce/customers"
 //         },
 //         {
 //             id: 1106,
 //             label: "menuitems.ecommerce.list.orders",
-//             link: "/ecommerce/orders"
+//             link: "/dashboard/ecommerce/orders"
 //         },
 //         {
 //             id: 1105,
 //             label: "menuitems.ecommerce.list.orderdetail",
-//             link: "/ecommerce/order-detail"
+//             link: "/dashboard/ecommerce/order-detail"
 //         },
 //         {
 //             id: 1104,
 //             label: "menuitems.ecommerce.list.sellers",
-//             link: "/ecommerce/sellers"
+//             link: "/dashboard/ecommerce/sellers"
 //         },
 //         {
 //             id: 1103,
 //             label: "menuitems.ecommerce.list.cart",
-//             link: "/ecommerce/cart"
+//             link: "/dashboard/ecommerce/cart"
 //         },
 //         {
 //             id: 1102,
 //             label: "menuitems.ecommerce.list.checkout",
-//             link: "/ecommerce/checkout"
+//             link: "/dashboard/ecommerce/checkout"
 //         }
 //     ]
 // },
@@ -5486,7 +5693,7 @@ var menuItems = [{
 //     id: 1101,
 //     label: 'menuitems.calendar.text',
 //     icon: 'ri-calendar-2-line',
-//     link: '/apps/calendar'
+//     link: '/dashboard/apps/calendar'
 // },
 // {
 //     id: 1100,
@@ -5497,17 +5704,17 @@ var menuItems = [{
 //         {
 //             id: 1099,
 //             label: 'menuitems.email.list.inbox',
-//             link: '/email/inbox'
+//             link: '/dashboard/email/inbox'
 //         },
 //         {
 //             id: 1098,
 //             label: 'menuitems.email.list.reademail',
-//             link: '/email/reademail/1'
+//             link: '/dashboard/email/reademail/1'
 //         },
 //         {
 //             id: 1097,
 //             label: 'menuitems.email.list.template',
-//             link: '/email/templates'
+//             link: '/dashboard/email/templates'
 //         }
 //     ]
 // },
@@ -5515,7 +5722,7 @@ var menuItems = [{
 //     id: 1096,
 //     label: 'menuitems.companies.text',
 //     icon: 'ri-building-4-line',
-//     link: '/apps/companies'
+//     link: '/dashboard/apps/companies'
 // },
 // {
 //     id: 1095,
@@ -5526,17 +5733,17 @@ var menuItems = [{
 //         {
 //             id: 1093,
 //             label: 'menuitems.tasks.list.list',
-//             link: '/task/list'
+//             link: '/dashboard/task/list'
 //         },
 //         {
 //             id: 1092,
 //             label: 'menuitems.tasks.list.detail',
-//             link: '/task/detail'
+//             link: '/dashboard/task/detail'
 //         },
 //         {
 //             id: 1091,
 //             label: 'menuitems.tasks.list.kanban',
-//             link: '/task/kanban'
+//             link: '/dashboard/task/kanban'
 //         }
 //     ]
 // },
@@ -5544,7 +5751,7 @@ var menuItems = [{
 //     id: 1090,
 //     label: 'menuitems.ticket.text',
 //     icon: 'ri-customer-service-2-line',
-//     link: '/apps/tickets'
+//     link: '/dashboard/apps/tickets'
 // },
 // {
 //     id: 1089,
@@ -5555,12 +5762,12 @@ var menuItems = [{
 //         {
 //             id: 1088,
 //             label: 'menuitems.contacts.list.members',
-//             link: '/contacts/list'
+//             link: '/dashboard/contacts/list'
 //         },
 //         {
 //             id: 1087,
 //             label: 'menuitems.contacts.list.profile',
-//             link: '/contacts/profile'
+//             link: '/dashboard/contacts/profile'
 //         }
 //     ]
 // },
@@ -5568,7 +5775,7 @@ var menuItems = [{
 //     id: 1086,
 //     label: 'menuitems.filemanager.text',
 //     icon: 'ri-folders-line',
-//     link: '/apps/file-manager'
+//     link: '/dashboard/apps/file-manager'
 // },
 // {
 //     id: 1085,
@@ -5584,72 +5791,72 @@ var menuItems = [{
 //         {
 //             id: 1083,
 //             label: 'menuitems.auth.list.login',
-//             link: '/auth/login-1'
+//             link: '/dashboard/auth/login-1'
 //         },
 //         {
 //             id: 1082,
 //             label: 'menuitems.auth.list.login-2',
-//             link: '/auth/login-2'
+//             link: '/dashboard/auth/login-2'
 //         },
 //         {
 //             id: 1081,
 //             label: 'menuitems.auth.list.register',
-//             link: '/auth/register-1'
+//             link: '/dashboard/auth/register-1'
 //         },
 //         {
 //             id: 1080,
 //             label: 'menuitems.auth.list.register-2',
-//             link: '/auth/register-2'
+//             link: '/dashboard/auth/register-2'
 //         },
 //         {
 //             id: 1079,
 //             label: 'menuitems.auth.list.signin-signup',
-//             link: '/auth/signin-signup'
+//             link: '/dashboard/auth/signin-signup'
 //         },
 //         {
 //             id: 1078,
 //             label: 'menuitems.auth.list.signin-signup-2',
-//             link: '/auth/signin-signup-2'
+//             link: '/dashboard/auth/signin-signup-2'
 //         },
 //         {
 //             id: 1077,
 //             label: 'menuitems.auth.list.recoverpwd',
-//             link: '/auth/recoverpwd'
+//             link: '/dashboard/auth/recoverpwd'
 //         },
 //         {
 //             id: 1076,
 //             label: 'menuitems.auth.list.recoverpwd-2',
-//             link: '/auth/recoverpwd-2'
+//             link: '/dashboard/auth/recoverpwd-2'
 //         },
 //         {
 //             id: 1075,
 //             label: 'menuitems.auth.list.lock-screen',
-//             link: '/auth/lock-screen'
+//             link: '/dashboard/auth/lock-screen'
 //         },
 //         {
 //             id: 1074,
 //             label: 'menuitems.auth.list.lock-screen-2',
-//             link: '/auth/lock-screen-2'
+//             link: '/dashboard/auth/lock-screen-2'
 //         },
 //         {
 //             id: 1073,
 //             label: 'menuitems.auth.list.logout',
-//             link: '/auth/logout-1'
+//             link: '/dashboard/auth/logout-1'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.logout-2',
-//             link: '/auth/logout-2'
+//             link: '/dashboard/auth/logout-2'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.confirm-mail',
-//             link: '/auth/confirm-mail'
+//             link: '/dashboard/auth/confirm-mail'
 //         },
 //         {
 //             id: 1072,
 //             label: 'menuitems.auth.list.confirm-mail-2',
-//             link: '/auth/confirm-mail-2'
+//             link: '/dashboard/auth/confirm-mail-2'
 //         },
 //     ]
 // },
@@ -5662,67 +5869,67 @@ var menuItems = [{
 //         {
 //             id: 1070,
 //             label: 'menuitems.extrapages.list.starter',
-//             link: '/extras/starter'
+//             link: '/dashboard/extras/starter'
 //         },
 //         {
 //             id: 1069,
 //             label: 'menuitems.extrapages.list.timeline',
-//             link: '/extras/timeline'
+//             link: '/dashboard/extras/timeline'
 //         },
 //         {
 //             id: 1068,
 //             label: 'menuitems.extrapages.list.sitemap',
-//             link: '/extras/sitemap'
+//             link: '/dashboard/extras/sitemap'
 //         },
 //         {
 //             id: 1067,
 //             label: 'menuitems.extrapages.list.invoice',
-//             link: '/extras/invoice'
+//             link: '/dashboard/extras/invoice'
 //         },
 //         {
 //             id: 1066,
 //             label: 'menuitems.extrapages.list.faqs',
-//             link: '/extras/faqs'
+//             link: '/dashboard/extras/faqs'
 //         },
 //         {
 //             id: 1065,
 //             label: 'menuitems.extrapages.list.search-results',
-//             link: '/extras/search-results'
+//             link: '/dashboard/extras/search-results'
 //         },
 //         {
 //             id: 1064,
 //             label: 'menuitems.extrapages.list.pricing',
-//             link: '/extras/pricing'
+//             link: '/dashboard/extras/pricing'
 //         },
 //         {
 //             id: 1063,
 //             label: 'menuitems.extrapages.list.maintenance',
-//             link: '/extras/maintenance'
+//             link: '/dashboard/extras/maintenance'
 //         },
 //         {
 //             id: 1062,
 //             label: 'menuitems.extrapages.list.comingsoon',
-//             link: '/extras/coming-soon'
+//             link: '/dashboard/extras/coming-soon'
 //         },
 //         {
 //             id: 1061,
 //             label: 'menuitems.extrapages.list.lightbox',
-//             link: '/extras/lightbox'
+//             link: '/dashboard/extras/lightbox'
 //         },
 //         {
 //             id: 1060,
 //             label: 'menuitems.extrapages.list.error404',
-//             link: '/error/404'
+//             link: '/dashboard/error/404'
 //         },
 //         {
 //             id: 1059,
 //             label: 'menuitems.extrapages.list.error404-alt',
-//             link: '/error/404-alt'
+//             link: '/dashboard/error/404-alt'
 //         },
 //         {
 //             id: 1058,
 //             label: 'menuitems.extrapages.list.error500',
-//             link: '/error/500'
+//             link: '/dashboard/error/500'
 //         }
 //     ]
 // },
@@ -5740,97 +5947,97 @@ var menuItems = [{
 //         {
 //             id: 1055,
 //             label: 'menuitems.ui.list.avatars',
-//             link: '/ui/avatars'
+//             link: '/dashboard/ui/avatars'
 //         },
 //         {
 //             id: 1054,
 //             label: 'menuitems.ui.list.buttons',
-//             link: '/ui/buttons'
+//             link: '/dashboard/ui/buttons'
 //         },
 //         {
 //             id: 1053,
 //             label: 'menuitems.ui.list.cards',
-//             link: '/ui/cards'
+//             link: '/dashboard/ui/cards'
 //         },
 //         {
 //             id: 1052,
 //             label: 'menuitems.ui.list.carousel',
-//             link: '/ui/carousel'
+//             link: '/dashboard/ui/carousel'
 //         },
 //         {
 //             id: 1051,
 //             label: 'menuitems.ui.list.dropdowns',
-//             link: '/ui/dropdowns'
+//             link: '/dashboard/ui/dropdowns'
 //         },
 //         {
 //             id: 1050,
 //             label: 'menuitems.ui.list.video',
-//             link: '/ui/video'
+//             link: '/dashboard/ui/video'
 //         },
 //         {
 //             id: 1049,
 //             label: 'menuitems.ui.list.general',
-//             link: '/ui/general'
+//             link: '/dashboard/ui/general'
 //         },
 //         {
 //             id: 1048,
 //             label: 'menuitems.ui.list.grid',
-//             link: '/ui/grid'
+//             link: '/dashboard/ui/grid'
 //         },
 //         {
 //             id: 1047,
 //             label: 'menuitems.ui.list.images',
-//             link: '/ui/images'
+//             link: '/dashboard/ui/images'
 //         },
 //         {
 //             id: 1046,
 //             label: 'menuitems.ui.list.listgroup',
-//             link: '/ui/list-group'
+//             link: '/dashboard/ui/list-group'
 //         },
 //         {
 //             id: 1045,
 //             label: 'menuitems.ui.list.modals',
-//             link: '/ui/modals'
+//             link: '/dashboard/ui/modals'
 //         },
 //         {
 //             id: 1044,
 //             label: 'menuitems.ui.list.notifications',
-//             link: '/ui/notifications'
+//             link: '/dashboard/ui/notifications'
 //         },
 //         {
 //             id: 1043,
 //             label: 'menuitems.ui.list.portlet',
-//             link: '/ui/portlets'
+//             link: '/dashboard/ui/portlets'
 //         },
 //         {
 //             id: 1042,
 //             label: 'menuitems.ui.list.progress',
-//             link: '/ui/progress'
+//             link: '/dashboard/ui/progress'
 //         },
 //         {
 //             id: 1041,
 //             label: 'menuitems.ui.list.ribbons',
-//             link: '/ui/ribbons'
+//             link: '/dashboard/ui/ribbons'
 //         },
 //         {
 //             id: 1040,
 //             label: 'menuitems.ui.list.spinners',
-//             link: '/ui/spinners'
+//             link: '/dashboard/ui/spinners'
 //         },
 //         {
 //             id: 1039,
 //             label: 'menuitems.ui.list.tabs',
-//             link: '/ui/tabs-accordions'
+//             link: '/dashboard/ui/tabs-accordions'
 //         },
 //         {
 //             id: 1038,
 //             label: 'menuitems.ui.list.tooltip',
-//             link: '/ui/tooltips-popovers'
+//             link: '/dashboard/ui/tooltips-popovers'
 //         },
 //         {
 //             id: 1037,
 //             label: 'menuitems.ui.list.typography',
-//             link: '/ui/typography'
+//             link: '/dashboard/ui/typography'
 //         }
 //     ]
 // },
@@ -5847,22 +6054,22 @@ var menuItems = [{
 //         {
 //             id: 1035,
 //             label: 'menuitems.extendedui.list.rangeslider',
-//             link: '/extended/rangeslider'
+//             link: '/dashboard/extended/rangeslider'
 //         },
 //         {
 //             id: 1034,
 //             label: 'menuitems.extendedui.list.sweetalert',
-//             link: '/extended/sweet-alert'
+//             link: '/dashboard/extended/sweet-alert'
 //         },
 //         {
 //             id: 1033,
 //             label: 'menuitems.extendedui.list.tour',
-//             link: '/extended/tour'
+//             link: '/dashboard/extended/tour'
 //         },
 //         {
 //             id: 1032,
 //             label: 'menuitems.extendedui.list.scrollspy',
-//             link: '/extended/scrollspy'
+//             link: '/dashboard/extended/scrollspy'
 //         },
 //     ]
 // },
@@ -5870,7 +6077,7 @@ var menuItems = [{
 //     id: 1031,
 //     label: 'menuitems.widgets.text',
 //     icon: 'ri-honour-line',
-//     link: '/widgets'
+//     link: '/dashboard/widgets'
 // },
 // {
 //     id: 1024,
@@ -5881,32 +6088,32 @@ var menuItems = [{
 //         {
 //             id: 1025,
 //             label: 'menuitems.icons.list.feather',
-//             link: '/icons/feather'
+//             link: '/dashboard/icons/feather'
 //         },
 //         {
 //             id: 1026,
 //             label: 'menuitems.icons.list.remix',
-//             link: '/icons/remix'
+//             link: '/dashboard/icons/remix'
 //         },
 //         {
 //             id: 1027,
 //             label: 'menuitems.icons.list.boxicons',
-//             link: '/icons/boxicons'
+//             link: '/dashboard/icons/boxicons'
 //         },
 //         {
 //             id: 1028,
 //             label: 'menuitems.icons.list.materialdesign',
-//             link: '/icons/mdi'
+//             link: '/dashboard/icons/mdi'
 //         },
 //         {
 //             id: 1029,
 //             label: 'menuitems.icons.list.fontawesome',
-//             link: '/icons/font-awesome'
+//             link: '/dashboard/icons/font-awesome'
 //         },
 //         {
 //             id: 1030,
 //             label: 'menuitems.icons.list.weather',
-//             link: '/icons/weather'
+//             link: '/dashboard/icons/weather'
 //         }
 //     ]
 // },
@@ -5919,37 +6126,37 @@ var menuItems = [{
 //         {
 //             id: 1022,
 //             label: 'menuitems.forms.list.elements',
-//             link: '/forms/elements'
+//             link: '/dashboard/forms/elements'
 //         },
 //         {
 //             id: 1021,
 //             label: 'menuitems.forms.list.advanced',
-//             link: '/forms/advanced'
+//             link: '/dashboard/forms/advanced'
 //         },
 //         {
 //             id: 1020,
 //             label: 'menuitems.forms.list.validation',
-//             link: '/forms/validation'
+//             link: '/dashboard/forms/validation'
 //         },
 //         {
 //             id: 1019,
 //             label: 'menuitems.forms.list.wizard',
-//             link: '/forms/wizard'
+//             link: '/dashboard/forms/wizard'
 //         },
 //         {
 //             id: 1018,
 //             label: 'menuitems.forms.list.mask',
-//             link: '/forms/mask'
+//             link: '/dashboard/forms/mask'
 //         },
 //         {
 //             id: 1017,
 //             label: 'menuitems.forms.list.editor',
-//             link: '/forms/quill'
+//             link: '/dashboard/forms/quill'
 //         },
 //         {
 //             id: 1016,
 //             label: 'menuitems.forms.list.fileupload',
-//             link: '/forms/file-uploads'
+//             link: '/dashboard/forms/file-uploads'
 //         }
 //     ]
 // },
@@ -5962,12 +6169,12 @@ var menuItems = [{
 //         {
 //             id: 1014,
 //             label: 'menuitems.tables.list.basic',
-//             link: '/tables/basic'
+//             link: '/dashboard/tables/basic'
 //         },
 //         {
 //             id: 1013,
 //             label: 'menuitems.tables.list.advanced',
-//             link: '/tables/advanced'
+//             link: '/dashboard/tables/advanced'
 //         },
 //     ]
 // },
@@ -5980,27 +6187,27 @@ var menuItems = [{
 //         {
 //             id: 1007,
 //             label: 'menuitems.charts.list.apex',
-//             link: '/charts/apex'
+//             link: '/dashboard/charts/apex'
 //         },
 //         {
 //             id: 1008,
 //             label: 'menuitems.charts.list.chartjs',
-//             link: '/charts/chartjs'
+//             link: '/dashboard/charts/chartjs'
 //         },
 //         {
 //             id: 1009,
 //             label: 'menuitems.charts.list.c3',
-//             link: '/charts/c3'
+//             link: '/dashboard/charts/c3'
 //         },
 //         {
 //             id: 1010,
 //             label: 'menuitems.charts.list.chartist',
-//             link: '/charts/chartist'
+//             link: '/dashboard/charts/chartist'
 //         },
 //         {
 //             id: 1011,
 //             label: 'menuitems.charts.list.knob',
-//             link: '/charts/knob'
+//             link: '/dashboard/charts/knob'
 //         }
 //     ]
 // },
@@ -6013,7 +6220,7 @@ var menuItems = [{
 //         {
 //             id: 1005,
 //             label: 'menuitems.maps.list.googlemap',
-//             link: '/maps/google'
+//             link: '/dashboard/maps/google'
 //         }
 //     ]
 // },
@@ -6147,6 +6354,21 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         }
       }
       return keyInfo;
+    },
+    getCompanyKeyLang: function getCompanyKeyLang(key, lang) {
+      var returnedKey = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          returnedKey = lang == "ar" ? this.companyKeys[_key].new_ar : this.companyKeys[_key].new_en;
+          return returnedKey;
+        }
+      }
+      for (var _key3 in this.defaultsKeys) {
+        if (_key3 == key) {
+          returnedKey = lang == "ar" ? this.defaultsKeys[_key3].default_ar : this.defaultsKeys[_key3].default_en;
+          return returnedKey;
+        }
+      }
     }
   }
 });
@@ -6349,7 +6571,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.update-changes[data-v-2d8576c3] {\r\n  background-color: #3bafda;\r\n  color: #fff;\n}\nthead[data-v-2d8576c3] {\r\n  background-color: #269dc9;\r\n  color: #fff;\n}\ntable tbody[data-v-2d8576c3] {\r\n  display: block;\r\n  max-height: 300px;\r\n  overflow-y: scroll;\n}\ntable thead[data-v-2d8576c3],\r\ntable tbody tr[data-v-2d8576c3] {\r\n  display: table;\r\n  width: 100%;\r\n  table-layout: fixed;\n}\ntable tr[data-v-2d8576c3]:hover {\r\n  cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nthead[data-v-2d8576c3] {\r\n  background-color: #3bafda;\r\n  color: #fff;\n}\ntable td[data-v-2d8576c3]{\r\npadding: 0.13rem !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11430,6 +11652,960 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_2d8576c3_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=style&index=0&id=2d8576c3&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/pages/dictionary/index.vue?vue&type=style&index=0&id=2d8576c3&scoped=true&lang=css&");
 
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/alpha.js":
+/*!********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/alpha.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.regex)('alpha', /^[a-zA-Z]*$/);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/alphaNum.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/alphaNum.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.regex)('alphaNum', /^[a-zA-Z0-9]*$/);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/and.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/and.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default() {
+  for (var _len = arguments.length, validators = new Array(_len), _key = 0; _key < _len; _key++) {
+    validators[_key] = arguments[_key];
+  }
+
+  return (0, _common.withParams)({
+    type: 'and'
+  }, function () {
+    var _this = this;
+
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return validators.length > 0 && validators.reduce(function (valid, fn) {
+      return valid && fn.apply(_this, args);
+    }, true);
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/between.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/between.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(min, max) {
+  return (0, _common.withParams)({
+    type: 'between',
+    min: min,
+    max: max
+  }, function (value) {
+    return !(0, _common.req)(value) || (!/\s/.test(value) || value instanceof Date) && +min <= +value && +max >= +value;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/common.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/common.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.req = exports.regex = exports.ref = exports.len = void 0;
+Object.defineProperty(exports, "withParams", ({
+  enumerable: true,
+  get: function get() {
+    return _withParams.default;
+  }
+}));
+
+var _withParams = _interopRequireDefault(__webpack_require__(/*! ../withParams */ "./node_modules/vuelidate/lib/withParams.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var req = function req(value) {
+  if (Array.isArray(value)) return !!value.length;
+
+  if (value === undefined || value === null) {
+    return false;
+  }
+
+  if (value === false) {
+    return true;
+  }
+
+  if (value instanceof Date) {
+    return !isNaN(value.getTime());
+  }
+
+  if (_typeof(value) === 'object') {
+    for (var _ in value) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return !!String(value).length;
+};
+
+exports.req = req;
+
+var len = function len(value) {
+  if (Array.isArray(value)) return value.length;
+
+  if (_typeof(value) === 'object') {
+    return Object.keys(value).length;
+  }
+
+  return String(value).length;
+};
+
+exports.len = len;
+
+var ref = function ref(reference, vm, parentVm) {
+  return typeof reference === 'function' ? reference.call(vm, parentVm) : parentVm[reference];
+};
+
+exports.ref = ref;
+
+var regex = function regex(type, expr) {
+  return (0, _withParams.default)({
+    type: type
+  }, function (value) {
+    return !req(value) || expr.test(value);
+  });
+};
+
+exports.regex = regex;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/decimal.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/decimal.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.regex)('decimal', /^[-]?\d*(\.\d+)?$/);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/email.js":
+/*!********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/email.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var emailRegex = /^(?:[A-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]{2,}(?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+
+var _default = (0, _common.regex)('email', emailRegex);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/index.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+Object.defineProperty(exports, "alpha", ({
+  enumerable: true,
+  get: function get() {
+    return _alpha.default;
+  }
+}));
+Object.defineProperty(exports, "alphaNum", ({
+  enumerable: true,
+  get: function get() {
+    return _alphaNum.default;
+  }
+}));
+Object.defineProperty(exports, "and", ({
+  enumerable: true,
+  get: function get() {
+    return _and.default;
+  }
+}));
+Object.defineProperty(exports, "between", ({
+  enumerable: true,
+  get: function get() {
+    return _between.default;
+  }
+}));
+Object.defineProperty(exports, "decimal", ({
+  enumerable: true,
+  get: function get() {
+    return _decimal.default;
+  }
+}));
+Object.defineProperty(exports, "email", ({
+  enumerable: true,
+  get: function get() {
+    return _email.default;
+  }
+}));
+exports.helpers = void 0;
+Object.defineProperty(exports, "integer", ({
+  enumerable: true,
+  get: function get() {
+    return _integer.default;
+  }
+}));
+Object.defineProperty(exports, "ipAddress", ({
+  enumerable: true,
+  get: function get() {
+    return _ipAddress.default;
+  }
+}));
+Object.defineProperty(exports, "macAddress", ({
+  enumerable: true,
+  get: function get() {
+    return _macAddress.default;
+  }
+}));
+Object.defineProperty(exports, "maxLength", ({
+  enumerable: true,
+  get: function get() {
+    return _maxLength.default;
+  }
+}));
+Object.defineProperty(exports, "maxValue", ({
+  enumerable: true,
+  get: function get() {
+    return _maxValue.default;
+  }
+}));
+Object.defineProperty(exports, "minLength", ({
+  enumerable: true,
+  get: function get() {
+    return _minLength.default;
+  }
+}));
+Object.defineProperty(exports, "minValue", ({
+  enumerable: true,
+  get: function get() {
+    return _minValue.default;
+  }
+}));
+Object.defineProperty(exports, "not", ({
+  enumerable: true,
+  get: function get() {
+    return _not.default;
+  }
+}));
+Object.defineProperty(exports, "numeric", ({
+  enumerable: true,
+  get: function get() {
+    return _numeric.default;
+  }
+}));
+Object.defineProperty(exports, "or", ({
+  enumerable: true,
+  get: function get() {
+    return _or.default;
+  }
+}));
+Object.defineProperty(exports, "required", ({
+  enumerable: true,
+  get: function get() {
+    return _required.default;
+  }
+}));
+Object.defineProperty(exports, "requiredIf", ({
+  enumerable: true,
+  get: function get() {
+    return _requiredIf.default;
+  }
+}));
+Object.defineProperty(exports, "requiredUnless", ({
+  enumerable: true,
+  get: function get() {
+    return _requiredUnless.default;
+  }
+}));
+Object.defineProperty(exports, "sameAs", ({
+  enumerable: true,
+  get: function get() {
+    return _sameAs.default;
+  }
+}));
+Object.defineProperty(exports, "url", ({
+  enumerable: true,
+  get: function get() {
+    return _url.default;
+  }
+}));
+
+var _alpha = _interopRequireDefault(__webpack_require__(/*! ./alpha */ "./node_modules/vuelidate/lib/validators/alpha.js"));
+
+var _alphaNum = _interopRequireDefault(__webpack_require__(/*! ./alphaNum */ "./node_modules/vuelidate/lib/validators/alphaNum.js"));
+
+var _numeric = _interopRequireDefault(__webpack_require__(/*! ./numeric */ "./node_modules/vuelidate/lib/validators/numeric.js"));
+
+var _between = _interopRequireDefault(__webpack_require__(/*! ./between */ "./node_modules/vuelidate/lib/validators/between.js"));
+
+var _email = _interopRequireDefault(__webpack_require__(/*! ./email */ "./node_modules/vuelidate/lib/validators/email.js"));
+
+var _ipAddress = _interopRequireDefault(__webpack_require__(/*! ./ipAddress */ "./node_modules/vuelidate/lib/validators/ipAddress.js"));
+
+var _macAddress = _interopRequireDefault(__webpack_require__(/*! ./macAddress */ "./node_modules/vuelidate/lib/validators/macAddress.js"));
+
+var _maxLength = _interopRequireDefault(__webpack_require__(/*! ./maxLength */ "./node_modules/vuelidate/lib/validators/maxLength.js"));
+
+var _minLength = _interopRequireDefault(__webpack_require__(/*! ./minLength */ "./node_modules/vuelidate/lib/validators/minLength.js"));
+
+var _required = _interopRequireDefault(__webpack_require__(/*! ./required */ "./node_modules/vuelidate/lib/validators/required.js"));
+
+var _requiredIf = _interopRequireDefault(__webpack_require__(/*! ./requiredIf */ "./node_modules/vuelidate/lib/validators/requiredIf.js"));
+
+var _requiredUnless = _interopRequireDefault(__webpack_require__(/*! ./requiredUnless */ "./node_modules/vuelidate/lib/validators/requiredUnless.js"));
+
+var _sameAs = _interopRequireDefault(__webpack_require__(/*! ./sameAs */ "./node_modules/vuelidate/lib/validators/sameAs.js"));
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ./url */ "./node_modules/vuelidate/lib/validators/url.js"));
+
+var _or = _interopRequireDefault(__webpack_require__(/*! ./or */ "./node_modules/vuelidate/lib/validators/or.js"));
+
+var _and = _interopRequireDefault(__webpack_require__(/*! ./and */ "./node_modules/vuelidate/lib/validators/and.js"));
+
+var _not = _interopRequireDefault(__webpack_require__(/*! ./not */ "./node_modules/vuelidate/lib/validators/not.js"));
+
+var _minValue = _interopRequireDefault(__webpack_require__(/*! ./minValue */ "./node_modules/vuelidate/lib/validators/minValue.js"));
+
+var _maxValue = _interopRequireDefault(__webpack_require__(/*! ./maxValue */ "./node_modules/vuelidate/lib/validators/maxValue.js"));
+
+var _integer = _interopRequireDefault(__webpack_require__(/*! ./integer */ "./node_modules/vuelidate/lib/validators/integer.js"));
+
+var _decimal = _interopRequireDefault(__webpack_require__(/*! ./decimal */ "./node_modules/vuelidate/lib/validators/decimal.js"));
+
+var helpers = _interopRequireWildcard(__webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js"));
+
+exports.helpers = helpers;
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/integer.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/integer.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.regex)('integer', /(^[0-9]*$)|(^-[0-9]+$)/);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/ipAddress.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/ipAddress.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.withParams)({
+  type: 'ipAddress'
+}, function (value) {
+  if (!(0, _common.req)(value)) {
+    return true;
+  }
+
+  if (typeof value !== 'string') {
+    return false;
+  }
+
+  var nibbles = value.split('.');
+  return nibbles.length === 4 && nibbles.every(nibbleValid);
+});
+
+exports["default"] = _default;
+
+var nibbleValid = function nibbleValid(nibble) {
+  if (nibble.length > 3 || nibble.length === 0) {
+    return false;
+  }
+
+  if (nibble[0] === '0' && nibble !== '0') {
+    return false;
+  }
+
+  if (!nibble.match(/^\d+$/)) {
+    return false;
+  }
+
+  var numeric = +nibble | 0;
+  return numeric >= 0 && numeric <= 255;
+};
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/macAddress.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/macAddress.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default() {
+  var separator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ':';
+  return (0, _common.withParams)({
+    type: 'macAddress'
+  }, function (value) {
+    if (!(0, _common.req)(value)) {
+      return true;
+    }
+
+    if (typeof value !== 'string') {
+      return false;
+    }
+
+    var parts = typeof separator === 'string' && separator !== '' ? value.split(separator) : value.length === 12 || value.length === 16 ? value.match(/.{2}/g) : null;
+    return parts !== null && (parts.length === 6 || parts.length === 8) && parts.every(hexValid);
+  });
+};
+
+exports["default"] = _default;
+
+var hexValid = function hexValid(hex) {
+  return hex.toLowerCase().match(/^[0-9a-f]{2}$/);
+};
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/maxLength.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/maxLength.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(length) {
+  return (0, _common.withParams)({
+    type: 'maxLength',
+    max: length
+  }, function (value) {
+    return !(0, _common.req)(value) || (0, _common.len)(value) <= length;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/maxValue.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/maxValue.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(max) {
+  return (0, _common.withParams)({
+    type: 'maxValue',
+    max: max
+  }, function (value) {
+    return !(0, _common.req)(value) || (!/\s/.test(value) || value instanceof Date) && +value <= +max;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/minLength.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/minLength.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(length) {
+  return (0, _common.withParams)({
+    type: 'minLength',
+    min: length
+  }, function (value) {
+    return !(0, _common.req)(value) || (0, _common.len)(value) >= length;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/minValue.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/minValue.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(min) {
+  return (0, _common.withParams)({
+    type: 'minValue',
+    min: min
+  }, function (value) {
+    return !(0, _common.req)(value) || (!/\s/.test(value) || value instanceof Date) && +value >= +min;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/not.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/not.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(validator) {
+  return (0, _common.withParams)({
+    type: 'not'
+  }, function (value, vm) {
+    return !(0, _common.req)(value) || !validator.call(this, value, vm);
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/numeric.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/numeric.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.regex)('numeric', /^[0-9]*$/);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/or.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/or.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default() {
+  for (var _len = arguments.length, validators = new Array(_len), _key = 0; _key < _len; _key++) {
+    validators[_key] = arguments[_key];
+  }
+
+  return (0, _common.withParams)({
+    type: 'or'
+  }, function () {
+    var _this = this;
+
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return validators.length > 0 && validators.reduce(function (valid, fn) {
+      return valid || fn.apply(_this, args);
+    }, false);
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/required.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/required.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = (0, _common.withParams)({
+  type: 'required'
+}, function (value) {
+  if (typeof value === 'string') {
+    return (0, _common.req)(value.trim());
+  }
+
+  return (0, _common.req)(value);
+});
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/requiredIf.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/requiredIf.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(prop) {
+  return (0, _common.withParams)({
+    type: 'requiredIf',
+    prop: prop
+  }, function (value, parentVm) {
+    return (0, _common.ref)(prop, this, parentVm) ? (0, _common.req)(value) : true;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/requiredUnless.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/requiredUnless.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(prop) {
+  return (0, _common.withParams)({
+    type: 'requiredUnless',
+    prop: prop
+  }, function (value, parentVm) {
+    return !(0, _common.ref)(prop, this, parentVm) ? (0, _common.req)(value) : true;
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/sameAs.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/sameAs.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var _default = function _default(equalTo) {
+  return (0, _common.withParams)({
+    type: 'sameAs',
+    eq: equalTo
+  }, function (value, parentVm) {
+    return value === (0, _common.ref)(equalTo, this, parentVm);
+  });
+};
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/validators/url.js":
+/*!******************************************************!*\
+  !*** ./node_modules/vuelidate/lib/validators/url.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+
+var _common = __webpack_require__(/*! ./common */ "./node_modules/vuelidate/lib/validators/common.js");
+
+var urlRegex = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
+
+var _default = (0, _common.regex)('url', urlRegex);
+
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/withParams.js":
+/*!**************************************************!*\
+  !*** ./node_modules/vuelidate/lib/withParams.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var withParams = process.env.BUILD === 'web' ? (__webpack_require__(/*! ./withParamsBrowser */ "./node_modules/vuelidate/lib/withParamsBrowser.js").withParams) : (__webpack_require__(/*! ./params */ "./node_modules/vuelidate/lib/params.js").withParams);
+var _default = withParams;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./node_modules/vuelidate/lib/withParamsBrowser.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/vuelidate/lib/withParamsBrowser.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.withParams = void 0;
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var root = typeof window !== 'undefined' ? window : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : {};
+
+var fakeWithParams = function fakeWithParams(paramsOrClosure, maybeValidator) {
+  if (_typeof(paramsOrClosure) === 'object' && maybeValidator !== undefined) {
+    return maybeValidator;
+  }
+
+  return paramsOrClosure(function () {});
+};
+
+var withParams = root.vuelidate ? root.vuelidate.withParams : fakeWithParams;
+exports.withParams = withParams;
 
 /***/ })
 

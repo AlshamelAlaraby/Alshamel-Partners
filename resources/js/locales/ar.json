@@ -126,6 +126,59 @@
         "Table": "جدول  رجال المبيعات الداخلين",
         "salesmen": " رجال المبيعات الداخلين"
     },
+    "DocumentField": {
+        "AddDocumentField": "أضف حقل مستند",
+        "EditDocumentField": "تحرير حقل المستند",
+        "DocumentField": "حقل الوثيقة",
+        "DocumentFieldsTable": "جدول حقول الوثيقة"
+    },
+    "ArchiveClosedReference": {
+        "AddArchiveClosedReference": "إضافة أرشيف مرجعي مغلق",
+        "EditArchiveClosedReference": "تحرير مرجع الأرشيف مغلق",
+        "ArchiveClosedReferencesTable": "أرشفة جدول مرجعي مغلق",
+        "ArcDocField": "Archive Doc Field",
+        "FieldValue": "Field Value"
+    },
+    "ArchDepartment": {
+        "AddArchDepartment": " Add Arch Department",
+        "EditArchDepartment": "Edit Arch Department",
+        "ArchDepartment": "Arch Department",
+        "ArchDepartmentTable": "Arch Department Table"
+    },
+    "ArchDocument": {
+        "AddArchDocument": " Add Arch Document",
+        "EditArchDocument": "Edit Arch Document",
+        "ArchDocument": "Arch Document",
+        "ArchDocumentTable": "Arch Document Table",
+        "DocStatus": "Doc Status",
+        "URLReference": "URL Reference",
+        "DocDescription": "Doc Description",
+        "GenArchDocType": "Gen Arch Doc Type"
+    },
+    "GenArchDocType": {
+        "AddGenArchDocType": "Add Gen Arch Doc Type",
+        "EditGenArchDocType": "Edit Gen Arch Doc Type",
+        "GenArchDocType": "Gen Arch Doc Type",
+        "GenArchDocTypeTable": "Gen Arch Doc Type Table"
+    },
+    "ArchDocTypeField": {
+        "AddArchDocTypeField": "Add Arch Doc Type Field",
+        "EditArchDocTypeField": "Edit Arch Doc Type Field",
+        "ArchDocTypeField": "Arch Doc Type Field",
+        "ArchDocTypeFieldTable": "Arch Doc Type Field Table"
+    },
+    "ArchDocumentDtl": {
+        "AddArchDocumentDtl": " Add Arch Document Dtl",
+        "EditArchDocumentDtl": "Edit Arch Document Dtl",
+        "ArchDocumentDtl": "Arch Document Dtl",
+        "ArchDocumentDtlTable": "Arch Document Dtl Table"
+    },
+    "ArchDocStatus": {
+        "AddArchDocStatus": " Add Arch Doc Status",
+        "EditArchDocStatus": "Edit Arch Doc Status",
+        "ArchDocStatus": "Arch Doc Status",
+        "ArchDocStatusTable": "Arch Doc Status Table"
+    },
     "navbar": {
         "search": {
             "text": "بحث..."
@@ -278,6 +331,30 @@
         },
         "company": {
             "text": "الشركات"
+        },
+        "DocumentField": {
+            "text": "حقول الوثيقة"
+        },
+        "ArchiveClosedReference": {
+            "text": "أرشيف المرجع مغلق"
+        },
+        "ArchDepartment": {
+            "text": "Archive Department"
+        },
+        "ArchDocument": {
+            "text": "Archive Document"
+        },
+        "GenArchDocType": {
+            "text": "نوع مستند القوس العام"
+        },
+        "ArchDocTypeField": {
+            "text": "حقل نوع المستند القوسي"
+        },
+        "ArchDocumentStatus": {
+            "text": "Arch Document Status"
+        },
+        "ArchDocumentDtl": {
+            "text": "Arch Document Dtl"
         },
         "dashboard": {
             "text": "لوحة القيادة",
@@ -512,6 +589,8 @@
         }
     },
     "general": {
+        "text_ar":"النص (عربي)",
+        "text_en":"النص (الانجليزي)",
         "CompanyNotHaveTranslation":"لاتحتوي الشركة على ترجمة لهذا الملصق",
         "reset":"اعادة تعيين",
         "cancel":"الغاء",
@@ -674,6 +753,52 @@
         "building": "البنايات",
         "customer": "عملاء",
         "description": "الوصف(عربي)",
-        "description_e": "الوصف(انجليزي)"
+        "description_e": "الوصف(انجليزي)",
+        "land_area": "مساحة الأرض (م)",
+        "building_area": "منطقة بناء (م)",
+        "construction_year": "سنة البناء",
+        "module": "النموذج",
+        "lng": "خط طول",
+        "lat": "خط عرض",
+        "avenue": "المنطقه",
+        "buildsTable": "جدول المباني",
+        "addbuild": "اضافه مبني",
+        "editbuild": "تعديل مبني",
+        "ownersTable": "جدول الملاك",
+        "addowner": "اضافه المالك",
+        "editowner": "تعديل المالك",
+        "nationality": "الجنسيه",
+        "contact_person": "Contact Person",
+        "contact_phones": "Contact Phones",
+        "bankAccount": "الحساب البنكي",
+        "customersTable": "جدول العملاء",
+        "addcustomer": "اضافه العميل",
+        "editcustomer": "تعديل العميل",
+        "passport": "رقم جواز السفر",
+        "DocumentFieldNumeric": "Numeric",
+        "DocumentFieldDate": "Date",
+        "DocumentFieldDdlb": "ddlb{}",
+        "DocumentFieldLookup": "lookup(Table)",
+        "isReference": "Is Reference?",
+        "isReferenceYes": "نعم",
+        "isReferenceNo": "لا",
+        "Archive": "No",
+        "ArchiveClosedReferenceDocField": "Archive Document Field",
+        "ArchiveClosedReferenceFieldValue": "Field Value",
+        "ArchDepartmentParentID": "Arch Department",
+        "ArchDocumentDocDesc": "Doc Description",
+        "ArchDocumentDocStatus": "Doc Status",
+        "ArchDocumentArchDocType": "Arch Doc Type",
+        "ArchDocumentDocURLreference": "URL Reference",
+        "isValid": "صالح",
+        "parentId": "الأبوين",
+        "genArchDocType": "Gen Arch Doc Type",
+        "archDocTypeField": "Arch Doc Field",
+        "fieldOrder": "Field Order",
+        "isRequired": "Is Required",
+        "fieldCharacter": "Field Character",
+        "numericValidation": "This field should contains positive value.",
+        "fieldValue": "Field Value",
+        "archive": "ارشيف"
     }
 }

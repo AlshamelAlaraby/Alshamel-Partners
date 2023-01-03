@@ -266,7 +266,6 @@ export default {
         governorate_id: null,
         is_active: 1,
       },
-      errors: {},
       countries: [],
       governorates: [],
     };
@@ -358,7 +357,6 @@ export default {
         this.$v.$reset();
       });
       this.errors = {};
-      this.$bvModal.hide(`city-create`);
     },
 
     AddSubmit() {
@@ -379,6 +377,7 @@ export default {
           .post(`/cities`, this.create)
           .then((res) => {
             this.is_disabled = true;
+            this.$emit('created');
             setTimeout(() => {
               Swal.fire({
                 icon: "success",
