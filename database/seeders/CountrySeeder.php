@@ -24,7 +24,6 @@ class CountrySeeder extends Seeder
                 "long_name" => "long_name $i",
                 "long_name_e" => "long_name_e $i",
                 "short_code" => "$i",
-
             ]);
 
         }

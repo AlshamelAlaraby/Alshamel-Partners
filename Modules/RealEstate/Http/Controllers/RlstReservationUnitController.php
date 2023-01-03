@@ -7,8 +7,6 @@ use Illuminate\Routing\Controller;
 use Modules\RealEstate\Entities\RlstReservationUnit;
 use Modules\RealEstate\Http\Requests\RlstReservationUnitRequest;
 use Modules\RealEstate\Transformers\RlstReservationUnitResource;
-use Modules\RealEstate\Http\Requests\CreateRlstReservationUnitRequest;
-use Modules\RealEstate\Http\Requests\UpdateRlstReservationUnitRequest;
 
 class RlstReservationUnitController extends Controller
 {
@@ -81,6 +79,23 @@ class RlstReservationUnitController extends Controller
             return responseJson(404, 'not found');
         }
         $model->delete();
+        return responseJson(200, 'deleted');
+    }
+
+    public function bulkDelete()
+    {
+
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        if ($models->count() != count($ids)) {
+            return responseJson(404, 'not found');
+        }
+        $models->each(function ($model) {
+            $model->delete();
+        });
         return responseJson(200, 'deleted');
     }
 }

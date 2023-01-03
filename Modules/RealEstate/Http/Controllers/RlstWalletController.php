@@ -85,4 +85,25 @@ class RlstWalletController extends Controller
         $model->delete();
         return responseJson(200, 'deleted');
     }
+
+
+    public function bulkDelete()
+    {
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        if ($models->count() != count($ids)) {
+            return responseJson(400, 'some ids are not found');
+        }
+        foreach ($models as $model) {
+            if ($model->walletOwner()->count() > 0 || $model->buildingWallet()->count() > 0) {
+                return responseJson(400, 'some wallets are used in another place');
+            }
+        }
+
+        $this->model->whereIn('id', $ids)->delete();
+        return responseJson(200, 'deleted');
+    }
 }
