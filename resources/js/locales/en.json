@@ -812,6 +812,10 @@
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
         "fieldValue": "Field Value",
-        "archive": "Archive"
+        "archive": "Archive",
+        "walletsTable": "Wallets Tables",
+        "wallet": "Wallets",
+        "walletOwner": "Wallet Owner",
+        "walletOwnerTable": "wallet Owners Table"
     }
 }

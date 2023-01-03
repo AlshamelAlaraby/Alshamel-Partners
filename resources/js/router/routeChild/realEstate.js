@@ -26,4 +26,28 @@ export default [
         },
         component: () => import('../../views/pages/realEstate/customer'),
     },
+    {
+        path: '/dashboard/realEstate/wallet',
+        name: 'realEstate-wallet',
+        meta: {
+            middleware: [auth,checkAuth]
+        },
+        component: () => import('../../views/pages/realEstate/wallet'),
+    },
+    {
+        path: '/dashboard/realEstate/wallet-owner',
+        name: 'realEstate-wallet-owner',
+        meta: {
+            middleware: [auth,checkAuth]
+        },
+        component: () => import('../../views/pages/realEstate/walletOwner'),
+    },
+    {
+        path: '/dashboard/realEstate/unit',
+        name: 'realEstate-wallet-owner',
+        meta: {
+            middleware: [auth,checkAuth]
+        },
+        component: () => import('../../views/pages/realEstate/unit'),
+    },
 ];
