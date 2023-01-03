@@ -82,11 +82,20 @@ class RlstUnitController extends Controller
         return responseJson(200, 'deleted');
     }
 
-
     public function bulkDelete()
     {
         $ids = request()->ids;
-        $this->model->whereIn('id', $ids)->delete();
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        if ($models->count() != count($ids)) {
+            return responseJson(404, 'not found');
+        }
+        $models->each(function ($model) {
+            $model->delete();
+        });
         return responseJson(200, 'deleted');
     }
+
 }
