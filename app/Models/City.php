@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\ConnTrait;
 use App\Traits\LogTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    use HasFactory, LogTrait;
+    use HasFactory, LogTrait,ConnTrait;
 
     protected $guarded = ['id'];
 

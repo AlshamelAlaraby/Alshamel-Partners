@@ -805,6 +805,10 @@
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
         "fieldValue": "Field Value",
-        "archive": "ارشيف"
+        "archive": "ارشيف",
+        "walletsTable": "جدول المحافظ",
+        "wallet": "المحافظ",
+        "walletOwner": "صاحب المحفظة",
+        "walletOwnerTable": "جدول مالكي المحافظ"
     }
 }

@@ -2364,7 +2364,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this15.isLoader = true;
                 _context7.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.buttons = l.buttons;
                   _this15.workflows = l.work_flow_trees;
@@ -7388,6 +7388,18 @@ var menuItems = [{
     id: 1022343,
     label: 'general.customer',
     link: '/dashboard/realEstate/customer'
+  }, {
+    id: 1022323,
+    label: 'general.wallet',
+    link: '/dashboard/realEstate/wallet'
+  }, {
+    id: 1042323,
+    label: 'general.walletOwner',
+    link: '/dashboard/realEstate/wallet-owner'
+  }, {
+    id: 1042323,
+    label: 'units.units',
+    link: '/dashboard/realEstate/unit'
   }]
 }, {
   id: 1004346756,
