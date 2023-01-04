@@ -585,6 +585,8 @@
     }
     },
     "general": {
+        "text_ar":"Text (arabic)",
+        "text_en":"Text (english)",
         "CompanyNotHaveTranslation":"Company doesn't have translation for this key",
         "reset":"Reset",
         "cancel":"Cancel",

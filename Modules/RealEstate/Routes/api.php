@@ -22,6 +22,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstOwnerController@find')->name('rlst-owners.find');
         Route::post('/', 'RlstOwnerController@create')->name('rlst-owners.create');
         Route::put('/{id}', 'RlstOwnerController@update')->name('rlst-owners.update');
+        Route::delete("/bulk-delete","RlstOwnerController@bulkDelete");
         Route::delete('/{id}', 'RlstOwnerController@delete')->name('rlst-owners.delete');
     });
 
@@ -32,6 +33,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstCustomerController@find')->name('rlst-customers.find');
         Route::post('/', 'RlstCustomerController@create')->name('rlst-customers.create');
         Route::put('/{id}', 'RlstCustomerController@update')->name('rlst-customers.update');
+        Route::delete("/bulk-delete","RlstCustomerController@bulkDelete");
         Route::delete('/{id}', 'RlstCustomerController@delete')->name('rlst-customers.delete');
     });
 
@@ -43,6 +45,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstWalletController@find')->name('rlst-wallets.find');
         Route::post('/', 'RlstWalletController@create')->name('rlst-wallets.create');
         Route::put('/{id}', 'RlstWalletController@update')->name('rlst-wallets.update');
+        Route::delete("/bulk-delete","RlstWalletController@bulkDelete");
         Route::delete('/{id}', 'RlstWalletController@delete')->name('rlst-wallets.delete');
     });
 
@@ -54,6 +57,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstWalletOwnerController@find')->name('rlst-wallet-owner.find');
         Route::post('/', 'RlstWalletOwnerController@create')->name('rlst-wallet-owner.create');
         Route::put('/{id}', 'RlstWalletOwnerController@update')->name('rlst-wallet-owner.update');
+        Route::delete("/bulk-delete","RlstWalletOwnerController@bulkDelete");
         Route::delete('/{id}', 'RlstWalletOwnerController@delete')->name('rlst-wallet-owner.delete');
     });
 
@@ -65,6 +69,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstInstallmentController@find')->name('rlst-installments.find');
         Route::post('/', 'RlstInstallmentController@create')->name('rlst-installments.create');
         Route::put('/{id}', 'RlstInstallmentController@update')->name('rlst-installments.update');
+        Route::delete("/bulk-delete","RlstInstallmentController@bulkDelete");
         Route::delete('/{id}', 'RlstInstallmentController@delete')->name('rlst-installments.delete');
     });
 
@@ -75,6 +80,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstReservationController@find')->name('rlst-Reservations.find');
         Route::post('/', 'RlstReservationController@create')->name('rlst-Reservations.create');
         Route::put('/{id}', 'RlstReservationController@update')->name('rlst-Reservations.update');
+        Route::delete("/bulk-delete","RlstReservationController@bulkDelete");
         Route::delete('/{id}', 'RlstReservationController@delete')->name('rlst-Reservations.delete');
     });
     // reservation units
@@ -84,6 +90,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstReservationUnitController@find')->name('rlst-reservation-units.find');
         Route::post('/', 'RlstReservationUnitController@create')->name('rlst-reservation-units.create');
         Route::put('/{id}', 'RlstReservationUnitController@update')->name('rlst-reservation-units.update');
+        Route::delete("/bulk-delete","RlstReservationUnitController@bulkDelete");
         Route::delete('/{id}', 'RlstReservationUnitController@delete')->name('rlst-reservation-units.delete');
     });
 
@@ -95,6 +102,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstContractController@find')->name('rlst-contracts.find');
         Route::post('/', 'RlstContractController@create')->name('rlst-contracts.create');
         Route::put('/{id}', 'RlstContractController@update')->name('rlst-contracts.update');
+        Route::delete("/bulk-delete","RlstContractController@bulkDelete");
         Route::delete('/{id}', 'RlstContractController@delete')->name('rlst-contracts.delete');
     });
 
@@ -105,6 +113,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitContractController@find')->name('rlst-unit-contracts.find');
         Route::post('/', 'RlstUnitContractController@create')->name('rlst-unit-contracts.create');
         Route::put('/{id}', 'RlstUnitContractController@update')->name('rlst-unit-contracts.update');
+        Route::delete("/bulk-delete","RlstUnitContractController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
     });
 
@@ -115,6 +124,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitController@find')->name('rlst-units.find');
         Route::post('/', 'RlstUnitController@create')->name('rlst-units.create');
         Route::put('/{id}', 'RlstUnitController@update')->name('rlst-units.update');
+        Route::delete("/bulk-delete","RlstUnitController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitController@delete')->name('rlst-units.delete');
     });
 
@@ -125,7 +135,9 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitStatusController@find')->name('rlst-unit-statuses.find');
         Route::post('/', 'RlstUnitStatusController@create')->name('rlst-unit-statuses.create');
         Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
+        Route::delete("/bulk-delete","RlstUnitStatusController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
+
     });
     // property types
     Route::group(['prefix' => 'property-types'], function () {
@@ -134,6 +146,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstPropertyTypeController@find')->name('rlst-property-types.find');
         Route::post('/', 'RlstPropertyTypeController@create')->name('rlst-property-types.create');
         Route::put('/{id}', 'RlstPropertyTypeController@update')->name('rlst-property-types.update');
+        Route::delete("/bulk-delete","RlstPropertyTypeController@bulkDelete");
         Route::delete('/{id}', 'RlstPropertyTypeController@delete')->name('rlst-property-types.delete');
     });
 
@@ -144,6 +157,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstBuildingController@find')->name('rlst-buildings.find');
         Route::post('/', 'RlstBuildingController@create')->name('rlst-buildings.create');
         Route::put('/{id}', 'RlstBuildingController@update')->name('rlst-buildings.update');
+        Route::delete("/bulk-delete","RlstBuildingController@bulkDelete");
         Route::delete('/{id}', 'RlstBuildingController@delete')->name('rlst-buildings.delete');
     });
 
@@ -155,6 +169,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstBuildingWalletController@find')->name('rlst-building-wallets.find');
         Route::post('/', 'RlstBuildingWalletController@create')->name('rlst-building-wallets.create');
         Route::put('/{id}', 'RlstBuildingWalletController@update')->name('rlst-building-wallets.update');
+        Route::delete("/bulk-delete","RlstBuildingWalletController@bulkDelete");
         Route::delete('/{id}', 'RlstBuildingWalletController@delete')->name('rlst-building-wallets.delete');
     });
 

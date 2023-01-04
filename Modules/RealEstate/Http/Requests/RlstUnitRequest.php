@@ -47,6 +47,8 @@ class RlstUnitRequest extends FormRequest
             'properties' => "required|array",
             'attachments' => "required|array",
             'module_id' => "required|integer",
+            // 'attachments' => "required|array",
+            // 'module_id' => "required|integer",
         ];
     }
 

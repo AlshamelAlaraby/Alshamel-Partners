@@ -10650,6 +10650,21 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         }
       }
       return keyInfo;
+    },
+    getCompanyKeyLang: function getCompanyKeyLang(key, lang) {
+      var returnedKey = null;
+      for (var _key in this.companyKeys) {
+        if (_key == key) {
+          returnedKey = lang == "ar" ? this.companyKeys[_key].new_ar : this.companyKeys[_key].new_en;
+          return returnedKey;
+        }
+      }
+      for (var _key3 in this.defaultsKeys) {
+        if (_key3 == key) {
+          returnedKey = lang == "ar" ? this.defaultsKeys[_key3].default_ar : this.defaultsKeys[_key3].default_en;
+          return returnedKey;
+        }
+      }
     }
   }
 });

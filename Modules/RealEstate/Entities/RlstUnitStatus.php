@@ -37,7 +37,7 @@ class RlstUnitStatus extends Model
 
     public function units()
     {
-        return $this->hasMany(RlstUnit::class);
+        return $this->hasMany(RlstUnit::class,"unit_status_id");
     }
 
 }
