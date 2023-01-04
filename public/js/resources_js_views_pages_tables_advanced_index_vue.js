@@ -5189,6 +5189,18 @@ var menuItems = [{
     id: 1022343,
     label: 'general.customer',
     link: '/dashboard/realEstate/customer'
+  }, {
+    id: 1022323,
+    label: 'general.wallet',
+    link: '/dashboard/realEstate/wallet'
+  }, {
+    id: 1042323,
+    label: 'general.walletOwner',
+    link: '/dashboard/realEstate/wallet-owner'
+  }, {
+    id: 1042323,
+    label: 'units.units',
+    link: '/dashboard/realEstate/unit'
   }]
 }, {
   id: 1004346756,

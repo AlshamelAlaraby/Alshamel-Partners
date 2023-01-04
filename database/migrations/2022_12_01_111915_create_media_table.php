@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMediaTable extends Migration
 {
+    use \App\Traits\ConnTrait;
     public function up()
     {
         Schema::create('media', function (Blueprint $table) {

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\ConnTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class UserSettingScreen extends Model
 {
-    use HasFactory;
+    use HasFactory,ConnTrait;
 
     protected $guarded = [];
     protected $table = "user_setting_screens";
