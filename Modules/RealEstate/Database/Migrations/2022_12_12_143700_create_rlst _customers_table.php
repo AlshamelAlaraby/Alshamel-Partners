@@ -33,8 +33,8 @@ return new class extends Migration
             $table->string('note2',100);
             $table->string('note3',100);
             $table->string('note4',100);
-            $table->json('categories');
-            $table->json('attachments');
+            $table->json('categories')->nullable();
+            $table->json('attachments')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

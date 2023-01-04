@@ -5121,6 +5121,10 @@ var menuItems = [{
     label: 'general.unitstatus',
     link: '/dashboard/realEstate/unitstatus'
   }, {
+    id: 100111,
+    label: 'general.contract',
+    link: '/dashboard/realEstate/contract'
+  }, {
     id: 100021,
     label: 'general.contractunit',
     link: '/dashboard/realEstate/contractunit'

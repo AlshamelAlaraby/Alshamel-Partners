@@ -1440,5 +1440,56 @@ class TranslationSeeder extends Seeder
                 "company_id" => 0,
             ],
         ]);
+        //
+        Translation::insert([
+            [
+                "key" => "contract_create_form",
+                "default_en" => "Add new contract",
+                "default_ar" => "اضف عقد جديد",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "contract_edit_form",
+                "default_en" => "Edit contract form",
+                "default_ar" => "تعديل نموذج العقد",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "customer",
+                "default_en" => "Customer name",
+                "default_ar" => "اسم الزبون",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "contract_date",
+                "default_en" => "Contract date",
+                "default_ar" => "تاريخ العقد",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "sale_man",
+                "default_en" => "Sale man name",
+                "default_ar" => "اسم رجل المبيعات",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "reservation_date",
+                "default_en" => "Reservation date",
+                "default_ar" => "تاريخ الحجز",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],                                         
+        ]);
     }
 }

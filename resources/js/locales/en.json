@@ -585,6 +585,8 @@
     }
     },
     "general": {
+        "contract":"Contracts",
+        "contractTable":"Contracts table",
         "contractunit":"Contract unit",
         "ContractUnitTable":"Contract units table",
         "unitstatus":"Unit status",

@@ -81,4 +81,15 @@ class RlstInstallmentController extends Controller
         $model->delete();
         return responseJson(200, 'deleted');
     }
+
+    public function bulkDelete()
+    {
+
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $this->model->whereIn('id', $ids)->delete();
+        return responseJson(200, 'deleted');
+    }
 }

@@ -589,6 +589,8 @@
         }
     },
     "general": {
+        "contract":"العقود",
+        "contractTable":"جدول العقود",
         "contractunit":"وحدة العقد",
         "ContractUnitTable":"جدول وحدات العقود",
         "unitstatus":"حالة الوحدات",
