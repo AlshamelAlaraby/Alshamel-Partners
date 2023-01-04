@@ -5386,6 +5386,18 @@ var menuItems = [{
   icon: "fas fa-hotel",
   isMenuCollapsed: false,
   subItems: [{
+    id: 100001,
+    label: 'general.unitstatus',
+    link: '/dashboard/realEstate/unitstatus'
+  }, {
+    id: 100111,
+    label: 'general.contract',
+    link: '/dashboard/realEstate/contract'
+  }, {
+    id: 100021,
+    label: 'general.contractunit',
+    link: '/dashboard/realEstate/contractunit'
+  }, {
     id: 1000201,
     label: 'general.owner',
     link: '/dashboard/realEstate/owner'

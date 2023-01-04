@@ -568,7 +568,7 @@ export default {
                       v-model="filterSetting"
                       value="name_e"
                       class="mb-1"
-                      >{{ getCompanyKey("branch_name_en")}}</b-form-checkbox
+                      >{{ getCompanyKey("branch_name_en") }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->

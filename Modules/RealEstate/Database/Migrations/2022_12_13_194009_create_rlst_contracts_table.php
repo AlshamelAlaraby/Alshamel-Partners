@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId("reservation_id");
             $table->foreignId('salesman_id');
             $table->foreignId('customer_id');
-            $table->integer('payment_plan_id');
+            $table->integer('payment_plan_id')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

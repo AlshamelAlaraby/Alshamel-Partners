@@ -16,10 +16,19 @@ class RlstContractRequest extends FormRequest
     {
         return [
             "date" => "required|date",
-            "salesman_id" => "required|exists:salesmen,id,deleted_at,null",
-            "reservation_id" => "required|exists:rlst_reservations,id,deleted_at,null",
-            "customer_id" => "required|exists:rlst_customers,id,deleted_at,null",
-            "payment_plan_id" => "required|numeric",
+            "salesman_id" => [
+                "required",
+                // "exists:tree_properties,id,deleted_at,null"
+            ],
+            "reservation_id" => [
+                "required",
+                // "exists:tree_properties,id,deleted_at,null"
+            ],
+            "customer_id" => [
+                "required",
+                // "exists:tree_properties,id,deleted_at,null"
+            ],
+            // "payment_plan_id" => "required|numeric",
         ];
     }
 

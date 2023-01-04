@@ -470,7 +470,7 @@ export default {
               this.Tooltip = "";
               this.mouseEnter = id;
               adminApi
-                  .get(`/workflow-trees/logs/${id}`)
+                  .get(`/workflow-hotfield/logs/${id}`)
                   .then((res) => {
                       let l = res.data.data;
                       l.forEach((e) => {
