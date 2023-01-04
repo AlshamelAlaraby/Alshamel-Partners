@@ -1,4 +1,6 @@
 <script>
+import translation from "../../../helper/translation-mixin";
+
 import Layout from "../../layouts/main";
 import PageHeader from "../../../components/Page-header";
 import adminApi from "../../../api/adminAxios";
@@ -25,6 +27,8 @@ export default {
         title: "Buildings",
         meta: [{ name: "description", content: 'Buildings' }],
     },
+    mixins:[translation],
+
     components: {
         Layout,
         PageHeader,
@@ -810,19 +814,19 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search">
-                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="description" class="mb-1">{{ $t('general.description') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="description_e" class="mb-1">{{ $t('general.description_e') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="land_area" class="mb-1">{{ $t('general.land_area') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="building_area" class="mb-1">{{ $t('general.building_area') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="construction_year" class="mb-1">{{ $t('general.construction_year') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="module_id" class="mb-1">{{ $t('general.module') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="avenue_id" class="mb-1">{{ $t('general.avenue') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="lng" class="mb-1">{{ $t('general.lng') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="lat" class="mb-1">{{ $t('general.lat') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ getCompanyKey('building_name_ar') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ getCompanyKey('building_name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="description" class="mb-1">{{ getCompanyKey('building_description_ar') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="description_e" class="mb-1">{{ getCompanyKey('building_description_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="land_area" class="mb-1">{{ getCompanyKey('building_land_area') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="building_area" class="mb-1">{{ getCompanyKey('building_area') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="construction_year" class="mb-1">{{ getCompanyKey('building_construction_year') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="module_id" class="mb-1">{{ getCompanyKey('module') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ getCompanyKey('country') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="city_id" class="mb-1">{{ getCompanyKey('city') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="avenue_id" class="mb-1">{{ getCompanyKey('avenue') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="lng" class="mb-1">{{ getCompanyKey('building_longitude') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="lat" class="mb-1">{{ getCompanyKey('building_latitude') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -915,19 +919,19 @@ export default {
                                             :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                             ref="dropdown" class="dropdown-custom-ali dropdown-menu-custom-company"
                                         >
-                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{$t('general.Name') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.description" class="mb-1">{{$t('general.description') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.description_e" class="mb-1">{{ $t('general.description_e') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.construction_year" class="mb-1">{{$t('general.construction_year') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.building_area" class="mb-1">{{ $t('general.building_area') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.land_area" class="mb-1">{{$t('general.land_area') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.lat" class="mb-1">{{ $t('general.lat') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.lng" class="mb-1">{{ $t('general.lng') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.module_id" class="mb-1">{{$t('general.module') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">{{$t('general.country') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.avenue_id" class="mb-1">{{ $t('general.avenue') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{getCompanyKey('building_name_ar') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ getCompanyKey('building_name_en') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.description" class="mb-1">{{getCompanyKey('building_description_ar') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.description_e" class="mb-1">{{ getCompanyKey('building_description_en') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.construction_year" class="mb-1">{{getCompanyKey('building_construction_year') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.building_area" class="mb-1">{{ getCompanyKey('building_area') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.land_area" class="mb-1">{{getCompanyKey('building_land_area') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.lat" class="mb-1">{{ getCompanyKey('building_latitude') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.lng" class="mb-1">{{ getCompanyKey('building_longitude') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.module_id" class="mb-1">{{getCompanyKey('module') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">{{getCompanyKey('country') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.city_id" class="mb-1">{{ getCompanyKey('city') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.avenue_id" class="mb-1">{{ getCompanyKey('avenue') }}</b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
                                             </div>
@@ -972,7 +976,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('general.addbuild')"
+                            :title="getCompanyKey('building_create_form')"
                             title-class="font-18"
                             dialog-class="modal-full-width"
                             body-class="p-4 "
@@ -1016,7 +1020,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.module") }}
+                                                {{ getCompanyKey('module') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1043,7 +1047,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.country") }}
+                                                {{ getCompanyKey('country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1071,7 +1075,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.city") }}
+                                                {{ getCompanyKey('city') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1099,7 +1103,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.avenue") }}
+                                                {{ getCompanyKey('avenue') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1127,7 +1131,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.building_area') }}
+                                                {{ getCompanyKey('building_area') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1150,7 +1154,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.land_area') }}
+                                                {{ getCompanyKey('building_land_area') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1173,7 +1177,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.lng') }}
+                                                {{ getCompanyKey('building_longitude') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1196,7 +1200,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">
-                                                {{ $t('general.lat') }}
+                                                {{ getCompanyKey('building_latitude') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1219,7 +1223,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ getCompanyKey('building_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="rtl">
@@ -1246,7 +1250,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('building_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="ltr">
@@ -1302,7 +1306,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="mr-2" for="inlineFormCustomSelectPref">
-                                                {{ $t("general.description") }}
+                                                {{ getCompanyKey('building_description_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <quill-editor
@@ -1322,7 +1326,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="mr-2" for="inlineFormCustomSelectPref">
-                                                {{ $t("general.description_e") }}
+                                                {{ getCompanyKey('building_description_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <quill-editor
@@ -1365,7 +1369,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ getCompanyKey('building_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(sortString('name'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(sortString('-name'))"></i>
@@ -1374,7 +1378,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
+                                            <span>{{ getCompanyKey('building_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(sortString('name_e'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(sortString('-name_e'))"></i>
@@ -1383,7 +1387,7 @@ export default {
                                     </th>
                                     <th v-if="setting.description">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.description') }}</span>
+                                            <span>{{ getCompanyKey('building_description_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(sortString('description'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(sortString('-description'))"></i>
@@ -1392,7 +1396,7 @@ export default {
                                     </th>
                                     <th v-if="setting.description_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.description_e') }}</span>
+                                            <span>{{ getCompanyKey('building_description_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(sortString('description_e'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(sortString('-description_e'))"></i>
@@ -1401,7 +1405,7 @@ export default {
                                     </th>
                                     <th v-if="setting.building_area">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.building_area') }}</span>
+                                            <span>{{ getCompanyKey('building_area') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(SortNumber('building_area'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(SortNumber('-building_area'))"></i>
@@ -1410,7 +1414,7 @@ export default {
                                     </th>
                                     <th v-if="setting.land_area">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.land_area') }}</span>
+                                            <span>{{ getCompanyKey('building_land_area') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(SortNumber('land_area'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(SortNumber('-land_area'))"></i>
@@ -1419,7 +1423,7 @@ export default {
                                     </th>
                                     <th v-if="setting.construction_year">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.construction_year') }}</span>
+                                            <span>{{ getCompanyKey('building_construction_year') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="builds.sort(SortNumber('construction_year'))"></i>
                                                 <i class="fas fa-arrow-down" @click="builds.sort(SortNumber('-construction_year'))"></i>
@@ -1428,32 +1432,32 @@ export default {
                                     </th>
                                     <th v-if="setting.module_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.module') }}</span>
+                                            <span>{{ getCompanyKey('module') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.country') }}</span>
+                                            <span>{{ getCompanyKey('country') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.city_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.city') }}</span>
+                                            <span>{{ getCompanyKey('city') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.avenue_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.avenue') }}</span>
+                                            <span>{{ getCompanyKey('avenue') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.lng">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.lng') }}</span>
+                                            <span>{{ getCompanyKey('building_longitude') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.lat">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.lat') }}</span>
+                                            <span>{{ getCompanyKey('building_latitude') }}</span>
                                         </div>
                                     </th>
                                     <th>
@@ -1538,7 +1542,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('general.editbuild')"
+                                            :title="getCompanyKey('building_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             dialog-class="modal-full-width"
@@ -1574,7 +1578,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.module") }}
+                                                                {{ getCompanyKey('module') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1601,7 +1605,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.country") }}
+                                                                {{ getCompanyKey('country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1629,7 +1633,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.city") }}
+                                                                {{ getCompanyKey('city') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1657,7 +1661,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.avenue") }}
+                                                                {{ getCompanyKey('avenue') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1685,7 +1689,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.building_area') }}
+                                                                {{ getCompanyKey('building_area') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1708,7 +1712,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.land_area') }}
+                                                                {{ getCompanyKey('building_land_area') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1731,7 +1735,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.lng') }}
+                                                                {{ getCompanyKey('building_longitude') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1754,7 +1758,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                {{ $t('general.lat') }}
+                                                                {{ getCompanyKey('building_latitude') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1777,7 +1781,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-1" class="control-label">
-                                                                {{ $t('general.Name') }}
+                                                                {{ getCompanyKey('building_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1803,7 +1807,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
+                                                                {{ getCompanyKey('building_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
@@ -1857,7 +1861,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="mr-2" for="inlineFormCustomSelectPref">
-                                                                {{ $t("general.description") }}
+                                                                {{ getCompanyKey('building_description_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <quill-editor
@@ -1877,7 +1881,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="mr-2" for="inlineFormCustomSelectPref">
-                                                                {{ $t("general.description_e") }}
+                                                                {{ getCompanyKey('building_description_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <quill-editor
