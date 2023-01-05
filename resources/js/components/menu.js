@@ -194,6 +194,24 @@ export const menuItems = [
         isMenuCollapsed: false,
         subItems: [
             {
+                id: 100001,
+                name: 'realEstate unit status',
+                label: 'general.unitstatus',
+                link: '/dashboard/realEstate/unitstatus'
+            },
+            {
+                id: 100111,
+                name: 'contract',
+                label: 'general.contract',
+                link: '/dashboard/realEstate/contract'
+            },
+            {
+                id: 100021,
+                name: 'contract unit',
+                label: 'general.contractunit',
+                link: '/dashboard/realEstate/contractunit'
+            },
+            {
                 id: 1000201,
                 name: 'owners',
                 label: 'general.owner',

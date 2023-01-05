@@ -94,7 +94,7 @@ Route::prefix('real-estate')->group(function () {
         Route::delete('/{id}', 'RlstReservationUnitController@delete')->name('rlst-reservation-units.delete');
     });
 
-    // contracts
+    // contracs
 
     Route::group(['prefix' => 'contracts'], function () {
         Route::get('/', 'RlstContractController@all')->name('rlst-contracts.all');
@@ -102,7 +102,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstContractController@find')->name('rlst-contracts.find');
         Route::post('/', 'RlstContractController@create')->name('rlst-contracts.create');
         Route::put('/{id}', 'RlstContractController@update')->name('rlst-contracts.update');
-        Route::delete("/bulk-delete","RlstContractController@bulkDelete");
+        Route::post("/bulk-delete","RlstContractController@bulkDelete");
         Route::delete('/{id}', 'RlstContractController@delete')->name('rlst-contracts.delete');
     });
 
@@ -113,7 +113,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitContractController@find')->name('rlst-unit-contracts.find');
         Route::post('/', 'RlstUnitContractController@create')->name('rlst-unit-contracts.create');
         Route::put('/{id}', 'RlstUnitContractController@update')->name('rlst-unit-contracts.update');
-        Route::delete("/bulk-delete","RlstUnitContractController@bulkDelete");
+        Route::post("/bulk-delete","RlstUnitContractController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitContractController@delete')->name('rlst-unit-contracts.delete');
     });
 
@@ -135,7 +135,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstUnitStatusController@find')->name('rlst-unit-statuses.find');
         Route::post('/', 'RlstUnitStatusController@create')->name('rlst-unit-statuses.create');
         Route::put('/{id}', 'RlstUnitStatusController@update')->name('rlst-unit-statuses.update');
-        Route::delete("/bulk-delete","RlstUnitStatusController@bulkDelete");
+        Route::post("/bulk-delete","RlstUnitStatusController@bulkDelete");
         Route::delete('/{id}', 'RlstUnitStatusController@delete')->name('rlst-unit-statuses.delete');
 
     });

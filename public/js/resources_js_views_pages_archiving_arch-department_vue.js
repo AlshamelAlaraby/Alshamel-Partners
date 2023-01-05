@@ -1380,6 +1380,17 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     loader: _components_loader__WEBPACK_IMPORTED_MODULE_5__["default"],
     Multiselect: (vue_multiselect__WEBPACK_IMPORTED_MODULE_7___default())
   },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      if (vm.$store.state.auth.work_flow_trees.includes('arch departments')) {
+        return true;
+      } else {
+        return vm.$router.push({
+          name: "home"
+        });
+      }
+    });
+  },
   updated: function updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
@@ -6450,6 +6461,21 @@ var menuItems = [{
   name: 'realEstate',
   isMenuCollapsed: false,
   subItems: [{
+    id: 100001,
+    name: 'realEstate unit status',
+    label: 'general.unitstatus',
+    link: '/dashboard/realEstate/unitstatus'
+  }, {
+    id: 100111,
+    name: 'contract',
+    label: 'general.contract',
+    link: '/dashboard/realEstate/contract'
+  }, {
+    id: 100021,
+    name: 'contract unit',
+    label: 'general.contractunit',
+    link: '/dashboard/realEstate/contractunit'
+  }, {
     id: 1000201,
     name: 'owners',
     label: 'general.owner',
@@ -6531,6 +6557,7 @@ var menuItems = [{
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
+  name: 'Workflow hotfields',
   link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
@@ -7428,7 +7455,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\n  width: 70px;\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\n  width: 70px;\n  height: 45px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

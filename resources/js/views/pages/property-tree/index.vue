@@ -21,7 +21,7 @@ export default {
     title: "Tree properties",
     meta: [{ name: "description", content: "Tree properties" }],
   },
-  mixins:[translation],
+  mixins: [translation],
   components: {
     Layout,
     PageHeader,
@@ -72,7 +72,6 @@ export default {
       current_id: null,
       Tooltip: "",
       mouseEnter: "",
-
       create: {
         name: "",
         name_e: "",
@@ -251,7 +250,7 @@ export default {
     /**
      *  delete module
      */
-     deleteModule(id, index) {
+    deleteModule(id, index) {
       if (Array.isArray(id)) {
         Swal.fire({
           title: `${this.$t("general.Areyousure")}`,
@@ -595,8 +594,8 @@ export default {
         this.create.parent_id = null;
       }
     },
-    setUpdateParentId(parents,node) {
-      if(parents.includes(this.current_id)){
+    setUpdateParentId(parents, node) {
+      if (parents.includes(this.current_id)) {
         Swal.fire({
           icon: "error",
           title: `${this.$t("general.Error")}`,
@@ -1486,7 +1485,7 @@ export default {
                                       "
                                     ></i>
                                     <span
-                                      @click="setUpdateParentId([],node)"
+                                      @click="setUpdateParentId([], node)"
                                       :class="{
                                         'without-children': !node.haveChildren,
                                         active: node.id == edit.parent_id,
@@ -1519,7 +1518,7 @@ export default {
                                         >
                                         </i>
                                         <span
-                                          @click="setUpdateParentId([node.id],childNode)"
+                                          @click="setUpdateParentId([node.id], childNode)"
                                           :class="{
                                             'without-children': !childNode.haveChildren,
                                             active: childNode.id == edit.parent_id,
@@ -1562,7 +1561,12 @@ export default {
                                             >
                                             </i>
                                             <span
-                                              @click="setUpdateParentId([node.id,childNode.id],child)"
+                                              @click="
+                                                setUpdateParentId(
+                                                  [node.id, childNode.id],
+                                                  child
+                                                )
+                                              "
                                               :class="{
                                                 'without-children': !child.haveChildren,
                                                 active: child.id == edit.parent_id,
@@ -1604,7 +1608,12 @@ export default {
                                                 >
                                                 </i>
                                                 <span
-                                                  @click="setUpdateParentId([node.id,childNode.id,child.id],_child)"
+                                                  @click="
+                                                    setUpdateParentId(
+                                                      [node.id, childNode.id, child.id],
+                                                      _child
+                                                    )
+                                                  "
                                                   :class="{
                                                     'without-children': !_child.haveChildren,
                                                     active: _child.id == edit.parent_id,

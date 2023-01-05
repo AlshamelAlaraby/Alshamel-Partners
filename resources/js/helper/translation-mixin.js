@@ -1,4 +1,6 @@
 import adminApi from "../api/adminAxios";
+import Swal from "sweetalert2";
+
 export default {
     data() {
         return {

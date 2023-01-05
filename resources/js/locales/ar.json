@@ -589,6 +589,12 @@
         }
     },
     "general": {
+        "contract":"العقود",
+        "contractTable":"جدول العقود",
+        "contractunit":"وحدة العقد",
+        "ContractUnitTable":"جدول وحدات العقود",
+        "unitstatus":"حالة الوحدات",
+        "unitStatusTable":"جدول حالات الواحدات",
         "text_ar":"النص (عربي)",
         "text_en":"النص (الانجليزي)",
         "CompanyNotHaveTranslation":"لاتحتوي الشركة على ترجمة لهذا الملصق",
