@@ -585,6 +585,10 @@
     }
     },
     "general": {
+        "building_wallet":"Building wallets",
+        "Building":"Building",
+        "Unit":"Unit",
+        "buildingWalletTable":"Building wallet table",
         "contract":"Contracts",
         "contractTable":"Contracts table",
         "contractunit":"Contract unit",

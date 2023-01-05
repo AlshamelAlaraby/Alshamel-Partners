@@ -18,7 +18,7 @@ class RlstBuildingWalletResource extends JsonResource
             "id" => $this->id,
             "wallet" => new RlstWalletResource($this->wallet),
             "building" => new RlstBuildingResource($this->building),
-            "by_ty" => $this->by_ty,
+            "bu_ty" => $this->bu_ty,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];

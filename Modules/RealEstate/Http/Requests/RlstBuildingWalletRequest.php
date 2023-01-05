@@ -24,9 +24,15 @@ class RlstBuildingWalletRequest extends FormRequest
     public function rules()
     {
         return [
-            'wallet_id' => 'required|integer|exists:rlst_wallets,id,deleted_at,null',
-            'building_id' => 'required|integer|exists:rlst_buildings,id,deleted_at,null',
-            'bu_ty' => 'required|in:0,1',
+            'wallet_id' => [
+                'required', 'integer'
+                // ,'exists:rlst_wallets,id,deleted_at,null'
+            ],
+            'building_id' => [
+                'required', 'integer'
+                // ,'exists:rlst_wallets,id,deleted_at,null'
+            ],
+            'bu_ty' => 'required|in:1,2',
         ];
     }
     public function messages()
@@ -43,5 +49,4 @@ class RlstBuildingWalletRequest extends FormRequest
 
         ];
     }
-
 }

@@ -30,7 +30,7 @@ export default {
     ErrorMessage,
     loader,
     Multiselect,
-    Customer
+    Customer,
   },
   data() {
     return {
@@ -1120,7 +1120,6 @@ export default {
                         }}
                       </h5>
                     </td>
-
                     <td>
                       <div class="btn-group">
                         <button

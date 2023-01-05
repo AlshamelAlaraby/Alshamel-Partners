@@ -2039,5 +2039,47 @@ class TranslationSeeder extends Seeder
                 "company_id" => 0,
             ],
         ]);
+        Translation::insert([
+            [
+                "key" => "building_wallet_create_form",
+                "default_en" => "Add new building wallet",
+                "default_ar" => "اضافة محفظة بناء جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "building_wallet_edit_form",
+                "default_en" => "Edit building wallet form",
+                "default_ar" => "نموذج تعديل محفظة البناء",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "building",
+                "default_en" => "Building name",
+                "default_ar" => "اسم البناء",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet",
+                "default_en" => "Wallet name",
+                "default_ar" => "اسم المحفظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "building_wallet_bu_ty",
+                "default_en" => "Buty",
+                "default_ar" => "الزبد",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+        ]);
     }
 }
