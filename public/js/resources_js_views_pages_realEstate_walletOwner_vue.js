@@ -1809,17 +1809,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       content: "Wallet Owner"
     }]
   },
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    next(function (vm) {
-      if (vm.$store.state.auth.work_flow_trees.includes('wallet owner')) {
-        return true;
-      } else {
-        return vm.$router.push({
-          name: "home"
-        });
-      }
-    });
-  },
   mixins: [_helper_translation_mixin__WEBPACK_IMPORTED_MODULE_10__["default"]],
   components: {
     Role: _components_create_role_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
@@ -1879,18 +1868,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.numeric
       }
     },
-    edit: {
-      wallet_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
-      },
-      owner_id: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required
-      },
-      percentage: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.required,
-        numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_11__.numeric
-      }
-    }
+    beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+      next(function (vm) {
+        if (vm.$store.state.auth.work_flow_trees.includes('wallet owner')) {
+          return true;
+        } else {
+          return vm.$router.push({
+            name: "home"
+          });
+        }
+      });
+    },
+    mixins: [_helper_translation_mixin__WEBPACK_IMPORTED_MODULE_10__["default"]]
   },
   watch: {
     /**
