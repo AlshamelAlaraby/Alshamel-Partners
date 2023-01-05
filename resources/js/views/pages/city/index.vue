@@ -23,6 +23,15 @@ export default {
     meta: [{ name: "description", content: "City" }],
   },
   mixins: [translation],
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('city')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
   updated() {
     $(function () {
       $(".englishInput").keypress(function (event) {

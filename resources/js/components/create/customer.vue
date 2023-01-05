@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../components/widgets/errorMessage";
 import loader from "../../components/loader";
 import Multiselect from "vue-multiselect";
+import translation from "../../helper/translation-mixin";
+
 // require styles
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
@@ -28,6 +30,7 @@ export default {
     loader,
     Multiselect,
   },
+  mixins:[translation],
   data() {
     return {
       cities: [],
@@ -297,7 +300,7 @@ export default {
   <!--  create   -->
   <b-modal
     id="customer-create"
-    :title="$t('general.addcustomer')"
+    :title="getCompanyKey('customer_create_form')"
     title-class="font-18"
     dialog-class="modal-full-width"
     body-class="p-4 "
@@ -342,7 +345,7 @@ export default {
         <div class="col-md-4">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.country") }}
+              {{ getCompanyKey('country') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -369,7 +372,7 @@ export default {
         <div class="col-md-4">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.city") }}
+              {{ getCompanyKey('city') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -394,7 +397,7 @@ export default {
         <div class="col-md-4">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ $t("general.bankAccount") }}
+              {{ getCompanyKey('bank_account') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -421,7 +424,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label for="field-1" class="control-label">
-              {{ $t("general.Name") }}
+              {{ getCompanyKey('customer_name_ar')}}
               <span class="text-danger">*</span>
             </label>
             <div dir="rtl">
@@ -456,7 +459,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label for="field-2" class="control-label">
-              {{ $t("general.Name_en") }}
+              {{ getCompanyKey('customer_name_en') }}
               <span class="text-danger">*</span>
             </label>
             <div dir="ltr">
@@ -491,7 +494,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.phone") }}
+              {{ getCompanyKey('customer_phone') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -515,7 +518,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.email") }}
+              {{ getCompanyKey('customer_email') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -539,7 +542,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.contact_person") }}
+              {{ getCompanyKey('customer_contact_person') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -565,7 +568,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.code") }}
+              {{ getCompanyKey('customer_code') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -591,7 +594,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.national") }}
+              {{ getCompanyKey('customer_national_id') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -618,7 +621,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.passport") }}
+              {{ getCompanyKey('customer_passport_number') }}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -645,7 +648,7 @@ export default {
         <div class="col-md-4">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.contact_phones") }}
+              {{ getCompanyKey('customer_contact_phones')}}
               <span class="text-danger">*</span>
             </label>
             <input
@@ -672,7 +675,7 @@ export default {
         <div class="col-md-3">
           <div class="form-group">
             <label class="control-label">
-              {{ $t("general.whatsapp") }}
+              {{ getCompanyKey('customer_whatsapp') }}
               <span class="text-danger">*</span>
             </label>
             <input

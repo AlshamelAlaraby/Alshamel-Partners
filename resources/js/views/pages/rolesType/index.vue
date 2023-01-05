@@ -22,6 +22,15 @@ export default {
     title: "Roles Type",
     meta: [{ name: "Roles Type", content: "Roles Type" }],
   },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('role Type')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
   mixins: [translation],
   components: {
     Layout,

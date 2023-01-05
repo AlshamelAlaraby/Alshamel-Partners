@@ -28,6 +28,15 @@ export default {
     ErrorMessage,
     loader,
   },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('country')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
   data() {
     return {
       per_page: 50,
