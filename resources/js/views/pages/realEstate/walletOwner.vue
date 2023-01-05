@@ -83,11 +83,16 @@ export default {
       owner_id: { required },
       percentage: { required, numeric },
     },
-    edit: {
-      wallet_id: { required },
-      owner_id: { required },
-      percentage: { required, numeric },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('wallet owner')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
     },
+    mixins: [translation],
   },
   watch: {
     /**

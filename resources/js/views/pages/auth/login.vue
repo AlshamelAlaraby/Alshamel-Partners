@@ -3,6 +3,7 @@ import Auth from "../../layouts/auth";
 
 import { required, email } from "vuelidate/lib/validators";
 import adminApi from "../../../api/adminAxios";
+import Swal from "sweetalert2";
 
 /**
  * Login component
@@ -54,7 +55,7 @@ export default {
             email,
             password,
           })
-          .then((res) => {
+          .then( async (res) => {
             let l = res.data.data;
             this.$store.commit("auth/editToken", l.token);
             this.$store.commit("auth/editPartner", l.partner);
@@ -65,6 +66,7 @@ export default {
               this.$router.push({ name: "company" });
             } else if (l.partner.companies.length == 1) {
               this.$store.commit("auth/editCompanyId", l.partner.companies[0].id);
+              await this.companyId(l.partner.companies[0].id);
               this.$router.push({ name: "home" });
             } else {
               this.submitted = false;
@@ -78,6 +80,35 @@ export default {
           });
       }
     },
+    async companyId(id){
+              await axios
+                  .get(
+                      `${process.env.MIX_APP_URL_OUTSIDE}api/everything_about_the_company/${id}`
+                  )
+                  .then((res) => {
+                      let l = res.data.data;
+                      let name = [];
+                      l.work_flow_trees.forEach((parent) => {
+                          name.push(parent.name_e);
+                          if(parent.child){
+                              parent.child.forEach((child1) => {
+                                  name.push(child1.name_e);
+                                  child1.child.forEach((child2) => {
+                                      name.push(child2.name_e);
+                                  });
+                              });
+                          }
+                      });
+                      this.$store.commit('auth/editWorkFlowTrees',['dictionary','company',...name]);
+                  })
+                  .catch((err) => {
+                      Swal.fire({
+                          icon: "error",
+                          title: `${this.$t("general.Error")}`,
+                          text: `${this.$t("general.Thereisanerrorinthesystem")}`,
+                      });
+                  });
+      }
   },
 };
 </script>

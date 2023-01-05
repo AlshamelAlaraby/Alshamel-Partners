@@ -813,6 +813,7 @@
         "walletsTable": "جدول المحافظ",
         "wallet": "المحافظ",
         "walletOwner": "صاحب المحفظة",
-        "walletOwnerTable": "جدول مالكي المحافظ"
+        "walletOwnerTable": "جدول مالكي المحافظ",
+        "realEstateUnitTable": "جدول وحدات العقارات"
     }
 }

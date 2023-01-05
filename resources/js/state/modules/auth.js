@@ -8,7 +8,8 @@ export const state = {
     // permission: JSON.parse(localStorage.getItem("permission")) || [],
     partner: JSON.parse(localStorage.getItem("partner")) || {},
     companies: JSON.parse(localStorage.getItem("companies")) || [],
-    company_id: localStorage.getItem("company_id") || null
+    company_id: localStorage.getItem("company_id") || null,
+    work_flow_trees: JSON.parse(localStorage.getItem("work_flow_trees")) || []
 }
 
 // getters
@@ -19,7 +20,8 @@ export const getters = {
     partner: state => state.partner,
     companies: state => state.companies,
     errors: state => state.errors,
-    company_id: state => state.company_id
+    company_id: state => state.company_id,
+    work_flow_trees: state => state.work_flow_trees
 }
 
 // mutations
@@ -52,6 +54,10 @@ export const mutations = {
     editCompanyId(state,company_id){
         state.company_id = company_id;
         localStorage.setItem('company_id',JSON.stringify(company_id));
+    },
+    editWorkFlowTrees(state,work_flow_trees){
+        state.work_flow_trees = work_flow_trees;
+        localStorage.setItem('work_flow_trees',JSON.stringify(work_flow_trees));
     },
     logoutToken(state){
         // state.roles = null;

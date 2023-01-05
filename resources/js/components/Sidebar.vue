@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       menuItems: menuItems,
+      workFlowTree: []
     };
   },
   props: {
@@ -138,7 +139,8 @@ export default {
       },
     },
   },
-  mounted: function () {
+  mounted () {
+    this.workFlowTree = this.$store.state.auth.work_flow_trees;
     this._activateMenuDropdown();
     this.$router.afterEach((routeTo, routeFrom) => {
       this._activateMenuDropdown();
@@ -298,7 +300,7 @@ export default {
             <li class="menu-title" v-if="item.isTitle" :key="item.id">
               {{ $t(item.label) }}
             </li>
-            <li v-if="!item.isTitle && !item.isLayout" :key="item.id">
+            <li v-if="!item.isTitle && !item.isLayout && workFlowTree.includes(item.name)" :key="item.id">
               <a
                 v-if="hasItems(item)"
                 href="javascript:void(0);"
@@ -341,32 +343,34 @@ export default {
                   class="sub-menu nav-second-level"
                   aria-expanded="false"
                 >
-                  <li v-for="(subitem, index) of item.subItems" :key="index">
-                    <router-link
-                      :to="subitem.link"
-                      v-if="!hasItems(subitem)"
-                      class="side-nav-link-ref"
-                      >{{ $t(subitem.label) }}</router-link
-                    >
-                    <a
-                      v-if="hasItems(subitem)"
-                      class="side-nav-link-a-ref has-arrow"
-                      @click="subitem.isMenuCollapsed = !subitem.isMenuCollapsed"
-                      href="javascript:void(0);"
-                      >{{ $t(subitem.label) }}
-                      <span class="menu-arrow"></span>
-                    </a>
+                  <template v-for="(subitem, index) of item.subItems">
+                      <li :key="index" v-if="workFlowTree.includes(item.name)">
+                          <router-link
+                              :to="subitem.link"
+                              v-if="!hasItems(subitem)"
+                              class="side-nav-link-ref"
+                          >{{ $t(subitem.label) }}</router-link
+                          >
+                          <a
+                              v-if="hasItems(subitem)"
+                              class="side-nav-link-a-ref has-arrow"
+                              @click="subitem.isMenuCollapsed = !subitem.isMenuCollapsed"
+                              href="javascript:void(0);"
+                          >{{ $t(subitem.label) }}
+                              <span class="menu-arrow"></span>
+                          </a>
 
-                    <div class="collapse" :class="{ show: subitem.isMenuCollapsed }">
-                      <ul v-if="hasItems(subitem)" class="sub-menu" aria-expanded="false">
-                        <li v-for="(subSubitem, index) of subitem.subItems" :key="index">
-                          <router-link :to="subSubitem.link" class="side-nav-link-ref">{{
-                            $t(subSubitem.label)
-                          }}</router-link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                          <div class="collapse" :class="{ show: subitem.isMenuCollapsed }">
+                              <ul v-if="hasItems(subitem)" class="sub-menu" aria-expanded="false">
+                                  <li v-for="(subSubitem, index) of subitem.subItems" :key="index">
+                                      <router-link :to="subSubitem.link" class="side-nav-link-ref">{{
+                                          $t(subSubitem.label)
+                                          }}</router-link>
+                                  </li>
+                              </ul>
+                          </div>
+                      </li>
+                  </template>
                 </ul>
               </div>
             </li>

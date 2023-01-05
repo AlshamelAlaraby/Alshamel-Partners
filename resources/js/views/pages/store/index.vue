@@ -34,6 +34,15 @@ export default {
     Multiselect,
     Branch,
   },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('store')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
   data() {
     return {
       per_page: 50,
@@ -831,7 +840,7 @@ export default {
                       <b-spinner small></b-spinner>
                       <span class="sr-only">{{ $t("login.Loading") }}...</span>
                     </b-button>
-                    
+
                   </template>
                   <b-button
                     @click.prevent="$bvModal.hide(`create`)"
