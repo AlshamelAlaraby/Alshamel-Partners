@@ -17,6 +17,8 @@ import Multiselect from "vue-multiselect";
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import translation from "../../../helper/translation-mixin";
+
 /**
  * Advanced Table component
  */
@@ -25,6 +27,16 @@ export default {
     page: {
         title: "Customers",
         meta: [{ name: "description", content: 'Customers' }],
+    },
+    mixins: [translation],
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('customer')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
     },
     components: {
         Layout,
@@ -765,20 +777,20 @@ export default {
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->
                                     <b-dropdown variant="primary" :text="$t('general.searchSetting')" ref="dropdown" class="btn-block setting-search dropdown-menu-custom-company">
-                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ $t('general.Name') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="phone" class="mb-1">{{ $t('general.phone') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="email" class="mb-1">{{ $t('general.email') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="rp_code" class="mb-1">{{ $t('general.code') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="nationality_id" class="mb-1">{{ $t('general.nationality') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="contact_person" class="mb-1">{{ $t('general.contact_person') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="contact_phones" class="mb-1">{{ $t('general.contact_phones') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ $t('general.country') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="national_id" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="bank_account_id" class="mb-1">{{ $t('general.bankAccount') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="whatsapp" class="mb-1">{{ $t('general.whatsapp') }}</b-form-checkbox>
-                                        <b-form-checkbox v-model="filterSetting" value="passport_no" class="mb-1">{{ $t('general.passport') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name" class="mb-1">{{ getCompanyKey('customer_name_ar') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="name_e" class="mb-1">{{ getCompanyKey('customer_name_en') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="phone" class="mb-1">{{ getCompanyKey('customer_phone') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="email" class="mb-1">{{ getCompanyKey('customer_email') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="rp_code" class="mb-1">{{ getCompanyKey('customer_code') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="nationality_id" class="mb-1">{{ getCompanyKey('customer_nationality') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="contact_person" class="mb-1">{{ getCompanyKey('customer_contact_person') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="contact_phones" class="mb-1">{{ getCompanyKey('customer_contact_phones') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="country_id" class="mb-1">{{ getCompanyKey('country') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="city_id" class="mb-1">{{ getCompanyKey('city') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="national_id" class="mb-1">{{ getCompanyKey('customer_national_id') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="bank_account_id" class="mb-1">{{ getCompanyKey('bank_account') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="whatsapp" class="mb-1">{{ getCompanyKey('customer_whatsapp') }}</b-form-checkbox>
+                                        <b-form-checkbox v-model="filterSetting" value="passport_no" class="mb-1">{{ getCompanyKey('customer_passport_number') }}</b-form-checkbox>
                                     </b-dropdown>
                                     <!-- Basic dropdown -->
                                 </div>
@@ -871,19 +883,19 @@ export default {
                                             :html="`${$t('general.setting')} <i class='fe-settings'></i>`"
                                             ref="dropdown" class="dropdown-custom-ali dropdown-menu-custom-company"
                                         >
-                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{$t('general.Name') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ $t('general.Name_en') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.phone" class="mb-1">{{$t('general.phone') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.email" class="mb-1">{{ $t('general.email') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.rp_code" class="mb-1">{{$t('general.code') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.contact_person" class="mb-1">{{ $t('general.contact_person') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.contact_phones" class="mb-1">{{$t('general.contact_phones') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.nationality_id" class="mb-1">{{ $t('general.nationality') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.national_id" class="mb-1">{{ $t('general.national') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.bank_account_id" class="mb-1">{{$t('general.bankAccount') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">{{$t('general.country') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.city_id" class="mb-1">{{ $t('general.city') }}</b-form-checkbox>
-                                            <b-form-checkbox v-model="setting.whatsapp" class="mb-1">{{ $t('general.whatsapp') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name" class="mb-1">{{getCompanyKey('customer_name_ar') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.name_e" class="mb-1">{{ getCompanyKey('customer_name_en') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.phone" class="mb-1">{{getCompanyKey('customer_phone') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.email" class="mb-1">{{ getCompanyKey('customer_email') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.rp_code" class="mb-1">{{getCompanyKey('customer_code') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.contact_person" class="mb-1">{{ getCompanyKey('customer_contact_person') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.contact_phones" class="mb-1">{{getCompanyKey('customer_contact_phones') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.nationality_id" class="mb-1">{{ getCompanyKey('customer_nationality') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.national_id" class="mb-1">{{ getCompanyKey('customer_national_id') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.bank_account_id" class="mb-1">{{getCompanyKey('bank_account') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.country_id" class="mb-1">{{getCompanyKey('country') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.city_id" class="mb-1">{{ getCompanyKey('city') }}</b-form-checkbox>
+                                            <b-form-checkbox v-model="setting.whatsapp" class="mb-1">{{ getCompanyKey('customer_whatsapp') }}</b-form-checkbox>
                                             <div class="d-flex justify-content-end">
                                                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Apply</a>
                                             </div>
@@ -928,7 +940,7 @@ export default {
                         <!--  create   -->
                         <b-modal
                             id="create"
-                            :title="$t('general.addcustomer')"
+                            :title="getCompanyKey('customer_create_form')"
                             title-class="font-18"
                             dialog-class="modal-full-width"
                             body-class="p-4 "
@@ -972,7 +984,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.country") }}
+                                                {{ getCompanyKey('country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1000,7 +1012,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.city") }}
+                                                {{ getCompanyKey('city') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1028,7 +1040,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ $t("general.bankAccount") }}
+                                                {{ getCompanyKey('bank_account') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1056,7 +1068,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-1" class="control-label">
-                                                {{ $t('general.Name') }}
+                                                {{ getCompanyKey('customer_name_ar') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="rtl">
@@ -1083,7 +1095,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="field-2" class="control-label">
-                                                {{ $t('general.Name_en') }}
+                                                {{ getCompanyKey('customer_name_en') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div dir="ltr">
@@ -1110,7 +1122,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">
-                                                {{ $t('general.phone') }}
+                                                {{ getCompanyKey('customer_phone') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1132,7 +1144,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">
-                                                {{ $t('general.email') }}
+                                                {{ getCompanyKey('customer_email') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1154,7 +1166,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">
-                                                {{ $t('general.contact_person') }}
+                                                {{ getCompanyKey('customer_contact_person') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1176,7 +1188,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.code') }}
+                                                {{ getCompanyKey('customer_code') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1198,7 +1210,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.national') }}
+                                                {{ getCompanyKey('customer_national_id') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1221,7 +1233,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.passport') }}
+                                                {{ getCompanyKey('customer_passport_number') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1244,7 +1256,7 @@ export default {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label  class="control-label">
-                                                {{ $t('general.contact_phones') }}
+                                                {{ getCompanyKey('customer_contact_phones') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1267,7 +1279,7 @@ export default {
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="control-label">
-                                                {{ $t('general.whatsapp') }}
+                                                {{ getCompanyKey('customer_whatsapp') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input
@@ -1312,7 +1324,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name') }}</span>
+                                            <span>{{ getCompanyKey('customer_name_ar') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortString('name'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortString('-name'))"></i>
@@ -1321,7 +1333,7 @@ export default {
                                     </th>
                                     <th v-if="setting.name_e">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.Name_en') }}</span>
+                                            <span>{{ getCompanyKey('customer_name_en') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortString('name_e'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortString('-name_e'))"></i>
@@ -1330,7 +1342,7 @@ export default {
                                     </th>
                                     <th v-if="setting.phone">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.phone') }}</span>
+                                            <span>{{ getCompanyKey('customer_phone') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortNumber('phone'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortNumber('-phone'))"></i>
@@ -1339,7 +1351,7 @@ export default {
                                     </th>
                                     <th v-if="setting.email">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.email') }}</span>
+                                            <span>{{ getCompanyKey('customer_email') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortString('email'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortString('-email'))"></i>
@@ -1348,7 +1360,7 @@ export default {
                                     </th>
                                     <th v-if="setting.nationality_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.nationality') }}</span>
+                                            <span>{{ getCompanyKey('customer_nationality') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(SortNumber('nationality'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(SortNumber('-nationality'))"></i>
@@ -1357,7 +1369,7 @@ export default {
                                     </th>
                                     <th v-if="setting.national_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.national') }}</span>
+                                            <span>{{ getCompanyKey('customer_national_id') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortNumber('national_id'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortNumber('-national_id'))"></i>
@@ -1366,7 +1378,7 @@ export default {
                                     </th>
                                     <th v-if="setting.contact_person">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.contact_person') }}</span>
+                                            <span>{{ getCompanyKey('customer_contact_person') }}</span>
                                             <div class="arrow-sort">
                                                 <i class="fas fa-arrow-up" @click="customers.sort(sortString('contact_person'))"></i>
                                                 <i class="fas fa-arrow-down" @click="customers.sort(sortString('-contact_person'))"></i>
@@ -1375,32 +1387,32 @@ export default {
                                     </th>
                                     <th v-if="setting.contact_phones">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.contact_phones') }}</span>
+                                            <span>{{ getCompanyKey('customer_contact_phones') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.country') }}</span>
+                                            <span>{{ getCompanyKey('country') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.city_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.city') }}</span>
+                                            <span>{{ getCompanyKey('city') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.bank_account_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.bankAccount') }}</span>
+                                            <span>{{ getCompanyKey('bank_account') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.whatsapp">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.whatsapp') }}</span>
+                                            <span>{{ getCompanyKey('customer_whatsapp') }}</span>
                                         </div>
                                     </th>
                                     <th v-if="setting.rp_code">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ $t('general.code') }}</span>
+                                            <span>{{ getCompanyKey('customer_code') }}</span>
                                         </div>
                                     </th>
                                     <th>
@@ -1485,7 +1497,7 @@ export default {
                                         <!--  edit   -->
                                         <b-modal
                                             :id="`modal-edit-${data.id}`"
-                                            :title="$t('general.editcustomer')"
+                                            :title="getCompanyKey('customer_edit_form')"
                                             title-class="font-18"
                                             body-class="p-4"
                                             dialog-class="modal-full-width"
@@ -1521,7 +1533,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.country") }}
+                                                                {{ getCompanyKey('country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1549,7 +1561,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.city") }}
+                                                                {{ getCompanyKey('city') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1577,7 +1589,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ $t("general.bankAccount") }}
+                                                                {{ getCompanyKey('bank_account') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
@@ -1605,7 +1617,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="field-1" class="control-label">
-                                                                {{ $t('general.Name') }}
+                                                                {{ getCompanyKey('customer_name_ar') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="rtl">
@@ -1631,7 +1643,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="field-2" class="control-label">
-                                                                {{ $t('general.Name_en') }}
+                                                                {{ getCompanyKey('customer_name_en') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <div dir="ltr">
@@ -1657,7 +1669,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                {{ $t('general.phone') }}
+                                                                {{ getCompanyKey('customer_phone') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1679,7 +1691,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                {{ $t('general.email') }}
+                                                                {{ getCompanyKey('customer_email') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1701,7 +1713,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                {{ $t('general.contact_person') }}
+                                                                {{ getCompanyKey('customer_contact_person') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1723,7 +1735,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.code') }}
+                                                                {{ getCompanyKey('customer_code') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1745,7 +1757,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.national') }}
+                                                                {{ getCompanyKey('customer_national_id') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1768,7 +1780,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.passport') }}
+                                                                {{ getCompanyKey('customer_passport_number') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1791,7 +1803,7 @@ export default {
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label  class="control-label">
-                                                                {{ $t('general.contact_phones') }}
+                                                                {{ getCompanyKey('customer_contact_phones') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input
@@ -1814,7 +1826,7 @@ export default {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                {{ $t('general.whatsapp') }}
+                                                                {{ getCompanyKey('customer_whatsapp') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <input

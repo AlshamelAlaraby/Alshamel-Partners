@@ -85,4 +85,25 @@ class RlstCustomerController extends Controller
         $model->delete();
         return responseJson(200, 'deleted');
     }
+
+
+    public function bulkDelete()
+    {
+        $ids = request()->ids;
+        if (!$ids) {
+            return responseJson(400, 'ids is required');
+        }
+        $models = $this->model->whereIn('id', $ids)->get();
+        if ($models->count() == 0) {
+            return responseJson(404, 'not found');
+        }
+        foreach ($models as $model) {
+            if ($model->reservations()->count() > 0) {
+                return responseJson(400, 'can not delete this customer because it has reservations');
+            }
+        }
+        $this->model->whereIn('id', $ids)->delete();
+        return responseJson(200, 'deleted');
+    }
+
 }

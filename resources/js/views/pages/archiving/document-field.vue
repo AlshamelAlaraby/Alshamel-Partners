@@ -22,7 +22,17 @@ export default {
     ErrorMessage,
     loader,
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('document field')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -1132,7 +1142,7 @@ export default {
                                       !$v.edit.type.$invalid && !errors.type,
                                   }"
                                 >
-                                  <option value=""> 
+                                  <option value="">
                                     {{ $t("general.Type") }}...
                                   </option>
                                   <option value="numeric">

@@ -589,6 +589,16 @@
         }
     },
     "general": {
+        "building_wallet":"محافظ البناء",
+        "Building":"البناء",
+        "Unit":"الوحدة",
+        "buildingWalletTable":"جدول محافظ البناء",
+        "contract":"العقود",
+        "contractTable":"جدول العقود",
+        "contractunit":"وحدة العقد",
+        "ContractUnitTable":"جدول وحدات العقود",
+        "unitstatus":"حالة الوحدات",
+        "unitStatusTable":"جدول حالات الواحدات",
         "text_ar":"النص (عربي)",
         "text_en":"النص (الانجليزي)",
         "CompanyNotHaveTranslation":"لاتحتوي الشركة على ترجمة لهذا الملصق",
@@ -799,6 +809,11 @@
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
         "fieldValue": "Field Value",
-        "archive": "ارشيف"
+        "archive": "ارشيف",
+        "walletsTable": "جدول المحافظ",
+        "wallet": "المحافظ",
+        "walletOwner": "صاحب المحفظة",
+        "walletOwnerTable": "جدول مالكي المحافظ",
+        "realEstateUnitTable": "جدول وحدات العقارات"
     }
 }

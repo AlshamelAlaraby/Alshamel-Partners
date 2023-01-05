@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Employee;
+use App\Traits\ConnTrait;
 use App\Traits\LogTrait;
 use App\Traits\MediaTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -19,7 +20,9 @@ use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, MediaTrait, LogsActivity, CausesActivity,LogTrait;
+    use HasApiTokens, HasFactory, Notifiable, MediaTrait, LogsActivity, CausesActivity,LogTrait,ConnTrait;
+
+
 
     protected $fillable = [
         'name',

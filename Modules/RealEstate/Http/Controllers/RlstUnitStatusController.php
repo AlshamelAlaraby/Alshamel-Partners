@@ -89,7 +89,6 @@ class RlstUnitStatusController extends Controller
         return responseJson(200, 'deleted');
     }
 
-
     public function bulkDelete()
     {
         $ids = request()->ids;
@@ -97,6 +96,9 @@ class RlstUnitStatusController extends Controller
             return responseJson(400, 'ids is required');
         }
         $models = $this->model->whereIn('id', $ids)->get();
+        if (count($ids) != $models->count()) {
+            return responseJson(400, 'some ids are not found');
+        }
         foreach ($models as $model) {
             if ($model->units()->count() > 0) {
                 return responseJson(400, 'this status is used in units');

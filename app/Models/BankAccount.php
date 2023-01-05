@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ConnTrait;
 use App\Traits\LogTrait;
 use App\Traits\MediaTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Spatie\MediaLibrary\HasMedia;
 
 class BankAccount extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, LogTrait, MediaTrait;
+    use HasFactory, SoftDeletes, LogTrait, MediaTrait,ConnTrait;
 
     protected $fillable = [
         'bank_id',

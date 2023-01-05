@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCountriesTable extends Migration
 {
+    use \App\Traits\ConnTrait;
     /**
      * Run the migrations.
      *

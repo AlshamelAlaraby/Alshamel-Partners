@@ -363,7 +363,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems
+      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems,
+      workFlowTree: []
     };
   },
   props: {
@@ -495,6 +496,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
+    this.workFlowTree = this.$store.state.auth.work_flow_trees;
     this._activateMenuDropdown();
     this.$router.afterEach(function (routeTo, routeFrom) {
       _this._activateMenuDropdown();
@@ -2458,7 +2460,7 @@ var render = function render() {
     return [item.isTitle ? _c("li", {
       key: item.id,
       staticClass: "menu-title"
-    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout ? _c("li", {
+    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout && _vm.workFlowTree.includes(item.name) ? _c("li", {
       key: item.id
     }, [_vm.hasItems(item) ? _c("a", {
       "class": {
@@ -2501,8 +2503,8 @@ var render = function render() {
       attrs: {
         "aria-expanded": "false"
       }
-    }, _vm._l(item.subItems, function (subitem, index) {
-      return _c("li", {
+    }, [_vm._l(item.subItems, function (subitem, index) {
+      return [_vm.workFlowTree.includes(item.name) ? _c("li", {
         key: index
       }, [!_vm.hasItems(subitem) ? _c("router-link", {
         staticClass: "side-nav-link-ref",
@@ -2519,7 +2521,7 @@ var render = function render() {
             subitem.isMenuCollapsed = !subitem.isMenuCollapsed;
           }
         }
-      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                    "), _c("span", {
+      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                            "), _c("span", {
         staticClass: "menu-arrow"
       })]) : _vm._e(), _vm._v(" "), _c("div", {
         staticClass: "collapse",
@@ -2540,8 +2542,8 @@ var render = function render() {
             to: subSubitem.link
           }
         }, [_vm._v(_vm._s(_vm.$t(subSubitem.label)))])], 1);
-      }), 0) : _vm._e()])], 1);
-    }), 0) : _vm._e()])], 1) : _vm._e()];
+      }), 0) : _vm._e()])], 1) : _vm._e()];
+    })], 2) : _vm._e()])], 1) : _vm._e()];
   })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "clearfix"
   })])], 1);
@@ -5137,121 +5139,148 @@ var menuItems = [{
   id: 100032,
   label: 'menuitems.company.text',
   icon: 'fas fa-city',
+  name: 'company',
   link: '/dashboard/company'
 }, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
+  name: 'branch',
   link: '/dashboard/branch'
 }, {
   id: 10008,
   label: 'menuitems.store.text',
+  name: 'store',
   icon: 'fas fa-store',
   link: '/dashboard/store'
 }, {
   id: 10009,
   label: 'menuitems.serial.text',
+  name: 'serial',
   icon: 'fas fa-eraser',
   link: '/dashboard/serial'
 }, {
   id: 113872,
   label: "general.Properties",
   icon: "fas fa-hand-spock",
+  name: 'properties',
   isMenuCollapsed: false,
   subItems: [{
     id: 225,
     label: 'general.ScreenProperties',
+    name: 'screen properties',
     link: '/dashboard/screen-properties'
   }, {
     id: 226,
     label: 'general.TreeProperty',
+    name: 'tree property',
     link: '/dashboard/tree-properties'
   }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
   icon: "fas fa-user-tag",
+  name: 'sales men',
   isMenuCollapsed: false,
   subItems: [{
     id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
+    name: 'sales men Type',
     link: '/dashboard/salesmenTypes'
   }, {
     id: 100117,
     label: 'menuitems.dashboard.list.salesMen',
+    name: 'sales men',
     link: '/dashboard/salesmen'
   }, {
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
+    name: 'external salesmen',
     link: '/dashboard/externalSalesmen'
   }, {
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
+    name: 'internal salesmen',
     link: '/dashboard/internalSalesman'
   }]
 }, {
   id: 1000548,
   label: "menuitems.Banks.text",
   icon: "fas fa-piggy-bank",
+  name: 'bank',
   isMenuCollapsed: false,
   subItems: [{
     id: 112201,
     label: 'general.paymentTypes',
+    name: 'payment types',
     link: '/dashboard/paymentTypes'
   }, {
     id: 222,
     label: 'menuitems.Banks.text',
+    name: 'banks',
     link: '/dashboard/banks'
   }, {
     id: 112202,
     label: 'general.bankAccounts',
+    name: 'bank accounts',
     link: '/dashboard/bankAccount'
   }]
 }, {
   id: 1000544,
   label: "menuitems.area.text",
   icon: "fas fa-flag",
+  name: "area",
   isMenuCollapsed: false,
   subItems: [{
     id: 2,
     label: 'menuitems.dashboard.list.country',
+    name: "country",
     link: '/dashboard/country'
   }, {
     id: 3,
     label: 'menuitems.dashboard.list.governorate',
+    name: "governorate",
     link: '/dashboard/governorate'
   }, {
     id: 4,
     label: 'menuitems.dashboard.list.city',
+    name: "city",
     link: '/dashboard/city'
   }, {
     id: 8,
     label: 'menuitems.dashboard.list.avenue',
+    name: "avenue",
     link: '/dashboard/avenue'
   }]
 }, {
   id: 10001,
   label: "menuitems.role.text",
   icon: "ri-shield-user-line",
+  name: 'role',
   isMenuCollapsed: false,
   subItems: [{
     id: 10002,
+    name: 'role Type',
     label: 'menuitems.dashboard.list.rolesType',
     link: '/dashboard/rolesType'
   }, {
     id: 10003,
+    name: 'roles',
     label: 'menuitems.dashboard.list.roles',
     link: '/dashboard/roles'
   }, {
     id: 100043,
+    name: 'role workflow',
     label: 'menuitems.dashboard.list.roleWorkflow',
     link: '/dashboard/role-workflow'
   }, {
     id: 100088,
+    name: 'role workflow button',
     label: 'menuitems.dashboard.list.roleWorkflowButton',
     link: '/dashboard/role-workflow-button'
   }, {
     id: 100134,
+    name: 'role hotfield screen',
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
     link: '/dashboard/role-hotfield-screen'
   }]
@@ -5259,55 +5288,102 @@ var menuItems = [{
   id: 10023578,
   label: "general.realEstate",
   icon: "fas fa-hotel",
+  name: 'realEstate',
   isMenuCollapsed: false,
   subItems: [{
+    id: 100001,
+    name: 'realEstate unit status',
+    label: 'general.unitstatus',
+    link: '/dashboard/realEstate/unitstatus'
+  }, {
+    id: 100111,
+    name: 'contract',
+    label: 'general.contract',
+    link: '/dashboard/realEstate/contract'
+  }, {
+    id: 100021,
+    name: 'contract unit',
+    label: 'general.contractunit',
+    link: '/dashboard/realEstate/contractunit'
+  }, {
     id: 1000201,
+    name: 'owners',
     label: 'general.owner',
     link: '/dashboard/realEstate/owner'
   }, {
     id: 10048103,
+    name: 'building',
     label: 'general.building',
     link: '/dashboard/realEstate/building'
   }, {
     id: 1022343,
+    name: 'customer',
     label: 'general.customer',
     link: '/dashboard/realEstate/customer'
+  }, {
+    id: 1022323,
+    name: 'wallets',
+    label: 'general.wallet',
+    link: '/dashboard/realEstate/wallet'
+  }, {
+    id: 1042323,
+    name: 'wallet owner',
+    label: 'general.walletOwner',
+    link: '/dashboard/realEstate/wallet-owner'
+  }, {
+    id: 1042323,
+    name: 'realEstate units',
+    label: 'units.units',
+    link: '/dashboard/realEstate/unit'
+  }, {
+    id: 102371,
+    label: 'general.building_wallet',
+    link: '/dashboard/realEstate/building-wallet'
   }]
 }, {
   id: 1004346756,
   label: "general.archive",
+  name: 'archiving',
   icon: "ri-share-line",
   isMenuCollapsed: false,
   subItems: [{
     id: 38781,
+    name: 'document field',
     label: 'menuitems.DocumentField.text',
     link: '/dashboard/document-fields'
   }, {
     id: 34343,
+    name: 'archive closed references',
     label: 'menuitems.ArchiveClosedReference.text',
     link: '/dashboard/archive-closed-references'
   }, {
     id: 432234,
+    name: 'gen arch doc types',
     label: 'menuitems.GenArchDocType.text',
     link: '/dashboard/gen-arch-doc-types'
   }, {
     id: 34561,
+    name: 'arch doc type fields',
     label: 'menuitems.ArchDocTypeField.text',
     link: '/dashboard/arch-doc-type-fields'
   }, {
     id: 879756,
+    name: 'arch departments',
     label: 'menuitems.ArchDepartment.text',
     link: '/dashboard/arch-departments'
   }, {
     id: 1567443,
+    name: 'arch documents',
     label: 'menuitems.ArchDocument.text',
     link: '/dashboard/arch-documents'
   }, {
     id: 36462,
+    name: 'arch document dtls',
     label: 'menuitems.ArchDocumentDtl.text',
     link: '/dashboard/arch-document-dtls'
   }, {
     id: 32020,
+    name: 'arch doc status',
     label: 'menuitems.ArchDocumentStatus.text',
     link: '/dashboard/arch-doc-status'
   }]
@@ -5315,39 +5391,47 @@ var menuItems = [{
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
+  name: 'Workflow hotfields',
   link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
+  name: 'users',
   label: 'general.Users',
   icon: 'fas fa-network-wired',
   link: '/dashboard/users'
 }, {
   id: 5,
+  name: 'currencies',
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
   link: '/dashboard/currency'
 }, {
   id: 6,
+  name: 'employees',
   label: 'menuitems.employee.text',
   icon: 'fas fa-user-friends',
   link: '/dashboard/employee'
 }, {
   id: 7,
+  name: 'financial Year',
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/dashboard/financialYear'
 }, {
   id: 10004,
+  name: 'units',
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
   link: '/dashboard/units'
 }, {
   id: 10005,
+  name: 'color',
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/dashboard/colors'
 }, {
   id: 10099,
+  name: 'dictionary',
   label: 'general.dictionary',
   icon: 'fas fa-palette',
   link: '/dashboard/dictionary'

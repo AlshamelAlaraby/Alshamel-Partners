@@ -585,6 +585,16 @@
     }
     },
     "general": {
+        "building_wallet":"Building wallets",
+        "Building":"Building",
+        "Unit":"Unit",
+        "buildingWalletTable":"Building wallet table",
+        "contract":"Contracts",
+        "contractTable":"Contracts table",
+        "contractunit":"Contract unit",
+        "ContractUnitTable":"Contract units table",
+        "unitstatus":"Unit status",
+        "unitStatusTable":"Unit status table",
         "text_ar":"Text (arabic)",
         "text_en":"Text (english)",
         "CompanyNotHaveTranslation":"Company doesn't have translation for this key",
@@ -814,6 +824,11 @@
         "fieldCharacter": "Field Character",
         "numericValidation": "This field should contains positive value.",
         "fieldValue": "Field Value",
-        "archive": "Archive"
+        "archive": "Archive",
+        "walletsTable": "Wallets Tables",
+        "wallet": "Wallets",
+        "walletOwner": "Wallet Owner",
+        "walletOwnerTable": "wallet Owners Table",
+        "realEstateUnitTable": "RealEstate Units Table"
     }
 }
