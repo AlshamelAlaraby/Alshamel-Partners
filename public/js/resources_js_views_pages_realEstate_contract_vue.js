@@ -1250,7 +1250,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.errors = {};
         _api_adminAxios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/real-estate/customers", this.create).then(function (res) {
           _this4.is_disabled = true;
-          _this4.getData();
+          _this4.$emit("created");
           setTimeout(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
               icon: "success",

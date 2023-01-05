@@ -6070,7 +6070,7 @@ var render = function render() {
   return _c("b-modal", {
     attrs: {
       id: "wallet-create",
-      title: _vm.getCompanyKey("color_create_form"),
+      title: _vm.getCompanyKey("wallet_create_form"),
       "title-class": "font-18",
       "body-class": "p-4 ",
       "hide-footer": true
@@ -6140,7 +6140,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.getCompanyKey("color_name_ar")) + "\n            "), _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.getCompanyKey("wallet_name_ar")) + "\n            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -6193,7 +6193,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.getCompanyKey("color_name_en")) + "\n            "), _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.getCompanyKey("wallet_name_en")) + "\n            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{

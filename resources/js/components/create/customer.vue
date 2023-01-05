@@ -203,7 +203,7 @@ export default {
           .post(`/real-estate/customers`, this.create)
           .then((res) => {
             this.is_disabled = true;
-            this.getData();
+            this.$emit("created");
             setTimeout(() => {
               Swal.fire({
                 icon: "success",

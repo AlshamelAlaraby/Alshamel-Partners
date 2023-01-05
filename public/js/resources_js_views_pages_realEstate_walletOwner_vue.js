@@ -5976,7 +5976,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("role")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("owner")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: _vm.$i18n.locale == "ar" ? "wallet.name" : "wallet.name_e"
@@ -5988,7 +5988,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("workflow")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("wallet")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "percentage"
@@ -6000,7 +6000,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("workflow")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("wallet_owner_percentage")) + "\n                  ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -6057,7 +6057,7 @@ var render = function render() {
     attrs: {
       variant: "primary"
     }
-  }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.Create")) + "\n                                "), _c("i", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t("general.Create")) + "\n                "), _c("i", {
     staticClass: "fas fa-plus"
   })]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-flex"
@@ -6106,11 +6106,11 @@ var render = function render() {
     staticClass: "d-inline-block"
   }, [_c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.filter")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.filter")) + "\n                    "), _c("i", {
     staticClass: "fas fa-filter"
   })]), _vm._v(" "), _c("b-button", {
     staticClass: "mx-1 custom-btn-background"
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.group")) + "\n                                        "), _c("i", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.group")) + "\n                    "), _c("i", {
     staticClass: "fe-menu"
   })]), _vm._v(" "), _c("b-dropdown", {
     ref: "dropdown",
@@ -6128,7 +6128,7 @@ var render = function render() {
       },
       expression: "setting.owner_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("role")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("owner")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.wallet_id,
@@ -6137,7 +6137,7 @@ var render = function render() {
       },
       expression: "setting.wallet_id"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("workflow")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("wallet")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.percentage,
@@ -6146,7 +6146,7 @@ var render = function render() {
       },
       expression: "setting.percentage"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("workflow")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("wallet_owner_percentage")) + "\n                    ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -6160,7 +6160,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "13px"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.walletOwnersPagination.from) + "-" + _vm._s(_vm.walletOwnersPagination.to) + "\n                                        /\n                                        " + _vm._s(_vm.walletOwnersPagination.total) + "\n                                    ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.walletOwnersPagination.from) + "-" + _vm._s(_vm.walletOwnersPagination.to) + "\n                    /\n                    " + _vm._s(_vm.walletOwnersPagination.total) + "\n                  ")]), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block"
   }, [_c("a", {
     style: {
@@ -6215,7 +6215,7 @@ var render = function render() {
   }, [_c("span", [_vm._v(">")])])])])])])]), _vm._v(" "), _c("b-modal", {
     attrs: {
       id: "create",
-      title: _vm.getCompanyKey("role_workflow_create_form"),
+      title: _vm.getCompanyKey("wallet_owner_create_form"),
       "title-class": "font-18",
       "body-class": "p-4 ",
       "hide-footer": true
@@ -6239,7 +6239,7 @@ var render = function render() {
         return _vm.resetForm.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.AddNewRecord")) + "\n                ")]), _vm._v(" "), !_vm.is_disabled ? [!_vm.isLoader ? _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6251,7 +6251,7 @@ var render = function render() {
         return _vm.AddSubmit.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.$t("general.Add")) + "\n                                    ")]) : _c("b-button", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.Add")) + "\n                  ")]) : _c("b-button", {
     staticClass: "mx-1",
     attrs: {
       variant: "success",
@@ -6274,7 +6274,7 @@ var render = function render() {
         return _vm.resetModalHidden.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                ")])], 2), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                  " + _vm._s(_vm.$t("general.Cancel")) + "\n                ")])], 2), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
@@ -6282,7 +6282,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "my-1 mr-2"
-  }, [_vm._v(_vm._s(_vm.getCompanyKey("role")))]), _vm._v(" "), _c("multiselect", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("owner")))]), _vm._v(" "), _c("multiselect", {
     attrs: {
       options: _vm.wallets.map(function (type) {
         return type.id;
@@ -6307,7 +6307,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.$v.create.wallet_id.$error ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.wallet_id ? _vm._l(_vm.errors.wallet_id, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.wallet_id ? _vm._l(_vm.errors.wallet_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6317,7 +6317,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "my-1 mr-2"
-  }, [_vm._v(_vm._s(_vm.getCompanyKey("workflow")))]), _vm._v(" "), _c("multiselect", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("wallet")))]), _vm._v(" "), _c("multiselect", {
     attrs: {
       options: _vm.owners.map(function (type) {
         return type.id;
@@ -6339,7 +6339,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.$v.create.owner_id.$error ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.owner_id ? _vm._l(_vm.errors.owner_id, function (errorMessage, index) {
+  }, [_vm._v("\n                      " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                    ")]) : _vm._e(), _vm._v(" "), _vm.errors.owner_id ? _vm._l(_vm.errors.owner_id, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
     }, [_vm._v(_vm._s(errorMessage))]);
@@ -6349,7 +6349,7 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("bank_account_rpcode")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("wallet_owner_percentage")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -6380,7 +6380,7 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.percentage ? _vm._l(_vm.errors.percentage, function (errorMessage, index) {
     return _c("ErrorMessage", {
       key: index
-    }, [_vm._v(_vm._s(errorMessage) + "\n                                            ")]);
+    }, [_vm._v(_vm._s(errorMessage) + "\n                      ")]);
   }) : _vm._e()], 2)])])])]), _vm._v(" "), _c("div", {
     staticClass: "table-responsive mb-3 custom-table-theme position-relative"
   }, [_vm.isLoader ? _c("loader", {
@@ -6436,11 +6436,11 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.wallet_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("role")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.owner_id ? _c("th", [_c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("owner")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.owner_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("workflow")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.percentage ? _c("th", [_c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("wallet")))])])]) : _vm._e(), _vm._v(" "), _vm.setting.percentage ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("workflow")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                                    " + _vm._s(_vm.$t("general.Action")) + "\n                                ")]), _vm._v(" "), _c("th", [_c("i", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("wallet_owner_percentage")))])])]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("\n                    " + _vm._s(_vm.$t("general.Action")) + "\n                  ")]), _vm._v(" "), _c("th", [_c("i", {
     staticClass: "fas fa-ellipsis-v"
   })])])]), _vm._v(" "), _vm.walletOwners.length > 0 ? _c("tbody", _vm._l(_vm.walletOwners, function (data, index) {
     return _c("tr", {
@@ -6499,11 +6499,11 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _vm.setting.wallet_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                                        " + _vm._s(_vm.$i18n.locale == "ar" ? data.wallet.name : data.wallet.name_e) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.owner_id ? _c("td", [_c("h5", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.wallet.name : data.wallet.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.owner_id ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                                        " + _vm._s(_vm.$i18n.locale == "ar" ? data.owner.name : data.owner.name_e) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.percentage ? _c("td", [_c("h5", {
+    }, [_vm._v("\n                      " + _vm._s(_vm.$i18n.locale == "ar" ? data.owner.name : data.owner.name_e) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.percentage ? _c("td", [_c("h5", {
       staticClass: "m-0 font-weight-normal"
-    }, [_vm._v("\n                                        " + _vm._s(data.percentage) + "\n                                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                      " + _vm._s(data.percentage) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group"
     }, [_c("button", {
       staticClass: "btn btn-sm dropdown-toggle dropdown-coustom",
@@ -6512,7 +6512,7 @@ var render = function render() {
         "data-toggle": "dropdown",
         "aria-expanded": "false"
       }
-    }, [_vm._v("\n                                            " + _vm._s(_vm.$t("general.commands")) + "\n                                            "), _c("i", {
+    }, [_vm._v("\n                        " + _vm._s(_vm.$t("general.commands")) + "\n                        "), _c("i", {
       staticClass: "fas fa-angle-down"
     })]), _vm._v(" "), _c("div", {
       staticClass: "dropdown-menu dropdown-menu-custom"
@@ -6550,7 +6550,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.getCompanyKey("role_workflow_edit_form"),
+        title: _vm.getCompanyKey("wallet_owner_edit_form"),
         "title-class": "font-18",
         "body-class": "p-4",
         "hide-footer": true
@@ -6577,7 +6577,7 @@ var render = function render() {
           return _vm.editSubmit(data.id);
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Edit")) + "\n                                                ")]) : _c("b-button", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Edit")) + "\n                          ")]) : _c("b-button", {
       staticClass: "mx-1",
       attrs: {
         variant: "success",
@@ -6600,7 +6600,7 @@ var render = function render() {
           return _vm.$bvModal.hide("modal-edit-".concat(data.id));
         }
       }
-    }, [_vm._v("\n                                                    " + _vm._s(_vm.$t("general.Cancel")) + "\n                                                ")])], 1), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t("general.Cancel")) + "\n                          ")])], 1), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -6608,7 +6608,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v(_vm._s(_vm.getCompanyKey("role")))]), _vm._v(" "), _c("multiselect", {
+    }, [_vm._v(_vm._s(_vm.getCompanyKey("owner")))]), _vm._v(" "), _c("multiselect", {
       attrs: {
         options: _vm.wallets.map(function (type) {
           return type.id;
@@ -6633,7 +6633,7 @@ var render = function render() {
       }
     }), _vm._v(" "), _vm.$v.create.wallet_id.$error ? _c("div", {
       staticClass: "text-danger"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.wallet_id ? _vm._l(_vm.errors.wallet_id, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.wallet_id ? _vm._l(_vm.errors.wallet_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6643,7 +6643,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "my-1 mr-2"
-    }, [_vm._v(_vm._s(_vm.getCompanyKey("workflow")))]), _vm._v(" "), _c("multiselect", {
+    }, [_vm._v(_vm._s(_vm.getCompanyKey("wallet")))]), _vm._v(" "), _c("multiselect", {
       attrs: {
         options: _vm.owners.map(function (type) {
           return type.id;
@@ -6665,7 +6665,7 @@ var render = function render() {
       }
     }), _vm._v(" "), _vm.$v.create.wallet_id.$error ? _c("div", {
       staticClass: "text-danger"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                                                        ")]) : _vm._e(), _vm._v(" "), _vm.errors.owner_id ? _vm._l(_vm.errors.owner_id, function (errorMessage, index) {
+    }, [_vm._v("\n                                " + _vm._s(_vm.$t("general.fieldIsRequired")) + "\n                              ")]) : _vm._e(), _vm._v(" "), _vm.errors.owner_id ? _vm._l(_vm.errors.owner_id, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
       }, [_vm._v(_vm._s(errorMessage))]);
@@ -6675,7 +6675,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.getCompanyKey("bank_account_rpcode")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("wallet_owner_percentage")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -6706,7 +6706,7 @@ var render = function render() {
     }), _vm._v(" "), _vm.errors.percentage ? _vm._l(_vm.errors.percentage, function (errorMessage, index) {
       return _c("ErrorMessage", {
         key: index
-      }, [_vm._v(_vm._s(errorMessage) + "\n                                                            ")]);
+      }, [_vm._v(_vm._s(errorMessage) + "\n                                ")]);
     }) : _vm._e()], 2)])])])])], 1), _vm._v(" "), _c("td", [_c("button", {
       staticClass: "btn",
       attrs: {
@@ -6734,7 +6734,7 @@ var render = function render() {
     attrs: {
       colspan: "6"
     }
-  }, [_vm._v("\n                                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                                ")])])])])], 1)], 1)])])])], 1);
+  }, [_vm._v("\n                    " + _vm._s(_vm.$t("general.notDataFound")) + "\n                  ")])])])])], 1)], 1)])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

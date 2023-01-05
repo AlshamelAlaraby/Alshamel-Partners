@@ -141,7 +141,7 @@ export default {
   <!--  create   -->
   <b-modal
     id="wallet-create"
-    :title="getCompanyKey('color_create_form')"
+    :title="getCompanyKey('wallet_create_form')"
     title-class="font-18"
     body-class="p-4 "
     :hide-footer="true"
@@ -185,7 +185,7 @@ export default {
         <div class="col-md-12">
           <div class="form-group">
             <label for="field-1" class="control-label">
-              {{ getCompanyKey("color_name_ar") }}
+              {{ getCompanyKey("wallet_name_ar") }}
               <span class="text-danger">*</span>
             </label>
             <div dir="rtl">
@@ -220,7 +220,7 @@ export default {
         <div class="col-md-12">
           <div class="form-group">
             <label for="field-2" class="control-label">
-              {{ getCompanyKey("color_name_en") }}
+              {{ getCompanyKey("wallet_name_en") }}
               <span class="text-danger">*</span>
             </label>
             <div>

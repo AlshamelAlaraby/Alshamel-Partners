@@ -2081,5 +2081,83 @@ class TranslationSeeder extends Seeder
                 "company_id" => 0,
             ],
         ]);
+        //Wallet
+        Translation::insert([
+            [
+                "key" => "wallet_create_form",
+                "default_en" => "Add new wallet",
+                "default_ar" => "اضافة محفظة جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet_edit_form",
+                "default_en" => "Edit wallet form",
+                "default_ar" => "نموذج تعديل محفظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet_name_ar",
+                "default_en" => "Wallet name (arabic)",
+                "default_ar" => "اسم المحفظة (عربي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet_name_en",
+                "default_en" => "Wallet name (english)",
+                "default_ar" => "اسم المحفظة (انجليزي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+        ]);
+        //Wallet owner
+        Translation::insert([
+            [
+                "key" => "wallet_owner_create_form",
+                "default_en" => "Add new wallet owner",
+                "default_ar" => "اضافة محفظة مالك جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet_owner_edit_form",
+                "default_en" => "Edit wallet owner form",
+                "default_ar" => "نموذج تعديل محفظة المالك",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet",
+                "default_en" => "Wallet name",
+                "default_ar" => "اسم المحفظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "owner",
+                "default_en" => "Owner name",
+                "default_ar" => "اسم المالك",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+            [
+                "key" => "wallet_owner_percentage",
+                "default_en" => "Wallet owner percentage",
+                "default_ar" => "النسبة المئوية لمالك المحفظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+            ],
+        ]);
     }
 }
