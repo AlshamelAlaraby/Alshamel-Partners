@@ -555,6 +555,7 @@ export default {
                 floor: 0,
                 rank: 0
             };
+            this.custom_date_start = new Date();
             this.$nextTick(() => { this.$v.$reset() });
             this.errors = {};
         },
@@ -587,6 +588,7 @@ export default {
                 rank: 0
             };
             this.$nextTick(() => { this.$v.$reset() });
+            this.custom_date_start = new Date();
             this.errors = {};
             this.is_disabled = false;
         },
@@ -684,20 +686,30 @@ export default {
          *   show Modal (edit)
          */
         async resetModalEdit(id){
-            let build = this.units.find(e => id == e.id );
-            this.edit.name = build.name;
-            this.edit.name_e = build.name_e;
-            this.edit.description = build.description;
-            this.edit.description_e = build.description_e;
-            this.edit.building_area = build.building_area ?? 0;
-            this.edit.land_area = build.land_area ?? 0;
-            this.edit.construction_year = build.construction_year ?? '';
-            this.edit.module_id = build.module_id;
-            this.edit.country_id = build.country.id;
-            this.edit.city_id = build.city.id;
-            this.edit.avenue_id = build.avenue.id;
-            this.edit.lng = build.lng;
-            this.edit.lat = build.lat;
+            let unit = this.units.find(e => id == e.id );
+            this.edit.name = unit.name;
+            this.edit.name_e = unit.name_e;
+            this.edit.description = unit.description;
+            this.edit.description_e = unit.description_e;
+            this.edit.owner_id = unit.owner_id;
+            this.edit.wallet_id = unit.wallet_id;
+            this.edit.currency_id = unit.currency_id;
+            this.edit.building_id = unit.building_id;
+            this.edit.unit_status_id = unit.unit_status_id;
+            this.edit.module_id = unit.module_id;
+            this.edit.code = unit.code;
+            this.edit.commission_ty = unit.commission_ty;
+            this.edit.commission_value = unit.commission_value;
+            this.edit.unit_ty = unit.unit_ty;
+            this.edit.unit_area = unit.unit_area;
+            this.edit.floor = unit.floor;
+            this.edit.price = unit.price;
+            this.edit.path = unit.path;
+            this.edit.rank = unit.rank;
+            this.edit.rooms = unit.rooms;
+            this.edit.view = unit.view;
+            this.custom_date_start = new Date(unit.end_date);
+            this.edit.status_date = formatDateTime(unit.status_date);
             this.errors = {};
         },
         /**
@@ -823,7 +835,7 @@ export default {
 
                         <!-- start search -->
                         <div class="row justify-content-between align-items-center mb-2">
-                            <h4 class="header-title"> {{ $t('general.buildsTable') }}</h4>
+                            <h4 class="header-title"> {{ $t('general.realEstateUnitTable') }}</h4>
                             <div class="col-xs-10 col-md-9 col-lg-7" style="font-weight: 500">
                                 <div class="d-inline-block" style="width: 22.2%;">
                                     <!-- Basic dropdown -->

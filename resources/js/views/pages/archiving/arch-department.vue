@@ -24,7 +24,17 @@ export default {
     loader,
     Multiselect,
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('arch departments')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -55,7 +65,7 @@ export default {
         name: "",
         name_e: "",
         parent_id: "",
-        
+
       }, //Create form
       edit: {
         name: "",
@@ -770,7 +780,7 @@ export default {
                             :options="archDepartmentAr.map(type => type.id)"
                             :custom-label="opt => $i18n.locale ? archDepartmentAr.find(x => x.id == opt).name : archDepartmentAr.find(x => x.id == opt).parent_id">
                         </multiselect>
-                        
+
                         <div v-if="!$v.create.parent_id.integer" class="invalid-feedback">{{ $t('general.fieldIsInteger') }}</div>
                         <template v-if="errors.parent_id">
                             <ErrorMessage v-for="(errorMessage,index) in errors.parent_id" :key="index">{{ errorMessage }}</ErrorMessage>
@@ -879,12 +889,12 @@ export default {
                     </td>
                     <td v-if="setting.parent_id">
                       <h5 class="m-0 font-weight-normal">
-                        {{ 
-                          (data.parent_id) ? 
-                            ($i18n.locale == 'ar') ? 
-                                data.arch_department.name : 
-                                data.arch_department.name_e : 
-                        '' 
+                        {{
+                          (data.parent_id) ?
+                            ($i18n.locale == 'ar') ?
+                                data.arch_department.name :
+                                data.arch_department.name_e :
+                        ''
                         }}
                         </h5>
                     </td>
@@ -1063,7 +1073,7 @@ export default {
                                       :options="archDepartmentAr.map(type => type.id)"
                                       :custom-label="opt => $i18n.locale ? archDepartmentAr.find(x => x.id == opt).name : archDepartmentAr.find(x => x.id == opt).parent_id">
                                   </multiselect>
-                                  
+
                                   <div v-if="!$v.edit.parent_id.integer" class="invalid-feedback">{{ $t('general.fieldIsInteger') }}</div>
                                   <template v-if="errors.parent_id">
                                       <ErrorMessage v-for="(errorMessage,index) in errors.parent_id" :key="index">{{ errorMessage }}</ErrorMessage>

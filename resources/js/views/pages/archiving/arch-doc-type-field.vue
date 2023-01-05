@@ -23,7 +23,17 @@ export default {
     loader,
     Multiselect
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('arch doc type fields')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -287,7 +297,7 @@ export default {
       });
     },
 
-    /** 
+    /**
      *  get gen doc type data
      */
     async getGenDocType(){
@@ -305,7 +315,7 @@ export default {
     },
 
 
-    /** 
+    /**
      *  get arch doc field data
      */
      async getArchDocType(){
@@ -326,7 +336,7 @@ export default {
      *  reset Modal (create)
      */
     resetModalHidden() {
-      this.create = {  
+      this.create = {
         gen_arch_doc_type_id: "",
         arch_doc_field_id: "",
         field_order: "",
@@ -345,7 +355,7 @@ export default {
       // call api
       await this.getGenDocType();
       await this.getArchDocType();
-      this.create = {  
+      this.create = {
         gen_arch_doc_type_id: "",
         arch_doc_field_id: "",
         field_order: "",
@@ -362,7 +372,7 @@ export default {
      *  create document field
      */
     resetForm() {
-      this.create = {  
+      this.create = {
         gen_arch_doc_type_id: "",
         arch_doc_field_id: "",
         field_order: "",
@@ -1111,7 +1121,7 @@ export default {
                                 <label for="inlineFormCustomSelectPref">
                                   {{ $t("general.genArchDocType") }}
                                 </label>
-                               
+
                                 <multiselect
                                     v-model="edit.gen_arch_doc_type_id"
                                     :options="genArchDocData.map(type => type.id)"
@@ -1133,7 +1143,7 @@ export default {
                                 <label for="inlineFormCustomSelectPref">
                                   {{ $t("general.archDocTypeField") }}
                                 </label>
-                               
+
                                 <multiselect
                                     v-model="edit.arch_doc_field_id"
                                     :options="archDocFieldData.map(type => type.id)"

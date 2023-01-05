@@ -363,7 +363,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems
+      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems,
+      workFlowTree: []
     };
   },
   props: {
@@ -495,6 +496,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
+    this.workFlowTree = this.$store.state.auth.work_flow_trees;
     this._activateMenuDropdown();
     this.$router.afterEach(function (routeTo, routeFrom) {
       _this._activateMenuDropdown();
@@ -1986,11 +1988,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   floor: 0,
                   rank: 0
                 };
+                _this7.custom_date_start = new Date();
                 _this7.$nextTick(function () {
                   _this7.$v.$reset();
                 });
                 _this7.errors = {};
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2046,9 +2049,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this8.$nextTick(function () {
                   _this8.$v.$reset();
                 });
+                _this8.custom_date_start = new Date();
                 _this8.errors = {};
                 _this8.is_disabled = false;
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -2157,30 +2161,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetModalEdit: function resetModalEdit(id) {
       var _this11 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _build$building_area, _build$land_area, _build$construction_y;
-        var build;
+        var unit;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                build = _this11.units.find(function (e) {
+                unit = _this11.units.find(function (e) {
                   return id == e.id;
                 });
-                _this11.edit.name = build.name;
-                _this11.edit.name_e = build.name_e;
-                _this11.edit.description = build.description;
-                _this11.edit.description_e = build.description_e;
-                _this11.edit.building_area = (_build$building_area = build.building_area) !== null && _build$building_area !== void 0 ? _build$building_area : 0;
-                _this11.edit.land_area = (_build$land_area = build.land_area) !== null && _build$land_area !== void 0 ? _build$land_area : 0;
-                _this11.edit.construction_year = (_build$construction_y = build.construction_year) !== null && _build$construction_y !== void 0 ? _build$construction_y : '';
-                _this11.edit.module_id = build.module_id;
-                _this11.edit.country_id = build.country.id;
-                _this11.edit.city_id = build.city.id;
-                _this11.edit.avenue_id = build.avenue.id;
-                _this11.edit.lng = build.lng;
-                _this11.edit.lat = build.lat;
+                _this11.edit.name = unit.name;
+                _this11.edit.name_e = unit.name_e;
+                _this11.edit.description = unit.description;
+                _this11.edit.description_e = unit.description_e;
+                _this11.edit.owner_id = unit.owner_id;
+                _this11.edit.wallet_id = unit.wallet_id;
+                _this11.edit.currency_id = unit.currency_id;
+                _this11.edit.building_id = unit.building_id;
+                _this11.edit.unit_status_id = unit.unit_status_id;
+                _this11.edit.module_id = unit.module_id;
+                _this11.edit.code = unit.code;
+                _this11.edit.commission_ty = unit.commission_ty;
+                _this11.edit.commission_value = unit.commission_value;
+                _this11.edit.unit_ty = unit.unit_ty;
+                _this11.edit.unit_area = unit.unit_area;
+                _this11.edit.floor = unit.floor;
+                _this11.edit.price = unit.price;
+                _this11.edit.path = unit.path;
+                _this11.edit.rank = unit.rank;
+                _this11.edit.rooms = unit.rooms;
+                _this11.edit.view = unit.view;
+                _this11.custom_date_start = new Date(unit.end_date);
+                _this11.edit.status_date = (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_8__.formatDateTime)(unit.status_date);
                 _this11.errors = {};
-              case 15:
+              case 25:
               case "end":
                 return _context3.stop();
             }
@@ -3411,7 +3424,7 @@ var render = function render() {
     return [item.isTitle ? _c("li", {
       key: item.id,
       staticClass: "menu-title"
-    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout ? _c("li", {
+    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout && _vm.workFlowTree.includes(item.name) ? _c("li", {
       key: item.id
     }, [_vm.hasItems(item) ? _c("a", {
       "class": {
@@ -3454,8 +3467,8 @@ var render = function render() {
       attrs: {
         "aria-expanded": "false"
       }
-    }, _vm._l(item.subItems, function (subitem, index) {
-      return _c("li", {
+    }, [_vm._l(item.subItems, function (subitem, index) {
+      return [_vm.workFlowTree.includes(item.name) ? _c("li", {
         key: index
       }, [!_vm.hasItems(subitem) ? _c("router-link", {
         staticClass: "side-nav-link-ref",
@@ -3472,7 +3485,7 @@ var render = function render() {
             subitem.isMenuCollapsed = !subitem.isMenuCollapsed;
           }
         }
-      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                    "), _c("span", {
+      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                            "), _c("span", {
         staticClass: "menu-arrow"
       })]) : _vm._e(), _vm._v(" "), _c("div", {
         staticClass: "collapse",
@@ -3493,8 +3506,8 @@ var render = function render() {
             to: subSubitem.link
           }
         }, [_vm._v(_vm._s(_vm.$t(subSubitem.label)))])], 1);
-      }), 0) : _vm._e()])], 1);
-    }), 0) : _vm._e()])], 1) : _vm._e()];
+      }), 0) : _vm._e()])], 1) : _vm._e()];
+    })], 2) : _vm._e()])], 1) : _vm._e()];
   })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "clearfix"
   })])], 1);
@@ -5410,7 +5423,7 @@ var render = function render() {
     staticClass: "row justify-content-between align-items-center mb-2"
   }, [_c("h4", {
     staticClass: "header-title"
-  }, [_vm._v(" " + _vm._s(_vm.$t("general.buildsTable")))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.$t("general.realEstateUnitTable")))]), _vm._v(" "), _c("div", {
     staticClass: "col-xs-10 col-md-9 col-lg-7",
     staticStyle: {
       "font-weight": "500"
@@ -8873,121 +8886,148 @@ var menuItems = [{
   id: 100032,
   label: 'menuitems.company.text',
   icon: 'fas fa-city',
+  name: 'company',
   link: '/dashboard/company'
 }, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
+  name: 'branch',
   link: '/dashboard/branch'
 }, {
   id: 10008,
   label: 'menuitems.store.text',
+  name: 'store',
   icon: 'fas fa-store',
   link: '/dashboard/store'
 }, {
   id: 10009,
   label: 'menuitems.serial.text',
+  name: 'serial',
   icon: 'fas fa-eraser',
   link: '/dashboard/serial'
 }, {
   id: 113872,
   label: "general.Properties",
   icon: "fas fa-hand-spock",
+  name: 'properties',
   isMenuCollapsed: false,
   subItems: [{
     id: 225,
     label: 'general.ScreenProperties',
+    name: 'screen properties',
     link: '/dashboard/screen-properties'
   }, {
     id: 226,
     label: 'general.TreeProperty',
+    name: 'tree property',
     link: '/dashboard/tree-properties'
   }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
   icon: "fas fa-user-tag",
+  name: 'sales men',
   isMenuCollapsed: false,
   subItems: [{
     id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
+    name: 'sales men Type',
     link: '/dashboard/salesmenTypes'
   }, {
     id: 100117,
     label: 'menuitems.dashboard.list.salesMen',
+    name: 'sales men',
     link: '/dashboard/salesmen'
   }, {
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
+    name: 'external salesmen',
     link: '/dashboard/externalSalesmen'
   }, {
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
+    name: 'internal salesmen',
     link: '/dashboard/internalSalesman'
   }]
 }, {
   id: 1000548,
   label: "menuitems.Banks.text",
   icon: "fas fa-piggy-bank",
+  name: 'bank',
   isMenuCollapsed: false,
   subItems: [{
     id: 112201,
     label: 'general.paymentTypes',
+    name: 'payment types',
     link: '/dashboard/paymentTypes'
   }, {
     id: 222,
     label: 'menuitems.Banks.text',
+    name: 'banks',
     link: '/dashboard/banks'
   }, {
     id: 112202,
     label: 'general.bankAccounts',
+    name: 'bank accounts',
     link: '/dashboard/bankAccount'
   }]
 }, {
   id: 1000544,
   label: "menuitems.area.text",
   icon: "fas fa-flag",
+  name: "area",
   isMenuCollapsed: false,
   subItems: [{
     id: 2,
     label: 'menuitems.dashboard.list.country',
+    name: "country",
     link: '/dashboard/country'
   }, {
     id: 3,
     label: 'menuitems.dashboard.list.governorate',
+    name: "governorate",
     link: '/dashboard/governorate'
   }, {
     id: 4,
     label: 'menuitems.dashboard.list.city',
+    name: "city",
     link: '/dashboard/city'
   }, {
     id: 8,
     label: 'menuitems.dashboard.list.avenue',
+    name: "avenue",
     link: '/dashboard/avenue'
   }]
 }, {
   id: 10001,
   label: "menuitems.role.text",
   icon: "ri-shield-user-line",
+  name: 'role',
   isMenuCollapsed: false,
   subItems: [{
     id: 10002,
+    name: 'role Type',
     label: 'menuitems.dashboard.list.rolesType',
     link: '/dashboard/rolesType'
   }, {
     id: 10003,
+    name: 'roles',
     label: 'menuitems.dashboard.list.roles',
     link: '/dashboard/roles'
   }, {
     id: 100043,
+    name: 'role workflow',
     label: 'menuitems.dashboard.list.roleWorkflow',
     link: '/dashboard/role-workflow'
   }, {
     id: 100088,
+    name: 'role workflow button',
     label: 'menuitems.dashboard.list.roleWorkflowButton',
     link: '/dashboard/role-workflow-button'
   }, {
     id: 100134,
+    name: 'role hotfield screen',
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
     link: '/dashboard/role-hotfield-screen'
   }]
@@ -8995,67 +9035,83 @@ var menuItems = [{
   id: 10023578,
   label: "general.realEstate",
   icon: "fas fa-hotel",
+  name: 'realEstate',
   isMenuCollapsed: false,
   subItems: [{
     id: 1000201,
+    name: 'owners',
     label: 'general.owner',
     link: '/dashboard/realEstate/owner'
   }, {
     id: 10048103,
+    name: 'building',
     label: 'general.building',
     link: '/dashboard/realEstate/building'
   }, {
     id: 1022343,
+    name: 'customer',
     label: 'general.customer',
     link: '/dashboard/realEstate/customer'
   }, {
     id: 1022323,
+    name: 'wallets',
     label: 'general.wallet',
     link: '/dashboard/realEstate/wallet'
   }, {
     id: 1042323,
+    name: 'wallet owner',
     label: 'general.walletOwner',
     link: '/dashboard/realEstate/wallet-owner'
   }, {
     id: 1042323,
+    name: 'realEstate units',
     label: 'units.units',
     link: '/dashboard/realEstate/unit'
   }]
 }, {
   id: 1004346756,
   label: "general.archive",
+  name: 'archiving',
   icon: "ri-share-line",
   isMenuCollapsed: false,
   subItems: [{
     id: 38781,
+    name: 'document field',
     label: 'menuitems.DocumentField.text',
     link: '/dashboard/document-fields'
   }, {
     id: 34343,
+    name: 'archive closed references',
     label: 'menuitems.ArchiveClosedReference.text',
     link: '/dashboard/archive-closed-references'
   }, {
     id: 432234,
+    name: 'gen arch doc types',
     label: 'menuitems.GenArchDocType.text',
     link: '/dashboard/gen-arch-doc-types'
   }, {
     id: 34561,
+    name: 'arch doc type fields',
     label: 'menuitems.ArchDocTypeField.text',
     link: '/dashboard/arch-doc-type-fields'
   }, {
     id: 879756,
+    name: 'arch departments',
     label: 'menuitems.ArchDepartment.text',
     link: '/dashboard/arch-departments'
   }, {
     id: 1567443,
+    name: 'arch documents',
     label: 'menuitems.ArchDocument.text',
     link: '/dashboard/arch-documents'
   }, {
     id: 36462,
+    name: 'arch document dtls',
     label: 'menuitems.ArchDocumentDtl.text',
     link: '/dashboard/arch-document-dtls'
   }, {
     id: 32020,
+    name: 'arch doc status',
     label: 'menuitems.ArchDocumentStatus.text',
     link: '/dashboard/arch-doc-status'
   }]
@@ -9066,36 +9122,43 @@ var menuItems = [{
   link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
+  name: 'users',
   label: 'general.Users',
   icon: 'fas fa-network-wired',
   link: '/dashboard/users'
 }, {
   id: 5,
+  name: 'currencies',
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
   link: '/dashboard/currency'
 }, {
   id: 6,
+  name: 'employees',
   label: 'menuitems.employee.text',
   icon: 'fas fa-user-friends',
   link: '/dashboard/employee'
 }, {
   id: 7,
+  name: 'financial Year',
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/dashboard/financialYear'
 }, {
   id: 10004,
+  name: 'units',
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
   link: '/dashboard/units'
 }, {
   id: 10005,
+  name: 'color',
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/dashboard/colors'
 }, {
   id: 10099,
+  name: 'dictionary',
   label: 'general.dictionary',
   icon: 'fas fa-palette',
   link: '/dashboard/dictionary'
@@ -10169,7 +10232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\r\n  width: 70px;\r\n  height: 45px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-lg img[data-v-81fbb27e] {\n  width: 70px;\n  height: 45px;\n}\n.logo-sm img[data-v-81fbb27e] {\n  width: 70px;\n  height: 45px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

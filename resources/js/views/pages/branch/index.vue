@@ -133,10 +133,10 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      if (vm.$store.state.auth.company_id) {
+      if (vm.$store.state.auth.work_flow_trees.includes('branch')) {
         return true;
       } else {
-        return vm.$router.push({ name: "company" });
+        return vm.$router.push({ name: "home" });
       }
     });
   },
