@@ -56,7 +56,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this2.$store.commit('auth/editCompanyId', id);
                 _context2.next = 3;
-                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this2.company_id)).then(function (res) {
+                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this2.company_id)).then(function (res) {
                   var l = res.data.data;
                   var name = [];
                   l.work_flow_trees.forEach(function (parent) {
