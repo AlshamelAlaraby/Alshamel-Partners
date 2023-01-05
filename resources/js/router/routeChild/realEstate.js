@@ -19,6 +19,14 @@ export default [
         component: () => import('../../views/pages/realEstate/contract'),
     },
     {
+        path: '/dashboard/realEstate/building-wallet',
+        name: 'realEstate-building-wallet',
+        meta: {
+            middleware: [auth,checkAuth]
+        },
+        component: () => import('../../views/pages/realEstate/building-wallet'),
+    },
+    {
         path: '/dashboard/realEstate/contractunit',
         name: 'realEstate-contractunit',
         meta: {

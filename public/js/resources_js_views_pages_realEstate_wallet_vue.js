@@ -4993,7 +4993,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("color_name_ar")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("wallet_name_ar")) + "\n                                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "name_e"
@@ -5005,7 +5005,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("color_name_en")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                        " + _vm._s(_vm.getCompanyKey("wallet_name_en")) + "\n                                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5133,7 +5133,7 @@ var render = function render() {
       },
       expression: "setting.name"
     }
-  }, [_vm._v(_vm._s(_vm.getCompanyKey("color_name_ar")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("wallet_name_ar")) + "\n                                        ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.name_e,
@@ -5142,7 +5142,7 @@ var render = function render() {
       },
       expression: "setting.name_e"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("color_name_en")) + "\n                                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("wallet_name_en")) + "\n                                        ")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("a", {
     staticClass: "btn btn-primary btn-sm",
@@ -5211,7 +5211,7 @@ var render = function render() {
   }, [_c("span", [_vm._v(">")])])])])])])]), _vm._v(" "), _c("b-modal", {
     attrs: {
       id: "create",
-      title: _vm.getCompanyKey("color_create_form"),
+      title: _vm.getCompanyKey("wallet_create_form"),
       "title-class": "font-18",
       "body-class": "p-4 ",
       "hide-footer": true
@@ -5281,7 +5281,7 @@ var render = function render() {
     attrs: {
       "for": "field-1"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("color_name_ar")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("wallet_name_ar")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
     attrs: {
@@ -5334,7 +5334,7 @@ var render = function render() {
     attrs: {
       "for": "field-2"
     }
-  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("color_name_en")) + "\n                                            "), _c("span", {
+  }, [_vm._v("\n                                            " + _vm._s(_vm.getCompanyKey("wallet_name_en")) + "\n                                            "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("div", [_c("input", {
     directives: [{
@@ -5429,7 +5429,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.name ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("color_name_ar")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("wallet_name_ar")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5447,7 +5447,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.name_e ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("color_name_en")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("wallet_name_en")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -5573,7 +5573,7 @@ var render = function render() {
       refInFor: true,
       attrs: {
         id: "modal-edit-".concat(data.id),
-        title: _vm.getCompanyKey("color_edit_form"),
+        title: _vm.getCompanyKey("wallet_edit_form"),
         "title-class": "font-18",
         "body-class": "p-4",
         "hide-footer": true
@@ -5634,7 +5634,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-1"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.getCompanyKey("color_name_ar")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.getCompanyKey("wallet_name_ar")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -5682,7 +5682,7 @@ var render = function render() {
       attrs: {
         "for": "field-u-2"
       }
-    }, [_vm._v("\n                                                            " + _vm._s(_vm.getCompanyKey("color_name_en")) + "\n                                                            "), _c("span", {
+    }, [_vm._v("\n                                                            " + _vm._s(_vm.getCompanyKey("wallet_name_en")) + "\n                                                            "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("div", {
       attrs: {
@@ -6477,6 +6477,10 @@ var menuItems = [{
     name: 'realEstate units',
     label: 'units.units',
     link: '/dashboard/realEstate/unit'
+  }, {
+    id: 102371,
+    label: 'general.building_wallet',
+    link: '/dashboard/realEstate/building-wallet'
   }]
 }, {
   id: 1004346756,

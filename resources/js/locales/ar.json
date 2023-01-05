@@ -589,6 +589,10 @@
         }
     },
     "general": {
+        "building_wallet":"محافظ البناء",
+        "Building":"البناء",
+        "Unit":"الوحدة",
+        "buildingWalletTable":"جدول محافظ البناء",
         "contract":"العقود",
         "contractTable":"جدول العقود",
         "contractunit":"وحدة العقد",

@@ -11416,6 +11416,10 @@ var menuItems = [{
     name: 'realEstate units',
     label: 'units.units',
     link: '/dashboard/realEstate/unit'
+  }, {
+    id: 102371,
+    label: 'general.building_wallet',
+    link: '/dashboard/realEstate/building-wallet'
   }]
 }, {
   id: 1004346756,
@@ -12681,7 +12685,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-custom-company.dropdown .dropdown-menu {\n    padding: 5px 10px !important;\n    overflow-y: scroll;\n    height: 300px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-custom-company.dropdown .dropdown-menu {\r\n    padding: 5px 10px !important;\r\n    overflow-y: scroll;\r\n    height: 300px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

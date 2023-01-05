@@ -38,7 +38,6 @@ Route::prefix('real-estate')->group(function () {
     });
 
     // wallets routes
-
     Route::group(['prefix' => 'wallets'], function () {
         Route::get('/', 'RlstWalletController@all')->name('rlst-wallets.all');
         Route::get('/logs/{id}', 'RlstWalletController@logs')->name('rlst-wallets.logs');
@@ -169,7 +168,7 @@ Route::prefix('real-estate')->group(function () {
         Route::get('/{id}', 'RlstBuildingWalletController@find')->name('rlst-building-wallets.find');
         Route::post('/', 'RlstBuildingWalletController@create')->name('rlst-building-wallets.create');
         Route::put('/{id}', 'RlstBuildingWalletController@update')->name('rlst-building-wallets.update');
-        Route::delete("/bulk-delete","RlstBuildingWalletController@bulkDelete");
+        Route::post("/bulk-delete","RlstBuildingWalletController@bulkDelete");
         Route::delete('/{id}', 'RlstBuildingWalletController@delete')->name('rlst-building-wallets.delete');
     });
 

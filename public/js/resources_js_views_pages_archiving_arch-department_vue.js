@@ -6505,6 +6505,10 @@ var menuItems = [{
     name: 'realEstate units',
     label: 'units.units',
     link: '/dashboard/realEstate/unit'
+  }, {
+    id: 102371,
+    label: 'general.building_wallet',
+    link: '/dashboard/realEstate/building-wallet'
   }]
 }, {
   id: 1004346756,
