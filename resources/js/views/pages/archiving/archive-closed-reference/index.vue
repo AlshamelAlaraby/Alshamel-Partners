@@ -24,7 +24,17 @@ export default {
     loader,
     Multiselect,
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('archive closed references')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -275,10 +285,10 @@ export default {
      *  reset Modal (create)
      */
     resetModalHidden() {
-      this.create = { 
+      this.create = {
         arch_docfields_id: "",
         field_value: ""
-        
+
     };
       this.$nextTick(() => {
         this.$v.$reset();
@@ -290,8 +300,8 @@ export default {
      */
     async resetModal() {
     await this.getArcDocFields();
-      this.create = { 
-        arch_docfields_id: "", 
+      this.create = {
+        arch_docfields_id: "",
         field_value: ""
     };
       this.is_disabled = false;
@@ -321,8 +331,8 @@ export default {
      *  create Archive Closed Reference
      */
     resetForm() {
-        this.create = { 
-        arch_docfields_id: "", 
+        this.create = {
+        arch_docfields_id: "",
         field_value: ""
     };
       this.is_disabled = false;
@@ -435,7 +445,7 @@ export default {
       this.edit = {
         arch_docfields_id: "",
         field_value: "",
-        
+
       };
     },
 
@@ -703,7 +713,7 @@ export default {
                             :options="archDocFields.map(type => type.id)"
                             :custom-label="opt => $i18n.locale ? archDocFields.find(x => x.id == opt).name : archDocFields.find(x => x.id == opt).arch_docfields_id">
                         </multiselect>
-                        
+
                         <div v-if="!$v.create.arch_docfields_id.integer" class="invalid-feedback">{{ $t('general.fieldIsInteger') }}</div>
                         <template v-if="errors.arch_docfields_id">
                             <ErrorMessage v-for="(errorMessage,index) in errors.arch_docfields_id" :key="index">{{ errorMessage }}</ErrorMessage>
@@ -825,12 +835,12 @@ export default {
                       </div>
                     </td>
                     <td v-if="setting.arch_docfields_id">
-                      <h5 class="m-0 font-weight-normal">{{ 
-                      (data.arch_docfields_id) ? 
-                            ($i18n.locale == 'ar') ? 
-                                data.arch_docfield.name : 
-                                data.arch_docfield.name_e : 
-                        '' 
+                      <h5 class="m-0 font-weight-normal">{{
+                      (data.arch_docfields_id) ?
+                            ($i18n.locale == 'ar') ?
+                                data.arch_docfield.name :
+                                data.arch_docfield.name_e :
+                        ''
                     }}
                     </h5>
                     </td>
@@ -927,7 +937,7 @@ export default {
                                         :options="archDocFields.map(type => type.id)"
                                         :custom-label="opt => $i18n.locale ? archDocFields.find(x => x.id == opt).name : archDocFields.find(x => x.id == opt).arch_docfields_id">
                                     </multiselect>
-                                    
+
                                     <div v-if="!$v.edit.arch_docfields_id.integer" class="invalid-feedback">{{ $t('general.fieldIsInteger') }}</div>
                                     <template v-if="errors.arch_docfields_id">
                                         <ErrorMessage v-for="(errorMessage,index) in errors.arch_docfields_id" :key="index">{{ errorMessage }}</ErrorMessage>

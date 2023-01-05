@@ -363,7 +363,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems
+      menuItems: _menu__WEBPACK_IMPORTED_MODULE_0__.menuItems,
+      workFlowTree: []
     };
   },
   props: {
@@ -495,6 +496,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var _this = this;
+    this.workFlowTree = this.$store.state.auth.work_flow_trees;
     this._activateMenuDropdown();
     this.$router.afterEach(function (routeTo, routeFrom) {
       _this._activateMenuDropdown();
@@ -1525,6 +1527,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_create_branch_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../components/create/branch.vue */ "./resources/js/components/create/branch.vue");
 /* harmony import */ var _helper_startDate__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../helper/startDate */ "./resources/js/helper/startDate.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var _page$mixins$componen;
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -1548,7 +1554,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /**
  * Advanced Table component
  */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_page$mixins$componen = {
   page: {
     title: "Store",
     meta: [{
@@ -1565,6 +1571,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loader: _components_loader__WEBPACK_IMPORTED_MODULE_6__["default"],
     Multiselect: (vue_multiselect__WEBPACK_IMPORTED_MODULE_12___default()),
     Branch: _components_create_branch_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      if (vm.$store.state.auth.work_flow_trees.includes('store')) {
+        return true;
+      } else {
+        return vm.$router.push({
+          name: "home"
+        });
+      }
+    });
   },
   data: function data() {
     return {
@@ -1702,487 +1719,485 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return true;
       });
     });
+  }
+}, _defineProperty(_page$mixins$componen, "beforeRouteEnter", function beforeRouteEnter(to, from, next) {
+  next(function (vm) {
+    if (vm.$store.state.auth.company_id) {
+      return true;
+    } else {
+      return vm.$router.push({
+        name: "company"
+      });
+    }
+  });
+}), _defineProperty(_page$mixins$componen, "methods", {
+  formatDate: function formatDate(value) {
+    return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_14__.formatDateOnly)(value);
   },
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    next(function (vm) {
-      if (vm.$store.state.auth.company_id) {
-        return true;
-      } else {
-        return vm.$router.push({
-          name: "company"
+  log: function log(id) {
+    var _this3 = this;
+    if (this.mouseEnter != id) {
+      this.Tooltip = "";
+      this.mouseEnter = id;
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores/logs/".concat(id)).then(function (res) {
+        var l = res.data.data;
+        l.forEach(function (e) {
+          _this3.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this3.formatDate(e.created_at), " \n");
         });
-      }
+      })["catch"](function (err) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+          icon: "error",
+          title: "".concat(_this3.$t("general.Error")),
+          text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
+        });
+      });
+    } else {}
+  },
+  /**
+   *  start get Data countrie && pagination
+   */
+  getData: function getData() {
+    var _this4 = this;
+    var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    this.isLoader = true;
+    var filter = "";
+    for (var i = 0; i < this.filterSetting.length; ++i) {
+      filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+    }
+    _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+      var l = res.data;
+      _this4.stores = l.data;
+      _this4.storesPagination = l.pagination;
+      _this4.current_page = l.pagination.current_page;
+    })["catch"](function (err) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+        icon: "error",
+        title: "".concat(_this4.$t("general.Error")),
+        text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+      });
+    })["finally"](function () {
+      _this4.isLoader = false;
     });
   },
-  methods: {
-    formatDate: function formatDate(value) {
-      return (0,_helper_startDate__WEBPACK_IMPORTED_MODULE_14__.formatDateOnly)(value);
-    },
-    log: function log(id) {
-      var _this3 = this;
-      if (this.mouseEnter != id) {
-        this.Tooltip = "";
-        this.mouseEnter = id;
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores/logs/".concat(id)).then(function (res) {
-          var l = res.data.data;
-          l.forEach(function (e) {
-            _this3.Tooltip += "Created By: ".concat(e.causer_type, "; Event: ").concat(e.event, "; Description: ").concat(e.description, " ;Created At: ").concat(_this3.formatDate(e.created_at), " \n");
-          });
-        })["catch"](function (err) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-            icon: "error",
-            title: "".concat(_this3.$t("general.Error")),
-            text: "".concat(_this3.$t("general.Thereisanerrorinthesystem"))
-          });
-        });
-      } else {}
-    },
-    /**
-     *  start get Data countrie && pagination
-     */
-    getData: function getData() {
-      var _this4 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  getDataCurrentPage: function getDataCurrentPage() {
+    var _this5 = this;
+    var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    if (this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page) {
       this.isLoader = true;
       var filter = "";
       for (var i = 0; i < this.filterSetting.length; ++i) {
         filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
       }
-      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(page, "&per_page=").concat(this.per_page, "&company_id=").concat(this.company_id, "&search=").concat(this.search, "&").concat(filter)).then(function (res) {
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
         var l = res.data;
-        _this4.stores = l.data;
-        _this4.storesPagination = l.pagination;
-        _this4.current_page = l.pagination.current_page;
+        _this5.stores = l.data;
+        _this5.storesPagination = l.pagination;
+        _this5.current_page = l.pagination.current_page;
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
           icon: "error",
-          title: "".concat(_this4.$t("general.Error")),
-          text: "".concat(_this4.$t("general.Thereisanerrorinthesystem"))
+          title: "".concat(_this5.$t("general.Error")),
+          text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
         });
       })["finally"](function () {
-        _this4.isLoader = false;
+        _this5.isLoader = false;
       });
-    },
-    getDataCurrentPage: function getDataCurrentPage() {
-      var _this5 = this;
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      if (this.current_page <= this.storesPagination.last_page && this.current_page != this.storesPagination.current_page && this.current_page) {
-        this.isLoader = true;
-        var filter = "";
-        for (var i = 0; i < this.filterSetting.length; ++i) {
-          filter += "columns[".concat(i, "]=").concat(this.filterSetting[i], "&");
+    }
+  },
+  /**
+   *  end get Data countrie && pagination
+   */
+  /**
+   *  start delete countrie
+   */
+  deleteBranch: function deleteBranch(id, index) {
+    var _this6 = this;
+    if (Array.isArray(id)) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+        title: "".concat(this.$t("general.Areyousure")),
+        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+        cancelButtonText: "".concat(this.$t("general.Nocancel")),
+        confirmButtonClass: "btn btn-success mt-2",
+        cancelButtonClass: "btn btn-danger ml-2 mt-2",
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          _this6.isLoader = true;
+          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores/bulk-delete", {
+            ids: id
+          }).then(function (res) {
+            _this6.checkAll = [];
+            _this6.getData();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              title: "".concat(_this6.$t("general.Deleted")),
+              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          })["catch"](function (err) {
+            if (err.response.status == 400) {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "error",
+                title: "".concat(_this6.$t("general.Error")),
+                text: "".concat(_this6.$t("general.CantDeleteRelation"))
+              });
+              _this6.getData();
+            } else {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "error",
+                title: "".concat(_this6.$t("general.Error")),
+                text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
+              });
+            }
+          })["finally"](function () {
+            _this6.isLoader = false;
+          });
         }
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/stores?page=".concat(this.current_page, "&per_page=").concat(this.per_page, "&search=").concat(this.search, "&").concat(filter, "&company_id=").concat(this.company_id)).then(function (res) {
-          var l = res.data;
-          _this5.stores = l.data;
-          _this5.storesPagination = l.pagination;
-          _this5.current_page = l.pagination.current_page;
-        })["catch"](function (err) {
+      });
+    } else {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+        title: "".concat(this.$t("general.Areyousure")),
+        text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
+        cancelButtonText: "".concat(this.$t("general.Nocancel")),
+        confirmButtonClass: "btn btn-success mt-2",
+        cancelButtonClass: "btn btn-danger ml-2 mt-2",
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          _this6.isLoader = true;
+          _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/stores/".concat(id)).then(function (res) {
+            _this6.checkAll = [];
+            _this6.getData();
+            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+              icon: "success",
+              title: "".concat(_this6.$t("general.Deleted")),
+              text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
+              showConfirmButton: false,
+              timer: 1500
+            });
+          })["catch"](function (err) {
+            if (err.response.status == 400) {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "error",
+                title: "".concat(_this6.$t("general.Error")),
+                text: "".concat(_this6.$t("general.CantDeleteRelation"))
+              });
+            } else {
+              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                icon: "error",
+                title: "".concat(_this6.$t("general.Error")),
+                text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
+              });
+            }
+          })["finally"](function () {
+            _this6.isLoader = false;
+          });
+        }
+      });
+    }
+  },
+  /**
+   *  end delete countrie
+   */
+  /**
+   *  reset Modal (create)
+   */
+  resetModalHidden: function resetModalHidden() {
+    var _this7 = this;
+    this.create = {
+      name: "",
+      name_e: "",
+      branch_id: "",
+      is_active: "active"
+    };
+    this.$nextTick(function () {
+      _this7.$v.$reset();
+    });
+    this.errors = {};
+    this.$bvModal.hide("create");
+  },
+  /**
+   *  hidden Modal (create)
+   */
+  resetModal: function resetModal() {
+    var _this8 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this8.getBranch();
+            case 2:
+              _this8.create = {
+                name: "",
+                name_e: "",
+                branch_id: null,
+                is_active: "active"
+              };
+              _this8.$nextTick(function () {
+                _this8.$v.$reset();
+              });
+              _this8.errors = {};
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  /**
+   *  create countrie
+   */
+  resetForm: function resetForm() {
+    var _this9 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this9.getBranch();
+            case 2:
+              _this9.create = {
+                name: "",
+                name_e: "",
+                branch_id: null,
+                is_active: "active"
+              };
+              _this9.$nextTick(function () {
+                _this9.$v.$reset();
+              });
+              _this9.is_disabled = false;
+              _this9.errors = {};
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  AddSubmit: function AddSubmit() {
+    var _this10 = this;
+    if (!this.create.name) {
+      this.create.name = this.create.name_e;
+    }
+    if (!this.create.name_e) {
+      this.create.name_e = this.create.name;
+    }
+    this.$v.create.$touch();
+    if (this.$v.create.$invalid) {
+      return;
+    } else {
+      this.isLoader = true;
+      this.errors = {};
+      var data = {
+        name: this.create.name,
+        name_e: this.create.name_e,
+        branch_id: this.create.branch_id,
+        is_active: this.create.is_active,
+        company_id: this.company_id
+      };
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores", data).then(function (res) {
+        _this10.is_disabled = true;
+        _this10.getData();
+        setTimeout(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "success",
+            text: "".concat(_this10.$t("general.Addedsuccessfully")),
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }, 500);
+      })["catch"](function (err) {
+        if (err.response.data) {
+          _this10.errors = err.response.data.errors;
+        } else {
           sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
             icon: "error",
-            title: "".concat(_this5.$t("general.Error")),
-            text: "".concat(_this5.$t("general.Thereisanerrorinthesystem"))
+            title: "".concat(_this10.$t("general.Error")),
+            text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
           });
-        })["finally"](function () {
-          _this5.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  end get Data countrie && pagination
-     */
-    /**
-     *  start delete countrie
-     */
-    deleteBranch: function deleteBranch(id, index) {
-      var _this6 = this;
-      if (Array.isArray(id)) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this6.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores/bulk-delete", {
-              ids: id
-            }).then(function (res) {
-              _this6.checkAll = [];
-              _this6.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this6.$t("general.Deleted")),
-                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
-                });
-                _this6.getData();
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this6.isLoader = false;
-            });
-          }
-        });
-      } else {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-          title: "".concat(this.$t("general.Areyousure")),
-          text: "".concat(this.$t("general.Youwontbeabletoreverthis")),
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonText: "".concat(this.$t("general.Yesdeleteit")),
-          cancelButtonText: "".concat(this.$t("general.Nocancel")),
-          confirmButtonClass: "btn btn-success mt-2",
-          cancelButtonClass: "btn btn-danger ml-2 mt-2",
-          buttonsStyling: false
-        }).then(function (result) {
-          if (result.value) {
-            _this6.isLoader = true;
-            _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/stores/".concat(id)).then(function (res) {
-              _this6.checkAll = [];
-              _this6.getData();
-              sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                icon: "success",
-                title: "".concat(_this6.$t("general.Deleted")),
-                text: "".concat(_this6.$t("general.Yourrowhasbeendeleted")),
-                showConfirmButton: false,
-                timer: 1500
-              });
-            })["catch"](function (err) {
-              if (err.response.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.CantDeleteRelation"))
-                });
-              } else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                  icon: "error",
-                  title: "".concat(_this6.$t("general.Error")),
-                  text: "".concat(_this6.$t("general.Thereisanerrorinthesystem"))
-                });
-              }
-            })["finally"](function () {
-              _this6.isLoader = false;
-            });
-          }
-        });
-      }
-    },
-    /**
-     *  end delete countrie
-     */
-    /**
-     *  reset Modal (create)
-     */
-    resetModalHidden: function resetModalHidden() {
-      var _this7 = this;
-      this.create = {
-        name: "",
-        name_e: "",
-        branch_id: "",
-        is_active: "active"
-      };
-      this.$nextTick(function () {
-        _this7.$v.$reset();
+        }
+      })["finally"](function () {
+        _this10.isLoader = false;
       });
+    }
+  },
+  /**
+   *  edit countrie
+   */
+  editSubmit: function editSubmit(id) {
+    var _this11 = this;
+    if (!this.edit.name) {
+      this.edit.name = this.edit.name_e;
+    }
+    if (!this.edit.name_e) {
+      this.edit.name_e = this.edit.name;
+    }
+    this.$v.edit.$touch();
+    if (this.$v.edit.$invalid) {
+      return;
+    } else {
+      this.isLoader = true;
       this.errors = {};
-      this.$bvModal.hide("create");
-    },
-    /**
-     *  hidden Modal (create)
-     */
-    resetModal: function resetModal() {
-      var _this8 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this8.getBranch();
-              case 2:
-                _this8.create = {
-                  name: "",
-                  name_e: "",
-                  branch_id: null,
-                  is_active: "active"
-                };
-                _this8.$nextTick(function () {
-                  _this8.$v.$reset();
-                });
-                _this8.errors = {};
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    /**
-     *  create countrie
-     */
-    resetForm: function resetForm() {
-      var _this9 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _this9.getBranch();
-              case 2:
-                _this9.create = {
-                  name: "",
-                  name_e: "",
-                  branch_id: null,
-                  is_active: "active"
-                };
-                _this9.$nextTick(function () {
-                  _this9.$v.$reset();
-                });
-                _this9.is_disabled = false;
-                _this9.errors = {};
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    AddSubmit: function AddSubmit() {
-      var _this10 = this;
-      if (!this.create.name) {
-        this.create.name = this.create.name_e;
-      }
-      if (!this.create.name_e) {
-        this.create.name_e = this.create.name;
-      }
-      this.$v.create.$touch();
-      if (this.$v.create.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        var data = {
-          name: this.create.name,
-          name_e: this.create.name_e,
-          branch_id: this.create.branch_id,
-          is_active: this.create.is_active,
-          company_id: this.company_id
-        };
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/stores", data).then(function (res) {
-          _this10.is_disabled = true;
-          _this10.getData();
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this10.$t("general.Addedsuccessfully")),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this10.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this10.$t("general.Error")),
-              text: "".concat(_this10.$t("general.Thereisanerrorinthesystem"))
-            });
-          }
-        })["finally"](function () {
-          _this10.isLoader = false;
-        });
-      }
-    },
-    /**
-     *  edit countrie
-     */
-    editSubmit: function editSubmit(id) {
-      var _this11 = this;
-      if (!this.edit.name) {
-        this.edit.name = this.edit.name_e;
-      }
-      if (!this.edit.name_e) {
-        this.edit.name_e = this.edit.name;
-      }
-      this.$v.edit.$touch();
-      if (this.$v.edit.$invalid) {
-        return;
-      } else {
-        this.isLoader = true;
-        this.errors = {};
-        var data = {
-          name: this.edit.name,
-          name_e: this.edit.name_e,
-          branch_id: this.edit.branch_id,
-          is_active: this.edit.is_active,
-          company_id: this.company_id
-        };
-        _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/stores/".concat(id), data).then(function (res) {
-          _this11.$bvModal.hide("modal-edit-".concat(id));
-          _this11.getData();
-          setTimeout(function () {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "success",
-              text: "".concat(_this11.$t("general.Editsuccessfully")),
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }, 500);
-        })["catch"](function (err) {
-          if (err.response.data) {
-            _this11.errors = err.response.data.errors;
-          } else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-              icon: "error",
-              title: "".concat(_this11.$t("general.Error")),
-              text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
-            });
-          }
-        })["finally"](function () {
-          _this11.isLoader = false;
-        });
-      }
-    },
-    /**
-     *   show Modal (edit)
-     */
-    resetModalEdit: function resetModalEdit(id) {
-      var _this12 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var branch;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return _this12.getBranch();
-              case 2:
-                branch = _this12.stores.find(function (e) {
-                  return id == e.id;
-                });
-                _this12.edit.name = branch.name;
-                _this12.edit.name_e = branch.name_e;
-                _this12.edit.is_active = branch.is_active;
-                _this12.edit.branch_id = branch.branch_id;
-                _this12.errors = {};
-              case 8:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    /**
-     *  hidden Modal (edit)
-     */
-    resetModalHiddenEdit: function resetModalHiddenEdit(id) {
-      this.errors = {};
-      this.edit = {
-        name: "",
-        name_e: "",
-        branch_id: null,
-        is_active: "active"
+      var data = {
+        name: this.edit.name,
+        name_e: this.edit.name_e,
+        branch_id: this.edit.branch_id,
+        is_active: this.edit.is_active,
+        company_id: this.company_id
       };
-    },
-    /*
-     *  start  dynamicSortString
-     */
-    sortString: function sortString(value) {
-      return (0,_helper_tableSort__WEBPACK_IMPORTED_MODULE_9__.dynamicSortString)(value);
-    },
-    SortNumber: function SortNumber(value) {
-      return (0,_helper_tableSort__WEBPACK_IMPORTED_MODULE_9__.dynamicSortNumber)(value);
-    },
-    /**
-     *  start  ckeckRow
-     */
-    checkRow: function checkRow(id) {
-      if (!this.checkAll.includes(id)) {
-        this.checkAll.push(id);
-      } else {
-        var index = this.checkAll.indexOf(id);
-        this.checkAll.splice(index, 1);
-      }
-    },
-    /**
-     *  end  ckeckRow
-     */
-    moveInput: function moveInput(tag, c, index) {
-      document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
-    },
-    getBranch: function getBranch() {
-      var _this13 = this;
-      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _this13.isLoader = true;
-                _context4.next = 3;
-                return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/branches?company_id=".concat(_this13.company_id)).then(function (res) {
-                  var l = res.data.data;
-                  l.unshift({
-                    id: 0,
-                    name: "اضف فرع",
-                    name_e: "Add Branch"
-                  });
-                  _this13.branches = l;
-                })["catch"](function (err) {
-                  sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
-                    icon: "error",
-                    title: "".concat(_this13.$t("general.Error")),
-                    text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
-                  });
-                })["finally"](function () {
-                  _this13.isLoader = false;
-                });
-              case 3:
-              case "end":
-                return _context4.stop();
-            }
+      _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/stores/".concat(id), data).then(function (res) {
+        _this11.$bvModal.hide("modal-edit-".concat(id));
+        _this11.getData();
+        setTimeout(function () {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "success",
+            text: "".concat(_this11.$t("general.Editsuccessfully")),
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }, 500);
+      })["catch"](function (err) {
+        if (err.response.data) {
+          _this11.errors = err.response.data.errors;
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+            icon: "error",
+            title: "".concat(_this11.$t("general.Error")),
+            text: "".concat(_this11.$t("general.Thereisanerrorinthesystem"))
+          });
+        }
+      })["finally"](function () {
+        _this11.isLoader = false;
+      });
+    }
+  },
+  /**
+   *   show Modal (edit)
+   */
+  resetModalEdit: function resetModalEdit(id) {
+    var _this12 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var branch;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _this12.getBranch();
+            case 2:
+              branch = _this12.stores.find(function (e) {
+                return id == e.id;
+              });
+              _this12.edit.name = branch.name;
+              _this12.edit.name_e = branch.name_e;
+              _this12.edit.is_active = branch.is_active;
+              _this12.edit.branch_id = branch.branch_id;
+              _this12.errors = {};
+            case 8:
+            case "end":
+              return _context3.stop();
           }
-        }, _callee4);
-      }))();
-    },
-    showBranchModal: function showBranchModal() {
-      if (this.create.branch_id == 0) {
-        this.$bvModal.show("branch-create");
-        this.create.branch_id = null;
-      }
-    },
-    showBranchModalEdit: function showBranchModalEdit() {
-      if (this.edit.branch_id == 0) {
-        this.$bvModal.show("branch-create");
-        this.edit.branch_id = null;
-      }
+        }
+      }, _callee3);
+    }))();
+  },
+  /**
+   *  hidden Modal (edit)
+   */
+  resetModalHiddenEdit: function resetModalHiddenEdit(id) {
+    this.errors = {};
+    this.edit = {
+      name: "",
+      name_e: "",
+      branch_id: null,
+      is_active: "active"
+    };
+  },
+  /*
+   *  start  dynamicSortString
+   */
+  sortString: function sortString(value) {
+    return (0,_helper_tableSort__WEBPACK_IMPORTED_MODULE_9__.dynamicSortString)(value);
+  },
+  SortNumber: function SortNumber(value) {
+    return (0,_helper_tableSort__WEBPACK_IMPORTED_MODULE_9__.dynamicSortNumber)(value);
+  },
+  /**
+   *  start  ckeckRow
+   */
+  checkRow: function checkRow(id) {
+    if (!this.checkAll.includes(id)) {
+      this.checkAll.push(id);
+    } else {
+      var index = this.checkAll.indexOf(id);
+      this.checkAll.splice(index, 1);
+    }
+  },
+  /**
+   *  end  ckeckRow
+   */
+  moveInput: function moveInput(tag, c, index) {
+    document.querySelector("".concat(tag, "[data-").concat(c, "='").concat(index, "']")).focus();
+  },
+  getBranch: function getBranch() {
+    var _this13 = this;
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _this13.isLoader = true;
+              _context4.next = 3;
+              return _api_adminAxios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/branches?company_id=".concat(_this13.company_id)).then(function (res) {
+                var l = res.data.data;
+                l.unshift({
+                  id: 0,
+                  name: "اضف فرع",
+                  name_e: "Add Branch"
+                });
+                _this13.branches = l;
+              })["catch"](function (err) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default().fire({
+                  icon: "error",
+                  title: "".concat(_this13.$t("general.Error")),
+                  text: "".concat(_this13.$t("general.Thereisanerrorinthesystem"))
+                });
+              })["finally"](function () {
+                _this13.isLoader = false;
+              });
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+  },
+  showBranchModal: function showBranchModal() {
+    if (this.create.branch_id == 0) {
+      this.$bvModal.show("branch-create");
+      this.create.branch_id = null;
+    }
+  },
+  showBranchModalEdit: function showBranchModalEdit() {
+    if (this.edit.branch_id == 0) {
+      this.$bvModal.show("branch-create");
+      this.edit.branch_id = null;
     }
   }
-});
+}), _page$mixins$componen);
 
 /***/ }),
 
@@ -3286,7 +3301,7 @@ var render = function render() {
     return [item.isTitle ? _c("li", {
       key: item.id,
       staticClass: "menu-title"
-    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout ? _c("li", {
+    }, [_vm._v("\n            " + _vm._s(_vm.$t(item.label)) + "\n          ")]) : _vm._e(), _vm._v(" "), !item.isTitle && !item.isLayout && _vm.workFlowTree.includes(item.name) ? _c("li", {
       key: item.id
     }, [_vm.hasItems(item) ? _c("a", {
       "class": {
@@ -3329,8 +3344,8 @@ var render = function render() {
       attrs: {
         "aria-expanded": "false"
       }
-    }, _vm._l(item.subItems, function (subitem, index) {
-      return _c("li", {
+    }, [_vm._l(item.subItems, function (subitem, index) {
+      return [_vm.workFlowTree.includes(item.name) ? _c("li", {
         key: index
       }, [!_vm.hasItems(subitem) ? _c("router-link", {
         staticClass: "side-nav-link-ref",
@@ -3347,7 +3362,7 @@ var render = function render() {
             subitem.isMenuCollapsed = !subitem.isMenuCollapsed;
           }
         }
-      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                    "), _c("span", {
+      }, [_vm._v(_vm._s(_vm.$t(subitem.label)) + "\n                            "), _c("span", {
         staticClass: "menu-arrow"
       })]) : _vm._e(), _vm._v(" "), _c("div", {
         staticClass: "collapse",
@@ -3368,8 +3383,8 @@ var render = function render() {
             to: subSubitem.link
           }
         }, [_vm._v(_vm._s(_vm.$t(subSubitem.label)))])], 1);
-      }), 0) : _vm._e()])], 1);
-    }), 0) : _vm._e()])], 1) : _vm._e()];
+      }), 0) : _vm._e()])], 1) : _vm._e()];
+    })], 2) : _vm._e()])], 1) : _vm._e()];
   })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "clearfix"
   })])], 1);
@@ -7086,121 +7101,148 @@ var menuItems = [{
   id: 100032,
   label: 'menuitems.company.text',
   icon: 'fas fa-city',
+  name: 'company',
   link: '/dashboard/company'
 }, {
   id: 10007,
   label: 'menuitems.branch.text',
   icon: 'fas fa-code-branch',
+  name: 'branch',
   link: '/dashboard/branch'
 }, {
   id: 10008,
   label: 'menuitems.store.text',
+  name: 'store',
   icon: 'fas fa-store',
   link: '/dashboard/store'
 }, {
   id: 10009,
   label: 'menuitems.serial.text',
+  name: 'serial',
   icon: 'fas fa-eraser',
   link: '/dashboard/serial'
 }, {
   id: 113872,
   label: "general.Properties",
   icon: "fas fa-hand-spock",
+  name: 'properties',
   isMenuCollapsed: false,
   subItems: [{
     id: 225,
     label: 'general.ScreenProperties',
+    name: 'screen properties',
     link: '/dashboard/screen-properties'
   }, {
     id: 226,
     label: 'general.TreeProperty',
+    name: 'tree property',
     link: '/dashboard/tree-properties'
   }]
 }, {
   id: 10006,
   label: "menuitems.salesMen.text",
   icon: "fas fa-user-tag",
+  name: 'sales men',
   isMenuCollapsed: false,
   subItems: [{
     id: 10027,
     label: 'menuitems.dashboard.list.salesMenType',
+    name: 'sales men Type',
     link: '/dashboard/salesmenTypes'
   }, {
     id: 100117,
     label: 'menuitems.dashboard.list.salesMen',
+    name: 'sales men',
     link: '/dashboard/salesmen'
   }, {
     id: 9,
     label: 'menuitems.dashboard.list.externalSalesmen',
+    name: 'external salesmen',
     link: '/dashboard/externalSalesmen'
   }, {
     id: 7636473,
     label: 'menuitems.dashboard.list.internalSalesmen',
+    name: 'internal salesmen',
     link: '/dashboard/internalSalesman'
   }]
 }, {
   id: 1000548,
   label: "menuitems.Banks.text",
   icon: "fas fa-piggy-bank",
+  name: 'bank',
   isMenuCollapsed: false,
   subItems: [{
     id: 112201,
     label: 'general.paymentTypes',
+    name: 'payment types',
     link: '/dashboard/paymentTypes'
   }, {
     id: 222,
     label: 'menuitems.Banks.text',
+    name: 'banks',
     link: '/dashboard/banks'
   }, {
     id: 112202,
     label: 'general.bankAccounts',
+    name: 'bank accounts',
     link: '/dashboard/bankAccount'
   }]
 }, {
   id: 1000544,
   label: "menuitems.area.text",
   icon: "fas fa-flag",
+  name: "area",
   isMenuCollapsed: false,
   subItems: [{
     id: 2,
     label: 'menuitems.dashboard.list.country',
+    name: "country",
     link: '/dashboard/country'
   }, {
     id: 3,
     label: 'menuitems.dashboard.list.governorate',
+    name: "governorate",
     link: '/dashboard/governorate'
   }, {
     id: 4,
     label: 'menuitems.dashboard.list.city',
+    name: "city",
     link: '/dashboard/city'
   }, {
     id: 8,
     label: 'menuitems.dashboard.list.avenue',
+    name: "avenue",
     link: '/dashboard/avenue'
   }]
 }, {
   id: 10001,
   label: "menuitems.role.text",
   icon: "ri-shield-user-line",
+  name: 'role',
   isMenuCollapsed: false,
   subItems: [{
     id: 10002,
+    name: 'role Type',
     label: 'menuitems.dashboard.list.rolesType',
     link: '/dashboard/rolesType'
   }, {
     id: 10003,
+    name: 'roles',
     label: 'menuitems.dashboard.list.roles',
     link: '/dashboard/roles'
   }, {
     id: 100043,
+    name: 'role workflow',
     label: 'menuitems.dashboard.list.roleWorkflow',
     link: '/dashboard/role-workflow'
   }, {
     id: 100088,
+    name: 'role workflow button',
     label: 'menuitems.dashboard.list.roleWorkflowButton',
     link: '/dashboard/role-workflow-button'
   }, {
     id: 100134,
+    name: 'role hotfield screen',
     label: 'menuitems.dashboard.list.RoleHotfieldScreen',
     link: '/dashboard/role-hotfield-screen'
   }]
@@ -7208,79 +7250,98 @@ var menuItems = [{
   id: 10023578,
   label: "general.realEstate",
   icon: "fas fa-hotel",
+  name: 'realEstate',
   isMenuCollapsed: false,
   subItems: [{
     id: 100001,
+    name: 'realEstate unit status',
     label: 'general.unitstatus',
     link: '/dashboard/realEstate/unitstatus'
   }, {
     id: 100111,
+    name: 'contract',
     label: 'general.contract',
     link: '/dashboard/realEstate/contract'
   }, {
     id: 100021,
+    name: 'contract unit',
     label: 'general.contractunit',
     link: '/dashboard/realEstate/contractunit'
   }, {
     id: 1000201,
+    name: 'owners',
     label: 'general.owner',
     link: '/dashboard/realEstate/owner'
   }, {
     id: 10048103,
+    name: 'building',
     label: 'general.building',
     link: '/dashboard/realEstate/building'
   }, {
     id: 1022343,
+    name: 'customer',
     label: 'general.customer',
     link: '/dashboard/realEstate/customer'
   }, {
     id: 1022323,
+    name: 'wallets',
     label: 'general.wallet',
     link: '/dashboard/realEstate/wallet'
   }, {
     id: 1042323,
+    name: 'wallet owner',
     label: 'general.walletOwner',
     link: '/dashboard/realEstate/wallet-owner'
   }, {
     id: 1042323,
+    name: 'realEstate units',
     label: 'units.units',
     link: '/dashboard/realEstate/unit'
   }]
 }, {
   id: 1004346756,
   label: "general.archive",
+  name: 'archiving',
   icon: "ri-share-line",
   isMenuCollapsed: false,
   subItems: [{
     id: 38781,
+    name: 'document field',
     label: 'menuitems.DocumentField.text',
     link: '/dashboard/document-fields'
   }, {
     id: 34343,
+    name: 'archive closed references',
     label: 'menuitems.ArchiveClosedReference.text',
     link: '/dashboard/archive-closed-references'
   }, {
     id: 432234,
+    name: 'gen arch doc types',
     label: 'menuitems.GenArchDocType.text',
     link: '/dashboard/gen-arch-doc-types'
   }, {
     id: 34561,
+    name: 'arch doc type fields',
     label: 'menuitems.ArchDocTypeField.text',
     link: '/dashboard/arch-doc-type-fields'
   }, {
     id: 879756,
+    name: 'arch departments',
     label: 'menuitems.ArchDepartment.text',
     link: '/dashboard/arch-departments'
   }, {
     id: 1567443,
+    name: 'arch documents',
     label: 'menuitems.ArchDocument.text',
     link: '/dashboard/arch-documents'
   }, {
     id: 36462,
+    name: 'arch document dtls',
     label: 'menuitems.ArchDocumentDtl.text',
     link: '/dashboard/arch-document-dtls'
   }, {
     id: 32020,
+    name: 'arch doc status',
     label: 'menuitems.ArchDocumentStatus.text',
     link: '/dashboard/arch-doc-status'
   }]
@@ -7288,39 +7349,47 @@ var menuItems = [{
   id: 224,
   label: 'general.Workflowhotfields',
   icon: 'fas fa-hot-tub',
+  name: 'Workflow hotfields',
   link: '/dashboard/workflow-hotfields'
 }, {
   id: 223,
+  name: 'users',
   label: 'general.Users',
   icon: 'fas fa-network-wired',
   link: '/dashboard/users'
 }, {
   id: 5,
+  name: 'currencies',
   label: 'menuitems.currency.text',
   icon: ' fas fa-dollar-sign',
   link: '/dashboard/currency'
 }, {
   id: 6,
+  name: 'employees',
   label: 'menuitems.employee.text',
   icon: 'fas fa-user-friends',
   link: '/dashboard/employee'
 }, {
   id: 7,
+  name: 'financial Year',
   label: 'menuitems.financialYear.text',
   icon: 'fas fa-file-invoice-dollar',
   link: '/dashboard/financialYear'
 }, {
   id: 10004,
+  name: 'units',
   label: 'menuitems.units.text',
   icon: 'far fa-list-alt',
   link: '/dashboard/units'
 }, {
   id: 10005,
+  name: 'color',
   label: 'menuitems.colors.text',
   icon: 'fas fa-palette',
   link: '/dashboard/colors'
 }, {
   id: 10099,
+  name: 'dictionary',
   label: 'general.dictionary',
   icon: 'fas fa-palette',
   link: '/dashboard/dictionary'

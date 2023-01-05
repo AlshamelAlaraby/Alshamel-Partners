@@ -24,7 +24,17 @@ export default {
     loader,
     Multiselect,
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('arch documents')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -500,14 +510,14 @@ export default {
                     ref="dropdown"
                     class="btn-block setting-search"
                   >
-                    <b-form-checkbox 
-                      v-model="filterSetting" 
-                      value="name" 
+                    <b-form-checkbox
+                      v-model="filterSetting"
+                      value="name"
                       class="mb-1"
                       >{{ $t("general.ArchDocumentDocStatus") }}</b-form-checkbox>
-                    <b-form-checkbox 
-                      v-model="filterSetting" 
-                      value="name" 
+                    <b-form-checkbox
+                      v-model="filterSetting"
+                      value="name"
                       class="mb-1"
                       >{{ $t("general.ArchDocumentDocURLreference") }}</b-form-checkbox>
                   </b-dropdown>
@@ -909,23 +919,23 @@ export default {
                     </td>
                     <td v-if="setting.gen_arch_doc_type">
                       <h5 class="m-0 font-weight-normal">
-                        {{ 
-                          (data.gen_arch_doc_type) ? 
-                            ($i18n.locale == 'ar') ? 
-                                data.gen_arch_doc_type.name : 
-                                data.gen_arch_doc_type.name_e : 
-                        '' 
+                        {{
+                          (data.gen_arch_doc_type) ?
+                            ($i18n.locale == 'ar') ?
+                                data.gen_arch_doc_type.name :
+                                data.gen_arch_doc_type.name_e :
+                        ''
                         }}
                         </h5>
                     </td>
                     <td v-if="setting.doc_status">
                       <h5 class="m-0 font-weight-normal">
-                        {{ 
-                          (data.doc_status) ? 
-                            ($i18n.locale == 'ar') ? 
-                                data.doc_status.name : 
-                                data.doc_status.name_e : 
-                        '' 
+                        {{
+                          (data.doc_status) ?
+                            ($i18n.locale == 'ar') ?
+                                data.doc_status.name :
+                                data.doc_status.name_e :
+                        ''
                         }}
                         </h5>
                     </td>

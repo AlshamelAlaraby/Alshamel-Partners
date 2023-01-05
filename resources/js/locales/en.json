@@ -824,6 +824,7 @@
         "walletsTable": "Wallets Tables",
         "wallet": "Wallets",
         "walletOwner": "Wallet Owner",
-        "walletOwnerTable": "wallet Owners Table"
+        "walletOwnerTable": "wallet Owners Table",
+        "realEstateUnitTable": "RealEstate Units Table"
     }
 }

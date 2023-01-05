@@ -39,6 +39,15 @@ export default {
     Multiselect,
     Bank,
   },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('bank accounts')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
   data() {
     return {
       per_page: 50,

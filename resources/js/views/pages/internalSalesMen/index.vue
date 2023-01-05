@@ -31,7 +31,16 @@ export default {
     Multiselect,
     employee,
   },
-  data() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('internal salesmen')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+    data() {
     return {
       per_page: 50,
       search: "",

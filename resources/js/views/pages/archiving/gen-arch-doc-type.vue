@@ -23,7 +23,17 @@ export default {
     loader,
     Multiselect
   },
-  updated() {
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            if (vm.$store.state.auth.work_flow_trees.includes('gen arch doc types')) {
+                return true;
+            } else {
+                return vm.$router.push({ name: "home" });
+            }
+        });
+    },
+
+    updated() {
     $(".englishInput").keypress(function (event) {
       var ew = event.which;
       if (ew == 32) return true;
@@ -287,7 +297,7 @@ export default {
       });
     },
 
-    /** 
+    /**
      *  get parent data
      */
     async getParent(){
@@ -1132,7 +1142,7 @@ export default {
                                 <label for="inlineFormCustomSelectPref">
                                   {{ $t("general.parentId") }}
                                 </label>
-                               
+
                                 <multiselect
                                     v-model="edit.parent_id"
                                     :options="parent.map(type => type.id)"
