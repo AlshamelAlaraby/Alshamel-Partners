@@ -411,7 +411,7 @@ thead {
   background-color: #3bafda;
   color: #fff;
 }
-table td{
-padding: 0.13rem !important;
+table td {
+  padding: 0.13rem !important;
 }
 </style>

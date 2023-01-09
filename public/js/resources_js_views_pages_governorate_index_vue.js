@@ -6249,7 +6249,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v(_vm._s(_vm.getCompanyKey("governorate_country")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("country")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "phone_key"
@@ -6571,7 +6571,7 @@ var render = function render() {
     staticClass: "form-group position-relative"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("governorate_country")) + "\n                      "), _c("span", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("country")) + "\n                      "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -6964,7 +6964,7 @@ var render = function render() {
     staticClass: "d-flex justify-content-center"
   }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("governorate_phone_key")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.country_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("governorate_country")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("country")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_default ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
   }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("governorate_default")) + "\n                    ")])]) : _vm._e(), _vm._v(" "), _vm.setting.is_active ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
@@ -7155,7 +7155,7 @@ var render = function render() {
       staticClass: "form-group"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("governorate_country")) + "\n                                "), _c("span", {
+    }, [_vm._v("\n                                " + _vm._s(_vm.getCompanyKey("country")) + "\n                                "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -9106,7 +9106,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         translations: {},
         get_translation: true
       }).then(function (res) {
-        _this.defaultsKeys = res.data.translations;
+        var workflows = _this.$store.state.auth.work_flow_trees;
+        var keys = {};
+        for (var key in res.data.translations) {
+          if (workflows.includes(res.data.translations[key].screen)) {
+            keys[key] = res.data.translations[key];
+          }
+        }
+        _this.defaultsKeys = keys;
         _this.filterResult = _objectSpread({}, _this.defaultsKeys);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({

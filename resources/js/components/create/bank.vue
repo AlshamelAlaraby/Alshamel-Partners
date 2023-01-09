@@ -52,7 +52,7 @@
           <div class="col-md-6">
             <div class="form-group position-relative">
               <label class="control-label">
-                {{ getCompanyKey('bank_country') }}
+                {{ getCompanyKey('country') }}
                 <span class="text-danger">*</span>
               </label>
               <multiselect

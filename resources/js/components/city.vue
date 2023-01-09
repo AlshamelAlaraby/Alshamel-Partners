@@ -45,7 +45,7 @@
         <div class="col-md-6">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ getCompanyKey('city_country') }}
+              {{ getCompanyKey('country') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
@@ -73,7 +73,7 @@
         <div class="col-md-6">
           <div class="form-group position-relative">
             <label class="control-label">
-              {{ getCompanyKey('city_governorate') }}
+              {{ getCompanyKey('governorate') }}
               <span class="text-danger">*</span>
             </label>
             <multiselect
