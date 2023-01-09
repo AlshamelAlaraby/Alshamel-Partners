@@ -636,7 +636,7 @@ export default {
                       v-model="filterSetting"
                       :value="$i18n.locale == 'ar' ? 'country.name' : 'country.name_e'"
                       class="mb-1"
-                      >{{ getCompanyKey("governorate_country") }}
+                      >{{ getCompanyKey("country") }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
@@ -857,7 +857,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ getCompanyKey("governorate_country") }}
+                        {{ getCompanyKey("country") }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -1115,7 +1115,7 @@ export default {
                     </th>
                     <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
-                        {{ getCompanyKey("governorate_country") }}
+                        {{ getCompanyKey("country") }}
                       </div>
                     </th>
                     <th v-if="setting.is_default">
@@ -1282,7 +1282,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="control-label">
-                                  {{ getCompanyKey("governorate_country") }}
+                                  {{ getCompanyKey("country") }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect

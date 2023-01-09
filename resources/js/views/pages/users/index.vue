@@ -813,7 +813,7 @@ export default {
                       {{ getCompanyKey("user_email") }}
                     </b-form-checkbox>
                       <b-form-checkbox v-model="filterSetting" :value="this.$i18n.locale == 'ar'?'employee.name':'employee.name_e'" class="mb-1">
-                          {{ getCompanyKey('user_employee') }}
+                          {{ getCompanyKey('employee') }}
                       </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -917,7 +917,7 @@ export default {
                         {{ getCompanyKey("user_email") }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.employee_id" class="mb-1">
-                        {{ getCompanyKey('user_employee') }}
+                        {{ getCompanyKey('employee') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
                         {{ getCompanyKey('user_status') }}
@@ -1034,7 +1034,7 @@ export default {
                           <div class="col-md-12">
                             <div class="form-group">
                               <label
-                                >{{ getCompanyKey('user_employee') }}
+                                >{{ getCompanyKey('employee') }}
                                 <span class="text-danger">*</span></label
                               >
 
@@ -1439,7 +1439,7 @@ export default {
                     </th>
                     <th v-if="setting.employee_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('user_employee') }}</span>
+                        <span>{{ getCompanyKey('employee') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1617,7 +1617,7 @@ export default {
                                   <div class="col-md-12">
                                     <div class="form-group">
                                       <label
-                                        >{{ getCompanyKey('user_employee') }}
+                                        >{{ getCompanyKey('employee') }}
                                         <span class="text-danger">*</span>
                                       </label>
                                       <multiselect

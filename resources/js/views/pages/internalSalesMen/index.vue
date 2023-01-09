@@ -550,7 +550,7 @@ export default {
                       :value="$i18n.locale  == 'ar'?'employee.name':'employee.name_e'"
                       class="mb-1"
                     >
-                      {{ getCompanyKey('internal_sale_man_employee') }}
+                      {{ getCompanyKey('employee') }}
                     </b-form-checkbox>
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -645,7 +645,7 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.employee_id" class="mb-1"
-                        >{{ getCompanyKey('internal_sale_man_employee') }}
+                        >{{ getCompanyKey('employee') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
                         {{ getCompanyKey('internal_sale_man_status') }}
@@ -754,7 +754,7 @@ export default {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="my-1 mr-2">
-                        {{ getCompanyKey('internal_sale_man_employee') }}
+                        {{ getCompanyKey('employee') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -841,7 +841,7 @@ export default {
                     </th>
                     <th v-if="setting.employee_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('internal_sale_man_employee') }}</span>
+                        <span>{{ getCompanyKey('ployee') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -985,7 +985,7 @@ export default {
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label class="my-1 mr-2">
-                                  {{ getCompanyKey('internal_sale_man_employee') }}
+                                  {{ getCompanyKey('employee') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect

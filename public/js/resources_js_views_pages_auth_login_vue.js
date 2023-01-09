@@ -175,7 +175,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       });
                     }
                   });
-                  _this2.$store.commit('auth/editWorkFlowTrees', ['dictionary', 'company'].concat(name));
+                  _this2.$store.commit('auth/editWorkFlowTrees', ['dictionary', "home", 'company'].concat(name));
                 })["catch"](function (err) {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                     icon: "error",

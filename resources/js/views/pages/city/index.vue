@@ -672,13 +672,13 @@ export default {
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
-                      >{{ getCompanyKey('city_country') }}</b-form-checkbox
+                      >{{ getCompanyKey('country') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'governorate.name':'governorate.name_e'"
                       class="mb-1"
-                      >{{ getCompanyKey('city_governorate') }}</b-form-checkbox
+                      >{{ getCompanyKey('governorate') }}</b-form-checkbox
                     >
                   </b-dropdown>
                   <!-- Basic dropdown -->
@@ -777,10 +777,10 @@ export default {
                               {{ getCompanyKey('city_name_en') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                              {{ getCompanyKey('city_country') }}
+                              {{ getCompanyKey('country') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.governorate_id" class="mb-1">
-                              {{ getCompanyKey('city_governorate') }}
+                              {{ getCompanyKey('governorate') }}
                           </b-form-checkbox>
                           <b-form-checkbox v-model="setting.is_active" class="mb-1">
                               {{ getCompanyKey('city_status') }}
@@ -885,7 +885,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ getCompanyKey('city_country') }}
+                        {{ getCompanyKey('country') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -913,7 +913,7 @@ export default {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ getCompanyKey('city_governorate') }}
+                        {{ getCompanyKey('governorate') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -1100,7 +1100,7 @@ export default {
                     </th>
                     <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('city_country') }}</span>
+                        <span>{{ getCompanyKey('country') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1115,7 +1115,7 @@ export default {
                     </th>
                     <th v-if="setting.governorate_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('city_governorate') }}</span>
+                        <span>{{ getCompanyKey('governorate') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1279,7 +1279,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ getCompanyKey('city_country') }}
+                                  {{ getCompanyKey('country') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect
@@ -1309,7 +1309,7 @@ export default {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ getCompanyKey('city_governorate') }}
+                                  {{ getCompanyKey('governorate') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect

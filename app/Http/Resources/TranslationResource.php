@@ -15,12 +15,12 @@ class TranslationResource extends JsonResource
     public function toArray($request)
     {
         return [
-            $this->key=>[
-                'id'=>$this->id,
-                'default_en'=>$this->default_en,
-                'default_ar'=>$this->default_ar,
-                'new_en'=>$this->new_en,
-                'new_ar'=>$this->new_ar
+            $this->key => [
+                'id' => $this->id,
+                'default_en' => $this->default_en,
+                'default_ar' => $this->default_ar,
+                'new_en' => $this->new_en,
+                'new_ar' => $this->new_ar,
             ]
         ];
     }

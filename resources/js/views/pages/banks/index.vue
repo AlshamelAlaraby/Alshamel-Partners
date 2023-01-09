@@ -713,7 +713,7 @@ export default {
                                                 {{ getCompanyKey('bank_name_en') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                                                {{ getCompanyKey('bank_country') }}
+                                                {{ getCompanyKey('country') }}
                                             </b-form-checkbox>
                                             <b-form-checkbox v-model="setting.swift_code" class="mb-1">
                                                 {{ getCompanyKey('bank_swiftcode') }}
@@ -819,7 +819,7 @@ export default {
                                     <div class="col-md-6">
                                         <div class="form-group position-relative">
                                             <label class="control-label">
-                                                {{ getCompanyKey('bank_country') }}
+                                                {{ getCompanyKey('country') }}
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <multiselect
@@ -1014,7 +1014,7 @@ export default {
                                     </th>
                                     <th v-if="setting.country_id">
                                         <div class="d-flex justify-content-center">
-                                            <span>{{ getCompanyKey('bank_country') }}</span>
+                                            <span>{{ getCompanyKey('country') }}</span>
                                             <div class="arrow-sort">
                                                 <i
                                                     class="fas fa-arrow-up"
@@ -1173,7 +1173,7 @@ export default {
                                                     <div class="col-md-6">
                                                         <div class="form-group position-relative">
                                                             <label class="control-label">
-                                                                {{ getCompanyKey('bank_country') }}
+                                                                {{ getCompanyKey('country') }}
                                                                 <span class="text-danger">*</span>
                                                             </label>
                                                             <multiselect
