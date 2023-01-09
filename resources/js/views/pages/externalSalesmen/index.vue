@@ -617,7 +617,7 @@ create: {
                       v-model="filterSetting"
                       :value="$i18n.locale  == 'ar'?'country.name':'country.name_e'"
                       class="mb-1"
-                      >{{ getCompanyKey('external_sale_man_country') }}</b-form-checkbox
+                      >{{ getCompanyKey('country') }}</b-form-checkbox
                     >
                     <b-form-checkbox
                       v-model="filterSetting"
@@ -748,7 +748,7 @@ create: {
                         {{ getCompanyKey('external_sale_man_national_id') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.country_id" class="mb-1">
-                        {{ getCompanyKey('external_sale_man_country') }}
+                        {{ getCompanyKey('country') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.is_active" class="mb-1">
                         {{ getCompanyKey('external_sale_man_status') }}
@@ -867,7 +867,7 @@ create: {
                   <div class="col-md-6">
                     <div class="form-group position-relative">
                       <label class="control-label">
-                        {{ getCompanyKey('external_sale_man_country') }}
+                        {{ getCompanyKey('country') }}
                         <span class="text-danger">*</span>
                       </label>
                       <multiselect
@@ -1151,7 +1151,7 @@ create: {
                     </th>
                     <th v-if="setting.country_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('external_sale_man_country') }}</span>
+                        <span>{{ getCompanyKey('country') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1332,7 +1332,7 @@ create: {
                             <div class="col-md-6">
                               <div class="form-group position-relative">
                                 <label class="control-label">
-                                  {{ getCompanyKey('external_sale_man_country') }}
+                                  {{ getCompanyKey('country') }}
                                   <span class="text-danger">*</span>
                                 </label>
                                 <multiselect

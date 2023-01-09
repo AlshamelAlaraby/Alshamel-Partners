@@ -842,7 +842,7 @@ export default {
                       :value="$i18n.locale == 'ar' ? 'bank.name' : 'bank.name_e'"
                       class="mb-1"
                     >
-                      {{ getCompanyKey('bank_account_bank') }}
+                      {{ getCompanyKey('bank') }}
                     </b-form-checkbox>
                     <b-form-checkbox
                       v-model="filterSetting"
@@ -861,7 +861,7 @@ export default {
                       {{ getCompanyKey('bank_account_email') }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="filterSetting" value="emp_id" class="mb-1">
-                      {{ getCompanyKey('bank_account_employee') }}
+                      {{ getCompanyKey('employee') }}
                     </b-form-checkbox>
                     <b-form-checkbox v-model="filterSetting" value="rp_code" class="mb-1"
                       >{{ getCompanyKey('bank_account_rpcode') }}
@@ -959,7 +959,7 @@ export default {
                       class="dropdown-custom-ali"
                     >
                       <b-form-checkbox v-model="setting.bank_id" class="mb-1"
-                        >{{ getCompanyKey('bank_account_bank') }}
+                        >{{ getCompanyKey('bank') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.account_number" class="mb-1">
                         {{ getCompanyKey('bank_account_number') }}
@@ -974,7 +974,7 @@ export default {
                         {{ getCompanyKey('bank_account_email') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.emp_id" class="mb-1">
-                        {{ getCompanyKey('bank_account_employee') }}
+                        {{ getCompanyKey('employee') }}
                       </b-form-checkbox>
                       <b-form-checkbox v-model="setting.rp_code" class="mb-1">
                         {{ getCompanyKey('bank_account_rpcode') }}
@@ -1092,7 +1092,7 @@ export default {
                           <div class="col-md-6">
                             <div class="form-group position-relative">
                               <label class="control-label">
-                                {{ getCompanyKey('bank_account_bank') }}
+                                {{ getCompanyKey('bank') }}
                                 <span class="text-danger">*</span>
                               </label>
                               <multiselect
@@ -1293,7 +1293,7 @@ export default {
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="field-3" class="control-label">
-                                {{ getCompanyKey('bank_account_employee') }}
+                                {{ getCompanyKey('employee') }}
                                 <span class="text-danger">*</span>
                               </label>
 
@@ -1528,7 +1528,7 @@ export default {
                     </th>
                     <th v-if="setting.bank_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('bank_account_bank') }}</span>
+                        <span>{{ getCompanyKey('bank') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1608,7 +1608,7 @@ export default {
 
                     <th v-if="setting.emp_id">
                       <div class="d-flex justify-content-center">
-                        <span>{{ getCompanyKey('bank_account_employee') }}</span>
+                        <span>{{ getCompanyKey('employee') }}</span>
                         <div class="arrow-sort">
                           <i
                             class="fas fa-arrow-up"
@@ -1765,7 +1765,7 @@ export default {
                                 <div class="col-md-6">
                                   <div class="form-group position-relative">
                                     <label class="control-label">
-                                      {{ getCompanyKey('bank_account_bank') }}
+                                      {{ getCompanyKey('bank') }}
                                       <span class="text-danger">*</span>
                                     </label>
                                     <multiselect
@@ -1971,7 +1971,7 @@ export default {
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <label for="field-3" class="control-label">
-                                      {{ getCompanyKey('bank_account_employee') }}
+                                      {{ getCompanyKey('employee') }}
                                       <span class="text-danger">*</span>
                                     </label>
 

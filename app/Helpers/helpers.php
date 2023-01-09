@@ -90,7 +90,8 @@ function get_trans(){
             'default_en'=>$d->default_en,
             'default_ar'=>$d->default_ar,
             'new_en'=>$d->new_en,
-            'new_ar'=>$d->new_ar
+            'new_ar'=>$d->new_ar,
+            "screen"=>$d->screen
         ];
     }
     return $arr;

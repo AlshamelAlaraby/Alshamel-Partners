@@ -5720,7 +5720,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                        " + _vm._s(_vm.getCompanyKey("user_employee")) + "\n                    ")])], 1)], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                        " + _vm._s(_vm.getCompanyKey("employee")) + "\n                    ")])], 1)], 1), _vm._v(" "), _c("div", {
     staticClass: "d-inline-block position-relative",
     staticStyle: {
       width: "77%"
@@ -5875,7 +5875,7 @@ var render = function render() {
       },
       expression: "setting.employee_id"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("user_employee")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("employee")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.is_active,
@@ -6035,7 +6035,7 @@ var render = function render() {
     staticClass: "col-md-12"
   }, [_c("div", {
     staticClass: "form-group"
-  }, [_c("label", [_vm._v(_vm._s(_vm.getCompanyKey("user_employee")) + "\n                              "), _c("span", {
+  }, [_c("label", [_vm._v(_vm._s(_vm.getCompanyKey("employee")) + "\n                              "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -6536,7 +6536,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.employee_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("user_employee")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("employee")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -6757,7 +6757,7 @@ var render = function render() {
       staticClass: "col-md-12"
     }, [_c("div", {
       staticClass: "form-group"
-    }, [_c("label", [_vm._v(_vm._s(_vm.getCompanyKey("user_employee")) + "\n                                      "), _c("span", {
+    }, [_c("label", [_vm._v(_vm._s(_vm.getCompanyKey("employee")) + "\n                                      "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -8749,7 +8749,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         translations: {},
         get_translation: true
       }).then(function (res) {
-        _this.defaultsKeys = res.data.translations;
+        var workflows = _this.$store.state.auth.work_flow_trees;
+        var keys = {};
+        for (var key in res.data.translations) {
+          if (workflows.includes(res.data.translations[key].screen)) {
+            keys[key] = res.data.translations[key];
+          }
+        }
+        _this.defaultsKeys = keys;
         _this.filterResult = _objectSpread({}, _this.defaultsKeys);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({

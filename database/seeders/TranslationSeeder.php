@@ -22,6 +22,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "branch"
             ],
             [
                 "key" => "branch_edit_form",
@@ -30,6 +31,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "branch"
             ],
             [
                 "key" => "branch_name_ar",
@@ -38,6 +40,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "branch"
             ],
             [
                 "key" => "branch_name_en",
@@ -46,6 +49,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "branch"
             ],
             [
                 "key" => "branch_status",
@@ -54,6 +58,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "branch"
             ],
         ]);
         //Unit status
@@ -65,6 +70,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
             ],
             [
                 "key" => "unitstatus_edit_form",
@@ -73,6 +79,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
             ],
             [
                 "key" => "unitstatus_name_ar",
@@ -81,6 +88,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
+
             ],
             [
                 "key" => "unitstatus_name_en",
@@ -89,6 +98,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
+
             ],
             [
                 "key" => "unitstatus_status",
@@ -97,6 +108,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
+
             ],
             [
                 "key" => "unitstatus_default",
@@ -105,6 +118,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "realEstate unit status"
+
             ],
         ]);
         //Store
@@ -116,6 +131,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
             ],
             [
                 "key" => "store_edit_form",
@@ -124,6 +140,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
             ],
             [
                 "key" => "store_name_ar",
@@ -132,6 +149,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
             ],
             [
                 "key" => "store_name_en",
@@ -140,6 +158,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
             ],
             [
                 "key" => "store_status",
@@ -148,6 +167,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
+
             ],
             [
                 "key" => "branch",
@@ -156,6 +177,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "store",
             ],
         ]);
         //Screen property
@@ -167,6 +189,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "screen properties",
             ],
             [
                 "key" => "screen_property_edit_form",
@@ -175,6 +198,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "screen properties",
+
             ],
             [
                 "key" => "screen",
@@ -183,6 +208,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "screen properties",
+
             ],
             [
                 "key" => "property",
@@ -191,6 +218,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "screen properties",
+
             ],
         ]);
         //Tree property
@@ -202,6 +231,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "tree property"
             ],
             [
                 "key" => "property_edit_form",
@@ -210,6 +240,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "tree property"
             ],
             [
                 "key" => "property_name_ar",
@@ -218,6 +249,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "tree property"
+
             ],
             [
                 "key" => "property_name_en",
@@ -226,6 +259,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "tree property"
             ],
             [
                 "key" => "required",
@@ -234,6 +268,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "tree property"
             ],
         ]);
         //Sales men types
@@ -245,6 +280,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men Type"
             ],
             [
                 "key" => "sale_man_type_edit_form",
@@ -253,6 +289,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men Type"
             ],
             [
                 "key" => "sale_man_type_name_ar",
@@ -261,6 +298,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men Type"
             ],
             [
                 "key" => "sale_man_type_name_en",
@@ -269,6 +307,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men Type"
             ],
             [
                 "key" => "is_employee",
@@ -277,6 +316,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men Type"
             ],
         ]);
         //Sales man
@@ -288,6 +328,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men"
             ],
             [
                 "key" => "sale_man_edit_form",
@@ -296,6 +337,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men"
             ],
             [
                 "key" => "sale_man_name_ar",
@@ -304,6 +346,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men"
             ],
             [
                 "key" => "sale_man_name_en",
@@ -312,6 +355,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men"
             ],
             [
                 "key" => "sale_man_type",
@@ -320,6 +364,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "sales men"
             ],
         ]);
         //External sale man
@@ -331,6 +376,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
             ],
             [
                 "key" => "external_sale_man_edit_form",
@@ -339,6 +385,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
             ],
             [
                 "key" => "external_sale_man_phone",
@@ -347,6 +394,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
             ],
             [
                 "key" => "external_sale_man_email",
@@ -355,14 +403,17 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
+
             ],
             [
-                "key" => "external_sale_man_country",
-                "default_en" => "External Sale man country",
-                "default_ar" => "دولة رجل المبيعات الخارجي",
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
             ],
             [
                 "key" => "external_sale_man_national_id",
@@ -371,6 +422,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
+
             ],
             [
                 "key" => "external_sale_man_address",
@@ -379,6 +432,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
+
             ],
             [
                 "key" => "external_sale_man_code",
@@ -387,6 +442,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
+
             ],
             [
                 "key" => "external_sale_man_status",
@@ -395,6 +452,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "external salesmen"
+
             ],
         ]);
         //Payment type
@@ -406,6 +465,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "payment types"
             ],
             [
                 "key" => "payment_type_edit_form",
@@ -414,6 +474,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "payment types"
             ],
             [
                 "key" => "payment_type_name_ar",
@@ -422,6 +483,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "payment types"
+
             ],
             [
                 "key" => "payment_type_name_en",
@@ -430,6 +493,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "payment types"
+
             ],
             [
                 "key" => "payment_type_default",
@@ -438,6 +503,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "payment types"
+
             ],
         ]);
         //Banks
@@ -449,6 +516,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
             ],
             [
                 "key" => "bank_edit_form",
@@ -457,6 +525,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
             ],
             [
                 "key" => "bank_name_ar",
@@ -465,6 +534,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
             ],
             [
                 "key" => "bank_name_en",
@@ -473,14 +543,18 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
+
             ],
             [
-                "key" => "bank_country",
-                "default_en" => "Bank coutnry",
-                "default_ar" => "دولة البنك",
+                "key" => "country",
+                "default_en" => "Coutnry name",
+                "default_ar" => "اسم الدولة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
+
             ],
             [
                 "key" => "bank_swiftcode",
@@ -489,6 +563,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "banks"
             ],
         ]);
         //Bank account
@@ -500,6 +575,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_edit_form",
@@ -508,14 +584,16 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
-                "key" => "bank_account_bank",
-                "default_en" => "Bank account bank",
-                "default_ar" => "بنك الحساب البنكي",
+                "key" => "bank",
+                "default_en" => "Bank name",
+                "default_ar" => "اسم البنك",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_number",
@@ -524,6 +602,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_phone",
@@ -532,6 +611,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_address",
@@ -540,6 +620,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_email",
@@ -548,15 +629,17 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
 
             [
-                "key" => "bank_account_employee",
-                "default_en" => "Bank account employee",
-                "default_ar" => "موظف الحساب البنكي",
+                "key" => "employee",
+                "default_en" => "Employee name",
+                "default_ar" => "اسم الموظف",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
             [
                 "key" => "bank_account_rpcode",
@@ -565,6 +648,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "bank accounts"
             ],
         ]);
 
@@ -577,6 +661,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "internal salesmen"
             ],
             [
                 "key" => "internal_sale_man_edit_form",
@@ -585,14 +670,16 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "internal salesmen"
             ],
             [
-                "key" => "internal_sale_man_employee",
-                "default_en" => "Internal sale man employee",
-                "default_ar" => "موظف رجل المبيعات الداخلي",
+                "key" => "employee",
+                "default_en" => "Employee name",
+                "default_ar" => "اسم الموظف",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "internal salesmen"
             ],
             [
                 "key" => "internal_sale_man_status",
@@ -601,6 +688,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "internal salesmen"
             ],
         ]);
         //country
@@ -612,6 +700,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_edit_form",
@@ -620,6 +709,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_name_ar",
@@ -628,6 +718,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_name_en",
@@ -636,8 +727,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
-            ////
             [
                 "key" => "country_long_name_ar",
                 "default_en" => "Country long name (arabic)",
@@ -645,6 +736,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_long_name_en",
@@ -653,6 +745,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_phone_key",
@@ -661,6 +754,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_short_code",
@@ -669,6 +763,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_default",
@@ -677,6 +772,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_status",
@@ -685,6 +781,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
             [
                 "key" => "country_national_id",
@@ -693,6 +790,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "country"
             ],
         ]);
         //governorate
@@ -704,6 +802,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_edit_form",
@@ -712,6 +811,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_name_ar",
@@ -720,6 +820,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_name_en",
@@ -728,6 +829,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_phone_key",
@@ -736,6 +838,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_default",
@@ -744,6 +847,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
                 "key" => "governorate_status",
@@ -752,14 +856,16 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
             [
-                "key" => "governorate_country",
-                "default_en" => "Governorate country",
-                "default_ar" => "دولة المحافظة",
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "governorate"
             ],
         ]);
         //city
@@ -771,6 +877,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
                 "key" => "city_edit_form",
@@ -779,6 +886,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
                 "key" => "city_name_ar",
@@ -787,6 +895,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
                 "key" => "city_name_en",
@@ -795,6 +904,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
                 "key" => "city_status",
@@ -803,22 +913,25 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
-                "key" => "city_country",
-                "default_en" => "City country",
-                "default_ar" => "دولة المدينة",
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
             [
-                "key" => "city_governorate",
-                "default_en" => "City governorate",
-                "default_ar" => "محافظة المدينة",
+                "key" => "governorate",
+                "default_en" => "Governorate name",
+                "default_ar" => "اسم المحافظة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "city"
             ],
         ]);
         //avenue
@@ -830,6 +943,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
                 "key" => "avenue_edit_form",
@@ -838,6 +952,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
                 "key" => "avenue_name_ar",
@@ -846,6 +961,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
                 "key" => "avenue_name_en",
@@ -854,6 +970,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
                 "key" => "avenue_status",
@@ -862,30 +979,34 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
-                "key" => "avenue_country",
-                "default_en" => "Avenue country",
-                "default_ar" => "دولة المنطقة",
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
-                "key" => "avenue_governorate",
-                "default_en" => "Avenue governorate",
-                "default_ar" => "محافظة المنطقة",
+                "key" => "governorate",
+                "default_en" => "Governorate name",
+                "default_ar" => "اسم المحافظة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
             [
-                "key" => "avenue_city",
-                "default_en" => "Avenue city",
-                "default_ar" => "مدينة المنطقة",
+                "key" => "city",
+                "default_en" => "City name",
+                "default_ar" => "اسم المدينة",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "avenue"
             ],
         ]);
         //Role type
@@ -897,6 +1018,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "role Type"
             ],
             [
                 "key" => "role_type_edit_form",
@@ -905,6 +1027,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "role Type"
             ],
             [
                 "key" => "role_type_name_ar",
@@ -913,6 +1036,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "role Type"
             ],
             [
                 "key" => "role_type_name_en",
@@ -921,6 +1045,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "role Type"
             ],
         ]);
         //Role
@@ -932,6 +1057,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "roles"
             ],
             [
                 "key" => "role_edit_form",
@@ -940,6 +1066,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "roles"
             ],
             [
                 "key" => "role_name_ar",
@@ -948,6 +1075,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "roles"
             ],
             [
                 "key" => "role_name_en",
@@ -956,6 +1084,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "roles"
             ],
             [
                 "key" => "role_type",
@@ -964,6 +1093,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen" => "roles"
             ],
         ]);
         //Role workflow
@@ -975,6 +1105,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow"
             ],
             [
                 "key" => "role_workflow_edit_form",
@@ -983,6 +1114,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow"
             ],
             [
                 "key" => "role",
@@ -991,6 +1123,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow"
             ],
             [
                 "key" => "workflow",
@@ -999,6 +1132,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow"
             ],
         ]);
         //Role workflow button
@@ -1010,6 +1144,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow button"
             ],
             [
                 "key" => "role_workflow_button_edit_form",
@@ -1018,6 +1153,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow button"
             ],
             [
                 "key" => "button",
@@ -1026,6 +1162,25 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role workflow button"
+            ],
+            [
+                "key" => "role",
+                "default_en" => "Role name",
+                "default_ar" => "اسم الدور",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"role workflow button"
+            ],
+            [
+                "key" => "workflow",
+                "default_en" => "Workflow name",
+                "default_ar" => "اسم سير العمل",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"role workflow button"
             ],
         ]);
         //Role hotfield screen
@@ -1037,6 +1192,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role hotfield screen",
             ],
             [
                 "key" => "role_hotfield_screen_edit_form",
@@ -1045,6 +1201,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role hotfield screen",
             ],
             [
                 "key" => "hotfield",
@@ -1053,6 +1210,25 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"role hotfield screen",
+            ],
+            [
+                "key" => "role",
+                "default_en" => "Role name",
+                "default_ar" => "اسم الدور",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"role hotfield screen"
+            ],
+            [
+                "key" => "workflow",
+                "default_en" => "Workflow name",
+                "default_ar" => "اسم سير العمل",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"role hotfield screen"
             ],
         ]);
         //Workflow hotfield
@@ -1064,6 +1240,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"Workflow hotfields"
             ],
             [
                 "key" => "workflow_hotfield_edit_form",
@@ -1072,6 +1249,25 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"Workflow hotfields"
+            ],
+            [
+                "key" => "hotfield",
+                "default_en" => "Hotfield name",
+                "default_ar" => "اسم الحقل الساخن",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"Workflow hotfields",
+            ],
+            [
+                "key" => "workflow",
+                "default_en" => "Workflow name",
+                "default_ar" => "اسم سير العمل",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"Workflow hotfields"
             ],
         ]);
         //Users
@@ -1083,6 +1279,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_edit_form",
@@ -1091,6 +1288,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_name_ar",
@@ -1099,6 +1297,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_name_en",
@@ -1107,6 +1306,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_status",
@@ -1115,6 +1315,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_email",
@@ -1123,14 +1324,16 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
-                "key" => "user_employee",
-                "default_en" => "User employee",
-                "default_ar" => "موظف المستخدم",
+                "key" => "employee",
+                "default_en" => "Employee name",
+                "default_ar" => "اسم الموظف",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
             [
                 "key" => "user_password",
@@ -1139,6 +1342,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"users"
             ],
         ]);
         //Currency
@@ -1150,6 +1354,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
             ],
             [
                 "key" => "currency_edit_form",
@@ -1158,6 +1363,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_name_ar",
@@ -1166,6 +1373,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_name_en",
@@ -1174,6 +1383,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_code_ar",
@@ -1182,6 +1393,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_code_en",
@@ -1190,6 +1403,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_fraction_ar",
@@ -1198,6 +1413,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_fraction_en",
@@ -1206,8 +1423,9 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
-            ////
             [
                 "key" => "currency_symbol_ar",
                 "default_en" => "Currency symbol (arabic)",
@@ -1215,6 +1433,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
             ],
             [
                 "key" => "currency_symbol_en",
@@ -1223,6 +1442,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_status",
@@ -1231,6 +1452,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_default",
@@ -1239,6 +1462,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
             [
                 "key" => "currency_fraction_number",
@@ -1247,6 +1472,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"currencies"
+
             ],
         ]);
         //Employee
@@ -1258,6 +1485,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"employees"
             ],
             [
                 "key" => "employee_edit_form",
@@ -1266,6 +1494,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"employees"
+
             ],
             [
                 "key" => "employee_name_ar",
@@ -1274,6 +1504,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"employees"
+
             ],
             [
                 "key" => "employee_name_en",
@@ -1282,6 +1514,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"employees"
+
             ],
         ]);
         //Financial Year
@@ -1293,6 +1527,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
             ],
             [
                 "key" => "financial_year_edit_form",
@@ -1301,6 +1536,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
+
             ],
             [
                 "key" => "financial_year_name_ar",
@@ -1309,6 +1546,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
+
             ],
             [
                 "key" => "financial_year_name_en",
@@ -1317,6 +1556,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
+
             ],
             [
                 "key" => "financial_year_start_date",
@@ -1325,6 +1566,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
+
             ],
             [
                 "key" => "financial_year_end_date",
@@ -1333,6 +1576,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"financial Year"
+
             ],
         ]);
         //Units
@@ -1344,6 +1589,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"units"
             ],
             [
                 "key" => "unit_edit_form",
@@ -1352,6 +1598,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"units"
+
             ],
             [
                 "key" => "unit_name_ar",
@@ -1360,6 +1608,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"units"
+
             ],
             [
                 "key" => "unit_name_en",
@@ -1368,6 +1618,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"units"
+
             ],
             [
                 "key" => "unit_status",
@@ -1376,9 +1628,11 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"units"
+
             ],
         ]);
-        //Units
+        //Color
         Translation::insert([
             [
                 "key" => "color_create_form",
@@ -1387,6 +1641,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"color"
             ],
             [
                 "key" => "color_edit_form",
@@ -1395,6 +1650,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"color"
+
             ],
             [
                 "key" => "color_name_ar",
@@ -1403,6 +1660,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"color"
+
             ],
             [
                 "key" => "color_name_en",
@@ -1411,6 +1670,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"color"
+
             ],
             [
                 "key" => "color_status",
@@ -1419,6 +1680,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"color"
+
             ],
         ]);
         //Contract unit
@@ -1430,6 +1693,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract unit"
             ],
             [
                 "key" => "contractunit_edit_form",
@@ -1438,6 +1702,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract unit"
+
             ],
         ]);
         //Contract
@@ -1449,6 +1715,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
             ],
             [
                 "key" => "contract_edit_form",
@@ -1457,6 +1724,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
+
             ],
             [
                 "key" => "customer",
@@ -1465,6 +1734,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
             ],
             [
                 "key" => "contract_date",
@@ -1473,6 +1743,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
             ],
             [
                 "key" => "sale_man",
@@ -1481,6 +1752,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
+
             ],
             [
                 "key" => "reservation_date",
@@ -1489,6 +1762,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"contract"
+
             ],
         ]);
         //real estate units
@@ -1500,6 +1775,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
             ],
             [
                 "key" => "realEstate_unit_edit_form",
@@ -1508,6 +1784,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_name_ar",
@@ -1516,6 +1794,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_name_en",
@@ -1524,6 +1804,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_description_ar",
@@ -1532,6 +1814,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_description_en",
@@ -1540,6 +1824,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_code",
@@ -1548,6 +1834,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_unit_ty",
@@ -1556,6 +1844,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_status_date",
@@ -1564,6 +1854,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_unit_area",
@@ -1572,6 +1864,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_building",
@@ -1580,6 +1874,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_owner",
@@ -1588,6 +1884,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_currency",
@@ -1596,6 +1894,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_wallet",
@@ -1604,6 +1904,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_wallet",
@@ -1612,6 +1914,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_status",
@@ -1620,6 +1924,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_price",
@@ -1628,6 +1934,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_commission_ty",
@@ -1636,6 +1944,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_commission_value",
@@ -1644,6 +1954,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_commission_ty",
@@ -1652,6 +1964,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_rooms",
@@ -1660,6 +1974,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_path",
@@ -1668,6 +1984,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_floor",
@@ -1676,6 +1994,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_view",
@@ -1684,6 +2004,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_rank",
@@ -1692,6 +2014,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ],
             [
                 "key" => "realEstate_unit_module",
@@ -1700,6 +2024,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"realEstate units"
+
             ]
         ]);
         //Owners
@@ -1711,6 +2037,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
             ],
             [
                 "key" => "owner_edit_form",
@@ -1719,6 +2046,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_name_ar",
@@ -1727,6 +2056,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_name_en",
@@ -1735,6 +2066,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_phone",
@@ -1743,6 +2076,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_email",
@@ -1751,6 +2086,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_nationality",
@@ -1759,6 +2096,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_national_id",
@@ -1767,6 +2106,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_contact_person",
@@ -1775,6 +2116,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_contact_phones",
@@ -1783,6 +2126,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "country",
@@ -1791,6 +2136,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "city",
@@ -1799,6 +2146,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "bank_account",
@@ -1807,6 +2156,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_whatsapp",
@@ -1815,6 +2166,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
             [
                 "key" => "owner_code",
@@ -1823,6 +2176,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"owners"
+
             ],
         ]);
         //Buildings
@@ -1834,6 +2189,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
             ],
             [
                 "key" => "building_edit_form",
@@ -1842,6 +2198,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_name_ar",
@@ -1850,6 +2208,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_name_en",
@@ -1858,6 +2218,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_description_ar",
@@ -1866,6 +2228,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_description_en",
@@ -1874,6 +2238,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_area",
@@ -1882,6 +2248,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_land_area",
@@ -1890,6 +2258,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_construction_year",
@@ -1898,6 +2268,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "module",
@@ -1906,7 +2278,40 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
+            [
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"building"
+
+            ],
+            [
+                "key" => "city",
+                "default_en" => "City name",
+                "default_ar" => "اسم المدينة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"building"
+            ],
+       
+            [
+                "key" => "governorate",
+                "default_en" => "Governorate name",
+                "default_ar" => "اسم المحافظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"building"
+
+            ],
+       
             [
                 "key" => "avenue",
                 "default_en" => "Avenue name",
@@ -1914,6 +2319,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_longitude",
@@ -1922,6 +2329,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
             [
                 "key" => "building_latitude",
@@ -1930,6 +2339,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"building"
+
             ],
         ]);
         //Customers
@@ -1941,6 +2352,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
             ],
             [
                 "key" => "customer_edit_form",
@@ -1949,6 +2361,28 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
+            ],
+            [
+                "key" => "country",
+                "default_en" => "Country name",
+                "default_ar" => "اسم الدولة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"customer"
+
+            ],
+            [
+                "key" => "city",
+                "default_en" => "City name",
+                "default_ar" => "اسم المدينة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_name_ar",
@@ -1957,6 +2391,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_name_en",
@@ -1965,6 +2401,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_phone",
@@ -1973,6 +2411,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_email",
@@ -1981,6 +2421,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_nationality",
@@ -1989,6 +2431,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_national_id",
@@ -1997,6 +2441,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_contact_person",
@@ -2005,6 +2451,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_contact_phones",
@@ -2013,6 +2461,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_whatsapp",
@@ -2021,6 +2471,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_code",
@@ -2029,6 +2481,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
             [
                 "key" => "customer_passport_number",
@@ -2037,8 +2491,11 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"customer"
+
             ],
         ]);
+        //Building wallet
         Translation::insert([
             [
                 "key" => "building_wallet_create_form",
@@ -2090,6 +2547,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallets"
             ],
             [
                 "key" => "wallet_edit_form",
@@ -2098,6 +2556,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallets"
+
             ],
             [
                 "key" => "wallet_name_ar",
@@ -2106,6 +2566,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallets"
             ],
             [
                 "key" => "wallet_name_en",
@@ -2114,6 +2575,8 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallets"
+
             ],
         ]);
         //Wallet owner
@@ -2125,6 +2588,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallet owner"
             ],
             [
                 "key" => "wallet_owner_edit_form",
@@ -2133,6 +2597,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallet owner"
             ],
             [
                 "key" => "wallet",
@@ -2141,6 +2606,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallet owner"
             ],
             [
                 "key" => "owner",
@@ -2149,6 +2615,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallet owner"
             ],
             [
                 "key" => "wallet_owner_percentage",
@@ -2157,6 +2624,7 @@ class TranslationSeeder extends Seeder
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,
+                "screen"=>"wallet owner"
             ],
         ]);
     }

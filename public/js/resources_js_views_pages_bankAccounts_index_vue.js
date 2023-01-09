@@ -6513,7 +6513,7 @@ var render = function render() {
     staticClass: "form-group position-relative"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n              " + _vm._s(_vm.getCompanyKey("bank_country")) + "\n              "), _c("span", {
+  }, [_vm._v("\n              " + _vm._s(_vm.getCompanyKey("country")) + "\n              "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -7004,7 +7004,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("bank_account_bank")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("bank")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "account_number"
@@ -7064,7 +7064,7 @@ var render = function render() {
       },
       expression: "filterSetting"
     }
-  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("bank_account_employee")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.getCompanyKey("employee")) + "\n                  ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     attrs: {
       value: "rp_code"
@@ -7204,7 +7204,7 @@ var render = function render() {
       },
       expression: "setting.bank_id"
     }
-  }, [_vm._v(_vm._s(_vm.getCompanyKey("bank_account_bank")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v(_vm._s(_vm.getCompanyKey("bank")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.account_number,
@@ -7249,7 +7249,7 @@ var render = function render() {
       },
       expression: "setting.emp_id"
     }
-  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("bank_account_employee")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
+  }, [_vm._v("\n                      " + _vm._s(_vm.getCompanyKey("employee")) + "\n                    ")]), _vm._v(" "), _c("b-form-checkbox", {
     staticClass: "mb-1",
     model: {
       value: _vm.setting.rp_code,
@@ -7411,7 +7411,7 @@ var render = function render() {
     staticClass: "form-group position-relative"
   }, [_c("label", {
     staticClass: "control-label"
-  }, [_vm._v("\n                              " + _vm._s(_vm.getCompanyKey("bank_account_bank")) + "\n                              "), _c("span", {
+  }, [_vm._v("\n                              " + _vm._s(_vm.getCompanyKey("bank")) + "\n                              "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
     attrs: {
@@ -7649,7 +7649,7 @@ var render = function render() {
     attrs: {
       "for": "field-3"
     }
-  }, [_vm._v("\n                              " + _vm._s(_vm.getCompanyKey("bank_account_employee")) + "\n                              "), _c("span", {
+  }, [_vm._v("\n                              " + _vm._s(_vm.getCompanyKey("employee")) + "\n                              "), _c("span", {
     staticClass: "text-danger"
   }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
     directives: [{
@@ -7915,7 +7915,7 @@ var render = function render() {
     }
   })])]), _vm._v(" "), _vm.setting.bank_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("bank_account_bank")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("bank")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -8005,7 +8005,7 @@ var render = function render() {
     }
   })])])]) : _vm._e(), _vm._v(" "), _vm.setting.emp_id ? _c("th", [_c("div", {
     staticClass: "d-flex justify-content-center"
-  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("bank_account_employee")))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.getCompanyKey("employee")))]), _vm._v(" "), _c("div", {
     staticClass: "arrow-sort"
   }, [_c("i", {
     staticClass: "fas fa-arrow-up",
@@ -8224,7 +8224,7 @@ var render = function render() {
       staticClass: "form-group position-relative"
     }, [_c("label", {
       staticClass: "control-label"
-    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("bank_account_bank")) + "\n                                    "), _c("span", {
+    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("bank")) + "\n                                    "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("multiselect", {
       attrs: {
@@ -8458,7 +8458,7 @@ var render = function render() {
       attrs: {
         "for": "field-3"
       }
-    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("bank_account_employee")) + "\n                                    "), _c("span", {
+    }, [_vm._v("\n                                    " + _vm._s(_vm.getCompanyKey("employee")) + "\n                                    "), _c("span", {
       staticClass: "text-danger"
     }, [_vm._v("*")])]), _vm._v(" "), _c("input", {
       directives: [{
@@ -10322,7 +10322,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         translations: {},
         get_translation: true
       }).then(function (res) {
-        _this.defaultsKeys = res.data.translations;
+        var workflows = _this.$store.state.auth.work_flow_trees;
+        var keys = {};
+        for (var key in res.data.translations) {
+          if (workflows.includes(res.data.translations[key].screen)) {
+            keys[key] = res.data.translations[key];
+          }
+        }
+        _this.defaultsKeys = keys;
         _this.filterResult = _objectSpread({}, _this.defaultsKeys);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({

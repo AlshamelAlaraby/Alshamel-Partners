@@ -99,7 +99,7 @@ export default {
                               });
                           }
                       });
-                      this.$store.commit('auth/editWorkFlowTrees',['dictionary','company',...name]);
+                      this.$store.commit('auth/editWorkFlowTrees',['dictionary',"home",'company',...name]);
                   })
                   .catch((err) => {
                       Swal.fire({

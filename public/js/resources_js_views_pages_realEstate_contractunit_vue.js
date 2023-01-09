@@ -8027,7 +8027,14 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         translations: {},
         get_translation: true
       }).then(function (res) {
-        _this.defaultsKeys = res.data.translations;
+        var workflows = _this.$store.state.auth.work_flow_trees;
+        var keys = {};
+        for (var key in res.data.translations) {
+          if (workflows.includes(res.data.translations[key].screen)) {
+            keys[key] = res.data.translations[key];
+          }
+        }
+        _this.defaultsKeys = keys;
         _this.filterResult = _objectSpread({}, _this.defaultsKeys);
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
