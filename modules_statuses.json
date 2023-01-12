@@ -3,5 +3,6 @@
     "Realestate": true,
     "RealEstate": true,
     "RecievablePayable": true,
-    "Archiving": true
+    "Archiving": true,
+    "GL": true
 }
