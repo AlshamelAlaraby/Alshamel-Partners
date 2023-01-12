@@ -2300,7 +2300,7 @@ class TranslationSeeder extends Seeder
                 "company_id" => 0,
                 "screen"=>"building"
             ],
-       
+
             [
                 "key" => "governorate",
                 "default_en" => "Governorate name",
@@ -2311,7 +2311,7 @@ class TranslationSeeder extends Seeder
                 "screen"=>"building"
 
             ],
-       
+
             [
                 "key" => "avenue",
                 "default_en" => "Avenue name",
@@ -2621,6 +2621,54 @@ class TranslationSeeder extends Seeder
                 "key" => "wallet_owner_percentage",
                 "default_en" => "Wallet owner percentage",
                 "default_ar" => "النسبة المئوية لمالك المحفظة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"wallet owner"
+            ],
+        ]);
+        //Installment Status
+        Translation::insert([
+            [
+                "key" => "installment_status_create_form",
+                "default_en" => "Add new Installment Status",
+                "default_ar" => "اضافة حاله تقسيط جديدة",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"installment status"
+            ],
+            [
+                "key" => "installment_status_edit_form",
+                "default_en" => "Edit  Installment Status",
+                "default_ar" => "نموذج تعديل حاله التقسيط",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"installment status"
+            ],
+            [
+                "key" => "installment_status_name",
+                "default_en" => "Installment Status name (arabic)",
+                "default_ar" => "اسم حاله التقسيط (عربي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"installment status"
+            ],
+            [
+                "key" => "installment_status_name_e",
+                "default_en" => "installment_status name (english)",
+                "default_ar" => "اسم حاله التقسيط (انجليزي)",
+                "new_ar" => "",
+                "new_en" => "",
+                "company_id" => 0,
+                "screen"=>"installment status"
+            ],
+            [
+                "key" => "installment_status_default",
+                "default_en" => "Installment Status Default",
+                "default_ar" => "الحالة الافتراضية لحاله التقسيط",
                 "new_ar" => "",
                 "new_en" => "",
                 "company_id" => 0,

@@ -2394,7 +2394,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _this15.isLoader = true;
                 _context8.next = 3;
-                return axios.get("".concat("https://alshamelalaraby.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
+                return axios.get("".concat("http://alshamel-administrator.com/", "api/everything_about_the_company/").concat(_this15.company_id)).then(function (res) {
                   var l = res.data.data;
                   _this15.workflows = l.work_flow_trees;
                   _this15.hotfields = l.hot_fields;
@@ -7417,7 +7417,7 @@ var menuItems = [{
     link: '/dashboard/role-hotfield-screen'
   }]
 }, {
-  id: 10023578,
+  id: 10024568,
   label: "general.realEstate",
   icon: "fas fa-hotel",
   name: 'realEstate',
@@ -7518,6 +7518,18 @@ var menuItems = [{
     name: 'arch doc status',
     label: 'menuitems.ArchDocumentStatus.text',
     link: '/dashboard/arch-doc-status'
+  }]
+}, {
+  id: 1004325156,
+  label: "general.recievablePayable",
+  name: 'archiving',
+  icon: "fas fa-money-check-alt",
+  isMenuCollapsed: false,
+  subItems: [{
+    id: 387181,
+    name: 'document field',
+    label: 'general.installmentStatus',
+    link: '/dashboard/installment-status'
   }]
 }, {
   id: 224,

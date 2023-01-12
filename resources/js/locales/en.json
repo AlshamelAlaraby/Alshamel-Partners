@@ -829,6 +829,9 @@
         "wallet": "Wallets",
         "walletOwner": "Wallet Owner",
         "walletOwnerTable": "wallet Owners Table",
-        "realEstateUnitTable": "RealEstate Units Table"
+        "realEstateUnitTable": "RealEstate Units Table",
+        "recievablePayable": "Receivable Payable",
+        "installmentStatus": "installment Status",
+        "installmentStatusTable": "installment Status Table"
     }
 }
