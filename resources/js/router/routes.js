@@ -30,6 +30,7 @@ import users from  "./routeChild/users";
 import propertyTrees from  "./routeChild/property-tree";
 import realEstate from  "./routeChild/realEstate";
 import archiving from "./routeChild/archiving";
+import recievablePayable from "./routeChild/recievablePayable";
 
 
 export default [
@@ -63,6 +64,7 @@ export default [
     ...bankAccount,
     ...realEstate,
     ...archiving,
+    ...recievablePayable,
     //**********************************************
     {
         path: '/dashboard/',
