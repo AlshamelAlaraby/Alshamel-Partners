@@ -814,6 +814,9 @@
         "wallet": "المحافظ",
         "walletOwner": "صاحب المحفظة",
         "walletOwnerTable": "جدول مالكي المحافظ",
-        "realEstateUnitTable": "جدول وحدات العقارات"
+        "realEstateUnitTable": "جدول وحدات العقارات",
+        "recievablePayable": "الحسابات الدائنه",
+        "installmentStatus": "حالة التقسيط",
+        "installmentStatusTable": " جدول حالة التقسيط"
     }
 }
